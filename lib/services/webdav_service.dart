@@ -53,6 +53,7 @@ class WebDavService {
       // 正常成功码 + WebDAV 特有码
       if (status >= 200 && status < 300) return true;
       if (status == 207) return true; // Multi-Status (PROPFIND)
+      if (status == 404) return true; // Not Found（路径不存在，需自动创建）
       if (status == 405) return true; // Method Not Allowed（认证通过但方法被禁）
       // 其他状态码按默认处理（抛 DioException）
       return false;
