@@ -536,6 +536,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: MediaUtils.buildImage(
+                fileName: _existingMediaFiles[index],
                   imageUrl: imageUrl,
                   width: double.infinity,
                   height: double.infinity,

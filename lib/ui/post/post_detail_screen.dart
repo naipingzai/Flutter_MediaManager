@@ -499,6 +499,7 @@ class _MediaCarouselState extends State<_MediaCarousel> {
                 child: Container(
                   color: cs.surfaceContainerHighest.withOpacity(0.1),
                   child: MediaUtils.buildFullWidthImage(
+                    fileName: widget.mediaFiles[index],
                     imageUrl: imageUrl,
                     screenWidth: widget.screenWidth,
                     fit: BoxFit.contain,

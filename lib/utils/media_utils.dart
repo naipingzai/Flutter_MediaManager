@@ -41,8 +41,10 @@ class MediaUtils {
 
   /// 构建图片 Widget
   /// 优先级：本地文件 → 远程加密下载缓存 → 远程直接加载
+  /// [fileName] 是必填的（用于本地文件查找），[imageUrl] 可选（用于云端加载）
   static Widget buildImage({
-    required String? imageUrl,
+    required String fileName,
+    String? imageUrl,
     required double width,
     double? height,
     BoxFit fit = BoxFit.cover,
@@ -50,21 +52,11 @@ class MediaUtils {
     Map<String, String>? httpHeaders,
     EncryptionService? encryption,
   }) {
-    if (imageUrl == null) {
-      return Container(
-        width: width, height: height,
-        decoration: BoxDecoration(color: Colors.grey[200], borderRadius: borderRadius),
-        child: const Center(child: Icon(Icons.image_outlined, size: 32, color: Colors.grey)),
-      );
-    }
-
-    final fileName = imageUrl.split('/').last.split('?').first;
-
-    // 本地文件优先（明文，不加密）
+    // 本地文件优先（无论是否有 WebDAV）
     if (cacheService != null) {
-      final localPath = cacheService!.getLocalMediaPath(fileName);
+      final localPathFuture = cacheService!.getLocalMediaPath(fileName);
       return FutureBuilder<String>(
-        future: localPath,
+        future: localPathFuture,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final file = File(snapshot.data!);
@@ -83,43 +75,52 @@ class MediaUtils {
               return image;
             }
           }
-          return _buildNetworkImage(
-            imageUrl: imageUrl, fileName: fileName,
-            width: width, height: height, fit: fit,
-            borderRadius: borderRadius, httpHeaders: httpHeaders, encryption: encryption,
+          // 本地文件不存在，回退到网络（如果有URL）
+          if (imageUrl != null) {
+            return _buildNetworkImage(
+              imageUrl: imageUrl, fileName: fileName,
+              width: width, height: height, fit: fit,
+              borderRadius: borderRadius, httpHeaders: httpHeaders, encryption: encryption,
+            );
+          }
+          // 没有本地也没有URL，显示占位符
+          return Container(
+            width: width, height: height,
+            decoration: BoxDecoration(color: Colors.grey[200], borderRadius: borderRadius),
+            child: const Center(child: Icon(Icons.image_outlined, size: 32, color: Colors.grey)),
           );
         },
       );
     }
 
-    return _buildNetworkImage(
-      imageUrl: imageUrl, fileName: fileName,
-      width: width, height: height, fit: fit,
-      borderRadius: borderRadius, httpHeaders: httpHeaders, encryption: encryption,
+    // 没有 cacheService 时只能走网络
+    if (imageUrl != null) {
+      return _buildNetworkImage(
+        imageUrl: imageUrl, fileName: fileName,
+        width: width, height: height, fit: fit,
+        borderRadius: borderRadius, httpHeaders: httpHeaders, encryption: encryption,
+      );
+    }
+    return Container(
+      width: width, height: height,
+      decoration: BoxDecoration(color: Colors.grey[200], borderRadius: borderRadius),
+      child: const Center(child: Icon(Icons.image_outlined, size: 32, color: Colors.grey)),
     );
   }
 
-  /// 构建全宽图片 Widget
+  /// 构建全宽图片 Widget（详情页用）
   static Widget buildFullWidthImage({
-    required String? imageUrl,
+    required String fileName,
+    String? imageUrl,
     required double screenWidth,
     BoxFit fit = BoxFit.fitWidth,
     Map<String, String>? httpHeaders,
     EncryptionService? encryption,
   }) {
-    if (imageUrl == null) {
-      return Container(
-        width: screenWidth, height: 200, color: Colors.grey[200],
-        child: const Center(child: Icon(Icons.image_outlined, size: 48, color: Colors.grey)),
-      );
-    }
-
-    final fileName = imageUrl.split('/').last.split('?').first;
-
     if (cacheService != null) {
-      final localPath = cacheService!.getLocalMediaPath(fileName);
+      final localPathFuture = cacheService!.getLocalMediaPath(fileName);
       return FutureBuilder<String>(
-        future: localPath,
+        future: localPathFuture,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final file = File(snapshot.data!);
@@ -139,19 +140,31 @@ class MediaUtils {
               );
             }
           }
-          return _buildNetworkImage(
-            imageUrl: imageUrl, fileName: fileName,
-            width: screenWidth, height: 200, fit: fit,
-            httpHeaders: httpHeaders, encryption: encryption,
+          if (imageUrl != null) {
+            return _buildNetworkImage(
+              imageUrl: imageUrl, fileName: fileName,
+              width: screenWidth, height: 200, fit: fit,
+              httpHeaders: httpHeaders, encryption: encryption,
+            );
+          }
+          return Container(
+            width: screenWidth, height: 200, color: Colors.grey[200],
+            child: const Center(child: Icon(Icons.image_outlined, size: 48, color: Colors.grey)),
           );
         },
       );
     }
 
-    return _buildNetworkImage(
-      imageUrl: imageUrl, fileName: fileName,
-      width: screenWidth, height: 200, fit: fit,
-      httpHeaders: httpHeaders, encryption: encryption,
+    if (imageUrl != null) {
+      return _buildNetworkImage(
+        imageUrl: imageUrl, fileName: fileName,
+        width: screenWidth, height: 200, fit: fit,
+        httpHeaders: httpHeaders, encryption: encryption,
+      );
+    }
+    return Container(
+      width: screenWidth, height: 200, color: Colors.grey[200],
+      child: const Center(child: Icon(Icons.image_outlined, size: 48, color: Colors.grey)),
     );
   }
 

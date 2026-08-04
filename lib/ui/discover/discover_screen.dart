@@ -287,6 +287,7 @@ class _SearchResultCard extends StatelessWidget {
                   final authBloc = ctx.read<AuthBloc>();
                   final encryption = authBloc.webDavService?.encryption;
                   return MediaUtils.buildImage(
+                  fileName: post.mediaFiles.first,
                     imageUrl:
                         MediaUtils.getFirstImageUrl(feedState, post.mediaFiles),
                     width: 72,

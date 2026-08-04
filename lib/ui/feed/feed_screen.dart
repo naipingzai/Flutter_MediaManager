@@ -777,6 +777,7 @@ class _MediaGrid extends StatelessWidget {
     final encryption = authBloc.webDavService?.encryption;
 
     return MediaUtils.buildImage(
+      fileName: fileName,
       imageUrl: imageUrl,
       width: width,
       height: height,
