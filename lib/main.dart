@@ -87,6 +87,22 @@ class LifeApp extends StatelessWidget {
                 feedBloc.setOnAuthError(() {
                   context.read<AuthBloc>().add(const AuthLogoutEvent());
                 });
+
+                // 启动后台同步定时器
+                if (cacheEnabled) {
+                  cacheService.startBackgroundSync(() async {
+                    // 返回所有活跃的媒体文件名
+                    final data = await cacheService.loadLocalData();
+                    if (data == null) return [];
+                    final files = <String>[];
+                    for (final post in data.posts) {
+                      files.addAll(post.mediaFiles);
+                      if (post.videoFile != null) files.add(post.videoFile!);
+                      if (post.videoThumbnail != null) files.add(post.videoThumbnail!);
+                    }
+                    return files;
+                  });
+                }
               }
 
               return DynamicColorBuilder(

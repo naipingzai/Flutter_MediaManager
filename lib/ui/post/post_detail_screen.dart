@@ -1,13 +1,11 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:photo_view/photo_view.dart';
-import 'package:photo_view/photo_view_gallery.dart';
-import 'package:media_kit/media_kit.dart' hide Color;
+import 'package:extended_image/extended_image.dart';
+import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
 import '../../functionality/auth/auth_bloc.dart';
 import '../../functionality/feed/feed_bloc.dart';
@@ -38,18 +36,13 @@ class PostDetailScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('详情'),
         actions: [
-          // 编辑按钮
           IconButton(
             onPressed: () async {
               final result = await Navigator.push<bool>(
                 context,
-                MaterialPageRoute(
-                  builder: (_) => CreatePostScreen(editPost: post),
-                ),
+                MaterialPageRoute(builder: (_) => CreatePostScreen(editPost: post)),
               );
-              if (result == true && context.mounted) {
-                Navigator.pop(context, true);
-              }
+              if (result == true && context.mounted) Navigator.pop(context, true);
             },
             icon: const Icon(Icons.edit_outlined, size: 22),
             tooltip: '编辑',
@@ -67,39 +60,22 @@ class PostDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 1. 文字内容
             if (post.content.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 16, 20, 16),
                 child: _buildRichContent(post.content, textTheme, cs),
               ),
-
-            // 2. 媒体文件
-            if (post.mediaFiles.isNotEmpty) ...[
-              _MediaCarousel(
-                mediaFiles: post.mediaFiles,
-                feedState: feedState,
-                screenWidth: screenWidth,
-              ),
-            ],
-
+            if (post.mediaFiles.isNotEmpty)
+              _MediaCarousel(mediaFiles: post.mediaFiles, feedState: feedState, screenWidth: screenWidth),
             if (post.hasVideo)
-              _VideoPlayerWidget(
-                feedState: feedState,
-                videoFileName: post.videoFile!,
-                screenWidth: screenWidth,
-              ),
-
-            // 3. 时间 + 标签
+              _VlcVideoPlayer(feedState: feedState, videoFileName: post.videoFile!, screenWidth: screenWidth),
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 16, 20, 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // 时间
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
                       color: cs.surfaceContainerHighest.withOpacity(0.5),
                       borderRadius: BorderRadius.circular(20),
@@ -107,36 +83,24 @@ class PostDetailScreen extends StatelessWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.schedule_rounded,
-                            size: 14, color: cs.onSurfaceVariant),
+                        Icon(Icons.schedule_rounded, size: 14, color: cs.onSurfaceVariant),
                         const SizedBox(width: 6),
-                        Text(timeStr,
-                            style: textTheme.labelMedium
-                                ?.copyWith(color: cs.onSurfaceVariant)),
+                        Text(timeStr, style: textTheme.labelMedium?.copyWith(color: cs.onSurfaceVariant)),
                       ],
                     ),
                   ),
                   const SizedBox(height: 12),
-
-                  // 标签
                   if (post.tags.isNotEmpty)
                     Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: post.tags
-                          .map((tag) => Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 12, vertical: 6),
-                                decoration: BoxDecoration(
-                                  color: cs.primaryContainer.withOpacity(0.5),
-                                  borderRadius: BorderRadius.circular(16),
-                                ),
-                                child: Text(tag,
-                                    style: textTheme.bodySmall?.copyWith(
-                                        color: cs.onPrimaryContainer,
-                                        fontWeight: FontWeight.w500)),
-                              ))
-                          .toList(),
+                      spacing: 8, runSpacing: 8,
+                      children: post.tags.map((tag) => Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        decoration: BoxDecoration(
+                          color: cs.primaryContainer.withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Text(tag, style: textTheme.bodySmall?.copyWith(color: cs.onPrimaryContainer, fontWeight: FontWeight.w500)),
+                      )).toList(),
                     ),
                 ],
               ),
@@ -148,30 +112,17 @@ class PostDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildRichContent(
-      String content, TextTheme textTheme, ColorScheme cs) {
+  Widget _buildRichContent(String content, TextTheme textTheme, ColorScheme cs) {
     final regex = RegExp(r'#[^\s#]+');
     final spans = <TextSpan>[];
     int lastEnd = 0;
     for (final match in regex.allMatches(content)) {
-      if (match.start > lastEnd) {
-        spans.add(TextSpan(text: content.substring(lastEnd, match.start)));
-      }
-      spans.add(TextSpan(
-        text: content.substring(match.start + 1, match.end),
-        style: TextStyle(color: cs.primary, fontWeight: FontWeight.w600),
-      ));
+      if (match.start > lastEnd) spans.add(TextSpan(text: content.substring(lastEnd, match.start)));
+      spans.add(TextSpan(text: content.substring(match.start + 1, match.end), style: TextStyle(color: cs.primary, fontWeight: FontWeight.w600)));
       lastEnd = match.end;
     }
-    if (lastEnd < content.length) {
-      spans.add(TextSpan(text: content.substring(lastEnd)));
-    }
-    return SelectableText.rich(
-      TextSpan(
-        style: textTheme.bodyLarge?.copyWith(height: 1.8, fontSize: 16),
-        children: spans,
-      ),
-    );
+    if (lastEnd < content.length) spans.add(TextSpan(text: content.substring(lastEnd)));
+    return SelectableText.rich(TextSpan(style: textTheme.bodyLarge?.copyWith(height: 1.8, fontSize: 16), children: spans));
   }
 
   void _confirmDelete(BuildContext context) {
@@ -183,19 +134,14 @@ class PostDetailScreen extends StatelessWidget {
         title: const Text('删除动态'),
         content: const Text('确定要删除这条动态吗？删除后无法恢复。'),
         actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: const Text('取消'),
-          ),
+          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('取消')),
           FilledButton(
             style: FilledButton.styleFrom(backgroundColor: cs.error),
             onPressed: () {
               context.read<FeedBloc>().add(FeedDeletePostEvent(post.id));
               Navigator.pop(ctx);
               Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('动态已删除')),
-              );
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('动态已删除')));
             },
             child: const Text('删除'),
           ),
@@ -206,108 +152,86 @@ class PostDetailScreen extends StatelessWidget {
 }
 
 // ============================================================
-// 视频播放器组件
+// 视频播放器 —— media_kit (全平台支持: Android/iOS/Linux/macOS/Windows)
 // ============================================================
-class _VideoPlayerWidget extends StatefulWidget {
+class _VlcVideoPlayer extends StatefulWidget {
   final FeedState feedState;
   final String videoFileName;
   final double screenWidth;
 
-  const _VideoPlayerWidget({
-    required this.feedState,
-    required this.videoFileName,
-    required this.screenWidth,
-  });
+  const _VlcVideoPlayer({required this.feedState, required this.videoFileName, required this.screenWidth});
 
   @override
-  State<_VideoPlayerWidget> createState() => _VideoPlayerWidgetState();
+  State<_VlcVideoPlayer> createState() => _VlcVideoPlayerState();
 }
 
-class _VideoPlayerWidgetState extends State<_VideoPlayerWidget> {
-  Player? _player;
-  VideoController? _videoController;
-  bool _isInitialized = false;
+class _VlcVideoPlayerState extends State<_VlcVideoPlayer> {
+  // Player 和 VideoController 必须在 initState 创建（不在异步方法中）
+  // 这样 Video widget 在第一帧 build 时就能绑定纹理
+  late final Player _player;
+  late final VideoController _controller;
+  bool _ready = false;
   bool _hasError = false;
   bool _showControls = true;
   bool _isPlaying = false;
+  StreamSubscription? _playingSub;
 
   @override
   void initState() {
     super.initState();
-    _initVideo();
+    _player = Player();
+    _controller = VideoController(_player);
+    _playingSub = _player.stream.playing.listen((v) {
+      if (mounted) setState(() => _isPlaying = v);
+    });
+    _initMedia();
   }
 
-  Future<void> _initVideo() async {
+  Future<void> _initMedia() async {
     try {
-      // 优先从本地获取视频文件
+      // 1. 本地文件优先（明文，不加密）
       final cacheService = context.read<CacheService>();
-      if (cacheService.enabled && cacheService.isCached(widget.videoFileName)) {
-        final localFile =
-            await cacheService.getCachedFile(widget.videoFileName);
-        if (localFile != null && await localFile.exists()) {
-          await _openFile(localFile.path);
-          return;
-        }
-      }
+      final localPath = await cacheService.getLocalMediaPath(widget.videoFileName);
+      final localFile = File(localPath);
 
-      final url =
-          MediaUtils.buildMediaUrl(widget.feedState, widget.videoFileName);
-      if (url == null) {
-        setState(() => _hasError = true);
-        return;
-      }
-
-      final authBloc = context.read<AuthBloc>();
-      final encryption = authBloc.webDavService?.encryption;
-      final headers = widget.feedState.imageHeaders;
-      final isEncrypted = encryption != null && encryption.isEncryptionEnabled;
-
-      if (isEncrypted) {
-        // 加密视频：下载解密后写入临时文件播放
-        final dio = Dio();
-        final response = await dio.get<List<int>>(
-          url,
-          options: Options(responseType: ResponseType.bytes, headers: headers),
-        );
-        if (response.data == null) throw Exception('Download failed');
-        final decrypted =
-            encryption.decryptBytes(Uint8List.fromList(response.data!));
-        final tempDir = await Directory.systemTemp.createTemp('video_');
-        final tempFile = File('${tempDir.path}/${widget.videoFileName}');
-        await tempFile.writeAsBytes(decrypted);
-        await _openFile(tempFile.path);
+      String path;
+      if (await localFile.exists()) {
+        path = localFile.path;
       } else {
-        await _openUrl(url);
+        // 2. 本地没有，从远程下载
+        final url = MediaUtils.buildMediaUrl(widget.feedState, widget.videoFileName);
+        if (url == null) { if (mounted) setState(() => _hasError = true); return; }
+
+        final authBloc = context.read<AuthBloc>();
+        final encryption = authBloc.webDavService?.encryption;
+        final headers = widget.feedState.imageHeaders;
+
+        final dio = Dio();
+        final response = await dio.get<List<int>>(url, options: Options(responseType: ResponseType.bytes, headers: headers));
+        if (response.data == null) throw Exception('Download failed');
+
+        var bytes = response.data!;
+        if (encryption != null && encryption.isEncryptionEnabled) {
+          bytes = encryption.decryptBytes(Uint8List.fromList(bytes)).toList();
+        }
+        await localFile.writeAsBytes(bytes);
+        cacheService.cachedFiles.add(widget.videoFileName);
+        path = localFile.path;
       }
+
+      // 打开媒体文件
+      await _player.open(Media(path));
+      if (mounted) setState(() => _ready = true);
     } catch (e) {
       debugPrint('Video init error: $e');
       if (mounted) setState(() => _hasError = true);
     }
   }
 
-  Future<void> _openFile(String path) async {
-    _player = Player();
-    _videoController = VideoController(_player!);
-    _player!.stream.playing.listen((playing) {
-      if (mounted) setState(() => _isPlaying = playing);
-    });
-    await _player!.open(Media(path));
-    if (mounted) setState(() => _isInitialized = true);
-  }
-
-  Future<void> _openUrl(String url) async {
-    _player = Player();
-    _videoController = VideoController(_player!);
-    _player!.stream.playing.listen((playing) {
-      if (mounted) setState(() => _isPlaying = playing);
-    });
-    await _player!.open(Media(url));
-    if (mounted) setState(() => _isInitialized = true);
-  }
-
   @override
   void dispose() {
-    _player?.dispose();
+    _playingSub?.cancel();
+    _player.dispose();
     super.dispose();
   }
 
@@ -336,18 +260,8 @@ class _VideoPlayerWidgetState extends State<_VideoPlayerWidget> {
       );
     }
 
-    if (!_isInitialized || _videoController == null) {
-      return Container(
-        height: 200,
-        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        decoration: BoxDecoration(
-          color: cs.surfaceContainerHighest.withOpacity(0.3),
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: const Center(child: CircularProgressIndicator()),
-      );
-    }
-
+    // Video widget 始终在树中（Player 和 Controller 在 initState 创建）
+    // 用 Stack 覆盖加载指示器，不条件创建 Video
     return GestureDetector(
       onTap: () => setState(() => _showControls = !_showControls),
       child: Container(
@@ -360,38 +274,40 @@ class _VideoPlayerWidgetState extends State<_VideoPlayerWidget> {
         child: Stack(
           alignment: Alignment.center,
           children: [
+            // 视频画面 —— 始终在树中
             AspectRatio(
               aspectRatio: 16 / 9,
               child: Video(
-                controller: _videoController!,
+                controller: _controller,
                 controls: NoVideoControls,
               ),
             ),
+            // 加载中
+            if (!_ready)
+              Container(
+                color: cs.surfaceContainerHighest.withOpacity(0.3),
+                child: const Center(child: CircularProgressIndicator()),
+              ),
             // 播放/暂停控制
-            AnimatedOpacity(
-              opacity: _showControls ? 1.0 : 0.0,
-              duration: const Duration(milliseconds: 200),
-              child: GestureDetector(
-                onTap: () {
-                  _player!.playOrPause();
-                  setState(() => _showControls = false);
-                },
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.black45,
-                    shape: BoxShape.circle,
-                  ),
-                  padding: const EdgeInsets.all(16),
-                  child: Icon(
-                    _isPlaying
-                        ? Icons.pause_rounded
-                        : Icons.play_arrow_rounded,
-                    color: Colors.white,
-                    size: 40,
+            if (_ready)
+              AnimatedOpacity(
+                opacity: _showControls ? 1.0 : 0.0,
+                duration: const Duration(milliseconds: 200),
+                child: GestureDetector(
+                  onTap: () {
+                    _player.playOrPause();
+                    setState(() => _showControls = false);
+                  },
+                  child: Container(
+                    decoration: const BoxDecoration(color: Colors.black45, shape: BoxShape.circle),
+                    padding: const EdgeInsets.all(16),
+                    child: Icon(
+                      _isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
+                      color: Colors.white, size: 40,
+                    ),
                   ),
                 ),
               ),
-            ),
           ],
         ),
       ),
@@ -399,16 +315,15 @@ class _VideoPlayerWidgetState extends State<_VideoPlayerWidget> {
   }
 }
 
+// ============================================================
+// 媒体轮播（extended_image）
+// ============================================================
 class _MediaCarousel extends StatefulWidget {
   final List<String> mediaFiles;
   final FeedState feedState;
   final double screenWidth;
 
-  const _MediaCarousel({
-    required this.mediaFiles,
-    required this.feedState,
-    required this.screenWidth,
-  });
+  const _MediaCarousel({required this.mediaFiles, required this.feedState, required this.screenWidth});
 
   @override
   State<_MediaCarousel> createState() => _MediaCarouselState();
@@ -446,8 +361,7 @@ class _MediaCarouselState extends State<_MediaCarousel> {
             physics: const ClampingScrollPhysics(),
             onPageChanged: (i) => setState(() => _currentIndex = i),
             itemBuilder: (_, index) {
-              final imageUrl = MediaUtils.buildMediaUrl(
-                  widget.feedState, widget.mediaFiles[index]);
+              final imageUrl = MediaUtils.buildMediaUrl(widget.feedState, widget.mediaFiles[index]);
               final authBloc = context.read<AuthBloc>();
               final encryption = authBloc.webDavService?.encryption;
               return GestureDetector(
@@ -468,18 +382,15 @@ class _MediaCarouselState extends State<_MediaCarousel> {
             padding: const EdgeInsets.only(top: 12),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(
-                widget.mediaFiles.length,
-                (index) => AnimatedContainer(
+              children: List.generate(widget.mediaFiles.length, (index) =>
+                AnimatedContainer(
                   duration: const Duration(milliseconds: 200),
                   width: _currentIndex == index ? 20 : 6,
                   height: 6,
                   margin: const EdgeInsets.symmetric(horizontal: 3),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(3),
-                    color: _currentIndex == index
-                        ? cs.primary
-                        : cs.primary.withOpacity(0.3),
+                    color: _currentIndex == index ? cs.primary : cs.primary.withOpacity(0.3),
                   ),
                 ),
               ),
@@ -492,29 +403,22 @@ class _MediaCarouselState extends State<_MediaCarousel> {
   void _openGallery(BuildContext context, int initialIndex) {
     final imageUrls = widget.mediaFiles
         .map((f) => MediaUtils.buildMediaUrl(widget.feedState, f))
-        .where((url) => url != null)
-        .cast<String>()
-        .toList();
+        .where((url) => url != null).cast<String>().toList();
     if (imageUrls.isEmpty) return;
 
     final authBloc = context.read<AuthBloc>();
     final encryption = authBloc.webDavService?.encryption;
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => _GalleryScreen(
-          imageUrls: imageUrls,
-          initialIndex: initialIndex,
-          httpHeaders: widget.feedState.imageHeaders,
-          encryption: encryption,
-        ),
+    Navigator.push(context, MaterialPageRoute(
+      builder: (_) => _GalleryScreen(
+        imageUrls: imageUrls, initialIndex: initialIndex,
+        httpHeaders: widget.feedState.imageHeaders, encryption: encryption,
       ),
-    );
+    ));
   }
 }
 
-/// 全屏图片查看（双指缩放 + 左右滑动，支持加密 + 缓存）
+/// 全屏图片查看（extended_image，双指缩放 + 左右滑动）
 class _GalleryScreen extends StatefulWidget {
   final List<String> imageUrls;
   final int initialIndex;
@@ -522,10 +426,8 @@ class _GalleryScreen extends StatefulWidget {
   final EncryptionService? encryption;
 
   const _GalleryScreen({
-    required this.imageUrls,
-    required this.initialIndex,
-    this.httpHeaders = const {},
-    this.encryption,
+    required this.imageUrls, required this.initialIndex,
+    this.httpHeaders = const {}, this.encryption,
   });
 
   @override
@@ -536,7 +438,6 @@ class _GalleryScreenState extends State<_GalleryScreen> {
   late int _currentIndex;
   late final PageController _pageController;
   final Map<int, ImageProvider> _imageProviders = {};
-  final Map<int, bool> _loadingImages = {};
   final CacheService? _cacheService = MediaUtils.cacheService;
 
   @override
@@ -545,28 +446,21 @@ class _GalleryScreenState extends State<_GalleryScreen> {
     _currentIndex = widget.initialIndex;
     _pageController = PageController(initialPage: widget.initialIndex);
     _loadImage(widget.initialIndex);
-    _preloadNeighbors(widget.initialIndex);
-  }
-
-  void _preloadNeighbors(int index) {
-    _loadImage(index - 1);
-    _loadImage(index + 1);
+    _loadImage(widget.initialIndex - 1);
+    _loadImage(widget.initialIndex + 1);
   }
 
   Future<void> _loadImage(int index) async {
     if (index < 0 || index >= widget.imageUrls.length) return;
-    if (_imageProviders.containsKey(index) || _loadingImages[index] == true)
-      return;
-    _loadingImages[index] = true;
+    if (_imageProviders.containsKey(index)) return;
 
     try {
       final url = widget.imageUrls[index];
-      // 提取文件名（去掉查询参数）
       final cleanFileName = Uri.parse(url).pathSegments.last;
 
-      // 1. 尝试从缓存加载
-      if (_cacheService != null && _cacheService.isCached(cleanFileName)) {
-        final localPath = await _cacheService.getLocalPath(cleanFileName);
+      // 本地缓存优先
+      if (_cacheService != null) {
+        final localPath = await _cacheService.getLocalMediaPath(cleanFileName);
         final file = File(localPath);
         if (await file.exists()) {
           if (!mounted) return;
@@ -576,34 +470,27 @@ class _GalleryScreenState extends State<_GalleryScreen> {
         }
       }
 
-      // 2. 从网络下载
+      // 网络下载
       final dio = Dio();
-      final response = await dio.get<List<int>>(
-        url,
-        options: Options(
-          responseType: ResponseType.bytes,
-          headers: widget.httpHeaders,
-        ),
+      final response = await dio.get<List<int>>(url,
+        options: Options(responseType: ResponseType.bytes, headers: widget.httpHeaders),
       );
       if (!mounted) return;
       if (response.data != null) {
-        var data = Uint8List.fromList(response.data!);
-        // 解密
-        if (widget.encryption != null &&
-            widget.encryption!.isEncryptionEnabled) {
-          data = widget.encryption!.decryptBytes(data);
+        var data = response.data!;
+        if (widget.encryption != null && widget.encryption!.isEncryptionEnabled) {
+          data = widget.encryption!.decryptBytes(Uint8List.fromList(data)).toList();
         }
-        // 存入缓存（如果有缓存服务且文件名有效）
-        if (_cacheService != null &&
-            _cacheService.enabled &&
-            cleanFileName.isNotEmpty) {
+        // 缓存到本地
+        if (_cacheService != null && cleanFileName.isNotEmpty) {
           try {
-            final localPath = await _cacheService.getLocalPath(cleanFileName);
+            final localPath = await _cacheService.getLocalMediaPath(cleanFileName);
             await File(localPath).writeAsBytes(data);
+            _cacheService.cachedFiles.add(cleanFileName);
           } catch (_) {}
         }
         if (!mounted) return;
-        setState(() => _imageProviders[index] = MemoryImage(data));
+        setState(() => _imageProviders[index] = MemoryImage(Uint8List.fromList(data)));
       }
     } catch (e) {
       // ignore
@@ -622,100 +509,83 @@ class _GalleryScreenState extends State<_GalleryScreen> {
       backgroundColor: Colors.black,
       body: Stack(
         children: [
-          // 图片画廊（全屏，无 AppBar 遮挡）
           GestureDetector(
             onVerticalDragEnd: (details) {
-              if (details.primaryVelocity != null &&
-                  details.primaryVelocity!.abs() > 300) {
+              if (details.primaryVelocity != null && details.primaryVelocity!.abs() > 300) {
                 Navigator.pop(context);
               }
             },
-            child: PhotoViewGallery.builder(
+            child: PageView.builder(
               itemCount: widget.imageUrls.length,
-              pageController: _pageController,
+              controller: _pageController,
               onPageChanged: (index) {
                 setState(() => _currentIndex = index);
-                _preloadNeighbors(index);
+                _loadImage(index - 1);
+                _loadImage(index + 1);
               },
-              builder: (context, index) {
+              itemBuilder: (context, index) {
                 final provider = _imageProviders[index];
                 if (provider != null) {
-                  return PhotoViewGalleryPageOptions(
-                    imageProvider: provider,
-                    minScale: PhotoViewComputedScale.contained,
-                    maxScale: PhotoViewComputedScale.covered * 4,
-                    initialScale: PhotoViewComputedScale.contained,
-                    heroAttributes:
-                        PhotoViewHeroAttributes(tag: 'gallery_$index'),
+                  return ExtendedImage(
+                    image: provider,
+                    mode: ExtendedImageMode.gesture,
+                    initGestureConfigHandler: (state) => GestureConfig(
+                      minScale: 0.9,
+                      animationMinScale: 0.7,
+                      maxScale: 4.0,
+                      animationMaxScale: 4.5,
+                      speed: 1.0,
+                      inertialSpeed: 100.0,
+                      initialScale: 1.0,
+                      inPageView: true,
+                      initialAlignment: InitialAlignment.center,
+                    ),
                   );
                 }
                 _loadImage(index);
-                return PhotoViewGalleryPageOptions.customChild(
-                  child: const Center(
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      color: Colors.white54,
-                    ),
-                  ),
-                  minScale: PhotoViewComputedScale.contained,
-                  maxScale: PhotoViewComputedScale.covered * 4,
-                  initialScale: PhotoViewComputedScale.contained,
+                return const Center(
+                  child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white54),
                 );
               },
-              scrollPhysics: const BouncingScrollPhysics(),
-              backgroundDecoration: const BoxDecoration(color: Colors.black),
             ),
           ),
-          // 顶部关闭按钮 + 页码
           Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
+            top: 0, left: 0, right: 0,
             child: Container(
               padding: EdgeInsets.only(
                 top: MediaQuery.of(context).padding.top + 8,
-                left: 16,
-                right: 16,
-                bottom: 8,
+                left: 16, right: 16, bottom: 8,
               ),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.black.withOpacity(0.6),
-                    Colors.transparent,
-                  ],
+                  colors: [Colors.black.withOpacity(0.6), Colors.transparent],
                 ),
               ),
               child: Row(
                 children: [
                   IconButton(
                     onPressed: () => Navigator.pop(context),
-                    icon: const Icon(Icons.close_rounded,
-                        color: Colors.white, size: 28),
+                    icon: const Icon(Icons.close_rounded, color: Colors.white, size: 28),
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(),
                   ),
                   const Spacer(),
                   if (widget.imageUrls.length > 1)
                     Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 6),
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                       decoration: BoxDecoration(
                         color: Colors.black.withOpacity(0.4),
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Text(
                         '${_currentIndex + 1} / ${widget.imageUrls.length}',
-                        style: const TextStyle(
-                            fontSize: 13,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500),
+                        style: const TextStyle(fontSize: 13, color: Colors.white, fontWeight: FontWeight.w500),
                       ),
                     ),
                   const Spacer(),
-                  const SizedBox(width: 44), // 平衡左边
+                  const SizedBox(width: 44),
                 ],
               ),
             ),

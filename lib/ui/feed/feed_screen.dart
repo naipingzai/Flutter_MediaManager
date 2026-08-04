@@ -7,7 +7,6 @@ import '../../functionality/home/app_bloc.dart';
 import '../../models/post.dart';
 import '../../utils/media_utils.dart';
 import '../post/create_post_screen.dart';
-import '../../services/cache_service.dart';
 import '../post/post_detail_screen.dart';
 
 /// 首页 - 动态信息流
@@ -23,31 +22,6 @@ class _FeedScreenState extends State<FeedScreen> {
   void initState() {
     super.initState();
     context.read<FeedBloc>().add(const FeedLoadEvent());
-  }
-
-  void _syncCache() {
-    final cacheService = context.read<CacheService>();
-    if (!cacheService.enabled) return;
-    // 延迟等待 feed 加载完成
-    Future.delayed(const Duration(seconds: 2), () async {
-      if (!mounted) return;
-      final feedState = context.read<FeedBloc>().state;
-      if (feedState.status != FeedStatus.loaded) return;
-      final allFiles = <String>[];
-      for (final post in feedState.posts) {
-        allFiles.addAll(post.mediaFiles);
-        if (post.hasVideo) allFiles.add(post.videoFile!);
-      }
-      // 清理已删除帖子的缓存
-      await cacheService.syncCleanup(allFiles);
-      // 同步新文件
-      cacheService.syncAll(
-        (dirUrl) async => [],
-        feedState.mediaBaseUrl ?? '',
-        feedState.imageHeaders,
-        allFiles,
-      );
-    });
   }
 
   @override
@@ -70,10 +44,6 @@ class _FeedScreenState extends State<FeedScreen> {
                 behavior: SnackBarBehavior.floating,
               ),
             );
-          }
-          // 自动触发缓存同步
-          if (state.status == FeedStatus.loaded) {
-            _syncCache();
           }
         },
         builder: (context, state) {
@@ -99,13 +69,11 @@ class _FeedScreenState extends State<FeedScreen> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
-          final result = await Navigator.push<bool>(
+          // 发布完成不触发 FeedLoadEvent，数据已在内存中更新
+          await Navigator.push<bool>(
             context,
             MaterialPageRoute(builder: (_) => const CreatePostScreen()),
           );
-          if (result == true && mounted) {
-            context.read<FeedBloc>().add(const FeedLoadEvent());
-          }
         },
         icon: const Icon(Icons.edit_rounded, size: 20),
         label: const Text('发布'),
@@ -651,9 +619,42 @@ class _MediaGrid extends StatelessWidget {
 
     // 单张：显示比例，最大60%宽高
     if (displayCount == 1 && !hasMore) {
-      final isFirstVideo = hasVideo && imageCount == 0;
       final maxW = screenWidth * 0.6;
       final maxH = screenWidth * 0.6;
+      if (hasVideo && imageCount == 0) {
+        // 只有视频：显示视频封面（如果有）+ 播放按钮
+        final thumbnail = post.videoThumbnail;
+        final hasThumb = thumbnail != null && thumbnail.isNotEmpty;
+        return Align(
+          alignment: Alignment.centerLeft,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Container(
+              constraints: BoxConstraints(maxWidth: maxW, maxHeight: maxH),
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  if (hasThumb)
+                    _buildImage(context, thumbnail, maxW, height: maxH, fit: BoxFit.cover)
+                  else
+                    _buildVideoPlaceholder(context, cs, textTheme, maxW),
+                  // 播放按钮
+                  Container(
+                    color: Colors.black26,
+                    child: Center(
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: const BoxDecoration(color: Colors.white70, shape: BoxShape.circle),
+                        child: Icon(Icons.play_arrow_rounded, size: 28, color: cs.primary),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      }
       return Align(
         alignment: Alignment.centerLeft,
         child: ClipRRect(
@@ -664,10 +665,8 @@ class _MediaGrid extends StatelessWidget {
               border: Border.all(color: cs.outlineVariant.withOpacity(0.25)),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: isFirstVideo
-                ? _buildVideoPlaceholder(context, cs, textTheme, maxW)
-                : _buildImage(context, allMedia.first, maxW,
-                    height: maxH, fit: BoxFit.cover),
+            child: _buildImage(context, allMedia.first, maxW,
+                height: maxH, fit: BoxFit.cover),
           ),
         ),
       );

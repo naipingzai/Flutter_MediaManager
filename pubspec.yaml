@@ -18,14 +18,10 @@ dependencies:
   provider: ^6.1.2
 
   # 图片查看
-  photo_view: ^0.15.0
-
   # HTTP 客户端（WebDAV 支持）
   dio: ^5.4.0
 
   # 图片缓存
-  cached_network_image: ^3.4.1
-
   # 日志
   logger: ^2.4.0
 
@@ -39,12 +35,7 @@ dependencies:
   image_picker: ^1.1.2
 
   # 视频播放（自带解码器，不依赖系统GStreamer）
-  media_kit: ^1.1.11
-  media_kit_video: ^1.2.5
-  media_kit_libs_video: ^1.0.5
   # 视频缩略图
-  video_thumbnail: ^0.5.6
-
   # 音频播放
   just_audio: ^0.9.40
 
@@ -57,7 +48,11 @@ dependencies:
 
   # 主题/动态颜色
   dynamic_color: ^1.7.2
-
+  extended_image: ^10.1.0
+  media_kit: ^1.2.6
+  media_kit_video: ^2.0.1
+  media_kit_libs_video: ^1.0.7
+  video_thumbnail: ^0.5.6
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:uuid/uuid.dart';
-import 'package:logger/logger.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 import '../../models/post.dart';
 import '../../services/webdav_service.dart';
@@ -14,7 +13,6 @@ import '../../utils/error_helper.dart';
 part 'feed_event.dart';
 part 'feed_state.dart';
 
-final _logger = Logger();
 const _uuid = Uuid();
 
 class FeedBloc extends Bloc<FeedEvent, FeedState> {

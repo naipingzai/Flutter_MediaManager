@@ -117,7 +117,10 @@ class CacheService {
 
       // 3. 上传 data.json 到 WebDAV
       await saveDataFn(localData);
-      
+
+      // 4. 推送成功后创建快照
+      await createSnapshot(localData);
+
       // 清除待同步标记
       _pendingSync = false;
       _syncStatus = SyncStatus.completed;

@@ -6,25 +6,47 @@ import 'package:crypto/crypto.dart';
 /// WebDAV 文件加密服务（内部自动加密，无需用户设置）
 ///
 /// 使用 AES-256-CBC 模式加密文件内容。
-/// 密码在内部生成，用户无感知。
+/// 密钥从用户 WebDAV 凭证派生，每个用户的密钥不同。
 /// 所有上传到 WebDAV 的文件（JSON 和媒体文件）都会被加密。
 /// 加密后的文件格式：[Magic "ENC1" (4字节)] + [IV (16字节)] + [密文]
 class EncryptionService {
   /// 加密文件的魔术标记 "ENC1"
   static const _magicHeader = [0x45, 0x4E, 0x43, 0x31]; // "ENC1"
 
-  /// 内部加密密码（永不暴露给用户）
+  /// 内部默认密码（仅作为 fallback，实际应从用户凭证派生）
   static const _internalPassword = 'AMB-2026-SecureKey-7f3a';
 
-  late final encrypt.Key _key;
+  late encrypt.Key _key;
+  String _currentKeySource = 'default';
 
-  EncryptionService() {
-    final hash = sha256.convert(utf8.encode(_internalPassword));
+  EncryptionService({String? userCredential}) {
+    _initKey(userCredential ?? _internalPassword);
+  }
+
+  void _initKey(String credential) {
+    _currentKeySource = credential;
+    final hash = sha256.convert(utf8.encode(credential));
     _key = encrypt.Key(Uint8List.fromList(hash.bytes));
   }
 
-  /// 加密始终启用
-  bool get isEncryptionEnabled => true;
+  /// 从用户 WebDAV 凭证更新密钥
+  ///
+  /// 使用 serverUrl + username + token 组合作为密钥源
+  void updateKeyFromCredential({
+    required String serverUrl,
+    required String username,
+    required String token,
+  }) {
+    final credential = '$serverUrl|$username|$token';
+    if (credential != _currentKeySource) {
+      _initKey(credential);
+    }
+  }
+
+  /// 加密是否启用（默认开启，用于 WebDAV 同步）
+  bool _enabled = true;
+  bool get isEncryptionEnabled => _enabled;
+  set isEncryptionEnabled(bool value) => _enabled = value;
 
   /// 加密文本内容（用于 data.json 等文本文件）
   Uint8List encryptText(String plainText) {

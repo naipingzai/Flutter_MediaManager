@@ -19,6 +19,37 @@ class ConnectionResult {
   String toString() => success ? 'success' : 'failed: $errorDetail';
 }
 
+/// 云端锁信息
+class CloudLock {
+  final String lockId;
+  final String deviceId;
+  final DateTime acquiredAt;
+  final DateTime expiresAt;
+
+  const CloudLock({
+    required this.lockId,
+    required this.deviceId,
+    required this.acquiredAt,
+    required this.expiresAt,
+  });
+
+  Map<String, dynamic> toJson() => {
+        'lockId': lockId,
+        'deviceId': deviceId,
+        'acquiredAt': acquiredAt.toUtc().toIso8601String(),
+        'expiresAt': expiresAt.toUtc().toIso8601String(),
+      };
+
+  factory CloudLock.fromJson(Map<String, dynamic> json) => CloudLock(
+        lockId: json['lockId'] as String? ?? '',
+        deviceId: json['deviceId'] as String? ?? '',
+        acquiredAt: DateTime.parse(json['acquiredAt'] as String),
+        expiresAt: DateTime.parse(json['expiresAt'] as String),
+      );
+
+  bool get isExpired => DateTime.now().toUtc().isAfter(expiresAt);
+}
+
 /// WebDAV 服务客户端
 class WebDavService {
   final WebDavConfig config;
@@ -28,6 +59,18 @@ class WebDavService {
   final EncryptionService _encryption = EncryptionService();
   LogService? _logService;
   bool _rawDataEnabled = false;
+
+  /// 当前持有的锁
+  CloudLock? _currentLock;
+
+  /// 锁超时时间（秒）
+  static const int _lockTimeoutSeconds = 60;
+
+  /// 设备唯一标识
+  String get _deviceId {
+    // 使用配置哈希作为设备标识（简单实现）
+    return config.serverUrl.hashCode.toString().substring(0, 8);
+  }
 
   /// 外部注入的日志服务
   set logger(LogService? value) {
@@ -50,7 +93,12 @@ class WebDavService {
     _dio.options.headers = {
       'User-Agent': 'AdvanceMediaKB/1.0',
     };
-    // 加密服务自动初始化（内部密码）
+    // 从用户凭证派生加密密钥
+    _encryption.updateKeyFromCredential(
+      serverUrl: config.serverUrl,
+      username: config.username,
+      token: config.token,
+    );
     // 不设置 baseUrl，所有请求使用完整 URL
     // WebDAV 协议使用 207 (Multi-Status)、405 (Method Not Allowed) 等非标准码，
     // 需要扩展 validateStatus 避免 DioException 误抛
@@ -108,6 +156,87 @@ class WebDavService {
   Map<String, String> get imageHeaders => {
         'Authorization': _authHeader,
       };
+
+  // ─── 云端锁机制 ───
+
+  String get _lockUrl => '${config.rootUrl}/.lock';
+
+  /// 尝试获取云端锁
+  ///
+  /// 返回 true 表示成功获取锁，false 表示被其他设备锁定
+  Future<bool> acquireLock() async {
+    try {
+      // 先检查现有锁
+      final existingLock = await _readLock();
+      if (existingLock != null && !existingLock.isExpired) {
+        // 锁被其他设备持有且未过期
+        if (existingLock.deviceId != _deviceId) {
+          _log('云端锁被其他设备持有',
+              detail: 'deviceId=${existingLock.deviceId}');
+          return false;
+        }
+        // 是自己的锁，刷新过期时间
+        await _writeLock(existingLock.lockId);
+        return true;
+      }
+
+      // 创建新锁
+      final lockId = DateTime.now().millisecondsSinceEpoch.toString();
+      await _writeLock(lockId);
+      _log('获取云端锁成功', detail: 'lockId=$lockId');
+      return true;
+    } catch (e) {
+      _logService?.warn('获取云端锁失败', detail: e.toString());
+      // 锁获取失败时，允许操作继续（降级策略）
+      return true;
+    }
+  }
+
+  /// 释放云端锁
+  Future<void> releaseLock() async {
+    try {
+      await deleteFile(_lockUrl);
+      _currentLock = null;
+      _log('释放云端锁成功');
+    } catch (e) {
+      _logService?.warn('释放云端锁失败', detail: e.toString());
+    }
+  }
+
+  /// 检查是否持有有效锁
+  Future<bool> hasValidLock() async {
+    if (_currentLock == null) return false;
+    if (_currentLock!.isExpired) {
+      // 锁已过期，尝试重新获取
+      return await acquireLock();
+    }
+    return true;
+  }
+
+  Future<CloudLock?> _readLock() async {
+    try {
+      final content = await readFile(_lockUrl);
+      if (content == null || content.isEmpty) return null;
+      final json = jsonDecode(content) as Map<String, dynamic>;
+      return CloudLock.fromJson(json);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  Future<void> _writeLock(String lockId) async {
+    final now = DateTime.now().toUtc();
+    final lock = CloudLock(
+      lockId: lockId,
+      deviceId: _deviceId,
+      acquiredAt: now,
+      expiresAt: now.add(Duration(seconds: _lockTimeoutSeconds)),
+    );
+    _currentLock = lock;
+    await writeFile(_lockUrl, jsonEncode(lock.toJson()));
+  }
+
+  // ─── 连接测试 ───
 
   /// 测试 WebDAV 连接（带超时保护）
   Future<bool> testConnection() async {
@@ -494,8 +623,13 @@ class WebDavService {
       if (e.response?.statusCode == 409) {
         final dir = remoteUrl.substring(0, remoteUrl.lastIndexOf('/'));
         await _mkcol('$dir/');
-        await _dio.put(remoteUrl, data: data,
-            options: Options(headers: {..._headers, 'Content-Type': 'application/octet-stream', 'Content-Length': data.length}));
+        await _dio.put(remoteUrl,
+            data: data,
+            options: Options(headers: {
+              ..._headers,
+              'Content-Type': 'application/octet-stream',
+              'Content-Length': data.length
+            }));
       } else {
         rethrow;
       }
@@ -504,7 +638,9 @@ class WebDavService {
 
   String _formatSpeed(double bytesPerSec) {
     if (bytesPerSec < 1024) return '${bytesPerSec.toStringAsFixed(0)} B/s';
-    if (bytesPerSec < 1024 * 1024) return '${(bytesPerSec / 1024).toStringAsFixed(1)} KB/s';
+    if (bytesPerSec < 1024 * 1024) {
+      return '${(bytesPerSec / 1024).toStringAsFixed(1)} KB/s';
+    }
     return '${(bytesPerSec / (1024 * 1024)).toStringAsFixed(1)} MB/s';
   }
 
@@ -605,16 +741,30 @@ class WebDavService {
     }
   }
 
-  /// 保存 JournalData（加密版）
+  /// 保存 JournalData（加密版，带锁保护）
   Future<void> saveJournalData(JournalData data) async {
-    // 添加同步元数据
-    final syncData = data.withNewSync();
-    _log('保存 JournalData', detail: '${syncData.posts.length} 条帖子, syncId=${syncData.syncMeta?.syncId}');
-    final json = const JsonEncoder.withIndent('  ').convert(syncData.toJson());
-    await writeFile(config.dataUrl, json);
-    // 原始数据模式：上传一份不加密的 data.json 到 raw/ 目录
-    if (_rawDataEnabled) {
-      await _uploadRawData('data.json', utf8.encode(json));
+    // 尝试获取锁
+    final hasLock = await acquireLock();
+    if (!hasLock) {
+      _logService?.warn('无法获取云端锁，跳过本次保存');
+      throw Exception('云端数据被其他设备锁定，请稍后重试');
+    }
+
+    try {
+      // 添加同步元数据
+      final syncData = data.withNewSync();
+      _log('保存 JournalData',
+          detail:
+              '${syncData.posts.length} 条帖子, syncId=${syncData.syncMeta?.syncId}');
+      final json = const JsonEncoder.withIndent('  ').convert(syncData.toJson());
+      await writeFile(config.dataUrl, json);
+      // 原始数据模式：上传一份不加密的 data.json 到 raw/ 目录
+      if (_rawDataEnabled) {
+        await _uploadRawData('data.json', utf8.encode(json));
+      }
+    } finally {
+      // 释放锁
+      await releaseLock();
     }
   }
 
@@ -656,8 +806,10 @@ class WebDavService {
     final parts = originalPath.split('/');
     final fullName = parts.last; // e.g. IMG_1234.jpg
     final dotIdx = fullName.lastIndexOf('.');
-    final nameWithoutExt = dotIdx > 0 ? fullName.substring(0, dotIdx) : fullName;
-    final ext = dotIdx > 0 ? fullName.substring(dotIdx + 1).toLowerCase() : 'jpg';
+    final nameWithoutExt =
+        dotIdx > 0 ? fullName.substring(0, dotIdx) : fullName;
+    final ext =
+        dotIdx > 0 ? fullName.substring(dotIdx + 1).toLowerCase() : 'jpg';
     final now = DateTime.now();
     final ts = '${now.year.toString().padLeft(4, '0')}'
         '${now.month.toString().padLeft(2, '0')}'
@@ -711,7 +863,7 @@ class WebDavService {
   /// 清除 WebDAV 上所有 APP 数据（媒体文件 + data.json + debug）
   Future<void> clearAllData() async {
     _log('开始清除 WebDAV 数据', detail: config.rootUrl);
-    
+
     // 1. 删除媒体文件
     try {
       final mediaFiles = await listFiles(config.mediaUrl);
@@ -746,7 +898,11 @@ class WebDavService {
       }
     } catch (_) {}
 
+    // 4. 删除锁文件
+    try {
+      await deleteFile(_lockUrl);
+    } catch (_) {}
+
     _log('WebDAV 数据清除完成');
   }
-
 }
