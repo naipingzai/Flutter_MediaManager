@@ -303,7 +303,6 @@ class _FullscreenVideoPlayerState extends State<_FullscreenVideoPlayer> {
     _positionSub = _player.stream.position.listen((p) { if (mounted) setState(() => _position = p); });
     _durationSub = _player.stream.duration.listen((d) { if (mounted) setState(() => _duration = d); });
     _player.open(Media(widget.videoPath));
-    SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   }
 
@@ -313,7 +312,6 @@ class _FullscreenVideoPlayerState extends State<_FullscreenVideoPlayer> {
     _positionSub?.cancel();
     _durationSub?.cancel();
     _player.dispose();
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     super.dispose();
   }

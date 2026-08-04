@@ -1,4 +1,5 @@
-import 'dart:io';
+import 'dart:io' show File;
+import 'dart:typed_data';
 import 'package:extended_image/extended_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -59,21 +60,17 @@ class MediaUtils {
         future: localPathFuture,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            final file = File(snapshot.data!);
-            if (file.existsSync()) {
-              Widget image = ExtendedImage.file(
-                file,
-                width: width, height: height, fit: fit,
-                loadStateChanged: (state) {
-                  if (state.extendedImageLoadState == LoadState.failed) {
-                    return _buildPlaceholder(width, height);
-                  }
-                  return null;
-                },
-              );
-              if (borderRadius != null) return ClipRRect(borderRadius: borderRadius, child: image);
-              return image;
-            }
+            return _LoadLocalImage(
+              filePath: snapshot.data!,
+              fileName: fileName,
+              imageUrl: imageUrl,
+              width: width,
+              height: height,
+              fit: fit,
+              borderRadius: borderRadius,
+              httpHeaders: httpHeaders,
+              encryption: encryption,
+            );
           }
           // 本地文件不存在，回退到网络（如果有URL）
           if (imageUrl != null) {
@@ -86,7 +83,7 @@ class MediaUtils {
           // 没有本地也没有URL，显示占位符
           return Container(
             width: width, height: height,
-            decoration: BoxDecoration(color: Colors.grey[200], borderRadius: borderRadius),
+            color: Colors.grey[200],
             child: const Center(child: Icon(Icons.image_outlined, size: 32, color: Colors.grey)),
           );
         },
@@ -103,7 +100,7 @@ class MediaUtils {
     }
     return Container(
       width: width, height: height,
-      decoration: BoxDecoration(color: Colors.grey[200], borderRadius: borderRadius),
+      color: Colors.grey[200],
       child: const Center(child: Icon(Icons.image_outlined, size: 32, color: Colors.grey)),
     );
   }
@@ -123,22 +120,16 @@ class MediaUtils {
         future: localPathFuture,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            final file = File(snapshot.data!);
-            if (file.existsSync()) {
-              return ExtendedImage.file(
-                file,
-                width: screenWidth, fit: fit,
-                loadStateChanged: (state) {
-                  if (state.extendedImageLoadState == LoadState.failed) {
-                    return Container(
-                      width: screenWidth, height: 200, color: Colors.grey[200],
-                      child: const Center(child: Icon(Icons.broken_image_outlined, size: 48, color: Colors.grey)),
-                    );
-                  }
-                  return null;
-                },
-              );
-            }
+            return _LoadLocalImage(
+              filePath: snapshot.data!,
+              fileName: fileName,
+              imageUrl: imageUrl,
+              width: screenWidth,
+              height: 200,
+              fit: fit,
+              httpHeaders: httpHeaders,
+              encryption: encryption,
+            );
           }
           if (imageUrl != null) {
             return _buildNetworkImage(
@@ -209,6 +200,125 @@ class MediaUtils {
     );
 
     if (borderRadius != null) return ClipRRect(borderRadius: borderRadius, child: image);
+    return image;
+  }
+}
+
+/// 加载本地缓存图片的 Widget
+class _LoadLocalImage extends StatefulWidget {
+  final String filePath;
+  final String fileName;
+  final String? imageUrl;
+  final double? width;
+  final double? height;
+  final BoxFit fit;
+  final BorderRadius? borderRadius;
+  final Map<String, String>? httpHeaders;
+  final EncryptionService? encryption;
+
+  const _LoadLocalImage({
+    required this.filePath,
+    required this.fileName,
+    this.imageUrl,
+    this.width,
+    this.height,
+    this.fit = BoxFit.cover,
+    this.borderRadius,
+    this.httpHeaders,
+    this.encryption,
+  });
+
+  @override
+  State<_LoadLocalImage> createState() => _LoadLocalImageState();
+}
+
+class _LoadLocalImageState extends State<_LoadLocalImage> {
+  Uint8List? _bytes;
+  bool _loading = true;
+  bool _error = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadFile();
+  }
+
+  Future<void> _loadFile() async {
+    try {
+      final file = File(widget.filePath);
+      if (await file.exists()) {
+        final bytes = await file.readAsBytes();
+        if (!mounted) return;
+        setState(() {
+          _bytes = bytes;
+          _loading = false;
+        });
+      } else {
+        throw Exception('File not found');
+      }
+    } catch (e) {
+      if (!mounted) return;
+      setState(() {
+        _error = true;
+        _loading = false;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_loading) {
+      return Container(
+        width: widget.width,
+        height: widget.height ?? 200,
+        color: Colors.grey[100],
+        child: const Center(child: CircularProgressIndicator(strokeWidth: 2)),
+      );
+    }
+
+    if (_error || _bytes == null) {
+      // 回退到网络加载
+      if (widget.imageUrl != null) {
+        return MediaUtils._buildNetworkImage(
+          imageUrl: widget.imageUrl!,
+          fileName: widget.fileName,
+          width: widget.width ?? 200,
+          height: widget.height,
+          fit: widget.fit,
+          borderRadius: widget.borderRadius,
+          httpHeaders: widget.httpHeaders,
+          encryption: widget.encryption,
+        );
+      }
+      return Container(
+        width: widget.width,
+        height: widget.height ?? 200,
+        color: Colors.grey[200],
+        child: const Center(child: Icon(Icons.broken_image_outlined, size: 32, color: Colors.grey)),
+      );
+    }
+
+    Widget image = ExtendedImage.memory(
+      _bytes!,
+      width: widget.width,
+      height: widget.height,
+      fit: widget.fit,
+      loadStateChanged: (state) {
+        if (state.extendedImageLoadState == LoadState.failed) {
+          return Container(
+            width: widget.width,
+            height: widget.height ?? 200,
+            color: Colors.grey[200],
+            child: const Center(child: Icon(Icons.broken_image_outlined, size: 32, color: Colors.grey)),
+          );
+        }
+        return null;
+      },
+    );
+
+    if (widget.borderRadius != null) {
+      return ClipRRect(borderRadius: widget.borderRadius!, child: image);
+    }
     return image;
   }
 }

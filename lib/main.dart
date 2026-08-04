@@ -65,7 +65,7 @@ class LifeApp extends StatelessWidget {
               final cacheService = context.read<CacheService>();
               cacheService.setLogService(logService);
               MediaUtils.cacheService = cacheService;
-              final cacheEnabled = appState.settings?.cacheEnabled ?? false;
+              final cacheEnabled = appState.settings?.cacheEnabled ?? true;
               cacheService.setEnabled(cacheEnabled);
               if (cacheEnabled) cacheService.init();
 
@@ -74,7 +74,8 @@ class LifeApp extends StatelessWidget {
               feedBloc.setLogService(logService);
 
               // WebDAV 连接（仅认证后）
-              if (authState.status == AuthStatus.authenticated &&
+              if ((authState.status == AuthStatus.authenticated ||
+                   authState.status == AuthStatus.local) &&
                   webDavService != null) {
                 final appBloc = context.read<AppBloc>();
                 appBloc.setWebDavService(webDavService);
