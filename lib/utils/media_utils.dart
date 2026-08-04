@@ -6,11 +6,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../functionality/feed/feed_bloc.dart';
 import '../services/encryption_service.dart';
-import '../services/cache_service.dart';
+import '../services/sync_service.dart';
 
 /// 媒体文件工具类
 class MediaUtils {
-  static CacheService? cacheService;
+  static SyncService? syncService;
 
   static String? buildMediaUrl(FeedState state, String fileName) {
     final baseUrl = state.mediaBaseUrl;
@@ -24,15 +24,6 @@ class MediaUtils {
       }
     }
     return url;
-  }
-
-  static Widget _buildPlaceholder(double? width, double? height) {
-    return Container(
-      width: width,
-      height: height ?? 200,
-      color: Colors.grey[100],
-      child: const Center(child: CircularProgressIndicator(strokeWidth: 2)),
-    );
   }
 
   static String? getFirstImageUrl(FeedState state, List<String> mediaFiles) {
@@ -53,9 +44,8 @@ class MediaUtils {
     Map<String, String>? httpHeaders,
     EncryptionService? encryption,
   }) {
-    // 本地文件优先（无论是否有 WebDAV）
-    if (cacheService != null) {
-      final localPathFuture = cacheService!.getLocalMediaPath(fileName);
+    if (syncService != null) {
+      final localPathFuture = syncService!.getLocalMediaPath(fileName);
       return FutureBuilder<String>(
         future: localPathFuture,
         builder: (context, snapshot) {
@@ -72,7 +62,6 @@ class MediaUtils {
               encryption: encryption,
             );
           }
-          // 本地文件不存在，回退到网络（如果有URL）
           if (imageUrl != null) {
             return _buildNetworkImage(
               imageUrl: imageUrl, fileName: fileName,
@@ -80,17 +69,11 @@ class MediaUtils {
               borderRadius: borderRadius, httpHeaders: httpHeaders, encryption: encryption,
             );
           }
-          // 没有本地也没有URL，显示占位符
-          return Container(
-            width: width, height: height,
-            color: Colors.grey[200],
-            child: const Center(child: Icon(Icons.image_outlined, size: 32, color: Colors.grey)),
-          );
+          return _placeholder(width, height, Icons.image_outlined, size: 32);
         },
       );
     }
 
-    // 没有 cacheService 时只能走网络
     if (imageUrl != null) {
       return _buildNetworkImage(
         imageUrl: imageUrl, fileName: fileName,
@@ -98,11 +81,7 @@ class MediaUtils {
         borderRadius: borderRadius, httpHeaders: httpHeaders, encryption: encryption,
       );
     }
-    return Container(
-      width: width, height: height,
-      color: Colors.grey[200],
-      child: const Center(child: Icon(Icons.image_outlined, size: 32, color: Colors.grey)),
-    );
+    return _placeholder(width, height, Icons.image_outlined, size: 32);
   }
 
   /// 构建全宽图片 Widget（详情页用）
@@ -114,8 +93,8 @@ class MediaUtils {
     Map<String, String>? httpHeaders,
     EncryptionService? encryption,
   }) {
-    if (cacheService != null) {
-      final localPathFuture = cacheService!.getLocalMediaPath(fileName);
+    if (syncService != null) {
+      final localPathFuture = syncService!.getLocalMediaPath(fileName);
       return FutureBuilder<String>(
         future: localPathFuture,
         builder: (context, snapshot) {
@@ -138,10 +117,7 @@ class MediaUtils {
               httpHeaders: httpHeaders, encryption: encryption,
             );
           }
-          return Container(
-            width: screenWidth, height: 200, color: Colors.grey[200],
-            child: const Center(child: Icon(Icons.image_outlined, size: 48, color: Colors.grey)),
-          );
+          return _placeholder(screenWidth, 200, Icons.image_outlined, size: 48);
         },
       );
     }
@@ -153,9 +129,16 @@ class MediaUtils {
         httpHeaders: httpHeaders, encryption: encryption,
       );
     }
+    return _placeholder(screenWidth, 200, Icons.image_outlined, size: 48);
+  }
+
+  static Widget _placeholder(double? width, double? height, IconData icon,
+      {double size = 32}) {
     return Container(
-      width: screenWidth, height: 200, color: Colors.grey[200],
-      child: const Center(child: Icon(Icons.image_outlined, size: 48, color: Colors.grey)),
+      width: width,
+      height: height ?? 200,
+      color: Colors.grey[200],
+      child: Center(child: Icon(icon, size: size, color: Colors.grey)),
     );
   }
 
@@ -169,7 +152,6 @@ class MediaUtils {
     Map<String, String>? httpHeaders,
     EncryptionService? encryption,
   }) {
-    // 加密模式：下载解密后缓存到本地
     if (encryption != null && encryption.isEncryptionEnabled) {
       return _EncryptedCachedImage(
         imageUrl: imageUrl, fileName: fileName,
@@ -180,19 +162,25 @@ class MediaUtils {
       );
     }
 
-    // 非加密：extended_image 网络加载
     Widget image = ExtendedImage.network(
       imageUrl,
       width: width, height: height, fit: fit,
       headers: httpHeaders,
       loadStateChanged: (state) {
         if (state.extendedImageLoadState == LoadState.loading) {
-          return _buildPlaceholder(width, height);
+          return Container(
+            width: width,
+            height: height ?? 200,
+            color: Colors.grey[100],
+            child: const Center(child: CircularProgressIndicator(strokeWidth: 2)),
+          );
         }
         if (state.extendedImageLoadState == LoadState.failed) {
           return Container(
             width: width, height: height, color: Colors.grey[200],
-            child: const Center(child: Icon(Icons.broken_image_outlined, size: 32, color: Colors.grey)),
+            child: const Center(
+                child: Icon(Icons.broken_image_outlined,
+                    size: 32, color: Colors.grey)),
           );
         }
         return null;
@@ -204,7 +192,7 @@ class MediaUtils {
   }
 }
 
-/// 加载本地缓存图片的 Widget
+/// 加载本地数据图片的 Widget
 class _LoadLocalImage extends StatefulWidget {
   final String filePath;
   final String fileName;
@@ -277,7 +265,6 @@ class _LoadLocalImageState extends State<_LoadLocalImage> {
     }
 
     if (_error || _bytes == null) {
-      // 回退到网络加载
       if (widget.imageUrl != null) {
         return MediaUtils._buildNetworkImage(
           imageUrl: widget.imageUrl!,
@@ -294,7 +281,9 @@ class _LoadLocalImageState extends State<_LoadLocalImage> {
         width: widget.width,
         height: widget.height ?? 200,
         color: Colors.grey[200],
-        child: const Center(child: Icon(Icons.broken_image_outlined, size: 32, color: Colors.grey)),
+        child: const Center(
+            child: Icon(Icons.broken_image_outlined,
+                size: 32, color: Colors.grey)),
       );
     }
 
@@ -309,7 +298,9 @@ class _LoadLocalImageState extends State<_LoadLocalImage> {
             width: widget.width,
             height: widget.height ?? 200,
             color: Colors.grey[200],
-            child: const Center(child: Icon(Icons.broken_image_outlined, size: 32, color: Colors.grey)),
+            child: const Center(
+                child: Icon(Icons.broken_image_outlined,
+                    size: 32, color: Colors.grey)),
           );
         }
         return null;
@@ -365,9 +356,9 @@ class _EncryptedCachedImageState extends State<_EncryptedCachedImage> {
   Future<void> _loadImage() async {
     setState(() { _loading = true; _error = false; });
     try {
-      // 先检查本地缓存
-      if (MediaUtils.cacheService != null) {
-        final localPath = await MediaUtils.cacheService!.getLocalMediaPath(widget.fileName);
+      if (MediaUtils.syncService != null) {
+        final localPath =
+            await MediaUtils.syncService!.getLocalMediaPath(widget.fileName);
         final localFile = File(localPath);
         if (await localFile.exists()) {
           final bytes = await localFile.readAsBytes();
@@ -377,20 +368,21 @@ class _EncryptedCachedImageState extends State<_EncryptedCachedImage> {
         }
       }
 
-      // 下载并解密
       final dio = Dio();
       final response = await dio.get<List<int>>(
         widget.imageUrl,
-        options: Options(responseType: ResponseType.bytes, headers: widget.httpHeaders),
+        options: Options(
+            responseType: ResponseType.bytes, headers: widget.httpHeaders),
       );
       if (!mounted) return;
       if (response.data != null) {
-        final decrypted = widget.encryption.decryptBytes(Uint8List.fromList(response.data!));
-        // 缓存到本地（明文）
-        if (MediaUtils.cacheService != null) {
-          final localPath = await MediaUtils.cacheService!.getLocalMediaPath(widget.fileName);
+        final decrypted = widget.encryption
+            .decryptBytes(Uint8List.fromList(response.data!));
+        if (MediaUtils.syncService != null) {
+          final localPath =
+              await MediaUtils.syncService!.getLocalMediaPath(widget.fileName);
           await File(localPath).writeAsBytes(decrypted);
-          MediaUtils.cacheService!.cachedFiles.add(widget.fileName);
+          MediaUtils.syncService!.localMediaFiles.add(widget.fileName);
         }
         setState(() { _decryptedData = decrypted; _loading = false; });
       } else {
@@ -404,14 +396,20 @@ class _EncryptedCachedImageState extends State<_EncryptedCachedImage> {
 
   @override
   Widget build(BuildContext context) {
-    if (_loading) return Container(
-      width: widget.width, height: widget.height ?? 200, color: Colors.grey[100],
-      child: const Center(child: CircularProgressIndicator(strokeWidth: 2)),
-    );
-    if (_error || _decryptedData == null) return Container(
-      width: widget.width, height: widget.height ?? 200, color: Colors.grey[200],
-      child: const Center(child: Icon(Icons.broken_image_outlined, size: 32, color: Colors.grey)),
-    );
+    if (_loading) {
+      return Container(
+        width: widget.width, height: widget.height ?? 200, color: Colors.grey[100],
+        child: const Center(child: CircularProgressIndicator(strokeWidth: 2)),
+      );
+    }
+    if (_error || _decryptedData == null) {
+      return Container(
+        width: widget.width, height: widget.height ?? 200, color: Colors.grey[200],
+        child: const Center(
+            child: Icon(Icons.broken_image_outlined,
+                size: 32, color: Colors.grey)),
+      );
+    }
 
     Widget image = ExtendedImage.memory(
       _decryptedData!,
@@ -419,15 +417,21 @@ class _EncryptedCachedImageState extends State<_EncryptedCachedImage> {
       loadStateChanged: (state) {
         if (state.extendedImageLoadState == LoadState.failed) {
           return Container(
-            width: widget.width, height: widget.height ?? 200, color: Colors.grey[200],
-            child: const Center(child: Icon(Icons.broken_image_outlined, size: 32, color: Colors.grey)),
+            width: widget.width,
+            height: widget.height ?? 200,
+            color: Colors.grey[200],
+            child: const Center(
+                child: Icon(Icons.broken_image_outlined,
+                    size: 32, color: Colors.grey)),
           );
         }
         return null;
       },
     );
 
-    if (widget.borderRadius != null) return ClipRRect(borderRadius: widget.borderRadius!, child: image);
+    if (widget.borderRadius != null) {
+      return ClipRRect(borderRadius: widget.borderRadius!, child: image);
+    }
     return image;
   }
 }

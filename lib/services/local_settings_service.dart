@@ -11,8 +11,8 @@ class LocalSettingsService {
   static const _keyLanguage = 'language';
   static const _keyDynamicColor = 'dynamic_color';
   static const _keyLastScanPath = 'last_scan_path';
-  static const _keyCacheEnabled = 'cache_enabled';
-  static const _keyCacheSyncInterval = 'cache_sync_interval';
+  static const _keySyncEnabled = 'sync_enabled';
+  static const _keySyncInterval = 'sync_interval';
   static const _keyRawDataEnabled = 'raw_data_enabled';
   static const _keyNickname = 'user_nickname';
   static const _keyAvatarPath = 'user_avatar_path';
@@ -33,8 +33,8 @@ class LocalSettingsService {
         language: prefs.getString(_keyLanguage) ?? 'system',
         dynamicColor: prefs.getInt(_keyDynamicColor) ?? 1,
         lastScanPath: prefs.getString(_keyLastScanPath) ?? '',
-        cacheEnabled: prefs.getBool(_keyCacheEnabled) ?? false,
-        cacheSyncInterval: prefs.getInt(_keyCacheSyncInterval) ?? 60,
+        syncEnabled: prefs.getBool(_keySyncEnabled) ?? false,
+        syncInterval: prefs.getInt(_keySyncInterval) ?? 60,
         rawDataEnabled: prefs.getBool(_keyRawDataEnabled) ?? false,
         nickname: prefs.getString(_keyNickname) ?? '生活记录者',
         avatarPath: prefs.getString(_keyAvatarPath) ?? '',
@@ -58,8 +58,8 @@ class LocalSettingsService {
       await prefs.setString(_keyLanguage, settings.language);
       await prefs.setInt(_keyDynamicColor, settings.dynamicColor);
       await prefs.setString(_keyLastScanPath, settings.lastScanPath);
-      await prefs.setBool(_keyCacheEnabled, settings.cacheEnabled);
-      await prefs.setInt(_keyCacheSyncInterval, settings.cacheSyncInterval);
+      await prefs.setBool(_keySyncEnabled, settings.syncEnabled);
+      await prefs.setInt(_keySyncInterval, settings.syncInterval);
       await prefs.setBool(_keyRawDataEnabled, settings.rawDataEnabled);
       await prefs.setString(_keyNickname, settings.nickname);
       await prefs.setString(_keyAvatarPath, settings.avatarPath);

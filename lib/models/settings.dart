@@ -2,6 +2,9 @@
 enum ThemeMode { system, light, dark }
 
 /// 应用设置
+///
+/// 按 guide.skill 规范：APP 中不存在"缓存"概念
+/// 改用：syncEnabled（数据同步开关）/ syncInterval（同步间隔）
 class AppSettings {
   final ThemeMode themeMode;
   final int gridColumns;
@@ -10,11 +13,11 @@ class AppSettings {
   final String language;
   final int dynamicColor;
   final String lastScanPath;
-  final bool cacheEnabled; // 是否开启本地缓存
-  final int cacheSyncInterval; // 缓存同步间隔（秒）
-  final bool rawDataEnabled; // 是否上传原始数据（不加密副本）
-  final String nickname; // 用户昵称
-  final String avatarPath; // 用户头像本地路径
+  final bool syncEnabled;
+  final int syncInterval;
+  final bool rawDataEnabled;
+  final String nickname;
+  final String avatarPath;
 
   const AppSettings({
     this.themeMode = ThemeMode.system,
@@ -24,8 +27,8 @@ class AppSettings {
     this.language = 'system',
     this.dynamicColor = 1,
     this.lastScanPath = '',
-    this.cacheEnabled = false,
-    this.cacheSyncInterval = 60,
+    this.syncEnabled = false,
+    this.syncInterval = 60,
     this.rawDataEnabled = false,
     this.nickname = '生活记录者',
     this.avatarPath = '',
@@ -39,8 +42,8 @@ class AppSettings {
     String? language,
     int? dynamicColor,
     String? lastScanPath,
-    bool? cacheEnabled,
-    int? cacheSyncInterval,
+    bool? syncEnabled,
+    int? syncInterval,
     bool? rawDataEnabled,
     String? nickname,
     String? avatarPath,
@@ -53,8 +56,8 @@ class AppSettings {
       language: language ?? this.language,
       dynamicColor: dynamicColor ?? this.dynamicColor,
       lastScanPath: lastScanPath ?? this.lastScanPath,
-      cacheEnabled: cacheEnabled ?? this.cacheEnabled,
-      cacheSyncInterval: cacheSyncInterval ?? this.cacheSyncInterval,
+      syncEnabled: syncEnabled ?? this.syncEnabled,
+      syncInterval: syncInterval ?? this.syncInterval,
       rawDataEnabled: rawDataEnabled ?? this.rawDataEnabled,
       nickname: nickname ?? this.nickname,
       avatarPath: avatarPath ?? this.avatarPath,

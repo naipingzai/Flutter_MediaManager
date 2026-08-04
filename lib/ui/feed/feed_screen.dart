@@ -5,6 +5,7 @@ import 'dart:io';
 import '../../functionality/feed/feed_bloc.dart';
 import '../../functionality/home/app_bloc.dart';
 import '../../models/post.dart';
+import '../../services/sync_service.dart';
 import '../../utils/media_utils.dart';
 import '../post/create_post_screen.dart';
 import '../post/post_detail_screen.dart';
@@ -34,7 +35,8 @@ class _FeedScreenState extends State<FeedScreen> {
         listenWhen: (prev, curr) =>
             prev.uploadProgress != curr.uploadProgress ||
             prev.uploadStatusText != curr.uploadStatusText ||
-            (prev.status != FeedStatus.loaded && curr.status == FeedStatus.loaded),
+            (prev.status != FeedStatus.loaded &&
+                curr.status == FeedStatus.loaded),
         listener: (context, state) {
           if (state.uploadStatusText == '发布完成' ||
               state.uploadStatusText == '编辑完成') {
@@ -69,7 +71,6 @@ class _FeedScreenState extends State<FeedScreen> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
-          // 发布完成不触发 FeedLoadEvent，数据已在内存中更新
           await Navigator.push<bool>(
             context,
             MaterialPageRoute(builder: (_) => const CreatePostScreen()),
@@ -132,6 +133,8 @@ class _FeedScreenState extends State<FeedScreen> {
         ],
       ),
       actions: [
+        // 同步按钮（按 guide.skill 第一节：主页顶部工具栏右侧圆角矩形按钮）
+        _SyncButton(),
         PopupMenuButton<FeedSortMode>(
           icon: Icon(Icons.sort_rounded, size: 22, color: cs.onSurfaceVariant),
           tooltip: '排序',
@@ -141,8 +144,8 @@ class _FeedScreenState extends State<FeedScreen> {
           itemBuilder: (context) => [
             _sortItem(FeedSortMode.newest, '最新优先', Icons.access_time_rounded,
                 state, cs),
-            _sortItem(
-                FeedSortMode.oldest, '最早优先', Icons.history_rounded, state, cs),
+            _sortItem(FeedSortMode.oldest, '最早优先', Icons.history_rounded,
+                state, cs),
             _sortItem(FeedSortMode.contentAsc, '内容 A-Z',
                 Icons.sort_by_alpha_rounded, state, cs),
             _sortItem(FeedSortMode.contentDesc, '内容 Z-A',
@@ -232,7 +235,7 @@ class _FeedScreenState extends State<FeedScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
         decoration: BoxDecoration(
           color: cs.tertiaryContainer.withOpacity(0.4),
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(14),
         ),
         child: Row(
           children: [
@@ -377,8 +380,257 @@ class _FeedScreenState extends State<FeedScreen> {
   }
 }
 
+/// 同步状态按钮（按 guide.skill 第一节）
+class _SyncButton extends StatefulWidget {
+  @override
+  State<_SyncButton> createState() => _SyncButtonState();
+}
+
+class _SyncButtonState extends State<_SyncButton>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _spinController;
+
+  @override
+  void initState() {
+    super.initState();
+    _spinController = AnimationController(
+      duration: const Duration(seconds: 1),
+      vsync: this,
+    );
+  }
+
+  @override
+  void dispose() {
+    _spinController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final sync = context.watch<SyncService>();
+    final cs = Theme.of(context).colorScheme;
+    final auth = context.read<AuthBloc>().state;
+
+    // 已登录才显示
+    if (auth.status != AuthStatus.authenticated) return const SizedBox.shrink();
+
+    final status = sync.syncStatus;
+    if (status == SyncStatus.syncing) {
+      _spinController.repeat();
+    } else {
+      _spinController.stop();
+    }
+
+    final (IconData icon, Color iconColor, String label) = switch (status) {
+      SyncStatus.idle => (
+          Icons.cloud_outlined,
+          cs.onSurfaceVariant,
+          '同步'
+        ),
+      SyncStatus.syncing => (
+          Icons.sync_rounded,
+          cs.primary,
+          '同步中'
+        ),
+      SyncStatus.success => (
+          Icons.cloud_done_rounded,
+          Colors.green,
+          '同步'
+        ),
+      SyncStatus.failed => (
+          Icons.cloud_off_rounded,
+          cs.error,
+          '同步'
+        ),
+    };
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4),
+      child: Material(
+        color: cs.surfaceContainerHighest.withOpacity(0.5),
+        borderRadius: BorderRadius.circular(14),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(14),
+          onTap: () => _onTap(context, sync, status),
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                status == SyncStatus.syncing
+                    ? RotationTransition(
+                        turns: _spinController,
+                        child: Icon(icon, size: 16, color: iconColor),
+                      )
+                    : Icon(icon, size: 16, color: iconColor),
+                const SizedBox(width: 4),
+                Text(
+                  label,
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: iconColor,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future<void> _onTap(
+      BuildContext context, SyncService sync, SyncStatus status) async {
+    switch (status) {
+      case SyncStatus.syncing:
+        _showSyncingDialog(context, sync);
+        break;
+      case SyncStatus.success:
+        _showSuccessSummary(context, sync);
+        break;
+      case SyncStatus.failed:
+        _showFailureDialog(context, sync);
+        break;
+      case SyncStatus.idle:
+        await _triggerSync(context);
+        break;
+    }
+  }
+
+  Future<void> _triggerSync(BuildContext context) async {
+    final feedBloc = context.read<FeedBloc>();
+    final ok = await feedBloc.performManualSync();
+    if (!context.mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(ok ? '同步完成' : '同步失败'),
+      behavior: SnackBarBehavior.floating,
+    ));
+  }
+
+  void _showSyncingDialog(BuildContext context, SyncService sync) {
+    final cs = Theme.of(context).colorScheme;
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: const Row(
+          children: [
+            Icon(Icons.sync_rounded, color: Colors.blue),
+            SizedBox(width: 8),
+            Text('正在同步'),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (sync.currentFileName != null)
+              Text(sync.currentFileName!,
+                  style: TextStyle(color: cs.onSurfaceVariant, fontSize: 13)),
+            const SizedBox(height: 12),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: LinearProgressIndicator(
+                value: sync.totalToSync > 0
+                    ? sync.syncedCount / sync.totalToSync
+                    : null,
+                minHeight: 6,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text('${sync.syncedCount} / ${sync.totalToSync}'),
+          ],
+        ),
+        actions: [
+          TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text('隐藏')),
+        ],
+      ),
+    );
+  }
+
+  void _showSuccessSummary(BuildContext context, SyncService sync) {
+    final summary = sync.lastSummary;
+    if (summary == null) return;
+    final timeStr = '${summary.lastSyncTime.year}-'
+        '${summary.lastSyncTime.month.toString().padLeft(2, '0')}-'
+        '${summary.lastSyncTime.day.toString().padLeft(2, '0')} '
+        '${summary.lastSyncTime.hour.toString().padLeft(2, '0')}:'
+        '${summary.lastSyncTime.minute.toString().padLeft(2, '0')}:'
+        '${summary.lastSyncTime.second.toString().padLeft(2, '0')}';
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape:
+RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: const Row(
+          children: [
+            Icon(Icons.cloud_done_rounded, color: Colors.green),
+            SizedBox(width: 8),
+            Text('最近同步'),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('时间：$timeStr'),
+            const SizedBox(height: 8),
+            Text('上传：${summary.uploadedCount} 个文件'),
+            Text('下载：${summary.downloadedCount} 个文件'),
+          ],
+        ),
+        actions: [
+          TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text('关闭')),
+        ],
+      ),
+    );
+  }
+
+  void _showFailureDialog(BuildContext context, SyncService sync) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: const Row(
+          children: [
+            Icon(Icons.cloud_off_rounded, color: Colors.red),
+            SizedBox(width: 8),
+            Text('同步失败'),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('失败原因'),
+            const SizedBox(height: 4),
+            SelectableText(
+              sync.syncError ?? '未知错误',
+              style: const TextStyle(fontSize: 13),
+            ),
+            if (sync.syncErrorStatusCode != null) ...[
+              const SizedBox(height: 8),
+              Text('服务器返回 ${sync.syncErrorStatusCode}'),
+            ],
+          ],
+        ),
+        actions: [
+          TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text('关闭')),
+        ],
+      ),
+    );
+  }
+}
+
 /// 动态卡片
-/// 布局：头像+昵称+时间 → 文字内容 → 媒体网格 → 间隔线
 class _PostCard extends StatelessWidget {
   final Post post;
   final FeedState state;
@@ -390,12 +642,13 @@ class _PostCard extends StatelessWidget {
     final cs = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     final hasContent = post.content.trim().isNotEmpty;
-    final hasMedia =
-        post.mediaFiles.isNotEmpty || post.hasVideo ;
+    final hasMedia = post.mediaFiles.isNotEmpty || post.hasVideo;
 
     return GestureDetector(
-      onTap: () => Navigator.push(context,
-          MaterialPageRoute(builder: (_) => PostDetailScreen(post: post))),
+      onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (_) => PostDetailScreen(post: post))),
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
@@ -407,7 +660,6 @@ class _PostCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            // 1. 头像 + 用户昵称 + 时间
             BlocBuilder<AppBloc, AppState>(
               buildWhen: (prev, curr) =>
                   prev.settings?.nickname != curr.settings?.nickname ||
@@ -420,7 +672,6 @@ class _PostCard extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
                   child: Row(
                     children: [
-                      // 头像
                       CircleAvatar(
                         radius: 20,
                         backgroundColor: cs.primaryContainer,
@@ -431,17 +682,16 @@ class _PostCard extends StatelessWidget {
                                   width: 40,
                                   height: 40,
                                   fit: BoxFit.cover,
-                                  errorBuilder: (_, __, ___) =>
-                                      Icon(Icons.person_rounded,
-                                          size: 22,
-                                          color: cs.onPrimaryContainer),
+                                  errorBuilder: (_, __, ___) => Icon(
+                                      Icons.person_rounded,
+                                      size: 22,
+                                      color: cs.onPrimaryContainer),
                                 ),
                               )
                             : Icon(Icons.person_rounded,
                                 size: 22, color: cs.onPrimaryContainer),
                       ),
                       const SizedBox(width: 12),
-                      // 昵称 + 时间
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -449,8 +699,7 @@ class _PostCard extends StatelessWidget {
                             Text(
                               nickname,
                               style: textTheme.bodyMedium?.copyWith(
-                                fontWeight: FontWeight.w600,
-                              ),
+                                  fontWeight: FontWeight.w600),
                             ),
                             const SizedBox(height: 2),
                             Text(
@@ -467,8 +716,6 @@ class _PostCard extends StatelessWidget {
                 );
               },
             ),
-
-            // 2. 文字内容（#标签 高亮显示）
             if (hasContent)
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
@@ -482,15 +729,11 @@ class _PostCard extends StatelessWidget {
                   style: textTheme.bodyLarge?.copyWith(height: 1.5),
                 ),
               ),
-
-            // 3. 媒体网格
             if (hasMedia)
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
                 child: _MediaGrid(post: post, state: state),
               ),
-
-            // 4. 标签
             if (post.tags.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 4),
@@ -500,13 +743,11 @@ class _PostCard extends StatelessWidget {
                   children: post.tags
                       .map((tag) => GestureDetector(
                             onTap: () {
-                              // 切换到搜索 Tab
                               context
                                   .read<AppBloc>()
                                   .add(const AppNavigationChangedEvent(1));
-                              // 短暂延迟后触发标签搜索
-                              Future.delayed(const Duration(milliseconds: 200),
-                                  () {
+                              Future.delayed(
+                                  const Duration(milliseconds: 200), () {
                                 if (context.mounted) {
                                   context
                                       .read<FeedBloc>()
@@ -534,8 +775,6 @@ class _PostCard extends StatelessWidget {
                       .toList(),
                 ),
               ),
-
-            // 5. 底部：视频/音频标识 + 时间
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 4, 16, 14),
               child: Row(
@@ -544,8 +783,8 @@ class _PostCard extends StatelessWidget {
                     Icon(Icons.videocam_rounded, size: 14, color: cs.primary),
                     const SizedBox(width: 4),
                     Text('视频',
-                        style:
-                            textTheme.labelSmall?.copyWith(color: cs.primary)),
+                        style: textTheme.labelSmall
+                            ?.copyWith(color: cs.primary)),
                     const SizedBox(width: 10),
                   ],
                 ],
@@ -557,19 +796,16 @@ class _PostCard extends StatelessWidget {
     );
   }
 
-  /// 构建内容 TextSpan，#标签 高亮显示
   static List<TextSpan> _buildContentSpans(
       String content, TextTheme textTheme, ColorScheme cs) {
     final regex = RegExp(r'#(\S+)');
     final spans = <TextSpan>[];
     int lastEnd = 0;
     for (final match in regex.allMatches(content)) {
-      // 普通文本
       if (match.start > lastEnd) {
-        spans.add(TextSpan(
-            text: content.substring(lastEnd, match.start)));
+        spans.add(
+            TextSpan(text: content.substring(lastEnd, match.start)));
       }
-      // 高亮标签
       spans.add(TextSpan(
         text: match.group(1),
         style: TextStyle(
@@ -577,7 +813,6 @@ class _PostCard extends StatelessWidget {
       ));
       lastEnd = match.end;
     }
-    // 剩余文本
     if (lastEnd < content.length) {
       spans.add(TextSpan(text: content.substring(lastEnd)));
     }
@@ -590,11 +825,7 @@ class _PostCard extends StatelessWidget {
   }
 }
 
-/// 媒体网格组件
-/// 每个媒体文件单独圆角矩形，之间有间隙
-/// 1张: 显示比例，最大60%宽高
-/// 2张: 两列等分
-/// 3+张: 三列等分，最多显示9张
+/// 媒体网格（按 guide.skill 第二节：视频封面/时长，第三节：图片缩略图）
 class _MediaGrid extends StatelessWidget {
   final Post post;
   final FeedState state;
@@ -607,67 +838,39 @@ class _MediaGrid extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     final screenWidth = MediaQuery.of(context).size.width;
     final allMedia = post.mediaFiles;
-
     final hasVideo = post.hasVideo;
     final imageCount = allMedia.length;
-
     int totalMedia = imageCount + (hasVideo ? 1 : 0);
     final displayCount = totalMedia > 9 ? 9 : totalMedia;
     final hasMore = totalMedia > 9;
 
     if (imageCount == 0 && !hasVideo) return const SizedBox.shrink();
 
-    // 单张：显示比例，最大60%宽高
+    // 单个媒体
     if (displayCount == 1 && !hasMore) {
       final maxW = screenWidth * 0.7;
-    final maxH = maxW;
       if (hasVideo && imageCount == 0) {
-        // 只有视频：显示视频封面（保持原始比例）+ 播放按钮
-        final thumbnail = post.videoThumbnail;
-        final hasThumb = thumbnail != null && thumbnail.isNotEmpty;
-        return Align(
-          alignment: Alignment.centerLeft,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Container(
-              constraints: BoxConstraints(maxWidth: maxW),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  if (hasThumb)
-                    _buildImage(context, thumbnail, maxW, fit: BoxFit.contain)
-                  else
-                    _buildVideoPlaceholder(context, cs, textTheme, maxW),
-                  // 播放按钮
-                  Container(
-                    decoration: const BoxDecoration(color: Colors.black38, shape: BoxShape.circle),
-                    padding: const EdgeInsets.all(10),
-                    child: Icon(Icons.play_arrow_rounded, size: 28, color: Colors.white),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
+        return _buildVideoOnlyCard(context, cs, textTheme, maxW);
       }
       return Align(
         alignment: Alignment.centerLeft,
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(16),
           child: Container(
-            constraints: BoxConstraints(maxWidth: maxW, maxHeight: maxH),
+            constraints: BoxConstraints(maxWidth: maxW),
             decoration: BoxDecoration(
-              border: Border.all(color: cs.outlineVariant.withOpacity(0.25)),
-              borderRadius: BorderRadius.circular(12),
+              border:
+                  Border.all(color: cs.outlineVariant.withOpacity(0.25)),
+              borderRadius: BorderRadius.circular(16),
             ),
             child: _buildImage(context, allMedia.first, maxW,
-                height: maxH, fit: BoxFit.cover),
+                height: maxW, fit: BoxFit.cover),
           ),
         ),
       );
     }
 
-    // 多张：三列（或两列）网格，每个独立圆角
+    // 多张：3 列网格，每个独立圆角 16
     final crossAxisCount = displayCount == 2 ? 2 : 3;
     final spacing = 6.0;
     final imageSize =
@@ -676,94 +879,132 @@ class _MediaGrid extends StatelessWidget {
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: crossAxisCount,
-          crossAxisSpacing: spacing,
-          mainAxisSpacing: spacing,
-          childAspectRatio: 1.0,
-        ),
-        itemCount: displayCount,
-        itemBuilder: (context, index) {
-          // 视频占第一位置
-          if (hasVideo && index == 0) {
-            return _buildMediaBox(
-              context,
-              cs,
-              child: post.videoThumbnail != null && post.videoThumbnail!.isNotEmpty
-                  ? Stack(
-                      children: [
-                        _buildImage(context, post.videoThumbnail!, imageSize,
-                            height: imageSize, fit: BoxFit.cover),
-                        Container(
-                          color: Colors.black26,
-                          child: Center(
-                            child: Container(
-                              padding: const EdgeInsets.all(8),
-                              decoration: const BoxDecoration(
-                                color: Colors.white70,
-                                shape: BoxShape.circle,
-                              ),
-                              child: Icon(Icons.play_arrow_rounded,
-                                  size: 28, color: cs.primary),
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                  : _buildVideoPlaceholder(context, cs, textTheme, imageSize),
-            );
-          }
-
-          final imageIndex = hasVideo ? index - 1 : index;
-          if (imageIndex >= imageCount) return const SizedBox.shrink();
-
-          // 最后一个且有更多
-          if (hasMore && index == 8) {
-            return _buildMediaBox(
-              context,
-              cs,
-              child: Stack(
-                children: [
-                  _buildImage(context, allMedia[imageIndex], imageSize,
-                      height: imageSize, fit: BoxFit.cover),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.55),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Center(
-                      child: Text(
-                        '+${totalMedia - 8}',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          }
-
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: crossAxisCount,
+        crossAxisSpacing: spacing,
+        mainAxisSpacing: spacing,
+        childAspectRatio: 1.0,
+      ),
+      itemCount: displayCount,
+      itemBuilder: (context, index) {
+        if (hasVideo && index == 0) {
           return _buildMediaBox(
             context,
             cs,
-            child: _buildImage(context, allMedia[imageIndex], imageSize,
-                height: imageSize, fit: BoxFit.cover),
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: post.videoThumbnail != null &&
+                          post.videoThumbnail!.isNotEmpty
+                      ? _buildImage(context, post.videoThumbnail!, imageSize,
+                          height: imageSize, fit: BoxFit.cover)
+                      : Container(
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                cs.primary.withOpacity(0.08),
+                                cs.primary.withOpacity(0.18),
+                              ],
+                            ),
+                          ),
+                        ),
+                ),
+                Container(
+                  color: Colors.black26,
+                  child: Center(
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: const BoxDecoration(
+                          color: Colors.white70, shape: BoxShape.circle),
+                      child: Icon(Icons.play_arrow_rounded,
+                          size: 28, color: cs.primary),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           );
-        },
+        }
+
+        final imageIndex = hasVideo ? index - 1 : index;
+        if (imageIndex >= imageCount) return const SizedBox.shrink();
+
+        if (hasMore && index == 8) {
+          return _buildMediaBox(
+            context,
+            cs,
+            child: Stack(
+              children: [
+                _buildImage(context, allMedia[imageIndex], imageSize,
+                    height: imageSize, fit: BoxFit.cover),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.55),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Center(
+                    child: Text(
+                      '+${totalMedia - 8}',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+
+        return _buildMediaBox(
+          context,
+          cs,
+          child: _buildImage(context, allMedia[imageIndex], imageSize,
+              height: imageSize, fit: BoxFit.cover),
+        );
+      },
     );
   }
 
-  /// 单个媒体项的圆角矩形容器
+  Widget _buildVideoOnlyCard(
+      BuildContext context, ColorScheme cs, TextTheme textTheme, double maxW) {
+    final thumbnail = post.videoThumbnail;
+    final hasThumb = thumbnail != null && thumbnail.isNotEmpty;
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: Container(
+          constraints: BoxConstraints(maxWidth: maxW),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              if (hasThumb)
+                _buildImage(context, thumbnail, maxW, fit: BoxFit.cover),
+              Container(
+                decoration: const BoxDecoration(
+                    color: Colors.black38, shape: BoxShape.circle),
+                padding: const EdgeInsets.all(10),
+                child: const Icon(Icons.play_arrow_rounded,
+                    size: 28, color: Colors.white),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildMediaBox(BuildContext context, ColorScheme cs,
       {required Widget child}) {
     return Container(
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
         border: Border.all(color: cs.outlineVariant.withOpacity(0.25)),
       ),
       child: child,
@@ -775,7 +1016,6 @@ class _MediaGrid extends StatelessWidget {
     final imageUrl = MediaUtils.buildMediaUrl(state, fileName);
     final authBloc = context.read<AuthBloc>();
     final encryption = authBloc.webDavService?.encryption;
-
     return MediaUtils.buildImage(
       fileName: fileName,
       imageUrl: imageUrl,
@@ -784,34 +1024,6 @@ class _MediaGrid extends StatelessWidget {
       fit: fit,
       httpHeaders: state.imageHeaders,
       encryption: encryption,
-    );
-  }
-
-  Widget _buildVideoPlaceholder(
-      BuildContext context, ColorScheme cs, TextTheme textTheme, double size) {
-    return Container(
-      width: size,
-      height: size,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            cs.primary.withOpacity(0.08),
-            cs.primary.withOpacity(0.15),
-          ],
-        ),
-      ),
-      child: Center(
-        child: Container(
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: cs.primary.withOpacity(0.2),
-            shape: BoxShape.circle,
-          ),
-          child: Icon(Icons.play_arrow_rounded, size: 32, color: cs.primary),
-        ),
-      ),
     );
   }
 }

@@ -8,7 +8,7 @@ import 'functionality/home/app_bloc.dart';
 import 'functionality/feed/feed_bloc.dart';
 import 'models/settings.dart' as models;
 import 'services/log_service.dart';
-import 'services/cache_service.dart';
+import 'services/sync_service.dart';
 import 'utils/media_utils.dart';
 import 'ui/home/home_screen.dart';
 import 'ui/auth/login_screen.dart';
@@ -45,8 +45,8 @@ class LifeApp extends StatelessWidget {
             return appBloc;
           },
         ),
-        Provider<CacheService>(
-          create: (_) => CacheService(),
+        Provider<SyncService>(
+          create: (_) => SyncService(),
         ),
         BlocProvider<FeedBloc>(
           create: (context) => FeedBloc(),
@@ -60,44 +60,49 @@ class LifeApp extends StatelessWidget {
 
               final webDavService = context.read<AuthBloc>().webDavService;
               final logService = context.read<LogService>();
+              final syncService = context.read<SyncService>();
 
-              // 始终初始化缓存服务（本地模式也需要）
-              final cacheService = context.read<CacheService>();
-              cacheService.setLogService(logService);
-              MediaUtils.cacheService = cacheService;
-              final cacheEnabled = appState.settings?.cacheEnabled ?? true;
-              cacheService.setEnabled(cacheEnabled);
-              if (cacheEnabled) cacheService.init();
-
-              final feedBloc = context.read<FeedBloc>();
-              feedBloc.setCacheService(cacheService);
-              feedBloc.setLogService(logService);
+              // 注入日志和加密
+              syncService.setLogService(logService);
+              MediaUtils.syncService = syncService;
 
               // WebDAV 连接（仅认证后）
               if ((authState.status == AuthStatus.authenticated ||
-                   authState.status == AuthStatus.local) &&
+                  authState.status == AuthStatus.local) &&
                   webDavService != null) {
                 final appBloc = context.read<AppBloc>();
                 appBloc.setWebDavService(webDavService);
-                cacheService.setEncryption(webDavService.encryption);
-                final syncInterval = appState.settings?.cacheSyncInterval ?? 60;
-                cacheService.setSyncInterval(syncInterval);
-                webDavService.setRawDataEnabled(appState.settings?.rawDataEnabled ?? false);
+                syncService.setEncryption(webDavService.encryption);
+
+                final syncEnabled = appState.settings?.syncEnabled ?? true;
+                syncService.setEnabled(syncEnabled);
+                if (syncEnabled) syncService.init();
+
+                final feedBloc = context.read<FeedBloc>();
+                feedBloc.setSyncService(syncService);
+                feedBloc.setLogService(logService);
+
+                final syncInterval = appState.settings?.syncInterval ?? 60;
+                syncService.setSyncInterval(syncInterval);
+                webDavService.setRawDataEnabled(
+                    appState.settings?.rawDataEnabled ?? false);
 
                 feedBloc.setWebDavService(webDavService);
                 feedBloc.setOnAuthError(() {
                   context.read<AuthBloc>().add(const AuthLogoutEvent());
                 });
 
-                if (cacheEnabled) {
-                  cacheService.startBackgroundSync(() async {
-                    final data = await cacheService.loadLocalData();
+                if (syncEnabled) {
+                  syncService.startBackgroundSync(() async {
+                    final data = await syncService.loadLocalData();
                     if (data == null) return [];
                     final files = <String>[];
                     for (final post in data.posts) {
                       files.addAll(post.mediaFiles);
                       if (post.videoFile != null) files.add(post.videoFile!);
-                      if (post.videoThumbnail != null) files.add(post.videoThumbnail!);
+                      if (post.videoThumbnail != null) {
+                        files.add(post.videoThumbnail!);
+                      }
                     }
                     return files;
                   });
@@ -220,7 +225,7 @@ class LifeApp extends StatelessWidget {
       ),
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
       ),
       chipTheme: ChipThemeData(
         shape: RoundedRectangleBorder(
@@ -231,20 +236,34 @@ class LifeApp extends StatelessWidget {
         filled: true,
         fillColor: colorScheme.surfaceContainerHighest.withOpacity(0.4),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(14),
           borderSide: BorderSide.none,
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide:
-              BorderSide(color: colorScheme.outlineVariant.withOpacity(0.5)),
+          borderRadius: BorderRadius.circular(14),
+          borderSide: BorderSide(
+              color: colorScheme.outlineVariant.withOpacity(0.5)),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(14),
           borderSide: BorderSide(color: colorScheme.primary, width: 2),
         ),
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(14),
+          ),
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(14),
+          ),
+        ),
       ),
       dividerTheme: DividerThemeData(
         color: colorScheme.outlineVariant.withOpacity(0.3),
@@ -321,7 +340,7 @@ class LifeApp extends StatelessWidget {
       ),
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
       ),
       chipTheme: ChipThemeData(
         shape: RoundedRectangleBorder(
@@ -332,20 +351,34 @@ class LifeApp extends StatelessWidget {
         filled: true,
         fillColor: colorScheme.surfaceContainerHighest.withOpacity(0.4),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(14),
           borderSide: BorderSide.none,
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide:
-              BorderSide(color: colorScheme.outlineVariant.withOpacity(0.5)),
+          borderRadius: BorderRadius.circular(14),
+          borderSide: BorderSide(
+              color: colorScheme.outlineVariant.withOpacity(0.5)),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(14),
           borderSide: BorderSide(color: colorScheme.primary, width: 2),
         ),
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(14),
+          ),
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(14),
+          ),
+        ),
       ),
       dividerTheme: DividerThemeData(
         color: colorScheme.outlineVariant.withOpacity(0.3),

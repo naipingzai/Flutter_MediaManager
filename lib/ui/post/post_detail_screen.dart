@@ -10,7 +10,7 @@ import 'package:media_kit_video/media_kit_video.dart';
 import '../../functionality/auth/auth_bloc.dart';
 import '../../functionality/feed/feed_bloc.dart';
 import '../../models/post.dart';
-import '../../services/cache_service.dart';
+import '../../services/sync_service.dart';
 import '../../services/encryption_service.dart';
 import '../../utils/media_utils.dart';
 import 'create_post_screen.dart';
@@ -36,11 +36,18 @@ class PostDetailScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('详情'),
         actions: [
+          // 右上角菜单：标签管理（按 guide.skill 第七节统一入口）
+          IconButton(
+            icon: const Icon(Icons.label_outline_rounded, size: 22),
+            tooltip: '标签',
+            onPressed: () => _showTagsDialog(context, post),
+          ),
           IconButton(
             onPressed: () async {
               final result = await Navigator.push<bool>(
                 context,
-                MaterialPageRoute(builder: (_) => CreatePostScreen(editPost: post)),
+                MaterialPageRoute(
+                    builder: (_) => CreatePostScreen(editPost: post)),
               );
               if (result == true && context.mounted) Navigator.pop(context, true);
             },
@@ -66,16 +73,24 @@ class PostDetailScreen extends StatelessWidget {
                 child: _buildRichContent(post.content, textTheme, cs),
               ),
             if (post.mediaFiles.isNotEmpty)
-              _MediaCarousel(mediaFiles: post.mediaFiles, feedState: feedState, screenWidth: screenWidth),
+              _MediaCarousel(
+                  mediaFiles: post.mediaFiles,
+                  feedState: feedState,
+                  screenWidth: screenWidth),
             if (post.hasVideo)
-              _VlcVideoPlayer(feedState: feedState, videoFileName: post.videoFile!, screenWidth: screenWidth),
+              _VideoPlayerCard(
+                feedState: feedState,
+                post: post,
+                screenWidth: screenWidth,
+              ),
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 16, 20, 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
                       color: cs.surfaceContainerHighest.withOpacity(0.5),
                       borderRadius: BorderRadius.circular(20),
@@ -83,24 +98,34 @@ class PostDetailScreen extends StatelessWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.schedule_rounded, size: 14, color: cs.onSurfaceVariant),
+                        Icon(Icons.schedule_rounded,
+                            size: 14, color: cs.onSurfaceVariant),
                         const SizedBox(width: 6),
-                        Text(timeStr, style: textTheme.labelMedium?.copyWith(color: cs.onSurfaceVariant)),
+                        Text(timeStr,
+                            style: textTheme.labelMedium
+                                ?.copyWith(color: cs.onSurfaceVariant)),
                       ],
                     ),
                   ),
                   const SizedBox(height: 12),
                   if (post.tags.isNotEmpty)
                     Wrap(
-                      spacing: 8, runSpacing: 8,
-                      children: post.tags.map((tag) => Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                        decoration: BoxDecoration(
-                          color: cs.primaryContainer.withOpacity(0.5),
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Text(tag, style: textTheme.bodySmall?.copyWith(color: cs.onPrimaryContainer, fontWeight: FontWeight.w500)),
-                      )).toList(),
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: post.tags
+                          .map((tag) => Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 6),
+                                decoration: BoxDecoration(
+                                  color: cs.primaryContainer.withOpacity(0.5),
+                                  borderRadius: BorderRadius.circular(14),
+                                ),
+                                child: Text(tag,
+                                    style: textTheme.bodySmall?.copyWith(
+                                        color: cs.onPrimaryContainer,
+                                        fontWeight: FontWeight.w500)),
+                              ))
+                          .toList(),
                     ),
                 ],
               ),
@@ -112,17 +137,85 @@ class PostDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildRichContent(String content, TextTheme textTheme, ColorScheme cs) {
+  Widget _buildRichContent(
+      String content, TextTheme textTheme, ColorScheme cs) {
     final regex = RegExp(r'#[^\s#]+');
     final spans = <TextSpan>[];
     int lastEnd = 0;
     for (final match in regex.allMatches(content)) {
-      if (match.start > lastEnd) spans.add(TextSpan(text: content.substring(lastEnd, match.start)));
-      spans.add(TextSpan(text: content.substring(match.start + 1, match.end), style: TextStyle(color: cs.primary, fontWeight: FontWeight.w600)));
+      if (match.start > lastEnd) {
+        spans.add(TextSpan(text: content.substring(lastEnd, match.start)));
+      }
+      spans.add(TextSpan(
+          text: content.substring(match.start + 1, match.end),
+          style: TextStyle(color: cs.primary, fontWeight: FontWeight.w600)));
       lastEnd = match.end;
     }
-    if (lastEnd < content.length) spans.add(TextSpan(text: content.substring(lastEnd)));
-    return SelectableText.rich(TextSpan(style: textTheme.bodyLarge?.copyWith(height: 1.8, fontSize: 16), children: spans));
+    if (lastEnd < content.length) {
+      spans.add(TextSpan(text: content.substring(lastEnd)));
+    }
+    return SelectableText.rich(TextSpan(
+        style: textTheme.bodyLarge?.copyWith(height: 1.8, fontSize: 16),
+        children: spans));
+  }
+
+  /// 标签管理弹窗（统一入口）
+  void _showTagsDialog(BuildContext context, Post post) {
+    final controller = TextEditingController(text: post.tags.join(' '));
+    final cs = Theme.of(context).colorScheme;
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20)),
+        title: const Text('标签'),
+        content: TextField(
+          controller: controller,
+          maxLines: 2,
+          decoration: const InputDecoration(
+            hintText: '使用空格分隔，如：日常 天气',
+            border: OutlineInputBorder(),
+          ),
+        ),
+        actions: [
+          TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text('取消')),
+          FilledButton(
+            onPressed: () {
+              final newTags = controller.text
+                  .split(RegExp(r'\s+'))
+                  .where((s) => s.trim().isNotEmpty)
+                  .map((s) => s.replaceAll(RegExp(r'^#+'), ''))
+                  .toList();
+              final updated = post.copyWith(tags: newTags);
+              // 这里触发 feed bloc 更新（通过事件简化处理）
+              final feedBloc = context.read<FeedBloc>();
+              if (feedBloc.state.posts.any((p) => p.id == post.id)) {
+                // 直接编辑 data
+                final state = feedBloc.state;
+                final updatedPosts = state.posts
+                    .map((p) => p.id == post.id ? updated : p)
+                    .toList();
+                // 通过创建相同 id 的 edit 事件实现
+                feedBloc.add(FeedEditPostEvent(
+                  postId: post.id,
+                  content: post.content,
+                  tags: newTags,
+                ));
+              }
+              Navigator.pop(ctx);
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: const Text('标签已更新'),
+                behavior: SnackBarBehavior.floating,
+                backgroundColor: cs.primary,
+              ));
+            },
+            child: const Text('保存'),
+          ),
+        ],
+      ),
+    );
   }
 
   void _confirmDelete(BuildContext context) {
@@ -130,18 +223,22 @@ class PostDetailScreen extends StatelessWidget {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         icon: Icon(Icons.delete_outline_rounded, size: 40, color: cs.error),
         title: const Text('删除动态'),
         content: const Text('确定要删除这条动态吗？删除后无法恢复。'),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('取消')),
+          TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text('取消')),
           FilledButton(
             style: FilledButton.styleFrom(backgroundColor: cs.error),
             onPressed: () {
               context.read<FeedBloc>().add(FeedDeletePostEvent(post.id));
               Navigator.pop(ctx);
               Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('动态已删除')));
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('动态已删除')));
             },
             child: const Text('删除'),
           ),
@@ -152,21 +249,20 @@ class PostDetailScreen extends StatelessWidget {
 }
 
 // ============================================================
-// 视频播放器 —— media_kit (全平台支持: Android/iOS/Linux/macOS/Windows)
+// 视频播放器卡片（封面先行 + 点击进入播放）
 // ============================================================
-/// 视频预览卡片（点击后全屏播放）
-class _VlcVideoPlayer extends StatefulWidget {
+class _VideoPlayerCard extends StatefulWidget {
   final FeedState feedState;
-  final String videoFileName;
+  final Post post;
   final double screenWidth;
-
-  const _VlcVideoPlayer({required this.feedState, required this.videoFileName, required this.screenWidth});
+  const _VideoPlayerCard(
+      {required this.feedState, required this.post, required this.screenWidth});
 
   @override
-  State<_VlcVideoPlayer> createState() => _VlcVideoPlayerState();
+  State<_VideoPlayerCard> createState() => _VideoPlayerCardState();
 }
 
-class _VlcVideoPlayerState extends State<_VlcVideoPlayer> {
+class _VideoPlayerCardState extends State<_VideoPlayerCard> {
   String? _localPath;
   bool _loading = true;
   bool _hasError = false;
@@ -179,26 +275,33 @@ class _VlcVideoPlayerState extends State<_VlcVideoPlayer> {
 
   Future<void> _prepareVideo() async {
     try {
-      final cacheService = context.read<CacheService>();
-      final localPath = await cacheService.getLocalMediaPath(widget.videoFileName);
+      final sync = context.read<SyncService>();
+      final localPath =
+          await sync.getLocalMediaPath(widget.post.videoFile!);
       final localFile = File(localPath);
-
       if (await localFile.exists()) {
         _localPath = localFile.path;
       } else {
-        final url = MediaUtils.buildMediaUrl(widget.feedState, widget.videoFileName);
-        if (url == null) { if (mounted) setState(() { _hasError = true; _loading = false; }); return; }
+        final url = MediaUtils.buildMediaUrl(
+            widget.feedState, widget.post.videoFile!);
+        if (url == null) {
+          if (mounted) setState(() { _hasError = true; _loading = false; });
+          return;
+        }
         final authBloc = context.read<AuthBloc>();
         final encryption = authBloc.webDavService?.encryption;
         final dio = Dio();
-        final response = await dio.get<List<int>>(url, options: Options(responseType: ResponseType.bytes, headers: widget.feedState.imageHeaders));
+        final response = await dio.get<List<int>>(url,
+            options: Options(
+                responseType: ResponseType.bytes,
+                headers: widget.feedState.imageHeaders));
         if (response.data == null) throw Exception('Download failed');
         var bytes = response.data!;
         if (encryption != null && encryption.isEncryptionEnabled) {
           bytes = encryption.decryptBytes(Uint8List.fromList(bytes)).toList();
         }
         await localFile.writeAsBytes(bytes);
-        cacheService.cachedFiles.add(widget.videoFileName);
+        sync.localMediaFiles.add(widget.post.videoFile!);
         _localPath = localFile.path;
       }
       if (mounted) setState(() => _loading = false);
@@ -207,18 +310,51 @@ class _VlcVideoPlayerState extends State<_VlcVideoPlayer> {
     }
   }
 
-  void _openFullscreen() {
-    if (_localPath == null) return;
-    Navigator.push(context, MaterialPageRoute(
-      builder: (_) => _FullscreenVideoPlayer(videoPath: _localPath!),
-    ));
+  /// 获取视频封面 Widget（先用本地缩略图，再回退到占位）
+  Widget _buildThumbnail(BuildContext context, ColorScheme cs) {
+    final thumbName = widget.post.videoThumbnail;
+    if (thumbName != null && thumbName.isNotEmpty) {
+      final authBloc = context.read<AuthBloc>();
+      final encryption = authBloc.webDavService?.encryption;
+      final url = MediaUtils.buildMediaUrl(widget.feedState, thumbName);
+      return MediaUtils.buildImage(
+        fileName: thumbName,
+        imageUrl: url,
+        width: double.infinity,
+        height: double.infinity,
+        fit: BoxFit.cover,
+        httpHeaders: widget.feedState.imageHeaders,
+        encryption: encryption,
+      );
+    }
+    return Container(
+      color: cs.surfaceContainerHighest,
+      child: Center(
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: cs.primary.withOpacity(0.18),
+            shape: BoxShape.circle,
+          ),
+          child: Icon(Icons.play_arrow_rounded, size: 56, color: cs.primary),
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     return GestureDetector(
-      onTap: _openFullscreen,
+      onTap: _localPath == null
+          ? null
+          : () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) =>
+                          _VideoPlayerScreen(videoPath: _localPath!)));
+            },
       child: Container(
         margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
         decoration: BoxDecoration(
@@ -226,70 +362,77 @@ class _VlcVideoPlayerState extends State<_VlcVideoPlayer> {
           color: Colors.black,
         ),
         clipBehavior: Clip.antiAlias,
-        child: _hasError
-            ? Container(
-                height: 200,
-                child: Center(
+        child: AspectRatio(
+          aspectRatio: 16 / 9,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Positioned.fill(child: _buildThumbnail(context, cs)),
+              if (_loading)
+                const Center(
+                    child: CircularProgressIndicator(color: Colors.white54))
+              else if (_hasError)
+                Center(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(Icons.error_outline_rounded, color: cs.error, size: 40),
-                      const SizedBox(height: 8),
-                      Text('视频加载失败', style: TextStyle(color: cs.error)),
+                    children: const [
+                      Icon(Icons.error_outline_rounded,
+                          color: Colors.white70, size: 40),
+                      SizedBox(height: 8),
+                      Text('视频加载失败',
+                          style: TextStyle(color: Colors.white70)),
                     ],
                   ),
+                )
+              else
+                Container(
+                  decoration: const BoxDecoration(
+                      color: Colors.black45, shape: BoxShape.circle),
+                  padding: const EdgeInsets.all(18),
+                  child: const Icon(Icons.play_arrow_rounded,
+                      color: Colors.white, size: 48),
                 ),
-              )
-            : Stack(
-                alignment: Alignment.center,
-                children: [
-                  AspectRatio(
-                    aspectRatio: 16 / 9,
-                    child: Container(color: Colors.black),
+              Positioned(
+                bottom: 8,
+                right: 8,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: Colors.black54,
+                    borderRadius: BorderRadius.circular(8),
                   ),
-                  if (_loading)
-                    const CircularProgressIndicator(color: Colors.white54)
-                  else
-                    Container(
-                      decoration: const BoxDecoration(color: Colors.black45, shape: BoxShape.circle),
-                      padding: const EdgeInsets.all(20),
-                      child: const Icon(Icons.play_arrow_rounded, color: Colors.white, size: 48),
-                    ),
-                  Positioned(
-                    bottom: 8, right: 8,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                      decoration: BoxDecoration(
-                        color: Colors.black54,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: const Text('全屏播放', style: TextStyle(color: Colors.white, fontSize: 12)),
-                    ),
-                  ),
-                ],
+                  child: const Text('点击播放',
+                      style: TextStyle(color: Colors.white, fontSize: 12)),
+                ),
               ),
+            ],
+          ),
+        ),
       ),
     );
   }
 }
 
-/// 全屏视频播放器（带进度条、快进快退、倍速）
-class _FullscreenVideoPlayer extends StatefulWidget {
+// ============================================================
+// 视频播放器（封面先行 + 横屏按钮 + 底部控制栏）
+// ============================================================
+class _VideoPlayerScreen extends StatefulWidget {
   final String videoPath;
-  const _FullscreenVideoPlayer({required this.videoPath});
+  const _VideoPlayerScreen({required this.videoPath});
 
   @override
-  State<_FullscreenVideoPlayer> createState() => _FullscreenVideoPlayerState();
+  State<_VideoPlayerScreen> createState() => _VideoPlayerScreenState();
 }
 
-class _FullscreenVideoPlayerState extends State<_FullscreenVideoPlayer> {
+class _VideoPlayerScreenState extends State<_VideoPlayerScreen> {
   late final Player _player;
   late final VideoController _controller;
+  bool _started = false;
   bool _showControls = true;
   bool _isPlaying = false;
   Duration _position = Duration.zero;
   Duration _duration = Duration.zero;
-  double _speed = 1.0;
   StreamSubscription? _playingSub;
   StreamSubscription? _positionSub;
   StreamSubscription? _durationSub;
@@ -299,11 +442,13 @@ class _FullscreenVideoPlayerState extends State<_FullscreenVideoPlayer> {
     super.initState();
     _player = Player();
     _controller = VideoController(_player);
-    _playingSub = _player.stream.playing.listen((v) { if (mounted) setState(() => _isPlaying = v); });
-    _positionSub = _player.stream.position.listen((p) { if (mounted) setState(() => _position = p); });
-    _durationSub = _player.stream.duration.listen((d) { if (mounted) setState(() => _duration = d); });
+    _playingSub = _player.stream.playing
+        .listen((v) => mounted ? setState(() => _isPlaying = v) : null);
+    _positionSub = _player.stream.position
+        .listen((p) => mounted ? setState(() => _position = p) : null);
+    _durationSub = _player.stream.duration
+        .listen((d) => mounted ? setState(() => _duration = d) : null);
     _player.open(Media(widget.videoPath));
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   }
 
   @override
@@ -312,8 +457,18 @@ class _FullscreenVideoPlayerState extends State<_FullscreenVideoPlayer> {
     _positionSub?.cancel();
     _durationSub?.cancel();
     _player.dispose();
+    // 恢复系统 UI（不强制横竖屏）
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     super.dispose();
+  }
+
+  void _togglePlay() {
+    if (!_started) {
+      _started = true;
+      _player.play();
+    } else {
+      _player.playOrPause();
+    }
   }
 
   String _fmt(Duration d) {
@@ -321,14 +476,6 @@ class _FullscreenVideoPlayerState extends State<_FullscreenVideoPlayer> {
     final s = d.inSeconds.remainder(60).toString().padLeft(2, '0');
     if (d.inHours > 0) return '${d.inHours}:$m:$s';
     return '$m:$s';
-  }
-
-  void _toggleSpeed() {
-    const speeds = [0.5, 0.75, 1.0, 1.25, 1.5, 2.0];
-    final i = speeds.indexOf(_speed);
-    _speed = speeds[(i + 1) % speeds.length];
-    _player.setRate(_speed);
-    setState(() {});
   }
 
   @override
@@ -339,93 +486,144 @@ class _FullscreenVideoPlayerState extends State<_FullscreenVideoPlayer> {
         onTap: () => setState(() => _showControls = !_showControls),
         child: Stack(
           children: [
+            // 视频区域：始终保持竖屏（不强制旋转）
             Center(
-              child: Video(controller: _controller, controls: NoVideoControls),
+              child: _started
+                  ? AspectRatio(
+                      aspectRatio: 16 / 9,
+                      child: Video(controller: _controller, controls: NoVideoControls),
+                    )
+                  : Container(
+                      width: double.infinity,
+                      color: Colors.black,
+                      child: const Center(
+                        child: Icon(Icons.play_circle_outline,
+                            color: Colors.white70, size: 96),
+                      ),
+                    ),
             ),
+
             if (_showControls) ...[
-              // 顶部返回按钮
+              // 顶部：返回 + 视频信息 + 更多
               Positioned(
                 top: MediaQuery.of(context).padding.top + 8,
                 left: 16,
-                child: IconButton(
-                  onPressed: () => Navigator.pop(context),
-                  icon: const Icon(Icons.arrow_back_rounded, color: Colors.white, size: 28),
-                ),
-              ),
-              // 中间播放/暂停
-              Center(
+                right: 16,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     IconButton(
-                      onPressed: () => _player.seek(_position - const Duration(seconds: 10)),
-                      icon: const Icon(Icons.replay_10_rounded, color: Colors.white, size: 36),
+                      onPressed: () => Navigator.pop(context),
+                      icon: const Icon(Icons.arrow_back_rounded,
+                          color: Colors.white, size: 28),
                     ),
-                    const SizedBox(width: 24),
-                    GestureDetector(
-                      onTap: () => _player.playOrPause(),
-                      child: Container(
-                        decoration: const BoxDecoration(color: Colors.black45, shape: BoxShape.circle),
-                        padding: const EdgeInsets.all(16),
-                        child: Icon(
-                          _isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
-                          color: Colors.white, size: 48,
+                    const Spacer(),
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.info_outline_rounded,
+                          color: Colors.white, size: 26),
+                      tooltip: '视频信息',
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.more_vert_rounded,
+                          color: Colors.white, size: 26),
+                      tooltip: '更多',
+                    ),
+                  ],
+                ),
+              ),
+
+              // 中间播放按钮（未开始时显示）
+              if (!_started)
+                Center(
+                  child: GestureDetector(
+                    onTap: _togglePlay,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                          color: Colors.black54, shape: BoxShape.circle),
+                      padding: const EdgeInsets.all(20),
+                      child: const Icon(Icons.play_arrow_rounded,
+                          color: Colors.white, size: 56),
+                    ),
+                  ),
+                ),
+
+              // 底部控制栏（播放/暂停/进度/时间/音量/横屏按钮）
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: MediaQuery.of(context).padding.bottom + 12,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    children: [
+                      SliderTheme(
+                        data: SliderTheme.of(context).copyWith(
+                          trackHeight: 3,
+                          thumbShape: const RoundSliderThumbShape(
+                              enabledThumbRadius: 6),
+                          activeTrackColor: Colors.white,
+                          inactiveTrackColor: Colors.white30,
+                          thumbColor: Colors.white,
+                        ),
+                        child: Slider(
+                          value: _duration.inMilliseconds > 0
+                              ? _position.inMilliseconds
+                                  .toDouble()
+                                  .clamp(
+                                      0,
+                                      _duration.inMilliseconds
+                                          .toDouble())
+                              : 0,
+                          max: _duration.inMilliseconds > 0
+                              ? _duration.inMilliseconds.toDouble()
+                              : 1,
+                          onChanged: (v) => _player.seek(
+                              Duration(milliseconds: v.toInt())),
                         ),
                       ),
-                    ),
-                    const SizedBox(width: 24),
-                    IconButton(
-                      onPressed: () => _player.seek(_position + const Duration(seconds: 10)),
-                      icon: const Icon(Icons.forward_10_rounded, color: Colors.white, size: 36),
-                    ),
-                  ],
-                ),
-              ),
-              // 底部进度条
-              Positioned(
-                left: 16, right: 16, bottom: MediaQuery.of(context).padding.bottom + 16,
-                child: Column(
-                  children: [
-                    SliderTheme(
-                      data: SliderTheme.of(context).copyWith(
-                        trackHeight: 3,
-                        thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 6),
-                        overlayShape: const RoundSliderOverlayShape(overlayRadius: 14),
-                        activeTrackColor: Colors.white,
-                        inactiveTrackColor: Colors.white30,
-                        thumbColor: Colors.white,
-                      ),
-                      child: Slider(
-                        value: _duration.inMilliseconds > 0
-                            ? _position.inMilliseconds.toDouble().clamp(0, _duration.inMilliseconds.toDouble())
-                            : 0,
-                        max: _duration.inMilliseconds > 0 ? _duration.inMilliseconds.toDouble() : 1,
-                        onChanged: (v) => _player.seek(Duration(milliseconds: v.toInt())),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Row(
+                      Row(
                         children: [
-                          Text(_fmt(_position), style: const TextStyle(color: Colors.white70, fontSize: 12)),
-                          const Spacer(),
-                          GestureDetector(
-                            onTap: _toggleSpeed,
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                              decoration: BoxDecoration(
-                                color: Colors.white24,
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Text('${_speed}x', style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w600)),
-                            ),
+                          IconButton(
+                            onPressed: _togglePlay,
+                            icon: Icon(
+                                _isPlaying
+                                    ? Icons.pause_rounded
+                                    : Icons.play_arrow_rounded,
+                                color: Colors.white,
+                                size: 32),
                           ),
+                          const SizedBox(width: 4),
+                          Text(_fmt(_position),
+                              style: const TextStyle(
+                                  color: Colors.white70, fontSize: 12)),
                           const Spacer(),
-                          Text(_fmt(_duration), style: const TextStyle(color: Colors.white70, fontSize: 12)),
+                          IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Icons.volume_up_rounded,
+                                color: Colors.white, size: 22),
+                            tooltip: '音量',
+                          ),
+                          IconButton(
+                            onPressed: () async {
+                              // 进入横屏（用户主动）
+                              await SystemChrome
+                                  .setPreferredOrientations([
+                                DeviceOrientation.landscapeLeft,
+                                DeviceOrientation.landscapeRight,
+                              ]);
+                            },
+                            icon: const Icon(Icons.screen_rotation_rounded,
+                                color: Colors.white, size: 22),
+                            tooltip: '横屏播放',
+                          ),
+                          Text(_fmt(_duration),
+                              style: const TextStyle(
+                                  color: Colors.white70, fontSize: 12)),
                         ],
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -437,14 +635,16 @@ class _FullscreenVideoPlayerState extends State<_FullscreenVideoPlayer> {
 }
 
 // ============================================================
-// 媒体轮播（extended_image）
+// 媒体轮播（图片）
 // ============================================================
 class _MediaCarousel extends StatefulWidget {
   final List<String> mediaFiles;
   final FeedState feedState;
   final double screenWidth;
-
-  const _MediaCarousel({required this.mediaFiles, required this.feedState, required this.screenWidth});
+  const _MediaCarousel(
+      {required this.mediaFiles,
+      required this.feedState,
+      required this.screenWidth});
 
   @override
   State<_MediaCarousel> createState() => _MediaCarouselState();
@@ -470,13 +670,11 @@ class _MediaCarouselState extends State<_MediaCarousel> {
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     final hasMultiple = widget.mediaFiles.length > 1;
-
-    // 计算可用高度：屏幕高度 - AppBar - 状态栏 - 底部安全区 - 文字区域
     final screenHeight = MediaQuery.of(context).size.height;
     final statusBar = MediaQuery.of(context).padding.top;
     final bottomSafe = MediaQuery.of(context).padding.bottom;
-    // 留出 AppBar(56) + 文字+标签(~120) + 底部(32) 的空间
-    final availableHeight = screenHeight - statusBar - 56 - 120 - bottomSafe - 32;
+    final availableHeight =
+        screenHeight - statusBar - 56 - 120 - bottomSafe - 32;
     final imageHeight = availableHeight.clamp(200.0, screenHeight * 0.7);
 
     return Column(
@@ -489,7 +687,8 @@ class _MediaCarouselState extends State<_MediaCarousel> {
             physics: const ClampingScrollPhysics(),
             onPageChanged: (i) => setState(() => _currentIndex = i),
             itemBuilder: (_, index) {
-              final imageUrl = MediaUtils.buildMediaUrl(widget.feedState, widget.mediaFiles[index]);
+              final imageUrl = MediaUtils.buildMediaUrl(
+                  widget.feedState, widget.mediaFiles[index]);
               final authBloc = context.read<AuthBloc>();
               final encryption = authBloc.webDavService?.encryption;
               return GestureDetector(
@@ -514,18 +713,20 @@ class _MediaCarouselState extends State<_MediaCarousel> {
             padding: const EdgeInsets.only(top: 12),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(widget.mediaFiles.length, (index) =>
-                AnimatedContainer(
+              children: List.generate(widget.mediaFiles.length, (index) {
+                return AnimatedContainer(
                   duration: const Duration(milliseconds: 200),
                   width: _currentIndex == index ? 20 : 6,
                   height: 6,
                   margin: const EdgeInsets.symmetric(horizontal: 3),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(3),
-                    color: _currentIndex == index ? cs.primary : cs.primary.withOpacity(0.3),
+                    color: _currentIndex == index
+                        ? cs.primary
+                        : cs.primary.withOpacity(0.3),
                   ),
-                ),
-              ),
+                );
+              }),
             ),
           ),
       ],
@@ -535,31 +736,39 @@ class _MediaCarouselState extends State<_MediaCarousel> {
   void _openGallery(BuildContext context, int initialIndex) {
     final imageUrls = widget.mediaFiles
         .map((f) => MediaUtils.buildMediaUrl(widget.feedState, f))
-        .where((url) => url != null).cast<String>().toList();
+        .where((url) => url != null)
+        .cast<String>()
+        .toList();
     if (imageUrls.isEmpty) return;
-
     final authBloc = context.read<AuthBloc>();
     final encryption = authBloc.webDavService?.encryption;
-
-    Navigator.push(context, MaterialPageRoute(
-      builder: (_) => _GalleryScreen(
-        imageUrls: imageUrls, initialIndex: initialIndex,
-        httpHeaders: widget.feedState.imageHeaders, encryption: encryption,
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => _GalleryScreen(
+          imageUrls: imageUrls,
+          initialIndex: initialIndex,
+          httpHeaders: widget.feedState.imageHeaders,
+          encryption: encryption,
+        ),
       ),
-    ));
+    );
   }
 }
 
-/// 全屏图片查看（extended_image，双指缩放 + 左右滑动）
+// ============================================================
+// 图片查看器（返回+信息+更多+双击缩放+原图+底部 3/12+功能菜单）
+// ============================================================
 class _GalleryScreen extends StatefulWidget {
   final List<String> imageUrls;
   final int initialIndex;
   final Map<String, String> httpHeaders;
   final EncryptionService? encryption;
-
   const _GalleryScreen({
-    required this.imageUrls, required this.initialIndex,
-    this.httpHeaders = const {}, this.encryption,
+    required this.imageUrls,
+    required this.initialIndex,
+    this.httpHeaders = const {},
+    this.encryption,
   });
 
   @override
@@ -570,7 +779,7 @@ class _GalleryScreenState extends State<_GalleryScreen> {
   late int _currentIndex;
   late final PageController _pageController;
   final Map<int, ImageProvider> _imageProviders = {};
-  final CacheService? _cacheService = MediaUtils.cacheService;
+  final SyncService? _sync = MediaUtils.syncService;
 
   @override
   void initState() {
@@ -590,9 +799,8 @@ class _GalleryScreenState extends State<_GalleryScreen> {
       final url = widget.imageUrls[index];
       final cleanFileName = Uri.parse(url).pathSegments.last;
 
-      // 本地缓存优先
-      if (_cacheService != null) {
-        final localPath = await _cacheService.getLocalMediaPath(cleanFileName);
+      if (_sync != null) {
+        final localPath = await _sync.getLocalMediaPath(cleanFileName);
         final file = File(localPath);
         if (await file.exists()) {
           if (!mounted) return;
@@ -602,31 +810,35 @@ class _GalleryScreenState extends State<_GalleryScreen> {
         }
       }
 
-      // 网络下载
       final dio = Dio();
-      final response = await dio.get<List<int>>(url,
-        options: Options(responseType: ResponseType.bytes, headers: widget.httpHeaders),
+      final response = await dio.get<List<int>>(
+        url,
+        options: Options(
+            responseType: ResponseType.bytes,
+            headers: widget.httpHeaders),
       );
       if (!mounted) return;
       if (response.data != null) {
         var data = response.data!;
-        if (widget.encryption != null && widget.encryption!.isEncryptionEnabled) {
-          data = widget.encryption!.decryptBytes(Uint8List.fromList(data)).toList();
+        if (widget.encryption != null &&
+            widget.encryption!.isEncryptionEnabled) {
+          data = widget.encryption!
+              .decryptBytes(Uint8List.fromList(data))
+              .toList();
         }
-        // 缓存到本地
-        if (_cacheService != null && cleanFileName.isNotEmpty) {
+        if (_sync != null && cleanFileName.isNotEmpty) {
           try {
-            final localPath = await _cacheService.getLocalMediaPath(cleanFileName);
+            final localPath =
+                await _sync.getLocalMediaPath(cleanFileName);
             await File(localPath).writeAsBytes(data);
-            _cacheService.cachedFiles.add(cleanFileName);
+            _sync.localMediaFiles.add(cleanFileName);
           } catch (_) {}
         }
         if (!mounted) return;
-        setState(() => _imageProviders[index] = MemoryImage(Uint8List.fromList(data)));
+        setState(() =>
+            _imageProviders[index] = MemoryImage(Uint8List.fromList(data)));
       }
-    } catch (e) {
-      // ignore
-    }
+    } catch (_) {}
   }
 
   @override
@@ -641,89 +853,211 @@ class _GalleryScreenState extends State<_GalleryScreen> {
       backgroundColor: Colors.black,
       body: Stack(
         children: [
-          GestureDetector(
-            onVerticalDragEnd: (details) {
-              if (details.primaryVelocity != null && details.primaryVelocity!.abs() > 300) {
-                Navigator.pop(context);
-              }
+          // 图片区域
+          PageView.builder(
+            itemCount: widget.imageUrls.length,
+            controller: _pageController,
+            onPageChanged: (index) {
+              setState(() => _currentIndex = index);
+              _loadImage(index - 1);
+              _loadImage(index + 1);
             },
-            child: PageView.builder(
-              itemCount: widget.imageUrls.length,
-              controller: _pageController,
-              onPageChanged: (index) {
-                setState(() => _currentIndex = index);
-                _loadImage(index - 1);
-                _loadImage(index + 1);
-              },
-              itemBuilder: (context, index) {
-                final provider = _imageProviders[index];
-                if (provider != null) {
-                  return ExtendedImage(
-                    image: provider,
-                    mode: ExtendedImageMode.gesture,
-                    initGestureConfigHandler: (state) => GestureConfig(
-                      minScale: 0.9,
-                      animationMinScale: 0.7,
-                      maxScale: 4.0,
-                      animationMaxScale: 4.5,
-                      speed: 1.0,
-                      inertialSpeed: 100.0,
-                      initialScale: 1.0,
-                      inPageView: true,
-                      initialAlignment: InitialAlignment.center,
-                    ),
-                  );
-                }
-                _loadImage(index);
-                return const Center(
-                  child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white54),
+            itemBuilder: (context, index) {
+              final provider = _imageProviders[index];
+              if (provider != null) {
+                return ExtendedImage(
+                  image: provider,
+                  mode: ExtendedImageMode.gesture,
+                  initGestureConfigHandler: (state) => GestureConfig(
+                    minScale: 0.9,
+                    animationMinScale: 0.7,
+                    maxScale: 4.0,
+                    animationMaxScale: 4.5,
+                    speed: 1.0,
+                    inertialSpeed: 100.0,
+                    initialScale: 1.0,
+                    inPageView: true,
+                    initialAlignment: InitialAlignment.center,
+                  ),
                 );
-              },
-            ),
+              }
+              _loadImage(index);
+              return const Center(
+                child: CircularProgressIndicator(
+                    strokeWidth: 2, color: Colors.white54),
+              );
+            },
           ),
+
+          // 顶部：返回 + 信息 + 更多
           Positioned(
-            top: 0, left: 0, right: 0,
+            top: 0,
+            left: 0,
+            right: 0,
             child: Container(
               padding: EdgeInsets.only(
                 top: MediaQuery.of(context).padding.top + 8,
-                left: 16, right: 16, bottom: 8,
+                left: 8,
+                right: 8,
+                bottom: 8,
               ),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [Colors.black.withOpacity(0.6), Colors.transparent],
+                  colors: [
+                    Colors.black.withOpacity(0.6),
+                    Colors.transparent
+                  ],
                 ),
               ),
               child: Row(
                 children: [
                   IconButton(
                     onPressed: () => Navigator.pop(context),
-                    icon: const Icon(Icons.close_rounded, color: Colors.white, size: 28),
-                    padding: EdgeInsets.zero,
-                    constraints: const BoxConstraints(),
+                    icon: const Icon(Icons.arrow_back_rounded,
+                        color: Colors.white, size: 26),
                   ),
                   const Spacer(),
-                  if (widget.imageUrls.length > 1)
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.4),
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: Text(
-                        '${_currentIndex + 1} / ${widget.imageUrls.length}',
-                        style: const TextStyle(fontSize: 13, color: Colors.white, fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                  const Spacer(),
-                  const SizedBox(width: 44),
+                  IconButton(
+                    onPressed: () => _showImageInfo(context),
+                    icon: const Icon(Icons.info_outline_rounded,
+                        color: Colors.white, size: 24),
+                    tooltip: '图片信息',
+                  ),
+                  IconButton(
+                    onPressed: () => _showMoreMenu(context),
+                    icon: const Icon(Icons.more_vert_rounded,
+                        color: Colors.white, size: 24),
+                    tooltip: '更多',
+                  ),
                 ],
               ),
             ),
           ),
+
+          // 底部：3 / 12
+          if (widget.imageUrls.length > 1)
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: MediaQuery.of(context).padding.bottom + 16,
+              child: Center(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 14, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Text(
+                    '${_currentIndex + 1} / ${widget.imageUrls.length}',
+                    style: const TextStyle(
+                        fontSize: 13,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ),
+              ),
+            ),
         ],
       ),
+    );
+  }
+
+  void _showImageInfo(BuildContext context) {
+    final url = widget.imageUrls[_currentIndex];
+    final fileName = Uri.parse(url).pathSegments.last;
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: const Text('图片信息'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _infoRow('文件名', fileName),
+            const SizedBox(height: 6),
+            _infoRow('位置', '${_currentIndex + 1} / ${widget.imageUrls.length}'),
+            const SizedBox(height: 6),
+            _infoRow('来源', '云端 WebDAV'),
+          ],
+        ),
+        actions: [
+          TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text('关闭')),
+        ],
+      ),
+    );
+  }
+
+  Widget _infoRow(String label, String value) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(width: 56, child: Text(label)),
+        Expanded(child: Text(value, style: const TextStyle(fontWeight: FontWeight.w500))),
+      ],
+    );
+  }
+
+  /// 图片查看器更多菜单（按 guide.skill 第五节）
+  void _showMoreMenu(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) => SafeArea(
+        child: Container(
+          margin: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: Theme.of(ctx).colorScheme.surface,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(height: 8),
+              Container(
+                width: 36,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: Theme.of(ctx).colorScheme.outlineVariant,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+              const SizedBox(height: 8),
+              _menuTile(ctx, Icons.save_alt_rounded, '保存到相册', () {}),
+              _menuTile(ctx, Icons.share_rounded, '分享', () {}),
+              _menuTile(ctx, Icons.label_outline_rounded, '添加标签', () {
+                Navigator.pop(ctx);
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text('可在详情页右上角管理标签'),
+                  behavior: SnackBarBehavior.floating,
+                ));
+              }),
+              _menuTile(ctx, Icons.image_outlined, '查看 EXIF', () {}),
+              _menuTile(ctx, Icons.delete_outline_rounded, '删除', () {}),
+              const SizedBox(height: 8),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _menuTile(
+      BuildContext ctx, IconData icon, String label, VoidCallback onTap) {
+    return ListTile(
+      leading: Icon(icon),
+      title: Text(label),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(14)),
+      onTap: () {
+        Navigator.pop(ctx);
+        onTap();
+      },
     );
   }
 }
