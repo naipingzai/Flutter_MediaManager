@@ -154,6 +154,7 @@ class PostDetailScreen extends StatelessWidget {
 // ============================================================
 // 视频播放器 —— media_kit (全平台支持: Android/iOS/Linux/macOS/Windows)
 // ============================================================
+/// 视频预览卡片（点击后全屏播放）
 class _VlcVideoPlayer extends StatefulWidget {
   final FeedState feedState;
   final String videoFileName;
@@ -166,104 +167,58 @@ class _VlcVideoPlayer extends StatefulWidget {
 }
 
 class _VlcVideoPlayerState extends State<_VlcVideoPlayer> {
-  // Player 和 VideoController 必须在 initState 创建（不在异步方法中）
-  // 这样 Video widget 在第一帧 build 时就能绑定纹理
-  late final Player _player;
-  late final VideoController _controller;
-  bool _ready = false;
+  String? _localPath;
+  bool _loading = true;
   bool _hasError = false;
-  bool _showControls = true;
-  bool _isPlaying = false;
-  StreamSubscription? _playingSub;
 
   @override
   void initState() {
     super.initState();
-    _player = Player();
-    _controller = VideoController(_player);
-    _playingSub = _player.stream.playing.listen((v) {
-      if (mounted) setState(() => _isPlaying = v);
-    });
-    _initMedia();
+    _prepareVideo();
   }
 
-  Future<void> _initMedia() async {
+  Future<void> _prepareVideo() async {
     try {
-      // 1. 本地文件优先（明文，不加密）
       final cacheService = context.read<CacheService>();
       final localPath = await cacheService.getLocalMediaPath(widget.videoFileName);
       final localFile = File(localPath);
 
-      String path;
       if (await localFile.exists()) {
-        path = localFile.path;
+        _localPath = localFile.path;
       } else {
-        // 2. 本地没有，从远程下载
         final url = MediaUtils.buildMediaUrl(widget.feedState, widget.videoFileName);
-        if (url == null) { if (mounted) setState(() => _hasError = true); return; }
-
+        if (url == null) { if (mounted) setState(() { _hasError = true; _loading = false; }); return; }
         final authBloc = context.read<AuthBloc>();
         final encryption = authBloc.webDavService?.encryption;
-        final headers = widget.feedState.imageHeaders;
-
         final dio = Dio();
-        final response = await dio.get<List<int>>(url, options: Options(responseType: ResponseType.bytes, headers: headers));
+        final response = await dio.get<List<int>>(url, options: Options(responseType: ResponseType.bytes, headers: widget.feedState.imageHeaders));
         if (response.data == null) throw Exception('Download failed');
-
         var bytes = response.data!;
         if (encryption != null && encryption.isEncryptionEnabled) {
           bytes = encryption.decryptBytes(Uint8List.fromList(bytes)).toList();
         }
         await localFile.writeAsBytes(bytes);
         cacheService.cachedFiles.add(widget.videoFileName);
-        path = localFile.path;
+        _localPath = localFile.path;
       }
-
-      // 打开媒体文件
-      await _player.open(Media(path));
-      if (mounted) setState(() => _ready = true);
+      if (mounted) setState(() => _loading = false);
     } catch (e) {
-      debugPrint('Video init error: $e');
-      if (mounted) setState(() => _hasError = true);
+      if (mounted) setState(() { _hasError = true; _loading = false; });
     }
   }
 
-  @override
-  void dispose() {
-    _playingSub?.cancel();
-    _player.dispose();
-    super.dispose();
+  void _openFullscreen() {
+    if (_localPath == null) return;
+    Navigator.push(context, MaterialPageRoute(
+      builder: (_) => _FullscreenVideoPlayer(videoPath: _localPath!),
+    ));
   }
 
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-
-    if (_hasError) {
-      return Container(
-        height: 200,
-        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        decoration: BoxDecoration(
-          color: cs.errorContainer.withOpacity(0.3),
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(Icons.error_outline_rounded, color: cs.error, size: 40),
-              const SizedBox(height: 8),
-              Text('视频加载失败', style: TextStyle(color: cs.error)),
-            ],
-          ),
-        ),
-      );
-    }
-
-    // Video widget 始终在树中（Player 和 Controller 在 initState 创建）
-    // 用 Stack 覆盖加载指示器，不条件创建 Video
     return GestureDetector(
-      onTap: () => setState(() => _showControls = !_showControls),
+      onTap: _openFullscreen,
       child: Container(
         margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
         decoration: BoxDecoration(
@@ -271,43 +226,211 @@ class _VlcVideoPlayerState extends State<_VlcVideoPlayer> {
           color: Colors.black,
         ),
         clipBehavior: Clip.antiAlias,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            // 视频画面 —— 始终在树中
-            AspectRatio(
-              aspectRatio: 16 / 9,
-              child: Video(
-                controller: _controller,
-                controls: NoVideoControls,
-              ),
-            ),
-            // 加载中
-            if (!_ready)
-              Container(
-                color: cs.surfaceContainerHighest.withOpacity(0.3),
-                child: const Center(child: CircularProgressIndicator()),
-              ),
-            // 播放/暂停控制
-            if (_ready)
-              AnimatedOpacity(
-                opacity: _showControls ? 1.0 : 0.0,
-                duration: const Duration(milliseconds: 200),
-                child: GestureDetector(
-                  onTap: () {
-                    _player.playOrPause();
-                    setState(() => _showControls = false);
-                  },
-                  child: Container(
-                    decoration: const BoxDecoration(color: Colors.black45, shape: BoxShape.circle),
-                    padding: const EdgeInsets.all(16),
-                    child: Icon(
-                      _isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
-                      color: Colors.white, size: 40,
-                    ),
+        child: _hasError
+            ? Container(
+                height: 200,
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.error_outline_rounded, color: cs.error, size: 40),
+                      const SizedBox(height: 8),
+                      Text('视频加载失败', style: TextStyle(color: cs.error)),
+                    ],
                   ),
                 ),
+              )
+            : Stack(
+                alignment: Alignment.center,
+                children: [
+                  AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child: Container(color: Colors.black),
+                  ),
+                  if (_loading)
+                    const CircularProgressIndicator(color: Colors.white54)
+                  else
+                    Container(
+                      decoration: const BoxDecoration(color: Colors.black45, shape: BoxShape.circle),
+                      padding: const EdgeInsets.all(20),
+                      child: const Icon(Icons.play_arrow_rounded, color: Colors.white, size: 48),
+                    ),
+                  Positioned(
+                    bottom: 8, right: 8,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Colors.black54,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: const Text('全屏播放', style: TextStyle(color: Colors.white, fontSize: 12)),
+                    ),
+                  ),
+                ],
               ),
+      ),
+    );
+  }
+}
+
+/// 全屏视频播放器（带进度条、快进快退、倍速）
+class _FullscreenVideoPlayer extends StatefulWidget {
+  final String videoPath;
+  const _FullscreenVideoPlayer({required this.videoPath});
+
+  @override
+  State<_FullscreenVideoPlayer> createState() => _FullscreenVideoPlayerState();
+}
+
+class _FullscreenVideoPlayerState extends State<_FullscreenVideoPlayer> {
+  late final Player _player;
+  late final VideoController _controller;
+  bool _showControls = true;
+  bool _isPlaying = false;
+  Duration _position = Duration.zero;
+  Duration _duration = Duration.zero;
+  double _speed = 1.0;
+  StreamSubscription? _playingSub;
+  StreamSubscription? _positionSub;
+  StreamSubscription? _durationSub;
+
+  @override
+  void initState() {
+    super.initState();
+    _player = Player();
+    _controller = VideoController(_player);
+    _playingSub = _player.stream.playing.listen((v) { if (mounted) setState(() => _isPlaying = v); });
+    _positionSub = _player.stream.position.listen((p) { if (mounted) setState(() => _position = p); });
+    _durationSub = _player.stream.duration.listen((d) { if (mounted) setState(() => _duration = d); });
+    _player.open(Media(widget.videoPath));
+    SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  }
+
+  @override
+  void dispose() {
+    _playingSub?.cancel();
+    _positionSub?.cancel();
+    _durationSub?.cancel();
+    _player.dispose();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    super.dispose();
+  }
+
+  String _fmt(Duration d) {
+    final m = d.inMinutes.remainder(60).toString().padLeft(2, '0');
+    final s = d.inSeconds.remainder(60).toString().padLeft(2, '0');
+    if (d.inHours > 0) return '${d.inHours}:$m:$s';
+    return '$m:$s';
+  }
+
+  void _toggleSpeed() {
+    const speeds = [0.5, 0.75, 1.0, 1.25, 1.5, 2.0];
+    final i = speeds.indexOf(_speed);
+    _speed = speeds[(i + 1) % speeds.length];
+    _player.setRate(_speed);
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: GestureDetector(
+        onTap: () => setState(() => _showControls = !_showControls),
+        child: Stack(
+          children: [
+            Center(
+              child: Video(controller: _controller, controls: NoVideoControls),
+            ),
+            if (_showControls) ...[
+              // 顶部返回按钮
+              Positioned(
+                top: MediaQuery.of(context).padding.top + 8,
+                left: 16,
+                child: IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: const Icon(Icons.arrow_back_rounded, color: Colors.white, size: 28),
+                ),
+              ),
+              // 中间播放/暂停
+              Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      onPressed: () => _player.seek(_position - const Duration(seconds: 10)),
+                      icon: const Icon(Icons.replay_10_rounded, color: Colors.white, size: 36),
+                    ),
+                    const SizedBox(width: 24),
+                    GestureDetector(
+                      onTap: () => _player.playOrPause(),
+                      child: Container(
+                        decoration: const BoxDecoration(color: Colors.black45, shape: BoxShape.circle),
+                        padding: const EdgeInsets.all(16),
+                        child: Icon(
+                          _isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
+                          color: Colors.white, size: 48,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 24),
+                    IconButton(
+                      onPressed: () => _player.seek(_position + const Duration(seconds: 10)),
+                      icon: const Icon(Icons.forward_10_rounded, color: Colors.white, size: 36),
+                    ),
+                  ],
+                ),
+              ),
+              // 底部进度条
+              Positioned(
+                left: 16, right: 16, bottom: MediaQuery.of(context).padding.bottom + 16,
+                child: Column(
+                  children: [
+                    SliderTheme(
+                      data: SliderTheme.of(context).copyWith(
+                        trackHeight: 3,
+                        thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 6),
+                        overlayShape: const RoundSliderOverlayShape(overlayRadius: 14),
+                        activeTrackColor: Colors.white,
+                        inactiveTrackColor: Colors.white30,
+                        thumbColor: Colors.white,
+                      ),
+                      child: Slider(
+                        value: _duration.inMilliseconds > 0
+                            ? _position.inMilliseconds.toDouble().clamp(0, _duration.inMilliseconds.toDouble())
+                            : 0,
+                        max: _duration.inMilliseconds > 0 ? _duration.inMilliseconds.toDouble() : 1,
+                        onChanged: (v) => _player.seek(Duration(milliseconds: v.toInt())),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Row(
+                        children: [
+                          Text(_fmt(_position), style: const TextStyle(color: Colors.white70, fontSize: 12)),
+                          const Spacer(),
+                          GestureDetector(
+                            onTap: _toggleSpeed,
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                              decoration: BoxDecoration(
+                                color: Colors.white24,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Text('${_speed}x', style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w600)),
+                            ),
+                          ),
+                          const Spacer(),
+                          Text(_fmt(_duration), style: const TextStyle(color: Colors.white70, fontSize: 12)),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ],
         ),
       ),
@@ -350,11 +473,18 @@ class _MediaCarouselState extends State<_MediaCarousel> {
     final cs = Theme.of(context).colorScheme;
     final hasMultiple = widget.mediaFiles.length > 1;
 
+    // 计算可用高度：屏幕高度 - AppBar - 状态栏 - 底部安全区 - 文字区域
+    final screenHeight = MediaQuery.of(context).size.height;
+    final statusBar = MediaQuery.of(context).padding.top;
+    final bottomSafe = MediaQuery.of(context).padding.bottom;
+    // 留出 AppBar(56) + 文字+标签(~120) + 底部(32) 的空间
+    final availableHeight = screenHeight - statusBar - 56 - 120 - bottomSafe - 32;
+    final imageHeight = availableHeight.clamp(200.0, screenHeight * 0.7);
+
     return Column(
       children: [
-        Container(
-          height: widget.screenWidth * 0.75,
-          color: cs.surfaceContainerHighest.withOpacity(0.2),
+        SizedBox(
+          height: imageHeight,
           child: PageView.builder(
             controller: _pageController,
             itemCount: widget.mediaFiles.length,
@@ -366,12 +496,15 @@ class _MediaCarouselState extends State<_MediaCarousel> {
               final encryption = authBloc.webDavService?.encryption;
               return GestureDetector(
                 onTap: () => _openGallery(context, index),
-                child: MediaUtils.buildFullWidthImage(
-                  imageUrl: imageUrl,
-                  screenWidth: widget.screenWidth,
-                  fit: BoxFit.contain,
-                  httpHeaders: widget.feedState.imageHeaders,
-                  encryption: encryption,
+                child: Container(
+                  color: cs.surfaceContainerHighest.withOpacity(0.1),
+                  child: MediaUtils.buildFullWidthImage(
+                    imageUrl: imageUrl,
+                    screenWidth: widget.screenWidth,
+                    fit: BoxFit.contain,
+                    httpHeaders: widget.feedState.imageHeaders,
+                    encryption: encryption,
+                  ),
                 ),
               );
             },

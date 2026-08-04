@@ -619,10 +619,10 @@ class _MediaGrid extends StatelessWidget {
 
     // 单张：显示比例，最大60%宽高
     if (displayCount == 1 && !hasMore) {
-      final maxW = screenWidth * 0.6;
-      final maxH = screenWidth * 0.6;
+      final maxW = screenWidth * 0.7;
+    final maxH = maxW;
       if (hasVideo && imageCount == 0) {
-        // 只有视频：显示视频封面（如果有）+ 播放按钮
+        // 只有视频：显示视频封面（保持原始比例）+ 播放按钮
         final thumbnail = post.videoThumbnail;
         final hasThumb = thumbnail != null && thumbnail.isNotEmpty;
         return Align(
@@ -630,24 +630,19 @@ class _MediaGrid extends StatelessWidget {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: Container(
-              constraints: BoxConstraints(maxWidth: maxW, maxHeight: maxH),
+              constraints: BoxConstraints(maxWidth: maxW),
               child: Stack(
-                fit: StackFit.expand,
+                alignment: Alignment.center,
                 children: [
                   if (hasThumb)
-                    _buildImage(context, thumbnail, maxW, height: maxH, fit: BoxFit.cover)
+                    _buildImage(context, thumbnail, maxW, fit: BoxFit.contain)
                   else
                     _buildVideoPlaceholder(context, cs, textTheme, maxW),
                   // 播放按钮
                   Container(
-                    color: Colors.black26,
-                    child: Center(
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: const BoxDecoration(color: Colors.white70, shape: BoxShape.circle),
-                        child: Icon(Icons.play_arrow_rounded, size: 28, color: cs.primary),
-                      ),
-                    ),
+                    decoration: const BoxDecoration(color: Colors.black38, shape: BoxShape.circle),
+                    padding: const EdgeInsets.all(10),
+                    child: Icon(Icons.play_arrow_rounded, size: 28, color: Colors.white),
                   ),
                 ],
               ),
