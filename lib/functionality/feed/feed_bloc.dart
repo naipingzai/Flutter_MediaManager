@@ -53,17 +53,10 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
   }
 
   Future<void> _onLoad(FeedLoadEvent event, Emitter<FeedState> emit) async {
-    if (_webDavService == null) {
-      emit(state.copyWith(
-          status: FeedStatus.error, errorMessage: '未连接到 WebDAV 服务器'));
-      return;
-    }
+    final hasCache = _cacheService != null;
 
-    final hasLocalSync = _cacheService != null && _cacheService!.enabled;
-    final hasPendingSync = hasLocalSync && _cacheService!.pendingSync;
-
-    // Step 1: 立即加载本地数据（不阻塞）
-    if (hasLocalSync) {
+    // Step 1: 加载本地数据（无论是否有 WebDAV）
+    if (hasCache) {
       final localData = await _cacheService!.loadLocalData();
       if (localData != null) {
         _journalData = localData;
@@ -72,8 +65,18 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
       }
     }
 
-    // Step 2: 如果有待同步数据，后台推送（不阻塞，fire-and-forget）
-    if (hasPendingSync) {
+    // Step 2: 如果没有 WebDAV，纯本地模式
+    if (_webDavService == null) {
+      if (_journalData == null) {
+        // 本地也没数据，初始化空数据
+        _journalData = JournalData.empty();
+        _emitLoaded(emit, _journalData!);
+      }
+      return;
+    }
+
+    // Step 3: 有待同步数据，后台推送
+    if (hasCache && _cacheService!.pendingSync) {
       _logService?.info('后台推送待同步数据...', source: 'Feed');
       _cacheService!.pushToWebDav(
         uploadFn: (localPath, remoteUrl) => _webDavService!.uploadFile(localPath, remoteUrl),
@@ -84,37 +87,32 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
       });
     }
 
-    // Step 3: 后台拉取 WebDAV 最新数据（不阻塞，完成后合并）
+    // Step 4: 后台拉取 WebDAV 最新数据（不阻塞）
     _webDavService!.loadJournalData().then((remoteData) async {
-      if (hasLocalSync && _journalData != null) {
-        // 合并：以 WebDAV 为基准，加上本地独有的帖子
+      if (hasCache && _journalData != null) {
         final merged = _mergePosts(_journalData!, remoteData);
         _journalData = merged;
         await _cacheService!.createSnapshot(merged);
         await _cacheService!.saveLocalData(merged);
       } else {
         _journalData = remoteData;
-        if (hasLocalSync) {
+        if (hasCache) {
           await _cacheService!.saveLocalData(remoteData);
         }
       }
-      // 通知 UI 刷新（通过 add event 而非 emit，因为是异步回调）
       if (!isClosed) {
         add(const FeedRefreshEvent());
       }
     }).catchError((e) {
       _logService?.warn('后台拉取 WebDAV 失败', detail: e.toString(), source: 'Feed');
-      // WebDAV 失败时，如果本地也没数据，显示错误
-      if (_journalData == null || (_journalData!.posts.isEmpty)) {
-        if (!isClosed) {
-          if (ErrorHelper.isAuthError(e)) {
-            onAuthError?.call();
-          }
+      if (_journalData == null || _journalData!.posts.isEmpty) {
+        if (!isClosed && ErrorHelper.isAuthError(e)) {
+          onAuthError?.call();
         }
       }
     });
 
-    // 如果本地没数据，先显示 loading 等后台完成
+    // 如果本地没数据，显示 loading
     if (_journalData == null) {
       emit(state.copyWith(status: FeedStatus.loading));
     }
@@ -129,9 +127,9 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
       status: FeedStatus.loaded,
       posts: sorted,
       filteredPosts: filtered,
-      mediaBaseUrl: _webDavService!.config.mediaUrl,
-      imageHeaders: _webDavService!.imageHeaders,
-      encryptionEnabled: _webDavService!.encryption.isEncryptionEnabled,
+      mediaBaseUrl: _webDavService?.config.mediaUrl,
+      imageHeaders: _webDavService?.imageHeaders ?? {},
+      encryptionEnabled: _webDavService?.encryption.isEncryptionEnabled ?? false,
     ));
   }
 

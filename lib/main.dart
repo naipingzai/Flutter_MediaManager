@@ -58,40 +58,38 @@ class LifeApp extends StatelessWidget {
             builder: (context, appState) {
               final themeMode = appState.settings?.themeMode;
 
-              // 连接 WebDAV 到 FeedBloc（每次认证状态变化都同步更新）
               final webDavService = context.read<AuthBloc>().webDavService;
               final logService = context.read<LogService>();
+
+              // 始终初始化缓存服务（本地模式也需要）
+              final cacheService = context.read<CacheService>();
+              cacheService.setLogService(logService);
+              MediaUtils.cacheService = cacheService;
+              final cacheEnabled = appState.settings?.cacheEnabled ?? false;
+              cacheService.setEnabled(cacheEnabled);
+              if (cacheEnabled) cacheService.init();
+
+              final feedBloc = context.read<FeedBloc>();
+              feedBloc.setCacheService(cacheService);
+              feedBloc.setLogService(logService);
+
+              // WebDAV 连接（仅认证后）
               if (authState.status == AuthStatus.authenticated &&
                   webDavService != null) {
                 final appBloc = context.read<AppBloc>();
                 appBloc.setWebDavService(webDavService);
-
-                // 初始化缓存服务
-                final cacheService = context.read<CacheService>();
-                cacheService.setLogService(logService);
                 cacheService.setEncryption(webDavService.encryption);
-                MediaUtils.cacheService = cacheService;
-                final cacheEnabled = appState.settings?.cacheEnabled ?? false;
-                cacheService.setEnabled(cacheEnabled);
                 final syncInterval = appState.settings?.cacheSyncInterval ?? 60;
                 cacheService.setSyncInterval(syncInterval);
-                // 初始化原始数据开关
                 webDavService.setRawDataEnabled(appState.settings?.rawDataEnabled ?? false);
-                // 初始化缓存扫描
-                if (cacheEnabled) cacheService.init();
 
-                final feedBloc = context.read<FeedBloc>();
                 feedBloc.setWebDavService(webDavService);
-                feedBloc.setCacheService(cacheService);
-                feedBloc.setLogService(logService);
                 feedBloc.setOnAuthError(() {
                   context.read<AuthBloc>().add(const AuthLogoutEvent());
                 });
 
-                // 启动后台同步定时器
                 if (cacheEnabled) {
                   cacheService.startBackgroundSync(() async {
-                    // 返回所有活跃的媒体文件名
                     final data = await cacheService.loadLocalData();
                     if (data == null) return [];
                     final files = <String>[];
@@ -130,6 +128,7 @@ class LifeApp extends StatelessWidget {
       case AuthStatus.checking:
         return const _SplashScreen();
       case AuthStatus.authenticated:
+      case AuthStatus.local:
         return const HomeScreen();
       case AuthStatus.unauthenticated:
       case AuthStatus.error:

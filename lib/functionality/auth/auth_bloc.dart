@@ -56,8 +56,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final prefs = await SharedPreferences.getInstance();
       final configJson = prefs.getString('webdav_config');
       if (configJson == null) {
-        _log('检查认证：无已保存配置');
-        emit(state.copyWith(status: AuthStatus.unauthenticated));
+        _log('检查认证：无已保存配置，进入本地模式');
+        emit(state.copyWith(status: AuthStatus.local));
         return;
       }
       WebDavConfig config;
@@ -78,8 +78,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       if (connected) {
         emit(state.copyWith(status: AuthStatus.authenticated, config: config));
       } else {
-        await prefs.remove('webdav_config');
-        emit(state.copyWith(status: AuthStatus.unauthenticated));
+        // 连接失败不清除配置，进入本地模式（配置保留以便重试）
+        emit(state.copyWith(status: AuthStatus.local, config: config));
       }
     } catch (e) {
       _logService?.error('认证检查异常', detail: e.toString());
