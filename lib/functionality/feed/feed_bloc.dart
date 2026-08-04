@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:uuid/uuid.dart';
@@ -5,6 +7,7 @@ import 'package:logger/logger.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 import '../../models/post.dart';
 import '../../services/webdav_service.dart';
+import '../../services/cache_service.dart';
 import '../../services/log_service.dart';
 import '../../utils/error_helper.dart';
 
@@ -16,6 +19,7 @@ const _uuid = Uuid();
 
 class FeedBloc extends Bloc<FeedEvent, FeedState> {
   WebDavService? _webDavService;
+  CacheService? _cacheService;
   LogService? _logService;
   JournalData? _journalData;
   Function()? onAuthError;
@@ -31,10 +35,15 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
     on<FeedColumnChangedEvent>(_onColumnChanged);
     on<FeedSortChangedEvent>(_onSortChanged);
     on<FeedDateFilterEvent>(_onDateFilter);
+    on<FeedRefreshEvent>(_onRefresh);
   }
 
   void setWebDavService(WebDavService service) {
     _webDavService = service;
+  }
+
+  void setCacheService(CacheService service) {
+    _cacheService = service;
   }
 
   void setLogService(LogService? log) {
@@ -51,46 +60,105 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
           status: FeedStatus.error, errorMessage: '未连接到 WebDAV 服务器'));
       return;
     }
-    emit(state.copyWith(status: FeedStatus.loading));
-    try {
-      _journalData = await _webDavService!.loadJournalData();
-      final sorted = _applySort(_journalData!.posts, state.sortMode);
-      final filtered = _applyAllFilters(
-          sorted, state.searchKeyword, state.selectedTag,
-          startDate: state.filterStartDate, endDate: state.filterEndDate);
-      emit(state.copyWith(
-        status: FeedStatus.loaded,
-        posts: sorted,
-        filteredPosts: filtered,
-        mediaBaseUrl: _webDavService!.config.mediaUrl,
-        imageHeaders: _webDavService!.imageHeaders,
-        encryptionEnabled: _webDavService!.encryption.isEncryptionEnabled,
-      ));
-    } catch (e) {
-      _logService?.error('加载帖子失败', detail: e.toString(), source: 'Feed');
-      _logger.e('加载帖子失败: $e');
-      if (ErrorHelper.isAuthError(e)) {
-        onAuthError?.call();
-        emit(state.copyWith(
-          status: FeedStatus.error,
-          errorMessage: ErrorHelper.friendly(e, prefix: '会话已过期，'),
-        ));
-      } else {
-        emit(state.copyWith(
-          status: FeedStatus.error,
-          errorMessage: ErrorHelper.friendly(e, prefix: '加载失败：'),
-        ));
+
+    final hasLocalSync = _cacheService != null && _cacheService!.enabled;
+    final hasPendingSync = hasLocalSync && _cacheService!.pendingSync;
+
+    // Step 1: 立即加载本地数据（不阻塞）
+    if (hasLocalSync) {
+      final localData = await _cacheService!.loadLocalData();
+      if (localData != null) {
+        _journalData = localData;
+        _emitLoaded(emit, localData);
+        _logService?.info('本地数据已加载', detail: '${localData.posts.length} 条', source: 'Feed');
       }
     }
+
+    // Step 2: 如果有待同步数据，后台推送（不阻塞，fire-and-forget）
+    if (hasPendingSync) {
+      _logService?.info('后台推送待同步数据...', source: 'Feed');
+      _cacheService!.pushToWebDav(
+        uploadFn: (localPath, remoteUrl) => _webDavService!.uploadFile(localPath, remoteUrl),
+        saveDataFn: (data) => _webDavService!.saveJournalData(data),
+        mediaBaseUrl: _webDavService!.config.mediaUrl,
+      ).then((ok) {
+        if (ok) _logService?.success('后台推送完成', source: 'Feed');
+      });
+    }
+
+    // Step 3: 后台拉取 WebDAV 最新数据（不阻塞，完成后合并）
+    _webDavService!.loadJournalData().then((remoteData) async {
+      if (hasLocalSync && _journalData != null) {
+        // 合并：以 WebDAV 为基准，加上本地独有的帖子
+        final merged = _mergePosts(_journalData!, remoteData);
+        _journalData = merged;
+        await _cacheService!.createSnapshot(merged);
+        await _cacheService!.saveLocalData(merged);
+      } else {
+        _journalData = remoteData;
+        if (hasLocalSync) {
+          await _cacheService!.saveLocalData(remoteData);
+        }
+      }
+      // 通知 UI 刷新（通过 add event 而非 emit，因为是异步回调）
+      if (!isClosed) {
+        add(const FeedRefreshEvent());
+      }
+    }).catchError((e) {
+      _logService?.warn('后台拉取 WebDAV 失败', detail: e.toString(), source: 'Feed');
+      // WebDAV 失败时，如果本地也没数据，显示错误
+      if (_journalData == null || (_journalData!.posts.isEmpty)) {
+        if (!isClosed) {
+          if (ErrorHelper.isAuthError(e)) {
+            onAuthError?.call();
+          }
+        }
+      }
+    });
+
+    // 如果本地没数据，先显示 loading 等后台完成
+    if (_journalData == null) {
+      emit(state.copyWith(status: FeedStatus.loading));
+    }
+  }
+
+  void _emitLoaded(Emitter<FeedState> emit, JournalData data) {
+    final sorted = _applySort(data.posts, state.sortMode);
+    final filtered = _applyAllFilters(
+        sorted, state.searchKeyword, state.selectedTag,
+        startDate: state.filterStartDate, endDate: state.filterEndDate);
+    emit(state.copyWith(
+      status: FeedStatus.loaded,
+      posts: sorted,
+      filteredPosts: filtered,
+      mediaBaseUrl: _webDavService!.config.mediaUrl,
+      imageHeaders: _webDavService!.imageHeaders,
+      encryptionEnabled: _webDavService!.encryption.isEncryptionEnabled,
+    ));
+  }
+
+  /// 合并本地和远程数据：以远程为基准，加上本地独有的帖子
+  JournalData _mergePosts(JournalData local, JournalData remote) {
+    final remoteIds = remote.posts.map((p) => p.id).toSet();
+    final localOnly = local.posts.where((p) => !remoteIds.contains(p.id)).toList();
+    final merged = <Post>[...remote.posts, ...localOnly];
+    merged.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+    return JournalData(
+      version: 1,
+      lastModified: DateTime.now().toUtc(),
+      posts: merged,
+    );
+  }
+
+  /// 后台同步完成后刷新 UI
+  void _onRefresh(FeedRefreshEvent event, Emitter<FeedState> emit) {
+    if (_journalData == null) return;
+    _emitLoaded(emit, _journalData!);
   }
 
   Future<void> _onCreatePost(
       FeedCreatePostEvent event, Emitter<FeedState> emit) async {
-    if (_webDavService == null) {
-      _logService?.warn('创建帖子失败：未连接WebDAV', source: 'Feed');
-      return;
-    }
-    _logService?.info('开始创建帖子',
+    _logService?.info('开始创建帖子（本地保存）',
         detail: '内容长度=${event.content.length}', source: 'Feed');
     try {
       final now = DateTime.now();
@@ -98,94 +166,83 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
       final totalFiles = event.localMediaPaths.length +
           (event.videoPath != null ? 1 : 0) +
           (event.audioPath != null ? 1 : 0);
-      var uploadedFiles = 0;
+      var processedFiles = 0;
 
       emit(state.copyWith(
         status: FeedStatus.publishing,
         uploadProgress: 0,
-        uploadStatusText: totalFiles > 0 ? '准备上传...' : '保存中...',
+        uploadStatusText: totalFiles > 0 ? '正在保存媒体...' : '保存中...',
       ));
 
-      // 上传图片
+      // 保存图片到本地
       for (var i = 0; i < event.localMediaPaths.length; i++) {
         final localPath = event.localMediaPaths[i];
-        final remoteFileName = _webDavService!.generateMediaFileName(localPath);
-        final remoteUrl = _webDavService!.getMediaUrl(remoteFileName);
+        final fileName = _generateLocalFileName(localPath);
         emit(state.copyWith(
           uploadStatusText:
-              '正在上传第 ${i + 1}/${event.localMediaPaths.length} 张图片...',
+              '正在保存第 ${i + 1}/${event.localMediaPaths.length} 张图片...',
           uploadProgress:
-              (uploadedFiles + 0.5) / (totalFiles > 0 ? totalFiles + 1 : 1),
+              (processedFiles + 0.5) / (totalFiles > 0 ? totalFiles + 1 : 1),
         ));
-        await _webDavService!.uploadFile(localPath, remoteUrl);
-        mediaFiles.add(remoteFileName);
-        uploadedFiles++;
+        // 复制文件到本地媒体目录
+        await _saveMediaFileLocally(localPath, fileName);
+        mediaFiles.add(fileName);
+        processedFiles++;
         emit(state.copyWith(
-          uploadProgress: uploadedFiles / (totalFiles > 0 ? totalFiles + 1 : 1),
+          uploadProgress: processedFiles / (totalFiles > 0 ? totalFiles + 1 : 1),
         ));
       }
 
-      // 上传视频
+      // 保存视频到本地
       String? videoFile;
       String? videoThumbnail;
       if (event.videoPath != null) {
-        final videoFileName = _webDavService!
-            .generateMediaFileName(event.videoPath!, isVideo: true);
-        final remoteUrl = _webDavService!.getMediaUrl(videoFileName);
+        final videoFileName = _generateLocalFileName(event.videoPath!, isVideo: true);
         emit(state.copyWith(
-          uploadStatusText: '正在上传视频...',
+          uploadStatusText: '正在保存视频...',
           uploadProgress:
-              (uploadedFiles + 0.5) / (totalFiles > 0 ? totalFiles + 1 : 1),
+              (processedFiles + 0.5) / (totalFiles > 0 ? totalFiles + 1 : 1),
         ));
-        await _webDavService!.uploadFileWithProgress(
-          event.videoPath!,
-          remoteUrl,
-          onProgress: (progress, speed) {
-            emit(state.copyWith(
-              uploadStatusText: '正在上传视频 \$speed',
-              uploadProgress:
-                  (uploadedFiles + progress) / (totalFiles > 0 ? totalFiles + 1 : 1),
-            ));
-          },
-        );
+        await _saveMediaFileLocally(event.videoPath!, videoFileName);
         videoFile = videoFileName;
-        uploadedFiles++;
+        processedFiles++;
 
-        // 生成视频封面
-        try {
-          final thumbPath = await VideoThumbnail.thumbnailFile(
-            video: event.videoPath!,
-            imageFormat: ImageFormat.JPEG,
-            maxWidth: 480,
-            quality: 75,
-          );
-          if (thumbPath != null) {
-            final thumbFileName = videoFileName.replaceAll(
-                RegExp(r'\.[^.]+$'), '.thumb.jpg');
-            final thumbRemoteUrl = _webDavService!.getMediaUrl(thumbFileName);
-            await _webDavService!.uploadFile(thumbPath, thumbRemoteUrl);
-            videoThumbnail = thumbFileName;
+        // 生成视频封面（仅 Android/iOS，Linux/Windows 不支持）
+        if (!kIsWeb && !Platform.isLinux && !Platform.isWindows) {
+          try {
+            final thumbPath = await VideoThumbnail.thumbnailFile(
+              video: event.videoPath!,
+              imageFormat: ImageFormat.JPEG,
+              maxWidth: 480,
+              quality: 75,
+            ).timeout(const Duration(seconds: 15), onTimeout: () => null);
+            if (thumbPath != null) {
+              final thumbFileName = videoFileName.replaceAll(
+                  RegExp(r'\.[^.]+$'), '.thumb.jpg');
+              await _saveMediaFileLocally(thumbPath, thumbFileName);
+              videoThumbnail = thumbFileName;
+            }
+          } catch (e) {
+            _logService?.warn('视频封面生成跳过', detail: e.toString(), source: 'Feed');
           }
-        } catch (e) {
-          _logService?.warn('视频封面生成失败', detail: e.toString(), source: 'Feed');
+        } else {
+          _logService?.info('Linux 平台跳过视频封面生成', source: 'Feed');
         }
       }
 
-      // 上传音频
+      // 保存音频到本地
       // ignore: unused_local_variable
       String? audioFile;
       if (event.audioPath != null) {
-        final audioFileName = _webDavService!
-            .generateMediaFileName(event.audioPath!, isVideo: true);
-        final remoteUrl = _webDavService!.getMediaUrl(audioFileName);
+        final audioFileName = _generateLocalFileName(event.audioPath!, isVideo: true);
         emit(state.copyWith(
-          uploadStatusText: '正在上传音频...',
+          uploadStatusText: '正在保存音频...',
           uploadProgress:
-              (uploadedFiles + 0.5) / (totalFiles > 0 ? totalFiles + 1 : 1),
+              (processedFiles + 0.5) / (totalFiles > 0 ? totalFiles + 1 : 1),
         ));
-        await _webDavService!.uploadFile(event.audioPath!, remoteUrl);
+        await _saveMediaFileLocally(event.audioPath!, audioFileName);
         audioFile = audioFileName;
-        uploadedFiles++;
+        processedFiles++;
       }
 
       emit(state.copyWith(
@@ -211,8 +268,13 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
         posts: updatedPosts,
       );
 
-      await _webDavService!.saveJournalData(_journalData!);
-      _logService?.success('帖子创建成功', detail: 'id=${post.id}', source: 'Feed');
+      // 保存到本地数据
+      if (_cacheService != null) {
+        await _cacheService!.saveLocalData(_journalData!);
+        // 标记有待同步数据
+        await _cacheService!.markPendingSync(true);
+      }
+      _logService?.success('帖子创建成功（本地）', detail: 'id=${post.id}', source: 'Feed');
 
       final sorted = _applySort(updatedPosts, state.sortMode);
       emit(state.copyWith(
@@ -221,9 +283,6 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
         filteredPosts: _applyAllFilters(
             sorted, state.searchKeyword, state.selectedTag,
             startDate: state.filterStartDate, endDate: state.filterEndDate),
-        mediaBaseUrl: _webDavService!.config.mediaUrl,
-        imageHeaders: _webDavService!.imageHeaders,
-        encryptionEnabled: _webDavService!.encryption.isEncryptionEnabled,
         uploadProgress: 1.0,
         uploadStatusText: '发布完成',
       ));
@@ -238,13 +297,34 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
     }
   }
 
+  /// 生成本地文件名（时间戳格式）
+  String _generateLocalFileName(String path, {bool isVideo = false}) {
+    final ext = path.split('.').last;
+    final now = DateTime.now();
+    final ts = '${now.year}${_pad(now.month)}${_pad(now.day)}_${_pad(now.hour)}${_pad(now.minute)}${_pad(now.second)}';
+    final type = isVideo ? 'VID' : 'IMG';
+    return '${type}_${_uuid.v4().substring(0, 8)}_$ts.$ext';
+  }
+
+  String _pad(int n) => n.toString().padLeft(2, '0');
+
+  /// 保存媒体文件到本地目录（使用文件复制，避免读入内存）
+  Future<void> _saveMediaFileLocally(String sourcePath, String fileName) async {
+    if (_cacheService != null) {
+      final localPath = await _cacheService!.getLocalMediaPath(fileName);
+      await File(sourcePath).copy(localPath);
+      _cacheService!.cachedFiles.add(fileName);
+      _logService?.info('本地保存媒体: $fileName', source: 'Feed');
+    }
+  }
+
   Future<void> _onEditPost(
       FeedEditPostEvent event, Emitter<FeedState> emit) async {
-    if (_webDavService == null || _journalData == null) {
-      _logService?.warn('编辑帖子失败：未连接WebDAV', source: 'Feed');
+    if (_journalData == null) {
+      _logService?.warn('编辑帖子失败：无数据', source: 'Feed');
       return;
     }
-    _logService?.info('开始编辑帖子',
+    _logService?.info('开始编辑帖子（本地操作）',
         detail: 'postId=${event.postId}', source: 'Feed');
     try {
       emit(state.copyWith(status: FeedStatus.editing, uploadProgress: 0));
@@ -253,14 +333,10 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
       final originalPost =
           _journalData!.posts.firstWhere((p) => p.id == event.postId);
 
-      // 删除被移除的媒体文件
+      // 本地删除被移除的媒体文件
       for (final fileName in event.removedMediaFiles) {
-        final url = _webDavService!.getMediaUrl(fileName);
-        try {
-          await _webDavService!.deleteFile(url);
-        } catch (e) {
-          _logService?.warn('删除旧媒体文件失败: $fileName',
-              detail: e.toString(), source: 'Feed');
+        if (_cacheService != null) {
+          await _cacheService!.deleteMedia(fileName);
         }
       }
 
@@ -269,42 +345,36 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
           .where((f) => !event.removedMediaFiles.contains(f))
           .toList();
 
-      // 上传新增的图片
+      // 本地保存新增的图片
       final newMediaFiles = <String>[];
       final totalNew = event.newLocalMediaPaths.length +
           (event.newVideoPath != null ? 1 : 0) +
           (event.newAudioPath != null ? 1 : 0);
-      var uploaded = 0;
+      var processed = 0;
 
       for (var i = 0; i < event.newLocalMediaPaths.length; i++) {
         final localPath = event.newLocalMediaPaths[i];
-        final remoteFileName = _webDavService!.generateMediaFileName(localPath);
-        final remoteUrl = _webDavService!.getMediaUrl(remoteFileName);
+        final fileName = _generateLocalFileName(localPath);
         emit(state.copyWith(
           uploadStatusText:
-              '上传图片 ${i + 1}/${event.newLocalMediaPaths.length}...',
-          uploadProgress: totalNew > 0 ? uploaded / totalNew : 0,
+              '保存图片 ${i + 1}/${event.newLocalMediaPaths.length}...',
+          uploadProgress: totalNew > 0 ? processed / totalNew : 0,
         ));
-        await _webDavService!.uploadFile(localPath, remoteUrl);
-        newMediaFiles.add(remoteFileName);
-        uploaded++;
+        await _saveMediaFileLocally(localPath, fileName);
+        newMediaFiles.add(fileName);
+        processed++;
       }
 
-      // 上传新视频（替换旧视频）
+      // 本地保存新视频
       String? videoFile = originalPost.videoFile;
       if (event.newVideoPath != null) {
-        if (videoFile != null) {
-          try {
-            await _webDavService!
-                .deleteFile(_webDavService!.getMediaUrl(videoFile));
-          } catch (_) {}
+        if (videoFile != null && _cacheService != null) {
+          await _cacheService!.deleteMedia(videoFile);
         }
-        final fileName = _webDavService!
-            .generateMediaFileName(event.newVideoPath!, isVideo: true);
-        final remoteUrl = _webDavService!.getMediaUrl(fileName);
-        await _webDavService!.uploadFile(event.newVideoPath!, remoteUrl);
+        final fileName = _generateLocalFileName(event.newVideoPath!, isVideo: true);
+        await _saveMediaFileLocally(event.newVideoPath!, fileName);
         videoFile = fileName;
-        uploaded++;
+        processed++;
       }
 
       emit(state.copyWith(
@@ -332,8 +402,12 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
         posts: updatedPosts,
       );
 
-      await _webDavService!.saveJournalData(_journalData!);
-      _logService?.success('帖子编辑成功',
+      // 保存到本地
+      if (_cacheService != null) {
+        await _cacheService!.saveLocalData(_journalData!);
+        await _cacheService!.markPendingSync(true);
+      }
+      _logService?.success('帖子编辑成功（本地）',
           detail: 'postId=${event.postId}', source: 'Feed');
 
       final sorted = _applySort(updatedPosts, state.sortMode);
@@ -343,9 +417,6 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
         filteredPosts: _applyAllFilters(
             sorted, state.searchKeyword, state.selectedTag,
             startDate: state.filterStartDate, endDate: state.filterEndDate),
-        mediaBaseUrl: _webDavService!.config.mediaUrl,
-        imageHeaders: _webDavService!.imageHeaders,
-        encryptionEnabled: _webDavService!.encryption.isEncryptionEnabled,
         uploadProgress: 1.0,
         uploadStatusText: '编辑完成',
       ));
@@ -362,25 +433,25 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
 
   Future<void> _onDeletePost(
       FeedDeletePostEvent event, Emitter<FeedState> emit) async {
-    if (_webDavService == null || _journalData == null) {
-      _logService?.warn('删除帖子失败：未连接WebDAV', source: 'Feed');
+    if (_journalData == null) {
+      _logService?.warn('删除帖子失败：无数据', source: 'Feed');
       return;
     }
-    _logService?.info('开始删除帖子',
+    _logService?.info('开始删除帖子（本地操作）',
         detail: 'postId=${event.postId}', source: 'Feed');
     try {
       emit(state.copyWith(status: FeedStatus.syncing));
 
       final post = _journalData!.posts.firstWhere((p) => p.id == event.postId);
 
-      // 删除关联的媒体文件
-      for (final fileName in post.mediaFiles) {
-        final url = _webDavService!.getMediaUrl(fileName);
-        await _webDavService!.deleteFile(url);
-      }
-      if (post.videoFile != null) {
-        final url = _webDavService!.getMediaUrl(post.videoFile!);
-        await _webDavService!.deleteFile(url);
+      // 本地删除关联的媒体文件
+      if (_cacheService != null) {
+        for (final fileName in post.mediaFiles) {
+          await _cacheService!.deleteMedia(fileName);
+        }
+        if (post.videoFile != null) {
+          await _cacheService!.deleteMedia(post.videoFile!);
+        }
       }
 
       final updatedPosts =
@@ -391,8 +462,12 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
         posts: updatedPosts,
       );
 
-      await _webDavService!.saveJournalData(_journalData!);
-      _logService?.success('帖子删除成功',
+      // 保存到本地
+      if (_cacheService != null) {
+        await _cacheService!.saveLocalData(_journalData!);
+        await _cacheService!.markPendingSync(true);
+      }
+      _logService?.success('帖子删除成功（本地）',
           detail: 'postId=${event.postId}', source: 'Feed');
 
       final sorted = _applySort(updatedPosts, state.sortMode);

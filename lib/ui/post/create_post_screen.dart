@@ -171,14 +171,19 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
         ],
       ),
       body: BlocConsumer<FeedBloc, FeedState>(
-        listenWhen: (prev, curr) =>
-            prev.status != curr.status &&
-            (curr.status == FeedStatus.loaded ||
-                curr.status == FeedStatus.error),
+        listenWhen: (prev, curr) {
+          // 只在发布完成后或出错时触发
+          if (curr.status == FeedStatus.loaded && curr.uploadProgress >= 1.0) return true;
+          if (curr.status == FeedStatus.error) return true;
+          return false;
+        },
         listener: (context, state) {
-          if ((state.status == FeedStatus.loaded) && _isPublishing) {
-            if (mounted) Navigator.pop(context, true);
-          } else if (state.status == FeedStatus.error && _isPublishing) {
+          if (_isPublishing && state.status == FeedStatus.loaded && state.uploadProgress >= 1.0) {
+            _isPublishing = false;
+            if (mounted && Navigator.of(context).canPop()) {
+              Navigator.of(context).pop(true);
+            }
+          } else if (_isPublishing && state.status == FeedStatus.error) {
             if (mounted) {
               setState(() => _isPublishing = false);
               ScaffoldMessenger.of(context).showSnackBar(

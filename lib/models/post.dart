@@ -82,16 +82,61 @@ class Post {
   }
 }
 
+/// 同步元数据（用于多端冲突检测）
+class SyncMeta {
+  final String syncId; // 每次保存时生成的唯一 ID
+  final DateTime lastSyncTime; // 最后同步时间（UTC）
+  final String deviceId; // 设备标识
+  final int editCount; // 编辑计数
+
+  const SyncMeta({
+    required this.syncId,
+    required this.lastSyncTime,
+    this.deviceId = '',
+    this.editCount = 0,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'syncId': syncId,
+      'lastSyncTime': lastSyncTime.toUtc().toIso8601String(),
+      'deviceId': deviceId,
+      'editCount': editCount,
+    };
+  }
+
+  factory SyncMeta.fromJson(Map<String, dynamic> json) {
+    return SyncMeta(
+      syncId: json['syncId'] as String? ?? '',
+      lastSyncTime: json['lastSyncTime'] != null
+          ? DateTime.parse(json['lastSyncTime'] as String)
+          : DateTime.fromMillisecondsSinceEpoch(0),
+      deviceId: json['deviceId'] as String? ?? '',
+      editCount: json['editCount'] as int? ?? 0,
+    );
+  }
+
+  factory SyncMeta.initial() {
+    return SyncMeta(
+      syncId: DateTime.now().millisecondsSinceEpoch.toString(),
+      lastSyncTime: DateTime.now().toUtc(),
+      editCount: 0,
+    );
+  }
+}
+
 /// WebDAV 数据库文件格式
 class JournalData {
   final int version;
   final DateTime lastModified;
   final List<Post> posts;
+  final SyncMeta? syncMeta;
 
   const JournalData({
     this.version = 1,
     required this.lastModified,
     required this.posts,
+    this.syncMeta,
   });
 
   Map<String, dynamic> toJson() {
@@ -99,6 +144,7 @@ class JournalData {
       'version': version,
       'lastModified': lastModified.toUtc().toIso8601String(),
       'posts': posts.map((p) => p.toJson()).toList(),
+      if (syncMeta != null) 'syncMeta': syncMeta!.toJson(),
     };
   }
 
@@ -110,6 +156,9 @@ class JournalData {
               ?.map((p) => Post.fromJson(p as Map<String, dynamic>))
               .toList() ??
           [],
+      syncMeta: json['syncMeta'] != null
+          ? SyncMeta.fromJson(json['syncMeta'] as Map<String, dynamic>)
+          : null,
     );
   }
 
@@ -118,6 +167,23 @@ class JournalData {
       version: 1,
       lastModified: DateTime.now().toUtc(),
       posts: [],
+      syncMeta: SyncMeta.initial(),
+    );
+  }
+
+  /// 创建带新同步元数据的副本（每次保存时调用）
+  JournalData withNewSync({String deviceId = ''}) {
+    final currentEdit = syncMeta?.editCount ?? 0;
+    return JournalData(
+      version: version,
+      lastModified: DateTime.now().toUtc(),
+      posts: posts,
+      syncMeta: SyncMeta(
+        syncId: DateTime.now().millisecondsSinceEpoch.toString(),
+        lastSyncTime: DateTime.now().toUtc(),
+        deviceId: deviceId,
+        editCount: currentEdit + 1,
+      ),
     );
   }
 }

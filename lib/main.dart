@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:media_kit/media_kit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:dynamic_color/dynamic_color.dart';
@@ -14,6 +15,7 @@ import 'ui/auth/login_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  MediaKit.ensureInitialized();
   runApp(const LifeApp());
 }
 
@@ -64,13 +66,6 @@ class LifeApp extends StatelessWidget {
                 final appBloc = context.read<AppBloc>();
                 appBloc.setWebDavService(webDavService);
 
-                final feedBloc = context.read<FeedBloc>();
-                feedBloc.setWebDavService(webDavService);
-                feedBloc.setLogService(logService);
-                feedBloc.setOnAuthError(() {
-                  context.read<AuthBloc>().add(const AuthLogoutEvent());
-                });
-
                 // 初始化缓存服务
                 final cacheService = context.read<CacheService>();
                 cacheService.setLogService(logService);
@@ -78,8 +73,20 @@ class LifeApp extends StatelessWidget {
                 MediaUtils.cacheService = cacheService;
                 final cacheEnabled = appState.settings?.cacheEnabled ?? false;
                 cacheService.setEnabled(cacheEnabled);
+                final syncInterval = appState.settings?.cacheSyncInterval ?? 60;
+                cacheService.setSyncInterval(syncInterval);
+                // 初始化原始数据开关
+                webDavService.setRawDataEnabled(appState.settings?.rawDataEnabled ?? false);
                 // 初始化缓存扫描
                 if (cacheEnabled) cacheService.init();
+
+                final feedBloc = context.read<FeedBloc>();
+                feedBloc.setWebDavService(webDavService);
+                feedBloc.setCacheService(cacheService);
+                feedBloc.setLogService(logService);
+                feedBloc.setOnAuthError(() {
+                  context.read<AuthBloc>().add(const AuthLogoutEvent());
+                });
               }
 
               return DynamicColorBuilder(

@@ -7,7 +7,7 @@ import '../../functionality/feed/feed_bloc.dart';
 import '../../functionality/home/app_bloc.dart';
 import '../../functionality/auth/auth_bloc.dart';
 import '../../services/cache_service.dart';
-import '../../models/settings.dart' show ThemeMode, AppSettings;
+import '../../models/settings.dart' show ThemeMode;
 import '../../services/log_service.dart';
 import '../log/log_viewer_screen.dart';
 
@@ -119,6 +119,8 @@ class ProfileScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             _CacheTile(),
+                            _SyncIntervalTile(),
+                            _RawDataTile(),
                             Divider(
                                 height: 1,
                                 indent: 56,
@@ -265,7 +267,7 @@ class ProfileScreen extends StatelessWidget {
                                     '包括：\n'
                                     '• 所有动态（data.json）\n'
                                     '• 所有媒体文件（图片/视频）\n'
-                                    '• 调试备份文件\n\n'
+                                    '• 原始数据副本\n\n'
                                     '此操作不可恢复！'),
                                 actions: [
                                   TextButton(
@@ -475,15 +477,7 @@ class ProfileScreen extends StatelessWidget {
                         }
 
                         // 更新本地设置
-                        final newSettings = AppSettings(
-                          themeMode: settings.themeMode,
-                          gridColumns: settings.gridColumns,
-                          albumGridColumns: settings.albumGridColumns,
-                          thumbnailQuality: settings.thumbnailQuality,
-                          language: settings.language,
-                          dynamicColor: settings.dynamicColor,
-                          lastScanPath: settings.lastScanPath,
-                          cacheEnabled: settings.cacheEnabled,
+                        final newSettings = settings.copyWith(
                           nickname: nickname,
                           avatarPath: avatarPath,
                         );
@@ -652,7 +646,7 @@ class _CacheTileState extends State<_CacheTile> {
               '同步中 ${cacheService.syncedCount}/${cacheService.totalToSync}';
           break;
         case SyncStatus.completed:
-          subtitle = '已缓存 ${cacheService.cachedFiles.length} 个文件';
+          subtitle = '已同步 ${cacheService.cachedFiles.length} 个文件';
           break;
         case SyncStatus.error:
           subtitle = '同步出错';
@@ -661,13 +655,6 @@ class _CacheTileState extends State<_CacheTile> {
           subtitle = '已开启';
       }
     }
-
-    // 同步间隔选项
-    final intervalOptions = [30, 60, 120, 180, 300];
-    final currentInterval = cacheService.syncIntervalSeconds;
-    final intervalLabel = currentInterval < 60
-        ? '${currentInterval}秒'
-        : '${(currentInterval / 60).round()}分钟';
 
     return Column(
       children: [
@@ -678,25 +665,14 @@ class _CacheTileState extends State<_CacheTile> {
                 : Icons.cloud_off_outlined,
             color: cs.onSurfaceVariant,
           ),
-          title: const Text('本地缓存'),
-          subtitle: Text(isEnabled ? '$subtitle · 间隔$intervalLabel' : subtitle),
+          title: const Text('数据同步'),
+          subtitle: Text(isEnabled ? subtitle : '关闭'),
           trailing: Switch(
             value: isEnabled,
             onChanged: (value) {
               final settings = appBloc.state.settings;
               if (settings == null) return;
-              final newSettings = AppSettings(
-                themeMode: settings.themeMode,
-                gridColumns: settings.gridColumns,
-                albumGridColumns: settings.albumGridColumns,
-                thumbnailQuality: settings.thumbnailQuality,
-                language: settings.language,
-                dynamicColor: settings.dynamicColor,
-                lastScanPath: settings.lastScanPath,
-                cacheEnabled: value,
-                nickname: settings.nickname,
-                avatarPath: settings.avatarPath,
-              );
+              final newSettings = settings.copyWith(cacheEnabled: value);
               appBloc.add(AppSettingsUpdatedEvent(newSettings));
               cacheService.setEnabled(value);
               if (value) {
@@ -718,35 +694,6 @@ class _CacheTileState extends State<_CacheTile> {
             },
           ),
         ),
-        // 同步间隔设置
-        if (isEnabled)
-          Padding(
-            padding: const EdgeInsets.fromLTRB(56, 0, 16, 4),
-            child: Row(
-              children: [
-                Text('同步间隔', style: textTheme.labelSmall?.copyWith(
-                    color: cs.onSurfaceVariant)),
-                const SizedBox(width: 8),
-                ...intervalOptions.map((s) {
-                  final label = s < 60 ? '${s}s' : '${(s / 60).round()}m';
-                  final isSelected = s == currentInterval;
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 4),
-                    child: ChoiceChip(
-                      label: Text(label, style: TextStyle(fontSize: 11)),
-                      selected: isSelected,
-                      onSelected: (_) {
-                        cacheService.setSyncInterval(s);
-                        setState(() {});
-                      },
-                      visualDensity: VisualDensity.compact,
-                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    ),
-                  );
-                }),
-              ],
-            ),
-          ),
         // 同步进度条
         if (isEnabled &&
             cacheService.syncStatus == SyncStatus.syncing &&
@@ -776,6 +723,109 @@ class _CacheTileState extends State<_CacheTile> {
             ),
           ),
       ],
+    );
+  }
+}
+
+
+/// 同步间隔设置项（独立于缓存开关）
+class _SyncIntervalTile extends StatefulWidget {
+  const _SyncIntervalTile();
+
+  @override
+  State<_SyncIntervalTile> createState() => _SyncIntervalTileState();
+}
+
+class _SyncIntervalTileState extends State<_SyncIntervalTile> {
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    final appBloc = context.read<AppBloc>();
+    final currentInterval = appBloc.state.settings?.cacheSyncInterval ?? 60;
+    final intervalLabel = currentInterval < 60
+        ? '$currentInterval秒'
+        : '${(currentInterval / 60).round()}分钟';
+
+    return ListTile(
+      leading: Icon(Icons.timer_outlined, color: cs.onSurfaceVariant),
+      title: const Text('同步间隔'),
+      subtitle: Text(intervalLabel),
+      trailing: Icon(Icons.chevron_right_rounded, size: 20, color: cs.onSurfaceVariant),
+      onTap: () => _showIntervalPicker(context, currentInterval),
+    );
+  }
+
+  void _showIntervalPicker(BuildContext context, int current) {
+    final cs = Theme.of(context).colorScheme;
+    final intervalOptions = [30, 60, 120, 180, 300];
+    showModalBottomSheet(
+      context: context,
+      builder: (ctx) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(height: 12),
+            Container(
+              width: 36, height: 4,
+              decoration: BoxDecoration(
+                color: cs.outlineVariant,
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Text('同步间隔', style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600)),
+            const SizedBox(height: 8),
+            ...intervalOptions.map((s) {
+              final label = s < 60 ? '${s}秒' : '${(s / 60).round()}分钟';
+              return ListTile(
+                leading: Icon(Icons.timer_outlined, color: current == s ? cs.primary : null),
+                title: Text(label),
+                trailing: current == s ? Icon(Icons.check_rounded, color: cs.primary) : null,
+                onTap: () {
+                  final settings = context.read<AppBloc>().state.settings;
+                  if (settings != null) {
+                    context.read<AppBloc>().add(AppSettingsUpdatedEvent(
+                      settings.copyWith(cacheSyncInterval: s),
+                    ));
+                  }
+                  context.read<CacheService>().setSyncInterval(s);
+                  Navigator.pop(ctx);
+                  setState(() {});
+                },
+              );
+            }),
+            const SizedBox(height: 8),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// 原始数据上传设置项
+class _RawDataTile extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    return BlocBuilder<AppBloc, AppState>(
+      builder: (context, state) {
+        final isEnabled = state.settings?.rawDataEnabled ?? false;
+        return SwitchListTile(
+          secondary: Icon(Icons.raw_on_rounded, color: cs.onSurfaceVariant),
+          title: const Text('原始数据'),
+          subtitle: const Text('上传不加密副本到 raw/ 目录'),
+          value: isEnabled,
+          onChanged: (value) {
+            final settings = state.settings;
+            if (settings == null) return;
+            context.read<AppBloc>().add(AppSettingsUpdatedEvent(
+              settings.copyWith(rawDataEnabled: value),
+            ));
+            final webDavService = context.read<AuthBloc>().webDavService;
+            webDavService?.setRawDataEnabled(value);
+          },
+        );
+      },
     );
   }
 }

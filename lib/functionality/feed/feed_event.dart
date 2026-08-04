@@ -103,3 +103,10 @@ class FeedDateFilterEvent extends FeedEvent {
   @override
   List<Object?> get props => [startDate, endDate];
 }
+
+/// 后台同步完成后刷新 UI
+class FeedRefreshEvent extends FeedEvent {
+  const FeedRefreshEvent();
+  @override
+  List<Object?> get props => [];
+}

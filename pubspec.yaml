@@ -38,8 +38,10 @@ dependencies:
   # 图片选择
   image_picker: ^1.1.2
 
-  # 视频播放
-  video_player: ^2.9.2
+  # 视频播放（自带解码器，不依赖系统GStreamer）
+  media_kit: ^1.1.11
+  media_kit_video: ^1.2.5
+  media_kit_libs_video: ^1.0.5
   # 视频缩略图
   video_thumbnail: ^0.5.6
 

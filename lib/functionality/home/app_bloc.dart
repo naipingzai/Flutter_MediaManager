@@ -51,17 +51,8 @@ class AppBloc extends Bloc<AppEvent, AppState> {
         try {
           final profile = await _webDavService!.loadUserProfile();
           if (profile != null) {
-            settings = AppSettings(
-              themeMode: settings.themeMode,
-              gridColumns: settings.gridColumns,
-              albumGridColumns: settings.albumGridColumns,
-              thumbnailQuality: settings.thumbnailQuality,
-              language: settings.language,
-              dynamicColor: settings.dynamicColor,
-              lastScanPath: settings.lastScanPath,
-              cacheEnabled: settings.cacheEnabled,
+            settings = settings.copyWith(
               nickname: profile['nickname'] as String? ?? settings.nickname,
-              avatarPath: settings.avatarPath,
             );
             // 保存到本地
             await _settingsService.saveSettings(settings);
@@ -86,16 +77,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
                   await File(localAvatarPath).writeAsBytes(
                     Uint8List.fromList(response.data!),
                   );
-                  final updatedSettings = AppSettings(
-                    themeMode: settings.themeMode,
-                    gridColumns: settings.gridColumns,
-                    albumGridColumns: settings.albumGridColumns,
-                    thumbnailQuality: settings.thumbnailQuality,
-                    language: settings.language,
-                    dynamicColor: settings.dynamicColor,
-                    lastScanPath: settings.lastScanPath,
-                    cacheEnabled: settings.cacheEnabled,
-                    nickname: settings.nickname,
+                  final updatedSettings = settings.copyWith(
                     avatarPath: localAvatarPath,
                   );
                   await _settingsService.saveSettings(updatedSettings);
@@ -131,18 +113,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     Emitter<AppState> emit,
   ) async {
     if (state.settings == null) return;
-    final newSettings = AppSettings(
-      themeMode: event.themeMode,
-      gridColumns: state.settings!.gridColumns,
-      albumGridColumns: state.settings!.albumGridColumns,
-      thumbnailQuality: state.settings!.thumbnailQuality,
-      language: state.settings!.language,
-      dynamicColor: state.settings!.dynamicColor,
-      lastScanPath: state.settings!.lastScanPath,
-      cacheEnabled: state.settings!.cacheEnabled,
-      nickname: state.settings!.nickname,
-      avatarPath: state.settings!.avatarPath,
-    );
+    final newSettings = state.settings!.copyWith(themeMode: event.themeMode);
     try {
       await _settingsService.saveSettings(newSettings);
       _logService?.info('主题设置已保存',
@@ -175,3 +146,4 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     emit(state.copyWith(currentTabIndex: event.tabIndex));
   }
 }
+

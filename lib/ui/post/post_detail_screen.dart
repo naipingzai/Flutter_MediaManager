@@ -7,7 +7,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
-import 'package:video_player/video_player.dart';
+import 'package:media_kit/media_kit.dart' hide Color;
+import 'package:media_kit_video/media_kit_video.dart';
 import '../../functionality/auth/auth_bloc.dart';
 import '../../functionality/feed/feed_bloc.dart';
 import '../../models/post.dart';
@@ -147,7 +148,8 @@ class PostDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildRichContent(String content, TextTheme textTheme, ColorScheme cs) {
+  Widget _buildRichContent(
+      String content, TextTheme textTheme, ColorScheme cs) {
     final regex = RegExp(r'#[^\s#]+');
     final spans = <TextSpan>[];
     int lastEnd = 0;
@@ -222,10 +224,12 @@ class _VideoPlayerWidget extends StatefulWidget {
 }
 
 class _VideoPlayerWidgetState extends State<_VideoPlayerWidget> {
-  VideoPlayerController? _controller;
+  Player? _player;
+  VideoController? _videoController;
   bool _isInitialized = false;
   bool _hasError = false;
   bool _showControls = true;
+  bool _isPlaying = false;
 
   @override
   void initState() {
@@ -234,14 +238,25 @@ class _VideoPlayerWidgetState extends State<_VideoPlayerWidget> {
   }
 
   Future<void> _initVideo() async {
-    final url =
-        MediaUtils.buildMediaUrl(widget.feedState, widget.videoFileName);
-    if (url == null) {
-      setState(() => _hasError = true);
-      return;
-    }
-
     try {
+      // 优先从本地获取视频文件
+      final cacheService = context.read<CacheService>();
+      if (cacheService.enabled && cacheService.isCached(widget.videoFileName)) {
+        final localFile =
+            await cacheService.getCachedFile(widget.videoFileName);
+        if (localFile != null && await localFile.exists()) {
+          await _openFile(localFile.path);
+          return;
+        }
+      }
+
+      final url =
+          MediaUtils.buildMediaUrl(widget.feedState, widget.videoFileName);
+      if (url == null) {
+        setState(() => _hasError = true);
+        return;
+      }
+
       final authBloc = context.read<AuthBloc>();
       final encryption = authBloc.webDavService?.encryption;
       final headers = widget.feedState.imageHeaders;
@@ -255,30 +270,44 @@ class _VideoPlayerWidgetState extends State<_VideoPlayerWidget> {
           options: Options(responseType: ResponseType.bytes, headers: headers),
         );
         if (response.data == null) throw Exception('Download failed');
-        final decrypted = encryption.decryptBytes(
-            Uint8List.fromList(response.data!));
+        final decrypted =
+            encryption.decryptBytes(Uint8List.fromList(response.data!));
         final tempDir = await Directory.systemTemp.createTemp('video_');
         final tempFile = File('${tempDir.path}/${widget.videoFileName}');
         await tempFile.writeAsBytes(decrypted);
-        _controller = VideoPlayerController.file(tempFile);
+        await _openFile(tempFile.path);
       } else {
-        _controller = VideoPlayerController.networkUrl(
-          Uri.parse(url),
-          httpHeaders: headers,
-        );
-      }
-      await _controller!.initialize();
-      if (mounted) {
-        setState(() => _isInitialized = true);
+        await _openUrl(url);
       }
     } catch (e) {
+      debugPrint('Video init error: $e');
       if (mounted) setState(() => _hasError = true);
     }
   }
 
+  Future<void> _openFile(String path) async {
+    _player = Player();
+    _videoController = VideoController(_player!);
+    _player!.stream.playing.listen((playing) {
+      if (mounted) setState(() => _isPlaying = playing);
+    });
+    await _player!.open(Media(path));
+    if (mounted) setState(() => _isInitialized = true);
+  }
+
+  Future<void> _openUrl(String url) async {
+    _player = Player();
+    _videoController = VideoController(_player!);
+    _player!.stream.playing.listen((playing) {
+      if (mounted) setState(() => _isPlaying = playing);
+    });
+    await _player!.open(Media(url));
+    if (mounted) setState(() => _isInitialized = true);
+  }
+
   @override
   void dispose() {
-    _controller?.dispose();
+    _player?.dispose();
     super.dispose();
   }
 
@@ -307,7 +336,7 @@ class _VideoPlayerWidgetState extends State<_VideoPlayerWidget> {
       );
     }
 
-    if (!_isInitialized || _controller == null) {
+    if (!_isInitialized || _videoController == null) {
       return Container(
         height: 200,
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -319,7 +348,6 @@ class _VideoPlayerWidgetState extends State<_VideoPlayerWidget> {
       );
     }
 
-    final aspect = _controller!.value.aspectRatio;
     return GestureDetector(
       onTap: () => setState(() => _showControls = !_showControls),
       child: Container(
@@ -333,8 +361,11 @@ class _VideoPlayerWidgetState extends State<_VideoPlayerWidget> {
           alignment: Alignment.center,
           children: [
             AspectRatio(
-              aspectRatio: aspect,
-              child: VideoPlayer(_controller!),
+              aspectRatio: 16 / 9,
+              child: Video(
+                controller: _videoController!,
+                controls: NoVideoControls,
+              ),
             ),
             // 播放/暂停控制
             AnimatedOpacity(
@@ -342,41 +373,22 @@ class _VideoPlayerWidgetState extends State<_VideoPlayerWidget> {
               duration: const Duration(milliseconds: 200),
               child: GestureDetector(
                 onTap: () {
-                  setState(() {
-                    _controller!.value.isPlaying
-                        ? _controller!.pause()
-                        : _controller!.play();
-                    _showControls = false;
-                  });
+                  _player!.playOrPause();
+                  setState(() => _showControls = false);
                 },
                 child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.black45,
                     shape: BoxShape.circle,
                   ),
                   padding: const EdgeInsets.all(16),
                   child: Icon(
-                    _controller!.value.isPlaying
+                    _isPlaying
                         ? Icons.pause_rounded
                         : Icons.play_arrow_rounded,
                     color: Colors.white,
                     size: 40,
                   ),
-                ),
-              ),
-            ),
-            // 进度条
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: VideoProgressIndicator(
-                _controller!,
-                allowScrubbing: true,
-                colors: VideoProgressColors(
-                  playedColor: cs.primary,
-                  bufferedColor: cs.primary.withOpacity(0.3),
-                  backgroundColor: Colors.white24,
                 ),
               ),
             ),
@@ -543,7 +555,8 @@ class _GalleryScreenState extends State<_GalleryScreen> {
 
   Future<void> _loadImage(int index) async {
     if (index < 0 || index >= widget.imageUrls.length) return;
-    if (_imageProviders.containsKey(index) || _loadingImages[index] == true) return;
+    if (_imageProviders.containsKey(index) || _loadingImages[index] == true)
+      return;
     _loadingImages[index] = true;
 
     try {
@@ -576,11 +589,14 @@ class _GalleryScreenState extends State<_GalleryScreen> {
       if (response.data != null) {
         var data = Uint8List.fromList(response.data!);
         // 解密
-        if (widget.encryption != null && widget.encryption!.isEncryptionEnabled) {
+        if (widget.encryption != null &&
+            widget.encryption!.isEncryptionEnabled) {
           data = widget.encryption!.decryptBytes(data);
         }
         // 存入缓存（如果有缓存服务且文件名有效）
-        if (_cacheService != null && _cacheService.enabled && cleanFileName.isNotEmpty) {
+        if (_cacheService != null &&
+            _cacheService.enabled &&
+            cleanFileName.isNotEmpty) {
           try {
             final localPath = await _cacheService.getLocalPath(cleanFileName);
             await File(localPath).writeAsBytes(data);
@@ -629,7 +645,8 @@ class _GalleryScreenState extends State<_GalleryScreen> {
                     minScale: PhotoViewComputedScale.contained,
                     maxScale: PhotoViewComputedScale.covered * 4,
                     initialScale: PhotoViewComputedScale.contained,
-                    heroAttributes: PhotoViewHeroAttributes(tag: 'gallery_$index'),
+                    heroAttributes:
+                        PhotoViewHeroAttributes(tag: 'gallery_$index'),
                   );
                 }
                 _loadImage(index);

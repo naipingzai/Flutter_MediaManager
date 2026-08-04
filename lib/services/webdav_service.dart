@@ -27,10 +27,16 @@ class WebDavService {
   final Logger _logger = Logger();
   final EncryptionService _encryption = EncryptionService();
   LogService? _logService;
+  bool _rawDataEnabled = false;
 
   /// 外部注入的日志服务
   set logger(LogService? value) {
     _logService = value;
+  }
+
+  /// 设置原始数据上传开关
+  void setRawDataEnabled(bool enabled) {
+    _rawDataEnabled = enabled;
   }
 
   WebDavService(this.config)
@@ -399,21 +405,11 @@ class WebDavService {
         ),
       );
       _log('上传文件成功', detail: '$localPath -> $remoteUrl');
-      // 调试备份：上传一份不加密的媒体文件到 debug/ 目录
-      final debugUrl = '${config.rootUrl}/debug/${remoteUrl.split('/').last}';
-      try {
-        await _dio.put(
-          debugUrl,
-          data: Uint8List.fromList(bytes),
-          options: Options(
-            headers: {
-              ..._headers,
-              'Content-Type': 'application/octet-stream',
-            },
-          ),
-        );
-        _log('调试备份媒体文件', detail: debugUrl);
-      } catch (_) {}
+      // 原始数据：上传一份不加密的媒体文件到 raw/ 目录（保持原始文件名）
+      if (_rawDataEnabled) {
+        final originalFileName = localPath.split('/').last;
+        await _uploadRawData(originalFileName, Uint8List.fromList(bytes));
+      }
     } on DioException catch (e) {
       if (e.response?.statusCode == 409) {
         _log('目录不存在，先创建', detail: remoteUrl);
@@ -489,13 +485,11 @@ class WebDavService {
         },
       );
       _log('上传文件成功', detail: '$localPath -> $remoteUrl');
-      // 调试备份
-      final debugUrl = '${config.rootUrl}/debug/${remoteUrl.split('/').last}';
-      try {
-        await _dio.put(debugUrl,
-            data: Uint8List.fromList(bytes),
-            options: Options(headers: {..._headers, 'Content-Type': 'application/octet-stream'}));
-      } catch (_) {}
+      // 原始数据
+      if (_rawDataEnabled) {
+        final originalFileName = localPath.split('/').last;
+        await _uploadRawData(originalFileName, Uint8List.fromList(bytes));
+      }
     } on DioException catch (e) {
       if (e.response?.statusCode == 409) {
         final dir = remoteUrl.substring(0, remoteUrl.lastIndexOf('/'));
@@ -613,42 +607,46 @@ class WebDavService {
 
   /// 保存 JournalData（加密版）
   Future<void> saveJournalData(JournalData data) async {
-    _log('保存 JournalData', detail: '${data.posts.length} 条帖子');
-    final json = const JsonEncoder.withIndent('  ').convert(data.toJson());
+    // 添加同步元数据
+    final syncData = data.withNewSync();
+    _log('保存 JournalData', detail: '${syncData.posts.length} 条帖子, syncId=${syncData.syncMeta?.syncId}');
+    final json = const JsonEncoder.withIndent('  ').convert(syncData.toJson());
     await writeFile(config.dataUrl, json);
-    // 同时保存一份明文到 debug 目录（用于调试查看）
-    await _saveDebugCopy(json);
+    // 原始数据模式：上传一份不加密的 data.json 到 raw/ 目录
+    if (_rawDataEnabled) {
+      await _uploadRawData('data.json', utf8.encode(json));
+    }
   }
 
-  /// 确保 debug 目录存在（仅调用一次）
-  bool _debugDirCreated = false;
+  /// 确保原始数据目录存在
+  bool _rawDirCreated = false;
 
-  Future<void> _ensureDebugDir() async {
-    if (_debugDirCreated) return;
+  Future<void> _ensureRawDir() async {
+    if (_rawDirCreated) return;
     try {
-      await _mkcol('${config.rootUrl}/debug/');
-      _debugDirCreated = true;
+      await _mkcol('${config.rootUrl}/raw/');
+      _rawDirCreated = true;
     } catch (_) {}
   }
 
-  /// 调试备份：上传一份不加密的 data.json 到 debug/ 目录
-  Future<void> _saveDebugCopy(String jsonContent) async {
+  /// 上传不加密的原始数据文件到 raw/ 目录
+  Future<void> _uploadRawData(String fileName, List<int> data) async {
     try {
-      await _ensureDebugDir();
-      final debugUrl = '${config.rootUrl}/debug/data.json';
+      await _ensureRawDir();
+      final rawUrl = '${config.rootUrl}/raw/$fileName';
       await _dio.put(
-        debugUrl,
-        data: utf8.encode(jsonContent),
+        rawUrl,
+        data: data,
         options: Options(
           headers: {
             ..._headers,
-            'Content-Type': 'application/json; charset=utf-8',
+            'Content-Type': 'application/octet-stream',
           },
         ),
       );
-      _log('调试备份保存成功', detail: debugUrl);
+      _log('原始数据上传成功', detail: rawUrl);
     } catch (e) {
-      _logService?.warn('调试备份失败（不影响主流程）', detail: e.toString());
+      _logService?.warn('原始数据上传失败（不影响主流程）', detail: e.toString());
     }
   }
 
@@ -738,15 +736,14 @@ class WebDavService {
       _logService?.warn('删除 data.json 失败', detail: e.toString());
     }
 
-    // 3. 删除 debug 目录文件
+    // 3. 删除原始数据目录文件
     try {
-      final debugFiles = await listFiles('${config.rootUrl}/debug');
-      for (final fileName in debugFiles) {
+      final rawFiles = await listFiles('${config.rootUrl}/raw');
+      for (final fileName in rawFiles) {
         try {
-          await deleteFile('${config.rootUrl}/debug/$fileName');
+          await deleteFile('${config.rootUrl}/raw/$fileName');
         } catch (_) {}
       }
-      _log('debug 目录已清除');
     } catch (_) {}
 
     _log('WebDAV 数据清除完成');
