@@ -219,6 +219,7 @@ class WebDavConfig {
   String get mediaUrl => '$rootUrl/media';
   String get dataUrl => '$rootUrl/data.json';
   String get profileUrl => '$rootUrl/profile.json';
+
   /// 获取 Authorization 头的值
   String get authHeaderValue {
     if (authMethod == AuthMethod.basic) {

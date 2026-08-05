@@ -36,7 +36,7 @@ class LocalSettingsService {
         syncEnabled: prefs.getBool(_keySyncEnabled) ?? false,
         syncInterval: prefs.getInt(_keySyncInterval) ?? 60,
         rawDataEnabled: prefs.getBool(_keyRawDataEnabled) ?? false,
-        nickname: prefs.getString(_keyNickname) ?? '生活记录者',
+        nickname: prefs.getString(_keyNickname) ?? '媒体管理',
         avatarPath: prefs.getString(_keyAvatarPath) ?? '',
       );
       _logService?.success('本地设置读取完成', source: 'Settings');

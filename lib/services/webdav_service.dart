@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:logger/logger.dart';
+import 'package:path_provider/path_provider.dart';
 import '../models/post.dart';
 import 'log_service.dart';
 import 'encryption_service.dart';
@@ -50,6 +51,14 @@ class CloudLock {
   bool get isExpired => DateTime.now().toUtc().isAfter(expiresAt);
 }
 
+
+class _AvatarColor {
+  final double r;
+  final double g;
+  final double b;
+  const _AvatarColor(this.r, this.g, this.b);
+}
+
 /// WebDAV 服务客户端
 class WebDavService {
   final WebDavConfig config;
@@ -91,7 +100,7 @@ class WebDavService {
     _dio.options.maxRedirects = 5;
     // WebDAV 服务器可能因缺少 User-Agent 而拒绝请求
     _dio.options.headers = {
-      'User-Agent': 'AdvanceMediaKB/1.0',
+      'User-Agent': 'flutter_media_manager/1.0',
     };
     // 从用户凭证派生加密密钥
     _encryption.updateKeyFromCredential(
@@ -171,8 +180,7 @@ class WebDavService {
       if (existingLock != null && !existingLock.isExpired) {
         // 锁被其他设备持有且未过期
         if (existingLock.deviceId != _deviceId) {
-          _log('云端锁被其他设备持有',
-              detail: 'deviceId=${existingLock.deviceId}');
+          _log('云端锁被其他设备持有', detail: 'deviceId=${existingLock.deviceId}');
           return false;
         }
         // 是自己的锁，刷新过期时间
@@ -733,8 +741,14 @@ class WebDavService {
       await saveJournalData(emptyData);
       return emptyData;
     }
+    // 兼容某些代理返回的错误文本（如 "Not Found"），避免解析失败
+    final trimmed = content.trim();
+    if (!trimmed.startsWith('{') && !trimmed.startsWith('[')) {
+      _log('data.json 不存在或格式无效，返回空数据库');
+      return JournalData.empty();
+    }
     try {
-      return JournalData.fromJson(jsonDecode(content));
+      return JournalData.fromJson(jsonDecode(trimmed));
     } catch (e) {
       _logService?.error('解析 data.json 失败', detail: e.toString());
       return JournalData.empty();
@@ -756,7 +770,8 @@ class WebDavService {
       _log('保存 JournalData',
           detail:
               '${syncData.posts.length} 条帖子, syncId=${syncData.syncMeta?.syncId}');
-      final json = const JsonEncoder.withIndent('  ').convert(syncData.toJson());
+      final json =
+          const JsonEncoder.withIndent('  ').convert(syncData.toJson());
       await writeFile(config.dataUrl, json);
       // 原始数据模式：上传一份不加密的 data.json 到 raw/ 目录
       if (_rawDataEnabled) {
@@ -832,13 +847,233 @@ class WebDavService {
     await writeFile(config.profileUrl, json);
   }
 
+  /// 同步本地用户资料到 WebDAV
+  ///
+  /// 如果本地没有头像（[localAvatarPath] 为空），则生成一张默认头像（取昵称首字）
+  /// 并上传到云端。无论头像是否存在，都会保存 profile.json。
+  Future<String> saveUserProfileWithDefaults({
+    required String nickname,
+    required String localAvatarPath,
+  }) async {
+    String? avatarFileName;
+    String actualAvatarPath = localAvatarPath;
+
+    // 1. 如果没有本地头像，生成默认头像（基于昵称首字）
+    if (actualAvatarPath.isEmpty) {
+      try {
+        actualAvatarPath = await _generateDefaultAvatar(nickname);
+        _log('已生成本地默认头像', detail: actualAvatarPath);
+      } catch (e) {
+        _logService?.warn('生成默认头像失败', detail: e.toString());
+      }
+    }
+
+    // 2. 上传头像到云端
+    if (actualAvatarPath.isNotEmpty && await File(actualAvatarPath).exists()) {
+      try {
+        avatarFileName = await uploadAvatar(actualAvatarPath);
+      } catch (e) {
+        _logService?.warn('上传头像失败', detail: e.toString());
+      }
+    }
+
+    // 3. 保存 profile.json
+    final profile = <String, dynamic>{
+      'nickname': nickname,
+      'avatarFileName': avatarFileName ?? '',
+    };
+    await saveUserProfile(profile);
+    _log('用户资料已同步到云端', detail: 'nickname=$nickname');
+    return avatarFileName ?? '';
+  }
+
+  /// 生成默认头像：纯色背景（颜色由昵称哈希稳定生成）
+  Future<String> _generateDefaultAvatar(String nickname) async {
+    // 使用 path_provider 获取临时目录
+    final dir = await getTemporaryDirectory();
+    final path = '${dir.path}/default_avatar_${DateTime.now().millisecondsSinceEpoch}.png';
+
+    // 用纯色背景 PNG 作为默认头像（颜色由昵称哈希稳定生成）
+    final color = _colorFromString(nickname);
+    final pngBytes = _buildColoredPng(120, color.r, color.g, color.b);
+    final file = File(path);
+    await file.writeAsBytes(pngBytes);
+    return path;
+  }
+
+  _AvatarColor _colorFromString(String s) {
+    // 用昵称的哈希生成稳定的色调
+    int hash = 0;
+    for (var i = 0; i < s.length; i++) {
+      hash = (hash * 31 + s.codeUnitAt(i)) & 0xFFFFFFFF;
+    }
+    final hue = (hash % 360).toDouble();
+    final c = _hsvToRgb(hue, 0.55, 0.85);
+    return _AvatarColor(c[0], c[1], c[2]);
+  }
+
+  List<double> _hsvToRgb(double h, double s, double v) {
+    final c = v * s;
+    final x = c * (1 - ((h / 60) % 2 - 1).abs());
+    final m = v - c;
+    double r = 0, g = 0, b = 0;
+    if (h < 60) {
+      r = c;
+      g = x;
+    } else if (h < 120) {
+      r = x;
+      g = c;
+    } else if (h < 180) {
+      g = c;
+      b = x;
+    } else if (h < 240) {
+      g = x;
+      b = c;
+    } else if (h < 300) {
+      r = x;
+      b = c;
+    } else {
+      r = c;
+      b = x;
+    }
+    return [r + m, g + m, b + m];
+  }
+
+  /// 生成纯色 PNG（不依赖 image 包）
+  /// 使用最小的 PNG 结构：IHDR + IDAT (使用 filter type 0) + IEND
+  List<int> _buildColoredPng(int size, double r, double g, double b) {
+    // 创建像素数据：每行前加 1 字节 filter type (0)
+    final pixels = <int>[];
+    for (var y = 0; y < size; y++) {
+      pixels.add(0); // filter type
+      for (var x = 0; x < size; x++) {
+        pixels.add((r * 255).round());
+        pixels.add((g * 255).round());
+        pixels.add((b * 255).round());
+      }
+    }
+    // 计算每段 IDAT（分段以避免单次 inflate 过大）
+    final compressed = <int>[];
+    const chunkSize = 65535;
+    for (var off = 0; off < pixels.length; off += chunkSize) {
+      final end = (off + chunkSize).clamp(0, pixels.length);
+      final segment = pixels.sublist(off, end);
+      compressed.addAll(_zlibStore(segment));
+    }
+    // 构建 PNG 文件
+    final png = <int>[];
+    png.addAll([137, 80, 78, 71, 13, 10, 26, 10]); // PNG 签名
+    png.addAll(_pngChunk('IHDR', _ihdrData(size)));
+    png.addAll(_pngChunk('IDAT', compressed));
+    png.addAll(_pngChunk('IEND', []));
+    return png;
+  }
+
+  List<int> _ihdrData(int size) {
+    return [
+      (size >> 24) & 0xFF,
+      (size >> 16) & 0xFF,
+      (size >> 8) & 0xFF,
+      size & 0xFF,
+      8, // bit depth
+      2, // color type (RGB)
+      0, // compression
+      0, // filter
+      0, // interlace
+    ];
+  }
+
+  List<int> _pngChunk(String type, List<int> data) {
+    final chunk = <int>[];
+    final typeBytes = type.codeUnits;
+    // CRC 校验
+    final crcInput = <int>[...typeBytes, ...data];
+    final crc = _crc32(crcInput);
+    // length
+    final len = data.length;
+    chunk.add((len >> 24) & 0xFF);
+    chunk.add((len >> 16) & 0xFF);
+    chunk.add((len >> 8) & 0xFF);
+    chunk.add(len & 0xFF);
+    chunk.addAll(typeBytes);
+    chunk.addAll(data);
+    chunk.add((crc >> 24) & 0xFF);
+    chunk.add((crc >> 16) & 0xFF);
+    chunk.add((crc >> 8) & 0xFF);
+    chunk.add(crc & 0xFF);
+    return chunk;
+  }
+
+  /// 计算 CRC32（PNG 使用）
+  int _crc32(List<int> bytes) {
+    final table = _crc32Table;
+    var crc = 0xFFFFFFFF;
+    for (final b in bytes) {
+      crc = table[(crc ^ b) & 0xFF] ^ (crc >> 8);
+    }
+    return crc ^ 0xFFFFFFFF;
+  }
+
+  /// zlib store（未压缩）封装，便于生成最小 PNG
+  List<int> _zlibStore(List<int> data) {
+    final out = <int>[];
+    // zlib header: 0x78 0x01 (deflate, no compression)
+    out.add(0x78);
+    out.add(0x01);
+    var offset = 0;
+    while (offset < data.length) {
+      final remain = data.length - offset;
+      final blockLen = remain > 65535 ? 65535 : remain;
+      // BTYPE=00 (stored)
+      out.add(offset + blockLen == data.length ? 1 : 0);
+      out.add(blockLen & 0xFF);
+      out.add((blockLen >> 8) & 0xFF);
+      out.add(~blockLen & 0xFF);
+      out.add((~blockLen >> 8) & 0xFF);
+      out.addAll(data.sublist(offset, offset + blockLen));
+      offset += blockLen;
+    }
+    // adler32
+    final adler = _adler32(data);
+    out.add((adler >> 24) & 0xFF);
+    out.add((adler >> 16) & 0xFF);
+    out.add((adler >> 8) & 0xFF);
+    out.add(adler & 0xFF);
+    return out;
+  }
+
+  int _adler32(List<int> data) {
+    var a = 1, b = 0;
+    for (final byte in data) {
+      a = (a + byte) % 65521;
+      b = (b + a) % 65521;
+    }
+    return (b << 16) | a;
+  }
+
+  static final List<int> _crc32Table = List<int>.generate(256, (n) {
+    var c = n;
+    for (var k = 0; k < 8; k++) {
+      c = (c & 1) != 0 ? 0xEDB88320 ^ (c >> 1) : c >> 1;
+    }
+    return c;
+  });
+
   /// 加载用户资料从 WebDAV
+  ///
+  /// 返回 null 表示 profile.json 不存在或格式无效（首次使用为正常情况）
   Future<Map<String, dynamic>?> loadUserProfile() async {
     _log('加载用户资料', detail: config.profileUrl);
     try {
       final content = await readFile(config.profileUrl);
       if (content == null || content.isEmpty) return null;
-      return jsonDecode(content) as Map<String, dynamic>;
+      // 兼容某些代理返回的错误文本（如 "Not Found"），避免被 jsonDecode 报错
+      final trimmed = content.trim();
+      if (!trimmed.startsWith('{') && !trimmed.startsWith('[')) {
+        // 文件不存在或返回了非 JSON 内容（首次使用时正常）
+        return null;
+      }
+      return jsonDecode(trimmed) as Map<String, dynamic>;
     } catch (e) {
       _logService?.warn('加载用户资料失败', detail: e.toString());
       return null;

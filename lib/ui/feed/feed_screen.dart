@@ -76,7 +76,7 @@ class _FeedScreenState extends State<FeedScreen> {
             MaterialPageRoute(builder: (_) => const CreatePostScreen()),
           );
         },
-        icon: const Icon(Icons.edit_rounded, size: 20),
+        icon: const Icon(Icons.edit_location_alt_outlined, size: 20),
         label: const Text('发布'),
       ),
     );
@@ -115,7 +115,7 @@ class _FeedScreenState extends State<FeedScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                '生活动态',
+                '媒体管理',
                 style: textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.w800,
                   letterSpacing: -0.3,
@@ -133,7 +133,7 @@ class _FeedScreenState extends State<FeedScreen> {
         ],
       ),
       actions: [
-        // 同步按钮（按 guide.skill 第一节：主页顶部工具栏右侧圆角矩形按钮）
+        // 同步按钮
         _SyncButton(),
         PopupMenuButton<FeedSortMode>(
           icon: Icon(Icons.sort_rounded, size: 22, color: cs.onSurfaceVariant),
@@ -144,8 +144,8 @@ class _FeedScreenState extends State<FeedScreen> {
           itemBuilder: (context) => [
             _sortItem(FeedSortMode.newest, '最新优先', Icons.access_time_rounded,
                 state, cs),
-            _sortItem(FeedSortMode.oldest, '最早优先', Icons.history_rounded,
-                state, cs),
+            _sortItem(
+                FeedSortMode.oldest, '最早优先', Icons.history_rounded, state, cs),
             _sortItem(FeedSortMode.contentAsc, '内容 A-Z',
                 Icons.sort_by_alpha_rounded, state, cs),
             _sortItem(FeedSortMode.contentDesc, '内容 Z-A',
@@ -422,26 +422,10 @@ class _SyncButtonState extends State<_SyncButton>
     }
 
     final (IconData icon, Color iconColor, String label) = switch (status) {
-      SyncStatus.idle => (
-          Icons.cloud_outlined,
-          cs.onSurfaceVariant,
-          '同步'
-        ),
-      SyncStatus.syncing => (
-          Icons.sync_rounded,
-          cs.primary,
-          '同步中'
-        ),
-      SyncStatus.success => (
-          Icons.cloud_done_rounded,
-          Colors.green,
-          '同步'
-        ),
-      SyncStatus.failed => (
-          Icons.cloud_off_rounded,
-          cs.error,
-          '同步'
-        ),
+      SyncStatus.idle => (Icons.cloud_outlined, cs.onSurfaceVariant, '同步'),
+      SyncStatus.syncing => (Icons.sync_rounded, cs.primary, '同步中'),
+      SyncStatus.success => (Icons.cloud_done_rounded, Colors.green, '同步'),
+      SyncStatus.failed => (Icons.cloud_off_rounded, cs.error, '同步'),
     };
 
     return Padding(
@@ -453,8 +437,7 @@ class _SyncButtonState extends State<_SyncButton>
           borderRadius: BorderRadius.circular(14),
           onTap: () => _onTap(context, sync, status),
           child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -501,7 +484,12 @@ class _SyncButtonState extends State<_SyncButton>
 
   Future<void> _triggerSync(BuildContext context) async {
     final feedBloc = context.read<FeedBloc>();
-    final ok = await feedBloc.performManualSync();
+    final appBloc = context.read<AppBloc>();
+    final settings = appBloc.state.settings;
+    final ok = await feedBloc.performManualSync(
+      nickname: settings?.nickname,
+      avatarPath: settings?.avatarPath,
+    );
     if (!context.mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(ok ? '同步完成' : '同步失败'),
@@ -545,8 +533,7 @@ class _SyncButtonState extends State<_SyncButton>
         ),
         actions: [
           TextButton(
-              onPressed: () => Navigator.pop(ctx),
-              child: const Text('隐藏')),
+              onPressed: () => Navigator.pop(ctx), child: const Text('隐藏')),
         ],
       ),
     );
@@ -564,8 +551,7 @@ class _SyncButtonState extends State<_SyncButton>
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        shape:
-RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: const Row(
           children: [
             Icon(Icons.cloud_done_rounded, color: Colors.green),
@@ -585,8 +571,7 @@ RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         ),
         actions: [
           TextButton(
-              onPressed: () => Navigator.pop(ctx),
-              child: const Text('关闭')),
+              onPressed: () => Navigator.pop(ctx), child: const Text('关闭')),
         ],
       ),
     );
@@ -622,8 +607,7 @@ RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         ),
         actions: [
           TextButton(
-              onPressed: () => Navigator.pop(ctx),
-              child: const Text('关闭')),
+              onPressed: () => Navigator.pop(ctx), child: const Text('关闭')),
         ],
       ),
     );
@@ -645,10 +629,8 @@ class _PostCard extends StatelessWidget {
     final hasMedia = post.mediaFiles.isNotEmpty || post.hasVideo;
 
     return GestureDetector(
-      onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (_) => PostDetailScreen(post: post))),
+      onTap: () => Navigator.push(context,
+          MaterialPageRoute(builder: (_) => PostDetailScreen(post: post))),
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
@@ -667,7 +649,7 @@ class _PostCard extends StatelessWidget {
               builder: (context, appState) {
                 final settings = appState.settings;
                 final avatarPath = settings?.avatarPath ?? '';
-                final nickname = settings?.nickname ?? '生活记录者';
+                final nickname = settings?.nickname ?? '媒体管理';
                 return Padding(
                   padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
                   child: Row(
@@ -698,8 +680,8 @@ class _PostCard extends StatelessWidget {
                           children: [
                             Text(
                               nickname,
-                              style: textTheme.bodyMedium?.copyWith(
-                                  fontWeight: FontWeight.w600),
+                              style: textTheme.bodyMedium
+                                  ?.copyWith(fontWeight: FontWeight.w600),
                             ),
                             const SizedBox(height: 2),
                             Text(
@@ -721,22 +703,21 @@ class _PostCard extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
                 child: Text.rich(
                   TextSpan(
-                    children: _buildContentSpans(
-                        post.content, textTheme, cs),
+                    children: _buildContentSpans(post.content, textTheme, cs),
                   ),
-                  maxLines: 3,
+                  maxLines: 5,
                   overflow: TextOverflow.ellipsis,
                   style: textTheme.bodyLarge?.copyWith(height: 1.5),
                 ),
               ),
             if (hasMedia)
               Padding(
-                padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
                 child: _MediaGrid(post: post, state: state),
               ),
             if (post.tags.isNotEmpty)
               Padding(
-                padding: const EdgeInsets.fromLTRB(16, 0, 16, 4),
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
                 child: Wrap(
                   spacing: 8,
                   runSpacing: 6,
@@ -746,8 +727,8 @@ class _PostCard extends StatelessWidget {
                               context
                                   .read<AppBloc>()
                                   .add(const AppNavigationChangedEvent(1));
-                              Future.delayed(
-                                  const Duration(milliseconds: 200), () {
+                              Future.delayed(const Duration(milliseconds: 200),
+                                  () {
                                 if (context.mounted) {
                                   context
                                       .read<FeedBloc>()
@@ -783,8 +764,8 @@ class _PostCard extends StatelessWidget {
                     Icon(Icons.videocam_rounded, size: 14, color: cs.primary),
                     const SizedBox(width: 4),
                     Text('视频',
-                        style: textTheme.labelSmall
-                            ?.copyWith(color: cs.primary)),
+                        style:
+                            textTheme.labelSmall?.copyWith(color: cs.primary)),
                     const SizedBox(width: 10),
                   ],
                 ],
@@ -803,13 +784,11 @@ class _PostCard extends StatelessWidget {
     int lastEnd = 0;
     for (final match in regex.allMatches(content)) {
       if (match.start > lastEnd) {
-        spans.add(
-            TextSpan(text: content.substring(lastEnd, match.start)));
+        spans.add(TextSpan(text: content.substring(lastEnd, match.start)));
       }
       spans.add(TextSpan(
         text: match.group(1),
-        style: TextStyle(
-            color: cs.primary, fontWeight: FontWeight.w600),
+        style: TextStyle(color: cs.primary, fontWeight: FontWeight.w600),
       ));
       lastEnd = match.end;
     }
@@ -859,8 +838,7 @@ class _MediaGrid extends StatelessWidget {
           child: Container(
             constraints: BoxConstraints(maxWidth: maxW),
             decoration: BoxDecoration(
-              border:
-                  Border.all(color: cs.outlineVariant.withOpacity(0.25)),
+              border: Border.all(color: cs.outlineVariant.withOpacity(0.25)),
               borderRadius: BorderRadius.circular(16),
             ),
             child: _buildImage(context, allMedia.first, maxW,

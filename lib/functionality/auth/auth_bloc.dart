@@ -99,7 +99,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         serverUrl: event.serverUrl,
         token: event.token,
         username: event.username,
-        rootPath: event.rootPath.isNotEmpty ? event.rootPath : '/life-journal',
+        rootPath: event.rootPath.isNotEmpty
+            ? event.rootPath
+            : '/flutter_media_manager',
         authMethod: event.authMethod,
       );
       _webDavService = WebDavService(config);

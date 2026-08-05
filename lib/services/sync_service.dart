@@ -9,7 +9,7 @@ import '../models/post.dart';
 import 'encryption_service.dart';
 import 'log_service.dart';
 
-/// 数据同步状态（按 guide.skill 规范）
+/// 数据同步状态
 enum SyncStatus {
   /// 未同步（灰色云朵）
   idle,
@@ -71,8 +71,6 @@ class SnapshotInfo {
 
 /// 数据同步服务
 ///
-/// 按 guide.skill 规范：
-/// - APP 中不存在"缓存"概念
 /// - 三种数据状态：本地数据、云端数据、数据同步
 /// - 同时提供数据快照管理（自动/手动/恢复）
 ///
@@ -246,7 +244,8 @@ class SyncService {
       _localMediaFiles.add(fileName);
       _logService?.info('保存到本地', detail: fileName, source: 'Sync');
     } catch (e) {
-      _logService?.warn('本地保存失败: $fileName', detail: e.toString(), source: 'Sync');
+      _logService?.warn('本地保存失败: $fileName',
+          detail: e.toString(), source: 'Sync');
     }
   }
 
@@ -303,11 +302,14 @@ class SyncService {
   // ─── 推送本地数据到云端 ───
 
   /// 推送本地数据到 WebDAV
+  ///
+  /// [saveProfileFn] 可选：用于上传用户资料（昵称/头像）到云端 profile.json
   Future<bool> pushToCloud({
     required Future<void> Function(String localPath, String remoteUrl) uploadFn,
     required Future<void> Function(JournalData data) saveDataFn,
     required String mediaBaseUrl,
     required JournalData data,
+    Future<void> Function()? saveProfileFn,
   }) async {
     try {
       _setStatus(SyncStatus.syncing);
@@ -339,7 +341,18 @@ class SyncService {
         _notifyStateChanged();
       }
 
-      // 2. 上传 data.json
+      // 2. 上传用户资料（昵称/头像）到云端 profile.json
+      //    如果没有头像，使用本地默认头像；昵称使用本地当前昵称
+      if (saveProfileFn != null) {
+        try {
+          await saveProfileFn();
+          _logService?.info('用户资料已上传', source: 'Sync');
+        } catch (e) {
+          _logService?.warn('上传用户资料失败', detail: e.toString(), source: 'Sync');
+        }
+      }
+
+      // 3. 上传 data.json
       await saveDataFn(data);
 
       _currentFileName = null;
@@ -390,8 +403,7 @@ class SyncService {
     } catch (e) {
       _setStatus(SyncStatus.failed);
       _syncError = e.toString();
-      _logService?.error('拉取云端数据失败',
-          detail: e.toString(), source: 'Sync');
+      _logService?.error('拉取云端数据失败', detail: e.toString(), source: 'Sync');
       return null;
     }
   }
@@ -399,7 +411,8 @@ class SyncService {
   JournalData _mergeData(JournalData? local, JournalData remote) {
     if (local == null) return remote;
     final remoteIds = remote.posts.map((p) => p.id).toSet();
-    final localOnly = local.posts.where((p) => !remoteIds.contains(p.id)).toList();
+    final localOnly =
+        local.posts.where((p) => !remoteIds.contains(p.id)).toList();
     final merged = <Post>[...remote.posts, ...localOnly];
     merged.sort((a, b) => b.createdAt.compareTo(a.createdAt));
     return JournalData(
@@ -563,8 +576,7 @@ class SyncService {
     } catch (e) {
       _setStatus(SyncStatus.failed);
       _syncError = e.toString();
-      _logService?.error('云端数据下载失败',
-          detail: e.toString(), source: 'Sync');
+      _logService?.error('云端数据下载失败', detail: e.toString(), source: 'Sync');
     }
     _currentFileName = null;
     _notifyStateChanged();
@@ -584,8 +596,7 @@ class SyncService {
             detail: '删除 ${toRemove.length} 个文件', source: 'Sync');
       }
     } catch (e) {
-      _logService?.warn('本地数据清理异常',
-          detail: e.toString(), source: 'Sync');
+      _logService?.warn('本地数据清理异常', detail: e.toString(), source: 'Sync');
     }
   }
 
@@ -602,8 +613,7 @@ class SyncService {
       _lastSummary = null;
       _logService?.info('已清除本地数据', source: 'Sync');
     } catch (e) {
-      _logService?.warn('清除本地数据失败',
-          detail: e.toString(), source: 'Sync');
+      _logService?.warn('清除本地数据失败', detail: e.toString(), source: 'Sync');
     }
   }
 
@@ -649,8 +659,7 @@ class SyncService {
           final allFiles = await activeFilesFn();
           await cleanupLocal(allFiles);
         } catch (e) {
-          _logService?.warn('后台同步异常',
-              detail: e.toString(), source: 'Sync');
+          _logService?.warn('后台同步异常', detail: e.toString(), source: 'Sync');
         }
       },
     );

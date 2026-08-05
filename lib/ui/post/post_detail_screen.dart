@@ -36,7 +36,7 @@ class PostDetailScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('详情'),
         actions: [
-          // 右上角菜单：标签管理（按 guide.skill 第七节统一入口）
+          // 右上角菜单：标签管理
           IconButton(
             icon: const Icon(Icons.label_outline_rounded, size: 22),
             tooltip: '标签',
@@ -49,9 +49,10 @@ class PostDetailScreen extends StatelessWidget {
                 MaterialPageRoute(
                     builder: (_) => CreatePostScreen(editPost: post)),
               );
-              if (result == true && context.mounted) Navigator.pop(context, true);
+              if (result == true && context.mounted)
+                Navigator.pop(context, true);
             },
-            icon: const Icon(Icons.edit_outlined, size: 22),
+            icon: const Icon(Icons.edit_location_alt_outlined, size: 22),
             tooltip: '编辑',
           ),
           IconButton(
@@ -89,8 +90,8 @@ class PostDetailScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 6),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
                       color: cs.surfaceContainerHighest.withOpacity(0.5),
                       borderRadius: BorderRadius.circular(20),
@@ -166,8 +167,7 @@ class PostDetailScreen extends StatelessWidget {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: const Text('标签'),
         content: TextField(
           controller: controller,
@@ -179,8 +179,7 @@ class PostDetailScreen extends StatelessWidget {
         ),
         actions: [
           TextButton(
-              onPressed: () => Navigator.pop(ctx),
-              child: const Text('取消')),
+              onPressed: () => Navigator.pop(ctx), child: const Text('取消')),
           FilledButton(
             onPressed: () {
               final newTags = controller.text
@@ -229,16 +228,21 @@ class PostDetailScreen extends StatelessWidget {
         content: const Text('确定要删除这条动态吗？删除后无法恢复。'),
         actions: [
           TextButton(
-              onPressed: () => Navigator.pop(ctx),
-              child: const Text('取消')),
+              onPressed: () => Navigator.pop(ctx), child: const Text('取消')),
           FilledButton(
             style: FilledButton.styleFrom(backgroundColor: cs.error),
-            onPressed: () {
+            onPressed: () async {
+              // ★ 等待 FeedBloc 处理完成后再 pop
+              //  避免竞态：pop 后 state 未更新，feed 页看不到删除
               context.read<FeedBloc>().add(FeedDeletePostEvent(post.id));
-              Navigator.pop(ctx);
-              Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('动态已删除')));
+              Navigator.pop(ctx);  // 关闭确认对话框
+              // 等待 BLoC 真正 emit 新状态
+              await Future<void>.delayed(const Duration(milliseconds: 200));
+              if (context.mounted) Navigator.pop(context);  // 关闭详情页
+              if (context.mounted) {
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(const SnackBar(content: Text('动态已删除')));
+              }
             },
             child: const Text('删除'),
           ),
@@ -276,16 +280,19 @@ class _VideoPlayerCardState extends State<_VideoPlayerCard> {
   Future<void> _prepareVideo() async {
     try {
       final sync = context.read<SyncService>();
-      final localPath =
-          await sync.getLocalMediaPath(widget.post.videoFile!);
+      final localPath = await sync.getLocalMediaPath(widget.post.videoFile!);
       final localFile = File(localPath);
       if (await localFile.exists()) {
         _localPath = localFile.path;
       } else {
-        final url = MediaUtils.buildMediaUrl(
-            widget.feedState, widget.post.videoFile!);
+        final url =
+            MediaUtils.buildMediaUrl(widget.feedState, widget.post.videoFile!);
         if (url == null) {
-          if (mounted) setState(() { _hasError = true; _loading = false; });
+          if (mounted)
+            setState(() {
+              _hasError = true;
+              _loading = false;
+            });
           return;
         }
         final authBloc = context.read<AuthBloc>();
@@ -306,7 +313,11 @@ class _VideoPlayerCardState extends State<_VideoPlayerCard> {
       }
       if (mounted) setState(() => _loading = false);
     } catch (e) {
-      if (mounted) setState(() { _hasError = true; _loading = false; });
+      if (mounted)
+        setState(() {
+          _hasError = true;
+          _loading = false;
+        });
     }
   }
 
@@ -379,8 +390,7 @@ class _VideoPlayerCardState extends State<_VideoPlayerCard> {
                       Icon(Icons.error_outline_rounded,
                           color: Colors.white70, size: 40),
                       SizedBox(height: 8),
-                      Text('视频加载失败',
-                          style: TextStyle(color: Colors.white70)),
+                      Text('视频加载失败', style: TextStyle(color: Colors.white70)),
                     ],
                   ),
                 )
@@ -396,8 +406,8 @@ class _VideoPlayerCardState extends State<_VideoPlayerCard> {
                 bottom: 8,
                 right: 8,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 8, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: Colors.black54,
                     borderRadius: BorderRadius.circular(8),
@@ -491,7 +501,8 @@ class _VideoPlayerScreenState extends State<_VideoPlayerScreen> {
               child: _started
                   ? AspectRatio(
                       aspectRatio: 16 / 9,
-                      child: Video(controller: _controller, controls: NoVideoControls),
+                      child: Video(
+                          controller: _controller, controls: NoVideoControls),
                     )
                   : Container(
                       width: double.infinity,
@@ -570,16 +581,13 @@ class _VideoPlayerScreenState extends State<_VideoPlayerScreen> {
                           value: _duration.inMilliseconds > 0
                               ? _position.inMilliseconds
                                   .toDouble()
-                                  .clamp(
-                                      0,
-                                      _duration.inMilliseconds
-                                          .toDouble())
+                                  .clamp(0, _duration.inMilliseconds.toDouble())
                               : 0,
                           max: _duration.inMilliseconds > 0
                               ? _duration.inMilliseconds.toDouble()
                               : 1,
-                          onChanged: (v) => _player.seek(
-                              Duration(milliseconds: v.toInt())),
+                          onChanged: (v) =>
+                              _player.seek(Duration(milliseconds: v.toInt())),
                         ),
                       ),
                       Row(
@@ -607,8 +615,7 @@ class _VideoPlayerScreenState extends State<_VideoPlayerScreen> {
                           IconButton(
                             onPressed: () async {
                               // 进入横屏（用户主动）
-                              await SystemChrome
-                                  .setPreferredOrientations([
+                              await SystemChrome.setPreferredOrientations([
                                 DeviceOrientation.landscapeLeft,
                                 DeviceOrientation.landscapeRight,
                               ]);
@@ -786,9 +793,26 @@ class _GalleryScreenState extends State<_GalleryScreen> {
     super.initState();
     _currentIndex = widget.initialIndex;
     _pageController = PageController(initialPage: widget.initialIndex);
+    // ★ 进入全屏沉浸式：隐藏状态栏 + 导航栏（Android 关键修复）
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    // 允许横屏 + 竖屏
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
     _loadImage(widget.initialIndex);
     _loadImage(widget.initialIndex - 1);
     _loadImage(widget.initialIndex + 1);
+  }
+
+  @override
+  void dispose() {
+    // 恢复系统 UI（回到详情页时不再沉浸式）
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    _pageController.dispose();
+    super.dispose();
   }
 
   Future<void> _loadImage(int index) async {
@@ -814,8 +838,7 @@ class _GalleryScreenState extends State<_GalleryScreen> {
       final response = await dio.get<List<int>>(
         url,
         options: Options(
-            responseType: ResponseType.bytes,
-            headers: widget.httpHeaders),
+            responseType: ResponseType.bytes, headers: widget.httpHeaders),
       );
       if (!mounted) return;
       if (response.data != null) {
@@ -828,8 +851,7 @@ class _GalleryScreenState extends State<_GalleryScreen> {
         }
         if (_sync != null && cleanFileName.isNotEmpty) {
           try {
-            final localPath =
-                await _sync.getLocalMediaPath(cleanFileName);
+            final localPath = await _sync.getLocalMediaPath(cleanFileName);
             await File(localPath).writeAsBytes(data);
             _sync.localMediaFiles.add(cleanFileName);
           } catch (_) {}
@@ -839,12 +861,6 @@ class _GalleryScreenState extends State<_GalleryScreen> {
             _imageProviders[index] = MemoryImage(Uint8List.fromList(data)));
       }
     } catch (_) {}
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
   }
 
   @override
@@ -905,10 +921,7 @@ class _GalleryScreenState extends State<_GalleryScreen> {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.black.withOpacity(0.6),
-                    Colors.transparent
-                  ],
+                  colors: [Colors.black.withOpacity(0.6), Colors.transparent],
                 ),
               ),
               child: Row(
@@ -917,19 +930,6 @@ class _GalleryScreenState extends State<_GalleryScreen> {
                     onPressed: () => Navigator.pop(context),
                     icon: const Icon(Icons.arrow_back_rounded,
                         color: Colors.white, size: 26),
-                  ),
-                  const Spacer(),
-                  IconButton(
-                    onPressed: () => _showImageInfo(context),
-                    icon: const Icon(Icons.info_outline_rounded,
-                        color: Colors.white, size: 24),
-                    tooltip: '图片信息',
-                  ),
-                  IconButton(
-                    onPressed: () => _showMoreMenu(context),
-                    icon: const Icon(Icons.more_vert_rounded,
-                        color: Colors.white, size: 24),
-                    tooltip: '更多',
                   ),
                 ],
               ),
@@ -944,8 +944,8 @@ class _GalleryScreenState extends State<_GalleryScreen> {
               bottom: MediaQuery.of(context).padding.bottom + 16,
               child: Center(
                 child: Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 14, vertical: 6),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.5),
                     borderRadius: BorderRadius.circular(16),
@@ -965,85 +965,15 @@ class _GalleryScreenState extends State<_GalleryScreen> {
     );
   }
 
-  void _showImageInfo(BuildContext context) {
-    final url = widget.imageUrls[_currentIndex];
-    final fileName = Uri.parse(url).pathSegments.last;
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: const Text('图片信息'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _infoRow('文件名', fileName),
-            const SizedBox(height: 6),
-            _infoRow('位置', '${_currentIndex + 1} / ${widget.imageUrls.length}'),
-            const SizedBox(height: 6),
-            _infoRow('来源', '云端 WebDAV'),
-          ],
-        ),
-        actions: [
-          TextButton(
-              onPressed: () => Navigator.pop(ctx),
-              child: const Text('关闭')),
-        ],
-      ),
-    );
-  }
-
   Widget _infoRow(String label, String value) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(width: 56, child: Text(label)),
-        Expanded(child: Text(value, style: const TextStyle(fontWeight: FontWeight.w500))),
+        Expanded(
+            child: Text(value,
+                style: const TextStyle(fontWeight: FontWeight.w500))),
       ],
-    );
-  }
-
-  /// 图片查看器更多菜单（按 guide.skill 第五节）
-  void _showMoreMenu(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (ctx) => SafeArea(
-        child: Container(
-          margin: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: Theme.of(ctx).colorScheme.surface,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const SizedBox(height: 8),
-              Container(
-                width: 36,
-                height: 4,
-                decoration: BoxDecoration(
-                  color: Theme.of(ctx).colorScheme.outlineVariant,
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-              const SizedBox(height: 8),
-              _menuTile(ctx, Icons.save_alt_rounded, '保存到相册', () {}),
-              _menuTile(ctx, Icons.share_rounded, '分享', () {}),
-              _menuTile(ctx, Icons.label_outline_rounded, '添加标签', () {
-                Navigator.pop(ctx);
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                  content: Text('可在详情页右上角管理标签'),
-                  behavior: SnackBarBehavior.floating,
-                ));
-              }),
-              _menuTile(ctx, Icons.image_outlined, '查看 EXIF', () {}),
-              _menuTile(ctx, Icons.delete_outline_rounded, '删除', () {}),
-              const SizedBox(height: 8),
-            ],
-          ),
-        ),
-      ),
     );
   }
 
@@ -1052,8 +982,7 @@ class _GalleryScreenState extends State<_GalleryScreen> {
     return ListTile(
       leading: Icon(icon),
       title: Text(label),
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(14)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
       onTap: () {
         Navigator.pop(ctx);
         onTap();

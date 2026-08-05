@@ -21,7 +21,7 @@ class AuthLoginEvent extends AuthEvent {
     required this.serverUrl,
     required this.token,
     this.username = '',
-    this.rootPath = '/life-journal',
+    this.rootPath = '/flutter_media_manager',
     this.authMethod = AuthMethod.token,
   });
 

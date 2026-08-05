@@ -5,8 +5,12 @@ import '../../functionality/auth/auth_bloc.dart';
 import '../../models/post.dart';
 
 /// WebDAV 登录页面
+///
+/// [fromProfile] 用于在登录成功后清除整个调用栈（ProfileScreen + LoginScreen）。
+/// 当为 true 时，登录成功后会用 pushAndRemoveUntil 跳到 HomeScreen。
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  final bool fromProfile;
+  const LoginScreen({super.key, this.fromProfile = false});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -18,7 +22,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final _tokenController = TextEditingController();
   final _usernameController = TextEditingController();
   bool _obscureToken = true;
-  // 123pan 等 WebDAV 服务需要 Basic Auth（用户名+密码）
+
+  // webdav
   AuthMethod _authMethod = AuthMethod.basic;
 
   // Web 端自动预填 CORS 代理地址 + 默认账号密码
@@ -26,13 +31,11 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
     if (kIsWeb) {
-      // 支持 URL 参数预填：?proxy=https://xxx/webdav&user=xxx
       final uri = Uri.base;
       final proxyParam = uri.queryParameters['proxy'];
       if (proxyParam != null && proxyParam.isNotEmpty) {
         _serverController.text = proxyParam;
       } else {
-        // 自动检测：如果在远程访问，用当前 host 的 8080 端口
         final host = uri.host;
         if (host == 'localhost' || host == '127.0.0.1') {
           _serverController.text = 'http://localhost:8080/webdav';
@@ -41,7 +44,6 @@ class _LoginScreenState extends State<LoginScreen> {
         }
       }
       _usernameController.text = uri.queryParameters['user'] ?? '17302587963';
-      // token/password 留空，由用户填写
     }
   }
 
@@ -130,6 +132,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 );
               });
             }
+            // 登录成功后：从 ProfileScreen 进入的情况下，清除整个调用栈
+            if (state.status == AuthStatus.authenticated &&
+                widget.fromProfile) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                if (!mounted) return;
+                Navigator.of(context).popUntil((route) => route.isFirst);
+              });
+            }
           },
           builder: (context, state) {
             final isLoading = state.status == AuthStatus.loggingIn;
@@ -164,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             const SizedBox(height: 24),
                             Text(
-                              '生活动态',
+                              '媒体管理',
                               textAlign: TextAlign.center,
                               style: textTheme.headlineMedium?.copyWith(
                                 fontWeight: FontWeight.w800,
@@ -298,9 +308,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               enabled: !isLoading,
                               decoration: InputDecoration(
                                 labelText: '服务器地址',
-                                hintText: kIsWeb
-                                    ? 'http://localhost:8080/webdav'
-                                    : 'https://webdav.123pan.cn/webdav',
                                 prefixIcon: const Icon(Icons.dns_outlined),
                               ),
                               keyboardType: TextInputType.url,

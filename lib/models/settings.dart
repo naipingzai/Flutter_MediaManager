@@ -2,9 +2,7 @@
 enum ThemeMode { system, light, dark }
 
 /// 应用设置
-///
-/// 按 guide.skill 规范：APP 中不存在"缓存"概念
-/// 改用：syncEnabled（数据同步开关）/ syncInterval（同步间隔）
+/// syncEnabled（数据同步开关）/ syncInterval（同步间隔）
 class AppSettings {
   final ThemeMode themeMode;
   final int gridColumns;
@@ -30,7 +28,7 @@ class AppSettings {
     this.syncEnabled = false,
     this.syncInterval = 60,
     this.rawDataEnabled = false,
-    this.nickname = '生活记录者',
+    this.nickname = '媒体管理',
     this.avatarPath = '',
   });
 

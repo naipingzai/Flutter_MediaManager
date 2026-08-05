@@ -12,6 +12,7 @@ import '../../models/settings.dart' show ThemeMode;
 import '../../services/log_service.dart';
 import '../../services/encryption_service.dart';
 import '../log/log_viewer_screen.dart';
+import '../auth/login_screen.dart';
 
 /// 个人中心页面（按 guide.skill 第一节：本地/云端/同步/快照 四大分区）
 class ProfileScreen extends StatefulWidget {
@@ -56,21 +57,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(24, 8, 24, 16),
                       child: GestureDetector(
-                        onTap: () => _editProfile(
-                            context, appState, cs, textTheme),
+                        onTap: () =>
+                            _editProfile(context, appState, cs, textTheme),
                         child: Column(
                           children: [
                             CircleAvatar(
                               radius: 40,
                               backgroundColor: cs.primaryContainer,
-                              child: appState.settings?.avatarPath !=
-                                          null &&
-                                      appState
-                                          .settings!.avatarPath.isNotEmpty
+                              child: appState.settings?.avatarPath != null &&
+                                      appState.settings!.avatarPath.isNotEmpty
                                   ? ClipOval(
                                       child: Image.file(
-                                        File(
-                                            appState.settings!.avatarPath),
+                                        File(appState.settings!.avatarPath),
                                         width: 80,
                                         height: 80,
                                         fit: BoxFit.cover,
@@ -81,12 +79,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       ),
                                     )
                                   : Icon(Icons.person_rounded,
-                                      size: 44,
-                                      color: cs.onPrimaryContainer),
+                                      size: 44, color: cs.onPrimaryContainer),
                             ),
                             const SizedBox(height: 12),
                             Text(
-                              appState.settings?.nickname ?? '生活记录者',
+                              appState.settings?.nickname ?? '媒体管理',
                               style: textTheme.titleLarge?.copyWith(
                                 fontWeight: FontWeight.w700,
                               ),
@@ -114,15 +111,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   SliverToBoxAdapter(
                     child: Padding(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 24),
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
                       child: Card(
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                           side: BorderSide(
-                              color:
-                                  cs.outlineVariant.withOpacity(0.4)),
+                              color: cs.outlineVariant.withOpacity(0.4)),
                         ),
                         clipBehavior: Clip.antiAlias,
                         child: Column(
@@ -153,15 +148,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   // 通用设置区
                   SliverToBoxAdapter(
                     child: Padding(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 24),
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
                       child: Card(
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                           side: BorderSide(
-                              color:
-                                  cs.outlineVariant.withOpacity(0.4)),
+                              color: cs.outlineVariant.withOpacity(0.4)),
                         ),
                         clipBehavior: Clip.antiAlias,
                         child: Column(
@@ -175,8 +168,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) =>
-                                        const LogViewerScreen(),
+                                    builder: (_) => const LogViewerScreen(),
                                   ),
                                 );
                               },
@@ -190,17 +182,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               label: '复制日志',
                               subtitle: '导出日志到剪贴板',
                               onTap: () {
-                                final logService =
-                                    context.read<LogService>();
+                                final logService = context.read<LogService>();
                                 final text = logService.export();
-                                Clipboard.setData(
-                                    ClipboardData(text: text));
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(
+                                Clipboard.setData(ClipboardData(text: text));
+                                ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
                                     content: Text('日志已复制到剪贴板'),
-                                    behavior:
-                                        SnackBarBehavior.floating,
+                                    behavior: SnackBarBehavior.floating,
                                   ),
                                 );
                               },
@@ -220,15 +208,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   // 危险操作
                   SliverToBoxAdapter(
                     child: Padding(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 24),
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
                       child: Card(
                         elevation: 0,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                           side: BorderSide(
-                              color:
-                                  cs.outlineVariant.withOpacity(0.4)),
+                              color: cs.outlineVariant.withOpacity(0.4)),
                         ),
                         clipBehavior: Clip.antiAlias,
                         child: Column(
@@ -264,10 +250,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   /// 编辑个人资料
-  void _editProfile(BuildContext context, AppState appState,
-      ColorScheme cs, TextTheme textTheme) {
-    final nicknameController = TextEditingController(
-        text: appState.settings?.nickname ?? '生活记录者');
+  void _editProfile(BuildContext context, AppState appState, ColorScheme cs,
+      TextTheme textTheme) {
+    final nicknameController =
+        TextEditingController(text: appState.settings?.nickname ?? '媒体管理');
     String avatarPath = appState.settings?.avatarPath ?? '';
 
     showModalBottomSheet(
@@ -347,10 +333,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       onPressed: () async {
                         final settings = appState.settings;
                         if (settings == null) return;
-                        final nickname =
-                            nicknameController.text.trim().isEmpty
-                                ? '生活记录者'
-                                : nicknameController.text.trim();
+                        final nickname = nicknameController.text.trim().isEmpty
+                            ? '媒体管理'
+                            : nicknameController.text.trim();
                         String? avatarFileName;
                         if (avatarPath.isNotEmpty &&
                             avatarPath != settings.avatarPath) {
@@ -405,8 +390,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         icon: Icon(Icons.warning_rounded, size: 48, color: cs.error),
         title: const Text('清除云端数据'),
-        content: const Text(
-            '确定要删除 WebDAV 服务器上所有 APP 数据吗？\n\n'
+        content: const Text('确定要删除 WebDAV 服务器上所有 APP 数据吗？\n\n'
             '包括：\n'
             '• 所有动态（data.json）\n'
             '• 所有媒体文件（图片/视频）\n'
@@ -414,14 +398,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
             '此操作不可恢复！'),
         actions: [
           TextButton(
-              onPressed: () => Navigator.pop(ctx),
-              child: const Text('取消')),
+              onPressed: () => Navigator.pop(ctx), child: const Text('取消')),
           FilledButton(
             style: FilledButton.styleFrom(backgroundColor: cs.error),
             onPressed: () async {
               Navigator.pop(ctx);
-              final webDavService =
-                  context.read<AuthBloc>().webDavService;
+              final webDavService = context.read<AuthBloc>().webDavService;
               if (webDavService != null) {
                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                   content: Text('正在清除数据...'),
@@ -433,9 +415,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     content: Text('云端数据已清除'),
                     behavior: SnackBarBehavior.floating,
                   ));
-                  context
-                      .read<FeedBloc>()
-                      .add(const FeedLoadEvent());
+                  context.read<FeedBloc>().add(const FeedLoadEvent());
                 }
               }
             },
@@ -455,8 +435,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         content: const Text('确定要退出登录吗？'),
         actions: [
           TextButton(
-              onPressed: () => Navigator.pop(ctx),
-              child: const Text('取消')),
+              onPressed: () => Navigator.pop(ctx), child: const Text('取消')),
           FilledButton(
             onPressed: () {
               Navigator.pop(ctx);
@@ -544,15 +523,13 @@ class _LocalDataTileState extends State<_LocalDataTile> {
             ListTile(
               leading: const Icon(Icons.info_outline_rounded),
               title: const Text('本地数据信息'),
-              subtitle: Text(
-                  '${sync.localMediaFiles.length} 个文件 · $_sizeText'),
+              subtitle: Text('${sync.localMediaFiles.length} 个文件 · $_sizeText'),
             ),
             ListTile(
               leading: Icon(Icons.delete_outline_rounded,
                   color: Theme.of(ctx).colorScheme.error),
               title: Text('清除本地数据',
-                  style: TextStyle(
-                      color: Theme.of(ctx).colorScheme.error)),
+                  style: TextStyle(color: Theme.of(ctx).colorScheme.error)),
               subtitle: const Text('删除所有本地存储（不影响云端）'),
               onTap: () async {
                 Navigator.pop(ctx);
@@ -569,8 +546,7 @@ class _LocalDataTileState extends State<_LocalDataTile> {
                           child: const Text('取消')),
                       FilledButton(
                         style: FilledButton.styleFrom(
-                            backgroundColor:
-                                Theme.of(c).colorScheme.error),
+                            backgroundColor: Theme.of(c).colorScheme.error),
                         onPressed: () => Navigator.pop(c, true),
                         child: const Text('清除'),
                       ),
@@ -602,8 +578,7 @@ class _LocalDataTileState extends State<_LocalDataTile> {
 class _CloudDataTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final cs = Theme.of
-(context).colorScheme;
+    final cs = Theme.of(context).colorScheme;
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, authState) {
         final hasCloud = authState.config != null;
@@ -612,9 +587,7 @@ class _CloudDataTile extends StatelessWidget {
               hasCloud ? Icons.cloud_done_rounded : Icons.cloud_off_rounded,
               color: cs.onSurfaceVariant),
           title: const Text('云端数据'),
-          subtitle: Text(hasCloud
-              ? authState.config!.rootUrl
-              : '未配置（本地模式）'),
+          subtitle: Text(hasCloud ? authState.config!.rootUrl : '未配置（本地模式）'),
           trailing: Icon(Icons.chevron_right_rounded,
               size: 20, color: cs.onSurfaceVariant),
           onTap: () {
@@ -646,8 +619,7 @@ class _CloudDataTile extends StatelessWidget {
                       subtitle: Text(authState.config?.rootUrl ?? '未连接'),
                     ),
                     ListTile(
-                      leading:
-                          const Icon(Icons.folder_open_rounded),
+                      leading: const Icon(Icons.folder_open_rounded),
                       title: const Text('存储路径'),
                       subtitle: Text(authState.config?.rootPath ?? '-'),
                     ),
@@ -677,50 +649,76 @@ class _SyncTileState extends State<_SyncTile> {
     final appBloc = context.read<AppBloc>();
     final enabled = sync.enabled;
 
-    String subtitle = '关闭';
-    if (enabled) {
-      switch (sync.syncStatus) {
-        case SyncStatus.syncing:
-          subtitle =
-              '同步中 ${sync.syncedCount}/${sync.totalToSync}';
-          break;
-        case SyncStatus.success:
-          subtitle = '已同步';
-          break;
-        case SyncStatus.failed:
-          subtitle = '同步出错';
-          break;
-        case SyncStatus.idle:
-          subtitle = '已开启';
-          break;
-      }
-    }
-
-    return ListTile(
-      leading: Icon(
-        enabled
-            ? Icons.cloud_sync_rounded
-            : Icons.cloud_off_outlined,
-        color: cs.onSurfaceVariant,
-      ),
-      title: const Text('数据同步'),
-      subtitle: Text(subtitle),
-      trailing: Switch(
-        value: enabled,
-        onChanged: (value) {
-          final settings = appBloc.state.settings;
-          if (settings == null) return;
-          appBloc.add(AppSettingsUpdatedEvent(
-              settings.copyWith(syncEnabled: value)));
-          sync.setEnabled(value);
-          if (value) {
-            sync.init();
-            // 触发一次推送
-            context.read<FeedBloc>().performManualSync();
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, authState) {
+        String subtitle = '关闭';
+        if (enabled) {
+          switch (sync.syncStatus) {
+            case SyncStatus.syncing:
+              subtitle = '同步中 ${sync.syncedCount}/${sync.totalToSync}';
+              break;
+            case SyncStatus.success:
+              subtitle = '已同步';
+              break;
+            case SyncStatus.failed:
+              subtitle = '同步出错';
+              break;
+            case SyncStatus.idle:
+              subtitle = '已开启';
+              break;
           }
-          setState(() {});
-        },
-      ),
+        } else if (authState.status == AuthStatus.unauthenticated) {
+          subtitle = '请先配置 WebDAV';
+        }
+
+        return ListTile(
+          leading: Icon(
+            enabled ? Icons.cloud_sync_rounded : Icons.cloud_off_outlined,
+            color: cs.onSurfaceVariant,
+          ),
+          title: const Text('数据同步'),
+          subtitle: Text(subtitle),
+          trailing: Switch(
+            value: enabled,
+            onChanged: (value) {
+              // 未连接 WebDAV：提示去配置云端数据，不强制跳登录
+              if (authState.status != AuthStatus.authenticated) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('请先在「云端数据」中配置 WebDAV 服务器'),
+                    behavior: SnackBarBehavior.floating,
+                  ),
+                );
+                return;
+              }
+              // 已连接：直接切换同步
+              final settings = appBloc.state.settings;
+              if (settings == null) return;
+              appBloc.add(AppSettingsUpdatedEvent(
+                  settings.copyWith(syncEnabled: value)));
+              sync.setEnabled(value);
+              if (value) {
+                sync.init();
+                context.read<FeedBloc>().performManualSync(
+                      nickname: settings.nickname,
+                      avatarPath: settings.avatarPath,
+                    );
+              }
+              setState(() {});
+            },
+          ),
+        );
+      },
+    );
+  }
+
+  /// 跳转到 WebDAV 登录页（保留当前页面，用户可返回）
+  ///
+  /// 传入 fromProfile: true，登录成功后会清除整个调用栈，跳到 HomeScreen。
+  void _navigateToLogin(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const LoginScreen(fromProfile: true)),
     );
   }
 }
@@ -771,8 +769,7 @@ class _SnapshotTileState extends State<_SnapshotTile> {
                           style: Theme.of(ctx)
                               .textTheme
                               .titleMedium
-                              ?.copyWith(
-                                  fontWeight: FontWeight.w600)),
+                              ?.copyWith(fontWeight: FontWeight.w600)),
                       const Spacer(),
                       IconButton(
                         onPressed: () async {
@@ -813,8 +810,7 @@ class _SnapshotTileState extends State<_SnapshotTile> {
                         return ListView.separated(
                           controller: scroll,
                           itemCount: list.length,
-                          separatorBuilder: (_, __) =>
-                              const Divider(height: 1),
+                          separatorBuilder: (_, __) => const Divider(height: 1),
                           itemBuilder: (_, i) {
                             final s = list[i];
                             return ListTile(

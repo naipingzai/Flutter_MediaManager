@@ -16,11 +16,11 @@ import 'ui/auth/login_screen.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   MediaKit.ensureInitialized();
-  runApp(const LifeApp());
+  runApp(const FlutterMediaManager());
 }
 
-class LifeApp extends StatelessWidget {
-  const LifeApp({super.key});
+class FlutterMediaManager extends StatelessWidget {
+  const FlutterMediaManager({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +68,7 @@ class LifeApp extends StatelessWidget {
 
               // WebDAV 连接（仅认证后）
               if ((authState.status == AuthStatus.authenticated ||
-                  authState.status == AuthStatus.local) &&
+                      authState.status == AuthStatus.local) &&
                   webDavService != null) {
                 final appBloc = context.read<AppBloc>();
                 appBloc.setWebDavService(webDavService);
@@ -112,7 +112,10 @@ class LifeApp extends StatelessWidget {
               return DynamicColorBuilder(
                 builder: (lightDynamic, darkDynamic) {
                   return MaterialApp(
-                    title: '生活动态',
+                    // 使用 key 让 Navigator 在 authState.status 变化时重建，
+                    // 从而彻底清理 Navigator 栈中残留的 LoginScreen / ProfileScreen
+                    key: ValueKey('app-${authState.status}'),
+                    title: '媒体管理',
                     debugShowCheckedModeBanner: false,
                     theme: _buildLightTheme(lightDynamic),
                     darkTheme: _buildDarkTheme(darkDynamic),
@@ -133,13 +136,14 @@ class LifeApp extends StatelessWidget {
       case AuthStatus.initial:
       case AuthStatus.checking:
         return const _SplashScreen();
+      // 本地为先：未连接 WebDAV 也能正常进入 HomeScreen。
+      //   WebDAV 仅是数据同步模块，不决定主页面。
       case AuthStatus.authenticated:
       case AuthStatus.local:
-        return const HomeScreen();
       case AuthStatus.unauthenticated:
-      case AuthStatus.error:
       case AuthStatus.loggingIn:
-        return const LoginScreen();
+      case AuthStatus.error:
+        return const HomeScreen();
     }
   }
 
@@ -241,8 +245,8 @@ class LifeApp extends StatelessWidget {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
-          borderSide: BorderSide(
-              color: colorScheme.outlineVariant.withOpacity(0.5)),
+          borderSide:
+              BorderSide(color: colorScheme.outlineVariant.withOpacity(0.5)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
@@ -356,8 +360,8 @@ class LifeApp extends StatelessWidget {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
-          borderSide: BorderSide(
-              color: colorScheme.outlineVariant.withOpacity(0.5)),
+          borderSide:
+              BorderSide(color: colorScheme.outlineVariant.withOpacity(0.5)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
@@ -404,7 +408,7 @@ class _SplashScreen extends StatelessWidget {
             Icon(Icons.auto_awesome_rounded, size: 64, color: cs.primary),
             const SizedBox(height: 24),
             Text(
-              '生活动态',
+              '媒体管理',
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                     fontWeight: FontWeight.w800,
                   ),

@@ -53,7 +53,10 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
   }
 
   /// 手动触发一次同步推送
-  Future<bool> performManualSync() async {
+  ///
+  /// 同时同步用户资料（昵称 + 头像）到云端 profile.json。
+  /// 如果本地没有头像，会生成默认头像并上传。
+  Future<bool> performManualSync({String? nickname, String? avatarPath}) async {
     if (_syncService == null || _webDavService == null) return false;
     if (_journalData == null) return false;
     final ok = await _syncService!.pushToCloud(
@@ -62,6 +65,12 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
       saveDataFn: (data) => _webDavService!.saveJournalData(data),
       mediaBaseUrl: _webDavService!.config.mediaUrl,
       data: _journalData!,
+      saveProfileFn: () async {
+        await _webDavService!.saveUserProfileWithDefaults(
+          nickname: nickname ?? '媒体管理',
+          localAvatarPath: avatarPath ?? '',
+        );
+      },
     );
     if (ok) {
       await _syncService!.createSnapshot(_journalData!);
@@ -457,8 +466,25 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
         detail: 'postId=${event.postId}', source: 'Feed');
     try {
       emit(state.copyWith(status: FeedStatus.syncing));
-      final post =
-          _journalData!.posts.firstWhere((p) => p.id == event.postId);
+      // ★ 用 firstOrNull 替代 firstWhere，避免重复删除时抛 StateError
+      final post = _journalData!
+          .posts.where((p) => p.id == event.postId)
+          .firstOrNull;
+
+      if (post == null) {
+        _logService?.warn('删除帖子失败：未找到帖子',
+            detail: 'postId=' + event.postId, source: 'Feed');
+        // 即使未找到也刷新一次（幂等）
+        final sorted = _applySort(_journalData!.posts, state.sortMode);
+        emit(state.copyWith(
+          status: FeedStatus.loaded,
+          posts: sorted,
+          filteredPosts: _applyAllFilters(
+              sorted, state.searchKeyword, state.selectedTag,
+              startDate: state.filterStartDate, endDate: state.filterEndDate),
+        ));
+        return;
+      }
 
       if (_syncService != null) {
         for (final fileName in post.mediaFiles) {

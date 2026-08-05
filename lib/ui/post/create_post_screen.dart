@@ -106,7 +106,11 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
   Future<void> _publish() async {
     final content = _contentController.text.trim();
-    if (content.isEmpty && _imagePaths.isEmpty && _existingMediaFiles.isEmpty && _videoPath == null && _existingVideoFile == null) {
+    if (content.isEmpty &&
+        _imagePaths.isEmpty &&
+        _existingMediaFiles.isEmpty &&
+        _videoPath == null &&
+        _existingVideoFile == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('请输入内容或添加图片')),
       );
@@ -173,12 +177,15 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
       body: BlocConsumer<FeedBloc, FeedState>(
         listenWhen: (prev, curr) {
           // 只在发布完成后或出错时触发
-          if (curr.status == FeedStatus.loaded && curr.uploadProgress >= 1.0) return true;
+          if (curr.status == FeedStatus.loaded && curr.uploadProgress >= 1.0)
+            return true;
           if (curr.status == FeedStatus.error) return true;
           return false;
         },
         listener: (context, state) {
-          if (_isPublishing && state.status == FeedStatus.loaded && state.uploadProgress >= 1.0) {
+          if (_isPublishing &&
+              state.status == FeedStatus.loaded &&
+              state.uploadProgress >= 1.0) {
             _isPublishing = false;
             if (mounted && Navigator.of(context).canPop()) {
               Navigator.of(context).pop(true);
@@ -254,7 +261,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                             height: 120,
                             width: double.infinity,
                             decoration: BoxDecoration(
-                              color: cs.surfaceContainerHighest.withOpacity(0.3),
+                              color:
+                                  cs.surfaceContainerHighest.withOpacity(0.3),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Center(
@@ -303,7 +311,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                             height: 120,
                             width: double.infinity,
                             decoration: BoxDecoration(
-                              color: cs.surfaceContainerHighest.withOpacity(0.3),
+                              color:
+                                  cs.surfaceContainerHighest.withOpacity(0.3),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Center(
@@ -316,7 +325,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                               top: 4,
                               right: 4,
                               child: GestureDetector(
-                                onTap: () => setState(() => _existingVideoFile = null),
+                                onTap: () =>
+                                    setState(() => _existingVideoFile = null),
                                 child: Container(
                                   padding: const EdgeInsets.all(3),
                                   decoration: BoxDecoration(
@@ -406,8 +416,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                     const SizedBox(height: 4),
                     Text(
                       '在文字中输入 #标签名 自动识别，如：今天天气真好 #日常 #天气',
-                      style: textTheme.bodySmall?.copyWith(
-                          color: cs.onSurfaceVariant),
+                      style: textTheme.bodySmall
+                          ?.copyWith(color: cs.onSurfaceVariant),
                     ),
                     const SizedBox(height: 8),
                     if (_tags.isNotEmpty)
@@ -536,7 +546,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: MediaUtils.buildImage(
-                fileName: _existingMediaFiles[index],
+                  fileName: _existingMediaFiles[index],
                   imageUrl: imageUrl,
                   width: double.infinity,
                   height: double.infinity,

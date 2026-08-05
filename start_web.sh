@@ -1,5 +1,5 @@
 #!/bin/bash
-# 生活动态 - Web 一键启动脚本
+# 媒体管理 - Web 一键启动脚本
 # 用法: ./start_web.sh [stop|status|tunnel]
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"

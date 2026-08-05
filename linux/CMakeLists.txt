@@ -7,7 +7,7 @@ project(runner LANGUAGES CXX)
 set(BINARY_NAME "flutter_media_manager")
 # The unique GTK application identifier for this application. See:
 # https://wiki.gnome.org/HowDoI/ChooseApplicationID
-set(APPLICATION_ID "com.fluttermediamanager.flutter_media_manager")
+set(APPLICATION_ID "com.naipingzai.flutter_media_manager")
 
 # Explicitly opt in to modern CMake behaviors to avoid warnings with recent
 # versions of CMake.
@@ -106,10 +106,16 @@ foreach(bundled_library ${PLUGIN_BUNDLED_LIBRARIES})
 endforeach(bundled_library)
 
 # Copy the native assets provided by the build.dart from all packages.
+# Only install if the directory exists (it may not be present in older Flutter versions or without native asset plugins).
 set(NATIVE_ASSETS_DIR "${PROJECT_BUILD_DIR}native_assets/linux/")
-install(DIRECTORY "${NATIVE_ASSETS_DIR}"
-   DESTINATION "${INSTALL_BUNDLE_LIB_DIR}"
-   COMPONENT Runtime)
+install(CODE "
+  if(EXISTS \"${NATIVE_ASSETS_DIR}\")
+    file(GLOB NATIVE_ASSETS_CONTENTS \"\${NATIVE_ASSETS_DIR}/*\")
+    if(NATIVE_ASSETS_CONTENTS)
+      execute_process(COMMAND ${CMAKE_COMMAND} -E copy_directory \"${NATIVE_ASSETS_DIR}\" \"${INSTALL_BUNDLE_LIB_DIR}\")
+    endif()
+  endif()
+  " COMPONENT Runtime)
 
 # Fully re-copy the assets directory on each build to avoid having stale files
 # from a previous install.
