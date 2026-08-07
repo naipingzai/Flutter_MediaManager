@@ -45,53 +45,46 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     try {
       var settings = await _settingsService.getSettings();
 
-      // 尝试从 SyncService 加载用户资料（SyncService 代理 WebDAV）
-      if (_syncService != null && _syncService!.hasCloudConnection) {
+      // 从 SyncService 读取用户资料（资料存储在 data.json）
+      if (_syncService != null) {
         try {
-          final profile = await _syncService!.loadUserProfile();
-          if (profile != null) {
-            settings = settings.copyWith(
-              nickname: profile['nickname'] as String? ?? settings.nickname,
-            );
+          final profile = await _syncService!.getUserProfile();
+          final nickname = profile['nickname'] ?? settings.nickname;
+          final avatarFileName = profile['avatarFileName'] ?? '';
+          if (nickname != settings.nickname || avatarFileName.isNotEmpty) {
+            settings = settings.copyWith(nickname: nickname);
             await _settingsService.saveSettings(settings);
-            _logService?.success('云端用户资料已加载', source: 'App');
-
-            // 下载头像到本地
-            final avatarFileName = profile['avatarFileName'] as String?;
-            if (avatarFileName != null && avatarFileName.isNotEmpty) {
-              try {
-                final avatarUrl = _syncService!.getMediaUrl(avatarFileName);
-                if (avatarUrl != null) {
-                  final dio = Dio();
-                  final response = await dio.get<List<int>>(
-                    avatarUrl,
-                    options: Options(
-                      responseType: ResponseType.bytes,
-                      headers: _syncService!.imageHeaders,
-                    ),
+          }
+          // 下载头像
+          if (avatarFileName.isNotEmpty) {
+            try {
+              final avatarUrl = _syncService!.getMediaUrl(avatarFileName);
+              if (avatarUrl != null) {
+                final dio = Dio();
+                final response = await dio.get<List<int>>(
+                  avatarUrl,
+                  options: Options(
+                    responseType: ResponseType.bytes,
+                    headers: _syncService!.imageHeaders,
+                  ),
+                );
+                if (response.data != null) {
+                  final appDir = await getApplicationDocumentsDirectory();
+                  final localAvatarPath = '${appDir.path}/$avatarFileName';
+                  await File(localAvatarPath).writeAsBytes(
+                    Uint8List.fromList(response.data!),
                   );
-                  if (response.data != null) {
-                    final appDir = await getApplicationDocumentsDirectory();
-                    final localAvatarPath = '${appDir.path}/$avatarFileName';
-                    await File(localAvatarPath).writeAsBytes(
-                      Uint8List.fromList(response.data!),
-                    );
-                    final updatedSettings = settings.copyWith(
-                      avatarPath: localAvatarPath,
-                    );
-                    await _settingsService.saveSettings(updatedSettings);
-                    emit(state.copyWith(settings: updatedSettings));
-                    _logService?.success('头像已下载到本地',
-                        detail: localAvatarPath, source: 'App');
-                  }
+                  settings = settings.copyWith(avatarPath: localAvatarPath);
+                  await _settingsService.saveSettings(settings);
+                  _logService?.success('头像已下载', source: 'App');
                 }
-              } catch (e) {
-                _logService?.warn('头像下载失败', detail: e.toString(), source: 'App');
               }
+            } catch (e) {
+              _logService?.warn('头像下载失败', detail: e.toString(), source: 'App');
             }
           }
         } catch (e) {
-          _logService?.warn('加载云端用户资料失败', detail: e.toString(), source: 'App');
+          _logService?.warn('读取用户资料失败', detail: e.toString(), source: 'App');
         }
       }
 

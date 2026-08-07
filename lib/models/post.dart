@@ -125,18 +125,27 @@ class SyncMeta {
   }
 }
 
-/// WebDAV 数据库文件格式
+/// 本地数据库文件格式（data.json）
+///
+/// 包含：版本号、最后修改时间、动态列表、用户资料、同步元数据。
+/// 用户资料（昵称/头像）与动态数据统一存储、统一同步。
 class JournalData {
   final int version;
   final DateTime lastModified;
   final List<Post> posts;
   final SyncMeta? syncMeta;
 
+  /// 用户资料（昵称/头像文件名），随 data.json 一起同步
+  final String nickname;
+  final String avatarFileName;
+
   const JournalData({
     this.version = 1,
     required this.lastModified,
     required this.posts,
     this.syncMeta,
+    this.nickname = '媒体管理',
+    this.avatarFileName = '',
   });
 
   Map<String, dynamic> toJson() {
@@ -144,6 +153,8 @@ class JournalData {
       'version': version,
       'lastModified': lastModified.toUtc().toIso8601String(),
       'posts': posts.map((p) => p.toJson()).toList(),
+      'nickname': nickname,
+      'avatarFileName': avatarFileName,
       if (syncMeta != null) 'syncMeta': syncMeta!.toJson(),
     };
   }
@@ -159,6 +170,8 @@ class JournalData {
       syncMeta: json['syncMeta'] != null
           ? SyncMeta.fromJson(json['syncMeta'] as Map<String, dynamic>)
           : null,
+      nickname: json['nickname'] as String? ?? '媒体管理',
+      avatarFileName: json['avatarFileName'] as String? ?? '',
     );
   }
 
@@ -168,22 +181,42 @@ class JournalData {
       lastModified: DateTime.now().toUtc(),
       posts: [],
       syncMeta: SyncMeta.initial(),
+      nickname: '媒体管理',
+      avatarFileName: '',
     );
   }
 
-  /// 创建带新同步元数据的副本（每次保存时调用）
+  /// 创建带新同步元数据的副本
   JournalData withNewSync({String deviceId = ''}) {
     final currentEdit = syncMeta?.editCount ?? 0;
     return JournalData(
       version: version,
       lastModified: DateTime.now().toUtc(),
       posts: posts,
+      nickname: nickname,
+      avatarFileName: avatarFileName,
       syncMeta: SyncMeta(
         syncId: DateTime.now().millisecondsSinceEpoch.toString(),
         lastSyncTime: DateTime.now().toUtc(),
         deviceId: deviceId,
         editCount: currentEdit + 1,
       ),
+    );
+  }
+
+  /// 更新用户资料
+  JournalData copyWith({
+    String? nickname,
+    String? avatarFileName,
+    List<Post>? posts,
+  }) {
+    return JournalData(
+      version: version,
+      lastModified: DateTime.now().toUtc(),
+      posts: posts ?? this.posts,
+      syncMeta: syncMeta,
+      nickname: nickname ?? this.nickname,
+      avatarFileName: avatarFileName ?? this.avatarFileName,
     );
   }
 }

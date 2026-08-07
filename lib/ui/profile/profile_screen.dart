@@ -336,18 +336,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         final nickname = nicknameController.text.trim().isEmpty
                             ? '媒体管理'
                             : nicknameController.text.trim();
-                        String? avatarFileName;
-                        if (avatarPath.isNotEmpty &&
-                            avatarPath != settings.avatarPath) {
-                          // avatarFileName 将通过 SyncService 上传
-                        }
                         final syncService = context.read<SyncService>();
-                        if (syncService.hasCloudConnection) {
-                          await syncService.saveUserProfile(
-                            nickname: nickname,
-                            localAvatarPath: avatarPath,
-                          );
+                        String avatarFileName = '';
+                        if (avatarPath.isNotEmpty) {
+                          if (syncService.hasCloudConnection) {
+                            avatarFileName = await syncService.uploadAvatar(avatarPath) ?? '';
+                          }
                         }
+                        // 读取当前本地资料的 avatarFileName
+                        final currentProfile = await syncService.getUserProfile();
+                        final savedAvatarFileName = avatarFileName.isNotEmpty
+                            ? avatarFileName
+                            : currentProfile['avatarFileName'] ?? '';
+                        await syncService.saveUserProfileLocal(
+                          nickname: nickname,
+                          avatarFileName: savedAvatarFileName,
+                        );
                         final newSettings = settings.copyWith(
                           nickname: nickname,
                           avatarPath: avatarPath,

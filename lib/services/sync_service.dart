@@ -617,17 +617,26 @@ class SyncService {
   }
 
   JournalData _mergeData(JournalData? local, JournalData remote) {
-    if (local == null) return remote;
+    if (local == null) {
+      return remote;
+    }
     final remoteIds = remote.posts.map((p) => p.id).toSet();
     final localOnly =
         local.posts.where((p) => !remoteIds.contains(p.id)).toList();
     final merged = <Post>[...remote.posts, ...localOnly];
     merged.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+
+    // 用户资料：优先保留本地（避免云端旧数据覆盖本地新数据）
+    final mergedNickname = local.nickname.isNotEmpty ? local.nickname : remote.nickname;
+    final mergedAvatar = local.avatarFileName.isNotEmpty ? local.avatarFileName : remote.avatarFileName;
+
     return JournalData(
       version: 1,
       lastModified: DateTime.now().toUtc(),
       posts: merged,
       syncMeta: remote.syncMeta,
+      nickname: mergedNickname,
+      avatarFileName: mergedAvatar,
     );
   }
 
@@ -879,5 +888,43 @@ class SyncService {
   void stopBackgroundTimer() {
     _backgroundTimer?.cancel();
     _backgroundTimer = null;
+  }
+
+  // ─── 用户资料管理（纳入 data.json 统一同步）───
+
+  /// 读取本地用户资料
+  Future<Map<String, String>> getUserProfile() async {
+    final data = await loadLocalData();
+    if (data == null) return {'nickname': '媒体管理', 'avatarFileName': ''};
+    return {
+      'nickname': data.nickname,
+      'avatarFileName': data.avatarFileName,
+    };
+  }
+
+  /// 保存用户资料到本地 data.json
+  Future<void> saveUserProfileLocal({
+    required String nickname,
+    required String avatarFileName,
+  }) async {
+    var data = await loadLocalData();
+    data ??= JournalData.empty();
+    data = data.copyWith(
+      nickname: nickname,
+      avatarFileName: avatarFileName,
+    );
+    await saveLocalData(data);
+    _logService?.info('用户资料已保存', detail: 'nickname=$nickname', source: 'Sync');
+  }
+
+  /// 上传头像文件到云端，返回文件名
+  Future<String?> uploadAvatar(String localPath) async {
+    if (_webDavService == null) return null;
+    try {
+      return await _webDavService!.uploadAvatar(localPath);
+    } catch (e) {
+      _logService?.warn('上传头像失败', detail: e.toString(), source: 'Sync');
+      return null;
+    }
   }
 }
