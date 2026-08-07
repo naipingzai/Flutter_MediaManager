@@ -1,4 +1,6 @@
 import 'dart:io' show File;
+import 'dart:typed_data';
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Image;
 import 'package:flutter/widgets.dart';
@@ -9,8 +11,7 @@ import '../services/sync_service.dart';
 /// 媒体文件工具类
 ///
 /// **设计原则**：本地数据是基础，WebDAV 同步是可选增强功能。
-/// UI 层 **只加载本地文件**，云端数据由 `SyncService` 拉取/同步后写入本地。
-/// 旧 API（接受 `FeedState` 等）保留以兼容旧调用，但功能已弱化（仅是工具）。
+/// UI 层优先加载本地文件；本地不存在时 **按需从 WebDAV 下载** 并缓存。
 class MediaUtils {
   static SyncService? syncService;
 
@@ -27,13 +28,16 @@ class MediaUtils {
     return buildMediaUrl(state, mediaFiles.first);
   }
 
-  /// 构建图片 Widget（**只加载本地文件**）
+  /// 构建图片 Widget
   ///
-  /// - 本地有 → 直接用 `Image.file` 显示（iOS 兼容性最好）
-  /// - 本地没有 → 显示占位图标
+  /// **加载策略**：
+  /// 1. 本地有 → 直接用 `Image.file` 显示
+  /// 2. 本地没有 → 从 WebDAV 按需下载（如果提供了 imageUrl + httpHeaders）
+  /// 3. 下载失败 → 显示占位图标
   ///
-  /// **重要**：不再使用 `ExtendedImage.memory(bytes)`，因为 iOS 上 bytes 模式经常
-  /// 因沙箱权限/Provider 注册问题加载失败；`Image.file` 是 Flutter 官方跨平台稳定方案。
+  /// **为什么保留 imageUrl / httpHeaders / encryption？**
+  /// iOS 端首次打开时本地可能没有媒体文件（尚未同步），
+  /// 如果不传远程 URL，图片会一直显示占位符。
   static Widget buildImage({
     required String fileName,
     required double width,
@@ -41,7 +45,6 @@ class MediaUtils {
     BoxFit fit = BoxFit.cover,
     BorderRadius? borderRadius,
     VoidCallback? onTap,
-    // 兼容旧签名的可选参数（已忽略，因为不读远程）
     String? imageUrl,
     Map<String, String>? httpHeaders,
     EncryptionService? encryption,
@@ -49,24 +52,16 @@ class MediaUtils {
     if (syncService == null) {
       return _placeholder(width, height);
     }
-    return FutureBuilder<String>(
-      future: syncService!.getLocalMediaPath(fileName),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState != ConnectionState.done) {
-          return _loadingPlaceholder(width, height);
-        }
-        if (snapshot.hasError || !snapshot.hasData) {
-          return _placeholder(width, height);
-        }
-        return _LocalImage(
-          filePath: snapshot.data!,
-          width: width,
-          height: height,
-          fit: fit,
-          borderRadius: borderRadius,
-          onTap: onTap,
-        );
-      },
+    return _LoadableImage(
+      fileName: fileName,
+      width: width,
+      height: height,
+      fit: fit,
+      borderRadius: borderRadius,
+      onTap: onTap,
+      imageUrl: imageUrl,
+      httpHeaders: httpHeaders ?? {},
+      encryption: encryption,
     );
   }
 
@@ -76,7 +71,6 @@ class MediaUtils {
     required double screenWidth,
     BoxFit fit = BoxFit.fitWidth,
     BorderRadius? borderRadius,
-    // 兼容旧签名的可选参数
     String? imageUrl,
     Map<String, String>? httpHeaders,
     EncryptionService? encryption,
@@ -87,6 +81,9 @@ class MediaUtils {
       height: null,
       fit: fit,
       borderRadius: borderRadius,
+      imageUrl: imageUrl,
+      httpHeaders: httpHeaders,
+      encryption: encryption,
     );
   }
 
@@ -116,81 +113,130 @@ class MediaUtils {
   }
 }
 
-/// 本地图片加载 Widget（iOS 兼容版本）
+/// 可加载本地/远程图片的 Widget
 ///
-/// **关键修复**：
-/// - 之前用 `ExtendedImage.memory(bytes)` 在 iOS 上经常因沙箱权限/Provider
-///   注册问题加载失败，导致图片不显示。
-/// - 现在改用 `Image.file(File(path))`，这是 Flutter 官方跨平台最稳定的
-///   本地文件加载方案，iOS/Android/Desktop 都完全一致。
-/// - 同时支持 `onTap` 回调，避免 GestureDetector 包裹后吃掉 tap 事件。
-class _LocalImage extends StatefulWidget {
-  final String filePath;
+/// **加载策略**：
+/// 1. 检查本地文件是否存在
+/// 2. 本地存在 → 直接 `Image.file`
+/// 3. 本地不存在但有远程 URL → 按需下载 → 缓存到本地 → 显示
+/// 4. 都没有 → 显示占位符
+class _LoadableImage extends StatefulWidget {
+  final String fileName;
   final double width;
   final double? height;
   final BoxFit fit;
   final BorderRadius? borderRadius;
   final VoidCallback? onTap;
+  final String? imageUrl;
+  final Map<String, String> httpHeaders;
+  final EncryptionService? encryption;
 
-  const _LocalImage({
-    required this.filePath,
+  const _LoadableImage({
+    required this.fileName,
     required this.width,
     this.height,
     this.fit = BoxFit.cover,
     this.borderRadius,
     this.onTap,
+    this.imageUrl,
+    this.httpHeaders = const {},
+    this.encryption,
   });
 
   @override
-  State<_LocalImage> createState() => _LocalImageState();
+  State<_LoadableImage> createState() => _LoadableImageState();
 }
 
-class _LocalImageState extends State<_LocalImage> {
-  bool _exists = true;
+class _LoadableImageState extends State<_LoadableImage> {
+  Uint8List? _bytes;
+  bool _loading = true;
+  bool _error = false;
 
   @override
   void initState() {
     super.initState();
-    _checkFile();
+    _load();
   }
 
-  Future<void> _checkFile() async {
+  Future<void> _load() async {
+    final sync = MediaUtils.syncService;
+    if (sync == null) {
+      if (!mounted) return;
+      setState(() { _loading = false; _error = true; });
+      return;
+    }
+
     try {
-      final exists = await File(widget.filePath).exists();
-      if (!mounted) return;
-      if (!exists) {
-        setState(() => _exists = false);
+      final localPath = await sync.getLocalMediaPath(widget.fileName);
+      final file = File(localPath);
+
+      // 1. 本地有文件
+      if (await file.exists()) {
+        final bytes = await file.readAsBytes();
+        if (!mounted) return;
+        setState(() { _bytes = bytes; _loading = false; });
+        return;
       }
-    } catch (_) {
+
+      // 2. 本地没有，尝试从 WebDAV 按需下载
+      if (widget.imageUrl != null && widget.imageUrl!.isNotEmpty) {
+        final dio = Dio();
+        final response = await dio.get<List<int>>(
+          widget.imageUrl!,
+          options: Options(
+            responseType: ResponseType.bytes,
+            headers: widget.httpHeaders,
+          ),
+        );
+        if (!mounted) return;
+        if (response.data != null) {
+          var data = Uint8List.fromList(response.data!);
+          // 解密
+          if (widget.encryption != null &&
+              widget.encryption!.isEncryptionEnabled) {
+            data = widget.encryption!.decryptBytes(data);
+          }
+          // 缓存到本地
+          try {
+            await file.writeAsBytes(data);
+            sync.localMediaFiles.add(widget.fileName);
+          } catch (_) {}
+          if (!mounted) return;
+          setState(() { _bytes = data; _loading = false; });
+          return;
+        }
+      }
+
+      // 3. 都没有
       if (!mounted) return;
-      setState(() => _exists = false);
+      setState(() { _loading = false; _error = true; });
+    } catch (e) {
+      if (!mounted) return;
+      setState(() { _loading = false; _error = true; });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    if (!_exists) {
+    if (_loading) {
+      return MediaUtils._loadingPlaceholder(widget.width, widget.height);
+    }
+
+    if (_error || _bytes == null) {
       return MediaUtils._placeholder(widget.width, widget.height);
     }
 
-    // ★ iOS 兼容：直接使用 Image.file，让 Flutter 内置的 ImageProvider 处理 iOS 沙箱。
-    Widget image = Image.file(
-      File(widget.filePath),
+    // ★ iOS 兼容：使用 Image.memory（bytes）而不是 Image.file。
+    //   原因：按需下载的文件写入后，iOS 的 Image.file 可能因 sandbox 延迟
+    //   而无法立即读取；Image.memory 直接使用已下载的 bytes，最可靠。
+    Widget image = Image.memory(
+      _bytes!,
       width: widget.width,
       height: widget.height,
       fit: widget.fit,
       gaplessPlayback: true,
       errorBuilder: (_, __, ___) =>
           MediaUtils._placeholder(widget.width, widget.height),
-      frameBuilder: (context, child, frame, wasSyncLoaded) {
-        if (wasSyncLoaded) return child;
-        return AnimatedSwitcher(
-          duration: const Duration(milliseconds: 200),
-          child: frame == null
-              ? MediaUtils._loadingPlaceholder(widget.width, widget.height)
-              : child,
-        );
-      },
     );
 
     if (widget.borderRadius != null) {

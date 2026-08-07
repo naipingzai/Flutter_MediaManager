@@ -36,10 +36,17 @@ class _FlutterMediaManagerState extends State<FlutterMediaManager> {
   bool _initialized = false;
   AuthStatus? _lastStatus;
 
-  /// 初始化所有服务（在认证后调用一次）
+  /// ★ 关键修复：初始化所有基础服务（无论是否有 WebDAV）
+  ///
+  /// 之前条件 `webDavService != null` 导致本地模式（无 WebDAV）时
+  /// MediaUtils.syncService / feedBloc._syncService 永远为 null，
+  /// 本地发布文件不保存、查看时图片空白。
+  /// 现在分为两步：
+  /// 1. 基础服务注入（SyncService、LogService、MediaUtils）— 无条件执行
+  /// 2. WebDAV 相关注入（加密、后台同步）— 仅在有 WebDAV 时执行
   void _initializeServices(
     BuildContext context,
-    WebDavService webDavService,
+    WebDavService? webDavService, // ★ 允许 null（本地模式）
     AppState appState,
   ) {
     final syncService = context.read<SyncService>();
@@ -47,25 +54,11 @@ class _FlutterMediaManagerState extends State<FlutterMediaManager> {
     final appBloc = context.read<AppBloc>();
     final feedBloc = context.read<FeedBloc>();
 
-    // 注入服务引用
+    // ── 第 1 步：基础服务注入（本地发布必须的） ──
     syncService.setLogService(logService);
     MediaUtils.syncService = syncService;
-    appBloc.setWebDavService(webDavService);
-    syncService.setEncryption(webDavService.encryption);
-    feedBloc.setWebDavService(webDavService);
     feedBloc.setSyncService(syncService);
     feedBloc.setLogService(logService);
-
-    // 应用用户设置
-    final settings = appState.settings;
-    final syncEnabled = settings?.syncEnabled ?? true;
-    final syncInterval = settings?.syncInterval ?? 60;
-    syncService.setEnabled(syncEnabled);
-    syncService.setSyncInterval(syncInterval);
-    webDavService.setRawDataEnabled(settings?.rawDataEnabled ?? false);
-
-    // 启动本地扫描
-    syncService.init();
 
     // 认证错误回调（401/403 自动登出）
     feedBloc.setOnAuthError(() {
@@ -74,21 +67,38 @@ class _FlutterMediaManagerState extends State<FlutterMediaManager> {
       } catch (_) {}
     });
 
-    // 后台同步
-    if (syncEnabled) {
-      syncService.startBackgroundSync(() async {
-        final data = await syncService.loadLocalData();
-        if (data == null) return <String>[];
-        final files = <String>[];
-        for (final post in data.posts) {
-          files.addAll(post.mediaFiles);
-          if (post.videoFile != null) files.add(post.videoFile!);
-          if (post.videoThumbnail != null) {
-            files.add(post.videoThumbnail!);
+    // 启动本地媒体扫描（无论同步开关，都先扫描本地数据）
+    syncService.init();
+
+    // ── 第 2 步：WebDAV 相关注入（仅在有 WebDAV 时） ──
+    if (webDavService != null) {
+      appBloc.setWebDavService(webDavService);
+      syncService.setEncryption(webDavService.encryption);
+      feedBloc.setWebDavService(webDavService);
+
+      final settings = appState.settings;
+      final syncEnabled = settings?.syncEnabled ?? true;
+      final syncInterval = settings?.syncInterval ?? 60;
+      syncService.setEnabled(syncEnabled);
+      syncService.setSyncInterval(syncInterval);
+      webDavService.setRawDataEnabled(settings?.rawDataEnabled ?? false);
+
+      // 后台同步
+      if (syncEnabled) {
+        syncService.startBackgroundSync(() async {
+          final data = await syncService.loadLocalData();
+          if (data == null) return <String>[];
+          final files = <String>[];
+          for (final post in data.posts) {
+            files.addAll(post.mediaFiles);
+            if (post.videoFile != null) files.add(post.videoFile!);
+            if (post.videoThumbnail != null) {
+              files.add(post.videoThumbnail!);
+            }
           }
-        }
-        return files;
-      });
+          return files;
+        });
+      }
     }
   }
 
@@ -139,7 +149,7 @@ class _FlutterMediaManagerState extends State<FlutterMediaManager> {
               //   _initializeServices()，并在退出登录后重置标记。
               final isLoggedIn = authState.status == AuthStatus.authenticated ||
                   authState.status == AuthStatus.local;
-              if (isLoggedIn && webDavService != null && !_initialized) {
+              if (isLoggedIn && !_initialized) {
                 _initialized = true;
                 _lastStatus = authState.status;
                 // ★ 修复：不能在 build 期间直接调用 _initializeServices，
