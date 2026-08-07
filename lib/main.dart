@@ -70,35 +70,34 @@ class _FlutterMediaManagerState extends State<FlutterMediaManager> {
     // 启动本地媒体扫描（无论同步开关，都先扫描本地数据）
     syncService.init();
 
-    // ── 第 2 步：WebDAV 相关注入（仅在有 WebDAV 时） ──
-    if (webDavService != null) {
-      appBloc.setWebDavService(webDavService);
-      syncService.setEncryption(webDavService.encryption);
-      feedBloc.setWebDavService(webDavService);
+    // ── 第 2 步：WebDAV 注入到 SyncService（唯一桥梁） ──
+    //   SyncService 会自动从 WebDavService 提取 encryption
+    syncService.setWebDavService(webDavService);
 
-      final settings = appState.settings;
-      final syncEnabled = settings?.syncEnabled ?? true;
-      final syncInterval = settings?.syncInterval ?? 60;
-      syncService.setEnabled(syncEnabled);
-      syncService.setSyncInterval(syncInterval);
-      webDavService.setRawDataEnabled(settings?.rawDataEnabled ?? false);
+    // AppBloc 也通过 SyncService 获取云端信息
+    appBloc.setSyncService(syncService);
 
-      // 后台同步
-      if (syncEnabled) {
-        syncService.startBackgroundSync(() async {
-          final data = await syncService.loadLocalData();
-          if (data == null) return <String>[];
-          final files = <String>[];
-          for (final post in data.posts) {
-            files.addAll(post.mediaFiles);
-            if (post.videoFile != null) files.add(post.videoFile!);
-            if (post.videoThumbnail != null) {
-              files.add(post.videoThumbnail!);
-            }
+    final settings = appState.settings;
+    final syncEnabled = settings?.syncEnabled ?? true;
+    final syncInterval = settings?.syncInterval ?? 60;
+    syncService.setEnabled(syncEnabled);
+    syncService.setSyncInterval(syncInterval);
+
+    // 后台同步（仅在有云端连接时启动）
+    if (syncService.hasCloudConnection && syncEnabled) {
+      syncService.startBackgroundSync(() async {
+        final data = await syncService.loadLocalData();
+        if (data == null) return <String>[];
+        final files = <String>[];
+        for (final post in data.posts) {
+          files.addAll(post.mediaFiles);
+          if (post.videoFile != null) files.add(post.videoFile!);
+          if (post.videoThumbnail != null) {
+            files.add(post.videoThumbnail!);
           }
-          return files;
-        });
-      }
+        }
+        return files;
+      });
     }
   }
 

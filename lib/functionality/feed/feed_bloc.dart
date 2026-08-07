@@ -5,7 +5,6 @@ import 'package:equatable/equatable.dart';
 import 'package:uuid/uuid.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 import '../../models/post.dart';
-import '../../services/webdav_service.dart';
 import '../../services/sync_service.dart';
 import '../../services/log_service.dart';
 import '../../utils/error_helper.dart';
@@ -16,7 +15,8 @@ part 'feed_state.dart';
 const _uuid = Uuid();
 
 class FeedBloc extends Bloc<FeedEvent, FeedState> {
-  WebDavService? _webDavService;
+  /// ★ 重构：只依赖 SyncService，不直接依赖 WebDavService
+  /// SyncService 是本地与云端的唯一桥梁
   SyncService? _syncService;
   LogService? _logService;
   JournalData? _journalData;
@@ -36,10 +36,6 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
     on<FeedRefreshEvent>(_onRefresh);
   }
 
-  void setWebDavService(WebDavService service) {
-    _webDavService = service;
-  }
-
   void setSyncService(SyncService service) {
     _syncService = service;
   }
@@ -52,35 +48,20 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
     onAuthError = callback;
   }
 
-  /// 手动触发一次同步推送
-  ///
-  /// 同时同步用户资料（昵称 + 头像）到云端 profile.json。
-  /// 如果本地没有头像，会生成默认头像并上传。
+  /// 手动触发一次同步推送（通过 SyncService 代理，不再直接依赖 WebDAV）
   Future<bool> performManualSync({String? nickname, String? avatarPath}) async {
-    if (_syncService == null || _webDavService == null) return false;
+    if (_syncService == null || !_syncService!.hasCloudConnection) return false;
     if (_journalData == null) return false;
-    final ok = await _syncService!.pushToCloud(
-      uploadFn: (localPath, remoteUrl) =>
-          _webDavService!.uploadFile(localPath, remoteUrl),
-      saveDataFn: (data) => _webDavService!.saveJournalData(data),
-      mediaBaseUrl: _webDavService!.config.mediaUrl,
-      data: _journalData!,
-      saveProfileFn: () async {
-        await _webDavService!.saveUserProfileWithDefaults(
-          nickname: nickname ?? '媒体管理',
-          localAvatarPath: avatarPath ?? '',
-        );
-      },
+    return await _syncService!.performFullSync(
+      nickname: nickname,
+      avatarPath: avatarPath,
     );
-    if (ok) {
-      await _syncService!.createSnapshot(_journalData!);
-    }
-    return ok;
   }
 
   Future<void> _onLoad(FeedLoadEvent event, Emitter<FeedState> emit) async {
     final hasSync = _syncService != null;
 
+    // 1. 加载本地数据（始终执行）
     if (hasSync) {
       final localData = await _syncService!.loadLocalData();
       if (localData != null) {
@@ -91,7 +72,8 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
       }
     }
 
-    if (_webDavService == null) {
+    // 2. 没有云端连接 → 只用本地数据
+    if (hasSync && !_syncService!.hasCloudConnection) {
       if (_journalData == null) {
         _journalData = JournalData.empty();
         _emitLoaded(emit, _journalData!);
@@ -99,47 +81,32 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
       return;
     }
 
+    // 3. 有待同步数据 → 后台推送
     if (hasSync && _syncService!.pendingSync && _journalData != null) {
       _logService?.info('后台推送待同步数据...', source: 'Feed');
-      _syncService!
-          .pushToCloud(
-        uploadFn: (localPath, remoteUrl) =>
-            _webDavService!.uploadFile(localPath, remoteUrl),
-        saveDataFn: (data) => _webDavService!.saveJournalData(data),
-        mediaBaseUrl: _webDavService!.config.mediaUrl,
-        data: _journalData!,
-      )
-          .then((ok) {
-        if (ok) _logService?.success('后台推送完成', source: 'Feed');
+      _syncService!.pushPendingData().then((_) {
+        if (!isClosed) add(const FeedRefreshEvent());
       });
     }
 
-    _webDavService!.loadJournalData().then((remoteData) async {
-      if (hasSync && _journalData != null) {
-        final merged = await _syncService!.pullFromCloud(
-          loadRemoteDataFn: () async => remoteData,
-          localData: _journalData!,
-        );
+    // 4. 从云端拉取数据并合并
+    if (hasSync) {
+      _syncService!.pullAndMerge(localData: _journalData).then((merged) {
         if (merged != null) {
           _journalData = merged;
-          await _syncService!.createSnapshot(merged);
+          _syncService!.createSnapshot(merged);
         }
-      } else {
-        _journalData = remoteData;
-        if (hasSync) {
-          await _syncService!.saveLocalData(remoteData);
+        if (!isClosed) add(const FeedRefreshEvent());
+      }).catchError((e) {
+        _logService?.warn('后台拉取云端数据失败',
+            detail: e.toString(), source: 'Feed');
+        if (_journalData == null || _journalData!.posts.isEmpty) {
+          if (!isClosed && ErrorHelper.isAuthError(e)) {
+            onAuthError?.call();
+          }
         }
-      }
-      if (!isClosed) add(const FeedRefreshEvent());
-    }).catchError((e) {
-      _logService?.warn('后台拉取 WebDAV 失败',
-          detail: e.toString(), source: 'Feed');
-      if (_journalData == null || _journalData!.posts.isEmpty) {
-        if (!isClosed && ErrorHelper.isAuthError(e)) {
-          onAuthError?.call();
-        }
-      }
-    });
+      });
+    }
 
     if (_journalData == null) {
       emit(state.copyWith(status: FeedStatus.loading));
@@ -155,10 +122,10 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
       status: FeedStatus.loaded,
       posts: sorted,
       filteredPosts: filtered,
-      mediaBaseUrl: _webDavService?.config.mediaUrl,
-      imageHeaders: _webDavService?.imageHeaders ?? {},
-      encryptionEnabled:
-          _webDavService?.encryption.isEncryptionEnabled ?? false,
+      // 通过 SyncService 获取云端信息（UI 层不再直接依赖 WebDavService）
+      mediaBaseUrl: _syncService?.mediaBaseUrl,
+      imageHeaders: _syncService?.imageHeaders ?? {},
+      encryptionEnabled: _syncService?.encryptionEnabled ?? false,
     ));
   }
 
@@ -466,15 +433,13 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
         detail: 'postId=${event.postId}', source: 'Feed');
     try {
       emit(state.copyWith(status: FeedStatus.syncing));
-      // ★ 用 firstOrNull 替代 firstWhere，避免重复删除时抛 StateError
       final post = _journalData!
           .posts.where((p) => p.id == event.postId)
           .firstOrNull;
 
       if (post == null) {
         _logService?.warn('删除帖子失败：未找到帖子',
-            detail: 'postId=' + event.postId, source: 'Feed');
-        // 即使未找到也刷新一次（幂等）
+            detail: 'postId=${event.postId}', source: 'Feed');
         final sorted = _applySort(_journalData!.posts, state.sortMode);
         emit(state.copyWith(
           status: FeedStatus.loaded,
@@ -497,7 +462,6 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
           await _syncService!.deleteMedia(post.videoThumbnail!);
         }
       }
-
 
       final updatedPosts = _journalData!.posts.where((p) => p.id != event.postId).toList();
       _journalData = JournalData(

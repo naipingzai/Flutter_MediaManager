@@ -993,7 +993,7 @@ class _MediaGrid extends StatelessWidget {
       {double? height, BoxFit fit = BoxFit.cover}) {
     final imageUrl = MediaUtils.buildMediaUrl(state, fileName);
     final authBloc = context.read<AuthBloc>();
-    final encryption = authBloc.webDavService?.encryption;
+    final encryption = context.read<SyncService>().encryption;
     return MediaUtils.buildImage(
       fileName: fileName,
       imageUrl: imageUrl,

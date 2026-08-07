@@ -339,20 +339,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         String? avatarFileName;
                         if (avatarPath.isNotEmpty &&
                             avatarPath != settings.avatarPath) {
-                          final webDavService =
-                              context.read<AuthBloc>().webDavService;
-                          if (webDavService != null) {
-                            avatarFileName =
-                                await webDavService.uploadAvatar(avatarPath);
-                          }
+                          // avatarFileName 将通过 SyncService 上传
                         }
-                        final webDavService =
-                            context.read<AuthBloc>().webDavService;
-                        if (webDavService != null) {
-                          await webDavService.saveUserProfile({
-                            'nickname': nickname,
-                            'avatarFileName': avatarFileName ?? '',
-                          });
+                        final syncService = context.read<SyncService>();
+                        if (syncService.hasCloudConnection) {
+                          await syncService.saveUserProfile(
+                            nickname: nickname,
+                            localAvatarPath: avatarPath,
+                          );
                         }
                         final newSettings = settings.copyWith(
                           nickname: nickname,
@@ -403,20 +397,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
             style: FilledButton.styleFrom(backgroundColor: cs.error),
             onPressed: () async {
               Navigator.pop(ctx);
-              final webDavService = context.read<AuthBloc>().webDavService;
-              if (webDavService != null) {
+              final syncService = context.read<SyncService>();
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                content: Text('正在清除数据...'),
+                behavior: SnackBarBehavior.floating,
+              ));
+              await syncService.clearCloudData();
+              if (context.mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                  content: Text('正在清除数据...'),
+                  content: Text('云端数据已清除'),
                   behavior: SnackBarBehavior.floating,
                 ));
-                await webDavService.clearAllData();
-                if (context.mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text('云端数据已清除'),
-                    behavior: SnackBarBehavior.floating,
-                  ));
-                  context.read<FeedBloc>().add(const FeedLoadEvent());
-                }
+                context.read<FeedBloc>().add(const FeedLoadEvent());
               }
             },
             child: const Text('确认删除'),

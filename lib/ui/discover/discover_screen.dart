@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../functionality/auth/auth_bloc.dart';
 import '../../functionality/feed/feed_bloc.dart';
 import '../../models/post.dart';
+import '../../services/sync_service.dart';
 import '../../utils/media_utils.dart';
 import '../post/post_detail_screen.dart';
 
@@ -285,7 +286,7 @@ class _SearchResultCard extends StatelessWidget {
               if (hasMedia)
                 Builder(builder: (ctx) {
                   final authBloc = ctx.read<AuthBloc>();
-                  final encryption = authBloc.webDavService?.encryption;
+                  final encryption = context.read<SyncService>().encryption;
                   return MediaUtils.buildImage(
                     fileName: post.mediaFiles.first,
                     imageUrl:

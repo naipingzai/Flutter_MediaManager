@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../functionality/feed/feed_bloc.dart';
 import '../../functionality/auth/auth_bloc.dart';
 import '../../models/post.dart';
+import '../../services/sync_service.dart';
 import '../../utils/media_utils.dart';
 
 /// 发布/编辑动态页面
@@ -524,7 +525,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   Widget _buildExistingMediaGrid(ColorScheme cs, bool disabled) {
     final feedState = context.read<FeedBloc>().state;
     final authBloc = context.read<AuthBloc>();
-    final encryption = authBloc.webDavService?.encryption;
+    final encryption = context.read<SyncService>().encryption;
 
     return GridView.builder(
       shrinkWrap: true,

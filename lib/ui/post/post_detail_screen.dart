@@ -471,8 +471,7 @@ class _VideoPlayerCardState extends State<_VideoPlayerCard> {
             });
           return;
         }
-        final authBloc = context.read<AuthBloc>();
-        final encryption = authBloc.webDavService?.encryption;
+        final encryption = context.read<SyncService>().encryption;
         final dio = Dio();
         final response = await dio.get<List<int>>(url,
             options: Options(
@@ -489,11 +488,12 @@ class _VideoPlayerCardState extends State<_VideoPlayerCard> {
       }
       if (mounted) setState(() => _loading = false);
     } catch (e) {
-      if (mounted)
+      if (mounted) {
         setState(() {
           _hasError = true;
           _loading = false;
         });
+      }
     }
   }
 
@@ -502,7 +502,7 @@ class _VideoPlayerCardState extends State<_VideoPlayerCard> {
     final thumbName = widget.post.videoThumbnail;
     if (thumbName != null && thumbName.isNotEmpty) {
       final authBloc = context.read<AuthBloc>();
-      final encryption = authBloc.webDavService?.encryption;
+      final encryption = context.read<SyncService>().encryption;
       final url = MediaUtils.buildMediaUrl(widget.feedState, thumbName);
       return MediaUtils.buildImage(
         fileName: thumbName,
@@ -885,8 +885,7 @@ class _MediaCarouselState extends State<_MediaCarousel> {
             itemBuilder: (_, index) {
               final imageUrl = MediaUtils.buildMediaUrl(
                   widget.feedState, widget.mediaFiles[index]);
-              final authBloc = context.read<AuthBloc>();
-              final encryption = authBloc.webDavService?.encryption;
+              final encryption = context.read<SyncService>().encryption;
               return GestureDetector(
                 onTap: () => _openGallery(context, index),
                 child: Container(
@@ -936,8 +935,7 @@ class _MediaCarouselState extends State<_MediaCarousel> {
         .cast<String>()
         .toList();
     if (imageUrls.isEmpty) return;
-    final authBloc = context.read<AuthBloc>();
-    final encryption = authBloc.webDavService?.encryption;
+    final encryption = context.read<SyncService>().encryption;
     Navigator.push(
       context,
       MaterialPageRoute(

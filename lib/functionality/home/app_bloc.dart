@@ -7,26 +7,25 @@ import 'package:path_provider/path_provider.dart';
 import '../../models/settings.dart';
 import '../../services/local_settings_service.dart';
 import '../../services/log_service.dart';
-import '../../services/webdav_service.dart';
+import '../../services/sync_service.dart';
 
 part 'app_event.dart';
 part 'app_state.dart';
 
 /// 应用级 Bloc，管理全局状态（主题、设置、导航等）
+/// ★ 重构：只依赖 SyncService，不直接依赖 WebDavService
 class AppBloc extends Bloc<AppEvent, AppState> {
   final LocalSettingsService _settingsService = LocalSettingsService();
   LogService? _logService;
   set logService(LogService value) => _logService = value;
 
-  WebDavService? _webDavService;
+  SyncService? _syncService;
 
-  void setWebDavService(WebDavService? service) {
-    if (_webDavService != service) {
-      _webDavService = service;
-      // Re-load profile from WebDAV when service changes (e.g. re-login)
-      if (service != null && state.settings != null) {
-        add(const AppInitializeEvent());
-      }
+  void setSyncService(SyncService service) {
+    _syncService = service;
+    // 重新加载用户资料
+    if (state.settings != null) {
+      add(const AppInitializeEvent());
     }
   }
 
@@ -46,43 +45,45 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     try {
       var settings = await _settingsService.getSettings();
 
-      // 尝试从 WebDAV 加载用户资料
-      if (_webDavService != null) {
+      // 尝试从 SyncService 加载用户资料（SyncService 代理 WebDAV）
+      if (_syncService != null && _syncService!.hasCloudConnection) {
         try {
-          final profile = await _webDavService!.loadUserProfile();
+          final profile = await _syncService!.loadUserProfile();
           if (profile != null) {
             settings = settings.copyWith(
               nickname: profile['nickname'] as String? ?? settings.nickname,
             );
-            // 保存到本地
             await _settingsService.saveSettings(settings);
-            _logService?.success('WebDAV 用户资料已加载', source: 'App');
+            _logService?.success('云端用户资料已加载', source: 'App');
 
             // 下载头像到本地
             final avatarFileName = profile['avatarFileName'] as String?;
             if (avatarFileName != null && avatarFileName.isNotEmpty) {
               try {
-                final avatarUrl = '${_webDavService!.config.rootUrl}/$avatarFileName';
-                final dio = Dio();
-                final response = await dio.get<List<int>>(
-                  avatarUrl,
-                  options: Options(
-                    responseType: ResponseType.bytes,
-                    headers: _webDavService!.imageHeaders,
-                  ),
-                );
-                if (response.data != null) {
-                  final appDir = await getApplicationDocumentsDirectory();
-                  final localAvatarPath = '${appDir.path}/$avatarFileName';
-                  await File(localAvatarPath).writeAsBytes(
-                    Uint8List.fromList(response.data!),
+                final avatarUrl = _syncService!.getMediaUrl(avatarFileName);
+                if (avatarUrl != null) {
+                  final dio = Dio();
+                  final response = await dio.get<List<int>>(
+                    avatarUrl,
+                    options: Options(
+                      responseType: ResponseType.bytes,
+                      headers: _syncService!.imageHeaders,
+                    ),
                   );
-                  final updatedSettings = settings.copyWith(
-                    avatarPath: localAvatarPath,
-                  );
-                  await _settingsService.saveSettings(updatedSettings);
-                  emit(state.copyWith(settings: updatedSettings));
-                  _logService?.success('头像已下载到本地', detail: localAvatarPath, source: 'App');
+                  if (response.data != null) {
+                    final appDir = await getApplicationDocumentsDirectory();
+                    final localAvatarPath = '${appDir.path}/$avatarFileName';
+                    await File(localAvatarPath).writeAsBytes(
+                      Uint8List.fromList(response.data!),
+                    );
+                    final updatedSettings = settings.copyWith(
+                      avatarPath: localAvatarPath,
+                    );
+                    await _settingsService.saveSettings(updatedSettings);
+                    emit(state.copyWith(settings: updatedSettings));
+                    _logService?.success('头像已下载到本地',
+                        detail: localAvatarPath, source: 'App');
+                  }
                 }
               } catch (e) {
                 _logService?.warn('头像下载失败', detail: e.toString(), source: 'App');
@@ -90,7 +91,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
             }
           }
         } catch (e) {
-          _logService?.warn('加载 WebDAV 用户资料失败', detail: e.toString(), source: 'App');
+          _logService?.warn('加载云端用户资料失败', detail: e.toString(), source: 'App');
         }
       }
 
@@ -146,4 +147,3 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     emit(state.copyWith(currentTabIndex: event.tabIndex));
   }
 }
-
