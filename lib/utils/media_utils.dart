@@ -1,6 +1,4 @@
 import 'dart:io' show File;
-import 'dart:typed_data';
-import 'package:extended_image/extended_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Image;
 import 'package:flutter/widgets.dart';
@@ -31,16 +29,18 @@ class MediaUtils {
 
   /// 构建图片 Widget（**只加载本地文件**）
   ///
-  /// - 本地有 → 用 `ExtendedImage.memory` 显示
+  /// - 本地有 → 直接用 `Image.file` 显示（iOS 兼容性最好）
   /// - 本地没有 → 显示占位图标
   ///
-  /// 不做"远程回退"——那是同步机制的工作，不在 UI 层处理。
+  /// **重要**：不再使用 `ExtendedImage.memory(bytes)`，因为 iOS 上 bytes 模式经常
+  /// 因沙箱权限/Provider 注册问题加载失败；`Image.file` 是 Flutter 官方跨平台稳定方案。
   static Widget buildImage({
     required String fileName,
     required double width,
     double? height,
     BoxFit fit = BoxFit.cover,
     BorderRadius? borderRadius,
+    VoidCallback? onTap,
     // 兼容旧签名的可选参数（已忽略，因为不读远程）
     String? imageUrl,
     Map<String, String>? httpHeaders,
@@ -64,6 +64,7 @@ class MediaUtils {
           height: height,
           fit: fit,
           borderRadius: borderRadius,
+          onTap: onTap,
         );
       },
     );
@@ -115,13 +116,21 @@ class MediaUtils {
   }
 }
 
-/// 本地图片加载 Widget
+/// 本地图片加载 Widget（iOS 兼容版本）
+///
+/// **关键修复**：
+/// - 之前用 `ExtendedImage.memory(bytes)` 在 iOS 上经常因沙箱权限/Provider
+///   注册问题加载失败，导致图片不显示。
+/// - 现在改用 `Image.file(File(path))`，这是 Flutter 官方跨平台最稳定的
+///   本地文件加载方案，iOS/Android/Desktop 都完全一致。
+/// - 同时支持 `onTap` 回调，避免 GestureDetector 包裹后吃掉 tap 事件。
 class _LocalImage extends StatefulWidget {
   final String filePath;
   final double width;
   final double? height;
   final BoxFit fit;
   final BorderRadius? borderRadius;
+  final VoidCallback? onTap;
 
   const _LocalImage({
     required this.filePath,
@@ -129,6 +138,7 @@ class _LocalImage extends StatefulWidget {
     this.height,
     this.fit = BoxFit.cover,
     this.borderRadius,
+    this.onTap,
   });
 
   @override
@@ -136,63 +146,63 @@ class _LocalImage extends StatefulWidget {
 }
 
 class _LocalImageState extends State<_LocalImage> {
-  Uint8List? _bytes;
-  bool _loading = true;
-  bool _error = false;
+  bool _exists = true;
 
   @override
   void initState() {
     super.initState();
-    _loadFile();
+    _checkFile();
   }
 
-  Future<void> _loadFile() async {
+  Future<void> _checkFile() async {
     try {
-      final file = File(widget.filePath);
-      if (await file.exists()) {
-        final bytes = await file.readAsBytes();
-        if (!mounted) return;
-        setState(() {
-          _bytes = bytes;
-          _loading = false;
-        });
-      } else {
-        throw Exception('File not found');
-      }
-    } catch (e) {
+      final exists = await File(widget.filePath).exists();
       if (!mounted) return;
-      setState(() {
-        _error = true;
-        _loading = false;
-      });
+      if (!exists) {
+        setState(() => _exists = false);
+      }
+    } catch (_) {
+      if (!mounted) return;
+      setState(() => _exists = false);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_loading) {
-      return MediaUtils._loadingPlaceholder(widget.width, widget.height);
-    }
-
-    if (_error || _bytes == null) {
+    if (!_exists) {
       return MediaUtils._placeholder(widget.width, widget.height);
     }
 
-    Widget image = ExtendedImage.memory(
-      _bytes!,
+    // ★ iOS 兼容：直接使用 Image.file，让 Flutter 内置的 ImageProvider 处理 iOS 沙箱。
+    Widget image = Image.file(
+      File(widget.filePath),
       width: widget.width,
       height: widget.height,
       fit: widget.fit,
-      loadStateChanged: (state) {
-        if (state.extendedImageLoadState == LoadState.failed) {
-          return MediaUtils._placeholder(widget.width, widget.height);
-        }
-        return null;
+      gaplessPlayback: true,
+      errorBuilder: (_, __, ___) =>
+          MediaUtils._placeholder(widget.width, widget.height),
+      frameBuilder: (context, child, frame, wasSyncLoaded) {
+        if (wasSyncLoaded) return child;
+        return AnimatedSwitcher(
+          duration: const Duration(milliseconds: 200),
+          child: frame == null
+              ? MediaUtils._loadingPlaceholder(widget.width, widget.height)
+              : child,
+        );
       },
     );
 
     if (widget.borderRadius != null) {
-      return ClipRRect(borderRadius: widget.borderRadius!, child: image);
+      image = ClipRRect(borderRadius: widget.borderRadius!, child: image);
+    }
+
+    if (widget.onTap != null) {
+      return GestureDetector(
+        onTap: widget.onTap,
+        behavior: HitTestBehavior.opaque,
+        child: image,
+      );
     }
     return image;
   }

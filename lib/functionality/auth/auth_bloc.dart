@@ -132,12 +132,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> _onLogout(AuthLogoutEvent event, Emitter<AuthState> emit) async {
     _log('退出登录');
     final prefs = await SharedPreferences.getInstance();
+    // ★ 只清除 WebDAV 配置；其他设置（昵称/头像/同步开关/同步间隔）必须保留
+    //  修复：原来用 prefs.clear() 会误删所有 SharedPreferences，导致用户退出登录后
+    //  丢失本地设置（昵称、头像路径、主题等），并使云端数据管理切换逻辑出错
     await prefs.remove('webdav_config');
-    // 清除网络图片缓存
-    try {
-      // 清除 SharedPreferences 中缓存的所有数据
-      await prefs.clear();
-    } catch (_) {}
     _webDavService = null;
     emit(const AuthState(status: AuthStatus.unauthenticated));
   }

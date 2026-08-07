@@ -9,6 +9,7 @@ import 'functionality/feed/feed_bloc.dart';
 import 'models/settings.dart' as models;
 import 'services/log_service.dart';
 import 'services/sync_service.dart';
+import 'services/webdav_service.dart';
 import 'utils/media_utils.dart';
 import 'ui/home/home_screen.dart';
 import 'ui/auth/login_screen.dart';
@@ -19,8 +20,77 @@ Future<void> main() async {
   runApp(const FlutterMediaManager());
 }
 
-class FlutterMediaManager extends StatelessWidget {
+class FlutterMediaManager extends StatefulWidget {
   const FlutterMediaManager({super.key});
+
+  @override
+  State<FlutterMediaManager> createState() => _FlutterMediaManagerState();
+}
+
+class _FlutterMediaManagerState extends State<FlutterMediaManager> {
+  // ★ Bug 修复：之前 BlocBuilder 重建时会反复调用 syncService.init()、
+  //   startBackgroundSync()、feedBloc.setWebDavService() 等副作用，
+  //   导致数据管理切换逻辑混乱、后台定时器被反复启动。
+  //   用 _initialized 标记控制只执行一次；_currentStatus 记录上次认证状态
+  //   用于在退出登录时重置标记。
+  bool _initialized = false;
+  AuthStatus? _lastStatus;
+
+  /// 初始化所有服务（在认证后调用一次）
+  void _initializeServices(
+    BuildContext context,
+    WebDavService webDavService,
+    AppState appState,
+  ) {
+    final syncService = context.read<SyncService>();
+    final logService = context.read<LogService>();
+    final appBloc = context.read<AppBloc>();
+    final feedBloc = context.read<FeedBloc>();
+
+    // 注入服务引用
+    syncService.setLogService(logService);
+    MediaUtils.syncService = syncService;
+    appBloc.setWebDavService(webDavService);
+    syncService.setEncryption(webDavService.encryption);
+    feedBloc.setWebDavService(webDavService);
+    feedBloc.setSyncService(syncService);
+    feedBloc.setLogService(logService);
+
+    // 应用用户设置
+    final settings = appState.settings;
+    final syncEnabled = settings?.syncEnabled ?? true;
+    final syncInterval = settings?.syncInterval ?? 60;
+    syncService.setEnabled(syncEnabled);
+    syncService.setSyncInterval(syncInterval);
+    webDavService.setRawDataEnabled(settings?.rawDataEnabled ?? false);
+
+    // 启动本地扫描
+    syncService.init();
+
+    // 认证错误回调（401/403 自动登出）
+    feedBloc.setOnAuthError(() {
+      try {
+        context.read<AuthBloc>().add(const AuthLogoutEvent());
+      } catch (_) {}
+    });
+
+    // 后台同步
+    if (syncEnabled) {
+      syncService.startBackgroundSync(() async {
+        final data = await syncService.loadLocalData();
+        if (data == null) return <String>[];
+        final files = <String>[];
+        for (final post in data.posts) {
+          files.addAll(post.mediaFiles);
+          if (post.videoFile != null) files.add(post.videoFile!);
+          if (post.videoThumbnail != null) {
+            files.add(post.videoThumbnail!);
+          }
+        }
+        return files;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,50 +132,41 @@ class FlutterMediaManager extends StatelessWidget {
               final logService = context.read<LogService>();
               final syncService = context.read<SyncService>();
 
-              // 注入日志和加密
-              syncService.setLogService(logService);
-              MediaUtils.syncService = syncService;
-
-              // WebDAV 连接（仅认证后）
-              if ((authState.status == AuthStatus.authenticated ||
-                      authState.status == AuthStatus.local) &&
-                  webDavService != null) {
-                final appBloc = context.read<AppBloc>();
-                appBloc.setWebDavService(webDavService);
-                syncService.setEncryption(webDavService.encryption);
-
-                final syncEnabled = appState.settings?.syncEnabled ?? true;
-                syncService.setEnabled(syncEnabled);
-                if (syncEnabled) syncService.init();
-
-                final feedBloc = context.read<FeedBloc>();
-                feedBloc.setSyncService(syncService);
-                feedBloc.setLogService(logService);
-
-                final syncInterval = appState.settings?.syncInterval ?? 60;
-                syncService.setSyncInterval(syncInterval);
-                webDavService.setRawDataEnabled(
-                    appState.settings?.rawDataEnabled ?? false);
-
-                feedBloc.setWebDavService(webDavService);
-                feedBloc.setOnAuthError(() {
-                  context.read<AuthBloc>().add(const AuthLogoutEvent());
+              // ★ Bug 修复：之前这里每次 BlocBuilder 重建都会重复调用
+              //   syncService.init()、startBackgroundSync()、setWebDavService() 等，
+              //   导致数据管理切换逻辑混乱。
+              //   现在只在 _lastStatus 从「未登录」变成「已登录」时调用一次
+              //   _initializeServices()，并在退出登录后重置标记。
+              final isLoggedIn = authState.status == AuthStatus.authenticated ||
+                  authState.status == AuthStatus.local;
+              if (isLoggedIn && webDavService != null && !_initialized) {
+                _initialized = true;
+                _lastStatus = authState.status;
+                // ★ 修复：不能在 build 期间直接调用 _initializeServices，
+                //   因为它内部调用 LogService.log() 会触发 notifyListeners()，
+                //   导致 "setState() or markNeedsBuild() called during build" 异常。
+                //   用 addPostFrameCallback 延迟到 build 完成后执行。
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  if (!mounted) return;
+                  _initializeServices(context, webDavService, appState);
                 });
-
-                if (syncEnabled) {
-                  syncService.startBackgroundSync(() async {
-                    final data = await syncService.loadLocalData();
-                    if (data == null) return [];
-                    final files = <String>[];
-                    for (final post in data.posts) {
-                      files.addAll(post.mediaFiles);
-                      if (post.videoFile != null) files.add(post.videoFile!);
-                      if (post.videoThumbnail != null) {
-                        files.add(post.videoThumbnail!);
-                      }
-                    }
-                    return files;
-                  });
+              } else if (!isLoggedIn && _initialized) {
+                _initialized = false;
+                _lastStatus = authState.status;
+                // 退出登录后停止后台同步
+                try {
+                  syncService.stopBackgroundTimer();
+                } catch (_) {}
+              } else {
+                // _lastStatus 发生变化（例如 authenticated → local）时重新初始化
+                if (_initialized && _lastStatus != authState.status) {
+                  _lastStatus = authState.status;
+                  if (webDavService != null) {
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      if (!mounted) return;
+                      _initializeServices(context, webDavService, appState);
+                    });
+                  }
                 }
               }
 

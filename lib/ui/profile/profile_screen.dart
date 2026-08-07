@@ -590,7 +590,19 @@ class _CloudDataTile extends StatelessWidget {
           subtitle: Text(hasCloud ? authState.config!.rootUrl : '未配置（本地模式）'),
           trailing: Icon(Icons.chevron_right_rounded,
               size: 20, color: cs.onSurfaceVariant),
+          // ★ 点击未配置 → 直接弹登录页，让用户配置 WebDAV
+          //   点击已配置 → 显示云端管理信息（地址、路径、登出）
           onTap: () {
+            if (!hasCloud) {
+              // 未配置 WebDAV：直接跳转登录页（fromProfile=true）
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => const LoginScreen(fromProfile: true)),
+              );
+              return;
+            }
+            // 已配置：弹出云端管理面板
             showModalBottomSheet(
               context: context,
               builder: (ctx) => SafeArea(
@@ -622,6 +634,33 @@ class _CloudDataTile extends StatelessWidget {
                       leading: const Icon(Icons.folder_open_rounded),
                       title: const Text('存储路径'),
                       subtitle: Text(authState.config?.rootPath ?? '-'),
+                    ),
+                    ListTile(
+                      leading: const Icon(Icons.dns_rounded),
+                      title: const Text('账号'),
+                      subtitle: Text(authState.config?.username ?? '-'),
+                    ),
+                    const Divider(height: 1),
+                    ListTile(
+                      leading: Icon(Icons.swap_horiz_rounded,
+                          color: Theme.of(ctx).colorScheme.error),
+                      title: Text('切换/重新登录',
+                          style: TextStyle(
+                              color: Theme.of(ctx).colorScheme.error)),
+                      subtitle: const Text('登出后可以配置新的 WebDAV 服务器'),
+                      onTap: () {
+                        Navigator.pop(ctx);
+                        // 登出 → 跳到登录页
+                        context
+                            .read<AuthBloc>()
+                            .add(const AuthLogoutEvent());
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) =>
+                                  const LoginScreen(fromProfile: true)),
+                        );
+                      },
                     ),
                     const SizedBox(height: 8),
                   ],

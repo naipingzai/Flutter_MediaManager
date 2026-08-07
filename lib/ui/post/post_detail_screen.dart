@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:extended_image/extended_image.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
 import '../../functionality/auth/auth_bloc.dart';
@@ -12,6 +11,7 @@ import '../../functionality/feed/feed_bloc.dart';
 import '../../models/post.dart';
 import '../../services/sync_service.dart';
 import '../../services/encryption_service.dart';
+import '../../utils/export_helper.dart';
 import '../../utils/media_utils.dart';
 import 'create_post_screen.dart';
 
@@ -36,6 +36,13 @@ class PostDetailScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('详情'),
         actions: [
+          // ★ 任务2: 保存到系统相册 / 分享到其他 APP
+          //  区分系统类型：iOS/Android 保存到相册；其他提示用户。
+          IconButton(
+            icon: const Icon(Icons.ios_share_rounded, size: 22),
+            tooltip: '保存到系统',
+            onPressed: () => _showExportSheet(context, post),
+          ),
           // 右上角菜单：标签管理
           IconButton(
             icon: const Icon(Icons.label_outline_rounded, size: 22),
@@ -215,6 +222,175 @@ class PostDetailScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  /// 任务2：弹出导出/分享菜单，把帖子中的图片/视频保存到系统相册
+  ///
+  /// 区分系统类型：
+  /// - iOS / Android → 保存到系统相册（SaverGallery）
+  /// - Desktop / Web → 提示使用下载目录
+  void _showExportSheet(BuildContext context, Post post) {
+    final sync = context.read<SyncService>();
+    final cs = Theme.of(context).colorScheme;
+
+    // 收集所有需要导出的媒体（图片 + 视频）
+    final items = <_ExportItem>[];
+    for (final fileName in post.mediaFiles) {
+      items.add(_ExportItem(
+        fileName: fileName,
+        isVideo: false,
+        displayName: fileName,
+      ));
+    }
+    if (post.videoFile != null) {
+      items.add(_ExportItem(
+        fileName: post.videoFile!,
+        isVideo: true,
+        displayName: post.videoFile!,
+      ));
+    }
+    if (items.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('该动态没有可导出的图片或视频'),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    }
+
+    showModalBottomSheet(
+      context: context,
+      builder: (ctx) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(height: 12),
+            Container(
+              width: 36,
+              height: 4,
+              decoration: BoxDecoration(
+                color: cs.outlineVariant,
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Row(
+                children: [
+                  Icon(Icons.ios_share_rounded, color: cs.primary),
+                  const SizedBox(width: 12),
+                  Text(
+                    '保存到系统 (${items.length})',
+                    style: Theme.of(ctx).textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 8),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Text(
+                _platformHint(),
+                style: Theme.of(ctx).textTheme.bodySmall?.copyWith(
+                      color: cs.onSurfaceVariant,
+                    ),
+              ),
+            ),
+            const SizedBox(height: 12),
+            const Divider(height: 1),
+            Flexible(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: items.length + 1,
+                itemBuilder: (_, idx) {
+                  if (idx == items.length) {
+                    return ListTile(
+                      leading: const Icon(Icons.select_all_rounded),
+                      title: const Text('全部保存'),
+                      onTap: () async {
+                        Navigator.pop(ctx);
+                        final messenger = ScaffoldMessenger.of(context);
+                        messenger.showSnackBar(const SnackBar(
+                          content: Text('正在保存到系统相册...'),
+                          behavior: SnackBarBehavior.floating,
+                        ));
+                        for (final it in items) {
+                          final localPath =
+                              await sync.getLocalMediaPath(it.fileName);
+                          final file = File(localPath);
+                          if (!await file.exists()) continue;
+                          final res = await ExportHelper.exportToGallery(
+                            filePath: localPath,
+                            fileName: it.fileName,
+                            isVideo: it.isVideo,
+                          );
+                          if (!context.mounted) break;
+                          ExportHelper.showResult(context, res);
+                        }
+                      },
+                    );
+                  }
+                  final it = items[idx];
+                  return ListTile(
+                    leading: Icon(it.isVideo
+                        ? Icons.videocam_rounded
+                        : Icons.image_rounded),
+                    title: Text(
+                      it.displayName,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    subtitle: Text(it.isVideo ? '视频' : '图片'),
+                    trailing: const Icon(Icons.save_alt_rounded),
+                    onTap: () async {
+                      Navigator.pop(ctx);
+                      final localPath =
+                          await sync.getLocalMediaPath(it.fileName);
+                      final file = File(localPath);
+                      if (!await file.exists()) {
+                        if (!context.mounted) return;
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('文件不存在，请先同步'),
+                            behavior: SnackBarBehavior.floating,
+                          ),
+                        );
+                        return;
+                      }
+                      final res = await ExportHelper.exportToGallery(
+                        filePath: localPath,
+                        fileName: it.fileName,
+                        isVideo: it.isVideo,
+                      );
+                      if (!context.mounted) return;
+                      ExportHelper.showResult(context, res);
+                    },
+                  );
+                },
+              ),
+            ),
+            const SizedBox(height: 8),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// 根据平台返回保存提示文案
+  String _platformHint() {
+    // 此方法仅在 iOS/Android/Desktop/Web 上有意义；
+    // Flutter 编译时不会报错，因为 [Platform] 在运行时求值。
+    // ignore: avoid_dynamic_calls
+    if (Platform.isIOS) return 'iOS 设备：保存到「照片」App';
+    if (Platform.isAndroid) return 'Android 设备：保存到「相册」';
+    if (Platform.isMacOS || Platform.isWindows || Platform.isLinux) {
+      return '桌面端：保存到「下载」目录';
+    }
+    return '保存到系统相册';
   }
 
   void _confirmDelete(BuildContext context) {
@@ -441,6 +617,8 @@ class _VideoPlayerScreenState extends State<_VideoPlayerScreen> {
   bool _started = false;
   bool _showControls = true;
   bool _isPlaying = false;
+  bool _openError = false;
+  String _errorMsg = '';
   Duration _position = Duration.zero;
   Duration _duration = Duration.zero;
   StreamSubscription? _playingSub;
@@ -458,7 +636,18 @@ class _VideoPlayerScreenState extends State<_VideoPlayerScreen> {
         .listen((p) => mounted ? setState(() => _position = p) : null);
     _durationSub = _player.stream.duration
         .listen((d) => mounted ? setState(() => _duration = d) : null);
-    _player.open(Media(widget.videoPath));
+    // ★ iOS 兼容：补足 file:// scheme，避免 iOS 把本地路径当作字符串 URL 报错。
+    final srcPath = widget.videoPath.startsWith('file://')
+        ? widget.videoPath
+        : 'file://${widget.videoPath}';
+    _player.open(Media(srcPath)).catchError((e) {
+      if (!mounted) return null;
+      setState(() {
+        _openError = true;
+        _errorMsg = e.toString();
+      });
+      return null;
+    });
   }
 
   @override
@@ -785,7 +974,8 @@ class _GalleryScreen extends StatefulWidget {
 class _GalleryScreenState extends State<_GalleryScreen> {
   late int _currentIndex;
   late final PageController _pageController;
-  final Map<int, ImageProvider> _imageProviders = {};
+  /// 已加载的图片本地路径（key 为索引）
+  final Map<int, String> _localPaths = {};
   final SyncService? _sync = MediaUtils.syncService;
 
   @override
@@ -815,25 +1005,27 @@ class _GalleryScreenState extends State<_GalleryScreen> {
     super.dispose();
   }
 
+  /// 加载图片（优先本地，其次下载）
   Future<void> _loadImage(int index) async {
     if (index < 0 || index >= widget.imageUrls.length) return;
-    if (_imageProviders.containsKey(index)) return;
+    if (_localPaths.containsKey(index)) return;
 
     try {
       final url = widget.imageUrls[index];
       final cleanFileName = Uri.parse(url).pathSegments.last;
 
+      // 1. 优先本地文件
       if (_sync != null) {
         final localPath = await _sync.getLocalMediaPath(cleanFileName);
         final file = File(localPath);
         if (await file.exists()) {
           if (!mounted) return;
-          final bytes = await file.readAsBytes();
-          setState(() => _imageProviders[index] = MemoryImage(bytes));
+          setState(() => _localPaths[index] = localPath);
           return;
         }
       }
 
+      // 2. 本地不存在：下载
       final dio = Dio();
       final response = await dio.get<List<int>>(
         url,
@@ -849,16 +1041,19 @@ class _GalleryScreenState extends State<_GalleryScreen> {
               .decryptBytes(Uint8List.fromList(data))
               .toList();
         }
+        String savedPath = '';
         if (_sync != null && cleanFileName.isNotEmpty) {
           try {
             final localPath = await _sync.getLocalMediaPath(cleanFileName);
             await File(localPath).writeAsBytes(data);
             _sync.localMediaFiles.add(cleanFileName);
+            savedPath = localPath;
           } catch (_) {}
         }
         if (!mounted) return;
-        setState(() =>
-            _imageProviders[index] = MemoryImage(Uint8List.fromList(data)));
+        if (savedPath.isNotEmpty) {
+          setState(() => _localPaths[index] = savedPath);
+        }
       }
     } catch (_) {}
   }
@@ -879,21 +1074,24 @@ class _GalleryScreenState extends State<_GalleryScreen> {
               _loadImage(index + 1);
             },
             itemBuilder: (context, index) {
-              final provider = _imageProviders[index];
-              if (provider != null) {
-                return ExtendedImage(
-                  image: provider,
-                  mode: ExtendedImageMode.gesture,
-                  initGestureConfigHandler: (state) => GestureConfig(
-                    minScale: 0.9,
-                    animationMinScale: 0.7,
-                    maxScale: 4.0,
-                    animationMaxScale: 4.5,
-                    speed: 1.0,
-                    inertialSpeed: 100.0,
-                    initialScale: 1.0,
-                    inPageView: true,
-                    initialAlignment: InitialAlignment.center,
+              final localPath = _localPaths[index];
+              if (localPath != null) {
+                // ★ iOS 兼容：使用 Image.file + InteractiveViewer 替代 ExtendedImage。
+                //   之前 ExtendedImage + GestureDetector 在 iOS 上容易拦截 tap 事件，
+                //   导致点击图片不能触发全屏显示。现在用 InteractiveViewer（Flutter 内置）
+                //   支持双指缩放、双击缩放，且不会拦截单次 tap。
+                return InteractiveViewer(
+                  minScale: 0.9,
+                  maxScale: 4.0,
+                  child: Center(
+                    child: Image.file(
+                      File(localPath),
+                      fit: BoxFit.contain,
+                      errorBuilder: (_, __, ___) => const Center(
+                        child: Icon(Icons.broken_image_outlined,
+                            color: Colors.white54, size: 64),
+                      ),
+                    ),
                   ),
                 );
               }
@@ -989,4 +1187,16 @@ class _GalleryScreenState extends State<_GalleryScreen> {
       },
     );
   }
+}
+
+/// 导出项（图片 / 视频）
+class _ExportItem {
+  final String fileName;
+  final bool isVideo;
+  final String displayName;
+  const _ExportItem({
+    required this.fileName,
+    required this.isVideo,
+    required this.displayName,
+  });
 }
