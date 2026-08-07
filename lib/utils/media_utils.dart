@@ -250,6 +250,7 @@ class _LoadableImageState extends State<_LoadableImage> {
         child: image,
       );
     }
-    return image;
+    // 没有 onTap 时，用 IgnorePointer 让点击事件穿透到父级 GestureDetector
+    return IgnorePointer(child: image);
   }
 }
