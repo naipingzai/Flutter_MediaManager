@@ -820,13 +820,12 @@ class _MediaGrid extends StatelessWidget {
     final hasVideo = post.hasVideo;
     final imageCount = allMedia.length;
     int totalMedia = imageCount + (hasVideo ? 1 : 0);
-    final displayCount = totalMedia > 9 ? 9 : totalMedia;
-    final hasMore = totalMedia > 9;
+    final displayCount = totalMedia;
 
     if (imageCount == 0 && !hasVideo) return const SizedBox.shrink();
 
     // 单个媒体
-    if (displayCount == 1 && !hasMore) {
+    if (displayCount == 1) {
       final maxW = screenWidth * 0.7;
       if (hasVideo && imageCount == 0) {
         return _buildVideoOnlyCard(context, cs, textTheme, maxW);
@@ -909,34 +908,7 @@ class _MediaGrid extends StatelessWidget {
         final imageIndex = hasVideo ? index - 1 : index;
         if (imageIndex >= imageCount) return const SizedBox.shrink();
 
-        if (hasMore && index == 8) {
-          return _buildMediaBox(
-            context,
-            cs,
-            child: Stack(
-              children: [
-                _buildImage(context, allMedia[imageIndex], imageSize,
-                    height: imageSize, fit: BoxFit.cover),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.55),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Center(
-                    child: Text(
-                      '+${totalMedia - 8}',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 22,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
-        }
+
 
         return _buildMediaBox(
           context,
