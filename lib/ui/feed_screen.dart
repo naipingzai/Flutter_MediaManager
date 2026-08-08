@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../functionality/auth/auth_bloc.dart';
+import '../functionality/auth_bloc.dart';
 import 'dart:io';
-import '../../functionality/feed/feed_bloc.dart';
-import '../../functionality/home/app_bloc.dart';
-import '../../models/post.dart';
-import '../../services/sync_service.dart';
-import '../../utils/media_utils.dart';
-import '../post/create_post_screen.dart';
-import '../post/post_detail_screen.dart';
+import '../functionality/feed_bloc.dart';
+import '../functionality/app_bloc.dart';
+import '../models/post.dart';
+import '../services/sync_service.dart';
+import 'media_utils.dart';
+import 'create_post_screen.dart';
+import 'post_detail_screen.dart';
 
 /// 首页 - 动态信息流
 class FeedScreen extends StatefulWidget {

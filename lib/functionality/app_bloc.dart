@@ -4,16 +4,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:path_provider/path_provider.dart';
-import '../../models/settings.dart';
-import '../../services/local_settings_service.dart';
-import '../../services/log_service.dart';
-import '../../services/sync_service.dart';
+import '../models/settings.dart';
+import '../services/local_settings_service.dart';
+import '../services/log_service.dart';
+import '../services/sync_service.dart';
 
 part 'app_event.dart';
 part 'app_state.dart';
 
-/// 应用级 Bloc，管理全局状态（主题、设置、导航等）
-/// ★ 重构：只依赖 SyncService，不直接依赖 WebDavService
 class AppBloc extends Bloc<AppEvent, AppState> {
   final LocalSettingsService _settingsService = LocalSettingsService();
   LogService? _logService;
@@ -23,7 +21,6 @@ class AppBloc extends Bloc<AppEvent, AppState> {
 
   void setSyncService(SyncService service) {
     _syncService = service;
-    // 重新加载用户资料
     if (state.settings != null) {
       add(const AppInitializeEvent());
     }

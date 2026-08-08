@@ -2,9 +2,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
-import '../../models/post.dart';
-import '../../services/webdav_service.dart';
-import '../../services/log_service.dart';
+import '../models/post.dart';
+import '../services/webdav_service.dart';
+import '../services/log_service.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';

@@ -47,11 +47,24 @@ class ExportHelper {
       }
 
       if (Platform.isAndroid || Platform.isIOS) {
-        // Android / iOS：保存到相册
         final bytes = await File(filePath).readAsBytes();
-        // ★ saver_gallery v4 没有 saveVideo 方法，统一用 saveImage
-        //   saveImage 内部会根据文件头自动判断是图片还是视频，
-        //   iOS 的 Photos 框架和 Android 的 MediaStore 都能正确处理。
+
+        if (isVideo) {
+          // 视频：用 saveFile 保存（saver_gallery v4 的 saveFile 方法）
+          final res = await SaverGallery.saveFile(
+            filePath: filePath,
+            fileName: fileName,
+            skipIfExists: false,
+          );
+          if (res.isSuccess) {
+            return ExportResult.success(
+              Platform.isIOS ? '已保存到 iOS 相册' : '已保存到 Android 相册',
+            );
+          }
+          return ExportResult.failure(res.errorMessage ?? '视频保存失败');
+        }
+
+        // 图片：用 saveImage
         final res = await SaverGallery.saveImage(
           bytes,
           fileName: fileName,

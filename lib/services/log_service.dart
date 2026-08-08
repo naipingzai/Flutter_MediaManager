@@ -2,10 +2,8 @@ import 'dart:collection';
 import 'dart:developer' as developer;
 import 'package:flutter/foundation.dart';
 
-/// 日志级别
 enum LogLevel { info, success, warning, error }
 
-/// 单条日志
 class AppLog {
   final DateTime timestamp;
   final LogLevel level;

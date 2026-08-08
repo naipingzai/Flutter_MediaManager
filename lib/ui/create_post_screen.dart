@@ -2,11 +2,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../functionality/feed/feed_bloc.dart';
-import '../../functionality/auth/auth_bloc.dart';
-import '../../models/post.dart';
-import '../../services/sync_service.dart';
-import '../../utils/media_utils.dart';
+import '../functionality/feed_bloc.dart';
+import '../functionality/auth_bloc.dart';
+import '../models/post.dart';
+import '../services/sync_service.dart';
+import 'media_utils.dart';
 
 /// 发布/编辑动态页面
 class CreatePostScreen extends StatefulWidget {
@@ -79,9 +79,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     }
   }
 
-  /// 从内容中自动提取 #标签
+  // 从内容中自动提取 #标签
   void _extractTagsFromContent(String content) {
-    final regex = RegExp(r'#(\S+)');
+    final regex = RegExp(r'#(\S+)#');
     final matches = regex.allMatches(content);
     final extractedTags = matches.map((m) => m.group(1)!).toSet();
     setState(() {

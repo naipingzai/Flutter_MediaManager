@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../functionality/auth/auth_bloc.dart';
-import '../../functionality/feed/feed_bloc.dart';
-import '../../models/post.dart';
-import '../../services/sync_service.dart';
-import '../../utils/media_utils.dart';
-import '../post/post_detail_screen.dart';
+import '../functionality/auth_bloc.dart';
+import '../functionality/feed_bloc.dart';
+import '../models/post.dart';
+import '../services/sync_service.dart';
+import 'media_utils.dart';
+import 'post_detail_screen.dart';
 
-/// 搜索页面
+// 搜索页面
 class DiscoverScreen extends StatefulWidget {
   const DiscoverScreen({super.key});
 

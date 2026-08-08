@@ -8,47 +8,34 @@ environment:
   sdk: ^3.5.0
 
 dependencies:
+  cryptography: ^2.7.0
   flutter:
     sdk: flutter
 
-  # 状态管理
   bloc: ^8.1.4
   flutter_bloc: ^8.1.6
   equatable: ^2.0.7
   provider: ^6.1.2
 
-  # 图片查看
-  # HTTP 客户端（WebDAV 支持）
   dio: ^5.4.0
 
-  # 图片缓存
-  # 日志
   logger: ^2.4.0
 
-  # 共享偏好设置
   shared_preferences: ^2.3.2
 
-  # 文件路径
   path_provider: ^2.1.4
 
-  # 图片选择
   image_picker: ^1.1.2
 
-  # 视频播放（自带解码器，不依赖系统GStreamer）
-  # 视频缩略图
-  # 音频播放
   just_audio: ^0.9.40
-  # 保存到相册 / 系统下载
+
   saver_gallery: ^4.0.1
 
-  # UUID 生成
   uuid: ^4.5.1
 
-  # 加密
   encrypt: ^5.0.3
   crypto: ^3.0.7
 
-  # 主题/动态颜色
   dynamic_color: ^1.7.2
   extended_image: ^10.1.0
   media_kit: ^1.2.6

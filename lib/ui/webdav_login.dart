@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../functionality/auth/auth_bloc.dart';
-import '../../models/post.dart';
+import '../functionality/auth_bloc.dart';
+import '../models/post.dart';
 
 /// WebDAV 登录页面
 ///

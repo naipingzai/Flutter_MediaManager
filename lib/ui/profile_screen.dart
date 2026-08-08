@@ -4,17 +4,16 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:dio/dio.dart';
-import '../../functionality/feed/feed_bloc.dart';
-import '../../functionality/home/app_bloc.dart';
-import '../../functionality/auth/auth_bloc.dart';
-import '../../services/sync_service.dart';
-import '../../models/settings.dart' show ThemeMode;
-import '../../services/log_service.dart';
-import '../../services/encryption_service.dart';
-import '../log/log_viewer_screen.dart';
-import '../auth/login_screen.dart';
+import '../functionality/feed_bloc.dart';
+import '../functionality/app_bloc.dart';
+import '../functionality/auth_bloc.dart';
+import '../services/sync_service.dart';
+import '../models/settings.dart' show ThemeMode;
+import '../services/log_service.dart';
+import '../services/encryption_service.dart';
+import 'log_viewer_screen.dart';
+import 'webdav_login.dart';
 
-/// 个人中心页面（按 guide.skill 第一节：本地/云端/同步/快照 四大分区）
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -168,7 +167,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) => const LogViewerScreen(),
+                                    builder: (_) => LogViewerScreen(),
                                   ),
                                 );
                               },
@@ -249,7 +248,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  /// 编辑个人资料
+  // 编辑个人资料
   void _editProfile(BuildContext context, AppState appState, ColorScheme cs,
       TextTheme textTheme) {
     final nicknameController =
@@ -340,11 +339,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         String avatarFileName = '';
                         if (avatarPath.isNotEmpty) {
                           if (syncService.hasCloudConnection) {
-                            avatarFileName = await syncService.uploadAvatar(avatarPath) ?? '';
+                            avatarFileName =
+                                await syncService.uploadAvatar(avatarPath) ??
+                                    '';
                           }
                         }
                         // 读取当前本地资料的 avatarFileName
-                        final currentProfile = await syncService.getUserProfile();
+                        final currentProfile =
+                            await syncService.getUserProfile();
                         final savedAvatarFileName = avatarFileName.isNotEmpty
                             ? avatarFileName
                             : currentProfile['avatarFileName'] ?? '';
@@ -647,9 +649,7 @@ class _CloudDataTile extends StatelessWidget {
                       onTap: () {
                         Navigator.pop(ctx);
                         // 登出 → 跳到登录页
-                        context
-                            .read<AuthBloc>()
-                            .add(const AuthLogoutEvent());
+                        context.read<AuthBloc>().add(const AuthLogoutEvent());
                         Navigator.push(
                           context,
                           MaterialPageRoute(

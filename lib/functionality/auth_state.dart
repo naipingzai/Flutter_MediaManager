@@ -3,7 +3,7 @@ part of 'auth_bloc.dart';
 enum AuthStatus {
   initial,
   checking,
-  local,          // 本地模式（未连接WebDAV，但可用）
+  local,
   unauthenticated,
   loggingIn,
   authenticated,

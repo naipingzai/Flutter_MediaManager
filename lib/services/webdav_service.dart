@@ -51,7 +51,6 @@ class CloudLock {
   bool get isExpired => DateTime.now().toUtc().isAfter(expiresAt);
 }
 
-
 class _AvatarColor {
   final double r;
   final double g;
@@ -442,27 +441,16 @@ class WebDavService {
   /// 读取文本文件（自动解密）
   Future<String?> readFile(String url) async {
     try {
-      if (_encryption.isEncryptionEnabled) {
-        // 加密模式：以 bytes 下载后解密
-        final response = await _dio.get<List<int>>(
-          url,
-          options: Options(
-            headers: _headers,
-            responseType: ResponseType.bytes,
-          ),
-        );
-        if (response.data == null) return null;
-        return _encryption.decryptText(Uint8List.fromList(response.data!));
-      } else {
-        final response = await _dio.get<String>(
-          url,
-          options: Options(
-            headers: _headers,
-            responseType: ResponseType.plain,
-          ),
-        );
-        return response.data;
-      }
+      // 加密模式：以 bytes 下载后解密
+      final response = await _dio.get<List<int>>(
+        url,
+        options: Options(
+          headers: _headers,
+          responseType: ResponseType.bytes,
+        ),
+      );
+      if (response.data == null) return null;
+      return _encryption.decryptText(Uint8List.fromList(response.data!));
     } on DioException catch (e) {
       if (e.response?.statusCode == 404) return null;
       _logService?.error('读取文件失败', detail: '$url - ${e.message}');
@@ -474,9 +462,8 @@ class WebDavService {
   /// 写入文本文件（自动加密 + 自动创建父目录）
   Future<void> writeFile(String url, String content) async {
     try {
-      final data = _encryption.isEncryptionEnabled
-          ? _encryption.encryptText(content)
-          : utf8.encode(content);
+      final data = _encryption.encryptText(content);
+
       await _dio.put(
         url,
         data: data,
@@ -494,9 +481,8 @@ class WebDavService {
         final dir = url.substring(0, url.lastIndexOf('/'));
         await _mkcol('$dir/');
         try {
-          final retryData = _encryption.isEncryptionEnabled
-              ? _encryption.encryptText(content)
-              : utf8.encode(content);
+          final retryData = _encryption.encryptText(content);
+
           await _dio.put(
             url,
             data: retryData,
@@ -527,9 +513,7 @@ class WebDavService {
     try {
       final file = File(localPath);
       final bytes = await file.readAsBytes();
-      final data = _encryption.isEncryptionEnabled
-          ? _encryption.encryptBytes(Uint8List.fromList(bytes))
-          : Uint8List.fromList(bytes);
+      final data = _encryption.encryptBytes(Uint8List.fromList(bytes));
       await _dio.put(
         remoteUrl,
         data: data,
@@ -555,9 +539,8 @@ class WebDavService {
         try {
           final file2 = File(localPath);
           final bytes2 = await file2.readAsBytes();
-          final data2 = _encryption.isEncryptionEnabled
-              ? _encryption.encryptBytes(Uint8List.fromList(bytes2))
-              : Uint8List.fromList(bytes2);
+          final data2 = _encryption.encryptBytes(Uint8List.fromList(bytes2));
+
           await _dio.put(
             remoteUrl,
             data: data2,
@@ -592,9 +575,8 @@ class WebDavService {
   }) async {
     final file = File(localPath);
     final bytes = await file.readAsBytes();
-    final data = _encryption.isEncryptionEnabled
-        ? _encryption.encryptBytes(Uint8List.fromList(bytes))
-        : Uint8List.fromList(bytes);
+    final data = _encryption.encryptBytes(Uint8List.fromList(bytes));
+
     final startTime = DateTime.now();
 
     try {
@@ -663,9 +645,8 @@ class WebDavService {
         ),
       );
       var data = Uint8List.fromList(response.data!);
-      if (_encryption.isEncryptionEnabled) {
-        data = _encryption.decryptBytes(data);
-      }
+      data = _encryption.decryptBytes(data);
+
       final file = File(localPath);
       await file.writeAsBytes(data);
       _log('下载文件成功', detail: '$remoteUrl -> $localPath');
@@ -891,7 +872,8 @@ class WebDavService {
   Future<String> _generateDefaultAvatar(String nickname) async {
     // 使用 path_provider 获取临时目录
     final dir = await getTemporaryDirectory();
-    final path = '${dir.path}/default_avatar_${DateTime.now().millisecondsSinceEpoch}.png';
+    final path =
+        '${dir.path}/default_avatar_${DateTime.now().millisecondsSinceEpoch}.png';
 
     // 用纯色背景 PNG 作为默认头像（颜色由昵称哈希稳定生成）
     final color = _colorFromString(nickname);

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../functionality/home/app_bloc.dart';
-import '../feed/feed_screen.dart';
-import '../discover/discover_screen.dart';
-import '../profile/profile_screen.dart';
+import '../functionality/app_bloc.dart';
+import 'feed_screen.dart';
+import 'discover_screen.dart';
+import 'profile_screen.dart';
 
 /// 主屏幕，包含底部导航栏（3 个 Tab）
 class HomeScreen extends StatelessWidget {

@@ -91,16 +91,11 @@ class SyncService {
   EncryptionService? _encryption;
   Dio? _dio;
 
-  // ★ 重构：WebDavService 作为可选注入（唯一桥梁）
-  //   所有 WebDAV 操作都通过 SyncService 代理，外部不再直接依赖 WebDavService
   WebDavService? _webDavService;
   bool get hasCloudConnection => _webDavService != null;
-  bool get encryptionEnabled => _encryption != null && _encryption!.isEncryptionEnabled;
 
-  /// 加密服务（供 UI 层图片解密用）
   EncryptionService? get encryption => _encryption;
 
-  /// 注入 WebDavService（登录成功后调用，退出登录时传 null）
   void setWebDavService(WebDavService? service) {
     _webDavService = service;
     if (service != null) {
@@ -151,44 +146,43 @@ class SyncService {
     );
   }
 
-  /// 加载云端用户资料
+  // 加载云端用户资料
   Future<Map<String, dynamic>?> loadUserProfile() async {
     if (_webDavService == null) return null;
     return await _webDavService!.loadUserProfile();
   }
 
-  /// 清除云端所有数据
+  // 清除云端所有数据
   Future<void> clearCloudData() async {
     if (_webDavService == null) return;
     await _webDavService!.clearAllData();
   }
 
-  /// 上传文件到云端（带进度回调）
+  // 上传文件到云端（带进度回调）
   Future<void> uploadWithProgress(
     String localPath,
     String remoteUrl, {
     void Function(double progress, String speedText)? onProgress,
   }) async {
     if (_webDavService == null) return;
-    await _webDavService!.uploadFileWithProgress(localPath, remoteUrl, onProgress: onProgress);
+    await _webDavService!
+        .uploadFileWithProgress(localPath, remoteUrl, onProgress: onProgress);
   }
 
-  // ─── 一键同步（供 UI 层直接调用） ───
-
-  /// 执行完整同步：推送本地数据到云端 + 拉取云端数据
+  // ─── 一键同步 ───
   Future<bool> performFullSync({String? nickname, String? avatarPath}) async {
     if (_webDavService == null) return false;
     final data = await loadLocalData();
     if (data == null) return false;
 
-    final ok = await _pushToCloudInternal(data, nickname: nickname, avatarPath: avatarPath);
+    final ok = await _pushToCloudInternal(data,
+        nickname: nickname, avatarPath: avatarPath);
     if (ok) {
       await createSnapshot(data);
     }
     return ok;
   }
 
-  /// 内部推送实现（不再需要外部回调）
   Future<bool> _pushToCloudInternal(
     JournalData data, {
     String? nickname,
@@ -207,7 +201,6 @@ class SyncService {
       var uploadedCount = 0;
       final mediaUrl = _webDavService!.config.mediaUrl;
 
-      // 1. 上传本地媒体文件到云端
       for (final fileName in List<String>.from(_localMediaFiles)) {
         _currentFileName = fileName;
         try {
@@ -219,13 +212,13 @@ class SyncService {
             uploadedCount++;
           }
         } catch (e) {
-          _logService?.warn('推送失败: $fileName', detail: e.toString(), source: 'Sync');
+          _logService?.warn('推送失败: $fileName',
+              detail: e.toString(), source: 'Sync');
         }
         _syncedCount++;
         _notifyStateChanged();
       }
 
-      // 2. 上传用户资料
       try {
         await _webDavService!.saveUserProfileWithDefaults(
           nickname: nickname ?? '媒体管理',
@@ -235,7 +228,6 @@ class SyncService {
         _logService?.warn('上传用户资料失败', detail: e.toString(), source: 'Sync');
       }
 
-      // 3. 上传 data.json
       await _webDavService!.saveJournalData(data);
 
       _currentFileName = null;
@@ -249,7 +241,8 @@ class SyncService {
         downloadedCount: 0,
       );
       _setStatus(SyncStatus.success);
-      _logService?.success('同步完成', detail: '上传 $uploadedCount 个文件', source: 'Sync');
+      _logService?.success('同步完成',
+          detail: '上传 $uploadedCount 个文件', source: 'Sync');
       return true;
     } catch (e) {
       _setStatus(SyncStatus.failed);
@@ -474,11 +467,7 @@ class SyncService {
       );
 
       var data = Uint8List.fromList(response.data!);
-
-      // 解密（如果启用加密）
-      if (_encryption != null && _encryption!.isEncryptionEnabled) {
-        data = _encryption!.decryptBytes(data);
-      }
+      data = _encryption!.decryptBytes(data);
 
       final path = await getLocalMediaPath(fileName);
       await File(path).writeAsBytes(data);
@@ -627,8 +616,11 @@ class SyncService {
     merged.sort((a, b) => b.createdAt.compareTo(a.createdAt));
 
     // 用户资料：优先保留本地（避免云端旧数据覆盖本地新数据）
-    final mergedNickname = local.nickname.isNotEmpty ? local.nickname : remote.nickname;
-    final mergedAvatar = local.avatarFileName.isNotEmpty ? local.avatarFileName : remote.avatarFileName;
+    final mergedNickname =
+        local.nickname.isNotEmpty ? local.nickname : remote.nickname;
+    final mergedAvatar = local.avatarFileName.isNotEmpty
+        ? local.avatarFileName
+        : remote.avatarFileName;
 
     return JournalData(
       version: 1,

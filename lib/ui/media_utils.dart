@@ -4,40 +4,24 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Image;
 import 'package:flutter/widgets.dart';
-import '../functionality/feed/feed_bloc.dart';
+import '../functionality/feed_bloc.dart';
 import '../services/encryption_service.dart';
 import '../services/sync_service.dart';
 
-/// 媒体文件工具类
-///
-/// **设计原则**：本地数据是基础，WebDAV 同步是可选增强功能。
-/// UI 层优先加载本地文件；本地不存在时 **按需从 WebDAV 下载** 并缓存。
 class MediaUtils {
   static SyncService? syncService;
 
-  /// 构造媒体 URL（用于加密模式下临时预览或旧兼容）
   static String? buildMediaUrl(FeedState state, String fileName) {
     final baseUrl = state.mediaBaseUrl;
     if (baseUrl == null) return null;
     return '$baseUrl/$fileName';
   }
 
-  /// 取首张图片 URL（旧兼容）
   static String? getFirstImageUrl(FeedState state, List<String> mediaFiles) {
     if (mediaFiles.isEmpty) return null;
     return buildMediaUrl(state, mediaFiles.first);
   }
 
-  /// 构建图片 Widget
-  ///
-  /// **加载策略**：
-  /// 1. 本地有 → 直接用 `Image.file` 显示
-  /// 2. 本地没有 → 从 WebDAV 按需下载（如果提供了 imageUrl + httpHeaders）
-  /// 3. 下载失败 → 显示占位图标
-  ///
-  /// **为什么保留 imageUrl / httpHeaders / encryption？**
-  /// iOS 端首次打开时本地可能没有媒体文件（尚未同步），
-  /// 如果不传远程 URL，图片会一直显示占位符。
   static Widget buildImage({
     required String fileName,
     required double width,
@@ -65,7 +49,6 @@ class MediaUtils {
     );
   }
 
-  /// 构建全宽图片 Widget（旧兼容）
   static Widget buildFullWidthImage({
     required String fileName,
     required double screenWidth,
@@ -105,7 +88,8 @@ class MediaUtils {
       color: const Color(0xFFF5F5F5),
       child: const Center(
         child: SizedBox(
-          width: 24, height: 24,
+          width: 24,
+          height: 24,
           child: CircularProgressIndicator(strokeWidth: 2),
         ),
       ),
@@ -113,13 +97,6 @@ class MediaUtils {
   }
 }
 
-/// 可加载本地/远程图片的 Widget
-///
-/// **加载策略**：
-/// 1. 检查本地文件是否存在
-/// 2. 本地存在 → 直接 `Image.file`
-/// 3. 本地不存在但有远程 URL → 按需下载 → 缓存到本地 → 显示
-/// 4. 都没有 → 显示占位符
 class _LoadableImage extends StatefulWidget {
   final String fileName;
   final double width;
@@ -162,7 +139,10 @@ class _LoadableImageState extends State<_LoadableImage> {
     final sync = MediaUtils.syncService;
     if (sync == null) {
       if (!mounted) return;
-      setState(() { _loading = false; _error = true; });
+      setState(() {
+        _loading = false;
+        _error = true;
+      });
       return;
     }
 
@@ -174,7 +154,10 @@ class _LoadableImageState extends State<_LoadableImage> {
       if (await file.exists()) {
         final bytes = await file.readAsBytes();
         if (!mounted) return;
-        setState(() { _bytes = bytes; _loading = false; });
+        setState(() {
+          _bytes = bytes;
+          _loading = false;
+        });
         return;
       }
 
@@ -192,8 +175,7 @@ class _LoadableImageState extends State<_LoadableImage> {
         if (response.data != null) {
           var data = Uint8List.fromList(response.data!);
           // 解密
-          if (widget.encryption != null &&
-              widget.encryption!.isEncryptionEnabled) {
+          if (widget.encryption != null) {
             data = widget.encryption!.decryptBytes(data);
           }
           // 缓存到本地
@@ -202,17 +184,26 @@ class _LoadableImageState extends State<_LoadableImage> {
             sync.localMediaFiles.add(widget.fileName);
           } catch (_) {}
           if (!mounted) return;
-          setState(() { _bytes = data; _loading = false; });
+          setState(() {
+            _bytes = data;
+            _loading = false;
+          });
           return;
         }
       }
 
       // 3. 都没有
       if (!mounted) return;
-      setState(() { _loading = false; _error = true; });
+      setState(() {
+        _loading = false;
+        _error = true;
+      });
     } catch (e) {
       if (!mounted) return;
-      setState(() { _loading = false; _error = true; });
+      setState(() {
+        _loading = false;
+        _error = true;
+      });
     }
   }
 
@@ -226,9 +217,6 @@ class _LoadableImageState extends State<_LoadableImage> {
       return MediaUtils._placeholder(widget.width, widget.height);
     }
 
-    // ★ iOS 兼容：使用 Image.memory（bytes）而不是 Image.file。
-    //   原因：按需下载的文件写入后，iOS 的 Image.file 可能因 sandbox 延迟
-    //   而无法立即读取；Image.memory 直接使用已下载的 bytes，最可靠。
     Widget image = Image.memory(
       _bytes!,
       width: widget.width,

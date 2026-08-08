@@ -4,15 +4,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:uuid/uuid.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
-import '../../models/post.dart';
-import '../../services/sync_service.dart';
-import '../../services/log_service.dart';
-import '../../utils/error_helper.dart';
+import '../models/post.dart';
+import '../services/sync_service.dart';
+import '../services/log_service.dart';
+import '../ui/error_helper.dart';
 
 part 'feed_event.dart';
 part 'feed_state.dart';
 
 const _uuid = Uuid();
+
+/// 后台 isolate 复制文件（compute 的顶层函数）
+Future<void> _copyFileInIsolate((String, String) args) async {
+  await File(args.$1).copy(args.$2);
+}
 
 class FeedBloc extends Bloc<FeedEvent, FeedState> {
   /// ★ 重构：只依赖 SyncService，不直接依赖 WebDavService
@@ -98,8 +103,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
         }
         if (!isClosed) add(const FeedRefreshEvent());
       }).catchError((e) {
-        _logService?.warn('后台拉取云端数据失败',
-            detail: e.toString(), source: 'Feed');
+        _logService?.warn('后台拉取云端数据失败', detail: e.toString(), source: 'Feed');
         if (_journalData == null || _journalData!.posts.isEmpty) {
           if (!isClosed && ErrorHelper.isAuthError(e)) {
             onAuthError?.call();
@@ -125,7 +129,6 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
       // 通过 SyncService 获取云端信息（UI 层不再直接依赖 WebDavService）
       mediaBaseUrl: _syncService?.mediaBaseUrl,
       imageHeaders: _syncService?.imageHeaders ?? {},
-      encryptionEnabled: _syncService?.encryptionEnabled ?? false,
     ));
   }
 
@@ -186,12 +189,11 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
 
         if (!kIsWeb && !Platform.isLinux && !Platform.isWindows) {
           try {
-            final thumbPath = await _generateVideoThumbnail(
-                event.videoPath!, videoFileName);
+            final thumbPath =
+                await _generateVideoThumbnail(event.videoPath!, videoFileName);
             if (thumbPath != null) videoThumbnail = thumbPath;
           } catch (e) {
-            _logService?.warn('视频封面生成跳过',
-                detail: e.toString(), source: 'Feed');
+            _logService?.warn('视频封面生成跳过', detail: e.toString(), source: 'Feed');
           }
         }
       }
@@ -251,8 +253,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
         uploadStatusText: '发布完成',
       ));
     } catch (e) {
-      _logService?.error('创建帖子失败',
-          detail: e.toString(), source: 'Feed');
+      _logService?.error('创建帖子失败', detail: e.toString(), source: 'Feed');
       emit(state.copyWith(
         status: FeedStatus.error,
         errorMessage: '发布失败: $e',
@@ -289,8 +290,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
     final thumbFileName =
         videoFileName.replaceAll(RegExp(r'\.[^.]+$'), '.thumb.jpg');
     await _saveMediaFileLocally(outPath, thumbFileName);
-    _logService?.info('视频封面已生成',
-        detail: thumbFileName, source: 'Feed');
+    _logService?.info('视频封面已生成', detail: thumbFileName, source: 'Feed');
     return thumbFileName;
   }
 
@@ -305,11 +305,11 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
 
   String _pad(int n) => n.toString().padLeft(2, '0');
 
-  Future<void> _saveMediaFileLocally(
-      String sourcePath, String fileName) async {
+  Future<void> _saveMediaFileLocally(String sourcePath, String fileName) async {
     if (_syncService != null) {
       final localPath = await _syncService!.getLocalMediaPath(fileName);
-      await File(sourcePath).copy(localPath);
+      // 使用后台 isolate 复制文件，避免大文件阻塞 UI
+      await compute(_copyFileInIsolate, (sourcePath, localPath));
       _syncService!.localMediaFiles.add(fileName);
       _logService?.info('本地保存媒体: $fileName', source: 'Feed');
     }
@@ -412,8 +412,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
         uploadStatusText: '编辑完成',
       ));
     } catch (e) {
-      _logService?.error('编辑帖子失败',
-          detail: e.toString(), source: 'Feed');
+      _logService?.error('编辑帖子失败', detail: e.toString(), source: 'Feed');
       emit(state.copyWith(
         status: FeedStatus.error,
         errorMessage: '编辑失败: $e',
@@ -433,9 +432,8 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
         detail: 'postId=${event.postId}', source: 'Feed');
     try {
       emit(state.copyWith(status: FeedStatus.syncing));
-      final post = _journalData!
-          .posts.where((p) => p.id == event.postId)
-          .firstOrNull;
+      final post =
+          _journalData!.posts.where((p) => p.id == event.postId).firstOrNull;
 
       if (post == null) {
         _logService?.warn('删除帖子失败：未找到帖子',
@@ -463,7 +461,8 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
         }
       }
 
-      final updatedPosts = _journalData!.posts.where((p) => p.id != event.postId).toList();
+      final updatedPosts =
+          _journalData!.posts.where((p) => p.id != event.postId).toList();
       _journalData = JournalData(
         version: 1,
         lastModified: DateTime.now().toUtc(),
@@ -486,10 +485,8 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
             startDate: state.filterStartDate, endDate: state.filterEndDate),
       ));
     } catch (e) {
-      _logService?.error('删除帖子失败',
-          detail: e.toString(), source: 'Feed');
-      emit(state.copyWith(
-          status: FeedStatus.error, errorMessage: '删除失败: $e'));
+      _logService?.error('删除帖子失败', detail: e.toString(), source: 'Feed');
+      emit(state.copyWith(status: FeedStatus.error, errorMessage: '删除失败: $e'));
     }
   }
 
@@ -514,8 +511,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
   }
 
   void _onFilterByTag(FeedFilterByTagEvent event, Emitter<FeedState> emit) {
-    _logService?.info('按标签过滤',
-        detail: 'tag=${event.tag}', source: 'Feed');
+    _logService?.info('按标签过滤', detail: 'tag=${event.tag}', source: 'Feed');
     final results = _applyAllFilters(
         state.posts, state.searchKeyword, event.tag,
         startDate: state.filterStartDate, endDate: state.filterEndDate);
@@ -542,8 +538,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
   }
 
   void _onSortChanged(FeedSortChangedEvent event, Emitter<FeedState> emit) {
-    _logService?.info('切换排序',
-        detail: 'sort=${event.sortMode}', source: 'Feed');
+    _logService?.info('切换排序', detail: 'sort=${event.sortMode}', source: 'Feed');
     final sorted = _applySort(state.posts, event.sortMode);
     final filtered = _applyAllFilters(
         sorted, state.searchKeyword, state.selectedTag,
@@ -583,8 +578,8 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
         sorted.sort((a, b) =>
             b.content.toLowerCase().compareTo(a.content.toLowerCase()));
       case FeedSortMode.mediaCountDesc:
-        sorted.sort(
-            (a, b) => b.mediaFiles.length.compareTo(a.mediaFiles.length));
+        sorted
+            .sort((a, b) => b.mediaFiles.length.compareTo(a.mediaFiles.length));
     }
     return sorted;
   }
@@ -615,8 +610,8 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
     }
     if (endDate != null) {
       result = result
-          .where((p) =>
-              p.createdAt.isBefore(endDate.add(const Duration(days: 1))))
+          .where(
+              (p) => p.createdAt.isBefore(endDate.add(const Duration(days: 1))))
           .toList();
     }
     return result;

@@ -32,9 +32,6 @@ class FeedState extends Equatable {
   /// 用于给 [CachedNetworkImage] 加载 WebDAV 资源的认证请求头。
   final Map<String, String> imageHeaders;
 
-  /// 是否启用加密（用于 UI 层判断是否需要解密图片）
-  final bool encryptionEnabled;
-
   /// 当前发布进度 0.0 ~ 1.0；没有发布任务时为 0
   final double uploadProgress;
 
@@ -60,7 +57,6 @@ class FeedState extends Equatable {
     this.imageHeaders = const {},
     this.uploadProgress = 0,
     this.uploadStatusText,
-    this.encryptionEnabled = false,
     this.sortMode = FeedSortMode.newest,
     this.filterStartDate,
     this.filterEndDate,
@@ -78,7 +74,6 @@ class FeedState extends Equatable {
     Map<String, String>? imageHeaders,
     double? uploadProgress,
     String? uploadStatusText,
-    bool? encryptionEnabled,
     FeedSortMode? sortMode,
     DateTime? filterStartDate,
     DateTime? filterEndDate,
@@ -96,7 +91,6 @@ class FeedState extends Equatable {
       imageHeaders: imageHeaders ?? this.imageHeaders,
       uploadProgress: uploadProgress ?? this.uploadProgress,
       uploadStatusText: uploadStatusText ?? this.uploadStatusText,
-      encryptionEnabled: encryptionEnabled ?? this.encryptionEnabled,
       sortMode: sortMode ?? this.sortMode,
       filterStartDate:
           clearDateFilter ? null : (filterStartDate ?? this.filterStartDate),
@@ -118,7 +112,6 @@ class FeedState extends Equatable {
         imageHeaders,
         uploadProgress,
         uploadStatusText,
-        encryptionEnabled,
         sortMode,
         filterStartDate,
         filterEndDate,
