@@ -40,10 +40,12 @@ class _FlutterMediaManagerState extends State<FlutterMediaManager> {
     final appBloc = context.read<AppBloc>();
     final feedBloc = context.read<FeedBloc>();
 
+    final authBloc = context.read<AuthBloc>();
     syncService.setLogService(logService);
     MediaUtils.syncService = syncService;
     feedBloc.setSyncService(syncService);
     feedBloc.setLogService(logService);
+    authBloc.setSyncService(syncService);
 
     // 认证错误回调（401/403 自动登出）
     feedBloc.setOnAuthError(() {
@@ -61,6 +63,11 @@ class _FlutterMediaManagerState extends State<FlutterMediaManager> {
     final syncInterval = settings?.syncInterval ?? 60;
     syncService.setEnabled(syncEnabled);
     syncService.setSyncInterval(syncInterval);
+
+    // 连接已有后端（已登录的情况下）
+    if (authBloc.state.status == AuthStatus.authenticated && authBloc.webDavService != null) {
+      syncService.setBackend(authBloc.webDavService);
+    }
 
     // 后台同步（仅在有云端连接时启动）
     if (syncService.hasCloudConnection && syncEnabled) {

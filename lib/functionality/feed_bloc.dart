@@ -308,8 +308,7 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
   Future<void> _saveMediaFileLocally(String sourcePath, String fileName) async {
     if (_syncService != null) {
       final localPath = await _syncService!.getLocalMediaPath(fileName);
-      // 使用后台 isolate 复制文件，避免大文件阻塞 UI
-      await compute(_copyFileInIsolate, (sourcePath, localPath));
+      await File(sourcePath).copy(localPath);
       _syncService!.localMediaFiles.add(fileName);
       _logService?.info('本地保存媒体: $fileName', source: 'Feed');
     }

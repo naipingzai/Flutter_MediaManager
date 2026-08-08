@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import '../models/post.dart';
+import '../services/sync_service.dart';
 import '../services/webdav_service.dart';
 import '../services/log_service.dart';
 
@@ -11,6 +12,7 @@ part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   WebDavService? _webDavService;
+  SyncService? _syncService;
   LogService? _logService;
 
   set webDavLogger(LogService logger) => _logService = logger;
@@ -23,6 +25,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   WebDavService? get webDavService => _webDavService;
+  void setSyncService(SyncService service) => _syncService = service;
 
   void _log(String title, {String? detail, bool error = false}) {
     _logService?.log(
@@ -77,6 +80,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           detail: config.rootUrl, error: !connected);
       if (connected) {
         emit(state.copyWith(status: AuthStatus.authenticated, config: config));
+      // 连接 WebDavService 到 SyncService
+      _syncService?.setBackend(_webDavService);
       } else {
         // 连接失败不清除配置，进入本地模式（配置保留以便重试）
         emit(state.copyWith(status: AuthStatus.local, config: config));
@@ -122,6 +127,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await prefs.setString('webdav_config', jsonEncode(config.toJson()));
       _log('登录成功，配置已保存');
       emit(state.copyWith(status: AuthStatus.authenticated, config: config));
+      // 连接 WebDavService 到 SyncService
+      _syncService?.setBackend(_webDavService);
     } catch (e) {
       _logService?.error('登录异常', detail: e.toString());
       emit(state.copyWith(
@@ -136,6 +143,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     //  修复：原来用 prefs.clear() 会误删所有 SharedPreferences，导致用户退出登录后
     //  丢失本地设置（昵称、头像路径、主题等），并使云端数据管理切换逻辑出错
     await prefs.remove('webdav_config');
+    _syncService?.setBackend(null);
     _webDavService = null;
     emit(const AuthState(status: AuthStatus.unauthenticated));
   }
