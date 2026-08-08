@@ -8,7 +8,7 @@ import 'package:flutter/foundation.dart';
 import '../models/post.dart';
 import 'encryption_service.dart';
 import 'log_service.dart';
-import 'webdav_service.dart';
+import 'sync_backend.dart';
 
 /// 数据同步状态
 enum SyncStatus {
@@ -91,47 +91,48 @@ class SyncService {
   EncryptionService? _encryption;
   Dio? _dio;
 
-  WebDavService? _webDavService;
-  bool get hasCloudConnection => _webDavService != null;
+  SyncBackend? _backend;
+  bool get hasCloudConnection => _backend != null;
 
   EncryptionService? get encryption => _encryption;
 
-  void setWebDavService(WebDavService? service) {
-    _webDavService = service;
-    if (service != null) {
-      _encryption = service.encryption;
+  /// 设置同步后端（登录成功后调用，退出登录时传 null）
+  void setBackend(SyncBackend? backend) {
+    _backend = backend;
+    if (backend != null) {
+      _encryption = backend.encryption;
     }
   }
 
   /// 获取媒体认证请求头（供 UI 层图片加载用）
-  Map<String, String> get imageHeaders => _webDavService?.imageHeaders ?? {};
+  Map<String, String> get imageHeaders => _backend?.imageHeaders ?? {};
 
   /// 获取云端媒体文件 URL
   String? getMediaUrl(String fileName) {
-    return _webDavService?.getMediaUrl(fileName);
+    return _backend?.getMediaUrl(fileName);
   }
 
   /// 获取云端媒体基础 URL
-  String? get mediaBaseUrl => _webDavService?.config.mediaUrl;
+  String? get mediaBaseUrl => _backend?.mediaBaseUrl;
 
   // ─── WebDAV 代理方法（对内使用，外部不应直接调用） ───
 
   /// 从云端加载 JournalData
   Future<JournalData?> loadRemoteData() async {
-    if (_webDavService == null) return null;
-    return await _webDavService!.loadJournalData();
+    if (_backend == null) return null;
+    return await _backend!.loadData();
   }
 
   /// 保存 JournalData 到云端（带锁保护）
   Future<void> saveRemoteData(JournalData data) async {
-    if (_webDavService == null) return;
-    await _webDavService!.saveJournalData(data);
+    if (_backend == null) return;
+    await _backend!.saveData(data);
   }
 
   /// 上传本地文件到云端
   Future<void> uploadToCloud(String localPath, String remoteUrl) async {
-    if (_webDavService == null) return;
-    await _webDavService!.uploadFile(localPath, remoteUrl);
+    if (_backend == null) return;
+    await _backend!.uploadFile(localPath, remoteUrl);
   }
 
   /// 上传用户资料到云端
@@ -139,8 +140,8 @@ class SyncService {
     required String nickname,
     required String localAvatarPath,
   }) async {
-    if (_webDavService == null) return;
-    await _webDavService!.saveUserProfileWithDefaults(
+    if (_backend == null) return;
+    await _backend!.saveUserProfile(
       nickname: nickname,
       localAvatarPath: localAvatarPath,
     );
@@ -148,14 +149,14 @@ class SyncService {
 
   // 加载云端用户资料
   Future<Map<String, dynamic>?> loadUserProfile() async {
-    if (_webDavService == null) return null;
-    return await _webDavService!.loadUserProfile();
+    if (_backend == null) return null;
+    return await _backend!.loadUserProfile();
   }
 
   // 清除云端所有数据
   Future<void> clearCloudData() async {
-    if (_webDavService == null) return;
-    await _webDavService!.clearAllData();
+    if (_backend == null) return;
+    await _backend!.clearAllData();
   }
 
   // 上传文件到云端（带进度回调）
@@ -164,14 +165,14 @@ class SyncService {
     String remoteUrl, {
     void Function(double progress, String speedText)? onProgress,
   }) async {
-    if (_webDavService == null) return;
-    await _webDavService!
+    if (_backend == null) return;
+    await _backend!
         .uploadFileWithProgress(localPath, remoteUrl, onProgress: onProgress);
   }
 
   // ─── 一键同步 ───
   Future<bool> performFullSync({String? nickname, String? avatarPath}) async {
-    if (_webDavService == null) return false;
+    if (_backend == null) return false;
     final data = await loadLocalData();
     if (data == null) return false;
 
@@ -188,7 +189,7 @@ class SyncService {
     String? nickname,
     String? avatarPath,
   }) async {
-    if (_webDavService == null) return false;
+    if (_backend == null) return false;
     try {
       _setStatus(SyncStatus.syncing);
       _syncedCount = 0;
@@ -199,7 +200,7 @@ class SyncService {
       _notifyStateChanged();
 
       var uploadedCount = 0;
-      final mediaUrl = _webDavService!.config.mediaUrl;
+      final mediaUrl = _backend!.mediaBaseUrl!;
 
       for (final fileName in List<String>.from(_localMediaFiles)) {
         _currentFileName = fileName;
@@ -208,7 +209,7 @@ class SyncService {
           final localPath = await getLocalMediaPath(fileName);
           final localFile = File(localPath);
           if (await localFile.exists()) {
-            await _webDavService!.uploadFile(localPath, remoteUrl);
+            await _backend!.uploadFile(localPath, remoteUrl);
             uploadedCount++;
           }
         } catch (e) {
@@ -220,7 +221,7 @@ class SyncService {
       }
 
       try {
-        await _webDavService!.saveUserProfileWithDefaults(
+        await _backend!.saveUserProfile(
           nickname: nickname ?? '媒体管理',
           localAvatarPath: avatarPath ?? '',
         );
@@ -228,7 +229,7 @@ class SyncService {
         _logService?.warn('上传用户资料失败', detail: e.toString(), source: 'Sync');
       }
 
-      await _webDavService!.saveJournalData(data);
+      await _backend!.saveData(data);
 
       _currentFileName = null;
       _pendingSync = false;
@@ -256,7 +257,7 @@ class SyncService {
 
   /// 后台推送（如果有待同步数据）
   Future<void> pushPendingData() async {
-    if (_webDavService == null || !_pendingSync) return;
+    if (_backend == null || !_pendingSync) return;
     final data = await loadLocalData();
     if (data == null) return;
     _logService?.info('后台推送待同步数据...', source: 'Sync');
@@ -266,12 +267,13 @@ class SyncService {
 
   /// 后台拉取云端数据并合并
   Future<JournalData?> pullAndMerge({JournalData? localData}) async {
-    if (_webDavService == null) return null;
+    if (_backend == null) return null;
     try {
       _setStatus(SyncStatus.syncing);
       _notifyStateChanged();
 
-      final remote = await _webDavService!.loadJournalData();
+      final remote = await _backend!.loadData();
+      if (remote == null) return null;
       final merged = _mergeData(localData, remote);
       await saveLocalData(merged);
 
@@ -911,9 +913,10 @@ class SyncService {
 
   /// 上传头像文件到云端，返回文件名
   Future<String?> uploadAvatar(String localPath) async {
-    if (_webDavService == null) return null;
+    if (_backend == null) return null;
     try {
-      return await _webDavService!.uploadAvatar(localPath);
+      await _backend!.uploadFile(localPath, localPath); // localPath used as key placeholder
+      return localPath.split("/").last;
     } catch (e) {
       _logService?.warn('上传头像失败', detail: e.toString(), source: 'Sync');
       return null;

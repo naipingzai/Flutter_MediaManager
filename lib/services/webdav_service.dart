@@ -1,3 +1,4 @@
+import 'sync_backend.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
@@ -59,7 +60,7 @@ class _AvatarColor {
 }
 
 /// WebDAV 服务客户端
-class WebDavService {
+class WebDavService implements SyncBackend {
   final WebDavConfig config;
   final Dio _dio;
   final String _authHeader;
@@ -150,6 +151,10 @@ class WebDavService {
   }
 
   /// 加密服务（供外部访问，如图片加载时解密）
+  @override
+  String get name => 'WebDAV';
+
+  @override
   EncryptionService get encryption => _encryption;
 
   /// 通用请求头
@@ -161,6 +166,7 @@ class WebDavService {
   ///
   /// WebDAV 服务器几乎都不允许匿名 GET，必须带上 Authorization
   /// 才能拿到上传后的图片/视频。否则会 401 导致图片黑屏。
+  @override
   Map<String, String> get imageHeaders => {
         'Authorization': _authHeader,
       };
@@ -509,6 +515,7 @@ class WebDavService {
   }
 
   /// 上传文件（自动加密 + 自动创建父目录）
+  @override
   Future<void> uploadFile(String localPath, String remoteUrl) async {
     try {
       final file = File(localPath);
@@ -568,6 +575,7 @@ class WebDavService {
   }
 
   /// 上传文件（带进度和速度回调）
+  @override
   Future<void> uploadFileWithProgress(
     String localPath,
     String remoteUrl, {
@@ -817,12 +825,13 @@ class WebDavService {
   }
 
   /// 获取媒体文件完整 URL
-  String getMediaUrl(String fileName) {
+  @override
+  String? getMediaUrl(String fileName) {
     return '${config.mediaUrl}/$fileName';
   }
 
   /// 保存用户资料到 WebDAV
-  Future<void> saveUserProfile(Map<String, dynamic> profile) async {
+  Future<void> saveUserProfileRaw(Map<String, dynamic> profile) async {
     _log('保存用户资料', detail: config.profileUrl);
     final json = jsonEncode(profile);
     await writeFile(config.profileUrl, json);
@@ -832,6 +841,7 @@ class WebDavService {
   ///
   /// 如果本地没有头像（[localAvatarPath] 为空），则生成一张默认头像（取昵称首字）
   /// 并上传到云端。无论头像是否存在，都会保存 profile.json。
+  @override
   Future<String> saveUserProfileWithDefaults({
     required String nickname,
     required String localAvatarPath,
@@ -863,7 +873,7 @@ class WebDavService {
       'nickname': nickname,
       'avatarFileName': avatarFileName ?? '',
     };
-    await saveUserProfile(profile);
+    await saveUserProfileRaw(profile);
     _log('用户资料已同步到云端', detail: 'nickname=$nickname');
     return avatarFileName ?? '';
   }
@@ -1044,6 +1054,7 @@ class WebDavService {
   /// 加载用户资料从 WebDAV
   ///
   /// 返回 null 表示 profile.json 不存在或格式无效（首次使用为正常情况）
+  @override
   Future<Map<String, dynamic>?> loadUserProfile() async {
     _log('加载用户资料', detail: config.profileUrl);
     try {
@@ -1078,6 +1089,35 @@ class WebDavService {
   }
 
   /// 清除 WebDAV 上所有 APP 数据（媒体文件 + data.json + debug）
+  @override
+  String? get mediaBaseUrl => config.mediaUrl;
+
+  @override
+  Future<JournalData?> loadData() async {
+    try {
+      return await loadJournalData();
+    } catch (_) {
+      return null;
+    }
+  }
+
+  @override
+  Future<void> saveData(JournalData data) async {
+    await saveJournalData(data);
+  }
+
+  @override
+  Future<void> saveUserProfile({
+    required String nickname,
+    required String localAvatarPath,
+  }) async {
+    await saveUserProfileWithDefaults(
+      nickname: nickname,
+      localAvatarPath: localAvatarPath,
+    );
+  }
+
+  @override
   Future<void> clearAllData() async {
     _log('开始清除 WebDAV 数据', detail: config.rootUrl);
 
