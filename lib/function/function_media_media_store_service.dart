@@ -31,7 +31,7 @@ class PlatformMediaStoreService implements MediaStoreService {
       final result = await _platform.invokeMethod('checkObsoleteContentIds', <String, Object?>{
         'knownContentIds': knownContentIds,
       });
-      return (result as List).cast<int>();
+      return result is List ? result.cast<int>() : <int>[];
     } on PlatformException catch (e, stack) {
       await reportService.recordError(e, stack);
     }
@@ -44,7 +44,7 @@ class PlatformMediaStoreService implements MediaStoreService {
       final result = await _platform.invokeMethod('checkObsoletePaths', <String, Object?>{
         'knownPathById': knownPathById,
       });
-      return (result as List).cast<int>();
+      return result is List ? result.cast<int>() : <int>[];
     } on PlatformException catch (e, stack) {
       await reportService.recordError(e, stack);
     }
@@ -57,7 +57,7 @@ class PlatformMediaStoreService implements MediaStoreService {
       final result = await _platform.invokeMethod('getChangedUris', <String, Object?>{
         'sinceGeneration': sinceGeneration,
       });
-      return (result as List).cast<String>();
+      return result is List ? result.cast<String>() : <String>[];
     } on PlatformException catch (e, stack) {
       await reportService.recordError(e, stack);
     }

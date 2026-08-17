@@ -96,7 +96,7 @@ class PlatformStorageService implements StorageService {
   Future<Set<StorageVolume>> getStorageVolumes() async {
     try {
       final result = await _platform.invokeMethod('getStorageVolumes');
-      return (result as List).cast<Map>().map(StorageVolume.fromMap).toSet();
+      if (result is List) return result.cast<Map>().map(StorageVolume.fromMap).toSet();
     } on PlatformException catch (e, stack) {
       await reportService.recordError(e, stack);
     }
@@ -109,7 +109,7 @@ class PlatformStorageService implements StorageService {
       final result = await _platform.invokeMethod('getCacheDirectory', <String, Object?>{
         'external': true,
       });
-      return result as String;
+      if (result is String) return result;
     } on PlatformException catch (e, stack) {
       await reportService.recordError(e, stack);
     }
@@ -122,7 +122,7 @@ class PlatformStorageService implements StorageService {
       final result = await _platform.invokeMethod('getUntrackedTrashPaths', <String, Object?>{
         'knownPaths': knownPaths.toList(),
       });
-      return (result as List).cast<String>().toSet();
+      return result is List ? result.cast<String>().toSet() : <String>{};
     } on PlatformException catch (e, stack) {
       await reportService.recordError(e, stack);
     }
@@ -136,7 +136,7 @@ class PlatformStorageService implements StorageService {
         'vault': vaultName,
         'knownPaths': knownPaths.toList(),
       });
-      return (result as List).cast<String>().toSet();
+      return result is List ? result.cast<String>().toSet() : <String>{};
     } on PlatformException catch (e, stack) {
       await reportService.recordError(e, stack);
     }
@@ -147,7 +147,7 @@ class PlatformStorageService implements StorageService {
   Future<String> getVaultRoot() async {
     try {
       final result = await _platform.invokeMethod('getVaultRoot');
-      return result as String;
+      if (result is String) return result;
     } on PlatformException catch (e, stack) {
       await reportService.recordError(e, stack);
     }
@@ -171,7 +171,7 @@ class PlatformStorageService implements StorageService {
   Future<List<String>> getGrantedDirectories() async {
     try {
       final result = await _platform.invokeMethod('getGrantedDirectories');
-      return (result as List).cast<String>();
+      return result is List ? result.cast<String>() : <String>[];
     } on PlatformException catch (e, stack) {
       await reportService.recordError(e, stack);
     }
@@ -185,7 +185,7 @@ class PlatformStorageService implements StorageService {
         'dirPaths': dirPaths.toList(),
       });
       if (result != null) {
-        return (result as List).cast<Map>().map(VolumeRelativeDirectory.fromMap).toSet();
+        return result is List ? result.cast<Map>().map(VolumeRelativeDirectory.fromMap).toSet() : <VolumeRelativeDirectory>{};
       }
     } on PlatformException catch (e, stack) {
       await reportService.recordError(e, stack);
@@ -197,8 +197,8 @@ class PlatformStorageService implements StorageService {
   Future<Set<VolumeRelativeDirectory>> getRestrictedDirectoriesLowerCase() async {
     try {
       final result = await _platform.invokeMethod('getRestrictedDirectories');
-      if (result != null) {
-        return (result as List)
+      if (result is List) {
+        return result
             .cast<Map>()
             .map(VolumeRelativeDirectory.fromMap)
             .map(

@@ -65,7 +65,7 @@ class PlatformAppService implements AppService {
   Future<Set<Package>> getPackages() async {
     try {
       final result = await _platform.invokeMethod('getPackages');
-      final packages = (result as List).cast<Map>().map(Package.fromMap).toSet();
+      final packages = result is List ? result.cast<Map>().map(Package.fromMap).toSet() : <Package>{};
       // additional info for known directories
       _knownAppDirs.forEach((packageName, dirs) {
         final package = packages.firstWhereOrNull((package) => package.packageName == packageName);

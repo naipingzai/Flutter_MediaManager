@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io' show Platform;
 import 'dart:math';
 
 import 'package:flutter_media_view/app_flavor.dart';
@@ -144,6 +145,7 @@ class Settings
     final performanceClass = await deviceService.getMediaPerformanceClass();
     enableBlurEffect = performanceClass >= 31;
 
+    if (!Platform.isAndroid) return;
     final androidInfo = await DeviceInfoPlugin().androidInfo;
     final manufacturer = androidInfo.manufacturer.toLowerCase();
     final pattern = BurstPatterns.byManufacturer[manufacturer];

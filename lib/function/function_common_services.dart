@@ -1,3 +1,7 @@
+import 'dart:io' show Platform;
+
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:flutter_media_view/function/function_availability.dart';
 import 'package:flutter_media_view/function/function_db.dart';
 import 'package:flutter_media_view/function/function_db_db_sqflite.dart';
@@ -60,6 +64,11 @@ final StorageService storageService = getIt<StorageService>();
 final WindowService windowService = getIt<WindowService>();
 
 void initPlatformServices() {
+  // 桌面平台（Linux/Windows/macOS）无 sqflite 平台实现，改用 FFI（SQLite over dart:ffi）
+  if (!kIsWeb && (Platform.isLinux || Platform.isWindows || Platform.isMacOS)) {
+    sqfliteFfiInit();
+    databaseFactory = databaseFactoryFfi;
+  }
   getIt.registerLazySingleton<p.Context>(p.Context.new);
   getIt.registerLazySingleton<AvesAvailability>(LiveAvesAvailability.new);
   getIt.registerLazySingleton<LocalMediaDb>(SqfliteLocalMediaDb.new);

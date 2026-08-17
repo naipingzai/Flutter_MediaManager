@@ -260,10 +260,10 @@ class _HomePageState extends State<HomePage> {
           break;
       }
 
-      debugPrint('Home setup complete in ${stopwatch.elapsed.inMilliseconds}ms');
 
       // `pushReplacement` is not enough in some edge cases
       // e.g. when opening the viewer in `view` mode should replace a viewer in `main` mode
+      debugPrint('Home setup complete in ${stopwatch.elapsed.inMilliseconds}ms');
       unawaited(
         Navigator.maybeOf(context)?.pushAndRemoveUntil(
           await _getRedirectRoute(appMode),
@@ -271,7 +271,6 @@ class _HomePageState extends State<HomePage> {
         ),
       );
     } catch (error, stack) {
-      debugPrint('failed to setup app with error=$error\n$stack');
       setState(() => _setupError = (error, stack));
     }
   }

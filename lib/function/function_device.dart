@@ -1,3 +1,5 @@
+import 'dart:io' show Platform;
+
 import 'package:flutter_media_view/function/function_common_services.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:local_auth/local_auth.dart';
@@ -50,12 +52,22 @@ class Device {
     _packageVersion = packageInfo.version;
     _userAgent = '$_packageName/$_packageVersion';
 
-    final androidInfo = await DeviceInfoPlugin().androidInfo;
-    _isPhysicalDevice = androidInfo.isPhysicalDevice;
-    _isTelevision = androidInfo.systemFeatures.contains('android.software.leanback');
+    if (Platform.isAndroid) {
+      final androidInfo = await DeviceInfoPlugin().androidInfo;
+      _isPhysicalDevice = androidInfo.isPhysicalDevice;
+      _isTelevision = androidInfo.systemFeatures.contains('android.software.leanback');
+    } else {
+      _isPhysicalDevice = true;
+      _isTelevision = false;
+    }
 
-    final auth = LocalAuthentication();
-    _canAuthenticateUser = await auth.canCheckBiometrics || await auth.isDeviceSupported();
+    // `local_auth` 仅在移动平台有实现，桌面端调用会永久挂起
+    if (Platform.isAndroid || Platform.isIOS) {
+      final auth = LocalAuthentication();
+      _canAuthenticateUser = await auth.canCheckBiometrics || await auth.isDeviceSupported();
+    } else {
+      _canAuthenticateUser = false;
+    }
 
     final capabilities = await deviceService.getCapabilities();
     _canPinShortcut = capabilities['canPinShortcut'] as bool? ?? false;

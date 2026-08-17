@@ -58,13 +58,18 @@ class AndroidFileUtils {
     _invalidateAlbumTypeCache();
   }
 
-  Future<void> _initStorageVolumes() async {
+  Future<void> _initStorageVolumes({int attempt = 0}) async {
     storageVolumes = await storageService.getStorageVolumes();
     if (storageVolumes.isEmpty) {
       // this can happen when the device is booting up
+      // 平台未实现该通道（如桌面端）时不再无限重试
+      if (attempt >= 5) {
+        debugPrint('Storage volume list is still empty after $attempt attempts. Giving up.');
+        return;
+      }
       debugPrint('Storage volume list is empty. Retrying in a second...');
       await Future.delayed(const Duration(seconds: 1));
-      await _initStorageVolumes();
+      await _initStorageVolumes(attempt: attempt + 1);
     }
   }
 

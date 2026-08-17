@@ -147,6 +147,7 @@ dependencies:
   shelf:
   smooth_page_indicator:
   sqflite:
+  sqflite_common_ffi:
   stack_trace:
   streams_channel:
     git:

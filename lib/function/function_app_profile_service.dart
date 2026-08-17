@@ -80,7 +80,7 @@ class PlatformAppProfileService implements AppProfileService {
     try {
       final result = await _platform.invokeMethod('getTargetUserProfiles');
       if (result != null) {
-        return (result as List).cast<String>();
+        return result is List ? result.cast<String>() : <String>[];
       }
     } on PlatformException catch (e, stack) {
       await reportService.recordError(e, stack);
