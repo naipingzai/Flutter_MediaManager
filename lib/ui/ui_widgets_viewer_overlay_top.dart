@@ -1,3 +1,6 @@
+import 'dart:io' show Platform;
+
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_media_view/function/function_entry.dart';
 import 'package:flutter_media_view/function/function_entry_extensions_multipage.dart';
 import 'package:flutter_media_view/function/function_settings.dart';
@@ -67,7 +70,19 @@ class ViewerTopOverlay extends StatelessWidget {
           ),
         );
 
+        // 桌面平台无系统返回键，提供返回按钮
+        final backButton = !kIsWeb && (Platform.isLinux || Platform.isWindows || Platform.isMacOS)
+            ? _decorateCornerChild(
+                IconButton(
+                  icon: const Icon(Icons.arrow_back),
+                  tooltip: 'Back',
+                  onPressed: () => Navigator.maybeOf(context)?.maybePop(),
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+              )
+            : null;
         final startCornerChildren = [
+          if (backButton != null) backButton,
           if (settings.showOverlayZoomLevel)
             ZoomLevelIndicator(
               viewStateNotifier: viewStateNotifier,

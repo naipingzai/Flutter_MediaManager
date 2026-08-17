@@ -1,3 +1,4 @@
+import 'dart:ui' as ui;
 import 'dart:async';
 import 'dart:io';
 
@@ -57,6 +58,21 @@ class InternalDirMediaStoreService implements MediaStoreService {
 
       final stat = await entity.stat();
 
+      // 解码图片头获取真实尺寸（viewer 依赖非空 displaySize，否则显示 Oops）
+      var width = 0, height = 0;
+      if (mimeType.startsWith('image/')) {
+        try {
+          final bytes = await File(absPath).readAsBytes();
+          final buffer = await ui.ImmutableBuffer.fromUint8List(bytes);
+          final header = await ui.ImageDescriptor.encoded(buffer);
+          width = header.width;
+          height = header.height;
+          header.dispose();
+          buffer.dispose();
+        } catch (_) {
+          // 解码失败保持 0，后续分析流程会填充
+        }
+      }
       yield AvesEntry(
         id: null,
         uri: 'file://$absPath',
@@ -64,8 +80,8 @@ class InternalDirMediaStoreService implements MediaStoreService {
         pageId: null,
         contentId: stableHash(absPath),
         sourceMimeType: mimeType,
-        width: 0,
-        height: 0,
+        width: width,
+        height: height,
         sourceRotationDegrees: 0,
         sizeBytes: stat.size,
         sourceTitle: name,
