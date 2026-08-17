@@ -5,9 +5,11 @@
 *.swp
 .DS_Store
 .atom/
+.build/
 .buildlog/
 .history
 .svn/
+.swiftpm/
 migrate_working_dir/
 
 # IntelliJ related
@@ -23,12 +25,13 @@ migrate_working_dir/
 
 # Flutter/Dart/Pub related
 **/doc/api/
+**/ios/Flutter/.last_build_id
 .dart_tool/
-.flutter-plugins
 .flutter-plugins-dependencies
 .pub-cache/
 .pub/
 /build/
+/coverage/
 
 # Symbolication related
 app.*.symbols
@@ -41,34 +44,9 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# Native build artifacts
-native/build/
-*.o
-*.a
-*.so
+# screenshot generation
+/test_driver/assets/screenshots/
+/screenshots/
 
-# JNI libraries (compiled binaries)
-android/app/src/main/jniLibs/
-
-# Gradle
-.gradle/
-
-# Output binaries
-out/
-
-# Generated docs (large files, use GitHub releases instead)
-docs/*.pdf
-
-# CMake build cache
-**/CMakeFiles/
-**/cmake_install.cmake
-**/CMakeCache.txt
-
-# SQLite source (should be fetched as dependency, not committed)
-
-# Rust build artifacts
-rust/target/
-
-# Sensitive config files (contain credentials)
-webdav.config
-**/webdav.config
+# generated files
+/lib/l10ngen/app_localizations*
