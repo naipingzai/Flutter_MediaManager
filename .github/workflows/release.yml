@@ -1,117 +1,105 @@
-name: Release on tag
+name: Release
 
 on:
   push:
     tags:
-      - v*
+      - 'v*'
+  workflow_dispatch:
 
-# Declare default permissions as read only.
-permissions: read-all
+permissions:
+  contents: write
 
 jobs:
-  release_github:
-    name: GitHub release
+  build-android:
+    name: Android APK
     runs-on: ubuntu-latest
-    permissions:
-      attestations: write
-      contents: write
-      id-token: write
     steps:
-      - name: Harden Runner
-        uses: step-security/harden-runner@bf7454d06d71f1098171f2acdf0cd4708d7b5920 # v2.20.0
-        with:
-          egress-policy: audit
-
-      # Building relies on the Android Gradle plugin,
-      # which requires a modern Java version (not the default one).
-      - name: Set up JDK for Android Gradle plugin
-        uses: actions/setup-java@03ad4de0992f5dab5e18fcb136590ce7c4a0ac95 # v5.6.0
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '21'
-
-      - name: Checkout repository
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
-      - name: Get Flutter packages
-        run: ./flutterw pub get
-
-      - name: Generate app localizations
-        run: ./flutterw gen-l10n
-
-      - name: Build signed artifacts
-        # `KEY_JKS` should contain the result of:
-        # gpg -c --armor keystore.jks
-        # `KEY_JKS_PASSPHRASE` should contain the passphrase used for the command above
-        run: |
-          echo "${{ secrets.KEY_JKS }}" > release.keystore.asc
-          gpg -d --passphrase "${{ secrets.KEY_JKS_PASSPHRASE }}" --batch release.keystore.asc > $AVES_STORE_FILE
-          rm release.keystore.asc
-          mkdir outputs
-          scripts/apply_flavor_play.sh
-          ./flutterw build appbundle -t lib/main_play.dart --flavor play
-          cp build/app/outputs/bundle/playRelease/*.aab outputs
-          ./flutterw build apk -t lib/main_play.dart --flavor play
-          cp build/app/outputs/apk/play/release/*.apk outputs
-          scripts/apply_flavor_izzy.sh
-          ./flutterw build apk -t lib/main_izzy.dart --flavor izzy --split-per-abi
-          cp build/app/outputs/apk/izzy/release/*.apk outputs
-          export AVES_GOOGLE_API_KEY="NONE"
-          scripts/apply_flavor_libre.sh
-          ./flutterw build appbundle -t lib/main_libre.dart --flavor libre
-          cp build/app/outputs/bundle/libreRelease/*.aab outputs
-          ./flutterw build apk -t lib/main_libre.dart --flavor libre --split-per-abi
-          cp build/app/outputs/apk/libre/release/*.apk outputs
-          rm $AVES_STORE_FILE
-        env:
-          AVES_STORE_FILE: ${{ github.workspace }}/key.jks
-          AVES_STORE_PASSWORD: ${{ secrets.AVES_STORE_PASSWORD }}
-          AVES_KEY_ALIAS: ${{ secrets.AVES_KEY_ALIAS }}
-          AVES_KEY_PASSWORD: ${{ secrets.AVES_KEY_PASSWORD }}
-          AVES_GOOGLE_API_KEY: ${{ secrets.AVES_GOOGLE_API_KEY }}
-
-      - name: Generate artifact attestation
-        uses: actions/attest@f7c74d28b9d84cb8768d0b8ca14a4bac6ef463e6
+          java-version: '17'
+      - uses: subosito/flutter-action@v2
         with:
-          subject-path: 'outputs/*'
-
-      - name: Create GitHub release
-        uses: ncipollo/release-action@339a81892b84b4eeb0f6e744e4574d79d0d9b8dd # v1.21.0
+          flutter-version: '3.44.4'
+          channel: 'stable'
+          cache: true
+      - run: flutter pub get
+      - run: flutter analyze --no-fatal-infos --no-fatal-warnings
+      - run: flutter test
+      - name: Build APK
+        run: flutter build apk --release
+      - name: Rename APK
+        run: mv build/app/outputs/flutter-apk/app-release.apk flutter_media_view-${{ github.ref_name }}-android.apk
+      - uses: actions/upload-artifact@v4
         with:
-          artifacts: "outputs/*"
-          body: "[Changelog](https://github.com/${{ github.repository }}/blob/develop/CHANGELOG.md#${{ github.ref_name }})"
-          token: ${{ secrets.GITHUB_TOKEN }}
+          name: android-apk
+          path: flutter_media_view-*-android.apk
 
-      - name: Upload app bundle
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
-        with:
-          name: appbundle
-          path: outputs/app-play-release.aab
-
-  release_play:
-    name: Play Store beta release
-    needs: [ release_github ]
+  build-linux:
+    name: Linux Bundle
     runs-on: ubuntu-latest
     steps:
-      - name: Harden Runner
-        uses: step-security/harden-runner@bf7454d06d71f1098171f2acdf0cd4708d7b5920 # v2.20.0
+      - uses: actions/checkout@v4
+      - name: Install Linux dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build libgtk-3-dev libmpv-dev
+      - uses: subosito/flutter-action@v2
         with:
-          egress-policy: audit
-
-      - name: Checkout repository
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
-      - name: Get appbundle from artifacts
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+          flutter-version: '3.44.4'
+          channel: 'stable'
+          cache: true
+      - run: flutter pub get
+      - name: Build Linux
+        run: flutter build linux --release
+      - name: Archive bundle
+        run: |
+          cd build/linux/x64/release
+          tar czf ../../../flutter_media_view-${{ github.ref_name }}-linux-x64.tar.gz bundle
+      - uses: actions/upload-artifact@v4
         with:
-          name: appbundle
+          name: linux-bundle
+          path: build/flutter_media_view-*-linux-x64.tar.gz
 
-      - name: Release to beta channel
-        uses: r0adkll/upload-google-play@e738b9dd8f2476ea806d921b64aacd24f34515a5 # v1.1.5
+  build-ios:
+    name: iOS IPA (no codesign)
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
         with:
-          serviceAccountJsonPlainText: ${{ secrets.PLAYSTORE_ACCOUNT_KEY }}
-          packageName: deckers.thibault.aves
-          releaseFiles: app-play-release.aab
-          tracks: beta
-          status: completed
-          whatsNewDirectory: whatsnew
+          flutter-version: '3.44.4'
+          channel: 'stable'
+          cache: true
+      - run: flutter pub get
+      - name: Build iOS
+        run: flutter build ios --release --no-codesign
+      - name: Package IPA
+        run: |
+          mkdir -p build/ios/ipa/Payload
+          cp -r build/ios/iphoneos/Runner.app build/ios/ipa/Payload/
+          cd build/ios/ipa
+          zip -r flutter_media_view-${{ github.ref_name }}-ios.ipa Payload
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ios-ipa
+          path: build/ios/ipa/flutter_media_view-*-ios.ipa
+
+  release:
+    name: Create GitHub Release
+    needs: [build-android, build-linux, build-ios]
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            artifacts/android-apk/*.apk
+            artifacts/linux-bundle/*.tar.gz
+            artifacts/ios-ipa/*.ipa
