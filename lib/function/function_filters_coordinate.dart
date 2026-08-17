@@ -3,7 +3,7 @@ import 'package:flutter_media_view/function/function_entry_extensions_location.d
 import 'package:flutter_media_view/function/function_filters.dart';
 import 'package:flutter_media_view/function/function_settings_enums_coordinate_format.dart';
 import 'package:flutter_media_view/function/function_settings.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
+import 'package:flutter_media_view/ui/ui_theme_icons.dart';
 import 'package:flutter_media_view/function/function_aves_locale.dart';
 import 'package:aves_map/aves_map.dart';
 import 'package:aves_model/aves_model.dart';

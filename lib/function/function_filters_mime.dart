@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter_media_view/function/function_filters.dart';
 import 'package:flutter_media_view/function/function_mime_types.dart';
-import 'package:flutter_media_view/ui/theme/colors.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
+import 'package:flutter_media_view/ui/ui_theme_colors.dart';
+import 'package:flutter_media_view/ui/ui_theme_icons.dart';
 import 'package:flutter_media_view/function/function_mime_utils.dart';
-import 'package:flutter_media_view/ui/widgets/common/extensions/build_context.dart';
+import 'package:flutter_media_view/ui/ui_widgets_common_extensions_build_context.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';

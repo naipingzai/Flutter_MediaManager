@@ -2,7 +2,7 @@ import 'dart:isolate';
 
 import 'package:flutter_media_view/app_flavor.dart';
 import 'package:flutter_media_view/function/function_common_services.dart';
-import 'package:flutter_media_view/ui/widgets/aves_app.dart';
+import 'package:flutter_media_view/ui/ui_widgets_aves_app.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

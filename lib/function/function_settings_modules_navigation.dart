@@ -3,11 +3,11 @@ import 'package:flutter_media_view/function/function_filters_container_dynamic_a
 import 'package:flutter_media_view/function/function_filters.dart';
 import 'package:flutter_media_view/function/function_grouping_common.dart';
 import 'package:flutter_media_view/function/function_settings_defaults.dart';
-import 'package:flutter_media_view/ui/widgets/collection/collection_page.dart';
-import 'package:flutter_media_view/ui/widgets/explorer/explorer_page.dart';
-import 'package:flutter_media_view/ui/widgets/filter_grids/albums_page.dart';
-import 'package:flutter_media_view/ui/widgets/filter_grids/tags_page.dart';
-import 'package:flutter_media_view/ui/widgets/navigation/nav_item.dart';
+import 'package:flutter_media_view/ui/ui_widgets_collection_collection_page.dart';
+import 'package:flutter_media_view/ui/ui_widgets_explorer_explorer_page.dart';
+import 'package:flutter_media_view/ui/ui_widgets_filter_grids_albums_page.dart';
+import 'package:flutter_media_view/ui/ui_widgets_filter_grids_tags_page.dart';
+import 'package:flutter_media_view/ui/ui_widgets_navigation_nav_item.dart';
 import 'package:aves_model/aves_model.dart';
 import 'package:aves_utils/aves_utils.dart';
 import 'package:synchronized/synchronized.dart';

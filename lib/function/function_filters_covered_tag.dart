@@ -1,8 +1,8 @@
 import 'package:flutter_media_view/function/function_filters_container_tag_group.dart';
 import 'package:flutter_media_view/function/function_filters_covered.dart';
 import 'package:flutter_media_view/function/function_filters.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/widgets/common/extensions/build_context.dart';
+import 'package:flutter_media_view/ui/ui_theme_icons.dart';
+import 'package:flutter_media_view/ui/ui_widgets_common_extensions_build_context.dart';
 import 'package:flutter/widgets.dart';
 
 class TagFilter extends CollectionFilter with CoveredFilter, TagBaseFilter {

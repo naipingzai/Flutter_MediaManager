@@ -4,12 +4,12 @@ import 'package:flutter_media_view/function/function_filters_mime.dart';
 import 'package:flutter_media_view/function/function_filters_recent.dart';
 import 'package:flutter_media_view/function/function_naming_pattern.dart';
 import 'package:flutter_media_view/function/function_mime_types.dart';
-import 'package:flutter_media_view/ui/widgets/collection/collection_page.dart';
-import 'package:flutter_media_view/ui/widgets/explorer/explorer_page.dart';
-import 'package:flutter_media_view/ui/widgets/filter_grids/albums_page.dart';
-import 'package:flutter_media_view/ui/widgets/filter_grids/countries_page.dart';
-import 'package:flutter_media_view/ui/widgets/filter_grids/tags_page.dart';
-import 'package:flutter_media_view/ui/widgets/navigation/nav_item.dart';
+import 'package:flutter_media_view/ui/ui_widgets_collection_collection_page.dart';
+import 'package:flutter_media_view/ui/ui_widgets_explorer_explorer_page.dart';
+import 'package:flutter_media_view/ui/ui_widgets_filter_grids_albums_page.dart';
+import 'package:flutter_media_view/ui/ui_widgets_filter_grids_countries_page.dart';
+import 'package:flutter_media_view/ui/ui_widgets_filter_grids_tags_page.dart';
+import 'package:flutter_media_view/ui/ui_widgets_navigation_nav_item.dart';
 import 'package:aves_model/aves_model.dart';
 
 class SettingsDefaults {

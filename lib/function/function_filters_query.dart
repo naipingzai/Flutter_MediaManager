@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/function/function_entry.dart';
 import 'package:flutter_media_view/function/function_filters.dart';
-import 'package:flutter_media_view/ui/theme/colors.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
+import 'package:flutter_media_view/ui/ui_theme_colors.dart';
+import 'package:flutter_media_view/ui/ui_theme_icons.dart';
 import 'package:flutter_media_view/function/function_file_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';

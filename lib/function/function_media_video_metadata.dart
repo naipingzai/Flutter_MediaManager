@@ -13,7 +13,7 @@ import 'package:flutter_media_view/function/function_languages.dart';
 import 'package:flutter_media_view/function/function_mime_types.dart';
 import 'package:flutter_media_view/function/function_mp4.dart';
 import 'package:flutter_media_view/function/function_common_services.dart';
-import 'package:flutter_media_view/ui/theme/format.dart';
+import 'package:flutter_media_view/ui/ui_theme_format.dart';
 import 'package:flutter_media_view/function/function_aves_locale.dart';
 import 'package:flutter_media_view/function/function_calendar_ops_gregorian.dart';
 import 'package:flutter_media_view/function/function_file_utils.dart';

@@ -3,7 +3,7 @@ import 'package:flutter_media_view/function/function_filters_container_set_or.da
 import 'package:flutter_media_view/function/function_filters_covered.dart';
 import 'package:flutter_media_view/function/function_filters.dart';
 import 'package:flutter_media_view/function/function_grouping_common.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
+import 'package:flutter_media_view/ui/ui_theme_icons.dart';
 import 'package:flutter/widgets.dart';
 
 abstract class GroupBaseFilter extends CollectionFilter with ContainerFilter, CoveredFilter {

@@ -8,7 +8,7 @@ import 'package:flutter_media_view/function/function_source_trash.dart';
 import 'package:flutter_media_view/function/function_mime_types.dart';
 import 'package:flutter_media_view/function/function_unicode.dart';
 import 'package:flutter_media_view/function/function_common_services.dart';
-import 'package:flutter_media_view/ui/theme/text.dart';
+import 'package:flutter_media_view/ui/ui_theme_text.dart';
 import 'package:flutter_media_view/function/function_android_file_utils.dart';
 import 'package:flutter_media_view/function/function_aves_locale.dart';
 import 'package:flutter_media_view/function/function_time_utils.dart';

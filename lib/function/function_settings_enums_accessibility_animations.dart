@@ -1,5 +1,5 @@
 import 'package:flutter_media_view/function/function_settings.dart';
-import 'package:flutter_media_view/ui/theme/durations.dart';
+import 'package:flutter_media_view/ui/ui_theme_durations.dart';
 import 'package:aves_model/aves_model.dart';
 import 'package:flutter/widgets.dart';
 

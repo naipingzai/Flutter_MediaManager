@@ -12,7 +12,7 @@ import 'package:flutter_media_view/function/function_source_analysis_controller.
 import 'package:flutter_media_view/function/function_source_collection_source.dart';
 import 'package:flutter_media_view/function/function_vaults.dart';
 import 'package:flutter_media_view/function/function_common_services.dart';
-import 'package:flutter_media_view/ui/theme/durations.dart';
+import 'package:flutter_media_view/ui/ui_theme_durations.dart';
 import 'package:flutter_media_view/function/function_android_file_utils.dart';
 import 'package:flutter_media_view/function/function_debouncer.dart';
 import 'package:aves_model/aves_model.dart';

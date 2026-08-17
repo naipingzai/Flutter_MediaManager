@@ -10,7 +10,7 @@ import 'package:flutter_media_view/function/function_source_media_store_source.d
 import 'package:flutter_media_view/function/function_common_channel.dart';
 import 'package:flutter_media_view/function/function_common_services.dart';
 import 'package:flutter_media_view/function/function_android_file_utils.dart';
-import 'package:flutter_media_view/ui/view/view.dart';
+import 'package:flutter_media_view/ui/ui_view.dart';
 import 'package:aves_model/aves_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';

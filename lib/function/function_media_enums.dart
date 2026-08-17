@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/ui/widgets/common/extensions/build_context.dart';
+import 'package:flutter_media_view/ui/ui_widgets_common_extensions_build_context.dart';
 import 'package:flutter/widgets.dart';
 
 // names should match possible values on platform

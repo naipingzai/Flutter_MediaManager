@@ -26,11 +26,11 @@ import 'package:flutter_media_view/function/function_settings_modules_widget.dar
 import 'package:flutter_media_view/function/function_bursts.dart';
 import 'package:flutter_media_view/function/function_accessibility_service.dart';
 import 'package:flutter_media_view/function/function_common_services.dart';
-import 'package:flutter_media_view/ui/widgets/common/search/page.dart';
-import 'package:flutter_media_view/ui/widgets/filter_grids/albums_page.dart';
-import 'package:flutter_media_view/ui/widgets/filter_grids/countries_page.dart';
-import 'package:flutter_media_view/ui/widgets/filter_grids/places_page.dart';
-import 'package:flutter_media_view/ui/widgets/filter_grids/tags_page.dart';
+import 'package:flutter_media_view/ui/ui_widgets_common_search_page.dart';
+import 'package:flutter_media_view/ui/ui_widgets_filter_grids_albums_page.dart';
+import 'package:flutter_media_view/ui/ui_widgets_filter_grids_countries_page.dart';
+import 'package:flutter_media_view/ui/ui_widgets_filter_grids_places_page.dart';
+import 'package:flutter_media_view/ui/ui_widgets_filter_grids_tags_page.dart';
 import 'package:aves_map/aves_map.dart';
 import 'package:aves_model/aves_model.dart';
 import 'package:aves_utils/aves_utils.dart';

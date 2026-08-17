@@ -9,7 +9,7 @@ import 'package:flutter_media_view/function/function_metadata_catalog.dart';
 import 'package:flutter_media_view/function/function_metadata_trash.dart';
 import 'package:flutter_media_view/function/function_mime_types.dart';
 import 'package:flutter_media_view/function/function_common_services.dart';
-import 'package:flutter_media_view/ui/theme/format.dart';
+import 'package:flutter_media_view/ui/ui_theme_format.dart';
 import 'package:flutter_media_view/function/function_time_utils.dart';
 import 'package:aves_model/aves_model.dart';
 import 'package:aves_utils/aves_utils.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter_media_view/function/function_filters.dart';
 import 'package:flutter_media_view/function/function_common_services.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
+import 'package:flutter_media_view/ui/ui_theme_icons.dart';
 import 'package:flutter_media_view/function/function_android_file_utils.dart';
-import 'package:flutter_media_view/ui/view/view.dart';
+import 'package:flutter_media_view/ui/ui_view.dart';
 import 'package:flutter/widgets.dart';
 
 class PathFilter extends CollectionFilter {

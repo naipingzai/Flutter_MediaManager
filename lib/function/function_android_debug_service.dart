@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/ui/image_providers/thumbnail_provider.dart';
+import 'package:flutter_media_view/ui/ui_image_providers_thumbnail_provider.dart';
 import 'package:flutter_media_view/function/function_entry.dart';
 import 'package:flutter_media_view/function/function_mime_types.dart';
 import 'package:flutter_media_view/function/function_common_channel.dart';

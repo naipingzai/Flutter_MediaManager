@@ -23,7 +23,7 @@ import 'package:flutter_media_view/function/function_filters_recent.dart';
 import 'package:flutter_media_view/function/function_filters_trash.dart';
 import 'package:flutter_media_view/function/function_filters_type.dart';
 import 'package:flutter_media_view/function/function_filters_weekday.dart';
-import 'package:flutter_media_view/ui/theme/colors.dart';
+import 'package:flutter_media_view/ui/ui_theme_colors.dart';
 import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';

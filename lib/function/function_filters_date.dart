@@ -1,9 +1,9 @@
 import 'package:flutter_media_view/function/function_filters.dart';
 import 'package:flutter_media_view/function/function_settings.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
+import 'package:flutter_media_view/ui/ui_theme_icons.dart';
 import 'package:flutter_media_view/function/function_aves_locale.dart';
 import 'package:flutter_media_view/function/function_calendar_calendar_utils.dart';
-import 'package:flutter_media_view/ui/widgets/common/extensions/build_context.dart';
+import 'package:flutter_media_view/ui/ui_widgets_common_extensions_build_context.dart';
 import 'package:aves_utils/aves_utils.dart';
 import 'package:flutter/widgets.dart';
 

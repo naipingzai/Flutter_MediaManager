@@ -7,7 +7,7 @@ import 'package:flutter_media_view/function/function_source_collection_source.da
 import 'package:flutter_media_view/function/function_vaults.dart';
 import 'package:flutter_media_view/function/function_common_services.dart';
 import 'package:flutter_media_view/function/function_android_file_utils.dart';
-import 'package:flutter_media_view/ui/view/view.dart';
+import 'package:flutter_media_view/ui/ui_view.dart';
 import 'package:aves_model/aves_model.dart';
 import 'package:aves_utils/aves_utils.dart';
 import 'package:collection/collection.dart';
