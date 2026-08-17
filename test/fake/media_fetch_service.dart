@@ -1,5 +1,5 @@
-import 'package:flutter_media_view/model/entry/entry.dart';
-import 'package:flutter_media_view/services/media/media_fetch_service.dart';
+import 'package:flutter_media_view/function/function_entry.dart';
+import 'package:flutter_media_view/function/function_media_media_fetch_service.dart';
 import 'package:collection/collection.dart';
 import 'package:test/fake.dart';
 

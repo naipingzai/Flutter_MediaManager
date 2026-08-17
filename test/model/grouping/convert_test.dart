@@ -1,10 +1,10 @@
-import 'package:flutter_media_view/model/dynamic_albums.dart';
-import 'package:flutter_media_view/model/filters/container/album_group.dart';
-import 'package:flutter_media_view/model/filters/container/dynamic_album.dart';
-import 'package:flutter_media_view/model/filters/container/set_or.dart';
-import 'package:flutter_media_view/model/filters/covered/stored_album.dart';
-import 'package:flutter_media_view/model/grouping/common.dart';
-import 'package:flutter_media_view/model/grouping/convert.dart';
+import 'package:flutter_media_view/function/function_dynamic_albums.dart';
+import 'package:flutter_media_view/function/function_filters_container_album_group.dart';
+import 'package:flutter_media_view/function/function_filters_container_dynamic_album.dart';
+import 'package:flutter_media_view/function/function_filters_container_set_or.dart';
+import 'package:flutter_media_view/function/function_filters_covered_stored_album.dart';
+import 'package:flutter_media_view/function/function_grouping_common.dart';
+import 'package:flutter_media_view/function/function_grouping_convert.dart';
 import 'package:test/test.dart';
 
 import '../../common.dart';

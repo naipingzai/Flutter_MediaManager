@@ -1,9 +1,9 @@
-import 'package:flutter_media_view/model/entry/entry.dart';
-import 'package:flutter_media_view/model/entry/extensions/keys.dart';
-import 'package:flutter_media_view/model/entry/origins.dart';
-import 'package:flutter_media_view/ref/mime_types.dart';
-import 'package:flutter_media_view/services/common/image_op_events.dart';
-import 'package:flutter_media_view/services/media/media_store_service.dart';
+import 'package:flutter_media_view/function/function_entry.dart';
+import 'package:flutter_media_view/function/function_entry_extensions_keys.dart';
+import 'package:flutter_media_view/function/function_entry_origins.dart';
+import 'package:flutter_media_view/function/function_mime_types.dart';
+import 'package:flutter_media_view/function/function_common_image_op_events.dart';
+import 'package:flutter_media_view/function/function_media_media_store_service.dart';
 import 'package:test/fake.dart';
 
 class FakeMediaStoreService extends Fake implements MediaStoreService {

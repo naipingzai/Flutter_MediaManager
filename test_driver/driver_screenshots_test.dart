@@ -2,8 +2,8 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter_media_view/widgets/debug/app_debug_action.dart';
-import 'package:flutter_media_view/widgets/settings/language/locales.dart';
+import 'package:flutter_media_view/ui/widgets/debug/app_debug_action.dart';
+import 'package:flutter_media_view/ui/widgets/settings/language/locales.dart';
 import 'package:flutter_driver/flutter_driver.dart';
 import 'package:test/test.dart';
 

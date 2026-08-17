@@ -1,13 +1,13 @@
-import 'package:flutter_media_view/model/covers.dart';
-import 'package:flutter_media_view/model/db/db.dart';
-import 'package:flutter_media_view/model/dynamic_albums.dart';
-import 'package:flutter_media_view/model/entry/entry.dart';
-import 'package:flutter_media_view/model/favourites.dart';
-import 'package:flutter_media_view/model/filters/filters.dart';
-import 'package:flutter_media_view/model/metadata/address.dart';
-import 'package:flutter_media_view/model/metadata/catalog.dart';
-import 'package:flutter_media_view/model/metadata/trash.dart';
-import 'package:flutter_media_view/model/vaults/details.dart';
+import 'package:flutter_media_view/function/function_covers.dart';
+import 'package:flutter_media_view/function/function_db.dart';
+import 'package:flutter_media_view/function/function_dynamic_albums.dart';
+import 'package:flutter_media_view/function/function_entry.dart';
+import 'package:flutter_media_view/function/function_favourites.dart';
+import 'package:flutter_media_view/function/function_filters.dart';
+import 'package:flutter_media_view/function/function_metadata_address.dart';
+import 'package:flutter_media_view/function/function_metadata_catalog.dart';
+import 'package:flutter_media_view/function/function_metadata_trash.dart';
+import 'package:flutter_media_view/function/function_vaults_details.dart';
 import 'package:flutter/foundation.dart';
 import 'package:test/fake.dart';
 

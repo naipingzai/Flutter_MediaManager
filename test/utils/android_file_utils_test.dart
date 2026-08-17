@@ -1,6 +1,6 @@
-import 'package:flutter_media_view/services/common/services.dart';
-import 'package:flutter_media_view/services/storage_service.dart';
-import 'package:flutter_media_view/utils/android_file_utils.dart';
+import 'package:flutter_media_view/function/function_common_services.dart';
+import 'package:flutter_media_view/function/function_storage_service.dart';
+import 'package:flutter_media_view/function/function_android_file_utils.dart';
 import 'package:path/path.dart' as p;
 import 'package:test/test.dart';
 

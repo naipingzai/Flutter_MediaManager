@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/model/availability.dart';
+import 'package:flutter_media_view/function/function_availability.dart';
 import 'package:flutter/foundation.dart';
 import 'package:test/fake.dart';
 

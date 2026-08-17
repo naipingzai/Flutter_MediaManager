@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/model/naming_pattern.dart';
+import 'package:flutter_media_view/function/function_naming_pattern.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:test/test.dart';
 

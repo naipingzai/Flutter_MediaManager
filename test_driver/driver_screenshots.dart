@@ -1,9 +1,9 @@
 import 'package:flutter_media_view/main_play.dart' as app;
-import 'package:flutter_media_view/model/filters/favourite.dart';
-import 'package:flutter_media_view/model/settings/defaults.dart';
-import 'package:flutter_media_view/model/settings/settings.dart';
-import 'package:flutter_media_view/widgets/collection/collection_page.dart';
-import 'package:flutter_media_view/widgets/filter_grids/countries_page.dart';
+import 'package:flutter_media_view/function/function_filters_favourite.dart';
+import 'package:flutter_media_view/function/function_settings_defaults.dart';
+import 'package:flutter_media_view/function/function_settings.dart';
+import 'package:flutter_media_view/ui/widgets/collection/collection_page.dart';
+import 'package:flutter_media_view/ui/widgets/filter_grids/countries_page.dart';
 import 'package:aves_map/aves_map.dart';
 import 'package:aves_model/aves_model.dart';
 import 'package:flutter_driver/driver_extension.dart';

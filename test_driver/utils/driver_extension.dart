@@ -1,5 +1,5 @@
 // ignore_for_file: avoid_print
-import 'package:flutter_media_view/widgets/debug/app_debug_action.dart';
+import 'package:flutter_media_view/ui/widgets/debug/app_debug_action.dart';
 import 'package:flutter_driver/flutter_driver.dart';
 
 import 'adb_utils.dart';
