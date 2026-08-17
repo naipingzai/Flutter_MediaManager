@@ -76,6 +76,7 @@ dependencies:
       path: community_charts_flutter
   connectivity_plus:
   country_code:
+  crypto:
   csv:
   decorated_icon:
   device_info_plus:
