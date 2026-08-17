@@ -1,3 +1,4 @@
+import 'dart:io' show Platform;
 import 'dart:async';
 import 'dart:math';
 
@@ -59,6 +60,8 @@ class EntryViewerStack extends StatefulWidget {
   @override
   State<EntryViewerStack> createState() => _EntryViewerStackState();
 }
+
+const _pluginOpTimeout = Duration(seconds: 2);
 
 class _EntryViewerStackState extends State<EntryViewerStack> with EntryViewControllerMixin, FeedbackMixin, TickerProviderStateMixin, RouteAware {
   late int _currentEntryIndex;
@@ -904,17 +907,20 @@ class _EntryViewerStackState extends State<EntryViewerStack> with EntryViewContr
   Future<void> _onLeave() async {
     await viewerController.stopCast();
 
-    try {
-      switch (settings.maxBrightness) {
-        case .never:
-        case .viewerOnly:
-          await AvesApp.screenBrightness?.resetApplicationScreenBrightness();
-        case .always:
-          await AvesApp.screenBrightness?.setApplicationScreenBrightness(1);
+    // `screen_brightness` 在桌面平台无实现，调用会永久挂起，导致无法返回
+    if (!kIsWeb && (Platform.isAndroid || Platform.isIOS)) {
+      try {
+        switch (settings.maxBrightness) {
+          case .never:
+          case .viewerOnly:
+            await AvesApp.screenBrightness?.resetApplicationScreenBrightness().timeout(_pluginOpTimeout, onTimeout: () {});
+          case .always:
+            await AvesApp.screenBrightness?.setApplicationScreenBrightness(1).timeout(_pluginOpTimeout, onTimeout: () {});
+        }
+      } on PlatformException catch (e, stack) {
+        // `screen_brightness` plugin may fail
+        unawaited(reportService.recordError(e, stack));
       }
-    } on PlatformException catch (e, stack) {
-      // `screen_brightness` plugin may fail
-      unawaited(reportService.recordError(e, stack));
     }
     if (settings.keepScreenOn == KeepScreenOn.viewerOnly) {
       await windowService.keepScreenOn(false);
