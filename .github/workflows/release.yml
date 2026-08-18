@@ -34,7 +34,7 @@ jobs:
         run: flutter build apk --release --android-skip-build-dependency-validation
       - name: Rename APK
         run: mv build/app/outputs/flutter-apk/app-release.apk flutter_media_view-${{ github.ref_name }}-android.apk
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: android-apk
           path: flutter_media_view-*-android.apk
@@ -60,7 +60,7 @@ jobs:
         run: |
           cd build/linux/x64/release
           tar czf ../../../flutter_media_view-${{ github.ref_name }}-linux-x64.tar.gz bundle
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: linux-bundle
           path: build/flutter_media_view-*-linux-x64.tar.gz
@@ -88,7 +88,7 @@ jobs:
           cp -r build/ios/iphoneos/Runner.app build/ios/ipa/Payload/
           cd build/ios/ipa
           zip -r flutter_media_view-${{ github.ref_name }}-ios.ipa Payload
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: ios-ipa
           path: build/ios/ipa/flutter_media_view-*-ios.ipa
