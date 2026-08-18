@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter_media_view/function/entry/function_entry.dart';
-import 'package:flutter_media_view/function/entry/function_entry_origins.dart';
-import 'package:flutter_media_view/function/source/function_source_collection_source.dart';
+import 'package:flutter_media_view/function/entry/entry.dart';
+import 'package:flutter_media_view/function/entry/origins.dart';
+import 'package:flutter_media_view/function/source/collection_source.dart';
 import 'package:flutter_media_view/function/function_vaults_details.dart';
-import 'package:flutter_media_view/function/common/function_common_services.dart';
+import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view_screen_state/flutter_media_view_screen_state.dart';
 import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
 import 'package:collection/collection.dart';

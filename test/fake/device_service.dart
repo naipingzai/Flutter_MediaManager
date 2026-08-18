@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/services/function_device_service.dart';
+import 'package:flutter_media_view/function/services/device_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:test/fake.dart';
 

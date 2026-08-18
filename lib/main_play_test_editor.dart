@@ -1,6 +1,6 @@
 import 'package:flutter_media_view/app_flavor.dart';
 import 'package:flutter_media_view/main_common.dart';
-import 'package:flutter_media_view/function/settings/function_app_intent.dart';
+import 'package:flutter_media_view/function/settings/app_intent.dart';
 
 // https://developer.android.com/studio/command-line/adb.html#IntentSpec
 // adb shell am start -n com.naipingzai.flutter_media_view.debug/com.naipingzai.flutter_media_view.MainActivity -a android.intent.action.EDIT -d content://media/external/images/media/183128 -t image/*

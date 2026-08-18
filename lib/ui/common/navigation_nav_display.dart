@@ -1,0 +1,89 @@
+import 'package:flutter_media_view/function/filters/favourite.dart';
+import 'package:flutter_media_view/function/filters/filters.dart';
+import 'package:flutter_media_view/function/filters/mime.dart';
+import 'package:flutter_media_view/function/filters/type.dart';
+import 'package:flutter_media_view/ui/theme/icons.dart';
+import 'package:flutter_media_view/ui/about/widgets_about_about_page.dart';
+import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
+import 'package:flutter_media_view/ui/search/widgets_common_search_page.dart';
+import 'package:flutter_media_view/ui/common/debug_app_debug_page.dart';
+import 'package:flutter_media_view/ui/common/explorer_explorer_page.dart';
+import 'package:flutter_media_view/ui/filter/widgets_filter_grids_albums_page.dart';
+import 'package:flutter_media_view/ui/filter/widgets_filter_grids_countries_page.dart';
+import 'package:flutter_media_view/ui/filter/widgets_filter_grids_places_page.dart';
+import 'package:flutter_media_view/ui/filter/widgets_filter_grids_tags_page.dart';
+import 'package:flutter_media_view/ui/collection/widgets_home_home_page.dart';
+import 'package:flutter_media_view/ui/settings/widgets_settings_settings_page.dart';
+import 'package:flutter/material.dart';
+
+class NavigationDisplay {
+  static String getFilterTitle(BuildContext context, CollectionFilter? filter) {
+    final l10n = context.l10n;
+    if (filter == null) return l10n.drawerCollectionAll;
+    if (filter == FavouriteFilter.instance) return l10n.drawerCollectionFavourites;
+    if (filter == MimeFilter.image) return l10n.drawerCollectionImages;
+    if (filter == MimeFilter.video) return l10n.drawerCollectionVideos;
+    if (filter == TypeFilter.animated) return l10n.drawerCollectionAnimated;
+    if (filter == TypeFilter.motionPhoto) return l10n.drawerCollectionMotionPhotos;
+    if (filter == TypeFilter.panorama) return l10n.drawerCollectionPanoramas;
+    if (filter == TypeFilter.raw) return l10n.drawerCollectionRaws;
+    if (filter == TypeFilter.slowMotion) return l10n.drawerCollectionSlowMotionVideos;
+    if (filter == TypeFilter.sphericalVideo) return l10n.drawerCollectionSphericalVideos;
+    return filter.getLabel(context);
+  }
+
+  static String getPageTitle(BuildContext context, route) {
+    final l10n = context.l10n;
+    switch (route) {
+      case HomePage.routeName:
+        return l10n.settingsHomeTile;
+      case AlbumListPage.routeName:
+        return l10n.drawerAlbumPage;
+      case CountryListPage.routeName:
+        return l10n.drawerCountryPage;
+      case PlaceListPage.routeName:
+        return l10n.drawerPlacePage;
+      case TagListPage.routeName:
+        return l10n.drawerTagPage;
+      case AboutPage.routeName:
+        return l10n.aboutPageTitle;
+      case AppDebugPage.routeName:
+        return 'Debug';
+      case ExplorerPage.routeName:
+        return l10n.explorerPageTitle;
+      case SearchPage.routeName:
+        return MaterialLocalizations.of(context).searchFieldLabel;
+      case SettingsPage.routeName:
+        return l10n.settingsPageTitle;
+      default:
+        return route;
+    }
+  }
+
+  static IconData? getPageIcon(String route) {
+    switch (route) {
+      case HomePage.routeName:
+        return AIcons.home;
+      case AlbumListPage.routeName:
+        return AIcons.album;
+      case CountryListPage.routeName:
+        return AIcons.country;
+      case PlaceListPage.routeName:
+        return AIcons.place;
+      case TagListPage.routeName:
+        return AIcons.tag;
+      case AboutPage.routeName:
+        return AIcons.info;
+      case AppDebugPage.routeName:
+        return AIcons.debug;
+      case ExplorerPage.routeName:
+        return AIcons.explorer;
+      case SearchPage.routeName:
+        return AIcons.search;
+      case SettingsPage.routeName:
+        return AIcons.settings;
+      default:
+        return null;
+    }
+  }
+}

@@ -1,5 +1,5 @@
-import 'package:flutter_media_view/function/geo/function_countries.dart';
-import 'package:flutter_media_view/function/geo/function_topojson.dart';
+import 'package:flutter_media_view/function/geo/countries.dart';
+import 'package:flutter_media_view/function/geo/topojson.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:latlong2/latlong.dart';
 

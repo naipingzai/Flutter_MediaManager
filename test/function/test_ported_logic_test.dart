@@ -1,10 +1,10 @@
 import 'dart:typed_data';
 
-import 'package:flutter_media_view/function/utils/function_bmp_writer.dart';
-import 'package:flutter_media_view/function/utils/function_byte_utils.dart';
-import 'package:flutter_media_view/function/utils/function_hash_utils.dart';
-import 'package:flutter_media_view/function/metadata/function_quicktime_metadata.dart';
-import 'package:flutter_media_view/function/metadata/function_spherical_video.dart';
+import 'package:flutter_media_view/function/utils/bmp_writer.dart';
+import 'package:flutter_media_view/function/utils/byte_utils.dart';
+import 'package:flutter_media_view/function/utils/hash_utils.dart';
+import 'package:flutter_media_view/function/metadata/quicktime_metadata.dart';
+import 'package:flutter_media_view/function/metadata/spherical_video.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

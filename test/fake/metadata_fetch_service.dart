@@ -1,6 +1,6 @@
-import 'package:flutter_media_view/function/entry/function_entry.dart';
-import 'package:flutter_media_view/function/metadata/function_metadata_catalog.dart';
-import 'package:flutter_media_view/function/metadata/function_metadata_metadata_fetch_service.dart';
+import 'package:flutter_media_view/function/entry/entry.dart';
+import 'package:flutter_media_view/function/metadata/catalog.dart';
+import 'package:flutter_media_view/function/metadata/metadata_fetch_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:test/fake.dart';
 

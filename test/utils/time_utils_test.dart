@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/utils/function_time_utils.dart';
+import 'package:flutter_media_view/function/utils/time_utils.dart';
 import 'package:test/test.dart';
 
 void main() {
