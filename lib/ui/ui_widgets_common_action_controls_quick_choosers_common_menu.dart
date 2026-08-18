@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:flutter_media_view/ui/ui_theme_durations.dart';
 import 'package:flutter_media_view/ui/ui_theme_icons.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_action_controls_quick_choosers_common_quick_chooser.dart';
-import 'package:aves_ui/aves_ui.dart';
+import 'package:flutter_media_view_ui/flutter_media_view_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';

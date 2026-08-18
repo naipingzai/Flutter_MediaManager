@@ -1,5 +1,5 @@
 import 'package:flutter_media_view/ui/ui_widgets_common_identity_buttons_overlay_button.dart';
-import 'package:aves_map/aves_map.dart';
+import 'package:flutter_media_view_map/flutter_media_view_map.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

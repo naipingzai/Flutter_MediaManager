@@ -3,7 +3,7 @@ import 'dart:ui' as ui;
 import 'package:flutter_media_view/function/function_aves_locale.dart';
 import 'package:flutter_media_view/function/function_settings_defaults.dart';
 import 'package:flutter_media_view/ui/ui_widgets_aves_app.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/widgets.dart';
 
 mixin AppSettings on SettingsAccess {

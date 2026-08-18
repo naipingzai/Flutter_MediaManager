@@ -3,7 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter_media_view/ui/ui_widgets_editor_transform_crop_region.dart';
 import 'package:flutter_media_view/ui/ui_widgets_editor_transform_transformation.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:leak_tracker/leak_tracker.dart';
 

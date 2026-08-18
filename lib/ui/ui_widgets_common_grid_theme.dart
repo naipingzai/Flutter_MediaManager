@@ -6,7 +6,7 @@ import 'package:flutter_media_view/function/function_entry_extensions_multipage.
 import 'package:flutter_media_view/function/function_entry_extensions_props.dart';
 import 'package:flutter_media_view/function/function_settings.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_identity_aves_icons.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

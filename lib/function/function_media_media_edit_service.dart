@@ -5,7 +5,7 @@ import 'package:flutter_media_view/function/function_common_channel.dart';
 import 'package:flutter_media_view/function/function_common_image_op_events.dart';
 import 'package:flutter_media_view/function/function_common_services.dart';
 import 'package:flutter_media_view/function/function_media_enums.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';

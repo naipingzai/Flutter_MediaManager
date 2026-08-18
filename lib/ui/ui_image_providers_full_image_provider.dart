@@ -3,7 +3,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter_media_view/function/function_common_services.dart';
 import 'package:flutter_media_view/function/function_media_media_fetch_service.dart';
-import 'package:aves_report/aves_report.dart';
+import 'package:flutter_media_view_report/flutter_media_view_report.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';

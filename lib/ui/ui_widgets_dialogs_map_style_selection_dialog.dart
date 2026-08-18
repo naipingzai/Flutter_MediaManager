@@ -9,8 +9,8 @@ import 'package:flutter_media_view/ui/ui_widgets_dialogs_aves_confirmation_dialo
 import 'package:flutter_media_view/ui/ui_widgets_dialogs_aves_dialog.dart';
 import 'package:flutter_media_view/ui/ui_widgets_dialogs_map_style_editor_dialog.dart';
 import 'package:flutter_media_view/ui/ui_widgets_dialogs_selection_dialogs_radio_list_tile.dart';
-import 'package:aves_map/aves_map.dart';
-import 'package:aves_utils/aves_utils.dart';
+import 'package:flutter_media_view_map/flutter_media_view_map.dart';
+import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

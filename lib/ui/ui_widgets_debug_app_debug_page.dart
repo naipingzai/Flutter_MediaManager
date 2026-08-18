@@ -30,7 +30,7 @@ import 'package:flutter_media_view/ui/ui_widgets_debug_os_paths.dart';
 import 'package:flutter_media_view/ui/ui_widgets_debug_os_storage.dart';
 import 'package:flutter_media_view/ui/ui_widgets_debug_settings.dart';
 import 'package:flutter_media_view/ui/ui_widgets_dialogs_aves_dialog.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';

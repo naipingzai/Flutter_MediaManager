@@ -12,7 +12,7 @@ import 'package:flutter_media_view/function/function_metadata_metadata_fetch_ser
 import 'package:flutter_media_view/function/function_storage_service.dart';
 import 'package:flutter_media_view/function/function_window_service.dart';
 import 'package:flutter_media_view/function/function_android_file_utils.dart';
-import 'package:aves_report/aves_report.dart';
+import 'package:flutter_media_view_report/flutter_media_view_report.dart';
 import 'package:path/path.dart' as p;
 import 'package:shared_preferences_platform_interface/shared_preferences_platform_interface.dart';
 

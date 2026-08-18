@@ -11,7 +11,7 @@ import 'package:flutter_media_view/ui/ui_widgets_settings_common_tile_leading.da
 import 'package:flutter_media_view/ui/ui_widgets_settings_common_tiles.dart';
 import 'package:flutter_media_view/ui/ui_widgets_settings_privacy.dart';
 import 'package:flutter_media_view/ui/ui_widgets_settings_settings_definition.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

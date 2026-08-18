@@ -9,7 +9,7 @@ import 'package:flutter_media_view/function/function_file_utils.dart';
 import 'package:flutter_media_view/ui/ui_widgets_collection_grid_list_details_theme.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_fx_borders.dart';
-import 'package:aves_utils/aves_utils.dart';
+import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

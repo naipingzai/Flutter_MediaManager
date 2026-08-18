@@ -14,7 +14,7 @@ import 'package:flutter_media_view/ui/ui_widgets_settings_navigation_bottom_nav_
 import 'package:flutter_media_view/ui/ui_widgets_settings_navigation_confirmation_dialog_page.dart';
 import 'package:flutter_media_view/ui/ui_widgets_settings_navigation_drawer_editor_page.dart';
 import 'package:flutter_media_view/ui/ui_widgets_settings_settings_definition.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

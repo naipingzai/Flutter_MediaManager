@@ -1,0 +1,21 @@
+name: flutter_media_view_video
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ">=3.12.0 <4.0.0"
+resolution: workspace
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_media_view_model:
+    path: ../flutter_media_view_model
+  flutter_media_view_utils:
+    path: ../flutter_media_view_utils
+  leak_tracker:
+
+dev_dependencies:
+  flutter_lints:
+
+flutter:

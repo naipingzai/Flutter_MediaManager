@@ -6,7 +6,7 @@ import 'package:flutter_media_view/ui/ui_widgets_common_grid_sections_section_la
 import 'package:flutter_media_view/ui/ui_widgets_common_grid_theme.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_providers_tile_extent_controller_provider.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_tile_extent_controller.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

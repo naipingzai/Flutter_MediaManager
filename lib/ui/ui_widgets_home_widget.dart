@@ -7,7 +7,7 @@ import 'package:flutter_media_view/function/function_entry_extensions_images.dar
 import 'package:flutter_media_view/function/function_settings_enums_widget_shape.dart';
 import 'package:flutter_media_view/ui/ui_theme_colors.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_identity_aves_filter_chip.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 
 class HomeWidgetPainter {

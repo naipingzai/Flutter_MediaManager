@@ -48,7 +48,7 @@ import 'package:flutter_media_view/ui/ui_widgets_common_thumbnail_notifications.
 import 'package:flutter_media_view/ui/ui_widgets_common_tile_extent_controller.dart';
 import 'package:flutter_media_view/ui/ui_widgets_navigation_nav_bar.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_entry_viewer_page.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';

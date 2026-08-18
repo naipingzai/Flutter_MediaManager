@@ -6,7 +6,7 @@ import 'package:flutter_media_view/function/function_debouncer.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_fx_blurred.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_identity_aves_filter_chip.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_controls_notifications.dart';
-import 'package:aves_map/aves_map.dart';
+import 'package:flutter_media_view_map/flutter_media_view_map.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

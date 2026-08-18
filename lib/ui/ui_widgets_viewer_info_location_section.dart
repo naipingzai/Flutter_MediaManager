@@ -15,7 +15,7 @@ import 'package:flutter_media_view/ui/ui_widgets_common_providers_map_theme_prov
 import 'package:flutter_media_view/ui/ui_widgets_dialogs_aves_dialog.dart';
 import 'package:flutter_media_view/ui/ui_widgets_map_map_page.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_info_common.dart';
-import 'package:aves_map/aves_map.dart';
+import 'package:flutter_media_view_map/flutter_media_view_map.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/function/function_entry.dart';
 import 'package:flutter_media_view/ui/ui_widgets_map_address_row.dart';
 import 'package:flutter_media_view/ui/ui_widgets_map_date_row.dart';
-import 'package:aves_map/aves_map.dart';
+import 'package:flutter_media_view_map/flutter_media_view_map.dart';
 import 'package:flutter/material.dart';
 
 class MapInfoRow extends StatelessWidget {

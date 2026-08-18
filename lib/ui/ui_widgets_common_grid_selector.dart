@@ -7,7 +7,7 @@ import 'package:flutter_media_view/ui/ui_widgets_common_basic_gestures_gesture_d
 import 'package:flutter_media_view/ui/ui_widgets_common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_extensions_media_query.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_grid_sections_list_layout.dart';
-import 'package:aves_utils/aves_utils.dart';
+import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

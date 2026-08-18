@@ -7,7 +7,7 @@ import 'package:flutter_media_view/ui/ui_widgets_common_extensions_build_context
 import 'package:flutter_media_view/ui/ui_widgets_settings_common_tiles.dart';
 import 'package:flutter_media_view/ui/ui_widgets_settings_privacy_permissions_manage_media.dart';
 import 'package:flutter_media_view/ui/ui_widgets_settings_privacy_permissions_notification.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

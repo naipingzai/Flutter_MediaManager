@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/function/function_settings.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_fx_borders.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_providers_map_theme_provider.dart';
-import 'package:aves_map/aves_map.dart';
+import 'package:flutter_media_view_map/flutter_media_view_map.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

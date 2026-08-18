@@ -40,7 +40,7 @@ import 'package:flutter_media_view/ui/ui_widgets_viewer_entry_viewer_page.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_multipage_conductor.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_source_viewer_page.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_video_conductor.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';

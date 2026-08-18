@@ -6,7 +6,7 @@ import 'package:flutter_media_view/ui/ui_image_providers_thumbnail_provider.dart
 import 'package:flutter_media_view/function/function_entry.dart';
 import 'package:flutter_media_view/function/function_mime_types.dart';
 import 'package:flutter_media_view/function/function_media_media_fetch_service.dart';
-import 'package:aves_report/aves_report.dart';
+import 'package:flutter_media_view_report/flutter_media_view_report.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';

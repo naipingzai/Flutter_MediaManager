@@ -10,7 +10,7 @@ import 'package:flutter_media_view/ui/ui_widgets_filter_grids_albums_page.dart';
 import 'package:flutter_media_view/ui/ui_widgets_filter_grids_countries_page.dart';
 import 'package:flutter_media_view/ui/ui_widgets_filter_grids_tags_page.dart';
 import 'package:flutter_media_view/ui/ui_widgets_navigation_nav_item.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 
 class SettingsDefaults {
   // app

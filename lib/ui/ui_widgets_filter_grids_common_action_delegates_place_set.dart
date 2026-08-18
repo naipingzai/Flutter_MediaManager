@@ -3,7 +3,7 @@ import 'package:flutter_media_view/function/function_filters.dart';
 import 'package:flutter_media_view/function/function_settings.dart';
 import 'package:flutter_media_view/ui/ui_widgets_filter_grids_common_action_delegates_chip_set.dart';
 import 'package:flutter_media_view/ui/ui_widgets_filter_grids_places_page.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 
 class PlaceChipSetActionDelegate extends ChipSetActionDelegate<LocationFilter> {
   final Iterable<FilterGridItem<LocationFilter>> _items;

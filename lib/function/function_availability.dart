@@ -1,6 +1,6 @@
 import 'package:flutter_media_view/function/function_device.dart';
 import 'package:flutter_media_view/function/function_common_services.dart';
-import 'package:aves_map/aves_map.dart';
+import 'package:flutter_media_view_map/flutter_media_view_map.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
 

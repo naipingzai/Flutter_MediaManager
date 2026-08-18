@@ -2,7 +2,7 @@ import 'package:flutter_media_view/function/function_common_services.dart';
 import 'package:flutter_media_view/function/function_android_file_utils.dart';
 import 'package:flutter_media_view/ui/ui_view.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_app_bar_crumb_line.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 
 class ExplorerCrumbLine extends StatelessWidget {

@@ -1,4 +1,4 @@
-import 'package:aves_report/aves_report.dart';
+import 'package:flutter_media_view_report/flutter_media_view_report.dart';
 import 'package:flutter/foundation.dart';
 
 class FakeReportService extends ReportService {

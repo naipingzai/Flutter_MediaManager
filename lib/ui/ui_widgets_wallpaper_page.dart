@@ -19,9 +19,9 @@ import 'package:flutter_media_view/ui/ui_widgets_viewer_page_entry_builder.dart'
 import 'package:flutter_media_view/ui/ui_widgets_viewer_providers.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_video_conductor.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_visual_controller_mixin.dart';
-import 'package:aves_magnifier/aves_magnifier.dart';
-import 'package:aves_model/aves_model.dart';
-import 'package:aves_video/aves_video.dart';
+import 'package:flutter_media_view_magnifier/flutter_media_view_magnifier.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:flutter_media_view_video/flutter_media_view_video.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

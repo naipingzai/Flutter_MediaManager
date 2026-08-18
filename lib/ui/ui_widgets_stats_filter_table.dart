@@ -4,7 +4,7 @@ import 'package:flutter_media_view/ui/ui_theme_themes.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_identity_aves_filter_chip.dart';
 import 'package:flutter_media_view/ui/ui_widgets_stats_percent_text.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';

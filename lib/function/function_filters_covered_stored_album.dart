@@ -8,7 +8,7 @@ import 'package:flutter_media_view/ui/ui_theme_colors.dart';
 import 'package:flutter_media_view/ui/ui_theme_icons.dart';
 import 'package:flutter_media_view/function/function_android_file_utils.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_identity_aves_icons.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';

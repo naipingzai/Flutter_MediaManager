@@ -32,7 +32,7 @@ import 'package:flutter_media_view/function/function_analysis_service.dart';
 import 'package:flutter_media_view/function/function_common_image_op_events.dart';
 import 'package:flutter_media_view/function/function_common_services.dart';
 import 'package:flutter_media_view/ui/ui_widgets_aves_app.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:flutter/foundation.dart';

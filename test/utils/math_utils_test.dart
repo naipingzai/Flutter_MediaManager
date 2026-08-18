@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:aves_utils/aves_utils.dart';
+import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
 import 'package:test/test.dart';
 
 void main() {

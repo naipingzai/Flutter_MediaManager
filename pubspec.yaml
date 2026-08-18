@@ -16,51 +16,51 @@ platforms:
   linux:
 
 workspace:
-  - plugins/aves_magnifier
-  - plugins/aves_map
-  - plugins/aves_model
-  - plugins/aves_report
-  - plugins/aves_report_console
-  - plugins/aves_screen_state
-  - plugins/aves_services
-  - plugins/aves_services_none
-  - plugins/aves_ui
-  - plugins/aves_utils
-  - plugins/aves_video
-  - plugins/aves_video_exo
-  - plugins/aves_video_mpv
+  - plugins/flutter_media_view_magnifier
+  - plugins/flutter_media_view_map
+  - plugins/flutter_media_view_model
+  - plugins/flutter_media_view_report
+  - plugins/flutter_media_view_report_console
+  - plugins/flutter_media_view_screen_state
+  - plugins/flutter_media_view_services
+  - plugins/flutter_media_view_services_none
+  - plugins/flutter_media_view_ui
+  - plugins/flutter_media_view_utils
+  - plugins/flutter_media_view_video
+  - plugins/flutter_media_view_video_exo
+  - plugins/flutter_media_view_video_mpv
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  aves_magnifier:
-    path: plugins/aves_magnifier
-  aves_map:
-    path: plugins/aves_map
-  aves_model:
-    path: plugins/aves_model
-  aves_report:
-    path: plugins/aves_report
-  aves_report_platform:
-    path: plugins/aves_report_console
-  aves_screen_state:
-    path: plugins/aves_screen_state
-  aves_services:
-    path: plugins/aves_services
-  aves_services_platform:
-    path: plugins/aves_services_none
-  aves_video:
-    path: plugins/aves_video
-  #  aves_video_exo:
-  #    path: plugins/aves_video_exo
-  aves_video_mpv:
-    path: plugins/aves_video_mpv
-  aves_ui:
-    path: plugins/aves_ui
-  aves_utils:
-    path: plugins/aves_utils
+  flutter_media_view_magnifier:
+    path: plugins/flutter_media_view_magnifier
+  flutter_media_view_map:
+    path: plugins/flutter_media_view_map
+  flutter_media_view_model:
+    path: plugins/flutter_media_view_model
+  flutter_media_view_report:
+    path: plugins/flutter_media_view_report
+  flutter_media_view_report_platform:
+    path: plugins/flutter_media_view_report_console
+  flutter_media_view_screen_state:
+    path: plugins/flutter_media_view_screen_state
+  flutter_media_view_services:
+    path: plugins/flutter_media_view_services
+  flutter_media_view_services_platform:
+    path: plugins/flutter_media_view_services_none
+  flutter_media_view_video:
+    path: plugins/flutter_media_view_video
+  #  flutter_media_view_video_exo:
+  #    path: plugins/flutter_media_view_video_exo
+  flutter_media_view_video_mpv:
+    path: plugins/flutter_media_view_video_mpv
+  flutter_media_view_ui:
+    path: plugins/flutter_media_view_ui
+  flutter_media_view_utils:
+    path: plugins/flutter_media_view_utils
   collection:
   community_charts_flutter:
     git:

@@ -11,7 +11,7 @@ import 'package:flutter_media_view/function/function_source_location_country.dar
 import 'package:flutter_media_view/function/function_source_location_place.dart';
 import 'package:flutter_media_view/function/function_source_location_state.dart';
 import 'package:flutter_media_view/function/function_common_services.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 

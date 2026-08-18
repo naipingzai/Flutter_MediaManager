@@ -11,8 +11,8 @@ import 'package:flutter_media_view/ui/ui_widgets_common_map_buttons_item_track_t
 import 'package:flutter_media_view/ui/ui_widgets_common_map_compass.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_map_map_action_delegate.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_providers_map_theme_provider.dart';
-import 'package:aves_map/aves_map.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_map/flutter_media_view_map.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';

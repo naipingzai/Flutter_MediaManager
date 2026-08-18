@@ -2,8 +2,8 @@ import 'package:flutter_media_view/function/function_filters_container_dynamic_a
 import 'package:flutter_media_view/function/function_filters.dart';
 import 'package:flutter_media_view/function/function_grouping_common.dart';
 import 'package:flutter_media_view/function/function_settings_defaults.dart';
-import 'package:aves_model/aves_model.dart';
-import 'package:aves_utils/aves_utils.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
 import 'package:synchronized/synchronized.dart';
 
 mixin FilterGridsSettings on SettingsAccess {

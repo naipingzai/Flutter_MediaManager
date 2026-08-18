@@ -2,8 +2,8 @@ import 'package:flutter_media_view/ui/ui_image_providers_app_icon_image_provider
 import 'package:flutter_media_view/function/function_covers.dart';
 import 'package:flutter_media_view/function/function_settings.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_extensions_theme.dart';
-import 'package:aves_model/aves_model.dart';
-import 'package:aves_utils/aves_utils.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:material_color_utilities/material_color_utilities.dart';

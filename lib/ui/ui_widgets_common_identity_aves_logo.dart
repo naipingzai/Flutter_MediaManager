@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/function/function_settings.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_fx_borders.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_fx_colors.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

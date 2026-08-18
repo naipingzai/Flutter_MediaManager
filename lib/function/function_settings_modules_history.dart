@@ -3,7 +3,7 @@ import 'package:flutter_media_view/function/function_filters.dart';
 import 'package:flutter_media_view/function/function_settings_defaults.dart';
 import 'package:flutter_media_view/function/function_source_collection_source.dart';
 import 'package:flutter_media_view/function/function_vaults.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 
 mixin HistorySettings on SettingsAccess {
   static const int recentFilterHistoryMax = 20;

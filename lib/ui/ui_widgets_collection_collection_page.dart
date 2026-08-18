@@ -27,7 +27,7 @@ import 'package:flutter_media_view/ui/ui_widgets_common_providers_selection_prov
 import 'package:flutter_media_view/ui/ui_widgets_navigation_drawer_app_drawer.dart';
 import 'package:flutter_media_view/ui/ui_widgets_navigation_nav_bar.dart';
 import 'package:flutter_media_view/ui/ui_widgets_navigation_tv_rail.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

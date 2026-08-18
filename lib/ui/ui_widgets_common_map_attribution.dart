@@ -3,7 +3,7 @@ import 'package:flutter_media_view/ui/ui_theme_text.dart';
 import 'package:flutter_media_view/ui/ui_widgets_aves_app.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_info_common.dart';
-import 'package:aves_map/aves_map.dart';
+import 'package:flutter_media_view_map/flutter_media_view_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 import 'package:provider/provider.dart';

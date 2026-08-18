@@ -13,7 +13,7 @@ import 'package:flutter_media_view/ui/ui_widgets_dialogs_aves_dialog.dart';
 import 'package:flutter_media_view/ui/ui_widgets_explorer_explorer_page.dart';
 import 'package:flutter_media_view/ui/ui_widgets_filter_grids_common_action_delegates_chip.dart';
 import 'package:flutter_media_view/ui/ui_widgets_stats_stats_page.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

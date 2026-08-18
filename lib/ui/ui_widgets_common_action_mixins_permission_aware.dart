@@ -7,7 +7,7 @@ import 'package:flutter_media_view/ui/ui_view.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/ui_widgets_dialogs_aves_confirmation_dialog.dart';
 import 'package:flutter_media_view/ui/ui_widgets_dialogs_aves_dialog.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 
 mixin PermissionAwareMixin {

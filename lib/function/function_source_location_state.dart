@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/function/function_entry.dart';
 import 'package:flutter_media_view/function/function_filters_covered_location.dart';
 import 'package:flutter_media_view/function/function_source_collection_source.dart';
-import 'package:aves_utils/aves_utils.dart';
+import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
 import 'package:collection/collection.dart';
 
 mixin StateMixin on SourceBase {

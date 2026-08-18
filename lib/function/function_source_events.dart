@@ -1,5 +1,5 @@
 import 'package:flutter_media_view/function/function_entry.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/foundation.dart';
 
 @immutable

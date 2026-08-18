@@ -14,7 +14,7 @@ import 'package:flutter_media_view/function/function_settings.dart';
 import 'package:flutter_media_view/function/function_source_collection_source.dart';
 import 'package:flutter_media_view/function/function_source_media_store_source.dart';
 import 'package:flutter_media_view/function/function_common_services.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:latlong2/latlong.dart';

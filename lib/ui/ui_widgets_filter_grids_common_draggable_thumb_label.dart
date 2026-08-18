@@ -4,7 +4,7 @@ import 'package:flutter_media_view/function/function_source_collection_source.da
 import 'package:flutter_media_view/function/function_file_utils.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_grid_draggable_thumb_label.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter_media_view/function/function_settings.dart';
-import 'package:aves_map/aves_map.dart';
+import 'package:flutter_media_view_map/flutter_media_view_map.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

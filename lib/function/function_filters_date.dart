@@ -4,7 +4,7 @@ import 'package:flutter_media_view/ui/ui_theme_icons.dart';
 import 'package:flutter_media_view/function/function_aves_locale.dart';
 import 'package:flutter_media_view/function/function_calendar_calendar_utils.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_extensions_build_context.dart';
-import 'package:aves_utils/aves_utils.dart';
+import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
 import 'package:flutter/widgets.dart';
 
 class DateFilter extends CollectionFilter {

@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/function/function_entry.dart';
 import 'package:flutter_media_view/function/function_viewer_view_state.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_view_controller.dart';
-import 'package:aves_magnifier/aves_magnifier.dart';
+import 'package:flutter_media_view_magnifier/flutter_media_view_magnifier.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';

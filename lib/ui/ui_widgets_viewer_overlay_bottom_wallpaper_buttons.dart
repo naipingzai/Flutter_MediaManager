@@ -15,7 +15,7 @@ import 'package:flutter_media_view/ui/ui_widgets_viewer_overlay_bottom.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_overlay_bottom_viewer_buttons.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_video_conductor.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_view_conductor.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:latlong2/latlong.dart';

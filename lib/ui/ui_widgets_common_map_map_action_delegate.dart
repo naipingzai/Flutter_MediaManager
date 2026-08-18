@@ -10,8 +10,8 @@ import 'package:flutter_media_view/ui/ui_widgets_dialogs_add_shortcut_dialog.dar
 import 'package:flutter_media_view/ui/ui_widgets_dialogs_aves_dialog.dart';
 import 'package:flutter_media_view/ui/ui_widgets_dialogs_map_style_selection_dialog.dart';
 import 'package:flutter_media_view/ui/ui_widgets_map_map_page.dart';
-import 'package:aves_map/aves_map.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_map/flutter_media_view_map.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

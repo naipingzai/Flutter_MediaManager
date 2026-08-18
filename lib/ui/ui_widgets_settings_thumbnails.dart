@@ -8,7 +8,7 @@ import 'package:flutter_media_view/ui/ui_widgets_settings_common_tiles.dart';
 import 'package:flutter_media_view/ui/ui_widgets_settings_settings_definition.dart';
 import 'package:flutter_media_view/ui/ui_widgets_settings_thumbnails_collection_actions_editor_page.dart';
 import 'package:flutter_media_view/ui/ui_widgets_settings_thumbnails_overlay_page.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

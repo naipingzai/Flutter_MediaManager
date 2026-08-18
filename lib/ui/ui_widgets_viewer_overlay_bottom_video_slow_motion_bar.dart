@@ -6,8 +6,8 @@ import 'package:flutter_media_view/ui/ui_theme_themes.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_fx_blurred.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_fx_borders.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_overlay_bottom_video_progress_bar.dart';
-import 'package:aves_utils/aves_utils.dart';
-import 'package:aves_video/aves_video.dart';
+import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
+import 'package:flutter_media_view_video/flutter_media_view_video.dart';
 import 'package:flutter/material.dart';
 
 class SlowMotionBar extends StatefulWidget {

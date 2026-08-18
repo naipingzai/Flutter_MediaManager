@@ -21,7 +21,7 @@ import 'package:flutter_media_view/ui/ui_widgets_viewer_info_metadata_metadata_d
 import 'package:flutter_media_view/ui/ui_widgets_viewer_info_metadata_metadata_section.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_multipage_conductor.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_page_entry_builder.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

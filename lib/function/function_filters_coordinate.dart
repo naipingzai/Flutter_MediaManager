@@ -5,8 +5,8 @@ import 'package:flutter_media_view/function/function_settings_enums_coordinate_f
 import 'package:flutter_media_view/function/function_settings.dart';
 import 'package:flutter_media_view/ui/ui_theme_icons.dart';
 import 'package:flutter_media_view/function/function_aves_locale.dart';
-import 'package:aves_map/aves_map.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_map/flutter_media_view_map.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/widgets.dart';
 import 'package:latlong2/latlong.dart';
 

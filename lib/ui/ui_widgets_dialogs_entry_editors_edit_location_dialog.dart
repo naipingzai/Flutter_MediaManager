@@ -33,8 +33,8 @@ import 'package:flutter_media_view/ui/ui_widgets_dialogs_pick_dialogs_item_pick_
 import 'package:flutter_media_view/ui/ui_widgets_dialogs_pick_dialogs_location_pick_page.dart';
 import 'package:flutter_media_view/ui/ui_widgets_dialogs_time_shift_dialog.dart';
 import 'package:flutter_media_view/ui/ui_widgets_map_map_page.dart';
-import 'package:aves_map/aves_map.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_map/flutter_media_view_map.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';

@@ -13,7 +13,7 @@ import 'package:flutter_media_view/ui/ui_widgets_common_fx_transition_image.dart
 import 'package:flutter_media_view/ui/ui_widgets_common_grid_sections_mosaic_section_layout_builder.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_providers_media_query_data_provider.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_thumbnail_error.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

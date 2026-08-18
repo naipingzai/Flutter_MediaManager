@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:aves_utils/aves_utils.dart';
+import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 import 'package:latlong2/latlong.dart';

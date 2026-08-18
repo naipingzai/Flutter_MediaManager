@@ -8,8 +8,8 @@ import 'package:flutter_media_view/ui/ui_widgets_editor_transform_painter.dart';
 import 'package:flutter_media_view/ui/ui_widgets_editor_transform_transformation.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_visual_error.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_visual_raster.dart';
-import 'package:aves_magnifier/aves_magnifier.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_magnifier/flutter_media_view_magnifier.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

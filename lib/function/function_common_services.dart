@@ -24,13 +24,13 @@ import 'package:flutter_media_view/function/function_metadata_metadata_fetch_ser
 import 'package:flutter_media_view/function/function_security_service.dart';
 import 'package:flutter_media_view/function/function_storage_service.dart';
 import 'package:flutter_media_view/function/function_window_service.dart';
-import 'package:aves_model/aves_model.dart';
-import 'package:aves_report/aves_report.dart';
-import 'package:aves_report_platform/aves_report_platform.dart';
-import 'package:aves_services/aves_services.dart';
-import 'package:aves_services_platform/aves_services_platform.dart';
-import 'package:aves_video/aves_video.dart';
-import 'package:aves_video_mpv/aves_video_mpv.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:flutter_media_view_report/flutter_media_view_report.dart';
+import 'package:flutter_media_view_report_platform/flutter_media_view_report_platform.dart';
+import 'package:flutter_media_view_services/flutter_media_view_services.dart';
+import 'package:flutter_media_view_services_platform/flutter_media_view_services_platform.dart';
+import 'package:flutter_media_view_video/flutter_media_view_video.dart';
+import 'package:flutter_media_view_video_mpv/flutter_media_view_video_mpv.dart';
 import 'package:get_it/get_it.dart';
 import 'package:path/path.dart' as p;
 

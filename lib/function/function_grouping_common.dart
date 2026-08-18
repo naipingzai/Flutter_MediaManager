@@ -15,7 +15,7 @@ import 'package:flutter_media_view/function/function_source_album.dart';
 import 'package:flutter_media_view/function/function_source_collection_source.dart';
 import 'package:flutter_media_view/function/function_source_events.dart';
 import 'package:flutter_media_view/function/function_common_services.dart';
-import 'package:aves_utils/aves_utils.dart';
+import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
 import 'package:collection/collection.dart';
 import 'package:event_bus/event_bus.dart';
 import 'package:flutter/foundation.dart';

@@ -34,7 +34,7 @@ import 'package:flutter_media_view/ui/ui_widgets_dialogs_pick_dialogs_album_pick
 import 'package:flutter_media_view/ui/ui_widgets_dialogs_selection_dialogs_single_selection.dart';
 import 'package:flutter_media_view/ui/ui_widgets_filter_grids_common_enums.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_controls_notifications.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

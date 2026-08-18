@@ -1,5 +1,5 @@
 import 'package:flutter_media_view/ui/ui_widgets_aves_app.dart';
-import 'package:aves_utils/aves_utils.dart';
+import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
 import 'package:flutter/material.dart';
 
 class Themes {

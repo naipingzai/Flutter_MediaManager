@@ -2,7 +2,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter_media_view/function/function_common_channel.dart';
 import 'package:flutter_media_view/function/function_common_services.dart';
-import 'package:aves_utils/aves_utils.dart';
+import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
 import 'package:flutter/services.dart';
 
 enum MemorySizeType { advertised, available, free, max, total, used }

@@ -12,7 +12,7 @@ import 'package:flutter_media_view/ui/ui_widgets_settings_viewer_entry_backgroun
 import 'package:flutter_media_view/ui/ui_widgets_settings_viewer_overlay_page.dart';
 import 'package:flutter_media_view/ui/ui_widgets_settings_viewer_slideshow_page.dart';
 import 'package:flutter_media_view/ui/ui_widgets_settings_viewer_viewer_actions_editor_page.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

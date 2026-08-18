@@ -16,7 +16,7 @@ import 'package:flutter_media_view/ui/ui_widgets_viewer_overlay_top_details_posi
 import 'package:flutter_media_view/ui/ui_widgets_viewer_overlay_top_details_rating_tags.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_overlay_top_details_shooting.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_page_entry_builder.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

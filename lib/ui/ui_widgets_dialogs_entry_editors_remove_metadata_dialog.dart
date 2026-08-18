@@ -9,7 +9,7 @@ import 'package:flutter_media_view/ui/ui_widgets_common_extensions_build_context
 import 'package:flutter_media_view/ui/ui_widgets_common_fx_highlight_decoration.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_identity_highlight_title.dart';
 import 'package:flutter_media_view/ui/ui_widgets_dialogs_aves_dialog.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

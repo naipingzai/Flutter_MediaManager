@@ -9,7 +9,7 @@ import 'package:flutter_media_view/ui/ui_widgets_viewer_controls_notifications.d
 import 'package:flutter_media_view/ui/ui_widgets_viewer_multipage_conductor.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_page_entry_builder.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_visual_entry_page_view.dart';
-import 'package:aves_magnifier/aves_magnifier.dart';
+import 'package:flutter_media_view_magnifier/flutter_media_view_magnifier.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

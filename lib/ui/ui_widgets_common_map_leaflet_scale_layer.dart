@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter_media_view/ui/ui_widgets_common_basic_text_outlined.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';

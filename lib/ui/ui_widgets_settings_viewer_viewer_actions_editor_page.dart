@@ -3,7 +3,7 @@ import 'package:flutter_media_view/ui/ui_view.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/ui_widgets_settings_common_quick_actions_editor_page.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_overlay_bottom.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter_media_view/function/function_filters.dart';
 import 'package:flutter_media_view/function/function_settings_defaults.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 
 mixin WidgetSettings on SettingsAccess {
   WidgetOutline getWidgetOutline(int widgetId) => getEnumOrDefault('${SettingKeys.widgetOutlinePrefixKey}$widgetId', WidgetOutline.none, WidgetOutline.values);

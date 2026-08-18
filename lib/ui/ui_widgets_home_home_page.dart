@@ -35,7 +35,7 @@ import 'package:flutter_media_view/ui/ui_widgets_settings_screen_saver_settings_
 import 'package:flutter_media_view/ui/ui_widgets_viewer_entry_viewer_page.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_screen_saver_page.dart';
 import 'package:flutter_media_view/ui/ui_widgets_wallpaper_page.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';

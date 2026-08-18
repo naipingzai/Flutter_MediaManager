@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/function/function_entry.dart';
 import 'package:flutter_media_view/function/function_multipage.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_multipage_controller.dart';
-import 'package:aves_utils/aves_utils.dart';
+import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
 import 'package:flutter/widgets.dart';
 
 class PageEntryBuilder extends StatelessWidget {

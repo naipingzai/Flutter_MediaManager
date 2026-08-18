@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/function/function_aves_locale.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_extensions_build_context.dart';
-import 'package:aves_map/aves_map.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_map/flutter_media_view_map.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/widgets.dart';
 
 extension ExtraAccessibilityAnimationsView on AccessibilityAnimations {

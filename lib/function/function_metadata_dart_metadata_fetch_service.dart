@@ -11,7 +11,7 @@ import 'package:flutter_media_view/function/function_mime_types.dart';
 import 'package:flutter_media_view/function/function_common_services.dart';
 import 'package:flutter_media_view/function/function_metadata_metadata_fetch_service.dart';
 import 'package:flutter_media_view/function/function_services_metadata_xmp.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image/image.dart' as img;
 

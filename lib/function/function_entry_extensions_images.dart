@@ -5,7 +5,7 @@ import 'package:flutter_media_view/ui/ui_image_providers_region_provider.dart';
 import 'package:flutter_media_view/ui/ui_image_providers_thumbnail_provider.dart';
 import 'package:flutter_media_view/function/function_entry_cache.dart';
 import 'package:flutter_media_view/function/function_entry.dart';
-import 'package:aves_utils/aves_utils.dart';
+import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/painting.dart';
 

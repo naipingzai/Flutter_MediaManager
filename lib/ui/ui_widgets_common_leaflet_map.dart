@@ -9,8 +9,8 @@ import 'package:flutter_media_view/ui/ui_widgets_common_basic_gestures_gesture_d
 import 'package:flutter_media_view/ui/ui_widgets_common_map_leaflet_latlng_tween.dart' as llt;
 import 'package:flutter_media_view/ui/ui_widgets_common_map_leaflet_scale_layer.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_map_leaflet_tile_layers.dart';
-import 'package:aves_map/aves_map.dart';
-import 'package:aves_utils/aves_utils.dart';
+import 'package:flutter_media_view_map/flutter_media_view_map.dart';
+import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';

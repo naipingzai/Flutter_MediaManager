@@ -15,7 +15,7 @@ import 'package:flutter_media_view/function/function_services_metadata_xmp.dart'
 import 'package:flutter_media_view/function/function_aves_locale.dart';
 import 'package:flutter_media_view/function/function_time_utils.dart';
 import 'package:flutter_media_view/function/function_xmp_utils.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:xml/xml.dart';

@@ -1,4 +1,4 @@
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 
 extension ExtraMetadataSyntheticFieldConvert on MetadataSyntheticField {
   String? get toPlatform => name;

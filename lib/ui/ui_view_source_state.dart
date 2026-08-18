@@ -1,5 +1,5 @@
 import 'package:flutter_media_view/l10n/l10n.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 
 extension ExtraSourceStateView on SourceState {
   String? getName(AppLocalizations l10n) {

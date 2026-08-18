@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/ui/ui_theme_icons.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_identity_buttons_overlay_button.dart';
-import 'package:aves_video/aves_video.dart';
+import 'package:flutter_media_view_video/flutter_media_view_video.dart';
 import 'package:flutter/material.dart';
 
 class VideoABRepeatOverlay extends StatefulWidget {

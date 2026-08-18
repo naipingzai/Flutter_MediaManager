@@ -6,7 +6,7 @@ import 'package:flutter_media_view/function/function_common_services.dart';
 import 'package:flutter_media_view/ui/ui_theme_format.dart';
 import 'package:flutter_media_view/ui/ui_widgets_common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/ui_widgets_dialogs_aves_confirmation_dialog.dart';
-import 'package:aves_video/aves_video.dart';
+import 'package:flutter_media_view_video/flutter_media_view_video.dart';
 import 'package:flutter/material.dart';
 
 class DatabasePlaybackStateHandler extends PlaybackStateHandler {

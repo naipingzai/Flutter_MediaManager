@@ -7,7 +7,7 @@ import 'package:flutter_media_view/function/function_common_services.dart';
 import 'package:flutter_media_view/ui/ui_widgets_filter_grids_common_action_delegates_chip_set.dart';
 import 'package:flutter_media_view/ui/ui_widgets_filter_grids_countries_page.dart';
 import 'package:flutter_media_view/ui/ui_widgets_filter_grids_states_page.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 
 class CountryChipSetActionDelegate extends ChipSetActionDelegate<LocationFilter> {

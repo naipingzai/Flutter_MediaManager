@@ -11,7 +11,7 @@ import 'package:flutter_media_view/function/function_common_decoding.dart';
 import 'package:flutter_media_view/function/function_common_output_buffer.dart';
 import 'package:flutter_media_view/function/function_common_service_policy.dart';
 import 'package:flutter_media_view/function/function_common_services.dart';
-import 'package:aves_report/aves_report.dart';
+import 'package:flutter_media_view_report/flutter_media_view_report.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';

@@ -47,8 +47,8 @@ import 'package:flutter_media_view/ui/ui_widgets_navigation_tv_rail.dart';
 import 'package:flutter_media_view/ui/ui_widgets_settings_app_export_items.dart';
 import 'package:flutter_media_view/ui/ui_widgets_settings_settings_action_delegate.dart';
 import 'package:flutter_media_view/ui/ui_widgets_welcome_page.dart';
-import 'package:aves_model/aves_model.dart';
-import 'package:aves_utils/aves_utils.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
 import 'package:collection/collection.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:equatable/equatable.dart';
@@ -68,26 +68,7 @@ class AvesApp extends StatefulWidget {
   final AppFlavor flavor;
   final Map<String, Object?>? debugIntentData;
 
-  // temporary exclude locales not ready yet for prime time
-  // `ckb`: add `flutter_ckb_localization` and necessary app localization delegates when ready
-  static final _unsupportedLocales = {
-    'az', // Azerbaijani
-    'bn', // Bengali
-    'ckb', // Kurdish (Sorani, Central)
-    'he', // Hebrew
-    'hi', // Hindi
-    'hr', // Croatian
-    'ml', // Malayalam
-    'my', // Burmese
-    'ne', // Nepali
-    'or', // Odia
-    'sat', // Santali
-    'sl', // Slovenian
-    'sr', // Serbian
-    'th', // Thai
-    'ur', // Urdu
-  }.map(Locale.new).toSet();
-  static final List<Locale> supportedLocales = AppLocalizations.supportedLocales.where((v) => !_unsupportedLocales.contains(v)).toList();
+  static final List<Locale> supportedLocales = AppLocalizations.supportedLocales;
   static final ValueNotifier<bool> canGestureToOtherApps = ValueNotifier(false);
   static final ValueNotifier<bool> isInPictureInPictureMode = ValueNotifier(false);
   static final ValueNotifier<EdgeInsets> cutoutInsetsNotifier = ValueNotifier(EdgeInsets.zero);

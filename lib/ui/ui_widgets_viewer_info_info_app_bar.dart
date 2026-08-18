@@ -17,7 +17,7 @@ import 'package:flutter_media_view/ui/ui_widgets_common_search_route.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_action_entry_info_action_delegate.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_info_info_search_delegate.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_info_metadata_metadata_dir.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';

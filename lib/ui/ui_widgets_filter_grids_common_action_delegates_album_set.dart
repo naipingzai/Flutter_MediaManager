@@ -40,7 +40,7 @@ import 'package:flutter_media_view/ui/ui_widgets_dialogs_tile_view_dialog.dart';
 import 'package:flutter_media_view/ui/ui_widgets_filter_grids_albums_page.dart';
 import 'package:flutter_media_view/ui/ui_widgets_filter_grids_common_action_delegates_chip_set.dart';
 import 'package:flutter_media_view/ui/ui_widgets_filter_grids_common_enums.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';

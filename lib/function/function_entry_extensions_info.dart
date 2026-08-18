@@ -12,7 +12,7 @@ import 'package:flutter_media_view/ui/ui_theme_colors.dart';
 import 'package:flutter_media_view/ui/ui_theme_format.dart';
 import 'package:flutter_media_view/ui/ui_theme_text.dart';
 import 'package:flutter_media_view/ui/ui_widgets_viewer_info_metadata_metadata_dir.dart';
-import 'package:aves_model/aves_model.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';

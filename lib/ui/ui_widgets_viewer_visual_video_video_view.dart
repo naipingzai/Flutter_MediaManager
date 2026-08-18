@@ -1,5 +1,5 @@
 import 'package:flutter_media_view/function/function_entry.dart';
-import 'package:aves_video/aves_video.dart';
+import 'package:flutter_media_view_video/flutter_media_view_video.dart';
 import 'package:flutter/material.dart';
 
 class VideoView extends StatefulWidget {
