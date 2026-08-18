@@ -82,13 +82,16 @@ class PlatformMediaEditService implements MediaEditService {
           .where((event) => event is Map)
           .map((event) => ImageOpEvent.fromMap(event as Map))
           .timeout(const Duration(seconds: 10))
-          .onErrorReturnWith((error) {
-            if (error is TimeoutException) {
-              debugPrint('Delete operation timed out (platform not implemented)');
-              return const ImageOpEvent(success: true, skipped: false, uri: "");
-            }
-            return const ImageOpEvent(success: false, skipped: false, uri: "");
-          });
+          .transform(StreamTransformer.fromHandlers(
+            handleError: (error, stack, sink) {
+              if (error is TimeoutException) {
+                debugPrint('Delete operation timed out (platform not implemented)');
+                sink.add(const ImageOpEvent(success: true, skipped: false, uri: ''));
+              } else {
+                sink.addError(error, stack);
+              }
+            },
+          ));
     } on PlatformException catch (e, stack) {
       reportService.recordError(e, stack);
       return Stream.error(e);

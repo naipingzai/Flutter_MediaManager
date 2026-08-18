@@ -2,7 +2,7 @@ import 'package:flutter_media_view_video/flutter_media_view_video.dart';
 import 'package:media_kit/media_kit.dart';
 
 extension ExtraVideoTrack on VideoTrack {
-  MediaTrackSummary toAves(int index) {
+  MediaTrackSummary toFmv(int index) {
     return MediaTrackSummary(
       type: MediaTrackType.video,
       index: index,
@@ -16,7 +16,7 @@ extension ExtraVideoTrack on VideoTrack {
 }
 
 extension ExtraAudioTrack on AudioTrack {
-  MediaTrackSummary toAves(int index) {
+  MediaTrackSummary toFmv(int index) {
     return MediaTrackSummary(
       type: MediaTrackType.audio,
       index: index,
@@ -30,7 +30,7 @@ extension ExtraAudioTrack on AudioTrack {
 }
 
 extension ExtraSubtitleTrack on SubtitleTrack {
-  MediaTrackSummary toAves(int index) {
+  MediaTrackSummary toFmv(int index) {
     return MediaTrackSummary(
       type: MediaTrackType.text,
       index: index,

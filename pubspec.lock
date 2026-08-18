@@ -109,7 +109,7 @@ packages:
     dependency: transitive
     description:
       path: community_charts_common
-      ref: main
+      ref: aves
       resolved-ref: "221b81bf649f2b0be754322658013a5d8086fbe1"
       url: "https://github.com/deckerst/flutter_community_charts.git"
     source: git
@@ -823,11 +823,10 @@ packages:
   motion_sensors:
     dependency: transitive
     description:
-      path: "."
-      ref: main
-      resolved-ref: ae21350de8195dd6c211bac2d3c70e641ae6dbe1
-      url: "https://github.com/deckerst/fmv_panorama_motion_sensors.git"
-    source: git
+      name: motion_sensors
+      sha256: "4e2734a76cd6da633013bcdc68a9efe9fbbcff906e6d6c45040932edda3fa5d6"
+      url: "https://pub.dev"
+    source: hosted
     version: "0.1.0"
   native_toolchain_c:
     dependency: transitive
@@ -922,9 +921,9 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: main
-      resolved-ref: "6bdc7a7996abb469037e90aa07585fbe5bf5d1c3"
-      url: "https://github.com/deckerst/fmv_panorama.git"
+      ref: master
+      resolved-ref: "538fd948892357088afeeb4d90de04b3ccb91668"
+      url: "https://github.com/deckerst/aves_panorama.git"
     source: git
     version: "0.4.1"
   path:
@@ -1489,9 +1488,9 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: HEAD
+      ref: master
       resolved-ref: "35a9b0fcc0e97f756756c0010fb223129c2d832c"
-      url: "https://github.com/deckerst/fmv_streams_channel.git"
+      url: "https://github.com/deckerst/aves_streams_channel.git"
     source: git
     version: "0.3.0"
   string_scanner:

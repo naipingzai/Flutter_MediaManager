@@ -34,7 +34,7 @@ class PanoramaPage extends StatefulWidget {
 
 class _PanoramaPageState extends State<PanoramaPage> {
   final ValueNotifier<bool> _overlayVisible = ValueNotifier(true);
-  final ValueNotifier<SensorControl> _sensorControl = ValueNotifier(.none);
+  final ValueNotifier<SensorControl> _sensorControl = ValueNotifier<SensorControl>(SensorControl.None);
 
   FmvEntry get entry => widget.entry;
 
@@ -78,7 +78,7 @@ class _PanoramaPageState extends State<PanoramaPage> {
                     longitude: longitude,
                     minZoom: _minZoom,
                     sensorControl: sensorControl,
-                    sensorOrientationMeanCount: _sensorOrientationMeanCount,
+
                     croppedArea: croppedArea,
                     croppedFullWidth: fullSize.width,
                     croppedFullHeight: fullSize.height,
@@ -89,7 +89,7 @@ class _PanoramaPageState extends State<PanoramaPage> {
                   return Panorama(
                     minZoom: _minZoom,
                     sensorControl: sensorControl,
-                    sensorOrientationMeanCount: _sensorOrientationMeanCount,
+
                     onTap: onTap,
                     child: imageChild,
                   );
@@ -142,9 +142,9 @@ class _PanoramaPageState extends State<PanoramaPage> {
                   valueListenable: _sensorControl,
                   builder: (context, sensorControl, child) {
                     return IconButton(
-                      icon: Icon(sensorControl == SensorControl.none ? AIcons.sensorControlEnabled : AIcons.sensorControlDisabled),
+                      icon: Icon(sensorControl == SensorControl.None ? AIcons.sensorControlEnabled : AIcons.sensorControlDisabled),
                       onPressed: _toggleSensor,
-                      tooltip: sensorControl == SensorControl.none ? context.l10n.panoramaEnableSensorControl : context.l10n.panoramaDisableSensorControl,
+                      tooltip: sensorControl == SensorControl.None ? context.l10n.panoramaEnableSensorControl : context.l10n.panoramaDisableSensorControl,
                     );
                   },
                 ),
@@ -158,11 +158,10 @@ class _PanoramaPageState extends State<PanoramaPage> {
 
   void _toggleSensor() {
     switch (_sensorControl.value) {
-      case .none:
-        _sensorControl.value = .absoluteOrientation;
-      case .absoluteOrientation:
-      case .orientation:
-        _sensorControl.value = .none;
+      case SensorControl.None:
+        _sensorControl.value = SensorControl.AbsoluteOrientation;
+      default:
+        _sensorControl.value = SensorControl.None;
     }
   }
 
