@@ -6,7 +6,7 @@ body:
     attributes:
       label: Guidelines
       options:
-        - label: I have read the [guidelines to open issues](https://github.com/deckerst/aves/issues/234)
+        - label: I have read the [guidelines to open issues](https://github.com/naipingzai/Flutter_MediaManager/issues/234)
           required: true
 
   - type: textarea

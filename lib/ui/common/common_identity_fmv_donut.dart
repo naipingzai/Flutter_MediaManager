@@ -36,10 +36,10 @@ class FmvDonut extends StatefulWidget {
   });
 
   @override
-  State<FmvDonut> createState() => _AvesDonutState();
+  State<FmvDonut> createState() => _FmvDonutState();
 }
 
-class _AvesDonutState extends State<FmvDonut> with AutomaticKeepAliveClientMixin {
+class _FmvDonutState extends State<FmvDonut> with AutomaticKeepAliveClientMixin {
   Map<String, int> get byTypes => widget.byTypes;
 
   DatumKeyFormatter get formatKey => widget.formatKey;

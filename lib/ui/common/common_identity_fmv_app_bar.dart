@@ -220,10 +220,10 @@ class FmvFloatingBar extends StatefulWidget {
   });
 
   @override
-  State<FmvFloatingBar> createState() => _AvesFloatingBarState();
+  State<FmvFloatingBar> createState() => _FmvFloatingBarState();
 }
 
-class _AvesFloatingBarState extends State<FmvFloatingBar> with RouteAware {
+class _FmvFloatingBarState extends State<FmvFloatingBar> with RouteAware {
   // prevent expensive blurring when the current page is hidden
   final ValueNotifier<bool> _isBlurAllowedNotifier = ValueNotifier(true);
   Timer? _blurBlockTimer;
