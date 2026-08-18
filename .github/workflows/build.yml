@@ -80,10 +80,6 @@ jobs:
     runs-on: macos-14
     steps:
       - uses: actions/checkout@v4
-      - name: Disable codesign
-        run: |
-          defaults write com.apple.dt.Xcode DVTDisableAutomaticIssues YES
-          echo 'PROVISIONING_PROFILE_SPECIFIER = ""' >> ios/Runner.xcodeproj/project.pbxproj
       - name: Setup Xcode 16
         uses: maxim-lobanov/setup-xcode@v1
         with:
