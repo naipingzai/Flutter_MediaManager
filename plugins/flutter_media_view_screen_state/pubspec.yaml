@@ -18,5 +18,5 @@ flutter:
   plugin:
     platforms:
       android:
-        package: deckers.thibault.aves.flutter_media_view_screen_state
+        package: deckers.thibault.aves.aves_screen_state
         pluginClass: AvesScreenStatePlugin
