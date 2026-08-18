@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.core.net.toUri
 import com.naipingzai.flutter_media_view.channel.calls.MediaEditHandler.Companion.cancelledOps
 import com.naipingzai.flutter_media_view.channel.streams.BaseStreamHandler
-import com.naipingzai.flutter_media_view.model.AvesEntry
+import com.naipingzai.flutter_media_view.model.FmvEntry
 import com.naipingzai.flutter_media_view.model.FieldMap
 import com.naipingzai.flutter_media_view.model.NameConflictStrategy
 import com.naipingzai.flutter_media_view.model.provider.ImageProvider.ImageOpCallback
@@ -53,7 +53,7 @@ class ImageOpStreamHandler(private val activity: Activity, private val arguments
     private fun isCancelledOp() = cancelledOps.contains(opId)
 
     private fun delete() {
-        val entries = entryMapList.map(::AvesEntry)
+        val entries = entryMapList.map(::FmvEntry)
         for (entry in entries) {
             val mimeType = entry.mimeType
             val uri = entry.uri
@@ -108,7 +108,7 @@ class ImageOpStreamHandler(private val activity: Activity, private val arguments
         }
 
         destinationDir = ensureTrailingSeparator(destinationDir)
-        val entries = entryMapList.map(::AvesEntry)
+        val entries = entryMapList.map(::FmvEntry)
         provider.convertMultiple(
             activity = activity,
             imageExportMimeType = mimeType,
@@ -142,7 +142,7 @@ class ImageOpStreamHandler(private val activity: Activity, private val arguments
             return
         }
 
-        val entriesByTargetDir = HashMap<String, List<AvesEntry>>()
+        val entriesByTargetDir = HashMap<String, List<FmvEntry>>()
         rawEntryMap.forEach {
             var destinationDir = it.key as String
             if (destinationDir != StorageUtils.TRASH_PATH_PLACEHOLDER) {
@@ -150,7 +150,7 @@ class ImageOpStreamHandler(private val activity: Activity, private val arguments
             }
             @Suppress("unchecked_cast")
             val rawEntries = it.value as List<FieldMap>
-            entriesByTargetDir[destinationDir] = rawEntries.map(::AvesEntry)
+            entriesByTargetDir[destinationDir] = rawEntries.map(::FmvEntry)
         }
 
         // always use Media Store (as we move from or to it)
@@ -182,12 +182,12 @@ class ImageOpStreamHandler(private val activity: Activity, private val arguments
             return
         }
 
-        val entriesToNewName = HashMap<AvesEntry, String>()
+        val entriesToNewName = HashMap<FmvEntry, String>()
         rawEntryMap.forEach {
             @Suppress("unchecked_cast")
             val rawEntry = it.key as FieldMap
             val newName = it.value as String
-            entriesToNewName[AvesEntry(rawEntry)] = newName
+            entriesToNewName[FmvEntry(rawEntry)] = newName
         }
 
         val byProvider = entriesToNewName.entries.groupBy { kv -> getProvider(activity, kv.key.uri) }

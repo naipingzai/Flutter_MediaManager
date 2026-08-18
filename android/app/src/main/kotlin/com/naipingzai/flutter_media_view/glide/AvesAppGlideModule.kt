@@ -27,7 +27,7 @@ import com.naipingzai.flutter_media_view.utils.MimeTypes.isVideo
 import com.naipingzai.flutter_media_view.utils.StorageUtils
 
 @GlideModule
-class AvesAppGlideModule : AppGlideModule() {
+class FmvAppGlideModule : AppGlideModule() {
     override fun applyOptions(context: Context, builder: GlideBuilder) {
         // hide noisy warning (e.g. for images that can't be decoded)
         builder.setLogLevel(Log.ERROR)
@@ -78,7 +78,7 @@ class AvesAppGlideModule : AppGlideModule() {
     override fun isManifestParsingEnabled(): Boolean = false
 
     companion object {
-        private val LOG_TAG = LogUtils.createTag<AvesAppGlideModule>()
+        private val LOG_TAG = LogUtils.createTag<FmvAppGlideModule>()
 
         // request a fresh image with the highest quality format
         val uncachedFullImageOptions = RequestOptions()

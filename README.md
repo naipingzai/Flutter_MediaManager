@@ -12,7 +12,7 @@
 
 Flutter MediaView 是一个可视化的媒体管理与元数据浏览应用，目标是覆盖 Android、iOS、Linux、Windows、macOS 等多个平台。应用可将系统相册/文件中的图片与视频导入到应用私有库中统一管理，并支持浏览、检索与元数据查看。
 
-本工程基于 [Aves Gallery](https://github.com/deckerst/aves) 二次开发与重构。
+本工程基于 [Flutter Media Manager](https://github.com/naipingzai/Flutter_MediaManager) 二次开发与重构。
 
 ## 功能
 
@@ -39,4 +39,4 @@ flutter build apk --flavor izzy --release
 
 ## 许可
 
-基于 Aves Gallery 二次开发，遵循其原始开源许可（见 [LICENSE](LICENSE)）。
+基于 Flutter Media Manager 二次开发，遵循其原始开源许可（见 [LICENSE](LICENSE)）。

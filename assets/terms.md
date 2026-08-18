@@ -1,6 +1,6 @@
 ## Terms of Service
 
-“Aves Gallery” is an open-source gallery and metadata explorer app allowing you to access and manage your local photos and videos.
+“Flutter Media View” is an open-source gallery and metadata explorer app allowing you to access and manage your local photos and videos.
 
 The app is designed for legal, authorized and acceptable purposes.
 
@@ -20,6 +20,6 @@ __Optionally, with your consent, the app collects anonymous error and diagnostic
 
 Developer: Thibault Deckers
 
-Email: [gallery.aves@gmail.com](mailto:gallery.aves@gmail.com)
+Email: [flutter.media.manager@naipingzai.com](mailto:flutter.media.manager@naipingzai.com)
 
-Website: [https://github.com/deckerst/aves](https://github.com/deckerst/aves)
+Website: [https://github.com/naipingzai/Flutter_MediaManager](https://github.com/naipingzai/Flutter_MediaManager)

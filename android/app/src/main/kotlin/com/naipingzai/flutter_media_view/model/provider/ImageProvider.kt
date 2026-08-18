@@ -15,7 +15,7 @@ import androidx.core.net.toUri
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.FutureTarget
 import com.commonsware.cwac.document.DocumentFileCompat
-import com.naipingzai.flutter_media_view.glide.AvesAppGlideModule
+import com.naipingzai.flutter_media_view.glide.FmvAppGlideModule
 import com.naipingzai.flutter_media_view.metadata.ExifInterfaceHelper
 import com.naipingzai.flutter_media_view.metadata.ExifInterfaceHelper.getSafeDateMillis
 import com.naipingzai.flutter_media_view.metadata.Metadata
@@ -33,7 +33,7 @@ import com.naipingzai.flutter_media_view.metadata.PixyMetaHelper.extendedXmpDocS
 import com.naipingzai.flutter_media_view.metadata.PixyMetaHelper.xmpDocString
 import com.naipingzai.flutter_media_view.metadata.metadataextractor.Helper
 import com.naipingzai.flutter_media_view.metadata.xmp.GoogleXMP
-import com.naipingzai.flutter_media_view.model.AvesEntry
+import com.naipingzai.flutter_media_view.model.FmvEntry
 import com.naipingzai.flutter_media_view.model.EntryFields
 import com.naipingzai.flutter_media_view.model.ExifOrientationOp
 import com.naipingzai.flutter_media_view.model.FieldMap
@@ -109,7 +109,7 @@ abstract class ImageProvider {
         activity: Activity,
         copy: Boolean,
         nameConflictStrategy: NameConflictStrategy,
-        entriesByTargetDir: Map<String, List<AvesEntry>>,
+        entriesByTargetDir: Map<String, List<FmvEntry>>,
         isCancelledOp: CancelCheck,
         callback: ImageOpCallback,
     ) {
@@ -118,7 +118,7 @@ abstract class ImageProvider {
 
     suspend fun renameMultiple(
         activity: Activity,
-        entriesToNewName: Map<AvesEntry, String>,
+        entriesToNewName: Map<FmvEntry, String>,
         isCancelledOp: CancelCheck,
         callback: ImageOpCallback,
     ) {
@@ -197,7 +197,7 @@ abstract class ImageProvider {
         activity: Activity,
         imageExportMimeType: String,
         targetDir: String,
-        entries: List<AvesEntry>,
+        entries: List<FmvEntry>,
         quality: Int,
         lengthUnit: String,
         width: Int,
@@ -255,7 +255,7 @@ abstract class ImageProvider {
 
     private suspend fun convertSingle(
         activity: Activity,
-        sourceEntry: AvesEntry,
+        sourceEntry: FmvEntry,
         targetDir: String,
         targetDirDocFile: DocumentFileCompat?,
         quality: Int,
@@ -331,8 +331,8 @@ abstract class ImageProvider {
 
                 target = Glide.with(activity.applicationContext)
                     .asBitmap()
-                    .apply(AvesAppGlideModule.uncachedFullImageOptions)
-                    .load(AvesAppGlideModule.getModel(activity, sourceUri, sourceMimeType, pageId, sourceEntry.sizeBytes))
+                    .apply(FmvAppGlideModule.uncachedFullImageOptions)
+                    .load(FmvAppGlideModule.getModel(activity, sourceUri, sourceMimeType, pageId, sourceEntry.sizeBytes))
                     .submit(targetWidthPx, targetHeightPx)
 
                 var bitmap = withContext(Dispatchers.IO) { target.get() }

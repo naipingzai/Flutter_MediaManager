@@ -12,7 +12,7 @@ import android.util.Log
 import androidx.core.graphics.createBitmap
 import com.bumptech.glide.Glide
 import com.naipingzai.flutter_media_view.channel.streams.darttoplatform.ByteSink
-import com.naipingzai.flutter_media_view.glide.AvesAppGlideModule
+import com.naipingzai.flutter_media_view.glide.FmvAppGlideModule
 import com.naipingzai.flutter_media_view.glide.MultiPageImage
 import com.naipingzai.flutter_media_view.utils.BitmapRegionDecoderCompat
 import com.naipingzai.flutter_media_view.utils.BitmapUtils
@@ -161,8 +161,8 @@ class RegionFetcher internal constructor(
         Log.d(LOG_TAG, "create export for uri=$uri mimeType=$mimeType pageId=$pageId exportFormat=$exportFormat")
         val target = Glide.with(context)
             .asBitmap()
-            .apply(AvesAppGlideModule.uncachedFullImageOptions)
-            .load(AvesAppGlideModule.getModel(context, uri, mimeType, pageId))
+            .apply(FmvAppGlideModule.uncachedFullImageOptions)
+            .load(FmvAppGlideModule.getModel(context, uri, mimeType, pageId))
             .submit()
 
         try {

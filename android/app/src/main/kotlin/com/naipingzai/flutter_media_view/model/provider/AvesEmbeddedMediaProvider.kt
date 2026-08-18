@@ -5,7 +5,7 @@ import android.content.Context
 import android.net.Uri
 import java.util.Locale
 
-class AvesEmbeddedMediaProvider : UnknownContentProvider() {
+class FmvEmbeddedMediaProvider : UnknownContentProvider() {
     override val reliableProviderMimeType: Boolean
         get() = true
 

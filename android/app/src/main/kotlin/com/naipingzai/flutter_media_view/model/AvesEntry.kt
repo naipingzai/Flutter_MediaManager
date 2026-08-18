@@ -4,7 +4,7 @@ import android.content.ContentResolver
 import android.net.Uri
 import androidx.core.net.toUri
 
-class AvesEntry(map: FieldMap) {
+class FmvEntry(map: FieldMap) {
     val uri: Uri = (map[EntryFields.URI] as String).toUri() // content or file URI
     val path = map[EntryFields.PATH] as String? // best effort to get local path
     val pageId = map[EntryFields.PAGE_ID] as Int? // null means the main entry
@@ -37,7 +37,7 @@ class AvesEntry(map: FieldMap) {
     val displayHeight: Int
         get() = if (isRotated) width else height
 
-    override fun toString(): String = "AvesEntry#${hashCode()}{uri=$uri path=$path pageId=$pageId mimeType=$mimeType width=$width height=$height rotationDegrees=$rotationDegrees isFlipped=$isFlipped sizeBytes=$sizeBytes trashed=$trashed trashPath=$trashPath}"
+    override fun toString(): String = "FmvEntry#${hashCode()}{uri=$uri path=$path pageId=$pageId mimeType=$mimeType width=$width height=$height rotationDegrees=$rotationDegrees isFlipped=$isFlipped sizeBytes=$sizeBytes trashed=$trashed trashPath=$trashPath}"
 
     companion object {
         // convenience method

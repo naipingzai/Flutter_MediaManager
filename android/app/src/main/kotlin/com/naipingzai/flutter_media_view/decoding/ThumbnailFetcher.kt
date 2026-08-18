@@ -15,7 +15,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.signature.ObjectKey
 import com.naipingzai.flutter_media_view.channel.streams.darttoplatform.ByteSink
-import com.naipingzai.flutter_media_view.glide.AvesAppGlideModule
+import com.naipingzai.flutter_media_view.glide.FmvAppGlideModule
 import com.naipingzai.flutter_media_view.glide.MultiPageImage
 import com.naipingzai.flutter_media_view.utils.BitmapUtils
 import com.naipingzai.flutter_media_view.utils.BitmapUtils.applyExifOrientation
@@ -163,7 +163,7 @@ class ThumbnailFetcher internal constructor(
         val target = Glide.with(context)
             .asBitmap()
             .apply(options)
-            .load(AvesAppGlideModule.getModel(context, uri, mimeType, pageId))
+            .load(FmvAppGlideModule.getModel(context, uri, mimeType, pageId))
             .submit(width, height)
 
         return try {

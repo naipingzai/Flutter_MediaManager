@@ -19,7 +19,7 @@ import androidx.annotation.RequiresApi
 import com.commonsware.cwac.document.DocumentFileCompat
 import com.naipingzai.flutter_media_view.MainActivity
 import com.naipingzai.flutter_media_view.MainActivity.Companion.DELETE_SINGLE_PERMISSION_REQUEST
-import com.naipingzai.flutter_media_view.model.AvesEntry
+import com.naipingzai.flutter_media_view.model.FmvEntry
 import com.naipingzai.flutter_media_view.model.EntryFields
 import com.naipingzai.flutter_media_view.model.FieldMap
 import com.naipingzai.flutter_media_view.model.NameConflictStrategy
@@ -449,7 +449,7 @@ class MediaStoreImageProvider : ImageProvider() {
         activity: Activity,
         copy: Boolean,
         nameConflictStrategy: NameConflictStrategy,
-        entriesByTargetDir: Map<String, List<AvesEntry>>,
+        entriesByTargetDir: Map<String, List<FmvEntry>>,
         isCancelledOp: CancelCheck,
         callback: ImageOpCallback,
     ) {

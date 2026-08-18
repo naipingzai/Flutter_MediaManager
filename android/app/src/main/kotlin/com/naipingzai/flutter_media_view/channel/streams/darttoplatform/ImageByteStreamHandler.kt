@@ -10,7 +10,7 @@ import com.naipingzai.flutter_media_view.decoding.RegionFetcher
 import com.naipingzai.flutter_media_view.decoding.SvgRegionFetcher
 import com.naipingzai.flutter_media_view.decoding.ThumbnailFetcher
 import com.naipingzai.flutter_media_view.decoding.TiffRegionFetcher
-import com.naipingzai.flutter_media_view.glide.AvesAppGlideModule
+import com.naipingzai.flutter_media_view.glide.FmvAppGlideModule
 import com.naipingzai.flutter_media_view.model.EntryFields
 import com.naipingzai.flutter_media_view.utils.BitmapUtils
 import com.naipingzai.flutter_media_view.utils.BitmapUtils.applyExifOrientation
@@ -125,8 +125,8 @@ class ImageByteStreamHandler(private val context: Context, private val arguments
     ) {
         val target = Glide.with(context)
             .asBitmap()
-            .apply(AvesAppGlideModule.uncachedFullImageOptions)
-            .load(AvesAppGlideModule.getModel(context, uri, mimeType, pageId, sizeBytes))
+            .apply(FmvAppGlideModule.uncachedFullImageOptions)
+            .load(FmvAppGlideModule.getModel(context, uri, mimeType, pageId, sizeBytes))
             .submit()
         try {
             var bitmap = withContext(Dispatchers.IO) { target.get() }
@@ -150,8 +150,8 @@ class ImageByteStreamHandler(private val context: Context, private val arguments
     private suspend fun streamVideoByGlide(uri: Uri, mimeType: String, sizeBytes: Long?, decoded: Boolean) {
         val target = Glide.with(context)
             .asBitmap()
-            .apply(AvesAppGlideModule.uncachedFullImageOptions)
-            .load(AvesAppGlideModule.getModel(context, uri, mimeType, null, sizeBytes))
+            .apply(FmvAppGlideModule.uncachedFullImageOptions)
+            .load(FmvAppGlideModule.getModel(context, uri, mimeType, null, sizeBytes))
             .submit()
         try {
             val bitmap = withContext(Dispatchers.IO) { target.get() }

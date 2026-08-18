@@ -12,8 +12,8 @@ object ImageProviderFactory {
             ContentResolver.SCHEME_CONTENT -> {
                 if (StorageUtils.isMediaStoreContentUri(uri)) {
                     MediaStoreImageProvider()
-                } else if (AvesEmbeddedMediaProvider.provides(context, uri)) {
-                    AvesEmbeddedMediaProvider()
+                } else if (FmvEmbeddedMediaProvider.provides(context, uri)) {
+                    FmvEmbeddedMediaProvider()
                 } else {
                     UnknownContentProvider()
                 }
