@@ -1,5 +1,5 @@
-import 'package:flutter_media_view/function/function_aves_locale.dart';
-import 'package:flutter_media_view/function/function_file_utils.dart';
+import 'package:flutter_media_view/function/locale/function_aves_locale.dart';
+import 'package:flutter_media_view/function/utils/function_file_utils.dart';
 import 'package:test/test.dart';
 
 void main() {

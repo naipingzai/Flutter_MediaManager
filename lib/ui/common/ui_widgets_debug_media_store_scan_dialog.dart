@@ -1,0 +1,51 @@
+import 'dart:io';
+
+import 'package:flutter_media_view/function/model/function_mime_types.dart';
+import 'package:flutter_media_view/function/common/function_common_services.dart';
+import 'package:flutter_media_view/ui/common/ui_widgets_dialogs_aves_dialog.dart';
+import 'package:flutter/material.dart';
+
+class MediaStoreScanDirDialog extends StatefulWidget {
+  const MediaStoreScanDirDialog({super.key});
+
+  @override
+  State<MediaStoreScanDirDialog> createState() => _MediaStoreScanDirDialogState();
+}
+
+class _MediaStoreScanDirDialogState extends State<MediaStoreScanDirDialog> {
+  final TextEditingController _pathController = TextEditingController();
+  bool _processing = false;
+
+  @override
+  void dispose() {
+    _pathController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AvesDialog(
+      content: _processing ? const CircularProgressIndicator() : TextField(controller: _pathController),
+      actions: [
+        TextButton(
+          onPressed: _processing
+              ? null
+              : () async {
+                  final dir = _pathController.text;
+                  if (dir.isNotEmpty) {
+                    setState(() => _processing = true);
+                    await Future.forEach<FileSystemEntity>(Directory(dir).listSync(recursive: true), (file) async {
+                      if (file is File) {
+                        final mimeType = MimeTypes.forExtension(pContext.extension(file.path));
+                        await mediaStoreService.scanFile(file.path, mimeType!);
+                      }
+                    });
+                  }
+                  Navigator.maybeOf(context)?.pop();
+                },
+          child: const Text('Scan'),
+        ),
+      ],
+    );
+  }
+}

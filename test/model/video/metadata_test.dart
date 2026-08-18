@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/function_media_video_metadata.dart';
+import 'package:flutter_media_view/function/media/function_media_video_metadata.dart';
 import 'package:test/test.dart';
 
 void main() {

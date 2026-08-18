@@ -1,0 +1,21 @@
+import 'package:flutter_media_view/ui/theme/ui_theme_icons.dart';
+import 'package:flutter_media_view/ui/common/ui_widgets_common_extensions_build_context.dart';
+import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:flutter/widgets.dart';
+
+extension ExtraEntryConvertActionView on EntryConvertAction {
+  String getText(BuildContext context) {
+    final l10n = context.l10n;
+    return switch (this) {
+      EntryConvertAction.convert => l10n.entryActionConvert,
+      EntryConvertAction.convertMotionPhotoToStillImage => l10n.entryActionConvertMotionPhotoToStillImage,
+    };
+  }
+
+  IconData getIconData() {
+    return switch (this) {
+      EntryConvertAction.convert => AIcons.convert,
+      EntryConvertAction.convertMotionPhotoToStillImage => AIcons.convertToStillImage,
+    };
+  }
+}

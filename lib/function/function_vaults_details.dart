@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/function_android_file_utils.dart';
+import 'package:flutter_media_view/function/utils/function_android_file_utils.dart';
 import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
 import 'package:equatable/equatable.dart';

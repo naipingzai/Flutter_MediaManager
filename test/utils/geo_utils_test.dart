@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/l10n/l10n.dart';
-import 'package:flutter_media_view/function/function_aves_locale.dart';
-import 'package:flutter_media_view/function/function_settings_enums_coordinate_format.dart';
-import 'package:flutter_media_view/ui/ui_widgets_aves_app.dart';
+import 'package:flutter_media_view/function/locale/function_aves_locale.dart';
+import 'package:flutter_media_view/function/settings/function_settings_enums_coordinate_format.dart';
+import 'package:flutter_media_view/ui/common/ui_widgets_aves_app.dart';
 import 'package:flutter_media_view_map/flutter_media_view_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:test/test.dart';

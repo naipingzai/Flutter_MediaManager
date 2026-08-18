@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:flutter_media_view/function/function_media_internal_dir_media_fetch_service.dart';
-import 'package:flutter_media_view/ui/ui_image_providers_thumbnail_provider.dart';
+import 'package:flutter_media_view/function/media/function_media_internal_dir_media_fetch_service.dart';
+import 'package:flutter_media_view/ui/image_providers/ui_image_providers_thumbnail_provider.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
