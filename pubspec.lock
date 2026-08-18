@@ -109,7 +109,7 @@ packages:
     dependency: transitive
     description:
       path: community_charts_common
-      ref: aves
+      ref: main
       resolved-ref: "221b81bf649f2b0be754322658013a5d8086fbe1"
       url: "https://github.com/deckerst/flutter_community_charts.git"
     source: git
@@ -118,7 +118,7 @@ packages:
     dependency: "direct main"
     description:
       path: community_charts_flutter
-      ref: aves
+      ref: main
       resolved-ref: "221b81bf649f2b0be754322658013a5d8086fbe1"
       url: "https://github.com/deckerst/flutter_community_charts.git"
     source: git
@@ -460,7 +460,7 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: aves
+      ref: main
       resolved-ref: e474c5f67050f9a04e4e5b65e33e46bd2ccfdc53
       url: "https://github.com/deckerst/flutter_staggered_animations"
     source: git
@@ -824,9 +824,9 @@ packages:
     dependency: transitive
     description:
       path: "."
-      ref: aves
+      ref: main
       resolved-ref: ae21350de8195dd6c211bac2d3c70e641ae6dbe1
-      url: "https://github.com/deckerst/aves_panorama_motion_sensors.git"
+      url: "https://github.com/deckerst/fmv_panorama_motion_sensors.git"
     source: git
     version: "0.1.0"
   native_toolchain_c:
@@ -889,7 +889,7 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: aves
+      ref: main
       resolved-ref: f2c6903040bde097d574531fc6a6aa297f8915b0
       url: "https://github.com/deckerst/overlay_support.git"
     source: git
@@ -922,9 +922,9 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: aves
+      ref: main
       resolved-ref: "6bdc7a7996abb469037e90aa07585fbe5bf5d1c3"
-      url: "https://github.com/deckerst/aves_panorama.git"
+      url: "https://github.com/deckerst/fmv_panorama.git"
     source: git
     version: "0.4.1"
   path:
@@ -1019,7 +1019,7 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: aves
+      ref: main
       resolved-ref: bfc6db3dcf2f9b2b6812fe5f00c0883919f8de28
       url: "https://github.com/deckerst/flutter_percent_indicator.git"
     source: git
@@ -1491,7 +1491,7 @@ packages:
       path: "."
       ref: HEAD
       resolved-ref: "35a9b0fcc0e97f756756c0010fb223129c2d832c"
-      url: "https://github.com/deckerst/aves_streams_channel.git"
+      url: "https://github.com/deckerst/fmv_streams_channel.git"
     source: git
     version: "0.3.0"
   string_scanner:

@@ -29,9 +29,9 @@ if (keystorePropertiesFile.exists()) {
             keystoreProperties[propKey] = env[envKey]
         }
     }
-    getEnv("storeFile", "AVES_STORE_FILE")
-    getEnv("storePassword", "AVES_STORE_PASSWORD")
-    getEnv("keyAlias", "AVES_KEY_ALIAS")
+    getEnv("storeFile", "FMV_STORE_FILE")
+    getEnv("storePassword", "FMV_STORE_PASSWORD")
+    getEnv("keyAlias", "FMV_KEY_ALIAS")
     getEnv("keyPassword", "AVES_KEY_PASSWORD")
     getEnv("googleApiKey", "AVES_GOOGLE_API_KEY")
 }
