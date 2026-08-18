@@ -102,6 +102,11 @@ jobs:
         run: flutter pub get
 
       - name: Build iOS (no codesign)
+        env:
+          CODE_SIGNING_ALLOWED: NO
+          CODE_SIGNING_REQUIRED: NO
+          CODE_SIGN_IDENTITY: ""
+          PROVISIONING_PROFILE_SPECIFIER: ""
         run: |
           flutter build ios --release --no-codesign
           mkdir -p build/ios/ipa/Payload
