@@ -119,8 +119,8 @@ dependencies:
   package_info_plus:
   panorama:
     git:
-      url: https://github.com/naipingzai/Flutter_MediaManager.git
-      ref: main
+      url: https://github.com/deckerst/aves_panorama.git
+      ref: master
   path:
   path_provider:
   pattern_lock:
@@ -145,7 +145,8 @@ dependencies:
   stack_trace:
   streams_channel:
     git:
-      url: https://github.com/naipingzai/Flutter_MediaManager.git
+      url: https://github.com/deckerst/aves_streams_channel.git
+      ref: master
   synchronized:
   url_launcher:
   # `vector_map_tiles` v10.0.0-beta API is unclear to provide sprites
