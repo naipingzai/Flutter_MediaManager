@@ -443,9 +443,9 @@ class MpvVideoController extends FmvVideoController {
   @override
   List<MediaTrackSummary> get tracks {
     return {
-      ..._videoTracks.mapIndexed((i, v) => v.toAves(i)),
-      ..._audioTracks.mapIndexed((i, v) => v.toAves(i)),
-      ..._subtitleTracks.mapIndexed((i, v) => v.toAves(i)),
+      ..._videoTracks.mapIndexed((i, v) => v.toFmv(i)),
+      ..._audioTracks.mapIndexed((i, v) => v.toFmv(i)),
+      ..._subtitleTracks.mapIndexed((i, v) => v.toFmv(i)),
     }.toList();
   }
 
@@ -479,19 +479,19 @@ class MpvVideoController extends FmvVideoController {
         final video = track.video;
         if (video != VideoTrack.no()) {
           final index = video == VideoTrack.auto() ? 0 : _videoTracks.indexOf(video);
-          return video.toAves(index);
+          return video.toFmv(index);
         }
       case .audio:
         final audio = track.audio;
         if (audio != AudioTrack.no()) {
           final index = audio == AudioTrack.auto() ? 0 : _audioTracks.indexOf(audio);
-          return audio.toAves(index);
+          return audio.toFmv(index);
         }
       case .text:
         final subtitle = track.subtitle;
         if (subtitle != SubtitleTrack.no()) {
           final index = subtitle == SubtitleTrack.auto() ? 0 : _subtitleTracks.indexOf(subtitle);
-          return subtitle.toAves(index);
+          return subtitle.toFmv(index);
         }
     }
     return null;

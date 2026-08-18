@@ -6,7 +6,7 @@ import 'package:flutter_media_view/function/model/bursts.dart';
 import 'package:flutter_media_view/function/common/services.dart';
 import 'package:collection/collection.dart';
 
-extension ExtraAvesEntryMultipage on FmvEntry {
+extension ExtraFmvEntryMultipage on FmvEntry {
   bool get isMultiPage => isStack || ((catalogMetadata?.isMultiPage ?? false) && (isMotionPhoto || !isHdr));
 
   bool get isStack => stackedEntries?.isNotEmpty == true;

@@ -17,7 +17,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
-extension ExtraAvesEntryInfo on FmvEntry {
+extension ExtraFmvEntryInfo on FmvEntry {
   // directory names may contain the name of their parent directory (as prefix + '/')
   // directory names may contain an index (as suffix in '[]')
   static final directoryNamePattern = RegExp(r'^((?<parent>.*?)/)?(?<name>.*?)(\[(?<index>\d+)\])?$');

@@ -13,7 +13,7 @@ import 'package:flutter_media_view/function/utils/android_file_utils.dart';
 import 'package:flutter_media_view/function/locale/fmv_locale.dart';
 import 'package:flutter_media_view/function/utils/time_utils.dart';
 
-extension ExtraAvesEntryProps on FmvEntry {
+extension ExtraFmvEntryProps on FmvEntry {
   bool get isValid => !isMissingAtPath && sizeBytes != 0 && width > 0 && height > 0;
 
   // type

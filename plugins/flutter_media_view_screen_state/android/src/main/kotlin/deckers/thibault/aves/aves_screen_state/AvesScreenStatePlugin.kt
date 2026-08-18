@@ -7,7 +7,7 @@ import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.EventChannel.EventSink
 
-class AvesScreenStatePlugin : FlutterPlugin, EventChannel.StreamHandler {
+class FmvScreenStatePlugin : FlutterPlugin, EventChannel.StreamHandler {
     private lateinit var eventChannel: EventChannel
     private var context: Context? = null
     private var screenReceiver: ScreenReceiver? = null

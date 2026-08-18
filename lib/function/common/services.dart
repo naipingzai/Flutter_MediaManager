@@ -70,7 +70,7 @@ void initPlatformServices() {
     databaseFactory = databaseFactoryFfi;
   }
   getIt.registerLazySingleton<p.Context>(p.Context.new);
-  getIt.registerLazySingleton<FmvAvailability>(LiveAvesAvailability.new);
+  getIt.registerLazySingleton<FmvAvailability>(LiveFmvAvailability.new);
   getIt.registerLazySingleton<LocalMediaDb>(SqfliteLocalMediaDb.new);
   getIt.registerLazySingleton<FmvVideoControllerFactory>(MpvVideoControllerFactory.new);
   getIt.registerLazySingleton<FmvVideoMetadataFetcher>(MpvVideoMetadataFetcher.new);

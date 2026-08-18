@@ -11,7 +11,7 @@ import 'package:country_code/country_code.dart';
 import 'package:flutter/foundation.dart';
 import 'package:latlong2/latlong.dart';
 
-extension ExtraAvesEntryLocation on FmvEntry {
+extension ExtraFmvEntryLocation on FmvEntry {
   static final _invalidLocalityPattern = RegExp(r'^[-+\dA-Z]+$');
 
   LatLng? get latLng => hasGps ? LatLng(catalogMetadata!.latitude!, catalogMetadata!.longitude!) : null;

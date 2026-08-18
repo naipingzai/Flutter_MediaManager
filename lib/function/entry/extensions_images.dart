@@ -9,7 +9,7 @@ import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/painting.dart';
 
-extension ExtraAvesEntryImages on FmvEntry {
+extension ExtraFmvEntryImages on FmvEntry {
   bool isThumbnailReady({double extent = 0}) => _isReady(_getThumbnailProviderKey(extent));
 
   ThumbnailProvider getThumbnail({double extent = 0}) {

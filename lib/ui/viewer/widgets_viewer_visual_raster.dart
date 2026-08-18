@@ -162,7 +162,7 @@ class _RasterImageViewState extends State<RasterImageView> {
     _tileSide = viewportSize.shortestSide * devicePixelRatio / _tilesByShortestSide;
     // scale for initial state `contained`
     final containedScale = min(viewportSize.width / _displaySize.width, viewportSize.height / _displaySize.height);
-    _maxSampleSize = ExtraAvesEntryImages.sampleSizeForScale(magnifierScale: containedScale, devicePixelRatio: devicePixelRatio);
+    _maxSampleSize = ExtraFmvEntryImages.sampleSizeForScale(magnifierScale: containedScale, devicePixelRatio: devicePixelRatio);
 
     final rotationDegrees = entry.rotationDegrees;
     final isFlipped = entry.isFlipped;
@@ -264,7 +264,7 @@ class _RasterImageViewState extends State<RasterImageView> {
     );
     final tiles = [fullImageRegionTile];
 
-    final minSampleSize = min(ExtraAvesEntryImages.sampleSizeForScale(magnifierScale: magnifierScale, devicePixelRatio: devicePixelRatio), _maxSampleSize);
+    final minSampleSize = min(ExtraFmvEntryImages.sampleSizeForScale(magnifierScale: magnifierScale, devicePixelRatio: devicePixelRatio), _maxSampleSize);
     int nextSampleSize(int sampleSize) => (sampleSize / 2).floor();
     for (var sampleSize = nextSampleSize(_maxSampleSize); sampleSize >= minSampleSize; sampleSize = nextSampleSize(sampleSize)) {
       final regionSide = (_tileSide * sampleSize).round();

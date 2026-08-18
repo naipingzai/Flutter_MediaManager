@@ -84,10 +84,10 @@ class FmvMagnifier extends StatefulWidget {
   });
 
   @override
-  State<StatefulWidget> createState() => _AvesMagnifierState();
+  State<StatefulWidget> createState() => _FmvMagnifierState();
 }
 
-class _AvesMagnifierState extends State<FmvMagnifier> with TickerProviderStateMixin, FmvMagnifierControllerDelegate, EdgeHitDetector {
+class _FmvMagnifierState extends State<FmvMagnifier> with TickerProviderStateMixin, FmvMagnifierControllerDelegate, EdgeHitDetector {
   Offset? _startFocalPoint, _lastViewportFocalPosition;
   double? _startScale, _quickScaleLastY, _quickScaleLastDistance;
   late bool _dropped, _doubleTap, _quickScaleMoved;

@@ -18,10 +18,10 @@ abstract class FmvAvailability {
   List<EntryMapStyle> get mapStyles;
 }
 
-class LiveAvesAvailability implements FmvAvailability {
+class LiveFmvAvailability implements FmvAvailability {
   bool? _isConnected, _isLocked;
 
-  LiveAvesAvailability() {
+  LiveFmvAvailability() {
     Connectivity().onConnectivityChanged.listen(_updateConnectivityFromResult);
   }
 
