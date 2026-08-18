@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter_media_view/function/locale/aves_locale.dart';
+import 'package:flutter_media_view/function/locale/fmv_locale.dart';
 import 'package:flutter_media_view/function/calendar/calendar_utils.dart';
 import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/function/entry/sort.dart';
@@ -11,7 +11,7 @@ import 'package:flutter_media_view/ui/theme/durations.dart';
 import 'package:flutter_media_view/ui/theme/themes.dart';
 import 'package:flutter_media_view/function/utils/time_utils.dart';
 import 'package:flutter_media_view/ui/common/common_fx_transitions.dart';
-import 'package:flutter_media_view/ui/filter/widgets_common_identity_aves_filter_chip.dart';
+import 'package:flutter_media_view/ui/filter/widgets_common_identity_fmv_filter_chip.dart';
 import 'package:flutter_media_view/ui/common/stats_date_axis.dart';
 import 'package:collection/collection.dart';
 import 'package:community_charts_flutter/community_charts_flutter.dart' as charts;

@@ -19,7 +19,7 @@ import 'package:flutter_media_view/ui/collection/widgets_collection_collection_p
 import 'package:flutter_media_view/ui/common/common_basic_text_outlined.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_media_query.dart';
-import 'package:flutter_media_view/ui/common/common_identity_aves_logo.dart';
+import 'package:flutter_media_view/ui/common/common_identity_fmv_logo.dart';
 import 'package:flutter_media_view/ui/common/debug_app_debug_page.dart';
 import 'package:flutter_media_view/ui/common/explorer_explorer_page.dart';
 import 'package:flutter_media_view/ui/filter/widgets_filter_grids_albums_page.dart';

@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/locale/aves_locale.dart';
+import 'package:flutter_media_view/function/locale/fmv_locale.dart';
 import 'package:flutter_media_view/function/filters/aspect_ratio.dart';
 import 'package:flutter_media_view/function/filters/container_album_group.dart';
 import 'package:flutter_media_view/function/filters/container_dynamic_album.dart';

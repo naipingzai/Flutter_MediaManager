@@ -6,7 +6,7 @@ import 'package:flutter_media_view/function/metadata/address.dart';
 import 'package:flutter_media_view/function/common/service_policy.dart';
 import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/function/services/geocoding_service.dart';
-import 'package:flutter_media_view/function/locale/aves_locale.dart';
+import 'package:flutter_media_view/function/locale/fmv_locale.dart';
 import 'package:country_code/country_code.dart';
 import 'package:flutter/foundation.dart';
 import 'package:latlong2/latlong.dart';

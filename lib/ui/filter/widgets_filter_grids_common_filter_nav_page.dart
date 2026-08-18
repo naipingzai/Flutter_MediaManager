@@ -10,7 +10,7 @@ import 'package:flutter_media_view/ui/collection/widgets_collection_collection_p
 import 'package:flutter_media_view/ui/common/common_action_mixins_feedback.dart';
 import 'package:flutter_media_view/ui/common/common_action_mixins_vault_aware.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/filter/widgets_common_identity_aves_filter_chip.dart';
+import 'package:flutter_media_view/ui/filter/widgets_common_identity_fmv_filter_chip.dart';
 import 'package:flutter_media_view/ui/filter/widgets_common_providers_filter_group_provider.dart';
 import 'package:flutter_media_view/ui/common/common_providers_query_provider.dart';
 import 'package:flutter_media_view/ui/common/common_providers_selection_provider.dart';

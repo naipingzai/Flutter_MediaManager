@@ -14,7 +14,7 @@ import 'package:flutter_media_view/function/model/mime_types.dart';
 import 'package:flutter_media_view/function/media/mp4.dart';
 import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/ui/theme/format.dart';
-import 'package:flutter_media_view/function/locale/aves_locale.dart';
+import 'package:flutter_media_view/function/locale/fmv_locale.dart';
 import 'package:flutter_media_view/function/calendar/ops_gregorian.dart';
 import 'package:flutter_media_view/function/utils/file_utils.dart';
 import 'package:flutter_media_view/function/utils/string_utils.dart';

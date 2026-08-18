@@ -28,8 +28,8 @@ import 'package:flutter_media_view/ui/common/common_action_mixins_feedback.dart'
 import 'package:flutter_media_view/ui/common/common_action_mixins_permission_aware.dart';
 import 'package:flutter_media_view/ui/common/common_action_mixins_size_aware.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/dialogs_aves_confirmation_dialog.dart';
-import 'package:flutter_media_view/ui/common/dialogs_aves_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_confirmation_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_pick_dialogs_album_pick_page.dart';
 import 'package:flutter_media_view/ui/common/dialogs_selection_dialogs_single_selection.dart';
 import 'package:flutter_media_view/ui/filter/widgets_filter_grids_common_enums.dart';

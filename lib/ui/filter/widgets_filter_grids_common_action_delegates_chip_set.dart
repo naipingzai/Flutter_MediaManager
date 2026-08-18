@@ -22,8 +22,8 @@ import 'package:flutter_media_view/ui/common/common_action_mixins_vault_aware.da
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/filter/widgets_common_providers_filter_group_provider.dart';
 import 'package:flutter_media_view/ui/common/common_tile_extent_controller.dart';
-import 'package:flutter_media_view/ui/common/dialogs_aves_confirmation_dialog.dart';
-import 'package:flutter_media_view/ui/common/dialogs_aves_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_confirmation_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view/ui/editor/widgets_dialogs_filter_editors_cover_selection_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_tile_view_dialog.dart';
 import 'package:flutter_media_view/ui/common/map_map_page.dart';

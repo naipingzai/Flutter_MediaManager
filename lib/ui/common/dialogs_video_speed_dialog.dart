@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_media_view/ui/common/dialogs_aves_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 
 class VideoSpeedDialog extends StatefulWidget {
   static const routeName = '/dialog/select_video_speed';

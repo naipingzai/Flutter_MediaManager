@@ -9,7 +9,7 @@ import 'package:flutter_media_view/ui/common/common_basic_link_chip.dart';
 import 'package:flutter_media_view/ui/common/common_basic_markdown_container.dart';
 import 'package:flutter_media_view/ui/common/common_basic_scaffold.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/common_identity_aves_logo.dart';
+import 'package:flutter_media_view/ui/common/common_identity_fmv_logo.dart';
 import 'package:flutter_media_view/ui/common/common_identity_buttons_outlined_button.dart';
 import 'package:flutter_media_view/ui/collection/widgets_home_home_page.dart';
 import 'package:flutter/material.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter_media_view/app_mode.dart';
 import 'package:flutter_media_view/ui/image_providers/app_icon_image_provider.dart';
-import 'package:flutter_media_view/function/locale/aves_locale.dart';
+import 'package:flutter_media_view/function/locale/fmv_locale.dart';
 import 'package:flutter_media_view/function/calendar/calendar_utils.dart';
 import 'package:flutter_media_view/function/settings/app_inventory.dart';
 import 'package:flutter_media_view/function/model/dynamic_albums.dart';
@@ -28,7 +28,7 @@ import 'package:flutter_media_view/ui/common/view.dart';
 import 'package:flutter_media_view/ui/common/common_action_controls_quick_choosers_rate_button.dart';
 import 'package:flutter_media_view/ui/common/common_action_controls_quick_choosers_tag_button.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/filter/widgets_common_identity_aves_filter_chip.dart';
+import 'package:flutter_media_view/ui/filter/widgets_common_identity_fmv_filter_chip.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_action_entry_info_action_delegate.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_info_common.dart';
 import 'package:flutter_media_view_model/flutter_media_view_model.dart';

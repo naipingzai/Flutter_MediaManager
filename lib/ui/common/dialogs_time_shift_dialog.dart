@@ -2,7 +2,7 @@ import 'package:flutter_media_view/ui/common/common_basic_time_shift_selector.da
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_media_view/ui/common/dialogs_aves_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 
 class TimeShiftDialog extends StatefulWidget {
   static const routeName = '/dialog/time_shift';

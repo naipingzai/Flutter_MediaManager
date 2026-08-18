@@ -2,7 +2,7 @@ import 'dart:collection';
 import 'dart:ui' as ui;
 
 import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/common/aves_app.dart';
+import 'package:flutter_media_view/ui/common/fmv_app.dart';
 import 'package:flutter_media_view/ui/common/common_basic_list_tiles_reselectable_radio.dart';
 import 'package:flutter_media_view/ui/common/common_basic_query_bar.dart';
 import 'package:flutter_media_view/ui/common/common_basic_scaffold.dart';

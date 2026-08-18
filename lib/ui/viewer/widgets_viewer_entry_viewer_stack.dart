@@ -14,7 +14,7 @@ import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/function/source/collection_lens.dart';
 import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/ui/theme/durations.dart';
-import 'package:flutter_media_view/ui/common/aves_app.dart';
+import 'package:flutter_media_view/ui/common/fmv_app.dart';
 import 'package:flutter_media_view/ui/collection/widgets_collection_collection_page.dart';
 import 'package:flutter_media_view/ui/common/common_action_mixins_feedback.dart';
 import 'package:flutter_media_view/ui/common/common_basic_insets.dart';

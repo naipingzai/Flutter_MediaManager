@@ -5,7 +5,7 @@ import 'package:flutter_media_view/function/viewer/video_playback.dart';
 import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/ui/theme/format.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/dialogs_aves_confirmation_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_confirmation_dialog.dart';
 import 'package:flutter_media_view_video/flutter_media_view_video.dart';
 import 'package:flutter/material.dart';
 

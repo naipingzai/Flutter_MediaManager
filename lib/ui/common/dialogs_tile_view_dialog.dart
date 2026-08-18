@@ -6,13 +6,13 @@ import 'package:flutter_media_view/ui/common/common_basic_font_size_icon_theme.d
 import 'package:flutter_media_view/ui/common/common_basic_text_dropdown_button.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/common_fx_transitions.dart';
-import 'package:flutter_media_view/ui/common/common_identity_aves_caption.dart';
+import 'package:flutter_media_view/ui/common/common_identity_fmv_caption.dart';
 import 'package:flutter_media_view/ui/common/common_identity_highlight_title.dart';
 import 'package:flutter_media_view/ui/common/common_tile_extent_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutter_media_view/ui/common/dialogs_aves_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 
 class TileViewDialog<S, G, L> extends StatefulWidget {
   static const routeName = '/dialog/tile_view';

@@ -5,7 +5,7 @@ import 'package:flutter_media_view/ui/collection/widgets_collection_collection_p
 import 'package:flutter_media_view/ui/common/common_basic_draggable_scrollbar_notifications.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_media_query.dart';
-import 'package:flutter_media_view/ui/common/common_identity_aves_app_bar.dart';
+import 'package:flutter_media_view/ui/common/common_identity_fmv_app_bar.dart';
 import 'package:flutter_media_view/ui/common/navigation_nav_bar_floating.dart';
 import 'package:flutter_media_view/ui/common/navigation_nav_item.dart';
 import 'package:collection/collection.dart';

@@ -9,7 +9,7 @@ import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/ui/common/common_action_mixins_feedback.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/dialogs_add_shortcut_dialog.dart';
-import 'package:flutter_media_view/ui/common/dialogs_aves_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view/ui/common/explorer_explorer_page.dart';
 import 'package:flutter_media_view/ui/filter/widgets_filter_grids_common_action_delegates_chip.dart';
 import 'package:flutter_media_view/ui/common/stats_stats_page.dart';

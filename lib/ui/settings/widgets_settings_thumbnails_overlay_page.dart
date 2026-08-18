@@ -3,7 +3,7 @@ import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/common/view.dart';
 import 'package:flutter_media_view/ui/common/common_basic_scaffold.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/common_identity_aves_icons.dart';
+import 'package:flutter_media_view/ui/common/common_identity_fmv_icons.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_common_switch_icon.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_common_tiles.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_settings_definition.dart';

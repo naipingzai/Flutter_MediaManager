@@ -9,7 +9,7 @@ import 'package:flutter_media_view/function/services/wallpaper_service.dart';
 import 'package:flutter_media_view/ui/common/common_action_mixins_feedback.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/common_identity_buttons_overlay_button.dart';
-import 'package:flutter_media_view/ui/common/dialogs_aves_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view/ui/settings/widgets_dialogs_wallpaper_settings_dialog.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_overlay_bottom.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_overlay_bottom_viewer_buttons.dart';

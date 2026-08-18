@@ -7,7 +7,7 @@ import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/ui/common/common_action_mixins_feedback.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/dialogs_add_shortcut_dialog.dart';
-import 'package:flutter_media_view/ui/common/dialogs_aves_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_map_style_selection_dialog.dart';
 import 'package:flutter_media_view/ui/common/map_map_page.dart';
 import 'package:flutter_media_view_map/flutter_media_view_map.dart';

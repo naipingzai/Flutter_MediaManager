@@ -18,7 +18,7 @@ import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutter_media_view/ui/common/dialogs_aves_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 
 class ConvertEntryDialog extends StatefulWidget {
   static const routeName = '/dialog/convert_entry';

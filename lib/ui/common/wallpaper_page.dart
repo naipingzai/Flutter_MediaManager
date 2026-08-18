@@ -4,7 +4,7 @@ import 'package:flutter_media_view/function/entry/extensions_props.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/ui/theme/durations.dart';
-import 'package:flutter_media_view/ui/common/aves_app.dart';
+import 'package:flutter_media_view/ui/common/fmv_app.dart';
 import 'package:flutter_media_view/ui/common/common_basic_insets.dart';
 import 'package:flutter_media_view/ui/common/common_basic_scaffold.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_theme.dart';

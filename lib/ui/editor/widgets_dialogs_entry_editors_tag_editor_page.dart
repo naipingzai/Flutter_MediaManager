@@ -10,8 +10,8 @@ import 'package:flutter_media_view/ui/theme/themes.dart';
 import 'package:flutter_media_view/ui/common/common_basic_scaffold.dart';
 import 'package:flutter_media_view/ui/filter/widgets_common_expandable_filter_row.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/filter/widgets_common_identity_aves_filter_chip.dart';
-import 'package:flutter_media_view/ui/common/dialogs_aves_confirmation_dialog.dart';
+import 'package:flutter_media_view/ui/filter/widgets_common_identity_fmv_filter_chip.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_confirmation_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

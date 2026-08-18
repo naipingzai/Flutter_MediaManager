@@ -12,7 +12,7 @@ import 'package:flutter_media_view/function/function_ref_metadata_xmp.dart';
 import 'package:flutter_media_view/function/model/mime_types.dart';
 import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/function/function_services_metadata_xmp.dart';
-import 'package:flutter_media_view/function/locale/aves_locale.dart';
+import 'package:flutter_media_view/function/locale/fmv_locale.dart';
 import 'package:flutter_media_view/function/utils/time_utils.dart';
 import 'package:flutter_media_view/function/utils/xmp_utils.dart';
 import 'package:flutter_media_view_model/flutter_media_view_model.dart';

@@ -30,7 +30,7 @@ import 'package:flutter_media_view/ui/common/common_action_mixins_vault_aware.da
 import 'package:flutter_media_view/ui/common/common_basic_tv_edge_focus.dart';
 import 'package:flutter_media_view/ui/filter/widgets_common_expandable_filter_row.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/filter/widgets_common_identity_aves_filter_chip.dart';
+import 'package:flutter_media_view/ui/filter/widgets_common_identity_fmv_filter_chip.dart';
 import 'package:flutter_media_view/ui/search/widgets_common_search_delegate.dart';
 import 'package:flutter_media_view/ui/search/widgets_common_search_page.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_controls_notifications.dart';

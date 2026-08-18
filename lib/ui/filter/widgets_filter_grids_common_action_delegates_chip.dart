@@ -14,7 +14,7 @@ import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/ui/common/common_action_mixins_feedback.dart';
 import 'package:flutter_media_view/ui/common/common_action_mixins_vault_aware.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/dialogs_aves_confirmation_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_confirmation_dialog.dart';
 import 'package:flutter_media_view/ui/common/explorer_explorer_page.dart';
 import 'package:flutter_media_view/ui/filter/widgets_filter_grids_albums_page.dart';
 import 'package:flutter_media_view/ui/filter/widgets_filter_grids_countries_page.dart';

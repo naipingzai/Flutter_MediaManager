@@ -8,7 +8,7 @@ import 'package:flutter_media_view_video/flutter_media_view_video.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_media_view/ui/common/dialogs_aves_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 
 class VideoTrackSelectionDialog extends StatefulWidget {
   static const routeName = '/dialog/select_video_track';

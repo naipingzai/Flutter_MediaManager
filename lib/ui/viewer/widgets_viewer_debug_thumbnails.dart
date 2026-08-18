@@ -4,7 +4,7 @@ import 'package:flutter_media_view/ui/image_providers/thumbnail_provider.dart';
 import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/function/entry/extensions_images.dart';
 import 'package:flutter_media_view/function/device/android_debug_service.dart';
-import 'package:flutter_media_view/ui/common/common_identity_aves_expansion_tile.dart';
+import 'package:flutter_media_view/ui/common/common_identity_fmv_expansion_tile.dart';
 import 'package:flutter/material.dart';
 
 class ThumbnailsTab extends StatefulWidget {

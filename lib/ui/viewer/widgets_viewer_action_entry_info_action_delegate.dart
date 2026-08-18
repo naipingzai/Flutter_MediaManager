@@ -17,7 +17,7 @@ import 'package:flutter_media_view/ui/editor/widgets_common_action_mixins_entry_
 import 'package:flutter_media_view/ui/common/common_action_mixins_feedback.dart';
 import 'package:flutter_media_view/ui/common/common_action_mixins_permission_aware.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/dialogs_aves_confirmation_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_confirmation_dialog.dart';
 import 'package:flutter_media_view/ui/common/map_map_page.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_action_single_entry_editor.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_debug_debug_page.dart';

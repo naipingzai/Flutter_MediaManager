@@ -4,7 +4,7 @@ import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/about/widgets_about_policy_page.dart';
 import 'package:flutter_media_view/ui/common/common_basic_link_chip.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/common_identity_aves_logo.dart';
+import 'package:flutter_media_view/ui/common/common_identity_fmv_logo.dart';
 import 'package:flutter/material.dart';
 
 class AppReference extends StatelessWidget {

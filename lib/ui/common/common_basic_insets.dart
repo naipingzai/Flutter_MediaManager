@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/common/aves_app.dart';
+import 'package:flutter_media_view/ui/common/fmv_app.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_media_query.dart';
 import 'package:flutter_media_view/ui/common/common_providers_media_query_data_provider.dart';

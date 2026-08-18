@@ -8,7 +8,7 @@ import 'package:flutter_media_view/ui/common/common_basic_text_outlined.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/common_fx_highlight_decoration.dart';
 import 'package:flutter_media_view/ui/common/common_identity_highlight_title.dart';
-import 'package:flutter_media_view/ui/common/dialogs_aves_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';

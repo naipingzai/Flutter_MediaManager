@@ -6,7 +6,7 @@ import 'package:flutter_media_view/ui/theme/colors.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/common/view.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/dialogs_aves_confirmation_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_confirmation_dialog.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_common_tile_leading.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_common_tiles.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_privacy.dart';

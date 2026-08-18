@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/ui/common/dialogs_aves_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_selection_dialogs_common.dart';
 import 'package:flutter_media_view/ui/common/dialogs_selection_dialogs_radio_list_tile.dart';
 import 'package:flutter/material.dart';

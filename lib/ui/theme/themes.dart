@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/ui/common/aves_app.dart';
+import 'package:flutter_media_view/ui/common/fmv_app.dart';
 import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
 import 'package:flutter/material.dart';
 

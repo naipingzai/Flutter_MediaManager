@@ -11,7 +11,7 @@ import 'package:flutter_media_view/ui/about/widgets_about_about_page.dart';
 import 'package:flutter_media_view/ui/collection/widgets_collection_collection_page.dart';
 import 'package:flutter_media_view/ui/common/common_basic_insets.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/common_identity_aves_logo.dart';
+import 'package:flutter_media_view/ui/common/common_identity_fmv_logo.dart';
 import 'package:flutter_media_view/ui/common/debug_app_debug_page.dart';
 import 'package:flutter_media_view/ui/common/navigation_drawer_app_drawer.dart';
 import 'package:flutter_media_view/ui/common/navigation_drawer_tile.dart';

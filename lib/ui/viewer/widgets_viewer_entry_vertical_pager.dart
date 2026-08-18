@@ -10,7 +10,7 @@ import 'package:flutter_media_view/function/entry/extensions_props.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/function/source/collection_lens.dart';
 import 'package:flutter_media_view/ui/theme/durations.dart';
-import 'package:flutter_media_view/ui/common/aves_app.dart';
+import 'package:flutter_media_view/ui/common/fmv_app.dart';
 import 'package:flutter_media_view/ui/common/common_behaviour_springy_scroll_physics.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_theme.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_action_entry_action_delegate.dart';

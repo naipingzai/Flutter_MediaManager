@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/locale/aves_locale.dart';
+import 'package:flutter_media_view/function/locale/fmv_locale.dart';
 import 'package:flutter_media_view/function/utils/file_utils.dart';
 import 'package:test/test.dart';
 

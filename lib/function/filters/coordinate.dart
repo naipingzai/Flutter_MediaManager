@@ -4,7 +4,7 @@ import 'package:flutter_media_view/function/filters/filters.dart';
 import 'package:flutter_media_view/function/settings/enums_coordinate_format.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/function/locale/aves_locale.dart';
+import 'package:flutter_media_view/function/locale/fmv_locale.dart';
 import 'package:flutter_media_view_map/flutter_media_view_map.dart';
 import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/widgets.dart';

@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/ui/theme/durations.dart';
 import 'package:flutter_media_view/ui/theme/themes.dart';
-import 'package:flutter_media_view/ui/common/aves_app.dart';
+import 'package:flutter_media_view/ui/common/fmv_app.dart';
 import 'package:flutter_media_view/ui/common/common_basic_font_size_icon_theme.dart';
 import 'package:flutter_media_view/ui/common/common_basic_gestures_ink_well.dart';
 import 'package:flutter_media_view/ui/common/common_basic_insets.dart';

@@ -7,7 +7,7 @@ import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/ui/common/common_action_mixins_feedback.dart';
 import 'package:flutter_media_view/ui/common/common_behaviour_routes.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/dialogs_aves_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_entry_viewer_page.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_info_embedded_notifications.dart';
 import 'package:flutter/material.dart';

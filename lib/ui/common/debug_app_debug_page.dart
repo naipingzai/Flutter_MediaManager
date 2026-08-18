@@ -29,7 +29,7 @@ import 'package:flutter_media_view/ui/common/debug_os_codecs.dart';
 import 'package:flutter_media_view/ui/common/debug_os_paths.dart';
 import 'package:flutter_media_view/ui/common/debug_os_storage.dart';
 import 'package:flutter_media_view/ui/settings/widgets_debug_settings.dart';
-import 'package:flutter_media_view/ui/common/dialogs_aves_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';

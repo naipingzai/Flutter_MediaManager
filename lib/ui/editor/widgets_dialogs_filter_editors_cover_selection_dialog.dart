@@ -12,7 +12,7 @@ import 'package:flutter_media_view/ui/common/common_basic_color_indicator.dart';
 import 'package:flutter_media_view/ui/common/common_basic_list_tiles_color.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/common_fx_borders.dart';
-import 'package:flutter_media_view/ui/common/dialogs_aves_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_item_picker.dart';
 import 'package:flutter_media_view/ui/common/dialogs_pick_dialogs_app_pick_page.dart';
 import 'package:flutter_media_view/ui/common/dialogs_pick_dialogs_item_pick_page.dart';

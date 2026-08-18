@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter_media_view/function/filters/filters.dart';
 import 'package:flutter_media_view/function/settings/modules_history.dart';
-import 'package:flutter_media_view/ui/filter/widgets_common_identity_aves_filter_chip.dart';
+import 'package:flutter_media_view/ui/filter/widgets_common_identity_fmv_filter_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 

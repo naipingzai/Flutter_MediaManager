@@ -7,7 +7,7 @@ import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/function/model/mime_types.dart';
 import 'package:flutter_media_view/function/device/android_debug_service.dart';
 import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/ui/common/common_identity_aves_expansion_tile.dart';
+import 'package:flutter_media_view/ui/common/common_identity_fmv_expansion_tile.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_debug_utils.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_info_common.dart';
 import 'package:flutter/material.dart';

@@ -12,7 +12,7 @@ import 'package:flutter_media_view/ui/common/common_basic_text_change_highlight.
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_media_query.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_theme.dart';
-import 'package:flutter_media_view/ui/common/dialogs_aves_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';

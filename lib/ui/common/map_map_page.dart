@@ -29,7 +29,7 @@ import 'package:flutter_media_view/ui/common/common_map_geo_map.dart';
 import 'package:flutter_media_view/ui/common/common_map_map_action_delegate.dart';
 import 'package:flutter_media_view/ui/common/common_providers_highlight_info_provider.dart';
 import 'package:flutter_media_view/ui/common/common_providers_map_theme_provider.dart';
-import 'package:flutter_media_view/ui/common/dialogs_aves_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view/ui/common/map_scroller.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_controls_notifications.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_entry_viewer_page.dart';

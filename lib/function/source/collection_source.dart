@@ -31,7 +31,7 @@ import 'package:flutter_media_view/function/function_vaults.dart';
 import 'package:flutter_media_view/function/services/analysis_service.dart';
 import 'package:flutter_media_view/function/common/image_op_events.dart';
 import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/ui/common/aves_app.dart';
+import 'package:flutter_media_view/ui/common/fmv_app.dart';
 import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:event_bus/event_bus.dart';

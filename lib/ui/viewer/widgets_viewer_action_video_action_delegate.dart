@@ -15,7 +15,7 @@ import 'package:flutter_media_view/ui/common/common_action_mixins_feedback.dart'
 import 'package:flutter_media_view/ui/common/common_action_mixins_permission_aware.dart';
 import 'package:flutter_media_view/ui/common/common_action_mixins_size_aware.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/dialogs_aves_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_video_speed_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_video_track_selection_dialog.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_video_video_settings_page.dart';

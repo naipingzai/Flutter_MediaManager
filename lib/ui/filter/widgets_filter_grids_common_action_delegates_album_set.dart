@@ -28,8 +28,8 @@ import 'package:flutter_media_view/ui/common/common_action_mixins_feedback.dart'
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/filter/widgets_common_providers_filter_group_provider.dart';
 import 'package:flutter_media_view/ui/common/common_tile_extent_controller.dart';
-import 'package:flutter_media_view/ui/common/dialogs_aves_confirmation_dialog.dart';
-import 'package:flutter_media_view/ui/common/dialogs_aves_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_confirmation_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view/ui/editor/widgets_dialogs_filter_editors_create_stored_album_dialog.dart';
 import 'package:flutter_media_view/ui/editor/widgets_dialogs_filter_editors_edit_vault_dialog.dart';
 import 'package:flutter_media_view/ui/editor/widgets_dialogs_filter_editors_rename_dynamic_album_dialog.dart';

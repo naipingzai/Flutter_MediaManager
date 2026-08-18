@@ -31,7 +31,7 @@ jobs:
       - run: flutter analyze --no-fatal-infos --no-fatal-warnings
       - run: flutter test
       - name: Build APK
-        run: flutter build apk --release
+        run: flutter build apk --release --android-skip-build-dependency-validation
       - name: Rename APK
         run: mv build/app/outputs/flutter-apk/app-release.apk flutter_media_view-${{ github.ref_name }}-android.apk
       - uses: actions/upload-artifact@v4

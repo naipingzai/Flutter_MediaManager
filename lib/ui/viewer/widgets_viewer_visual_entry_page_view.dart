@@ -10,7 +10,7 @@ import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/function/media/media_session_service.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/common/view.dart';
-import 'package:flutter_media_view/ui/common/aves_app.dart';
+import 'package:flutter_media_view/ui/common/fmv_app.dart';
 import 'package:flutter_media_view/ui/common/common_action_mixins_feedback.dart';
 import 'package:flutter_media_view/ui/common/common_basic_insets.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';

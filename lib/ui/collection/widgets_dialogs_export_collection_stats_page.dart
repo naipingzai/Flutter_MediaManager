@@ -9,7 +9,7 @@ import 'package:flutter_media_view/function/model/mime_types.dart';
 import 'package:flutter_media_view/function/settings/app_service.dart';
 import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/ui/theme/themes.dart';
-import 'package:flutter_media_view/function/locale/aves_locale.dart';
+import 'package:flutter_media_view/function/locale/fmv_locale.dart';
 import 'package:flutter_media_view/function/utils/mime_utils.dart';
 import 'package:flutter_media_view/ui/common/view.dart';
 import 'package:flutter_media_view/ui/common/common_action_mixins_feedback.dart';
@@ -19,7 +19,7 @@ import 'package:flutter_media_view/ui/common/common_basic_text_dropdown_button.d
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/common_identity_buttons_outlined_button.dart';
 import 'package:flutter_media_view/ui/common/common_identity_highlight_title.dart';
-import 'package:flutter_media_view/ui/common/dialogs_aves_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:csv/csv.dart';

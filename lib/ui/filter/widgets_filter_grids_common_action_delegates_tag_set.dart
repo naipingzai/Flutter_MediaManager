@@ -10,7 +10,7 @@ import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/ui/collection/widgets_collection_entry_set_action_delegate.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/filter/widgets_common_providers_filter_group_provider.dart';
-import 'package:flutter_media_view/ui/common/dialogs_aves_confirmation_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_confirmation_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_pick_dialogs_tag_pick_page.dart';
 import 'package:flutter_media_view/ui/filter/widgets_filter_grids_common_action_delegates_chip_set.dart';
 import 'package:flutter_media_view/ui/filter/widgets_filter_grids_common_enums.dart';

@@ -1,8 +1,8 @@
 import 'dart:ui' as ui;
 
-import 'package:flutter_media_view/function/locale/aves_locale.dart';
+import 'package:flutter_media_view/function/locale/fmv_locale.dart';
 import 'package:flutter_media_view/function/settings/defaults.dart';
-import 'package:flutter_media_view/ui/common/aves_app.dart';
+import 'package:flutter_media_view/ui/common/fmv_app.dart';
 import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/widgets.dart';
 

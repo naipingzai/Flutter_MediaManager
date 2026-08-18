@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/locale/aves_locale.dart';
+import 'package:flutter_media_view/function/locale/fmv_locale.dart';
 import 'package:flutter/material.dart';
 
 abstract class FmvCalendarDelegate<T extends DateTime> extends CalendarDelegate<T> {

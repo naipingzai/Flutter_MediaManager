@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/ui/common/common_aves_highlight.dart';
+import 'package:flutter_media_view/ui/common/common_fmv_highlight.dart';
 import 'package:flutter_media_view/ui/common/common_basic_scaffold.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter/material.dart';

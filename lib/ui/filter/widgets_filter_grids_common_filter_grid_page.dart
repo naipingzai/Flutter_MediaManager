@@ -29,7 +29,7 @@ import 'package:flutter_media_view/ui/common/common_grid_sections_list_layout.da
 import 'package:flutter_media_view/ui/common/common_grid_selector.dart';
 import 'package:flutter_media_view/ui/common/common_grid_sliver.dart';
 import 'package:flutter_media_view/ui/common/common_grid_theme.dart';
-import 'package:flutter_media_view/ui/filter/widgets_common_identity_aves_filter_chip.dart';
+import 'package:flutter_media_view/ui/filter/widgets_common_identity_fmv_filter_chip.dart';
 import 'package:flutter_media_view/ui/common/common_identity_scroll_thumb.dart';
 import 'package:flutter_media_view/ui/filter/widgets_common_providers_filter_group_provider.dart';
 import 'package:flutter_media_view/ui/common/common_providers_tile_extent_controller_provider.dart';

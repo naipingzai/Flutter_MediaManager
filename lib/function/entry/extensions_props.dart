@@ -10,7 +10,7 @@ import 'package:flutter_media_view/function/function_unicode.dart';
 import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/ui/theme/text.dart';
 import 'package:flutter_media_view/function/utils/android_file_utils.dart';
-import 'package:flutter_media_view/function/locale/aves_locale.dart';
+import 'package:flutter_media_view/function/locale/fmv_locale.dart';
 import 'package:flutter_media_view/function/utils/time_utils.dart';
 
 extension ExtraAvesEntryProps on FmvEntry {

@@ -8,7 +8,7 @@ import 'package:flutter_media_view/ui/common/common_basic_scaffold.dart';
 import 'package:flutter_media_view/ui/common/common_behaviour_pop_double_back.dart';
 import 'package:flutter_media_view/ui/common/common_behaviour_pop_scope.dart';
 import 'package:flutter_media_view/ui/common/common_behaviour_pop_tv_navigation.dart';
-import 'package:flutter_media_view/ui/common/common_identity_aves_app_bar.dart';
+import 'package:flutter_media_view/ui/common/common_identity_fmv_app_bar.dart';
 import 'package:flutter_media_view/ui/search/widgets_common_search_delegate.dart';
 import 'package:flutter_media_view/ui/search/widgets_common_search_route.dart';
 import 'package:flutter/material.dart';

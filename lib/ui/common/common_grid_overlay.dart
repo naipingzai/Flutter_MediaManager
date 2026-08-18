@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/function/function_selection.dart';
 import 'package:flutter_media_view/ui/theme/durations.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/common/common_identity_aves_icons.dart';
+import 'package:flutter_media_view/ui/common/common_identity_fmv_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

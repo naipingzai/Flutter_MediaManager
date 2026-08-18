@@ -6,7 +6,7 @@ import 'package:flutter_media_view/function/model/mime_types.dart';
 import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/ui/common/common_action_mixins_feedback.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/dialogs_aves_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_app_export_items.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_app_export_selection_dialog.dart';
 import 'package:flutter_media_view_model/flutter_media_view_model.dart';

@@ -5,7 +5,7 @@ import 'package:flutter_media_view/function/function_vaults.dart';
 import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/ui/common/common_action_mixins_feedback.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/dialogs_aves_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view/ui/editor/widgets_dialogs_filter_editors_password_dialog.dart';
 import 'package:flutter_media_view/ui/editor/widgets_dialogs_filter_editors_pattern_dialog.dart';
 import 'package:flutter_media_view/ui/editor/widgets_dialogs_filter_editors_pin_dialog.dart';

@@ -13,7 +13,7 @@ import 'package:flutter_media_view/ui/common/common_basic_time_shift_selector.da
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/common_fx_transitions.dart';
 import 'package:flutter_media_view/ui/common/common_providers_media_query_data_provider.dart';
-import 'package:flutter_media_view/ui/common/dialogs_aves_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_item_picker.dart';
 import 'package:flutter_media_view/ui/common/dialogs_pick_dialogs_item_pick_page.dart';
 import 'package:flutter_media_view_model/flutter_media_view_model.dart';

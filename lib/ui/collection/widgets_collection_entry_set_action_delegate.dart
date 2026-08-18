@@ -45,8 +45,8 @@ import 'package:flutter_media_view/ui/common/common_action_mixins_size_aware.dar
 import 'package:flutter_media_view/ui/common/common_action_mixins_vault_aware.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/dialogs_add_shortcut_dialog.dart';
-import 'package:flutter_media_view/ui/common/dialogs_aves_confirmation_dialog.dart';
-import 'package:flutter_media_view/ui/common/dialogs_aves_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_confirmation_dialog.dart';
+import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_convert_entry_dialog.dart';
 import 'package:flutter_media_view/ui/editor/widgets_dialogs_entry_editors_rename_entry_set_page.dart';
 import 'package:flutter_media_view/ui/editor/widgets_dialogs_filter_editors_create_dynamic_album_dialog.dart';
