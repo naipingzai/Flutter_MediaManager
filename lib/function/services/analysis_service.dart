@@ -104,7 +104,7 @@ class Analyzer with WidgetsBindingObserver {
     debugPrint('$runtimeType create');
     if (kFlutterMemoryAllocationsEnabled) {
       LeakTracking.dispatchObjectCreated(
-        library: 'aves',
+        library: 'fmv',
         className: '$Analyzer',
         object: this,
       );

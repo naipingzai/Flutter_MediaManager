@@ -89,7 +89,7 @@ class FilterListDetails<T extends CollectionFilter> extends StatelessWidget {
   Widget _buildDateRow(BuildContext context, FilterListDetailsThemeData detailsTheme, bool hasTitleLeading) {
     final use24hour = MediaQuery.alwaysUse24HourFormatOf(context);
     final date = entry?.bestDate;
-    final dateText = date != null ? formatDateTime(date, settings.avesLocale, use24hour) : AText.valueNotAvailable;
+    final dateText = date != null ? formatDateTime(date, settings.fmvLocale, use24hour) : AText.valueNotAvailable;
 
     Widget leading = const Icon(AIcons.date);
     if (hasTitleLeading) {
@@ -158,7 +158,7 @@ class FilterListDetails<T extends CollectionFilter> extends StatelessWidget {
           leading,
           const SizedBox(width: 8),
           Text(
-            '${context.l10n.itemCount(source.count(filter))} • ${formatFileSize(settings.avesLocale, source.size(filter))}',
+            '${context.l10n.itemCount(source.count(filter))} • ${formatFileSize(settings.fmvLocale, source.size(filter))}',
             style: detailsTheme.captionStyle,
             softWrap: false,
             overflow: TextOverflow.fade,

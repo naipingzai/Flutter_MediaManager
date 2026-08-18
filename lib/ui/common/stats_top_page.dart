@@ -116,7 +116,7 @@ class StatsTopPage<T extends Comparable> extends StatelessWidget with FeedbackMi
     const mimeType = MimeTypes.csv;
     final date = DateFormat('yyyyMMdd_HHmmss', kAsciiLocale).format(DateTime.now());
     final success = await storageService.createFile(
-      basename: 'aves-stats-$date',
+      basename: 'fmv-stats-$date',
       mimeType: mimeType,
       bytes: utf8.encode(csvContent),
     );

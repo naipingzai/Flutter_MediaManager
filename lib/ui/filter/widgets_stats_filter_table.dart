@@ -33,7 +33,7 @@ class FilterTable<T extends Comparable> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final itemCountFormatter = settings.avesLocale.decimalNumberFormat();
+    final itemCountFormatter = settings.fmvLocale.decimalNumberFormat();
     final animate = context.select<Settings, bool>((v) => v.animate);
 
     final sortedEntries = entryCountMap.entries.toList();

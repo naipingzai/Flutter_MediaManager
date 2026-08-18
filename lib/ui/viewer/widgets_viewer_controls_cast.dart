@@ -76,7 +76,7 @@ mixin CastMixin {
   }
 
   Future<DLNADevice?> _selectRenderer(BuildContext context) async {
-    return await showAvesDialog<DLNADevice?>(
+    return await showFmvDialog<DLNADevice?>(
       context: context,
       builder: (context) => const CastDialog(),
       routeSettings: const RouteSettings(name: CastDialog.routeName),

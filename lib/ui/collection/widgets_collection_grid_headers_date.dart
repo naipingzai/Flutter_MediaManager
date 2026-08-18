@@ -22,7 +22,7 @@ class DaySectionHeader<T> extends StatelessWidget {
     final l10n = context.l10n;
     if (date == null) return l10n.sectionUnknown;
 
-    final locale = settings.avesLocale;
+    final locale = settings.fmvLocale;
     final calOps = locale.calendar.ops;
 
     if (calOps.isToday(date)) return l10n.dateToday;
@@ -59,7 +59,7 @@ class MonthSectionHeader<T> extends StatelessWidget {
     final l10n = context.l10n;
     if (date == null) return l10n.sectionUnknown;
 
-    final locale = settings.avesLocale;
+    final locale = settings.fmvLocale;
     final calOps = locale.calendar.ops;
 
     if (calOps.isThisMonth(date)) return l10n.dateThisMonth;

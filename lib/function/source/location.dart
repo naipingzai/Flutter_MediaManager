@@ -123,7 +123,7 @@ mixin LocationMixin on CountryMixin, StateMixin {
       if (knownLocations.containsKey(latLng)) {
         entry.addressDetails = knownLocations[latLng]?.copyWith(id: entry.id);
       } else {
-        await entry.locatePlace(background: true, force: force, geocoderLocale: settings.avesLocale);
+        await entry.locatePlace(background: true, force: force, geocoderLocale: settings.fmvLocale);
         // it is intended to insert `null` if the geocoder failed,
         // so that we skip geocoding of following entries with the same coordinates
         knownLocations[latLng] = entry.addressDetails;

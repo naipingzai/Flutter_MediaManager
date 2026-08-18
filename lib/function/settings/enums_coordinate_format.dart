@@ -10,7 +10,7 @@ extension ExtraCoordinateFormat on CoordinateFormat {
   static const _separator = ', ';
 
   String format(BuildContext context, LatLng latLng, {bool minuteSecondPadding = false, int? dmsSecondDecimals}) {
-    final text = formatWithoutDirectionality(settings.avesLocale, context.l10n, latLng, minuteSecondPadding: minuteSecondPadding, dmsSecondDecimals: dmsSecondDecimals);
+    final text = formatWithoutDirectionality(settings.fmvLocale, context.l10n, latLng, minuteSecondPadding: minuteSecondPadding, dmsSecondDecimals: dmsSecondDecimals);
     return context.applyDirectionality(text);
   }
 

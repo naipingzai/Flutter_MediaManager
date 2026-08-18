@@ -66,7 +66,7 @@ mixin SingleEntryEditorMixin on FeedbackMixin, PermissionAwareMixin, EntryEditor
           await targetEntry.locate(
             background: background,
             force: dataTypes.contains(EntryDataType.address),
-            geocoderLocale: settings.avesLocale,
+            geocoderLocale: settings.fmvLocale,
           );
         }
         showFeedback(context, FeedbackType.info, l10n.genericSuccessFeedback);

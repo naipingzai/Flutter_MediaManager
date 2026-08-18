@@ -17,7 +17,7 @@ class AnalysisController {
   }) {
     if (kFlutterMemoryAllocationsEnabled) {
       LeakTracking.dispatchObjectCreated(
-        library: 'aves',
+        library: 'fmv',
         className: '$AnalysisController',
         object: this,
       );

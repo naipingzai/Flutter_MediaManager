@@ -94,10 +94,10 @@ class _EntryGoogleMapState<T> extends State<EntryGoogleMap<T>> {
   }
 
   void _registerWidget(EntryGoogleMap<T> widget) {
-    final avesMapController = widget.controller;
-    _subscriptions.add(avesMapController.moveCommands.listen((event) => _moveTo(_toServiceLatLng(event.latLng))));
-    _subscriptions.add(avesMapController.zoomCommands.listen((event) => _zoomBy(event.delta)));
-    _subscriptions.add(avesMapController.rotationResetCommands.listen((_) => _resetRotation()));
+    final fmvMapController = widget.controller;
+    _subscriptions.add(fmvMapController.moveCommands.listen((event) => _moveTo(_toServiceLatLng(event.latLng))));
+    _subscriptions.add(fmvMapController.zoomCommands.listen((event) => _zoomBy(event.delta)));
+    _subscriptions.add(fmvMapController.rotationResetCommands.listen((_) => _resetRotation()));
     widget.clusterListenable.addListener(_updateMarkers);
   }
 

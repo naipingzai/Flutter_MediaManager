@@ -26,7 +26,7 @@ class FilterDraggableThumbLabel<T extends CollectionFilter> extends StatelessWid
         switch (sortFactor) {
           case .date:
             return [
-              DraggableThumbLabel.formatMonthThumbLabel(context, settings.avesLocale, filterGridItem.entry?.bestDate),
+              DraggableThumbLabel.formatMonthThumbLabel(context, settings.fmvLocale, filterGridItem.entry?.bestDate),
             ];
           case .name:
           case .path:
@@ -39,7 +39,7 @@ class FilterDraggableThumbLabel<T extends CollectionFilter> extends StatelessWid
             ];
           case .size:
             return [
-              formatFileSize(settings.avesLocale, context.read<CollectionSource>().size(filterGridItem.filter)),
+              formatFileSize(settings.fmvLocale, context.read<CollectionSource>().size(filterGridItem.filter)),
             ];
         }
       },

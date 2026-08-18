@@ -34,7 +34,7 @@ abstract class FmvVideoController extends Disposer with ABRepeatMixin, SlowMotio
   }) : _entry = entry {
     if (kFlutterMemoryAllocationsEnabled) {
       LeakTracking.dispatchObjectCreated(
-        library: 'aves',
+        library: 'fmv',
         className: '$FmvVideoController',
         object: this,
       );

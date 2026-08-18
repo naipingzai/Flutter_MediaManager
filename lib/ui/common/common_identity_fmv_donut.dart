@@ -48,7 +48,7 @@ class _AvesDonutState extends State<FmvDonut> with AutomaticKeepAliveClientMixin
 
   DatumColorizer get colorize => widget.colorize;
 
-  static const avesDonutMinWidth = 124.0;
+  static const fmvDonutMinWidth = 124.0;
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +86,7 @@ class _AvesDonutState extends State<FmvDonut> with AutomaticKeepAliveClientMixin
           ];
 
           final textScaler = MediaQuery.textScalerOf(context);
-          final minWidth = textScaler.scale(avesDonutMinWidth);
+          final minWidth = textScaler.scale(fmvDonutMinWidth);
           final availableWidth = constraints.maxWidth;
           final dim = max(minWidth, availableWidth / (availableWidth > 4 * minWidth ? 4 : (availableWidth > 2 * minWidth ? 2 : 1)));
 

@@ -88,7 +88,7 @@ mixin EntryStorageMixin on FeedbackMixin, PermissionAwareMixin, SizeAwareMixin, 
     // case insensitive comparison
     final uniqueNames = names.toSet();
     if (uniqueNames.length < names.length) {
-      final value = await showAvesDialog<NameConflictStrategy>(
+      final value = await showFmvDialog<NameConflictStrategy>(
         context: context,
         builder: (context) => FmvSingleSelectionDialog<NameConflictStrategy>(
           initialValue: nameConflictStrategy,
@@ -237,7 +237,7 @@ mixin EntryStorageMixin on FeedbackMixin, PermissionAwareMixin, SizeAwareMixin, 
       // case insensitive comparison
       final uniqueNames = names.toSet();
       if (uniqueNames.length < names.length) {
-        final value = await showAvesDialog<NameConflictStrategy>(
+        final value = await showFmvDialog<NameConflictStrategy>(
           context: context,
           builder: (context) => FmvSingleSelectionDialog<NameConflictStrategy>(
             initialValue: nameConflictStrategy,

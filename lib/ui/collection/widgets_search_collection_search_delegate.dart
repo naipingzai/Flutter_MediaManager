@@ -197,7 +197,7 @@ class CollectionSearchDelegate extends FmvSearchDelegate with FeedbackMixin, Vau
   }
 
   Widget _buildDateFilters(BuildContext context, CollectionFilterPredicate containQuery) {
-    final locale = settings.avesLocale;
+    final locale = settings.fmvLocale;
     final calendar = locale.calendar;
     final calOps = calendar.ops;
 

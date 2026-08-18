@@ -15,7 +15,7 @@ class LinearPercentIndicatorText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final percentFormatter = settings.avesLocale.percentNumberFormat();
+    final percentFormatter = settings.fmvLocale.percentNumberFormat();
 
     return OutlinedText(
       textSpans: [

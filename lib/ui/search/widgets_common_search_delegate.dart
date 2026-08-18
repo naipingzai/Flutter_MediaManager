@@ -23,7 +23,7 @@ abstract class FmvSearchDelegate extends SearchDelegate {
   }) {
     if (kFlutterMemoryAllocationsEnabled) {
       LeakTracking.dispatchObjectCreated(
-        library: 'aves',
+        library: 'fmv',
         className: '$FmvSearchDelegate',
         object: this,
       );

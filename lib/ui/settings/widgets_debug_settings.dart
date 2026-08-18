@@ -119,7 +119,7 @@ class _DebugSettingsSectionState extends State<DebugSettingsSection> with Automa
                 info: {
                   'basic': '${settings.basicLocale}',
                   'resolved': '${settings.resolvedLocale}',
-                  'aves': '${settings.avesLocale}',
+                  'fmv': '${settings.fmvLocale}',
                   'system': '${WidgetsBinding.instance.platformDispatcher.locales}',
                 },
               ),

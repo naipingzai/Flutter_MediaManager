@@ -27,7 +27,7 @@ class MultiPageController {
   MultiPageController(this.entry) {
     if (kFlutterMemoryAllocationsEnabled) {
       LeakTracking.dispatchObjectCreated(
-        library: 'aves',
+        library: 'fmv',
         className: '$MultiPageController',
         object: this,
       );

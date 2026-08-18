@@ -18,7 +18,7 @@ class ViewStateController with HistogramMixin {
   }) {
     if (kFlutterMemoryAllocationsEnabled) {
       LeakTracking.dispatchObjectCreated(
-        library: 'aves',
+        library: 'fmv',
         className: '$ViewStateController',
         object: this,
       );

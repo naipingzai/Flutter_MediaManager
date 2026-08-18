@@ -277,7 +277,7 @@ abstract class ChipSetActionDelegate<T extends CollectionFilter> with FeedbackMi
       sortReverse,
     );
     final extentController = context.read<TileExtentController>();
-    final value = await showAvesDialog<(ChipSortFactor?, void, TileLayout?, bool)>(
+    final value = await showFmvDialog<(ChipSortFactor?, void, TileLayout?, bool)>(
       context: context,
       builder: (context) {
         return TileViewDialog<ChipSortFactor, void, TileLayout>(
@@ -396,7 +396,7 @@ abstract class ChipSetActionDelegate<T extends CollectionFilter> with FeedbackMi
     final existingCover = covers.of(filter);
     final entryId = existingCover?.entryId;
     final customEntry = entryId != null ? context.read<CollectionSource>().visibleEntries.firstWhereOrNull((entry) => entry.id == entryId) : null;
-    final selectedCover = await showAvesDialog<(FmvEntry?, String?, Color?)>(
+    final selectedCover = await showFmvDialog<(FmvEntry?, String?, Color?)>(
       context: context,
       builder: (context) => CoverSelectionDialog(
         filter: filter,

@@ -77,7 +77,7 @@ class FmvEntry with FmvEntryBase {
   }) : id = id ?? 0 {
     if (kFlutterMemoryAllocationsEnabled) {
       LeakTracking.dispatchObjectCreated(
-        library: 'aves',
+        library: 'fmv',
         className: '$FmvEntry',
         object: this,
       );

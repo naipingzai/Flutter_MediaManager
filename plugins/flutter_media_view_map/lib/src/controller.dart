@@ -26,7 +26,7 @@ class FmvMapController {
   FmvMapController() {
     if (kFlutterMemoryAllocationsEnabled) {
       LeakTracking.dispatchObjectCreated(
-        library: 'aves',
+        library: 'fmv',
         className: '$FmvMapController',
         object: this,
       );

@@ -62,7 +62,7 @@ Future<List<Map<String, String?>>> _getSuggestions(Object? args) async {
       catalogMetadata.forEach((metadata) => entries.firstWhereOrNull((entry) => entry.id == metadata.id)?.catalogMetadata = metadata);
       entries.sort(FmvEntrySort.compareByDate);
 
-      // TODO TLAD [calendar] try whether `settings.avesLocale` is accessible, after:
+      // TODO TLAD [calendar] try whether `settings.fmvLocale` is accessible, after:
       //   await settings.init(monitorPlatformSettings: false, shouldSanitize: false);
       final locale = FmvLocale(
         languageTag: localeName,

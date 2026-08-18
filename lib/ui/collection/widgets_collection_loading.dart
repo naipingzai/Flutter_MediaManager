@@ -16,7 +16,7 @@ class LoadingEmptyContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final itemCountFormatter = settings.avesLocale.decimalNumberFormat();
+    final itemCountFormatter = settings.fmvLocale.decimalNumberFormat();
     final progressTextStyle = TextStyle(
       color: Theme.of(context).colorScheme.primary.withValues(alpha: .5),
       fontSize: 18,

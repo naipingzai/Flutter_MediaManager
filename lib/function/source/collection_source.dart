@@ -74,7 +74,7 @@ abstract class CollectionSource with SourceBase, AlbumMixin, CountryMixin, Place
   CollectionSource() {
     if (kFlutterMemoryAllocationsEnabled) {
       LeakTracking.dispatchObjectCreated(
-        library: 'aves',
+        library: 'fmv',
         className: '$CollectionSource',
         object: this,
       );
@@ -492,7 +492,7 @@ abstract class CollectionSource with SourceBase, AlbumMixin, CountryMixin, Place
 
     if (dataTypes.contains(EntryDataType.address)) {
       await Future.forEach(entries, (entry) async {
-        await entry.locate(background: background, force: true, geocoderLocale: settings.avesLocale);
+        await entry.locate(background: background, force: true, geocoderLocale: settings.fmvLocale);
         await localMediaDb.updateAddress(entry.id, entry.addressDetails);
       });
       onAddressMetadataChanged();

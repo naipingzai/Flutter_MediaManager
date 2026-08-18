@@ -23,10 +23,10 @@ class FmvMultiSelectionDialog<T> extends StatefulWidget {
   });
 
   @override
-  State<FmvMultiSelectionDialog<T>> createState() => _AvesMultiSelectionDialogState<T>();
+  State<FmvMultiSelectionDialog<T>> createState() => _FmvMultiSelectionDialogState<T>();
 }
 
-class _AvesMultiSelectionDialogState<T> extends State<FmvMultiSelectionDialog<T>> {
+class _FmvMultiSelectionDialogState<T> extends State<FmvMultiSelectionDialog<T>> {
   late Set<T> _selectedValues;
 
   @override

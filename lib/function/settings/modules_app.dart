@@ -87,20 +87,20 @@ mixin AppSettings on SettingsAccess {
     return _resolvedLocale!;
   }
 
-  FmvLocale? _avesLocale;
+  FmvLocale? _fmvLocale;
 
   void _resetAvesLocale() {
-    _avesLocale = null;
+    _fmvLocale = null;
   }
 
   // advanced identifier, resolved to match user settings
-  FmvLocale get avesLocale {
-    _avesLocale ??= FmvLocale(
+  FmvLocale get fmvLocale {
+    _fmvLocale ??= FmvLocale(
       languageTag: resolvedLocale.toLanguageTag(),
       calendar: calendar,
       forceWesternArabicNumerals: forceWesternArabicNumerals,
     );
-    return _avesLocale!;
+    return _fmvLocale!;
   }
 
   ACalendar get calendar => getEnumOrDefault(SettingKeys.calendarKey, SettingsDefaults.calendar, ACalendar.values);

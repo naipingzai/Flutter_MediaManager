@@ -65,7 +65,7 @@ class SettingsTileLanguageCalendar extends SettingsTile {
     onSelection: (v) => settings.calendar = v,
     tileTitle: title,
     optionSubtitleBuilder: (v) {
-      final locale = settings.avesLocale.copyWith(calendar: v);
+      final locale = settings.fmvLocale.copyWith(calendar: v);
       return locale.yMMMMd(DateTime.now());
     },
   );

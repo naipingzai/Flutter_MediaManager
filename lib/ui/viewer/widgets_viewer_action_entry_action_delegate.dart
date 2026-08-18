@@ -390,7 +390,7 @@ class EntryActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAwareMix
   }
 
   Future<void> _addShortcut(BuildContext context, FmvEntry targetEntry) async {
-    final result = await showAvesDialog<(FmvEntry?, String)>(
+    final result = await showFmvDialog<(FmvEntry?, String)>(
       context: context,
       builder: (context) => AddShortcutDialog(
         defaultName: targetEntry.bestTitle ?? '',
@@ -458,7 +458,7 @@ class EntryActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAwareMix
   );
 
   Future<void> _convert(BuildContext context, FmvEntry targetEntry) async {
-    final options = await showAvesDialog<EntryConvertOptions>(
+    final options = await showFmvDialog<EntryConvertOptions>(
       context: context,
       builder: (context) => ConvertEntryDialog(entries: {targetEntry}),
       routeSettings: const RouteSettings(name: ConvertEntryDialog.routeName),
@@ -483,7 +483,7 @@ class EntryActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAwareMix
   }
 
   Future<void> _rename(BuildContext context, FmvEntry targetEntry) async {
-    final newName = await showAvesDialog<String>(
+    final newName = await showFmvDialog<String>(
       context: context,
       builder: (context) => RenameEntryDialog(entry: targetEntry),
       routeSettings: const RouteSettings(name: RenameEntryDialog.routeName),

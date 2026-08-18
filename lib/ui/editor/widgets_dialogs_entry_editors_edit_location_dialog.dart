@@ -85,7 +85,7 @@ class _EditEntryLocationDialogState extends State<EditEntryLocationDialog> with 
     _mapCoordinates = mainEntry.latLng;
     _copyItemSource = mainEntry;
 
-    final locale = settings.avesLocale;
+    final locale = settings.fmvLocale;
     coordinateFormatter = locale.numberFormat(_coordinatePattern);
     coordinateParser = locale.numberParser(_coordinatePattern);
     final latLng = mainEntry.latLng;
@@ -393,7 +393,7 @@ class _EditEntryLocationDialogState extends State<EditEntryLocationDialog> with 
   }
 
   Future<void> _pickGpxShift() async {
-    final newShift = await showAvesDialog<Duration>(
+    final newShift = await showFmvDialog<Duration>(
       context: context,
       builder: (context) => TimeShiftDialog(
         initialValue: _gpxShift,
@@ -560,7 +560,7 @@ class _EditEntryLocationDialogState extends State<EditEntryLocationDialog> with 
     final dateRange = _gpxDateRange(gpx);
     if (dateRange != null) {
       final (firstDate, lastDate) = dateRange;
-      final locale = settings.avesLocale;
+      final locale = settings.fmvLocale;
       final use24hour = MediaQuery.alwaysUse24HourFormatOf(context);
       return Text(
         [
@@ -576,7 +576,7 @@ class _EditEntryLocationDialogState extends State<EditEntryLocationDialog> with 
   Text _coordinatesText(BuildContext context, LatLng? latLng) {
     if (latLng != null) {
       return Text(
-        ExtraCoordinateFormat.toDMS(settings.avesLocale, context.l10n, latLng).join('\n'),
+        ExtraCoordinateFormat.toDMS(settings.fmvLocale, context.l10n, latLng).join('\n'),
       );
     } else {
       return _unknownText(context);

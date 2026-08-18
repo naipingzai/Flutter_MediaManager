@@ -33,7 +33,7 @@ class FmvDialog extends StatefulWidget {
   }) : assert((scrollableContent != null) ^ (content != null));
 
   @override
-  State<FmvDialog> createState() => _AvesDialogState();
+  State<FmvDialog> createState() => _FmvDialogState();
 
   static Decoration contentDecoration(BuildContext context) => BoxDecoration(
     border: Border(
@@ -49,7 +49,7 @@ class FmvDialog extends StatefulWidget {
   }
 }
 
-class _AvesDialogState extends State<FmvDialog> {
+class _FmvDialogState extends State<FmvDialog> {
   final ScrollController _internalScrollController = ScrollController();
 
   ScrollController get scrollController => widget.scrollController ?? _internalScrollController;
@@ -181,13 +181,13 @@ Future<void> showNoMatchingAppDialog(BuildContext context) => showWarningDialog(
 Future<void> showWarningDialog({
   required BuildContext context,
   required String message,
-}) => showAvesDialog<void>(
+}) => showFmvDialog<void>(
   context: context,
   builder: (context) => FmvMessageDialog.info(message),
   routeSettings: const RouteSettings(name: FmvDialog.warningRouteName),
 );
 
-Future<T?> showAvesDialog<T>({
+Future<T?> showFmvDialog<T>({
   required BuildContext context,
   required WidgetBuilder builder,
   bool barrierDismissible = true,

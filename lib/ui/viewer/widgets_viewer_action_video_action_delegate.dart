@@ -35,7 +35,7 @@ class VideoActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAwareMix
   }) {
     if (kFlutterMemoryAllocationsEnabled) {
       LeakTracking.dispatchObjectCreated(
-        library: 'aves',
+        library: 'fmv',
         className: '$VideoActionDelegate',
         object: this,
       );
@@ -85,7 +85,7 @@ class VideoActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAwareMix
   }
 
   Future<void> _captureFrame(BuildContext context, FmvEntry entry, FmvVideoController controller) async {
-    final destinationAlbum = androidFileUtils.avesVideoCapturesPath;
+    final destinationAlbum = androidFileUtils.fmvVideoCapturesPath;
     final positionMillis = controller.currentPosition;
     final Map<String, dynamic> newFields = {};
 
@@ -158,7 +158,7 @@ class VideoActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAwareMix
     final tracks = controller.tracks;
     final currentSelectedTracks = await Future.wait(MediaTrackType.values.map(controller.getSelectedTrack));
 
-    final userSelectedTracks = await showAvesDialog<Map<MediaTrackType, MediaTrackSummary?>>(
+    final userSelectedTracks = await showFmvDialog<Map<MediaTrackType, MediaTrackSummary?>>(
       context: context,
       builder: (context) => VideoTrackSelectionDialog(
         tracks: Map.fromEntries(
@@ -180,7 +180,7 @@ class VideoActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAwareMix
   }
 
   Future<void> _showSpeedDialog(BuildContext context, FmvVideoController controller) async {
-    final newSpeed = await showAvesDialog<double>(
+    final newSpeed = await showFmvDialog<double>(
       context: context,
       builder: (context) => VideoSpeedDialog(
         current: controller.speed,

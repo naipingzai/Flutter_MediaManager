@@ -73,7 +73,7 @@ class VideoPlaybackPage extends StatelessWidget {
               tileTitle: (_) => l10n.settingsVideoEnableHardwareAcceleration,
               trailingBuilder: (context) => IconButton(
                 icon: const Icon(AIcons.help),
-                onPressed: () => FmvApp.launchUrl('${AppReference.avesFaq}#should-i-enable-hardware-acceleration-to-play-videos'),
+                onPressed: () => FmvApp.launchUrl('${AppReference.fmvFaq}#should-i-enable-hardware-acceleration-to-play-videos'),
                 tooltip: 'FAQ',
               ),
             ),

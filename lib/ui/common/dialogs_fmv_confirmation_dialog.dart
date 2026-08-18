@@ -11,7 +11,7 @@ Future<bool> showConfirmationDialog({
   String? ok,
   String? cancel,
 }) async {
-  final confirmed = await showAvesDialog<bool>(
+  final confirmed = await showFmvDialog<bool>(
     context: context,
     builder: (context) => FmvMessageDialog(
       message: message,
@@ -36,7 +36,7 @@ Future<bool> showSkippableConfirmationDialog({
 
   assert((message != null) ^ (delegate != null));
   final effectiveDelegate = delegate ?? MessageConfirmationDialogDelegate(message!);
-  final confirmed = await showAvesDialog<bool>(
+  final confirmed = await showFmvDialog<bool>(
     context: context,
     builder: (context) => _SkippableConfirmationDialog(
       type: type,

@@ -243,7 +243,7 @@ class SettingsDurationListTile extends StatelessWidget {
           title: Text(title(context) ?? '?'),
           subtitle: FmvCaption(subtitle),
           onTap: () async {
-            final seconds = await showAvesDialog<int>(
+            final seconds = await showFmvDialog<int>(
               context: context,
               builder: (context) => DurationDialog(initialSeconds: current),
             );

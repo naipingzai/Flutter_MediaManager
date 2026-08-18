@@ -32,7 +32,7 @@ class AndroidFileUtils {
   static const trashDirPath = '#trash';
 
   late final String separator, vaultRoot, primaryStorage;
-  late final String dcimPath, downloadPath, moviesPath, picturesPath, avesVideoCapturesPath;
+  late final String dcimPath, downloadPath, moviesPath, picturesPath, fmvVideoCapturesPath;
   late final Set<String> videoCapturesPaths;
   Set<StorageVolume> storageVolumes = {};
   Future<void>? _loader;
@@ -82,12 +82,12 @@ class AndroidFileUtils {
     moviesPath = pContext.join(primaryStorage, standardDirMovies);
     picturesPath = pContext.join(primaryStorage, standardDirPictures);
     // custom dirs
-    avesVideoCapturesPath = pContext.join(dcimPath, 'Video Captures');
+    fmvVideoCapturesPath = pContext.join(dcimPath, 'Video Captures');
     videoCapturesPaths = {
       // from Samsung
       pContext.join(dcimPath, 'Videocaptures'),
       // from Fmv
-      avesVideoCapturesPath,
+      fmvVideoCapturesPath,
     };
   }
 

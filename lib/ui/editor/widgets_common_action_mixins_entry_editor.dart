@@ -33,7 +33,7 @@ mixin EntryEditorMixin {
   Future<DateModifier?> selectDateModifier(BuildContext context, Set<FmvEntry> entries, CollectionLens? collection) async {
     if (entries.isEmpty) return null;
 
-    return showAvesDialog<DateModifier>(
+    return showFmvDialog<DateModifier>(
       context: context,
       builder: (context) => EditEntryDateDialog(
         entry: entries.first,
@@ -46,7 +46,7 @@ mixin EntryEditorMixin {
   Future<LocationEditActionResult?> selectLocation(BuildContext context, Set<FmvEntry> entries, CollectionLens? collection) async {
     if (entries.isEmpty) return null;
 
-    return showAvesDialog<LocationEditActionResult>(
+    return showFmvDialog<LocationEditActionResult>(
       context: context,
       builder: (context) => EditEntryLocationDialog(
         entries: entries,
@@ -64,7 +64,7 @@ mixin EntryEditorMixin {
     final fields = await metadataFetchService.getOverlayMetadata(entry, {MetadataSyntheticField.description});
     final initialDescription = fields.description ?? '';
 
-    return showAvesDialog<Map<DescriptionField, String?>>(
+    return showFmvDialog<Map<DescriptionField, String?>>(
       context: context,
       builder: (context) => EditEntryTitleDescriptionDialog(
         initialTitle: initialTitle,
@@ -77,7 +77,7 @@ mixin EntryEditorMixin {
   Future<int?> selectRating(BuildContext context, Set<FmvEntry> entries) async {
     if (entries.isEmpty) return null;
 
-    return showAvesDialog<int>(
+    return showFmvDialog<int>(
       context: context,
       builder: (context) => EditEntryRatingDialog(
         entry: entries.first,
@@ -125,7 +125,7 @@ mixin EntryEditorMixin {
   Future<Set<MetadataType>?> selectMetadataToRemove(BuildContext context, Set<FmvEntry> entries) async {
     if (entries.isEmpty) return null;
 
-    final types = await showAvesDialog<Set<MetadataType>>(
+    final types = await showFmvDialog<Set<MetadataType>>(
       context: context,
       builder: (context) => RemoveEntryMetadataDialog(
         showJpegTypes: entries.any((entry) => entry.mimeType == MimeTypes.jpeg),
@@ -211,7 +211,7 @@ class MoveUndatedConfirmationDialogDelegate extends ConfirmationDialogDelegate {
           Expanded(child: Text(context.l10n.moveUndatedConfirmationDialogMessage)),
           IconButton(
             icon: const Icon(AIcons.help),
-            onPressed: () => FmvApp.launchUrl('${AppReference.avesFaq}#whats-in-a-date'),
+            onPressed: () => FmvApp.launchUrl('${AppReference.fmvFaq}#whats-in-a-date'),
             tooltip: 'FAQ',
           ),
         ],

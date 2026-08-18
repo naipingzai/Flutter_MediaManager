@@ -8,8 +8,8 @@ import 'package:flutter_media_view/ui/common/common_identity_fmv_logo.dart';
 import 'package:flutter/material.dart';
 
 class AppReference extends StatelessWidget {
-  static const avesGithub = 'https://github.com/deckerst/aves';
-  static const avesFaq = '$avesGithub/wiki/FAQ';
+  static const fmvGithub = 'https://github.com/deckerst/aves';
+  static const fmvFaq = '$fmvGithub/wiki/FAQ';
 
   const AppReference({super.key});
 
@@ -18,7 +18,7 @@ class AppReference extends StatelessWidget {
     return Center(
       child: Column(
         children: [
-          _buildAvesLine(context),
+          _buildFmvLine(context),
           const SizedBox(height: 16),
           Wrap(
             alignment: .center,
@@ -31,7 +31,7 @@ class AppReference extends StatelessWidget {
     );
   }
 
-  Widget _buildAvesLine(BuildContext context) {
+  Widget _buildFmvLine(BuildContext context) {
     final localeName = context.localeName;
     final textScaler = MediaQuery.textScalerOf(context);
     return Row(
@@ -70,7 +70,7 @@ class AppReference extends StatelessWidget {
           size: 24,
         ),
         text: 'GitHub',
-        urlString: AppReference.avesGithub,
+        urlString: AppReference.fmvGithub,
       ),
       LinkChip(
         leading: const Icon(
@@ -78,7 +78,7 @@ class AppReference extends StatelessWidget {
           size: 22,
         ),
         text: l10n.aboutLinkLicense,
-        urlString: '${AppReference.avesGithub}/blob/main/LICENSE',
+        urlString: '${AppReference.fmvGithub}/blob/main/LICENSE',
       ),
       LinkChip(
         leading: const Icon(

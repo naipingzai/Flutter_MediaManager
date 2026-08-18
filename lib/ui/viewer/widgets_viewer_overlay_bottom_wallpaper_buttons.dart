@@ -59,7 +59,7 @@ class WallpaperButtons extends StatelessWidget with FeedbackMixin {
 
   Future<void> _setWallpaper(BuildContext context) async {
     final l10n = context.l10n;
-    final value = await showAvesDialog<(WallpaperTarget, bool)>(
+    final value = await showFmvDialog<(WallpaperTarget, bool)>(
       context: context,
       builder: (context) => const WallpaperSettingsDialog(),
       routeSettings: const RouteSettings(name: WallpaperSettingsDialog.routeName),

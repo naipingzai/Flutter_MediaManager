@@ -33,7 +33,7 @@ typedef GroupUriPredicate = bool Function(Uri? groupUri);
   tag URI: "aves://tags/tag?name=tag12"
  */
 class FilterGrouping<T extends GroupBaseFilter> with ChangeNotifier {
-  static const scheme = 'aves';
+  static const scheme = 'fmv';
   static const hostAlbums = 'albums';
   static const hostTags = 'tags';
 

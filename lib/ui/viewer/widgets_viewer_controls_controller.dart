@@ -52,7 +52,7 @@ class ViewerController with CastMixin {
   }) {
     if (kFlutterMemoryAllocationsEnabled) {
       LeakTracking.dispatchObjectCreated(
-        library: 'aves',
+        library: 'fmv',
         className: '$ViewerController',
         object: this,
       );

@@ -27,7 +27,7 @@ class VideoConductor {
   VideoConductor({this._collection}) {
     if (kFlutterMemoryAllocationsEnabled) {
       LeakTracking.dispatchObjectCreated(
-        library: 'aves',
+        library: 'fmv',
         className: '$VideoConductor',
         object: this,
       );

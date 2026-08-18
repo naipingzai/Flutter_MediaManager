@@ -120,7 +120,7 @@ class _BasicSectionState extends State<BasicSection> with AutomaticKeepAliveClie
   }
 
   Widget _buildChips(BuildContext context) {
-    final locale = settings.avesLocale;
+    final locale = settings.fmvLocale;
     final calendar = locale.calendar;
     final calOps = calendar.ops;
 
@@ -320,7 +320,7 @@ class _BasicInfoState extends State<_BasicInfo> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final infoUnknown = l10n.viewerInfoUnknown;
-    final locale = settings.avesLocale;
+    final locale = settings.fmvLocale;
     final use24hour = MediaQuery.alwaysUse24HourFormatOf(context);
 
     // TODO TLAD line break on all characters for the following fields when this is fixed: https://github.com/flutter/flutter/issues/61081

@@ -75,7 +75,7 @@ mixin SizeAwareMixin {
   }
 
   Future<void> _showNotEnoughSpaceDialog(BuildContext context, int needed, int free, StorageVolume destinationVolume) async {
-    final locale = settings.avesLocale;
+    final locale = settings.fmvLocale;
     final neededSize = formatFileSize(locale, needed);
     final freeSize = formatFileSize(locale, free);
     final volume = destinationVolume.getDescription(context);

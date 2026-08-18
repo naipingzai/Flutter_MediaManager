@@ -237,7 +237,7 @@ class _HistogramState extends State<Histogram> with AutomaticKeepAliveClientMixi
         )..setAttribute(charts.rendererIdKey, 'customPoint'),
     ];
 
-    final locale = settings.avesLocale;
+    final locale = settings.fmvLocale;
     final timeAxisSpec = _firstDate != null && _lastDate != null
         ? TimeAxisSpec.forLevel(
             locale: locale,
@@ -318,7 +318,7 @@ class _HistogramState extends State<Histogram> with AutomaticKeepAliveClientMixi
   }
 
   Widget _buildSelectionRow() {
-    final itemCountFormatter = settings.avesLocale.decimalNumberFormat();
+    final itemCountFormatter = settings.fmvLocale.decimalNumberFormat();
 
     return ValueListenableBuilder<_EntryByDate?>(
       valueListenable: _selection,

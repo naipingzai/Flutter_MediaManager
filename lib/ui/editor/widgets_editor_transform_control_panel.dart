@@ -158,7 +158,7 @@ class RotationControlPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = context.watch<TransformController>();
-    final angleFormatter = settings.avesLocale.numberFormat('0.0°');
+    final angleFormatter = settings.fmvLocale.numberFormat('0.0°');
 
     return Row(
       children: [

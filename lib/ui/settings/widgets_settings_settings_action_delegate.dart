@@ -45,7 +45,7 @@ class SettingsActionDelegate with FeedbackMixin {
 
   Future<void> _export(BuildContext context) async {
     final l10n = context.l10n;
-    final toExport = await showAvesDialog<Set<AppExportItem>>(
+    final toExport = await showFmvDialog<Set<AppExportItem>>(
       context: context,
       builder: (context) => AppExportItemSelectionDialog(
         title: l10n.settingsActionExportDialogTitle,
@@ -60,7 +60,7 @@ class SettingsActionDelegate with FeedbackMixin {
     );
     const mimeType = MimeTypes.json;
     final success = await storageService.createFile(
-      basename: 'aves-settings-$date',
+      basename: 'fmv-settings-$date',
       mimeType: mimeType,
       bytes: content,
     );
@@ -99,7 +99,7 @@ class SettingsActionDelegate with FeedbackMixin {
           });
         }
 
-        final toImport = await showAvesDialog<Set<AppExportItem>>(
+        final toImport = await showFmvDialog<Set<AppExportItem>>(
           context: context,
           builder: (context) => AppExportItemSelectionDialog(
             title: l10n.settingsActionImportDialogTitle,

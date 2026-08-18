@@ -100,7 +100,7 @@ class DateFilter extends CollectionFilter {
 
   @override
   String getLabel(BuildContext context) {
-    final locale = settings.avesLocale.copyWith(calendar: calendar);
+    final locale = settings.fmvLocale.copyWith(calendar: calendar);
     switch (level) {
       case .y:
         return locale.y(_effectiveDate);

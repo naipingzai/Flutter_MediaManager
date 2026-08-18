@@ -23,7 +23,7 @@ class FmvMagnifierController {
   }) : super() {
     if (kFlutterMemoryAllocationsEnabled) {
       LeakTracking.dispatchObjectCreated(
-        library: 'aves',
+        library: 'fmv',
         className: '$FmvMagnifierController',
         object: this,
       );

@@ -465,7 +465,7 @@ class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAware
   Future<void> _convert(BuildContext context) async {
     final entries = _getTargetItems(context);
 
-    final options = await showAvesDialog<EntryConvertOptions>(
+    final options = await showFmvDialog<EntryConvertOptions>(
       context: context,
       builder: (context) => ConvertEntryDialog(entries: entries),
       routeSettings: const RouteSettings(name: ConvertEntryDialog.routeName),
@@ -517,7 +517,7 @@ class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAware
       ..metadata = Metadata(
         author: Person(
           name: device.userAgent,
-          link: Link(href: AppReference.avesGithub),
+          link: Link(href: AppReference.fmvGithub),
         ),
         time: gpxDate,
         bounds: Bounds(
@@ -543,7 +543,7 @@ class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAware
     const mimeType = MimeTypes.gpx;
     final date = DateFormat('yyyyMMdd_HHmmss', kAsciiLocale).format(gpxDate);
     final success = await storageService.createFile(
-      basename: 'aves-gpx-$date',
+      basename: 'fmv-gpx-$date',
       mimeType: mimeType,
       bytes: utf8.encode(gpxContent),
     );
@@ -926,7 +926,7 @@ class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAware
     // local context may be deactivated when action is triggered after navigation
     final navigator = Navigator.maybeOf(context);
 
-    final name = await showAvesDialog<String>(
+    final name = await showFmvDialog<String>(
       context: context,
       builder: (context) => const CreateDynamicAlbumDialog(),
       routeSettings: const RouteSettings(name: CreateDynamicAlbumDialog.routeName),
@@ -975,7 +975,7 @@ class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAware
     final filters = collection.filters;
 
     String? defaultName = _getDefaultNameForFilters(context, filters);
-    final result = await showAvesDialog<(FmvEntry?, String)>(
+    final result = await showFmvDialog<(FmvEntry?, String)>(
       context: context,
       builder: (context) => AddShortcutDialog(
         defaultName: defaultName ?? '',

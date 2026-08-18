@@ -168,7 +168,7 @@ class DataUsageDonut extends StatelessWidget {
             return d.key;
         }
       },
-      formatValue: (v) => formatFileSize(settings.avesLocale, v, round: 0),
+      formatValue: (v) => formatFileSize(settings.fmvLocale, v, round: 0),
       colorize: (context, d) {
         final colors = context.read<FmvColorsData>();
         Color? color;

@@ -23,7 +23,7 @@ class MimeDonut extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final itemCountFormatter = settings.avesLocale.decimalNumberFormat();
+    final itemCountFormatter = settings.fmvLocale.decimalNumberFormat();
 
     String formatKey(d) => MimeUtils.displayType(d.key);
     return FmvDonut(

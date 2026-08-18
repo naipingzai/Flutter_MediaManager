@@ -113,7 +113,7 @@ class AppDebugPage extends StatelessWidget {
         final source = context.read<CollectionSource>();
         settings.changeFilterVisibility(settings.hiddenFilters, true);
         settings.changeFilterVisibility({
-          TagFilter('aves-thumbnail', reversed: true),
+          TagFilter('fmv-thumbnail', reversed: true),
         }, false);
         await favourites.clear();
         await favourites.add(source.visibleEntries);
@@ -131,7 +131,7 @@ class AppDebugPage extends StatelessWidget {
         // scan files copied from test assets
         // we do it via the app instead of broadcasting via ADB
         // because `MEDIA_SCANNER_SCAN_FILE` intent got deprecated in API 29
-        await showAvesDialog<String>(
+        await showFmvDialog<String>(
           context: context,
           builder: (context) => const MediaStoreScanDirDialog(),
         );

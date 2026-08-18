@@ -97,7 +97,7 @@ class _MapAddressRowState extends State<MapAddressRow> {
 
   Future<String?> _getAddressLine(FmvEntry? entry) async {
     if (entry != null && await availability.canLocatePlaces) {
-      final addresses = await geocodingService.getAddress(entry.latLng!, settings.avesLocale);
+      final addresses = await geocodingService.getAddress(entry.latLng!, settings.fmvLocale);
       if (addresses.isNotEmpty) {
         final address = addresses.first;
         return address.addressLine;

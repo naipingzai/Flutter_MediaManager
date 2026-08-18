@@ -339,7 +339,7 @@ class _AlbumPickPageState extends State<_AlbumPickPage> with FeedbackMixin, Vaul
   }
 
   Future<void> _createGroup(Uri? parentGroupUri) async {
-    final uri = await showAvesDialog<Uri>(
+    final uri = await showFmvDialog<Uri>(
       context: context,
       builder: (context) => CreateGroupDialog(grouping: albumGrouping, parentGroupUri: parentGroupUri),
       routeSettings: const RouteSettings(name: CreateGroupDialog.routeName),
@@ -353,7 +353,7 @@ class _AlbumPickPageState extends State<_AlbumPickPage> with FeedbackMixin, Vaul
   }
 
   Future<void> _createAlbum() async {
-    final directory = await showAvesDialog<String>(
+    final directory = await showFmvDialog<String>(
       context: context,
       builder: (context) => const CreateStoredAlbumDialog(),
       routeSettings: const RouteSettings(name: CreateStoredAlbumDialog.routeName),
@@ -377,7 +377,7 @@ class _AlbumPickPageState extends State<_AlbumPickPage> with FeedbackMixin, Vaul
       return;
     }
 
-    final details = await showAvesDialog<VaultDetails>(
+    final details = await showFmvDialog<VaultDetails>(
       context: context,
       builder: (context) => const EditVaultDialog(),
       routeSettings: const RouteSettings(name: EditVaultDialog.routeName),

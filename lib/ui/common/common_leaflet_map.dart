@@ -97,10 +97,10 @@ class _EntryLeafletMapState<T> extends State<EntryLeafletMap<T>> with TickerProv
   }
 
   void _registerWidget(EntryLeafletMap<T> widget) {
-    final avesMapController = widget.controller;
-    _subscriptions.add(avesMapController.moveCommands.listen((event) => _moveTo(event.latLng)));
-    _subscriptions.add(avesMapController.zoomCommands.listen((event) => _zoomBy(event.delta)));
-    _subscriptions.add(avesMapController.rotationResetCommands.listen((_) => _resetRotation()));
+    final fmvMapController = widget.controller;
+    _subscriptions.add(fmvMapController.moveCommands.listen((event) => _moveTo(event.latLng)));
+    _subscriptions.add(fmvMapController.zoomCommands.listen((event) => _zoomBy(event.delta)));
+    _subscriptions.add(fmvMapController.rotationResetCommands.listen((_) => _resetRotation()));
     _subscriptions.add(_leafletMapController.mapEventStream.listen((_) => _updateVisibleRegion()));
     widget.clusterListenable.addListener(_updateMarkers);
     widget.boundsNotifier.addListener(_onBoundsChanged);

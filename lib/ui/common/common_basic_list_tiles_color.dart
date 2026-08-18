@@ -27,7 +27,7 @@ class ColorListTile extends StatelessWidget {
       ),
       contentPadding: const EdgeInsetsDirectional.only(start: 16, end: 36 - ColorIndicator.radius),
       onTap: () async {
-        final color = await showAvesDialog<Color>(
+        final color = await showFmvDialog<Color>(
           context: context,
           builder: (context) => ColorPickerDialog(
             initialValue: value,

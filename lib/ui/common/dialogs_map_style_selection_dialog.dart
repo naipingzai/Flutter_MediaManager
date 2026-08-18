@@ -105,7 +105,7 @@ class _MapStyleSelectionDialogState extends State<MapStyleSelectionDialog> {
 
     return ImageMarker(
       count: null,
-      countFormatter: settings.avesLocale.decimalNumberFormat().format,
+      countFormatter: settings.fmvLocale.decimalNumberFormat().format,
       drawArrow: false,
       buildThumbnailImage: (_) => Image.asset('assets/$assetName'),
     );
@@ -142,7 +142,7 @@ class _MapStyleSelectionDialogState extends State<MapStyleSelectionDialog> {
   }
 
   Future<void> _add() async {
-    final newStyle = await showAvesDialog<EntryMapStyle>(
+    final newStyle = await showFmvDialog<EntryMapStyle>(
       context: context,
       builder: (context) => const MapStyleEditorDialog(),
       routeSettings: const RouteSettings(name: MapStyleEditorDialog.routeName),
@@ -154,7 +154,7 @@ class _MapStyleSelectionDialogState extends State<MapStyleSelectionDialog> {
   }
 
   Future<void> _edit(EntryMapStyle style) async {
-    final newStyle = await showAvesDialog<EntryMapStyle>(
+    final newStyle = await showFmvDialog<EntryMapStyle>(
       context: context,
       builder: (context) => MapStyleEditorDialog(initialValue: style),
       routeSettings: const RouteSettings(name: MapStyleEditorDialog.routeName),

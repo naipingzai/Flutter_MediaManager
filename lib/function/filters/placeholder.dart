@@ -61,7 +61,7 @@ class PlaceholderFilter extends CollectionFilter {
           await entry.locate(
             background: false,
             force: false,
-            geocoderLocale: settings.avesLocale,
+            geocoderLocale: settings.fmvLocale,
           );
         }
         final address = entry.addressDetails;

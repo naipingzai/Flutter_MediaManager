@@ -21,7 +21,7 @@ class MultiPageInfo {
   }) : _pages = pages {
     if (kFlutterMemoryAllocationsEnabled) {
       LeakTracking.dispatchObjectCreated(
-        library: 'aves',
+        library: 'fmv',
         className: '$MultiPageInfo',
         object: this,
       );

@@ -79,7 +79,7 @@ class BugReportContent extends StatefulWidget {
 
 class _BugReportContentState extends State<BugReportContent> with FeedbackMixin {
   late Future<String> _infoLoader;
-  static const bugReportUrl = '${AppReference.avesGithub}/issues/new?labels=type%3Abug&template=bug_report.yml';
+  static const bugReportUrl = '${AppReference.fmvGithub}/issues/new?labels=type%3Abug&template=bug_report.yml';
 
   @override
   void initState() {
@@ -105,7 +105,7 @@ class _BugReportContentState extends State<BugReportContent> with FeedbackMixin 
 
   Widget _buildStep(int step, String text, String buttonText, VoidCallback onPressed) {
     final isMonochrome = settings.themeColorMode == FmvThemeColorMode.monochrome;
-    final stepCountFormatter = settings.avesLocale.decimalNumberFormat();
+    final stepCountFormatter = settings.fmvLocale.decimalNumberFormat();
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
@@ -191,7 +191,7 @@ class _BugReportContentState extends State<BugReportContent> with FeedbackMixin 
 
     final date = DateFormat('yyyyMMdd_HHmmss', kAsciiLocale).format(DateTime.now());
     final success = await storageService.createFile(
-      basename: 'aves-logs-$date',
+      basename: 'fmv-logs-$date',
       mimeType: MimeTypes.plainText,
       bytes: utf8.encode(mixedContent),
     );

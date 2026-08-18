@@ -26,7 +26,7 @@ class CollectionDraggableThumbLabel extends StatelessWidget {
       lineBuilder: (context, entry) {
         switch (collection.sortFactor) {
           case .date:
-            final locale = settings.avesLocale;
+            final locale = settings.fmvLocale;
             final date = entry.bestDate;
             switch (collection.sectionFactor) {
               case .album:
@@ -50,14 +50,14 @@ class CollectionDraggableThumbLabel extends StatelessWidget {
               ?entry.bestTitle,
             ];
           case .rating:
-            final locale = settings.avesLocale;
+            final locale = settings.fmvLocale;
             final date = entry.bestDate;
             return [
               RatingFilter.formatRating(context, entry.rating),
               DraggableThumbLabel.formatMonthThumbLabel(context, locale, date),
             ];
           case .size:
-            final locale = settings.avesLocale;
+            final locale = settings.fmvLocale;
             final sizeBytes = entry.sizeBytes;
             return [
               if (sizeBytes != null) formatFileSize(locale, sizeBytes, round: 0),

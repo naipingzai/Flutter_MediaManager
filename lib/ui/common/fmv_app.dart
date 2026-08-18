@@ -631,10 +631,10 @@ class FmvAppContentDecorator extends StatefulWidget {
   });
 
   @override
-  State<FmvAppContentDecorator> createState() => _AvesAppContentDecoratorState();
+  State<FmvAppContentDecorator> createState() => _FmvAppContentDecoratorState();
 }
 
-class _AvesAppContentDecoratorState extends State<FmvAppContentDecorator> with FeedbackMixin {
+class _FmvAppContentDecoratorState extends State<FmvAppContentDecorator> with FeedbackMixin {
   late final Future<bool> _shouldUseBoldFontLoader;
   final ValueNotifier<PageTransitionsBuilder> _pageTransitionsBuilderNotifier = ValueNotifier(_defaultPageTransitionsBuilder);
   final ValueNotifier<TvMediaQueryModifier?> _tvMediaQueryModifierNotifier = ValueNotifier(null);
@@ -785,7 +785,7 @@ class _AvesAppContentDecoratorState extends State<FmvAppContentDecorator> with F
               : '';
           final success = await storageService.createFile(
             dirPath: dirPath,
-            basename: 'aves$suffix-settings-auto',
+            basename: 'fmv$suffix-settings-auto',
             mimeType: mimeType,
             bytes: content,
             reportErrors: false,
@@ -802,7 +802,7 @@ class _AvesAppContentDecoratorState extends State<FmvAppContentDecorator> with F
                 '${l10n.genericFailureFeedback}${AText.separator}${l10n.settingsAutoExportSettings}',
                 SnackBarAction(
                   label: 'FAQ',
-                  onPressed: () => FmvApp.launchUrl('${AppReference.avesFaq}#why-is-auto-settings-export-failing'),
+                  onPressed: () => FmvApp.launchUrl('${AppReference.fmvFaq}#why-is-auto-settings-export-failing'),
                 ),
               );
             }

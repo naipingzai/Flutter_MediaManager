@@ -157,10 +157,10 @@ class FmvFilterChip extends StatefulWidget {
   }
 
   @override
-  State<FmvFilterChip> createState() => _AvesFilterChipState();
+  State<FmvFilterChip> createState() => _FmvFilterChipState();
 }
 
-class _AvesFilterChipState extends State<FmvFilterChip> {
+class _FmvFilterChipState extends State<FmvFilterChip> {
   final Set<StreamSubscription> _subscriptions = {};
   late Color _outlineColor;
   late bool _tapped;

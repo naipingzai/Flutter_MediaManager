@@ -30,7 +30,7 @@ class TileExtentController {
   }) {
     if (kFlutterMemoryAllocationsEnabled) {
       LeakTracking.dispatchObjectCreated(
-        library: 'aves',
+        library: 'fmv',
         className: '$TileExtentController',
         object: this,
       );

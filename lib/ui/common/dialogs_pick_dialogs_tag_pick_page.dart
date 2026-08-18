@@ -311,7 +311,7 @@ class _TagPickPageState extends State<_TagPickPage> with FeedbackMixin {
   }
 
   Future<void> _createGroup(Uri? parentGroupUri) async {
-    final uri = await showAvesDialog<Uri>(
+    final uri = await showFmvDialog<Uri>(
       context: context,
       builder: (context) => CreateGroupDialog(grouping: tagGrouping, parentGroupUri: parentGroupUri),
       routeSettings: const RouteSettings(name: CreateGroupDialog.routeName),

@@ -204,7 +204,7 @@ class CoveredFilterChip<T extends CollectionFilter> extends StatelessWidget {
       color: _detailColor(context),
       fontSize: detailFontSize(extent),
     );
-    final itemCountFormatter = settings.avesLocale.decimalNumberFormat();
+    final itemCountFormatter = settings.fmvLocale.decimalNumberFormat();
     return Row(
       mainAxisSize: .min,
       children: [

@@ -71,7 +71,7 @@ class MapActionDelegate with FeedbackMixin {
     }
 
     final collection = context.read<CollectionLens>();
-    final result = await showAvesDialog<(FmvEntry?, String)>(
+    final result = await showFmvDialog<(FmvEntry?, String)>(
       context: context,
       builder: (context) => AddShortcutDialog(
         defaultName: '',

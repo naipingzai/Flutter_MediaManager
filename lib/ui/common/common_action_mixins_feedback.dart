@@ -143,7 +143,7 @@ mixin FeedbackMixin {
     Future<void> Function(Set<T> processed)? onDone,
   }) async {
     final opCompleter = Completer();
-    await showAvesDialog<void>(
+    await showFmvDialog<void>(
       context: context,
       barrierDismissible: false,
       builder: (context) => ReportOverlay<T>(
@@ -229,7 +229,7 @@ class _ReportOverlayState<T> extends State<ReportOverlay<T>> with SingleTickerPr
   Widget build(BuildContext context) {
     const diameter = ReportOverlay.diameter;
     const strokeWidth = ReportOverlay.strokeWidth;
-    final progressFormatter = settings.avesLocale.percentNumberFormat();
+    final progressFormatter = settings.fmvLocale.percentNumberFormat();
 
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
@@ -395,7 +395,7 @@ class _FeedbackMessageState extends State<_FeedbackMessage> with SingleTickerPro
 
   @override
   Widget build(BuildContext context) {
-    final durationFormatter = settings.avesLocale.decimalNumberFormat();
+    final durationFormatter = settings.fmvLocale.decimalNumberFormat();
 
     final textScaler = MediaQuery.textScalerOf(context);
     final theme = Theme.of(context);

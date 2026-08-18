@@ -73,7 +73,7 @@ class ExplorerActionDelegate with FeedbackMixin {
       filters: {filter},
     );
 
-    final result = await showAvesDialog<(FmvEntry?, String)>(
+    final result = await showFmvDialog<(FmvEntry?, String)>(
       context: context,
       builder: (context) => AddShortcutDialog(
         defaultName: defaultName,

@@ -26,10 +26,10 @@ class FmvSingleSelectionDialog<T> extends StatefulWidget {
   });
 
   @override
-  State<FmvSingleSelectionDialog<T>> createState() => _AvesSingleSelectionDialogState<T>();
+  State<FmvSingleSelectionDialog<T>> createState() => _FmvSingleSelectionDialogState<T>();
 }
 
-class _AvesSingleSelectionDialogState<T> extends State<FmvSingleSelectionDialog<T>> {
+class _FmvSingleSelectionDialogState<T> extends State<FmvSingleSelectionDialog<T>> {
   late T _selectedValue;
 
   @override

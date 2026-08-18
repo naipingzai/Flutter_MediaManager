@@ -392,7 +392,7 @@ class _ViewerVerticalPageViewState extends State<ViewerVerticalPageView> {
       await _entry.locate(
         background: false,
         force: false,
-        geocoderLocale: settings.avesLocale,
+        geocoderLocale: settings.fmvLocale,
       );
     } else {
       Navigator.maybeOf(context)?.pop();

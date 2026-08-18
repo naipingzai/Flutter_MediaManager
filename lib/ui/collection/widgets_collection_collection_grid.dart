@@ -723,7 +723,7 @@ class _CollectionScrollViewState extends State<_CollectionScrollView> with Widge
             final lastKey = sectionLayouts.last.sectionKey;
             if (firstKey is EntryDateSectionKey && lastKey is EntryDateSectionKey) {
               if (firstKey != EntryDateSectionKey.unknown && lastKey != EntryDateSectionKey.unknown) {
-                final locale = settings.avesLocale;
+                final locale = settings.fmvLocale;
                 final calendar = settings.calendar;
                 final calOps = calendar.ops;
 

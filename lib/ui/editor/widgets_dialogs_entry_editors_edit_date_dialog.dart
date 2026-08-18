@@ -150,7 +150,7 @@ class _EditEntryDateDialogState extends State<EditEntryDateDialog> {
       padding: const EdgeInsetsDirectional.only(start: 16, end: 8),
       child: Row(
         children: [
-          Expanded(child: Text(formatDateTime(_customDateTime, settings.avesLocale, use24hour))),
+          Expanded(child: Text(formatDateTime(_customDateTime, settings.fmvLocale, use24hour))),
           IconButton(
             icon: const Icon(AIcons.edit),
             onPressed: _editDate,
@@ -182,7 +182,7 @@ class _EditEntryDateDialogState extends State<EditEntryDateDialog> {
       padding: const EdgeInsetsDirectional.only(start: 16, end: 8),
       child: Row(
         children: [
-          Expanded(child: Text(formatDateTime(copyItemDate, settings.avesLocale, use24hour))),
+          Expanded(child: Text(formatDateTime(copyItemDate, settings.fmvLocale, use24hour))),
           const SizedBox(width: 8),
           ItemPicker(
             extent: 48,
@@ -242,7 +242,7 @@ class _EditEntryDateDialogState extends State<EditEntryDateDialog> {
     final l10n = context.l10n;
     final cancelText = Themes.asButtonLabel(l10n.cancelTooltip);
 
-    final locale = settings.avesLocale;
+    final locale = settings.fmvLocale;
     final calendarDelegate = locale.getDatePickerDelegate();
     DateTime initialDate = _customDateTime;
     DateTime firstDate = DateTime(1900);

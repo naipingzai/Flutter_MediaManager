@@ -816,7 +816,7 @@ class _CollectionAppBarState extends State<CollectionAppBar> with RouteAware, Si
       settings.collectionSortReverse,
     );
     final extentController = context.read<TileExtentController>();
-    final value = await showAvesDialog<(EntrySortFactor?, EntrySectionFactor?, TileLayout?, bool)>(
+    final value = await showFmvDialog<(EntrySortFactor?, EntrySectionFactor?, TileLayout?, bool)>(
       context: context,
       builder: (context) {
         return TileViewDialog<EntrySortFactor, EntrySectionFactor, TileLayout>(
