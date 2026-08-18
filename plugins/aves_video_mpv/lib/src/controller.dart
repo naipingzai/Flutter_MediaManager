@@ -255,6 +255,13 @@ class MpvVideoController extends AvesVideoController {
     // as of `media_kit_video` v2.0.1, the following properties are set internally:
     // - 'gpu-context': 'android',
     // - 'hwdec-codecs': 'h264,hevc,mpeg4,mpeg2video,vp8,vp9,av1',
+    // iOS/macOS 使用默认配置（`vo` 不应强制为 'gpu'，Android 专用参数不可用）
+    if (!Platform.isAndroid) {
+      return VideoControllerConfiguration(
+        hwdec: hwdec,
+        enableHardwareAcceleration: hardwareAcceleration != VideoHardwareAcceleration.disabled,
+      );
+    }
     return VideoControllerConfiguration(
       vo: 'gpu', // 'gpu-next' / 'mediacodec_embed' are not usable as of `media_kit_video` v2.0.1, `media_kit_libs_android_video` v1.3.8
       hwdec: hwdec, // default: 'auto-safe'
