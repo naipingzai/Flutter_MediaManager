@@ -65,7 +65,7 @@ class Settings
         ViewerSettings,
         WidgetSettings {
   final Set<StreamSubscription> _subscriptions = {};
-  final EventChannel _platformSettingsChangeChannel = const OptionalEventChannel('deckers.thibault/aves/settings_change');
+  final EventChannel _platformSettingsChangeChannel = const OptionalEventChannel('com.naipingzai/flutter_media_view/settings_change');
   final StreamController<SettingsChangedEvent> _updateStreamController = StreamController.broadcast();
   final StreamController<SettingsChangedEvent> _updateTileExtentStreamController = StreamController.broadcast();
 

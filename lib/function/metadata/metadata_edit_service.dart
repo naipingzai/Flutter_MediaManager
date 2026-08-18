@@ -26,7 +26,7 @@ abstract class MetadataEditService {
 }
 
 class PlatformMetadataEditService implements MetadataEditService {
-  static const _platform = AvesMethodChannel('deckers.thibault/aves/metadata_edit');
+  static const _platform = AvesMethodChannel('com.naipingzai/flutter_media_view/metadata_edit');
 
   @override
   Future<Map<String, Object?>> rotate(AvesEntry entry, {required bool clockwise}) async {

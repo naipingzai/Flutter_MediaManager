@@ -136,6 +136,7 @@ dependencies:
   provider:
   screen_brightness:
   shamsi_date:
+  share_plus:
   shared_preferences:
   shelf:
   smooth_page_indicator:

@@ -11,7 +11,7 @@ import 'package:flutter/widgets.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 class GlobalSearch {
-  static const _platform = AvesMethodChannel('deckers.thibault/aves/global_search');
+  static const _platform = AvesMethodChannel('com.naipingzai/flutter_media_view/global_search');
 
   static Future<void> registerCallback() async {
     try {
@@ -36,7 +36,7 @@ Future<void> _init() async {
   // `intl` initialization for date formatting
   await initializeDateFormatting();
 
-  const _channel = AvesMethodChannel('deckers.thibault/aves/global_search_background');
+  const _channel = AvesMethodChannel('com.naipingzai/flutter_media_view/global_search_background');
   _channel.setMethodCallHandler((call) async {
     switch (call.method) {
       case 'getSuggestions':

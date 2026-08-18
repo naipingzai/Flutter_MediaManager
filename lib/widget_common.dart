@@ -16,7 +16,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-const _widgetDrawChannel = AvesMethodChannel('deckers.thibault/aves/widget_draw');
+const _widgetDrawChannel = AvesMethodChannel('com.naipingzai/flutter_media_view/widget_draw');
 
 void widgetMainCommon(AppFlavor flavor) async {
   debugPrint('Widget main start');

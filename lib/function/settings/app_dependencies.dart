@@ -127,7 +127,7 @@ class Dependencies {
     Dependency(
       name: 'Streams Channel (Aves fork)',
       license: apache2,
-      sourceUrl: 'https://github.com/deckerst/aves_streams_channel',
+      sourceUrl: 'https://github.com/naipingzai/Flutter_MediaManager',
     ),
     Dependency(
       name: 'URL Launcher',
@@ -250,7 +250,7 @@ class Dependencies {
     Dependency(
       name: 'Panorama (Aves fork)',
       license: apache2,
-      sourceUrl: 'https://github.com/deckerst/aves_panorama',
+      sourceUrl: 'https://github.com/naipingzai/Flutter_MediaManager',
     ),
     Dependency(
       name: 'Pattern Lock',

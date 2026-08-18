@@ -42,7 +42,7 @@ abstract class DeviceService {
 }
 
 class PlatformDeviceService extends DeviceService {
-  static const _platform = AvesMethodChannel('deckers.thibault/aves/device');
+  static const _platform = AvesMethodChannel('com.naipingzai/flutter_media_view/device');
 
   @override
   Future<bool> canManageMedia() async {

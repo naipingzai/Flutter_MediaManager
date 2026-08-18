@@ -59,8 +59,8 @@ abstract class MediaFetchService {
 }
 
 class PlatformMediaFetchService implements MediaFetchService {
-  static const _platformObject = AvesMethodChannel('deckers.thibault/aves/media_fetch_object');
-  static final _byteStream = AvesStreamsChannel('deckers.thibault/aves/media_byte_stream');
+  static const _platformObject = AvesMethodChannel('com.naipingzai/flutter_media_view/media_fetch_object');
+  static final _byteStream = AvesStreamsChannel('com.naipingzai/flutter_media_view/media_byte_stream');
 
   static const int _formatTrailerLength = 1; // single format byte
   static const int _formatByteEncoded = 0xCA;

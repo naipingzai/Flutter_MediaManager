@@ -51,9 +51,9 @@ class AvesStreamsChannel extends StreamsChannel {
 }
 
 class AvesChannels {
-  static const geocoding = 'deckers.thibault/aves/geocoding';
-  static const mediaSession = 'deckers.thibault/aves/media_session';
-  static const metadataFetch = 'deckers.thibault/aves/metadata_fetch';
+  static const geocoding = 'com.naipingzai/flutter_media_view/geocoding';
+  static const mediaSession = 'com.naipingzai/flutter_media_view/media_session';
+  static const metadataFetch = 'com.naipingzai/flutter_media_view/metadata_fetch';
 
   static const _all = <MethodChannel>[
     AvesMethodChannel(geocoding),

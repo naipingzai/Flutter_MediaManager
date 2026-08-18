@@ -48,8 +48,8 @@ abstract class AppService {
 }
 
 class PlatformAppService implements AppService {
-  static const _platform = AvesMethodChannel('deckers.thibault/aves/app');
-  static final _stream = AvesStreamsChannel('deckers.thibault/aves/activity_result_stream');
+  static const _platform = AvesMethodChannel('com.naipingzai/flutter_media_view/app');
+  static final _stream = AvesStreamsChannel('com.naipingzai/flutter_media_view/activity_result_stream');
 
   static final _knownAppDirs = {
     'com.google.android.apps.photos': {'Google Photos'},

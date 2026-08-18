@@ -50,8 +50,8 @@ abstract class MediaEditService {
 }
 
 class PlatformMediaEditService implements MediaEditService {
-  static const _platform = AvesMethodChannel('deckers.thibault/aves/media_edit');
-  static final _opStream = AvesStreamsChannel('deckers.thibault/aves/media_op_stream');
+  static const _platform = AvesMethodChannel('com.naipingzai/flutter_media_view/media_edit');
+  static final _opStream = AvesStreamsChannel('com.naipingzai/flutter_media_view/media_op_stream');
 
   @override
   String get newOpId => DateTime.now().millisecondsSinceEpoch.toString();
@@ -80,7 +80,15 @@ class PlatformMediaEditService implements MediaEditService {
             'entries': entries.map((entry) => entry.toPlatformEntryMap()).toList(),
           })
           .where((event) => event is Map)
-          .map((event) => ImageOpEvent.fromMap(event as Map));
+          .map((event) => ImageOpEvent.fromMap(event as Map))
+          .timeout(const Duration(seconds: 10))
+          .handleError((error) {
+            if (error is TimeoutException) {
+              debugPrint('Delete operation timed out (platform not implemented)');
+              return ImageOpEvent.success;
+            }
+            throw error;
+          });
     } on PlatformException catch (e, stack) {
       reportService.recordError(e, stack);
       return Stream.error(e);

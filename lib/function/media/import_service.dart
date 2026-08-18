@@ -28,7 +28,7 @@ class ImportService {
   ///
   /// 选择逻辑与复制分离，便于上层在拿到文件列表后展示复制进度。
   Future<List<PlatformFile>> pickFiles() async {
-    final result = await FilePicker.pickFiles(
+    final result = await FilePicker.pickFiles(allowMultiple: true, 
       
       type: FileType.custom,
       allowedExtensions: const [
