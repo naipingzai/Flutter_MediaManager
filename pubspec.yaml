@@ -67,7 +67,7 @@ dependencies:
       url: https://github.com/deckerst/flutter_community_charts.git
       ref: aves
       path: community_charts_flutter
-  connectivity_plus:
+  connectivity_plus: ^6.1.0
   country_code:
   crypto:
   csv:
