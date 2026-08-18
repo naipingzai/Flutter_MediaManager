@@ -20,7 +20,7 @@ import 'package:flutter/foundation.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:xml/xml.dart';
 
-extension ExtraAvesEntryMetadataEdition on FmvEntry {
+extension ExtraFmvEntryMetadataEdition on FmvEntry {
   static final _iso6709LatitudeFormatter = FmvLocale.ascii.numberFormat('00.0000');
   static final _iso6709LongitudeFormatter = FmvLocale.ascii.numberFormat('000.0000');
 

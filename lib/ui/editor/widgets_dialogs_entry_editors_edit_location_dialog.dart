@@ -630,7 +630,7 @@ class _EditEntryLocationDialogState extends State<EditEntryLocationDialog> with 
       case .importGpx:
         result.addAll(_gpxMap);
       case .remove:
-        addLocationForAllEntries(ExtraAvesEntryMetadataEdition.removalLocation);
+        addLocationForAllEntries(ExtraFmvEntryMetadataEdition.removalLocation);
     }
     navigator?.pop(result);
   }

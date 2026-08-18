@@ -148,7 +148,7 @@ void main() {
         await XMP.edit(
           null,
           toolkit,
-          (descriptions) => ExtraAvesEntryMetadataEdition.editTagsXmp(descriptions, {'one', 'two'}),
+          (descriptions) => ExtraFmvEntryMetadataEdition.editTagsXmp(descriptions, {'one', 'two'}),
           modifyDate: modifyDate,
         ),
       ),
@@ -182,7 +182,7 @@ void main() {
         await XMP.edit(
           inMultiDescriptionRatings,
           toolkit,
-          (descriptions) => ExtraAvesEntryMetadataEdition.editTagsXmp(descriptions, {'one', 'two'}),
+          (descriptions) => ExtraFmvEntryMetadataEdition.editTagsXmp(descriptions, {'one', 'two'}),
           modifyDate: modifyDate,
         ),
       ),
@@ -220,7 +220,7 @@ void main() {
         await XMP.edit(
           inSubjects,
           toolkit,
-          (descriptions) => ExtraAvesEntryMetadataEdition.editTagsXmp(descriptions, {'one', 'two'}),
+          (descriptions) => ExtraFmvEntryMetadataEdition.editTagsXmp(descriptions, {'one', 'two'}),
           modifyDate: modifyDate,
         ),
       ),
@@ -251,7 +251,7 @@ void main() {
         await XMP.edit(
           inSubjects,
           toolkit,
-          (descriptions) => ExtraAvesEntryMetadataEdition.editTagsXmp(descriptions, {}),
+          (descriptions) => ExtraFmvEntryMetadataEdition.editTagsXmp(descriptions, {}),
         ),
       ),
       _toExpect(null),
@@ -267,7 +267,7 @@ void main() {
         await XMP.edit(
           inSubjectsCreator,
           toolkit,
-          (descriptions) => ExtraAvesEntryMetadataEdition.editTagsXmp(descriptions, {}),
+          (descriptions) => ExtraFmvEntryMetadataEdition.editTagsXmp(descriptions, {}),
           modifyDate: modifyDate,
         ),
       ),
@@ -300,7 +300,7 @@ void main() {
         await XMP.edit(
           null,
           toolkit,
-          (descriptions) => ExtraAvesEntryMetadataEdition.editRatingXmp(descriptions, 3),
+          (descriptions) => ExtraFmvEntryMetadataEdition.editRatingXmp(descriptions, 3),
           modifyDate: modifyDate,
         ),
       ),
@@ -327,7 +327,7 @@ void main() {
         await XMP.edit(
           inMultiDescriptionRatings,
           toolkit,
-          (descriptions) => ExtraAvesEntryMetadataEdition.editRatingXmp(descriptions, 3),
+          (descriptions) => ExtraFmvEntryMetadataEdition.editRatingXmp(descriptions, 3),
           modifyDate: modifyDate,
         ),
       ),
@@ -356,7 +356,7 @@ void main() {
         await XMP.edit(
           inRatingAttribute,
           toolkit,
-          (descriptions) => ExtraAvesEntryMetadataEdition.editRatingXmp(descriptions, 3),
+          (descriptions) => ExtraFmvEntryMetadataEdition.editRatingXmp(descriptions, 3),
           modifyDate: modifyDate,
         ),
       ),
@@ -383,7 +383,7 @@ void main() {
         await XMP.edit(
           inRatingElement,
           toolkit,
-          (descriptions) => ExtraAvesEntryMetadataEdition.editRatingXmp(descriptions, 3),
+          (descriptions) => ExtraFmvEntryMetadataEdition.editRatingXmp(descriptions, 3),
           modifyDate: modifyDate,
         ),
       ),
@@ -410,7 +410,7 @@ void main() {
         await XMP.edit(
           inSubjects,
           toolkit,
-          (descriptions) => ExtraAvesEntryMetadataEdition.editRatingXmp(descriptions, 3),
+          (descriptions) => ExtraFmvEntryMetadataEdition.editRatingXmp(descriptions, 3),
           modifyDate: modifyDate,
         ),
       ),
@@ -443,7 +443,7 @@ void main() {
         await XMP.edit(
           inSubjects,
           toolkit,
-          (descriptions) => ExtraAvesEntryMetadataEdition.editRatingXmp(descriptions, null),
+          (descriptions) => ExtraFmvEntryMetadataEdition.editRatingXmp(descriptions, null),
           modifyDate: modifyDate,
         ),
       ),
@@ -459,7 +459,7 @@ void main() {
         await XMP.edit(
           inMotionPhotoMicroVideo,
           toolkit,
-          ExtraAvesEntryMetadataEdition.removeContainerXmp,
+          ExtraFmvEntryMetadataEdition.removeContainerXmp,
           modifyDate: modifyDate,
         ),
       ),
@@ -475,7 +475,7 @@ void main() {
         await XMP.edit(
           inMotionPhotoContainer,
           toolkit,
-          ExtraAvesEntryMetadataEdition.removeContainerXmp,
+          ExtraFmvEntryMetadataEdition.removeContainerXmp,
           modifyDate: modifyDate,
         ),
       ),
@@ -491,7 +491,7 @@ void main() {
         await XMP.edit(
           inSubjects,
           toolkit,
-          ExtraAvesEntryMetadataEdition.removeContainerXmp,
+          ExtraFmvEntryMetadataEdition.removeContainerXmp,
           modifyDate: modifyDate,
         ),
       ),
@@ -507,7 +507,7 @@ void main() {
         await XMP.edit(
           inMultiDescriptionRatings,
           toolkit,
-          (descriptions) => ExtraAvesEntryMetadataEdition.editRatingXmp(descriptions, null),
+          (descriptions) => ExtraFmvEntryMetadataEdition.editRatingXmp(descriptions, null),
           modifyDate: modifyDate,
         ),
       ),
