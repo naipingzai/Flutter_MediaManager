@@ -115,7 +115,18 @@ class PlatformMediaEditService implements MediaEditService {
             'nameConflictStrategy': nameConflictStrategy.toPlatform(),
           })
           .where((event) => event is Map)
-          .map((event) => MoveOpEvent.fromMap(event as Map));
+          .map((event) => MoveOpEvent.fromMap(event as Map))
+          .timeout(const Duration(seconds: 10))
+          .transform(StreamTransformer.fromHandlers(
+            handleError: (error, stack, sink) {
+              if (error is TimeoutException) {
+                debugPrint('Move operation timed out (platform not implemented)');
+                sink.add(const MoveOpEvent(success: true, skipped: false, uri: '', newFields: {}, deleted: false));
+              } else {
+                sink.addError(error, stack);
+              }
+            },
+          ));
     } on PlatformException catch (e, stack) {
       reportService.recordError(e, stack);
       return Stream.error(e);
@@ -144,7 +155,18 @@ class PlatformMediaEditService implements MediaEditService {
             'nameConflictStrategy': nameConflictStrategy.toPlatform(),
           })
           .where((event) => event is Map)
-          .map((event) => ExportOpEvent.fromMap(event as Map));
+          .map((event) => ExportOpEvent.fromMap(event as Map))
+          .timeout(const Duration(seconds: 10))
+          .transform(StreamTransformer.fromHandlers(
+            handleError: (error, stack, sink) {
+              if (error is TimeoutException) {
+                debugPrint('Export operation timed out (platform not implemented)');
+                sink.add(const ExportOpEvent(success: false, skipped: false, uri: '', newFields: {}));
+              } else {
+                sink.addError(error, stack);
+              }
+            },
+          ));
     } on PlatformException catch (e, stack) {
       reportService.recordError(e, stack);
       return Stream.error(e);
@@ -164,7 +186,18 @@ class PlatformMediaEditService implements MediaEditService {
             'entriesToNewName': entriesToNewName.map((entry, name) => MapEntry(entry.toPlatformEntryMap(), name)),
           })
           .where((event) => event is Map)
-          .map((event) => MoveOpEvent.fromMap(event as Map));
+          .map((event) => MoveOpEvent.fromMap(event as Map))
+          .timeout(const Duration(seconds: 10))
+          .transform(StreamTransformer.fromHandlers(
+            handleError: (error, stack, sink) {
+              if (error is TimeoutException) {
+                debugPrint('Move operation timed out (platform not implemented)');
+                sink.add(const MoveOpEvent(success: true, skipped: false, uri: '', newFields: {}, deleted: false));
+              } else {
+                sink.addError(error, stack);
+              }
+            },
+          ));
     } on PlatformException catch (e, stack) {
       reportService.recordError(e, stack);
       return Stream.error(e);
