@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "aves (main play)",
+            "name": "fmv (main play)",
             "request": "launch",
             "type": "dart",
             "program": "lib/main_play.dart",
@@ -15,7 +15,7 @@
             ]
         },
         {
-            "name": "aves (main play) [profile]",
+            "name": "fmv (main play) [profile]",
             "request": "launch",
             "type": "dart",
             "program": "lib/main_play.dart",

@@ -15,8 +15,8 @@ void main() {
     });
 
     test('indexOfBytes Boyer-Moore 搜索', () {
-      final data = 'hello world, aves here'.codeUnits;
-      expect(data.indexOfBytes('aves'.codeUnits), 13);
+      final data = 'hello world, fmv here'.codeUnits;
+      expect(data.indexOfBytes("fmv".codeUnits), 13);
       expect(data.indexOfBytes('xyz'.codeUnits), -1);
       expect(data.indexOfBytes('o'.codeUnits, 5), 7);
     });

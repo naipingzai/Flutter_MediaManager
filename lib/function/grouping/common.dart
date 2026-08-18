@@ -26,11 +26,11 @@ final FilterGrouping tagGrouping = FilterGrouping._private(FilterGrouping.hostTa
 typedef GroupUriPredicate = bool Function(Uri? groupUri);
 
 /*
-  album group URI: "aves://albums/group?path=group%2Fsubgroup"
-  stored album URI: "aves://albums/stored?path=/volume/dir/path12"
-  dynamic album URI: "aves://albums/dynamic?name=dynalbum12"
-  tag group URI: "aves://tags/group?path=group%2Fsubgroup"
-  tag URI: "aves://tags/tag?name=tag12"
+  album group URI: "fmv://albums/group?path=group%2Fsubgroup"
+  stored album URI: "fmv://albums/stored?path=/volume/dir/path12"
+  dynamic album URI: "fmv://albums/dynamic?name=dynalbum12"
+  tag group URI: "fmv://tags/group?path=group%2Fsubgroup"
+  tag URI: "fmv://tags/tag?name=tag12"
  */
 class FilterGrouping<T extends GroupBaseFilter> with ChangeNotifier {
   static const scheme = 'fmv';

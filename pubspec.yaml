@@ -65,7 +65,7 @@ dependencies:
   community_charts_flutter:
     git:
       url: https://github.com/deckerst/flutter_community_charts.git
-      ref: aves
+      ref: main
       path: community_charts_flutter
   connectivity_plus: ^6.1.0
   country_code:
@@ -97,7 +97,7 @@ dependencies:
   flutter_staggered_animations:
     git:
       url: https://github.com/deckerst/flutter_staggered_animations
-      ref: aves
+      ref: main
   get_it:
   gpx:
   highlight:
@@ -115,12 +115,12 @@ dependencies:
   overlay_support:
     git:
       url: https://github.com/deckerst/overlay_support.git
-      ref: aves
+      ref: main
   package_info_plus:
   panorama:
     git:
-      url: https://github.com/deckerst/aves_panorama.git
-      ref: aves
+      url: https://github.com/naipingzai/Flutter_MediaManager.git
+      ref: main
   path:
   path_provider:
   pattern_lock:
@@ -128,7 +128,7 @@ dependencies:
   percent_indicator:
     git:
       url: https://github.com/deckerst/flutter_percent_indicator.git
-      ref: aves
+      ref: main
   permission_handler:
   pin_code_fields:
   printing:
@@ -145,7 +145,7 @@ dependencies:
   stack_trace:
   streams_channel:
     git:
-      url: https://github.com/deckerst/aves_streams_channel.git
+      url: https://github.com/naipingzai/Flutter_MediaManager.git
   synchronized:
   url_launcher:
   # `vector_map_tiles` v10.0.0-beta API is unclear to provide sprites

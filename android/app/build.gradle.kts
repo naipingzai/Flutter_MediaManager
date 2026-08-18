@@ -246,7 +246,7 @@ dependencies {
     compileOnly(rootProject.findProject(":streams_channel")!!)
 }
 
-if (rootProject.extra["aves_useCrashlytics"] as Boolean) {
+if (rootProject.extra["fmv_useCrashlytics"] as Boolean) {
     println("Building flavor with Crashlytics plugin")
     apply(plugin = "com.google.gms.google-services")
     apply(plugin = "com.google.firebase.crashlytics")

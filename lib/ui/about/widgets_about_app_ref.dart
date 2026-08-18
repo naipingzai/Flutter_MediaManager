@@ -8,7 +8,7 @@ import 'package:flutter_media_view/ui/common/common_identity_fmv_logo.dart';
 import 'package:flutter/material.dart';
 
 class AppReference extends StatelessWidget {
-  static const fmvGithub = 'https://github.com/deckerst/aves';
+  static const fmvGithub = 'https://github.com/naipingzai/Flutter_MediaManager';
   static const fmvFaq = '$fmvGithub/wiki/FAQ';
 
   const AppReference({super.key});
