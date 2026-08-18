@@ -13,7 +13,7 @@ import 'package:video_thumbnail/video_thumbnail.dart';
 
 /// 内部目录取图服务：从 `<docs>/library` 的文件路径直接解码。
 ///
-/// 替代 Aves 原生 `PlatformMediaFetchService`（走 Android MediaStore content URI）。
+/// 替代 Fmv 原生 `PlatformMediaFetchService`（走 Android MediaStore content URI）。
 /// 图片用 Flutter 内置解码，视频用 [video_thumbnail] 生成封面。
 /// 跨平台（Android/iOS/Linux 通用）。
 class InternalDirMediaFetchService implements MediaFetchService {
@@ -39,13 +39,13 @@ class InternalDirMediaFetchService implements MediaFetchService {
   }
 
   @override
-  Future<AvesEntry?> getEntry(String uri, String? mimeType, {bool allowUnsized = false}) async {
+  Future<FmvEntry?> getEntry(String uri, String? mimeType, {bool allowUnsized = false}) async {
     final path = _filePathFromUri(uri);
     if (path == null) return null;
     final file = File(path);
     if (!await file.exists()) return null;
     final stat = await file.stat();
-    return AvesEntry(
+    return FmvEntry(
       id: null,
       uri: uri,
       path: path,
@@ -67,7 +67,7 @@ class InternalDirMediaFetchService implements MediaFetchService {
   }
 
   @override
-  Future<Uint8List> getOriginalBytes(AvesEntry entry) async {
+  Future<Uint8List> getOriginalBytes(FmvEntry entry) async {
     final bytes = await _readFile(entry.uri);
     if (bytes.isEmpty) throw UnreportedStateError('empty file for ${entry.uri}');
     return bytes;

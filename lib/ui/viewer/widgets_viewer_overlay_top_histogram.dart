@@ -28,7 +28,7 @@ class _ImageHistogramState extends State<ImageHistogram> {
 
   ViewStateController get viewStateController => widget.viewStateController;
 
-  AvesEntry get entry => viewStateController.entry;
+  FmvEntry get entry => viewStateController.entry;
 
   ImageProvider get imageProvider => widget.image;
 

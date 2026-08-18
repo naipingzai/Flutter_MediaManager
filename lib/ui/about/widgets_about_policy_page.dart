@@ -28,7 +28,7 @@ class _PolicyPageState extends State<PolicyPage> {
 
   @override
   Widget build(BuildContext context) {
-    return AvesScaffold(
+    return FmvScaffold(
       appBar: AppBar(
         automaticallyImplyLeading: !settings.useTvLayout,
         title: Text(context.l10n.policyPageTitle),

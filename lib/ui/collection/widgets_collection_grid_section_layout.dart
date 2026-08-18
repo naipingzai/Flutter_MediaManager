@@ -5,7 +5,7 @@ import 'package:flutter_media_view/ui/collection/widgets_collection_grid_headers
 import 'package:flutter_media_view/ui/common/common_grid_sections_provider.dart';
 import 'package:flutter/material.dart';
 
-class SectionedEntryListLayoutProvider extends SectionedListLayoutProvider<AvesEntry> {
+class SectionedEntryListLayoutProvider extends SectionedListLayoutProvider<FmvEntry> {
   final CollectionLens collection;
   final bool selectable;
 
@@ -32,7 +32,7 @@ class SectionedEntryListLayoutProvider extends SectionedListLayoutProvider<AvesE
   bool get showHeaders => collection.showHeaders;
 
   @override
-  Map<SectionKey, List<AvesEntry>> get sections => collection.sections;
+  Map<SectionKey, List<FmvEntry>> get sections => collection.sections;
 
   @override
   double getHeaderExtent(BuildContext context, SectionKey sectionKey) {

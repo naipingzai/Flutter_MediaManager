@@ -13,14 +13,14 @@ Future<bool> showConfirmationDialog({
 }) async {
   final confirmed = await showAvesDialog<bool>(
     context: context,
-    builder: (context) => AvesMessageDialog(
+    builder: (context) => FmvMessageDialog(
       message: message,
       actions: [
         CancelButton<bool>(text: cancel, result: false),
         OkButton<bool>(text: ok, result: true),
       ],
     ),
-    routeSettings: const RouteSettings(name: AvesDialog.confirmationRouteName),
+    routeSettings: const RouteSettings(name: FmvDialog.confirmationRouteName),
   );
   return confirmed ?? false;
 }
@@ -127,7 +127,7 @@ class _SkippableConfirmationDialogState extends State<_SkippableConfirmationDial
 
   @override
   Widget build(BuildContext context) {
-    return AvesDialog(
+    return FmvDialog(
       scrollableContent: [
         ...widget.delegate.build(context),
         ValueListenableBuilder<bool>(

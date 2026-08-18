@@ -30,7 +30,7 @@ class AddShortcutDialog extends StatefulWidget {
 class _AddShortcutDialogState extends State<AddShortcutDialog> {
   final TextEditingController _nameController = TextEditingController();
   final ValueNotifier<bool> _isValidNotifier = ValueNotifier(false);
-  AvesEntry? _coverEntry;
+  FmvEntry? _coverEntry;
 
   @override
   void initState() {
@@ -61,7 +61,7 @@ class _AddShortcutDialogState extends State<AddShortcutDialog> {
         builder: (context) {
           final shortestSide = MediaQuery.sizeOf(context).shortestSide;
           final extent = (shortestSide / 3.0).clamp(60.0, 160.0);
-          return AvesDialog(
+          return FmvDialog(
             scrollableContent: [
               if (_coverEntry != null)
                 Container(
@@ -109,7 +109,7 @@ class _AddShortcutDialogState extends State<AddShortcutDialog> {
     final _collection = widget.collection;
     if (_collection == null) return;
 
-    final entry = await Navigator.maybeOf(context)?.push<AvesEntry>(
+    final entry = await Navigator.maybeOf(context)?.push<FmvEntry>(
       MaterialPageRoute(
         settings: const RouteSettings(name: ItemPickPage.routeName),
         builder: (context) {
@@ -143,7 +143,7 @@ class _AddShortcutDialogState extends State<AddShortcutDialog> {
 
   void _submit(BuildContext context) {
     if (_isValidNotifier.value) {
-      Navigator.maybeOf(context)?.pop<(AvesEntry?, String)>((_coverEntry, _nameController.text));
+      Navigator.maybeOf(context)?.pop<(FmvEntry?, String)>((_coverEntry, _nameController.text));
     }
   }
 }

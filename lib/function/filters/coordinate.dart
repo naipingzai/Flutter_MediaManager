@@ -53,7 +53,7 @@ class CoordinateFilter extends CollectionFilter {
   String get universalLabel {
     return _formatBounds(
       (latLng) => CoordinateFormat.decimal.formatWithoutDirectionality(
-        AvesLocale.ascii,
+        FmvLocale.ascii,
         lookupAppLocalizations(AppLocalizations.supportedLocales.first),
         latLng,
         minuteSecondPadding: minuteSecondPadding,

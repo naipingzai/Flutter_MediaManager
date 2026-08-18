@@ -37,7 +37,7 @@ class AppReference extends StatelessWidget {
     return Row(
       mainAxisSize: .min,
       children: [
-        AvesLogo(
+        FmvLogo(
           size: textScaler.scale(_getAppTitleStyle(localeName).fontSize!) * 1.3,
         ),
         const SizedBox(width: 8),

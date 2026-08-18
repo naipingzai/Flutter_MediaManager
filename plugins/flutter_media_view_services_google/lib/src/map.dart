@@ -9,7 +9,7 @@ import 'package:latlong2/latlong.dart' as ll;
 import 'package:provider/provider.dart';
 
 class EntryGoogleMap<T> extends StatefulWidget {
-  final AvesMapController controller;
+  final FmvMapController controller;
   final Listenable clusterListenable;
   final ValueNotifier<ZoomedBounds> boundsNotifier;
   final double? minZoom, maxZoom;

@@ -26,7 +26,7 @@ class NavigationSection extends SettingsSection {
   @override
   Widget icon(BuildContext context) => SettingsTileLeading(
     icon: AIcons.home,
-    color: context.select<AvesColorsData, Color>((v) => v.navigation),
+    color: context.select<FmvColorsData, Color>((v) => v.navigation),
   );
 
   @override

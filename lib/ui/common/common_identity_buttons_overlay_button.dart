@@ -80,9 +80,9 @@ class _OverlayButtonState extends State<OverlayButton> {
         child: ValueListenableBuilder<bool>(
           valueListenable: _focusedNotifier,
           builder: (context, focused, child) {
-            final border = AvesBorder.border(
+            final border = FmvBorder.border(
               context,
-              width: AvesBorder.curvedBorderWidth(context) * (focused ? 3 : 1),
+              width: FmvBorder.curvedBorderWidth(context) * (focused ? 3 : 1),
             );
             return borderRadius != null
                 ? BlurredRRect(
@@ -179,7 +179,7 @@ class OverlayTextButton extends StatelessWidget {
           overlayColor: theme.isDark ? WidgetStateProperty.all<Color>(Colors.white.withValues(alpha: .12)) : null,
           minimumSize: _minSize,
           iconColor: WidgetStateProperty.all<Color>(foreground),
-          side: WidgetStateProperty.all<BorderSide>(AvesBorder.curvedSide(context)),
+          side: WidgetStateProperty.all<BorderSide>(FmvBorder.curvedSide(context)),
           shape: WidgetStateProperty.all<OutlinedBorder>(
             const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(_borderRadius)),

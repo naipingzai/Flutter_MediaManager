@@ -143,7 +143,7 @@ class ExpandableFilterRow extends StatelessWidget {
       // specify transparent as a workaround to prevent
       // chip border clipping when the floating app bar is fading
       color: Colors.transparent,
-      height: AvesFilterChip.minChipHeight,
+      height: FmvFilterChip.minChipHeight,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: horizontalPadding),
@@ -157,7 +157,7 @@ class ExpandableFilterRow extends StatelessWidget {
   }
 
   Widget _buildChip(CollectionFilter filter) {
-    return AvesFilterChip(
+    return FmvFilterChip(
       // key is expected by test driver
       key: Key(filter.key),
       filter: filter,
@@ -212,7 +212,7 @@ class _ExpandedFilterRowState extends State<_ExpandedFilterRow> {
             children: [
               ...(showAll ? widget.filters : widget.filters.take(ExpandableFilterRow.topFilterCount)).map(widget.chipBuilder),
               if (!showAll)
-                AvesOutlinedButton(
+                FmvOutlinedButton(
                   label: Themes.asButtonLabel(MaterialLocalizations.of(context).moreButtonTooltip),
                   onPressed: () => _showAllNotifier.value = true,
                 ),

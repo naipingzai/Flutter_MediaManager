@@ -24,9 +24,9 @@ mixin TagMixin on SourceBase {
     onCatalogMetadataChanged();
   }
 
-  static bool catalogEntriesTest(AvesEntry entry) => !entry.isCatalogued;
+  static bool catalogEntriesTest(FmvEntry entry) => !entry.isCatalogued;
 
-  Future<void> catalogEntries(AnalysisController controller, Set<AvesEntry> candidateEntries) async {
+  Future<void> catalogEntries(AnalysisController controller, Set<FmvEntry> candidateEntries) async {
     if (controller.isStopping) return;
 
     final force = controller.force;
@@ -81,10 +81,10 @@ mixin TagMixin on SourceBase {
 
   // by tag
   final Map<String, int> _filterEntryCountMap = {}, _filterSizeMap = {};
-  final Map<String, AvesEntry?> _filterRecentEntryMap = {};
+  final Map<String, FmvEntry?> _filterRecentEntryMap = {};
 
   void invalidateTagFilterSummary({
-    Set<AvesEntry>? entries,
+    Set<FmvEntry>? entries,
     Set<String>? tags,
     bool notify = true,
   }) {
@@ -134,7 +134,7 @@ mixin TagMixin on SourceBase {
     return _filterSizeMap.putIfAbsent(filter.key, () => visibleEntries.where(filter.test).map((v) => v.sizeBytes).sum);
   }
 
-  AvesEntry? tagRecentEntry(TagBaseFilter filter) {
+  FmvEntry? tagRecentEntry(TagBaseFilter filter) {
     return _filterRecentEntryMap.putIfAbsent(filter.key, () => sortedEntriesByDate.firstWhereOrNull(filter.test));
   }
 }

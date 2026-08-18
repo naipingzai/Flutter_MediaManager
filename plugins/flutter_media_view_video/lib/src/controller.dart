@@ -7,35 +7,35 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:leak_tracker/leak_tracker.dart';
 
-abstract class AvesVideoControllerFactory {
+abstract class FmvVideoControllerFactory {
   void init();
 
-  AvesVideoController buildController(
-    AvesEntryBase entry, {
+  FmvVideoController buildController(
+    FmvEntryBase entry, {
     required PlaybackStateHandler playbackStateHandler,
     required VideoSettings settings,
   });
 }
 
-abstract class AvesVideoController extends Disposer with ABRepeatMixin, SlowMotionMixin {
-  final AvesEntryBase _entry;
+abstract class FmvVideoController extends Disposer with ABRepeatMixin, SlowMotionMixin {
+  final FmvEntryBase _entry;
   final PlaybackStateHandler playbackStateHandler;
   final VideoSettings settings;
   bool _disposed = false;
 
-  AvesEntryBase get entry => _entry;
+  FmvEntryBase get entry => _entry;
 
   static const resumeTimeSaveMinDuration = Duration(minutes: 2);
 
-  AvesVideoController(
-    AvesEntryBase entry, {
+  FmvVideoController(
+    FmvEntryBase entry, {
     required this.playbackStateHandler,
     required this.settings,
   }) : _entry = entry {
     if (kFlutterMemoryAllocationsEnabled) {
       LeakTracking.dispatchObjectCreated(
         library: 'aves',
-        className: '$AvesVideoController',
+        className: '$FmvVideoController',
         object: this,
       );
     }

@@ -7,7 +7,7 @@ import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter/material.dart';
 
 class MetadataThumbnails extends StatefulWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
 
   const MetadataThumbnails({
     super.key,
@@ -21,7 +21,7 @@ class MetadataThumbnails extends StatefulWidget {
 class _MetadataThumbnailsState extends State<MetadataThumbnails> {
   late Future<List<ui.ImageDescriptor?>> _loader;
 
-  AvesEntry get entry => widget.entry;
+  FmvEntry get entry => widget.entry;
 
   String get uri => entry.uri;
 

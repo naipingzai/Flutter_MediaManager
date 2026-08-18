@@ -32,7 +32,7 @@ class _VideoSpeedDialogState extends State<VideoSpeedDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AvesDialog(
+    return FmvDialog(
       horizontalContentPadding: 4,
       content: Column(
         mainAxisSize: .min,

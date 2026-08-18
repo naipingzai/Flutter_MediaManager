@@ -11,7 +11,7 @@ import 'package:flutter/widgets.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 class GlobalSearch {
-  static const _platform = AvesMethodChannel('com.naipingzai/flutter_media_view/global_search');
+  static const _platform = FmvMethodChannel('com.naipingzai/flutter_media_view/global_search');
 
   static Future<void> registerCallback() async {
     try {
@@ -36,7 +36,7 @@ Future<void> _init() async {
   // `intl` initialization for date formatting
   await initializeDateFormatting();
 
-  const _channel = AvesMethodChannel('com.naipingzai/flutter_media_view/global_search_background');
+  const _channel = FmvMethodChannel('com.naipingzai/flutter_media_view/global_search_background');
   _channel.setMethodCallHandler((call) async {
     switch (call.method) {
       case 'getSuggestions':
@@ -60,11 +60,11 @@ Future<List<Map<String, String?>>> _getSuggestions(Object? args) async {
       final entries = (await localMediaDb.searchLiveEntries(query, limit: 9)).toList();
       final catalogMetadata = await localMediaDb.loadCatalogMetadataById(entries.map((entry) => entry.id).toSet());
       catalogMetadata.forEach((metadata) => entries.firstWhereOrNull((entry) => entry.id == metadata.id)?.catalogMetadata = metadata);
-      entries.sort(AvesEntrySort.compareByDate);
+      entries.sort(FmvEntrySort.compareByDate);
 
       // TODO TLAD [calendar] try whether `settings.avesLocale` is accessible, after:
       //   await settings.init(monitorPlatformSettings: false, shouldSanitize: false);
-      final locale = AvesLocale(
+      final locale = FmvLocale(
         languageTag: localeName,
         calendar: ACalendar.gregorian,
         forceWesternArabicNumerals: false,

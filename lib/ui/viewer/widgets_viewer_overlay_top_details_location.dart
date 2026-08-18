@@ -9,7 +9,7 @@ import 'package:decorated_icon/decorated_icon.dart';
 import 'package:flutter/material.dart';
 
 class OverlayLocationRow extends AnimatedWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
 
   OverlayLocationRow({
     super.key,

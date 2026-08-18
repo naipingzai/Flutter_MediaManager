@@ -23,7 +23,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 class InfoAppBar extends StatelessWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
   final CollectionLens? collection;
   final EntryInfoActionDelegate actionDelegate;
   final ValueNotifier<Map<String, MetadataDirectory>> metadataNotifier;
@@ -113,7 +113,7 @@ class InfoAppBar extends StatelessWidget {
   }
 
   void _goToSearch(BuildContext context) {
-    final isSelecting = context.read<Selection<AvesEntry>?>()?.isSelecting ?? false;
+    final isSelecting = context.read<Selection<FmvEntry>?>()?.isSelecting ?? false;
     Navigator.maybeOf(context)?.push(
       SearchPageRoute(
         delegate: InfoSearchDelegate(

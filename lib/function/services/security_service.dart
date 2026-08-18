@@ -9,7 +9,7 @@ abstract class SecurityService {
 }
 
 class PlatformSecurityService implements SecurityService {
-  static const _platform = AvesMethodChannel('com.naipingzai/flutter_media_view/security');
+  static const _platform = FmvMethodChannel('com.naipingzai/flutter_media_view/security');
 
   @override
   Future<bool> writeValue<T>(String key, T? value) async {

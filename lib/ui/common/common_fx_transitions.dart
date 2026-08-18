@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-class AvesTransitions {
+class FmvTransitions {
   static Widget formTransitionBuilder(Widget child, Animation<double> animation) {
     return FadeTransition(
       opacity: animation,

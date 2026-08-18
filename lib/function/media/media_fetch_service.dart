@@ -18,9 +18,9 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
 
 abstract class MediaFetchService {
-  Future<AvesEntry?> getEntry(String uri, String? mimeType, {bool allowUnsized = false});
+  Future<FmvEntry?> getEntry(String uri, String? mimeType, {bool allowUnsized = false});
 
-  Future<Uint8List> getOriginalBytes(AvesEntry entry);
+  Future<Uint8List> getOriginalBytes(FmvEntry entry);
 
   Future<ui.Codec> getFullImage({
     required bool decoded,
@@ -59,8 +59,8 @@ abstract class MediaFetchService {
 }
 
 class PlatformMediaFetchService implements MediaFetchService {
-  static const _platformObject = AvesMethodChannel('com.naipingzai/flutter_media_view/media_fetch_object');
-  static final _byteStream = AvesStreamsChannel('com.naipingzai/flutter_media_view/media_byte_stream');
+  static const _platformObject = FmvMethodChannel('com.naipingzai/flutter_media_view/media_fetch_object');
+  static final _byteStream = FmvStreamsChannel('com.naipingzai/flutter_media_view/media_byte_stream');
 
   static const int _formatTrailerLength = 1; // single format byte
   static const int _formatByteEncoded = 0xCA;
@@ -69,7 +69,7 @@ class PlatformMediaFetchService implements MediaFetchService {
   static bool applyHdrGainmap = false;
 
   @override
-  Future<AvesEntry?> getEntry(String uri, String? mimeType, {bool allowUnsized = false}) async {
+  Future<FmvEntry?> getEntry(String uri, String? mimeType, {bool allowUnsized = false}) async {
     try {
       final result =
           await _platformObject.invokeMethod('getEntry', <String, Object?>{
@@ -78,8 +78,8 @@ class PlatformMediaFetchService implements MediaFetchService {
                 'allowUnsized': allowUnsized,
               })
               as Map;
-      AvesEntry.normalizeMimeTypeFields(result);
-      return AvesEntry.fromMap(result);
+      FmvEntry.normalizeMimeTypeFields(result);
+      return FmvEntry.fromMap(result);
     } on PlatformException catch (e, stack) {
       // ignore media content URIs as it is likely an obsolete Media Store entry
       if (!uri.startsWith('content://media/')) {
@@ -180,7 +180,7 @@ class PlatformMediaFetchService implements MediaFetchService {
   }
 
   @override
-  Future<Uint8List> getOriginalBytes(AvesEntry entry) async {
+  Future<Uint8List> getOriginalBytes(FmvEntry entry) async {
     final request = ImageRequest(
       entry.uri,
       entry.mimeType,

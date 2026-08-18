@@ -19,7 +19,7 @@ mixin SingleEntryEditorMixin on FeedbackMixin, PermissionAwareMixin, EntryEditor
 
   Future<void> edit(
     BuildContext context,
-    AvesEntry targetEntry,
+    FmvEntry targetEntry,
     Future<Set<EntryDataType>> Function() apply, {
     bool shouldCheckUndatedItems = true,
   }) async {

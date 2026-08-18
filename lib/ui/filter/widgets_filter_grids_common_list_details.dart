@@ -23,7 +23,7 @@ class FilterListDetails<T extends CollectionFilter> extends StatelessWidget {
 
   T get filter => gridItem.filter;
 
-  AvesEntry? get entry => gridItem.entry;
+  FmvEntry? get entry => gridItem.entry;
 
   const FilterListDetails({
     super.key,
@@ -42,7 +42,7 @@ class FilterListDetails<T extends CollectionFilter> extends StatelessWidget {
     return Container(
       padding: FilterListDetailsTheme.contentPadding,
       foregroundDecoration: BoxDecoration(
-        border: Border(top: AvesBorder.straightSide(context)),
+        border: Border(top: FmvBorder.straightSide(context)),
       ),
       margin: FilterListDetailsTheme.contentMargin,
       child: Column(

@@ -11,7 +11,7 @@ import 'package:flutter/foundation.dart';
 import 'package:image/image.dart' as img;
 import 'package:media_kit/media_kit.dart';
 
-class MpvVideoMetadataFetcher extends AvesVideoMetadataFetcher {
+class MpvVideoMetadataFetcher extends FmvVideoMetadataFetcher {
   static const mpvTypeAudio = 'audio';
   static const mpvTypeVideo = 'video';
   static const mpvTypeSub = 'sub';

@@ -46,7 +46,7 @@ class _CreateGroupDialogState extends State<CreateGroupDialog> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
 
-    return AvesDialog(
+    return FmvDialog(
       title: l10n.newGroupDialogTitle,
       content: ValueListenableBuilder<bool>(
         valueListenable: _existsNotifier,

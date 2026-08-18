@@ -19,7 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MetadataDirTile extends StatelessWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
   final String title;
   final MetadataDirectory dir;
   final ValueNotifier<String?>? expandedDirectoryNotifier;
@@ -40,7 +40,7 @@ class MetadataDirTile extends StatelessWidget {
     var tags = dir.tags;
     if (tags.isEmpty) return const SizedBox();
 
-    return AvesExpansionTile(
+    return FmvExpansionTile(
       title: title,
       highlightColor: getTitleColor(context, dir),
       expandedNotifier: expandedDirectoryNotifier,
@@ -58,16 +58,16 @@ class MetadataDirTile extends StatelessWidget {
   static Color getTitleColor(BuildContext context, MetadataDirectory dir) {
     final dirName = dir.name;
     if (dirName == MetadataDirectory.xmpDirectory) {
-      return context.select<AvesColorsData, Color>((v) => v.xmp);
+      return context.select<FmvColorsData, Color>((v) => v.xmp);
     } else {
-      final colors = context.watch<AvesColorsData>();
+      final colors = context.watch<FmvColorsData>();
       return dir.color ?? colors.fromBrandColor(BrandColors.get(dirName)) ?? colors.fromString(dirName);
     }
   }
 }
 
 class MetadataDirTileBody extends StatelessWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
   final MetadataDirectory dir;
   final bool showThumbnails;
 
@@ -115,7 +115,7 @@ class MetadataDirTileBody extends StatelessWidget {
         if (dirName.startsWith(MetadataDirectory.mpfImageDirectoryPrefix))
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: AvesOutlinedButton(
+            child: FmvOutlinedButton(
               label: context.l10n.viewerInfoOpenLinkText,
               onPressed: () {
                 final id = int.tryParse(dirName.substring(MetadataDirectory.mpfImageDirectoryPrefix.length));

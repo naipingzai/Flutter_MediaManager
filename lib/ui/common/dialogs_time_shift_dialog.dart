@@ -31,7 +31,7 @@ class _TimeShiftDialogState extends State<TimeShiftDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AvesDialog(
+    return FmvDialog(
       scrollableContent: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 16),

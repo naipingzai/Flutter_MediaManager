@@ -3,7 +3,7 @@ import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 extension ExtraVideoLoopMode on VideoLoopMode {
   static const shortVideoThreshold = Duration(seconds: 30);
 
-  bool shouldLoop(AvesEntryBase entry) {
+  bool shouldLoop(FmvEntryBase entry) {
     if (entry.isAnimated) return true;
 
     switch (this) {

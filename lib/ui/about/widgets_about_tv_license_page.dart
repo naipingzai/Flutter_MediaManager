@@ -47,7 +47,7 @@ class _TvLicensePageState extends State<TvLicensePage> {
 
   @override
   Widget build(BuildContext context) {
-    return AvesScaffold(
+    return FmvScaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(MaterialLocalizations.of(context).licensesPageTitle),

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:leak_tracker/leak_tracker.dart';
 
 class ViewStateController with HistogramMixin {
-  final AvesEntry entry;
+  final FmvEntry entry;
   final ValueNotifier<ViewState> viewStateNotifier;
   final ValueNotifier<ImageProvider?> fullImageNotifier = ValueNotifier(null);
 

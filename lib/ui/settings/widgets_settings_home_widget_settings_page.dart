@@ -90,7 +90,7 @@ class _HomeWidgetSettingsPageState extends State<HomeWidgetSettingsPage> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return AvesScaffold(
+    return FmvScaffold(
       appBar: AppBar(
         title: Text(l10n.settingsWidgetPageTitle),
       ),
@@ -149,7 +149,7 @@ class _HomeWidgetSettingsPageState extends State<HomeWidgetSettingsPage> {
                 const Divider(height: 0),
                 Padding(
                   padding: const EdgeInsets.all(8),
-                  child: AvesOutlinedButton(
+                  child: FmvOutlinedButton(
                     label: l10n.saveTooltip,
                     onPressed: () {
                       _saveSettings();

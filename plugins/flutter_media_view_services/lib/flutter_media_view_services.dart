@@ -12,7 +12,7 @@ abstract class MobileServices {
   List<EntryMapStyle> get mapStyles;
 
   Widget buildMap<T>({
-    required AvesMapController controller,
+    required FmvMapController controller,
     required Listenable clusterListenable,
     required ValueNotifier<ZoomedBounds> boundsNotifier,
     required EntryMapStyle style,

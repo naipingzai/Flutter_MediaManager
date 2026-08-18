@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ThumbnailEntryOverlay extends StatelessWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
 
   const ThumbnailEntryOverlay({
     super.key,
@@ -35,7 +35,7 @@ class ThumbnailEntryOverlay extends StatelessWidget {
 }
 
 class ThumbnailHighlightOverlay extends StatefulWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
 
   const ThumbnailHighlightOverlay({
     super.key,
@@ -49,7 +49,7 @@ class ThumbnailHighlightOverlay extends StatefulWidget {
 class _ThumbnailHighlightOverlayState extends State<ThumbnailHighlightOverlay> {
   final ValueNotifier<bool> _highlightedNotifier = ValueNotifier(false);
 
-  AvesEntry get entry => widget.entry;
+  FmvEntry get entry => widget.entry;
 
   static const startAngle = pi * -3 / 4;
 
@@ -98,7 +98,7 @@ class ThumbnailZoomOverlay extends StatelessWidget {
     if (useTvLayout) return const SizedBox();
 
     final duration = context.select<DurationsData, Duration>((v) => v.formTransition);
-    final isSelecting = context.select<Selection<AvesEntry>, bool>((selection) => selection.isSelecting);
+    final isSelecting = context.select<Selection<FmvEntry>, bool>((selection) => selection.isSelecting);
     final interactiveDimension = context.select<GridThemeData, double>((t) => t.interactiveDimension);
     return AnimatedSwitcher(
       duration: duration,

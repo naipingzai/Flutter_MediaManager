@@ -55,7 +55,7 @@ class _CreateStoredAlbumDialogState extends State<CreateStoredAlbumDialog> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    const contentHorizontalPadding = EdgeInsets.symmetric(horizontal: AvesDialog.defaultHorizontalContentPadding);
+    const contentHorizontalPadding = EdgeInsets.symmetric(horizontal: FmvDialog.defaultHorizontalContentPadding);
 
     final volumeTiles = <Widget>[];
     if (_allVolumes.length > 1) {
@@ -74,7 +74,7 @@ class _CreateStoredAlbumDialogState extends State<CreateStoredAlbumDialog> {
       ]);
     }
 
-    return AvesDialog(
+    return FmvDialog(
       title: l10n.newAlbumDialogTitle,
       scrollController: _scrollController,
       scrollableContent: [

@@ -29,7 +29,7 @@ import 'package:intl/intl.dart';
 class ExportCollectionStatsPage extends StatefulWidget {
   static const routeName = '/collection/stats/export';
 
-  final Set<AvesEntry> entries;
+  final Set<FmvEntry> entries;
 
   const ExportCollectionStatsPage({
     super.key,
@@ -47,9 +47,9 @@ class _ExportCollectionStatsPageState extends State<ExportCollectionStatsPage> w
   late String _exportMimeType;
   final ValueNotifier<bool> _isValidNotifier = ValueNotifier(false);
 
-  Set<AvesEntry> get entries => widget.entries;
+  Set<FmvEntry> get entries => widget.entries;
 
-  AvesEntry get sample => entries.first;
+  FmvEntry get sample => entries.first;
 
   @override
   void initState() {
@@ -67,7 +67,7 @@ class _ExportCollectionStatsPageState extends State<ExportCollectionStatsPage> w
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return AvesScaffold(
+    return FmvScaffold(
       appBar: AppBar(
         title: Text(l10n.settingsActionExport),
       ),
@@ -109,11 +109,11 @@ class _ExportCollectionStatsPageState extends State<ExportCollectionStatsPage> w
                     alignment: .end,
                     spacing: 16,
                     children: [
-                      AvesOutlinedButton(
+                      FmvOutlinedButton(
                         label: context.l10n.entryActionCopyToClipboard,
                         onPressed: isValid ? () => _submit(context, ExportTarget.clipboard) : null,
                       ),
-                      AvesOutlinedButton(
+                      FmvOutlinedButton(
                         label: context.l10n.saveTooltip,
                         onPressed: isValid ? () => _submit(context, ExportTarget.file) : null,
                       ),
@@ -202,20 +202,20 @@ class _ExportCollectionStatsPageState extends State<ExportCollectionStatsPage> w
 
   String _exportToCsv(List<ExportableEntryField> fields, BuildContext context) {
     final headers = fields.map((v) => v.getText(context)).toList();
-    List<String> toCsvValues(AvesEntry entry) => fields.map((field) {
+    List<String> toCsvValues(FmvEntry entry) => fields.map((field) {
       return _exportEntryField(field, entry)?.toString() ?? '';
     }).toList();
     return csv.encode([headers, ...entries.map(toCsvValues)]);
   }
 
   String _exportToJson(List<ExportableEntryField> fields) {
-    Map<String, Object?> toJsonMap(AvesEntry entry) => Map.fromEntries(
+    Map<String, Object?> toJsonMap(FmvEntry entry) => Map.fromEntries(
       fields.map((field) => MapEntry(field.name, _exportEntryField(field, entry))),
     );
     return jsonEncode(entries.map(toJsonMap).toList());
   }
 
-  static Object? _exportEntryField(ExportableEntryField field, AvesEntry entry) {
+  static Object? _exportEntryField(ExportableEntryField field, FmvEntry entry) {
     switch (field) {
       case .uri:
         return entry.uri;
@@ -228,7 +228,7 @@ class _ExportCollectionStatsPageState extends State<ExportCollectionStatsPage> w
       case .size:
         return entry.sizeBytes;
       case .resolution:
-        return entry.getResolutionText(AvesLocale.ascii);
+        return entry.getResolutionText(FmvLocale.ascii);
       case .width:
         return entry.displaySize.width.toInt();
       case .height:

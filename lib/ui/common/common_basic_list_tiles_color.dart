@@ -68,7 +68,7 @@ class _ColorPickerDialogState extends State<ColorPickerDialog> {
   @override
   Widget build(BuildContext context) {
     final useTvLayout = settings.useTvLayout;
-    return AvesDialog(
+    return FmvDialog(
       scrollableContent: [
         ColorPicker(
           color: color,

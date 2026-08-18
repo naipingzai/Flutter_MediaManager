@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class VideoIcon extends StatelessWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
 
   const VideoIcon({
     super.key,
@@ -173,7 +173,7 @@ class MotionPhotoIcon extends StatelessWidget {
 }
 
 class MultiPageIcon extends StatelessWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
 
   static const scale = .8;
 
@@ -203,7 +203,7 @@ class MultiPageIcon extends StatelessWidget {
 }
 
 class RatingIcon extends StatelessWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
 
   const RatingIcon({
     super.key,

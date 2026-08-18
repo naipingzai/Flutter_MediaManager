@@ -15,7 +15,7 @@ import 'package:pdf/widgets.dart' as pdf;
 import 'package:printing/printing.dart';
 
 class EntryPrinter with FeedbackMixin {
-  final AvesEntry entry;
+  final FmvEntry entry;
 
   static const _fit = pdf.BoxFit.contain;
 
@@ -75,9 +75,9 @@ class EntryPrinter with FeedbackMixin {
       if (multiPageInfo != null) {
         final pageCount = multiPageInfo.pageCount;
         if (pageCount > 1) {
-          final streamController = StreamController<AvesEntry>.broadcast();
+          final streamController = StreamController<FmvEntry>.broadcast();
           unawaited(
-            showOpReport<AvesEntry>(
+            showOpReport<FmvEntry>(
               context: context,
               opStream: streamController.stream,
               itemCount: pageCount,
@@ -106,7 +106,7 @@ class EntryPrinter with FeedbackMixin {
     return widgets;
   }
 
-  Future<pdf.Widget?> _buildPageImage(BuildContext context, AvesEntry entry) async {
+  Future<pdf.Widget?> _buildPageImage(BuildContext context, FmvEntry entry) async {
     try {
       if (entry.isSvg) {
         final data = await mediaFetchService.getOriginalBytes(entry);

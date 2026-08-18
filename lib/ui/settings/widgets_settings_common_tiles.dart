@@ -150,11 +150,11 @@ class SettingsSelectionListTile<T> extends StatelessWidget {
       builder: (context, current, child) {
         return ListTile(
           title: Text(tileTitle(context) ?? '?'),
-          subtitle: AvesCaption(getName(context, current)),
+          subtitle: FmvCaption(getName(context, current)),
           trailing: trailingBuilder?.call(context),
           onTap: () => showSelectionDialog<T>(
             context: context,
-            builder: (context) => AvesSingleSelectionDialog<T>(
+            builder: (context) => FmvSingleSelectionDialog<T>(
               initialValue: current,
               options: Map.fromEntries(values.map((v) => MapEntry(v, getName(context, v)))),
               optionSubtitleBuilder: optionSubtitleBuilder,
@@ -196,10 +196,10 @@ class SettingsMultiSelectionListTile<T> extends StatelessWidget {
       builder: (context, current, child) {
         return ListTile(
           title: Text(tileTitle),
-          subtitle: AvesCaption(current.isEmpty ? noneSubtitle : current.map((v) => getName(context, v)).join(AText.separator)),
+          subtitle: FmvCaption(current.isEmpty ? noneSubtitle : current.map((v) => getName(context, v)).join(AText.separator)),
           onTap: () => showSelectionDialog<List<T>>(
             context: context,
-            builder: (context) => AvesMultiSelectionDialog<T>(
+            builder: (context) => FmvMultiSelectionDialog<T>(
               initialValue: current.toSet(),
               options: Map.fromEntries(values.map((v) => MapEntry(v, getName(context, v)))),
               optionSubtitleBuilder: optionSubtitleBuilder,
@@ -241,7 +241,7 @@ class SettingsDurationListTile extends StatelessWidget {
 
         return ListTile(
           title: Text(title(context) ?? '?'),
-          subtitle: AvesCaption(subtitle),
+          subtitle: FmvCaption(subtitle),
           onTap: () async {
             final seconds = await showAvesDialog<int>(
               context: context,

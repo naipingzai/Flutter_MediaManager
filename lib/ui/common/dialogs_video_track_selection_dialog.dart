@@ -52,9 +52,9 @@ class _VideoTrackSelectionDialogState extends State<VideoTrackSelectionDialog> {
     final canSelectText = _textTracks.length > 1;
     final canSelect = canSelectVideo || canSelectAudio || canSelectText;
     if (!canSelect) {
-      return AvesMessageDialog.info(l10n.videoStreamSelectionDialogNoSelection);
+      return FmvMessageDialog.info(l10n.videoStreamSelectionDialogNoSelection);
     }
-    return AvesDialog(
+    return FmvDialog(
       scrollableContent: [
         if (canSelectVideo)
           ..._buildSection(

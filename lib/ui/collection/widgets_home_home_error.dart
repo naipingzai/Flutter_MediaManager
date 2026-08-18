@@ -44,7 +44,7 @@ class _HomeErrorState extends State<HomeError> with FeedbackMixin {
             sliver: SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  AvesExpansionTile(
+                  FmvExpansionTile(
                     title: 'Error',
                     expandedNotifier: _expandedNotifier,
                     showHighlight: false,
@@ -58,13 +58,13 @@ class _HomeErrorState extends State<HomeError> with FeedbackMixin {
                       ),
                     ],
                   ),
-                  AvesExpansionTile(
+                  FmvExpansionTile(
                     title: l10n.aboutBugSectionTitle,
                     expandedNotifier: _expandedNotifier,
                     showHighlight: false,
                     children: const [BugReportContent()],
                   ),
-                  AvesExpansionTile(
+                  FmvExpansionTile(
                     title: l10n.aboutDataUsageDatabase,
                     expandedNotifier: _expandedNotifier,
                     showHighlight: false,
@@ -73,7 +73,7 @@ class _HomeErrorState extends State<HomeError> with FeedbackMixin {
                         children: [
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                            child: AvesOutlinedButton(
+                            child: FmvOutlinedButton(
                               label: l10n.settingsActionExport,
                               onPressed: () async {
                                 final sourcePath = await localMediaDb.path;

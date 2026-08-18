@@ -49,7 +49,7 @@ class _LicensesState extends State<Licenses> {
 
   @override
   Widget build(BuildContext context) {
-    final colors = context.watch<AvesColorsData>();
+    final colors = context.watch<FmvColorsData>();
     return SliverPadding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       sliver: SliverList(
@@ -57,32 +57,32 @@ class _LicensesState extends State<Licenses> {
           [
             _buildHeader(),
             const SizedBox(height: 16),
-            AvesExpansionTile(
+            FmvExpansionTile(
               title: context.l10n.aboutLicensesAndroidLibrariesSectionTitle,
               highlightColor: colors.fromBrandColor(BrandColors.android),
               expandedNotifier: _expandedNotifier,
               children: _platform.map((package) => _LicenseRow(package: package)).toList(),
             ),
-            AvesExpansionTile(
+            FmvExpansionTile(
               title: context.l10n.aboutLicensesFlutterPluginsSectionTitle,
               highlightColor: colors.fromBrandColor(BrandColors.flutter),
               expandedNotifier: _expandedNotifier,
               children: _flutterPlugins.map((package) => _LicenseRow(package: package)).toList(),
             ),
-            AvesExpansionTile(
+            FmvExpansionTile(
               title: context.l10n.aboutLicensesFlutterPackagesSectionTitle,
               highlightColor: colors.fromBrandColor(BrandColors.flutter),
               expandedNotifier: _expandedNotifier,
               children: _flutterPackages.map((package) => _LicenseRow(package: package)).toList(),
             ),
-            AvesExpansionTile(
+            FmvExpansionTile(
               title: context.l10n.aboutLicensesDartPackagesSectionTitle,
               highlightColor: colors.fromBrandColor(BrandColors.flutter),
               expandedNotifier: _expandedNotifier,
               children: _dartPackages.map((package) => _LicenseRow(package: package)).toList(),
             ),
             Center(
-              child: AvesOutlinedButton(
+              child: FmvOutlinedButton(
                 label: context.l10n.aboutLicensesShowAllButtonLabel,
                 onPressed: () => Navigator.maybeOf(context)?.push(
                   MaterialPageRoute(

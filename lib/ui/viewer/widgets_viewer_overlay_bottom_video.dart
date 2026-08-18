@@ -15,8 +15,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class VideoControlOverlay extends StatefulWidget {
-  final AvesEntry entry;
-  final AvesVideoController? controller;
+  final FmvEntry entry;
+  final FmvVideoController? controller;
   final Animation<double> scale;
   final Function(EntryAction value) onActionSelected;
 
@@ -33,11 +33,11 @@ class VideoControlOverlay extends StatefulWidget {
 }
 
 class _VideoControlOverlayState extends State<VideoControlOverlay> with SingleTickerProviderStateMixin {
-  AvesEntry get entry => widget.entry;
+  FmvEntry get entry => widget.entry;
 
   Animation<double> get scale => widget.scale;
 
-  AvesVideoController? get controller => widget.controller;
+  FmvVideoController? get controller => widget.controller;
 
   Stream<VideoStatus> get statusStream => controller?.statusStream ?? Stream.value(VideoStatus.idle);
 

@@ -4,14 +4,14 @@ import 'package:flutter/foundation.dart';
 
 @immutable
 class EntryAddedEvent {
-  final Set<AvesEntry>? entries;
+  final Set<FmvEntry>? entries;
 
   const EntryAddedEvent([this.entries]);
 }
 
 @immutable
 class EntryRemovedEvent {
-  final Set<AvesEntry> entries;
+  final Set<FmvEntry> entries;
 
   const EntryRemovedEvent(this.entries);
 }
@@ -19,14 +19,14 @@ class EntryRemovedEvent {
 @immutable
 class EntryMovedEvent {
   final MoveType type;
-  final Set<AvesEntry> entries;
+  final Set<FmvEntry> entries;
 
   const EntryMovedEvent(this.type, this.entries);
 }
 
 @immutable
 class EntryRefreshedEvent {
-  final Set<AvesEntry> entries;
+  final Set<FmvEntry> entries;
 
   const EntryRefreshedEvent(this.entries);
 }

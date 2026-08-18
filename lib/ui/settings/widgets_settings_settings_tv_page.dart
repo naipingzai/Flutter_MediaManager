@@ -14,8 +14,8 @@ class SettingsTvPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AvesScaffold(
-      body: AvesPopScope(
+    return FmvScaffold(
+      body: FmvPopScope(
         handlers: [tvNavigationPopHandler],
         child: Row(
           children: [

@@ -16,7 +16,7 @@ import 'package:provider/provider.dart';
 class ViewerDebugPage extends StatelessWidget {
   static const routeName = '/viewer/debug';
 
-  final AvesEntry entry;
+  final FmvEntry entry;
 
   const ViewerDebugPage({
     super.key,

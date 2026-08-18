@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/ui/common/common_extensions_theme.dart';
 import 'package:flutter/material.dart';
 
-class AvesBorder {
+class FmvBorder {
   static Color _borderColor(BuildContext context) => Theme.of(context).isDark ? Colors.white30 : Colors.black26;
 
   // 1 device pixel for straight lines is fine

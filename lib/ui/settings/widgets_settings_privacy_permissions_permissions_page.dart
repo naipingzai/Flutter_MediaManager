@@ -25,7 +25,7 @@ class PermissionsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final canEnableErrorReporting = context.select<AppFlavor, bool>((v) => v.canEnableErrorReporting);
-    return AvesScaffold(
+    return FmvScaffold(
       appBar: AppBar(
         title: Text(l10n.settingsPermissionsPageTitle),
       ),

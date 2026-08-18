@@ -47,7 +47,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 class EntryActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAwareMixin, EntryEditorMixin, EntryStorageMixin, SingleEntryEditorMixin, VaultAwareMixin {
-  final AvesEntry mainEntry, pageEntry;
+  final FmvEntry mainEntry, pageEntry;
   final CollectionLens? collection;
   final EntryInfoActionDelegate _metadataActionDelegate = EntryInfoActionDelegate();
 
@@ -174,7 +174,7 @@ class EntryActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAwareMix
     }
   }
 
-  AvesEntry _getTargetEntry(BuildContext context, EntryAction action) {
+  FmvEntry _getTargetEntry(BuildContext context, EntryAction action) {
     if (mainEntry.isMultiPage && (mainEntry.isStack || EntryActions.pageActions.contains(action))) {
       final multiPageController = context.read<MultiPageConductor>().getController(mainEntry);
       if (multiPageController != null) {
@@ -389,8 +389,8 @@ class EntryActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAwareMix
     _metadataActionDelegate.quickTag(context, targetEntry, filter);
   }
 
-  Future<void> _addShortcut(BuildContext context, AvesEntry targetEntry) async {
-    final result = await showAvesDialog<(AvesEntry?, String)>(
+  Future<void> _addShortcut(BuildContext context, FmvEntry targetEntry) async {
+    final result = await showAvesDialog<(FmvEntry?, String)>(
       context: context,
       builder: (context) => AddShortcutDialog(
         defaultName: targetEntry.bestTitle ?? '',
@@ -408,11 +408,11 @@ class EntryActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAwareMix
     }
   }
 
-  Future<void> _flip(BuildContext context, AvesEntry targetEntry) async {
+  Future<void> _flip(BuildContext context, FmvEntry targetEntry) async {
     await edit(context, targetEntry, targetEntry.flip);
   }
 
-  Future<void> _rotate(BuildContext context, AvesEntry targetEntry, {required bool clockwise}) async {
+  Future<void> _rotate(BuildContext context, FmvEntry targetEntry, {required bool clockwise}) async {
     await edit(context, targetEntry, () => targetEntry.rotate(clockwise: clockwise));
   }
 
@@ -421,7 +421,7 @@ class EntryActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAwareMix
     await windowService.requestOrientation(isPortrait ? Orientation.landscape : Orientation.portrait);
   }
 
-  Future<void> _delete(BuildContext context, AvesEntry targetEntry) async {
+  Future<void> _delete(BuildContext context, FmvEntry targetEntry) async {
     final vault = vaults.getVault(targetEntry.directory);
     final enableBin = vault?.useBin ?? settings.enableBin;
 
@@ -451,13 +451,13 @@ class EntryActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAwareMix
     }
   }
 
-  Future<void> _move(BuildContext context, AvesEntry targetEntry, {required MoveType moveType}) => doMove(
+  Future<void> _move(BuildContext context, FmvEntry targetEntry, {required MoveType moveType}) => doMove(
     context,
     moveType: moveType,
     entries: {targetEntry},
   );
 
-  Future<void> _convert(BuildContext context, AvesEntry targetEntry) async {
+  Future<void> _convert(BuildContext context, FmvEntry targetEntry) async {
     final options = await showAvesDialog<EntryConvertOptions>(
       context: context,
       builder: (context) => ConvertEntryDialog(entries: {targetEntry}),
@@ -473,7 +473,7 @@ class EntryActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAwareMix
     }
   }
 
-  Future<void> _copyToClipboard(BuildContext context, AvesEntry targetEntry) async {
+  Future<void> _copyToClipboard(BuildContext context, FmvEntry targetEntry) async {
     final success = await appService.copyToClipboard(label: targetEntry.bestTitle, uris: [targetEntry.uri]);
     if (success) {
       showFeedback(context, FeedbackType.info, context.l10n.genericSuccessFeedback);
@@ -482,7 +482,7 @@ class EntryActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAwareMix
     }
   }
 
-  Future<void> _rename(BuildContext context, AvesEntry targetEntry) async {
+  Future<void> _rename(BuildContext context, FmvEntry targetEntry) async {
     final newName = await showAvesDialog<String>(
       context: context,
       builder: (context) => RenameEntryDialog(entry: targetEntry),
@@ -502,7 +502,7 @@ class EntryActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAwareMix
 
   bool _isMainMode(BuildContext context) => context.read<ValueNotifier<AppMode>>().value == .main;
 
-  void _goToSourceViewer(BuildContext context, AvesEntry targetEntry) {
+  void _goToSourceViewer(BuildContext context, FmvEntry targetEntry) {
     Navigator.maybeOf(context)?.push(
       MaterialPageRoute(
         settings: const RouteSettings(name: SourceViewerPage.routeName),
@@ -516,7 +516,7 @@ class EntryActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAwareMix
     );
   }
 
-  void _goToDebug(BuildContext context, AvesEntry targetEntry) {
+  void _goToDebug(BuildContext context, FmvEntry targetEntry) {
     Navigator.maybeOf(context)?.push(
       MaterialPageRoute(
         settings: const RouteSettings(name: ViewerDebugPage.routeName),

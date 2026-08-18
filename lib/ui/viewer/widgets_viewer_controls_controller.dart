@@ -12,7 +12,7 @@ import 'package:flutter/widgets.dart';
 import 'package:leak_tracker/leak_tracker.dart';
 
 class ViewerController with CastMixin {
-  final ValueNotifier<AvesEntry?> entryNotifier = ValueNotifier(null);
+  final ValueNotifier<FmvEntry?> entryNotifier = ValueNotifier(null);
   final ViewerTransition transition;
   final Duration? autopilotInterval;
   final bool autopilotAnimatedZoom;

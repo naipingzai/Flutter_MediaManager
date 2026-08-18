@@ -10,12 +10,12 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-typedef DatumKeyFormatter = String Function(AvesDonutDatum d);
+typedef DatumKeyFormatter = String Function(FmvDonutDatum d);
 typedef DatumValueFormatter = String Function(int d);
-typedef DatumColorizer = Color Function(BuildContext context, AvesDonutDatum d);
-typedef DatumCallback = void Function(AvesDonutDatum d);
+typedef DatumColorizer = Color Function(BuildContext context, FmvDonutDatum d);
+typedef DatumCallback = void Function(FmvDonutDatum d);
 
-class AvesDonut extends StatefulWidget {
+class FmvDonut extends StatefulWidget {
   final Widget title;
   final Map<String, int> byTypes;
   final Duration animationDuration;
@@ -24,7 +24,7 @@ class AvesDonut extends StatefulWidget {
   final DatumColorizer colorize;
   final DatumCallback? onTap;
 
-  const AvesDonut({
+  const FmvDonut({
     super.key,
     required this.title,
     required this.byTypes,
@@ -36,10 +36,10 @@ class AvesDonut extends StatefulWidget {
   });
 
   @override
-  State<AvesDonut> createState() => _AvesDonutState();
+  State<FmvDonut> createState() => _AvesDonutState();
 }
 
-class _AvesDonutState extends State<AvesDonut> with AutomaticKeepAliveClientMixin {
+class _AvesDonutState extends State<FmvDonut> with AutomaticKeepAliveClientMixin {
   Map<String, int> get byTypes => widget.byTypes;
 
   DatumKeyFormatter get formatKey => widget.formatKey;
@@ -60,7 +60,7 @@ class _AvesDonutState extends State<AvesDonut> with AutomaticKeepAliveClientMixi
 
     final seriesData = byTypes.entries.map((kv) {
       final type = kv.key;
-      return AvesDonutDatum(
+      return FmvDonutDatum(
         key: type,
         value: kv.value,
       );
@@ -70,12 +70,12 @@ class _AvesDonutState extends State<AvesDonut> with AutomaticKeepAliveClientMixi
       return c != 0 ? c : compareAsciiUpperCase(formatKey(d1), formatKey(d2));
     });
 
-    return AvesColorsProvider(
+    return FmvColorsProvider(
       allowMonochrome: false,
       child: LayoutBuilder(
         builder: (context, constraints) {
           final series = [
-            charts.Series<AvesDonutDatum, String>(
+            charts.Series<FmvDonutDatum, String>(
               id: 'type',
               colorFn: (d, i) => charts.ColorUtil.fromDartColor(colorize(context, d)),
               domainFn: (d, i) => formatKey(d),
@@ -189,14 +189,14 @@ class _AvesDonutState extends State<AvesDonut> with AutomaticKeepAliveClientMixi
 }
 
 @immutable
-class AvesDonutDatum extends Equatable {
+class FmvDonutDatum extends Equatable {
   final String key;
   final int value;
 
   @override
   List<Object?> get props => [key, value];
 
-  const AvesDonutDatum({
+  const FmvDonutDatum({
     required this.key,
     required this.value,
   });

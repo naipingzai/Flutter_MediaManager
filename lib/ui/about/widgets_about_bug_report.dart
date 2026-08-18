@@ -104,7 +104,7 @@ class _BugReportContentState extends State<BugReportContent> with FeedbackMixin 
   }
 
   Widget _buildStep(int step, String text, String buttonText, VoidCallback onPressed) {
-    final isMonochrome = settings.themeColorMode == AvesThemeColorMode.monochrome;
+    final isMonochrome = settings.themeColorMode == FmvThemeColorMode.monochrome;
     final stepCountFormatter = settings.avesLocale.decimalNumberFormat();
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
@@ -115,8 +115,8 @@ class _BugReportContentState extends State<BugReportContent> with FeedbackMixin 
             decoration: BoxDecoration(
               border: Border.fromBorderSide(
                 BorderSide(
-                  color: isMonochrome ? context.select<AvesColorsData, Color>((v) => v.neutral) : Theme.of(context).colorScheme.primary,
-                  width: AvesFilterChip.outlineWidth,
+                  color: isMonochrome ? context.select<FmvColorsData, Color>((v) => v.neutral) : Theme.of(context).colorScheme.primary,
+                  width: FmvFilterChip.outlineWidth,
                 ),
               ),
               shape: BoxShape.circle,
@@ -126,7 +126,7 @@ class _BugReportContentState extends State<BugReportContent> with FeedbackMixin 
           const SizedBox(width: 8),
           Expanded(child: Text(text)),
           const SizedBox(width: 8),
-          AvesOutlinedButton(
+          FmvOutlinedButton(
             label: buttonText,
             onPressed: onPressed,
           ),
@@ -144,8 +144,8 @@ class _BugReportContentState extends State<BugReportContent> with FeedbackMixin 
 
     final ram = await deviceService.getRamSizes(<MemorySizeType>{.total});
     final heap = await deviceService.getHeapSizes(<MemorySizeType>{.max});
-    final ramTotal = formatFileSize(AvesLocale.ascii, ram[MemorySizeType.total] ?? 0);
-    final heapMax = formatFileSize(AvesLocale.ascii, heap[MemorySizeType.max] ?? 0);
+    final ramTotal = formatFileSize(FmvLocale.ascii, ram[MemorySizeType.total] ?? 0);
+    final heapMax = formatFileSize(FmvLocale.ascii, heap[MemorySizeType.max] ?? 0);
 
     final supportsHdr = await windowService.supportsHdr();
     final supportsWideGamut = await windowService.supportsWideGamut();
@@ -161,7 +161,7 @@ class _BugReportContentState extends State<BugReportContent> with FeedbackMixin 
     final tagCount = source.sortedTags.length;
 
     return [
-      'Aves: ${device.packageVersion}-$flavor, build ${packageInfo.buildNumber}, package=${device.packageName}, installer=${packageInfo.installerStore}',
+      'Fmv: ${device.packageVersion}-$flavor, build ${packageInfo.buildNumber}, package=${device.packageName}, installer=${packageInfo.installerStore}',
       'Flutter: ${FlutterVersion.channel} ${FlutterVersion.version}',
       'Android: ${androidInfo.version.release}, API ${androidInfo.version.sdkInt}, MPC $mpc, build: ${androidInfo.display}',
       'Device: ${androidInfo.manufacturer} ${androidInfo.model}',
@@ -204,5 +204,5 @@ class _BugReportContentState extends State<BugReportContent> with FeedbackMixin 
     }
   }
 
-  Future<void> _goToGithub() => AvesApp.launchUrl(bugReportUrl);
+  Future<void> _goToGithub() => FmvApp.launchUrl(bugReportUrl);
 }

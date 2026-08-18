@@ -15,7 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TransformControlPanel extends StatefulWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
   final VoidCallback onCancel;
   final void Function(Transformation transformation) onApply;
 

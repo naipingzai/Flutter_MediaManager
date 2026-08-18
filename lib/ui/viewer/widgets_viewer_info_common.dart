@@ -23,7 +23,7 @@ class SectionRow extends StatelessWidget {
     Widget buildDivider() => const SizedBox(
       width: dim,
       child: Divider(
-        thickness: AvesFilterChip.outlineWidth,
+        thickness: FmvFilterChip.outlineWidth,
       ),
     );
     return Padding(

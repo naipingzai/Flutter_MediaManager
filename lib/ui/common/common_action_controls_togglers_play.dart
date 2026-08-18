@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PlayToggler extends StatefulWidget {
-  final AvesVideoController? controller;
+  final FmvVideoController? controller;
   final bool isMenuItem;
   final FocusNode? focusNode;
   final VoidCallback? onPressed;
@@ -31,7 +31,7 @@ class _PlayTogglerState extends State<PlayToggler> with SingleTickerProviderStat
   final Set<StreamSubscription> _subscriptions = {};
   late AnimationController _playPauseAnimation;
 
-  AvesVideoController? get controller => widget.controller;
+  FmvVideoController? get controller => widget.controller;
 
   bool get isPlaying => controller?.isPlaying ?? false;
 
@@ -104,7 +104,7 @@ class _PlayTogglerState extends State<PlayToggler> with SingleTickerProviderStat
 }
 
 class PlayTogglerCaption extends StatelessWidget {
-  final AvesVideoController? controller;
+  final FmvVideoController? controller;
   final bool enabled;
 
   const PlayTogglerCaption({

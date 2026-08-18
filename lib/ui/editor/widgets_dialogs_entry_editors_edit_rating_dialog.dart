@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 class EditEntryRatingDialog extends StatefulWidget {
   static const routeName = '/dialog/edit_entry_rating';
 
-  final AvesEntry entry;
+  final FmvEntry entry;
 
   const EditEntryRatingDialog({
     super.key,
@@ -52,7 +52,7 @@ class _EditEntryRatingDialogState extends State<EditEntryRatingDialog> {
           builder: (context) {
             final l10n = context.l10n;
 
-            return AvesDialog(
+            return FmvDialog(
               title: l10n.editEntryRatingDialogTitle,
               scrollableContent: [
                 RadioGroup(

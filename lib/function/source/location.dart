@@ -30,7 +30,7 @@ mixin LocationMixin on CountryMixin, StateMixin {
     onAddressMetadataChanged();
   }
 
-  Future<void> locateEntries(AnalysisController controller, Set<AvesEntry> candidateEntries) async {
+  Future<void> locateEntries(AnalysisController controller, Set<FmvEntry> candidateEntries) async {
     await _locateCountries(controller, candidateEntries);
     await _locatePlaces(controller, candidateEntries);
 
@@ -41,12 +41,12 @@ mixin LocationMixin on CountryMixin, StateMixin {
     }
   }
 
-  static bool locateCountriesTest(AvesEntry entry) => entry.hasGps && !entry.hasAddress;
+  static bool locateCountriesTest(FmvEntry entry) => entry.hasGps && !entry.hasAddress;
 
-  static bool locatePlacesTest(AvesEntry entry) => entry.hasGps && !entry.hasFineAddress;
+  static bool locatePlacesTest(FmvEntry entry) => entry.hasGps && !entry.hasFineAddress;
 
   // quick reverse geocoding to find the countries, using an offline asset
-  Future<void> _locateCountries(AnalysisController controller, Set<AvesEntry> candidateEntries) async {
+  Future<void> _locateCountries(AnalysisController controller, Set<FmvEntry> candidateEntries) async {
     if (controller.isStopping) return;
 
     final force = controller.force;
@@ -76,7 +76,7 @@ mixin LocationMixin on CountryMixin, StateMixin {
   }
 
   // full reverse geocoding, requiring geocoder and some connectivity
-  Future<void> _locatePlaces(AnalysisController controller, Set<AvesEntry> candidateEntries) async {
+  Future<void> _locatePlaces(AnalysisController controller, Set<FmvEntry> candidateEntries) async {
     if (controller.isStopping) return;
     if (!await availability.canLocatePlaces) return;
 
@@ -94,7 +94,7 @@ mixin LocationMixin on CountryMixin, StateMixin {
     // -  652 calls (22%) when approximating to 2 decimal places (~1km - town or village)
     // cf https://en.wikipedia.org/wiki/Decimal_degrees#Precision
     final latLngFactor = pow(10, 2);
-    (int latitude, int longitude) approximateLatLng(AvesEntry entry) {
+    (int latitude, int longitude) approximateLatLng(FmvEntry entry) {
       // entry has coordinates
       final catalogMetadata = entry.catalogMetadata!;
       final lat = catalogMetadata.latitude!;

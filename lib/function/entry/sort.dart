@@ -2,11 +2,11 @@ import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/function/utils/time_utils.dart';
 import 'package:collection/collection.dart';
 
-class AvesEntrySort {
+class FmvEntrySort {
   // compare by:
   // 1) title ascending
   // 2) extension ascending
-  static int compareByName(AvesEntry a, AvesEntry b) {
+  static int compareByName(FmvEntry a, FmvEntry b) {
     final c = compareAsciiUpperCaseNatural(a.bestTitle ?? '', b.bestTitle ?? '');
     return c != 0 ? c : compareAsciiUpperCase(a.extension ?? '', b.extension ?? '');
   }
@@ -14,7 +14,7 @@ class AvesEntrySort {
   // compare by:
   // 1) date descending
   // 2) name descending
-  static int compareByDate(AvesEntry a, AvesEntry b) {
+  static int compareByDate(FmvEntry a, FmvEntry b) {
     var c = (b.bestDate ?? epoch).compareTo(a.bestDate ?? epoch);
     if (c != 0) return c;
     return compareByName(b, a);
@@ -23,7 +23,7 @@ class AvesEntrySort {
   // compare by:
   // 1) rating descending
   // 2) date descending
-  static int compareByRating(AvesEntry a, AvesEntry b) {
+  static int compareByRating(FmvEntry a, FmvEntry b) {
     final c = b.rating.compareTo(a.rating);
     return c != 0 ? c : compareByDate(a, b);
   }
@@ -31,7 +31,7 @@ class AvesEntrySort {
   // compare by:
   // 1) size descending
   // 2) date descending
-  static int compareBySize(AvesEntry a, AvesEntry b) {
+  static int compareBySize(FmvEntry a, FmvEntry b) {
     final c = (b.sizeBytes ?? 0).compareTo(a.sizeBytes ?? 0);
     return c != 0 ? c : compareByDate(a, b);
   }
@@ -39,14 +39,14 @@ class AvesEntrySort {
   // compare by:
   // 1) duration descending
   // 2) date descending
-  static int compareByDuration(AvesEntry a, AvesEntry b) {
+  static int compareByDuration(FmvEntry a, FmvEntry b) {
     final c = (b.durationMillis ?? 0).compareTo(a.durationMillis ?? 0);
     return c != 0 ? c : compareByDate(a, b);
   }
 
   // compare by:
   // 1) path ascending
-  static int compareByPath(AvesEntry a, AvesEntry b) {
+  static int compareByPath(FmvEntry a, FmvEntry b) {
     return compareAsciiUpperCase(a.path ?? '', b.path ?? '');
   }
 }

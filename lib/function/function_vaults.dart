@@ -29,7 +29,7 @@ class Vaults {
   Future<void> init() async {
     _rows = await localMediaDb.loadAllVaults();
     _vaultDirPaths = null;
-    final screenStateStream = Platform.isAndroid ? AvesScreenState().screenStateStream : null;
+    final screenStateStream = Platform.isAndroid ? FmvScreenState().screenStateStream : null;
     if (screenStateStream != null) {
       _subscriptions.add(screenStateStream.where((event) => event == ScreenStateEvent.off).listen((event) => _onScreenOff()));
     }
@@ -169,8 +169,8 @@ class Vaults {
     _onLockStateChanged();
   }
 
-  Future<Set<AvesEntry>> recoverUntrackedItems(CollectionSource source, String dirPath) async {
-    final newEntries = <AvesEntry>{};
+  Future<Set<FmvEntry>> recoverUntrackedItems(CollectionSource source, String dirPath) async {
+    final newEntries = <FmvEntry>{};
 
     final vaultName = detailsForPath(dirPath)?.name;
     if (vaultName == null) return newEntries;

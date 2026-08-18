@@ -56,7 +56,7 @@ class GridTheme extends StatelessWidget {
   }
 }
 
-typedef GridThemeIconBuilder = List<Widget> Function(BuildContext context, AvesEntry entry);
+typedef GridThemeIconBuilder = List<Widget> Function(BuildContext context, FmvEntry entry);
 
 class GridThemeData {
   final double iconSize, fontSize, highlightBorderWidth, interactiveDimension;

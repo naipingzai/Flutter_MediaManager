@@ -30,7 +30,7 @@ import 'fake/window_service.dart';
 Future<void> setUpAllServices() async {
   // specify Posix style path context for consistent behaviour when running tests on Windows
   getIt.registerLazySingleton<p.Context>(() => p.Context(style: p.Style.posix));
-  getIt.registerLazySingleton<AvesAvailability>(FakeAvesAvailability.new);
+  getIt.registerLazySingleton<FmvAvailability>(FakeAvesAvailability.new);
   getIt.registerLazySingleton<LocalMediaDb>(FakeAvesDb.new);
 
   getIt.registerLazySingleton<AppService>(FakeAppService.new);

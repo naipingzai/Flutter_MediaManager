@@ -14,7 +14,7 @@ class TimeAxisSpec {
   TimeAxisSpec(this.tickSpecs);
 
   factory TimeAxisSpec.forLevel({
-    required AvesLocale locale,
+    required FmvLocale locale,
     required DateLevel level,
     required DateTime first,
     required DateTime last,
@@ -30,7 +30,7 @@ class TimeAxisSpec {
     }
   }
 
-  factory TimeAxisSpec.days(AvesLocale locale, DateTime first, DateTime last) {
+  factory TimeAxisSpec.days(FmvLocale locale, DateTime first, DateTime last) {
     final daysTickLongFormat = locale.MMMd;
     final daysTickShortFormat = locale.d;
     final calOps = locale.calendar.ops;
@@ -57,7 +57,7 @@ class TimeAxisSpec {
     return TimeAxisSpec(ticks);
   }
 
-  factory TimeAxisSpec.months(AvesLocale locale, DateTime first, DateTime last) {
+  factory TimeAxisSpec.months(FmvLocale locale, DateTime first, DateTime last) {
     final monthsTickLongFormat = locale.yMMM;
     final monthsTickShortFormat = locale.MMM;
     final calOps = locale.calendar.ops;
@@ -88,7 +88,7 @@ class TimeAxisSpec {
     return TimeAxisSpec(ticks);
   }
 
-  factory TimeAxisSpec.years(AvesLocale locale, DateTime first, DateTime last) {
+  factory TimeAxisSpec.years(FmvLocale locale, DateTime first, DateTime last) {
     final dateFormat = locale.y;
     final calOps = locale.calendar.ops;
 

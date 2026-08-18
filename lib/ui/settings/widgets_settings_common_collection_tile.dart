@@ -42,7 +42,7 @@ class SettingsCollectionTile extends StatelessWidget {
                         // fallback to `ListTile` M3 default style
                         style: theme.listTileTheme.titleTextStyle ?? theme.textTheme.bodyLarge!.copyWith(color: theme.colorScheme.onSurface),
                       ),
-                      if (hasSubtitle) AvesCaption(l10n.drawerCollectionAll),
+                      if (hasSubtitle) FmvCaption(l10n.drawerCollectionAll),
                     ],
                   ),
                   const Spacer(),

@@ -110,7 +110,7 @@ class SqfliteLocalMediaDb implements LocalMediaDb {
   }
 
   @override
-  Future<Set<AvesEntry>> loadEntries({int? origin, String? directory}) async {
+  Future<Set<FmvEntry>> loadEntries({int? origin, String? directory}) async {
     String? where;
     final whereArgs = <Object?>[];
 
@@ -119,7 +119,7 @@ class SqfliteLocalMediaDb implements LocalMediaDb {
       whereArgs.add(origin);
     }
 
-    final entries = <AvesEntry>{};
+    final entries = <FmvEntry>{};
     if (directory != null) {
       final separator = pContext.separator;
       if (!directory.endsWith(separator)) {
@@ -136,13 +136,13 @@ class SqfliteLocalMediaDb implements LocalMediaDb {
         // skip entries in subfolders
         final path = row['path'] as String?;
         if (path != null && !path.substring(dirLength).contains(separator)) {
-          entries.add(AvesEntry.fromMap(row));
+          entries.add(FmvEntry.fromMap(row));
         }
       }
     } else {
       final cursor = await _db.queryCursor(entryTable, where: where, whereArgs: whereArgs, bufferSize: _queryCursorBufferSize);
       while (await cursor.moveNext()) {
-        entries.add(AvesEntry.fromMap(cursor.current));
+        entries.add(FmvEntry.fromMap(cursor.current));
       }
     }
 
@@ -150,10 +150,10 @@ class SqfliteLocalMediaDb implements LocalMediaDb {
   }
 
   @override
-  Future<Set<AvesEntry>> loadEntriesById(Set<int> ids) => _getByIds(ids, entryTable, AvesEntry.fromMap);
+  Future<Set<FmvEntry>> loadEntriesById(Set<int> ids) => _getByIds(ids, entryTable, FmvEntry.fromMap);
 
   @override
-  Future<void> insertEntries(Set<AvesEntry> entries) async {
+  Future<void> insertEntries(Set<FmvEntry> entries) async {
     if (entries.isEmpty) return;
     final stopwatch = Stopwatch()..start();
     // slice entries to avoid memory issues
@@ -169,14 +169,14 @@ class SqfliteLocalMediaDb implements LocalMediaDb {
   }
 
   @override
-  Future<void> updateEntry(int id, AvesEntry entry) async {
+  Future<void> updateEntry(int id, FmvEntry entry) async {
     final batch = _db.batch();
     batch.delete(entryTable, where: 'id = ?', whereArgs: [id]);
     _batchInsertEntry(batch, entry);
     await batch.commit(noResult: true);
   }
 
-  void _batchInsertEntry(Batch batch, AvesEntry entry) {
+  void _batchInsertEntry(Batch batch, FmvEntry entry) {
     batch.insert(
       entryTable,
       entry.toDatabaseMap(),
@@ -185,7 +185,7 @@ class SqfliteLocalMediaDb implements LocalMediaDb {
   }
 
   @override
-  Future<Set<AvesEntry>> searchLiveEntries(String query, {int? limit}) async {
+  Future<Set<FmvEntry>> searchLiveEntries(String query, {int? limit}) async {
     final rows = await _db.query(
       entryTable,
       where: '(title LIKE ? OR path LIKE ?) AND trashed = ?',
@@ -193,11 +193,11 @@ class SqfliteLocalMediaDb implements LocalMediaDb {
       orderBy: 'sourceDateTakenMillis DESC',
       limit: limit,
     );
-    return rows.map(AvesEntry.fromMap).toSet();
+    return rows.map(FmvEntry.fromMap).toSet();
   }
 
   @override
-  Future<Set<AvesEntry>> searchLiveDuplicates(int origin, Set<AvesEntry>? entries) async {
+  Future<Set<FmvEntry>> searchLiveDuplicates(int origin, Set<FmvEntry>? entries) async {
     String where = 'origin = ? AND trashed = ?';
     if (entries != null) {
       where += ' AND contentId IN (${entries.map((v) => v.contentId).join(',')})';
@@ -210,7 +210,7 @@ class SqfliteLocalMediaDb implements LocalMediaDb {
       ' HAVING COUNT(id) > 1',
       [origin, 0],
     );
-    final duplicates = rows.map(AvesEntry.fromMap).toSet();
+    final duplicates = rows.map(FmvEntry.fromMap).toSet();
     if (duplicates.isNotEmpty) {
       debugPrint('$runtimeType found duplicates=$duplicates');
     }

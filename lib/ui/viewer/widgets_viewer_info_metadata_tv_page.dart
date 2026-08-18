@@ -13,7 +13,7 @@ import 'package:flutter/services.dart';
 class TvMetadataPage extends StatefulWidget {
   static const routeName = '/info/metadata';
 
-  final AvesEntry entry;
+  final FmvEntry entry;
   final Map<String, MetadataDirectory> metadata;
 
   const TvMetadataPage({
@@ -51,7 +51,7 @@ class _TvMetadataPageState extends State<TvMetadataPage> {
 
   @override
   Widget build(BuildContext context) {
-    return AvesScaffold(
+    return FmvScaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(context.l10n.viewerInfoPageTitle),

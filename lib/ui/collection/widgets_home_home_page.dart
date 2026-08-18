@@ -57,7 +57,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  AvesEntry? _viewerEntry;
+  FmvEntry? _viewerEntry;
   int? _widgetId;
   String? _initialRouteName, _initialSearchQuery;
   Set<CollectionFilter>? _initialFilters;
@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  Widget build(BuildContext context) => AvesScaffold(
+  Widget build(BuildContext context) => FmvScaffold(
     body: _setupError != null
         ? HomeError(
             error: _setupError!.$1,
@@ -280,11 +280,11 @@ class _HomePageState extends State<HomePage> {
     await localMediaDb.init();
   }
 
-  bool _isViewerSourceable(AvesEntry? viewerEntry) {
+  bool _isViewerSourceable(FmvEntry? viewerEntry) {
     return viewerEntry != null && viewerEntry.directory != null && !settings.hiddenFilters.any((filter) => filter.test(viewerEntry));
   }
 
-  Future<AvesEntry?> _initViewerEntry({required String uri, required String? mimeType}) async {
+  Future<FmvEntry?> _initViewerEntry({required String uri, required String? mimeType}) async {
     if (uri.startsWith('/')) {
       // convert this file path to a proper URI
       uri = Uri.file(uri).toString();
@@ -311,7 +311,7 @@ class _HomePageState extends State<HomePage> {
           },
         );
       case .view:
-        AvesEntry viewerEntry = _viewerEntry!;
+        FmvEntry viewerEntry = _viewerEntry!;
         CollectionLens? collection;
 
         final source = context.read<CollectionSource>();

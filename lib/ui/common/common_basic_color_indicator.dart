@@ -36,7 +36,7 @@ class ColorIndicator extends StatelessWidget {
       width: dimension,
       decoration: BoxDecoration(
         color: _value,
-        border: AvesBorder.border(context),
+        border: FmvBorder.border(context),
         gradient: gradient,
         shape: BoxShape.circle,
       ),

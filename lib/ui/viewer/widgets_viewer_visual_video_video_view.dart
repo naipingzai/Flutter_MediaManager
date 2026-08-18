@@ -3,8 +3,8 @@ import 'package:flutter_media_view_video/flutter_media_view_video.dart';
 import 'package:flutter/material.dart';
 
 class VideoView extends StatefulWidget {
-  final AvesEntry entry;
-  final AvesVideoController controller;
+  final FmvEntry entry;
+  final FmvVideoController controller;
 
   const VideoView({
     super.key,
@@ -17,9 +17,9 @@ class VideoView extends StatefulWidget {
 }
 
 class _VideoViewState extends State<VideoView> {
-  AvesEntry get entry => widget.entry;
+  FmvEntry get entry => widget.entry;
 
-  AvesVideoController get controller => widget.controller;
+  FmvVideoController get controller => widget.controller;
 
   @override
   void initState() {

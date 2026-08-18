@@ -20,7 +20,7 @@ class _DebugGroupsSectionState extends State<DebugGroupsSection> with AutomaticK
 
     return Consumer<Settings>(
       builder: (context, settings, child) {
-        return AvesExpansionTile(
+        return FmvExpansionTile(
           title: 'Groups',
           children: [
             Padding(

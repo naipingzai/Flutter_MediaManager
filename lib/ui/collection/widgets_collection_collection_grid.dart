@@ -115,7 +115,7 @@ class _CollectionGridContent extends StatefulWidget {
 }
 
 class _CollectionGridContentState extends State<_CollectionGridContent> {
-  final ValueNotifier<AvesEntry?> _focusedItemNotifier = ValueNotifier(null);
+  final ValueNotifier<FmvEntry?> _focusedItemNotifier = ValueNotifier(null);
   final ValueNotifier<bool> _isScrollingNotifier = ValueNotifier(false);
   final ValueNotifier<AppMode> _selectingAppModeNotifier = ValueNotifier(.pickFilteredMediaInternal);
 
@@ -204,7 +204,7 @@ class _CollectionGridContentState extends State<_CollectionGridContent> {
                                           _focusedItemNotifier.value = null;
                                         }
                                       },
-                                      child: ValueListenableBuilder<AvesEntry?>(
+                                      child: ValueListenableBuilder<FmvEntry?>(
                                         valueListenable: _focusedItemNotifier,
                                         builder: (context, focusedItem, child) {
                                           return AnimatedScale(
@@ -247,7 +247,7 @@ class _CollectionGridContentState extends State<_CollectionGridContent> {
     );
   }
 
-  Future<void> _goToViewer(CollectionLens collection, AvesEntry entry) async {
+  Future<void> _goToViewer(CollectionLens collection, FmvEntry entry) async {
     // track viewer entry for dynamic hero placeholder
     final viewerEntryNotifier = context.read<ViewerEntryNotifier>();
 
@@ -260,7 +260,7 @@ class _CollectionGridContentState extends State<_CollectionGridContent> {
     final viewerCollection = collection.copyWith(
       listenToSource: false,
     );
-    final selection = context.read<Selection<AvesEntry>>();
+    final selection = context.read<Selection<FmvEntry>>();
     await Navigator.maybeOf(context)?.push(
       TransparentMaterialPageRoute(
         settings: const RouteSettings(name: EntryViewerPage.routeName),
@@ -274,7 +274,7 @@ class _CollectionGridContentState extends State<_CollectionGridContent> {
             child = MultiProvider(
               providers: [
                 ListenableProvider<ValueNotifier<AppMode>>.value(value: _selectingAppModeNotifier),
-                ChangeNotifierProvider<Selection<AvesEntry>>.value(value: selection),
+                ChangeNotifierProvider<Selection<FmvEntry>>.value(value: selection),
               ],
               child: child,
             );
@@ -360,7 +360,7 @@ class _CollectionSectionedContentState extends State<_CollectionSectionedContent
       child: scrollView,
     );
 
-    final selector = GridSelectionGestureDetector<AvesEntry>(
+    final selector = GridSelectionGestureDetector<FmvEntry>(
       scrollableKey: _scrollableKey,
       selectable: widget.selectable,
       items: collection.sortedEntries,
@@ -369,7 +369,7 @@ class _CollectionSectionedContentState extends State<_CollectionSectionedContent
       child: scaler,
     );
 
-    return GridItemTracker<AvesEntry>(
+    return GridItemTracker<FmvEntry>(
       scrollableKey: _scrollableKey,
       tileLayout: tileLayout,
       appBarHeightNotifier: _appBarHeightNotifier,
@@ -400,7 +400,7 @@ class _CollectionScaler extends StatelessWidget {
     final brightness = Theme.of(context).brightness;
     final borderColor = DecoratedThumbnail.borderColor(context);
     final borderWidth = DecoratedThumbnail.borderWidth(context);
-    return GridScaleGestureDetector<AvesEntry>(
+    return GridScaleGestureDetector<FmvEntry>(
       scrollableKey: scrollableKey,
       tileLayout: tileLayout,
       heightForWidth: (width) => width,
@@ -532,16 +532,16 @@ class _CollectionScrollViewState extends State<_CollectionScrollView> with Widge
                 final canNavigate = context.select<ValueNotifier<AppMode>, bool>((v) => v.value.canNavigate);
                 final showBottomNavigationBar = canNavigate && enableBottomNavigationBar;
                 final navBarHeight = showBottomNavigationBar ? AppBottomNavBar.height : 0;
-                return Selector<SectionedListLayout<AvesEntry>, List<SectionLayout>>(
+                return Selector<SectionedListLayout<FmvEntry>, List<SectionLayout>>(
                   selector: (context, layout) => layout.sectionLayouts,
                   builder: (context, sectionLayouts, child) {
                     final scrollController = widget.scrollController;
                     final offsetIncrementSnapThreshold = context.select<TileExtentController, double>((v) => (v.extentNotifier.value + v.spacing) / 4);
                     return DraggableScrollbar(
                       backgroundColor: Colors.white,
-                      scrollThumbSize: AvesScrollThumb.thumbSize,
-                      scrollThumbBuilder: AvesScrollThumb.builder(
-                        height: AvesScrollThumb.thumbHeight,
+                      scrollThumbSize: FmvScrollThumb.thumbSize,
+                      scrollThumbBuilder: FmvScrollThumb.builder(
+                        height: FmvScrollThumb.thumbHeight,
                         backgroundColor: Colors.white,
                       ),
                       controller: scrollController,
@@ -604,7 +604,7 @@ class _CollectionScrollViewState extends State<_CollectionScrollView> with Widge
                 hasScrollBody: false,
                 child: _buildEmptyContent(collection),
               )
-            : const SectionedListSliver<AvesEntry>(),
+            : const SectionedListSliver<FmvEntry>(),
         const NavBarPaddingSliver(),
         const BottomPaddingSliver(),
         const TvTileGridBottomPaddingSliver(),
@@ -629,7 +629,7 @@ class _CollectionScrollViewState extends State<_CollectionScrollView> with Widge
                 ? null
                 : Padding(
                     padding: const EdgeInsets.only(top: 16),
-                    child: AvesOutlinedButton(
+                    child: FmvOutlinedButton(
                       label: context.l10n.collectionEmptyGrantAccessButtonLabel,
                       onPressed: () async {
                         if (await openAppSettings()) {
@@ -669,7 +669,7 @@ class _CollectionScrollViewState extends State<_CollectionScrollView> with Widge
   }
 
   void _sanitizeSelection(BuildContext context) {
-    final selection = context.read<Selection<AvesEntry>?>();
+    final selection = context.read<Selection<FmvEntry>?>();
     if (selection == null || !selection.isSelecting) return;
 
     // check whether selection items are still within the filtered collection

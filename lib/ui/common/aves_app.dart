@@ -64,7 +64,7 @@ import 'package:provider/provider.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 import 'package:url_launcher/url_launcher.dart' as ul;
 
-class AvesApp extends StatefulWidget {
+class FmvApp extends StatefulWidget {
   final AppFlavor flavor;
   final Map<String, Object?>? debugIntentData;
 
@@ -75,25 +75,25 @@ class AvesApp extends StatefulWidget {
 
   // children widgets registering as `WidgetsBinding` observers and implementing `didChangeAppLifecycleState`
   // do not receive events fast enough for time sensitive actions (like PiP when leaving by gesture to home)
-  // so we use this notifier to propagate events as soon as received by the top widget `AvesApp`
+  // so we use this notifier to propagate events as soon as received by the top widget `FmvApp`
   static final ValueNotifier<AppLifecycleState> lifecycleStateNotifier = ValueNotifier(AppLifecycleState.detached);
 
   // do not monitor all `ModalRoute`s, which would include popup menus,
   // so that we can react to fullscreen `PageRoute`s only
   static final RouteObserver<PageRoute> pageRouteObserver = RouteObserver<PageRoute>();
 
-  static ScreenBrightness? get screenBrightness => _AvesAppState._screenBrightness;
+  static ScreenBrightness? get screenBrightness => _FmvAppState._screenBrightness;
 
-  static EventBus get intentEventBus => _AvesAppState._intentEventBus;
+  static EventBus get intentEventBus => _FmvAppState._intentEventBus;
 
-  const AvesApp({
+  const FmvApp({
     super.key,
     required this.flavor,
     this.debugIntentData,
   });
 
   @override
-  State<AvesApp> createState() => _AvesAppState();
+  State<FmvApp> createState() => _FmvAppState();
 
   static Future<void> showSystemUI(bool visible) async {
     if (visible) {
@@ -151,7 +151,7 @@ class AvesApp extends StatefulWidget {
   }
 }
 
-class _AvesAppState extends State<AvesApp> with WidgetsBindingObserver {
+class _FmvAppState extends State<FmvApp> with WidgetsBindingObserver {
   final Set<StreamSubscription> _subscriptions = {};
   late final Future<void> _appSetup;
   final TvRailController _tvRailController = TvRailController();
@@ -162,7 +162,7 @@ class _AvesAppState extends State<AvesApp> with WidgetsBindingObserver {
 
   // observers are not registered when using the same list object with different items
   // the list itself needs to be reassigned
-  List<NavigatorObserver> _navigatorObservers = [AvesApp.pageRouteObserver];
+  List<NavigatorObserver> _navigatorObservers = [FmvApp.pageRouteObserver];
   final EventChannel _mediaStoreChangeChannel = const OptionalEventChannel('com.naipingzai/flutter_media_view/media_store_change');
   final EventChannel _newIntentChannel = const OptionalEventChannel('com.naipingzai/flutter_media_view/new_intent_stream');
   final EventChannel _analysisCompletionChannel = const OptionalEventChannel('com.naipingzai/flutter_media_view/analysis_events');
@@ -186,7 +186,7 @@ class _AvesAppState extends State<AvesApp> with WidgetsBindingObserver {
 
     debugPrint('start listening to app lifecycle');
     WidgetsBinding.instance.addObserver(this);
-    AvesApp.lifecycleStateNotifier.value = WidgetsBinding.instance.lifecycleState ?? AppLifecycleState.detached;
+    FmvApp.lifecycleStateNotifier.value = WidgetsBinding.instance.lifecycleState ?? AppLifecycleState.detached;
   }
 
   @override
@@ -235,10 +235,10 @@ class _AvesAppState extends State<AvesApp> with WidgetsBindingObserver {
               final initialized = !snapshot.hasError && snapshot.connectionState == ConnectionState.done;
               final home = initialized
                   ? getFirstPage(intentData: widget.debugIntentData)
-                  : AvesScaffold(
+                  : FmvScaffold(
                       body: snapshot.hasError ? _buildError(snapshot.error!) : const SizedBox(),
                     );
-              return Selector<Settings, (Locale?, AvesThemeBrightness, bool)>(
+              return Selector<Settings, (Locale?, FmvThemeBrightness, bool)>(
                 selector: (context, s) => (
                   s.basicLocale,
                   s.initialized ? s.themeBrightness : SettingsDefaults.themeBrightness,
@@ -248,14 +248,14 @@ class _AvesAppState extends State<AvesApp> with WidgetsBindingObserver {
                   final (settingsLocale, themeBrightness, enableDynamicColor) = s;
                   return DynamicColorBuilder(
                     builder: (lightScheme, darkScheme) {
-                      const defaultAccent = AvesColorsData.defaultAccent;
+                      const defaultAccent = FmvColorsData.defaultAccent;
                       Color lightAccent = defaultAccent, darkAccent = defaultAccent;
                       if (enableDynamicColor) {
                         lightAccent = lightScheme?.primary ?? lightAccent;
                         darkAccent = darkScheme?.primary ?? darkAccent;
                       }
                       final lightTheme = Themes.lightTheme(lightAccent, initialized);
-                      final darkTheme = themeBrightness == AvesThemeBrightness.black ? Themes.blackTheme(darkAccent, initialized) : Themes.darkTheme(darkAccent, initialized);
+                      final darkTheme = themeBrightness == FmvThemeBrightness.black ? Themes.blackTheme(darkAccent, initialized) : Themes.darkTheme(darkAccent, initialized);
                       return Shortcuts(
                         shortcuts: {
                           // handle Android TV remote `select` button (KEYCODE_DPAD_CENTER)
@@ -285,7 +285,7 @@ class _AvesAppState extends State<AvesApp> with WidgetsBindingObserver {
                                   final routeName = settings.name ?? 'none';
                                   debugPrint('Could not find a generator for route name=$routeName');
                                   // Flutter automatically pushes a new route when receiving a new Android intent with a provided URI,
-                                  // but this is redundant with Aves handling. If that redundant route is not handled here,
+                                  // but this is redundant with Fmv handling. If that redundant route is not handled here,
                                   // Flutter throws an error, so we provide a dummy result.
                                   return DirectMaterialPageRoute(
                                     settings: settings,
@@ -293,7 +293,7 @@ class _AvesAppState extends State<AvesApp> with WidgetsBindingObserver {
                                   );
                                 },
                                 navigatorObservers: _navigatorObservers,
-                                builder: (context, child) => AvesAppContentDecorator(
+                                builder: (context, child) => FmvAppContentDecorator(
                                   initialized: initialized,
                                   source: _mediaStoreSource,
                                   child: child,
@@ -310,8 +310,8 @@ class _AvesAppState extends State<AvesApp> with WidgetsBindingObserver {
                                   ...LocalizationsNn.delegates,
                                   ...AppLocalizations.localizationsDelegates,
                                 ],
-                                supportedLocales: AvesApp.supportedLocales,
-                                scrollBehavior: AvesScrollBehavior(),
+                                supportedLocales: FmvApp.supportedLocales,
+                                scrollBehavior: FmvScrollBehavior(),
                               ),
                             );
                           },
@@ -346,7 +346,7 @@ class _AvesAppState extends State<AvesApp> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     reportService.log('Lifecycle ${state.name}');
-    AvesApp.lifecycleStateNotifier.value = state;
+    FmvApp.lifecycleStateNotifier.value = state;
     switch (state) {
       case .inactive:
         switch (_appModeNotifier.value) {
@@ -432,7 +432,7 @@ class _AvesAppState extends State<AvesApp> with WidgetsBindingObserver {
     videoControllerFactory.init();
     videoMetadataFetcher.init();
 
-    unawaited(deviceService.setLocaleConfig(AvesApp.supportedLocales));
+    unawaited(deviceService.setLocaleConfig(FmvApp.supportedLocales));
     unawaited(storageService.deleteTempDirectory());
     unawaited(_setupErrorReporting());
 
@@ -455,9 +455,9 @@ class _AvesAppState extends State<AvesApp> with WidgetsBindingObserver {
         switch (settings.maxBrightness) {
           case .never:
           case .viewerOnly:
-            AvesApp.screenBrightness?.resetApplicationScreenBrightness();
+            FmvApp.screenBrightness?.resetApplicationScreenBrightness();
           case .always:
-            AvesApp.screenBrightness?.setApplicationScreenBrightness(1);
+            FmvApp.screenBrightness?.setApplicationScreenBrightness(1);
         }
       } on PlatformException catch (e, stack) {
         // `screen_brightness` plugin may fail
@@ -519,7 +519,7 @@ class _AvesAppState extends State<AvesApp> with WidgetsBindingObserver {
     await reportService.log('Launch');
     setState(
       () => _navigatorObservers = [
-        AvesApp.pageRouteObserver,
+        FmvApp.pageRouteObserver,
         ReportingRouteTracker(),
       ],
     );
@@ -597,7 +597,7 @@ class _AvesAppState extends State<AvesApp> with WidgetsBindingObserver {
 // Flutter has various overscroll indicator implementations for Android:
 // - `StretchingOverscrollIndicator`, default when using Material 3
 // - `GlowingOverscrollIndicator`, default when not using Material 3
-class AvesScrollBehavior extends MaterialScrollBehavior {
+class FmvScrollBehavior extends MaterialScrollBehavior {
   @override
   Widget buildOverscrollIndicator(BuildContext context, Widget child, ScrollableDetails details) {
     final animate = context.select<Settings, bool>((v) => v.animate);
@@ -618,12 +618,12 @@ class LocationReceivedEvent {
   const LocationReceivedEvent(this.location);
 }
 
-class AvesAppContentDecorator extends StatefulWidget {
+class FmvAppContentDecorator extends StatefulWidget {
   final bool initialized;
   final CollectionSource source;
   final Widget? child;
 
-  const AvesAppContentDecorator({
+  const FmvAppContentDecorator({
     super.key,
     required this.initialized,
     required this.source,
@@ -631,10 +631,10 @@ class AvesAppContentDecorator extends StatefulWidget {
   });
 
   @override
-  State<AvesAppContentDecorator> createState() => _AvesAppContentDecoratorState();
+  State<FmvAppContentDecorator> createState() => _AvesAppContentDecoratorState();
 }
 
-class _AvesAppContentDecoratorState extends State<AvesAppContentDecorator> with FeedbackMixin {
+class _AvesAppContentDecoratorState extends State<FmvAppContentDecorator> with FeedbackMixin {
   late final Future<bool> _shouldUseBoldFontLoader;
   final ValueNotifier<PageTransitionsBuilder> _pageTransitionsBuilderNotifier = ValueNotifier(_defaultPageTransitionsBuilder);
   final ValueNotifier<TvMediaQueryModifier?> _tvMediaQueryModifierNotifier = ValueNotifier(null);
@@ -660,7 +660,7 @@ class _AvesAppContentDecoratorState extends State<AvesAppContentDecorator> with 
   }
 
   @override
-  void didUpdateWidget(covariant AvesAppContentDecorator oldWidget) {
+  void didUpdateWidget(covariant FmvAppContentDecorator oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (!oldWidget.initialized && widget.initialized) {
       _onAppInitialized();
@@ -694,7 +694,7 @@ class _AvesAppContentDecoratorState extends State<AvesAppContentDecorator> with 
             builder: (context, modifier, child) {
               return MediaQuery(
                 data: modifier?.call(mq) ?? mq,
-                child: AvesColorsProvider(
+                child: FmvColorsProvider(
                   child: ValueListenableBuilder<PageTransitionsBuilder>(
                     valueListenable: _pageTransitionsBuilderNotifier,
                     builder: (context, pageTransitionsBuilder, child) {
@@ -730,9 +730,9 @@ class _AvesAppContentDecoratorState extends State<AvesAppContentDecorator> with 
 
   // necessary on older devices
   Future<void> _updateSystemUI() async {
-    await AvesApp.showSystemUI(true);
+    await FmvApp.showSystemUI(true);
     await Future.delayed(const Duration(milliseconds: 400));
-    AvesApp.setSystemUIStyle(Theme.of(context));
+    FmvApp.setSystemUIStyle(Theme.of(context));
   }
 
   Future<void> _onWindowChange(Map? fields) async {
@@ -752,19 +752,19 @@ class _AvesAppContentDecoratorState extends State<AvesAppContentDecorator> with 
         final statusBarVisible = fields['status_bar'];
         final navBarVisible = fields['nav_bar'];
         if (statusBarVisible == true && navBarVisible == true) {
-          AvesApp.setSystemUIStyle(Theme.of(context));
+          FmvApp.setSystemUIStyle(Theme.of(context));
         }
     }
   }
 
   Future<void> _updateCutoutInsets() async {
-    AvesApp.cutoutInsetsNotifier.value = await windowService.getCutoutInsets();
+    FmvApp.cutoutInsetsNotifier.value = await windowService.getCutoutInsets();
   }
 
   Future<void> _updateWindowMode() async {
     final isInPipMode = await windowService.isInPictureInPictureMode();
-    AvesApp.isInPictureInPictureMode.value = isInPipMode;
-    AvesApp.canGestureToOtherApps.value = await windowService.isInMultiWindowMode() && !isInPipMode;
+    FmvApp.isInPictureInPictureMode.value = isInPipMode;
+    FmvApp.canGestureToOtherApps.value = await windowService.isInMultiWindowMode() && !isInPipMode;
   }
 
   Future<void> _onSourceStateChanged() async {
@@ -802,7 +802,7 @@ class _AvesAppContentDecoratorState extends State<AvesAppContentDecorator> with 
                 '${l10n.genericFailureFeedback}${AText.separator}${l10n.settingsAutoExportSettings}',
                 SnackBarAction(
                   label: 'FAQ',
-                  onPressed: () => AvesApp.launchUrl('${AppReference.avesFaq}#why-is-auto-settings-export-failing'),
+                  onPressed: () => FmvApp.launchUrl('${AppReference.avesFaq}#why-is-auto-settings-export-failing'),
                 ),
               );
             }
@@ -816,10 +816,10 @@ class _AvesAppContentDecoratorState extends State<AvesAppContentDecorator> with 
   Future<void> _applyForceTvLayout() async {
     await _onTvLayoutChanged();
     unawaited(
-      _AvesAppState.navigatorKey.currentState!.pushAndRemoveUntil(
+      _FmvAppState.navigatorKey.currentState!.pushAndRemoveUntil(
         MaterialPageRoute(
           settings: const RouteSettings(name: HomePage.routeName),
-          builder: (_) => _AvesAppState.getFirstPage(),
+          builder: (_) => _FmvAppState.getFirstPage(),
         ),
         (route) => false,
       ),

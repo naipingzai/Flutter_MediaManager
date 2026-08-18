@@ -5,7 +5,7 @@ import 'package:flutter_media_view_video/flutter_media_view_video.dart';
 import 'package:flutter/material.dart';
 
 class VideoABRepeatOverlay extends StatefulWidget {
-  final AvesVideoController? controller;
+  final FmvVideoController? controller;
   final Animation<double> scale;
 
   const VideoABRepeatOverlay({
@@ -23,7 +23,7 @@ class _VideoABRepeatOverlayState extends State<VideoABRepeatOverlay> {
 
   Animation<double> get scale => widget.scale;
 
-  AvesVideoController? get controller => widget.controller;
+  FmvVideoController? get controller => widget.controller;
 
   ValueNotifier<ABRepeat?> get abRepeatNotifier => controller?.abRepeatNotifier ?? _internalAbRepeatNotifier;
 

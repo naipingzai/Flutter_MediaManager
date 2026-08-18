@@ -37,7 +37,7 @@ class CollectionPage extends StatefulWidget {
 
   final CollectionSource source;
   final Set<CollectionFilter?>? filters;
-  final bool Function(AvesEntry element)? highlightTest;
+  final bool Function(FmvEntry element)? highlightTest;
 
   const CollectionPage({
     super.key,
@@ -87,9 +87,9 @@ class _CollectionPageState extends State<CollectionPage> {
   Widget build(BuildContext context) {
     final useTvLayout = settings.useTvLayout;
     final liveFilter = _collection.filters.firstWhereOrNull((v) => v is QueryFilter && v.live) as QueryFilter?;
-    return SelectionProvider<AvesEntry>(
+    return SelectionProvider<FmvEntry>(
       toSelectableItems: (entry) => entry.toSelectableItems(),
-      child: Selector<Selection<AvesEntry>, (bool, int)>(
+      child: Selector<Selection<FmvEntry>, (bool, int)>(
         selector: (context, selection) => (selection.isSelecting, selection.selectedItemCount),
         builder: (context, selectionResult, child) {
           final (isSelecting, selectedItemCount) = selectionResult;
@@ -98,11 +98,11 @@ class _CollectionPageState extends State<CollectionPage> {
             initialQuery: liveFilter?.query,
             child: Builder(
               builder: (context) {
-                return AvesPopScope(
+                return FmvPopScope(
                   handlers: [
                     APopHandler(
-                      canPop: (context) => context.select<Selection<AvesEntry>, bool>((v) => !v.isSelecting),
-                      onPopBlocked: (context) => context.read<Selection<AvesEntry>>().browse(),
+                      canPop: (context) => context.select<Selection<FmvEntry>, bool>((v) => !v.isSelecting),
+                      onPopBlocked: (context) => context.read<Selection<FmvEntry>>().browse(),
                     ),
                     tvNavigationPopHandler,
                     doubleBackPopHandler,
@@ -126,7 +126,7 @@ class _CollectionPageState extends State<CollectionPage> {
 
           Widget page;
           if (useTvLayout) {
-            page = AvesScaffold(
+            page = FmvScaffold(
               body: Row(
                 children: [
                   TvRail(
@@ -151,7 +151,7 @@ class _CollectionPageState extends State<CollectionPage> {
                     _draggableScrollBarEventStreamController.add(notification.event);
                     return false;
                   },
-                  child: AvesScaffold(
+                  child: FmvScaffold(
                     body: body,
                     floatingActionButton: _buildFab(context, isSelecting, selectedItemCount),
                     drawer: canNavigate ? AppDrawer(currentCollection: _collection) : null,
@@ -199,7 +199,7 @@ class _CollectionPageState extends State<CollectionPage> {
         selectedItemCount: selectedItemCount,
       );
 
-      return AvesFab(
+      return FmvFab(
         tooltip: action.getText(context),
         icon: action.getIcon(),
         onPressed: canApply ? () => actionDelegate.onActionSelected(context, action) : null,

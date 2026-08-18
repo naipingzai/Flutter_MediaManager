@@ -5,7 +5,7 @@ import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class AvesExpansionTile extends StatelessWidget {
+class FmvExpansionTile extends StatelessWidget {
   final String value;
   final Widget? leading;
   final String title;
@@ -14,7 +14,7 @@ class AvesExpansionTile extends StatelessWidget {
   final bool initiallyExpanded, showHighlight;
   final List<Widget> children;
 
-  const AvesExpansionTile({
+  const FmvExpansionTile({
     super.key,
     String? value,
     this.leading,

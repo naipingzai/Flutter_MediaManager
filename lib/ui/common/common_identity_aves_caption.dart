@@ -3,10 +3,10 @@ import 'package:flutter_media_view/ui/common/common_basic_text_change_highlight.
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class AvesCaption extends StatelessWidget {
+class FmvCaption extends StatelessWidget {
   final String data;
 
-  const AvesCaption(
+  const FmvCaption(
     this.data, {
     super.key,
   });

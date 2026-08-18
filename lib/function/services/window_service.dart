@@ -45,7 +45,7 @@ abstract class WindowService {
 }
 
 class PlatformWindowService implements WindowService {
-  static const _platform = AvesMethodChannel('com.naipingzai/flutter_media_view/window');
+  static const _platform = FmvMethodChannel('com.naipingzai/flutter_media_view/window');
 
   bool? _isCutoutAware, _supportsHdr, _supportsWideGamut;
 

@@ -50,12 +50,12 @@ class FilterTable<T extends Comparable> extends StatelessWidget {
     final isRtl = context.isRtl;
 
     return Padding(
-      padding: const EdgeInsetsDirectional.only(start: AvesFilterChip.outlineWidth / 2 + 6, end: 8),
+      padding: const EdgeInsetsDirectional.only(start: FmvFilterChip.outlineWidth / 2 + 6, end: 8),
       child: LayoutBuilder(
         builder: (context, constraints) {
           final showPercentIndicator = constraints.maxWidth - (chipWidth + countWidth) > percentIndicatorMinWidth;
           final displayedEntries = maxRowCount != null ? sortedEntries.take(maxRowCount!) : sortedEntries;
-          final isMonochrome = settings.themeColorMode == AvesThemeColorMode.monochrome;
+          final isMonochrome = settings.themeColorMode == FmvThemeColorMode.monochrome;
           return Table(
             children: displayedEntries.map((kv) {
               final filter = filterBuilder(kv.key);
@@ -70,7 +70,7 @@ class FilterTable<T extends Comparable> extends StatelessWidget {
                     // to keep all cells vertically aligned on the center/middle
                     margin: const EdgeInsets.symmetric(vertical: 4),
                     alignment: AlignmentDirectional.centerStart,
-                    child: AvesFilterChip(
+                    child: FmvFilterChip(
                       filter: filter,
                       onTap: onFilterSelection,
                     ),

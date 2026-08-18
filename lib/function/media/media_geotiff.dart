@@ -40,7 +40,7 @@ class GeoTiffInfo extends Equatable {
 }
 
 class MappedGeoTiff with MapOverlay {
-  final AvesEntry entry;
+  final FmvEntry entry;
 
   late final GeoTiffCoordinateConverter _converter;
   late final int _mapServiceTileSize;
@@ -175,7 +175,7 @@ class MappedGeoTiff with MapOverlay {
 }
 
 class GeoTiffCoordinateConverter {
-  final AvesEntry entry;
+  final FmvEntry entry;
 
   late LatLng? Function(Point<int> pixel) pointToLatLng;
   late Point<int>? Function(Point<double> smPoint) epsg3857ToPoint;

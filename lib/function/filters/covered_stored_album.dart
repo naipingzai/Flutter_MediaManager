@@ -72,7 +72,7 @@ class StoredAlbumFilter extends CollectionFilter with CoveredFilter, AlbumBaseFi
     final customColor = covers.of(this)?.color;
     if (customColor != null) return SynchronousFuture(customColor);
 
-    final colors = context.read<AvesColorsData>();
+    final colors = context.read<FmvColorsData>();
     // do not use async/await and rely on `SynchronousFuture`
     // to prevent rebuilding of the `FutureBuilder` listening on this future
     final albumType = covers.effectiveAlbumType(album);

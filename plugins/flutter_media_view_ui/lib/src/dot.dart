@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class AvesDot extends StatelessWidget {
+class FmvDot extends StatelessWidget {
   final double diameter, outerBorderWidth, innerBorderWidth;
   final Color Function(bool isDark) getOuterBorderColor, getInnerBorderColor;
 
-  const AvesDot({
+  const FmvDot({
     super.key,
     this.diameter = 16,
     this.outerBorderWidth = 1.5,

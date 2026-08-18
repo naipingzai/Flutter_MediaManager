@@ -29,7 +29,7 @@ class MultiPageConductor {
     _controllers.clear();
   }
 
-  MultiPageController getOrCreateController(AvesEntry entry) {
+  MultiPageController getOrCreateController(FmvEntry entry) {
     var controller = getController(entry);
     if (controller != null) {
       _controllers.remove(controller);
@@ -43,7 +43,7 @@ class MultiPageConductor {
     return controller;
   }
 
-  MultiPageController? getController(AvesEntry entry) {
+  MultiPageController? getController(FmvEntry entry) {
     return _controllers.firstWhereOrNull((c) => c.entry.uri == entry.uri && c.entry.pageId == entry.pageId);
   }
 

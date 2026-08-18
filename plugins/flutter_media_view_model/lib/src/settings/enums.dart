@@ -2,9 +2,9 @@ enum AccessibilityAnimations { system, disabled, enabled }
 
 enum AccessibilityTimeout { system, s1, s3, s5, s10, s30 }
 
-enum AvesThemeBrightness { system, light, dark, black }
+enum FmvThemeBrightness { system, light, dark, black }
 
-enum AvesThemeColorMode { monochrome, polychrome }
+enum FmvThemeColorMode { monochrome, polychrome }
 
 enum ConfirmationDialog { createVault, deleteForever, moveToBin, moveUndatedItems }
 

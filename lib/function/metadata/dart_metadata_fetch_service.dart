@@ -17,13 +17,13 @@ import 'package:image/image.dart' as img;
 
 /// 纯 Dart 元数据服务：用 `image`（EXIF）+ `xml`（XMP）解析图片元数据。
 ///
-/// 跨平台（Android/iOS/Linux/Windows 通用），替代 Aves 原生 `PlatformMetadataFetchService`
+/// 跨平台（Android/iOS/Linux/Windows 通用），替代 Fmv 原生 `PlatformMetadataFetchService`
 /// （该实现依赖 Android/iOS 平台通道）。视频元数据仍由 `MpvVideoMetadataFetcher` 处理，
 /// 这里只负责图片。
 class DartMetadataFetchService implements MetadataFetchService {
   // ── 读取文件 ──
 
-  Future<Uint8List?> _readBytes(AvesEntry entry) async {
+  Future<Uint8List?> _readBytes(FmvEntry entry) async {
     try {
       return await mediaFetchService.getOriginalBytes(entry);
     } catch (error, stack) {
@@ -34,7 +34,7 @@ class DartMetadataFetchService implements MetadataFetchService {
 
   // ── EXIF ──
 
-  img.ExifData? _getExif(AvesEntry entry, Uint8List bytes) {
+  img.ExifData? _getExif(FmvEntry entry, Uint8List bytes) {
     if (entry.mimeType == MimeTypes.jpeg || entry.mimeType == MimeTypes.tiff) {
       try {
         return img.decodeJpgExif(bytes);
@@ -78,7 +78,7 @@ class DartMetadataFetchService implements MetadataFetchService {
   // ── 主入口 ──
 
   @override
-  Future<CatalogMetadata?> getCatalogMetadata(AvesEntry entry, {bool background = false}) async {
+  Future<CatalogMetadata?> getCatalogMetadata(FmvEntry entry, {bool background = false}) async {
     if (entry.isSvg) return CatalogMetadata(id: entry.id);
 
     final bytes = await _readBytes(entry);
@@ -155,7 +155,7 @@ class DartMetadataFetchService implements MetadataFetchService {
   }
 
   @override
-  Future<OverlayMetadata> getOverlayMetadata(AvesEntry entry, Set<MetadataSyntheticField> fields) async {
+  Future<OverlayMetadata> getOverlayMetadata(FmvEntry entry, Set<MetadataSyntheticField> fields) async {
     if (fields.isEmpty || entry.isSvg) return const OverlayMetadata();
 
     final bytes = await _readBytes(entry);
@@ -175,7 +175,7 @@ class DartMetadataFetchService implements MetadataFetchService {
   img.IfdDirectory? imageIfdOf(img.ExifData exif) => exif.imageIfd;
 
   @override
-  Future<Map> getAllMetadata(AvesEntry entry) async {
+  Future<Map> getAllMetadata(FmvEntry entry) async {
     if (entry.isSvg) return {};
 
     final bytes = await _readBytes(entry);
@@ -200,36 +200,36 @@ class DartMetadataFetchService implements MetadataFetchService {
   }
 
   @override
-  Future<GeoTiffInfo?> getGeoTiffInfo(AvesEntry entry) async => null;
+  Future<GeoTiffInfo?> getGeoTiffInfo(FmvEntry entry) async => null;
 
   @override
-  Future<MultiPageInfo?> getMultiPageInfo(AvesEntry entry) async => null;
+  Future<MultiPageInfo?> getMultiPageInfo(FmvEntry entry) async => null;
 
   @override
-  Future<PanoramaInfo?> getPanoramaInfo(AvesEntry entry) async => null;
+  Future<PanoramaInfo?> getPanoramaInfo(FmvEntry entry) async => null;
 
   @override
-  Future<List<Map<String, dynamic>>?> getIptc(AvesEntry entry) async {
+  Future<List<Map<String, dynamic>>?> getIptc(FmvEntry entry) async {
     final bytes = await _readBytes(entry);
     return bytes == null ? null : _parseIptc(bytes);
   }
 
   @override
-  Future<AvesXmp?> getXmp(AvesEntry entry) async {
+  Future<FmvXmp?> getXmp(FmvEntry entry) async {
     final bytes = await _readBytes(entry);
     if (bytes == null) return null;
     final xmpString = _extractXmpPacket(bytes);
-    return xmpString == null ? null : AvesXmp(xmpString: xmpString);
+    return xmpString == null ? null : FmvXmp(xmpString: xmpString);
   }
 
   @override
   Future<bool> hasContentResolverProp(String prop) async => false;
 
   @override
-  Future<String?> getContentResolverProp(AvesEntry entry, String prop) async => null;
+  Future<String?> getContentResolverProp(FmvEntry entry, String prop) async => null;
 
   @override
-  Future<DateTime?> getDate(AvesEntry entry, MetadataField field) async {
+  Future<DateTime?> getDate(FmvEntry entry, MetadataField field) async {
     final bytes = await _readBytes(entry);
     final exif = bytes == null ? null : _getExif(entry, bytes);
     if (exif == null) return null;
@@ -246,7 +246,7 @@ class DartMetadataFetchService implements MetadataFetchService {
   }
 
   @override
-  Future<Map<String, Object?>> getFields(AvesEntry entry, Set<MetadataField> fields) async {
+  Future<Map<String, Object?>> getFields(FmvEntry entry, Set<MetadataField> fields) async {
     if (fields.isEmpty) return {};
 
     final bytes = await _readBytes(entry);

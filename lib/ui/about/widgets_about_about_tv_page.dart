@@ -19,8 +19,8 @@ class AboutTvPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AvesScaffold(
-      body: AvesPopScope(
+    return FmvScaffold(
+      body: FmvPopScope(
         handlers: [tvNavigationPopHandler],
         child: Row(
           children: [
@@ -185,7 +185,7 @@ class _ContentState extends State<_Content> {
               Text(context.l10n.aboutLicensesBanner),
               const SizedBox(height: 16),
               Center(
-                child: AvesOutlinedButton(
+                child: FmvOutlinedButton(
                   label: context.l10n.aboutLicensesShowAllButtonLabel,
                   onPressed: () => Navigator.maybeOf(context)?.push(
                     MaterialPageRoute(

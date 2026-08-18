@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-class AvesAppBar extends StatelessWidget {
+class FmvAppBar extends StatelessWidget {
   final double contentHeight;
   final bool pinned;
   final Widget? leading;
@@ -26,7 +26,7 @@ class AvesAppBar extends StatelessWidget {
   static const titleHeroTag = 'appbar-title';
   static const double _titleMinWidth = 96;
 
-  const AvesAppBar({
+  const FmvAppBar({
     super.key,
     required this.contentHeight,
     required this.pinned,
@@ -98,7 +98,7 @@ class AvesAppBar extends StatelessWidget {
           bottom: false,
           child: AnnotatedRegion<SystemUiOverlayStyle>(
             value: appBarTheme.systemOverlayStyle!,
-            child: AvesFloatingBar(
+            child: FmvFloatingBar(
               builder: (context, backgroundColor, child) => Material(
                 color: backgroundColor,
                 child: AInkResponse(
@@ -181,7 +181,7 @@ class AvesAppBar extends StatelessWidget {
     );
   }
 
-  static double appBarHeightForContentHeight(double contentHeight) => AvesFloatingBar.margin.vertical + contentHeight;
+  static double appBarHeightForContentHeight(double contentHeight) => FmvFloatingBar.margin.vertical + contentHeight;
 }
 
 class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
@@ -206,24 +206,24 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   bool shouldRebuild(covariant _SliverAppBarDelegate oldDelegate) => true;
 }
 
-class AvesFloatingBar extends StatefulWidget {
+class FmvFloatingBar extends StatefulWidget {
   final Widget Function(BuildContext context, Color backgroundColor, Widget? child) builder;
   final Widget? child;
 
   static const margin = EdgeInsets.all(8);
   static const borderRadius = BorderRadius.all(Radius.circular(8));
 
-  const AvesFloatingBar({
+  const FmvFloatingBar({
     super.key,
     required this.builder,
     this.child,
   });
 
   @override
-  State<AvesFloatingBar> createState() => _AvesFloatingBarState();
+  State<FmvFloatingBar> createState() => _AvesFloatingBarState();
 }
 
-class _AvesFloatingBarState extends State<AvesFloatingBar> with RouteAware {
+class _AvesFloatingBarState extends State<FmvFloatingBar> with RouteAware {
   // prevent expensive blurring when the current page is hidden
   final ValueNotifier<bool> _isBlurAllowedNotifier = ValueNotifier(true);
   Timer? _blurBlockTimer;
@@ -233,13 +233,13 @@ class _AvesFloatingBarState extends State<AvesFloatingBar> with RouteAware {
     super.didChangeDependencies();
     final route = ModalRoute.of(context);
     if (route is PageRoute) {
-      AvesApp.pageRouteObserver.subscribe(this, route);
+      FmvApp.pageRouteObserver.subscribe(this, route);
     }
   }
 
   @override
   void dispose() {
-    AvesApp.pageRouteObserver.unsubscribe(this);
+    FmvApp.pageRouteObserver.unsubscribe(this);
     _isBlurAllowedNotifier.dispose();
     super.dispose();
   }
@@ -279,12 +279,12 @@ class _AvesFloatingBarState extends State<AvesFloatingBar> with RouteAware {
             border: Border.all(
               color: theme.dividerColor,
             ),
-            borderRadius: AvesFloatingBar.borderRadius,
+            borderRadius: FmvFloatingBar.borderRadius,
           ),
-          margin: AvesFloatingBar.margin,
+          margin: FmvFloatingBar.margin,
           child: BlurredRRect(
             enabled: blurred,
-            borderRadius: AvesFloatingBar.borderRadius,
+            borderRadius: FmvFloatingBar.borderRadius,
             child: widget.builder(
               context,
               blurred ? backgroundColor.withValues(alpha: .85) : backgroundColor,

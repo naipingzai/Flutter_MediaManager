@@ -4,7 +4,7 @@ import 'package:flutter_media_view/ui/common/common_extensions_build_context.dar
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class AvesDialog extends StatefulWidget {
+class FmvDialog extends StatefulWidget {
   static const confirmationRouteName = '/dialog/confirmation';
   static const warningRouteName = '/dialog/warning';
 
@@ -22,7 +22,7 @@ class AvesDialog extends StatefulWidget {
   static const EdgeInsets actionsPadding = EdgeInsets.symmetric(vertical: 4, horizontal: 16);
   static const EdgeInsets buttonPadding = EdgeInsets.symmetric(horizontal: 8);
 
-  const AvesDialog({
+  const FmvDialog({
     super.key,
     this.title,
     this.scrollController,
@@ -33,7 +33,7 @@ class AvesDialog extends StatefulWidget {
   }) : assert((scrollableContent != null) ^ (content != null));
 
   @override
-  State<AvesDialog> createState() => _AvesDialogState();
+  State<FmvDialog> createState() => _AvesDialogState();
 
   static Decoration contentDecoration(BuildContext context) => BoxDecoration(
     border: Border(
@@ -49,7 +49,7 @@ class AvesDialog extends StatefulWidget {
   }
 }
 
-class _AvesDialogState extends State<AvesDialog> {
+class _AvesDialogState extends State<FmvDialog> {
   final ScrollController _internalScrollController = ScrollController();
 
   ScrollController get scrollController => widget.scrollController ?? _internalScrollController;
@@ -67,7 +67,7 @@ class _AvesDialogState extends State<AvesDialog> {
       title: title != null
           ? Padding(
               // padding to avoid transparent border overlapping
-              padding: const EdgeInsets.symmetric(horizontal: AvesDialog.borderWidth),
+              padding: const EdgeInsets.symmetric(horizontal: FmvDialog.borderWidth),
               child: DialogTitle(title: title),
             )
           : null,
@@ -85,11 +85,11 @@ class _AvesDialogState extends State<AvesDialog> {
               right: widget.horizontalContentPadding,
             ),
       actions: widget.actions,
-      actionsPadding: AvesDialog.actionsPadding,
-      buttonPadding: AvesDialog.buttonPadding,
+      actionsPadding: FmvDialog.actionsPadding,
+      buttonPadding: FmvDialog.buttonPadding,
       // clipping to prevent highlighted material to bleed through rounded corners
       clipBehavior: Clip.antiAlias,
-      shape: AvesDialog.shape(context),
+      shape: FmvDialog.shape(context),
     );
   }
 
@@ -115,7 +115,7 @@ class _AvesDialogState extends State<AvesDialog> {
               radius: const Radius.circular(16),
               crossAxisMargin: 4,
               // adapt margin when corner is around content itself, not outside for the title
-              mainAxisMargin: 4 + (widget.title != null ? 0 : AvesDialog.cornerRadius.y / 2),
+              mainAxisMargin: 4 + (widget.title != null ? 0 : FmvDialog.cornerRadius.y / 2),
               interactive: true,
             ),
           ),
@@ -135,13 +135,13 @@ class _AvesDialogState extends State<AvesDialog> {
 
       return Container(
         // padding to avoid transparent border overlapping
-        padding: const EdgeInsets.symmetric(horizontal: AvesDialog.borderWidth),
+        padding: const EdgeInsets.symmetric(horizontal: FmvDialog.borderWidth),
         // workaround because the dialog tries
         // to size itself to the content intrinsic size,
         // but the `ListView` viewport does not have one
         width: MediaQuery.sizeOf(context).width / 2,
         child: DecoratedBox(
-          decoration: AvesDialog.contentDecoration(context),
+          decoration: FmvDialog.contentDecoration(context),
           child: child,
         ),
       );
@@ -164,7 +164,7 @@ class DialogTitle extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
-      decoration: AvesDialog.contentDecoration(context),
+      decoration: FmvDialog.contentDecoration(context),
       child: Text(
         title,
         textAlign: TextAlign.center,
@@ -183,8 +183,8 @@ Future<void> showWarningDialog({
   required String message,
 }) => showAvesDialog<void>(
   context: context,
-  builder: (context) => AvesMessageDialog.info(message),
-  routeSettings: const RouteSettings(name: AvesDialog.warningRouteName),
+  builder: (context) => FmvMessageDialog.info(message),
+  routeSettings: const RouteSettings(name: FmvDialog.warningRouteName),
 );
 
 Future<T?> showAvesDialog<T>({
@@ -261,18 +261,18 @@ class OkButton<T> extends StatelessWidget {
   }
 }
 
-class AvesMessageDialog extends StatelessWidget {
+class FmvMessageDialog extends StatelessWidget {
   final String message;
   final List<Widget> actions;
 
-  const AvesMessageDialog({
+  const FmvMessageDialog({
     super.key,
     required this.message,
     required this.actions,
   });
 
-  factory AvesMessageDialog.info(String message) {
-    return AvesMessageDialog(
+  factory FmvMessageDialog.info(String message) {
+    return FmvMessageDialog(
       message: message,
       actions: const [OkButton()],
     );
@@ -280,7 +280,7 @@ class AvesMessageDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AvesDialog(
+    return FmvDialog(
       content: Text(message),
       actions: actions,
     );

@@ -78,8 +78,8 @@ abstract class StorageService {
 }
 
 class PlatformStorageService implements StorageService {
-  static const _platform = AvesMethodChannel('com.naipingzai/flutter_media_view/storage');
-  static final _stream = AvesStreamsChannel('com.naipingzai/flutter_media_view/activity_result_stream');
+  static const _platform = FmvMethodChannel('com.naipingzai/flutter_media_view/storage');
+  static final _stream = FmvStreamsChannel('com.naipingzai/flutter_media_view/activity_result_stream');
 
   @override
   Future<Map<String, int>> getDataUsage() async {

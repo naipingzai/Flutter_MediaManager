@@ -216,7 +216,7 @@ class _AppDrawerState extends State<AppDrawer> with WidgetsBindingObserver {
                   spacing: 16,
                   crossAxisAlignment: .center,
                   children: [
-                    const AvesLogo(size: 48),
+                    const FmvLogo(size: 48),
                     OutlinedText(
                       textSpans: [
                         TextSpan(
@@ -310,7 +310,7 @@ class _AppDrawerState extends State<AppDrawer> with WidgetsBindingObserver {
           return PageNavTile(
             leading: leading,
             title: title,
-            navItem: AvesNavItem(route: ExplorerPage.routeName, path: path),
+            navItem: FmvNavItem(route: ExplorerPage.routeName, path: path),
             isSelected: () => widget.currentExplorerPath == path,
           );
         }
@@ -406,7 +406,7 @@ class _AppDrawerState extends State<AppDrawer> with WidgetsBindingObserver {
           // key is expected by test driver
           key: Key('drawer-page-$route'),
           trailing: trailing,
-          navItem: AvesNavItem(route: route),
+          navItem: FmvNavItem(route: route),
         );
       }),
     ];
@@ -429,6 +429,6 @@ class _AppDrawerState extends State<AppDrawer> with WidgetsBindingObserver {
   Widget get debugTile => const PageNavTile(
     // key is expected by test driver
     key: Key('drawer-debug'),
-    navItem: AvesNavItem(route: AppDebugPage.routeName),
+    navItem: FmvNavItem(route: AppDebugPage.routeName),
   );
 }

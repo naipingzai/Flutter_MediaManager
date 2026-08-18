@@ -7,10 +7,10 @@ import 'package:collection/collection.dart';
 mixin PlaceMixin on SourceBase {
   // by place
   final Map<String, int> _filterEntryCountMap = {}, _filterSizeMap = {};
-  final Map<String, AvesEntry?> _filterRecentEntryMap = {};
+  final Map<String, FmvEntry?> _filterRecentEntryMap = {};
 
   void invalidatePlaceFilterSummary({
-    Set<AvesEntry>? entries,
+    Set<FmvEntry>? entries,
     Set<String>? places,
     bool notify = true,
   }) {
@@ -44,7 +44,7 @@ mixin PlaceMixin on SourceBase {
     return _filterSizeMap.putIfAbsent(filter.place, () => visibleEntries.where(filter.test).map((v) => v.sizeBytes).sum);
   }
 
-  AvesEntry? placeRecentEntry(LocationFilter filter) {
+  FmvEntry? placeRecentEntry(LocationFilter filter) {
     return _filterRecentEntryMap.putIfAbsent(filter.place, () => sortedEntriesByDate.firstWhereOrNull(filter.test));
   }
 }

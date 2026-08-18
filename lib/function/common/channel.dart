@@ -2,10 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:streams_channel/streams_channel.dart';
 
-class AvesMethodChannel extends MethodChannel {
+class FmvMethodChannel extends MethodChannel {
   static bool kDebug = false;
 
-  const AvesMethodChannel(super.name);
+  const FmvMethodChannel(super.name);
 
   @override
   Future<T?> invokeMethod<T>(String method, [arguments]) {
@@ -31,12 +31,12 @@ class AvesMethodChannel extends MethodChannel {
   }
 }
 
-class AvesStreamsChannel extends StreamsChannel {
-  AvesStreamsChannel(super.name);
+class FmvStreamsChannel extends StreamsChannel {
+  FmvStreamsChannel(super.name);
 
   @override
   Stream receiveBroadcastStream([arguments]) {
-    if (AvesMethodChannel.kDebug) {
+    if (FmvMethodChannel.kDebug) {
       debugPrint('$runtimeType platform call channel=$name arguments=$arguments');
     }
     // 缺失平台通道实现时返回空流，避免 `MissingPluginException` 崩溃
@@ -50,15 +50,15 @@ class AvesStreamsChannel extends StreamsChannel {
   }
 }
 
-class AvesChannels {
+class FmvChannels {
   static const geocoding = 'com.naipingzai/flutter_media_view/geocoding';
   static const mediaSession = 'com.naipingzai/flutter_media_view/media_session';
   static const metadataFetch = 'com.naipingzai/flutter_media_view/metadata_fetch';
 
   static const _all = <MethodChannel>[
-    AvesMethodChannel(geocoding),
-    AvesMethodChannel(mediaSession),
-    AvesMethodChannel(metadataFetch),
+    FmvMethodChannel(geocoding),
+    FmvMethodChannel(mediaSession),
+    FmvMethodChannel(metadataFetch),
   ];
 
   static MethodChannel byName(String name) => _all.firstWhere((v) => v.name == name);

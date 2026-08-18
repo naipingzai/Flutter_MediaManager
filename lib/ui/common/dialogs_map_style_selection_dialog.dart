@@ -42,7 +42,7 @@ class _MapStyleSelectionDialogState extends State<MapStyleSelectionDialog> {
 
     return PopScope(
       onPopInvokedWithResult: (didPop, result) => settings.mapStyle = _selectedValue,
-      child: AvesScaffold(
+      child: FmvScaffold(
         appBar: AppBar(
           automaticallyImplyLeading: !useTvLayout,
           title: Text(context.l10n.mapStyleDialogTitle),
@@ -83,7 +83,7 @@ class _MapStyleSelectionDialogState extends State<MapStyleSelectionDialog> {
                   Container(
                     alignment: Alignment.center,
                     padding: const EdgeInsets.only(top: 4, bottom: 8),
-                    child: AvesOutlinedButton(
+                    child: FmvOutlinedButton(
                       icon: const Icon(AIcons.add),
                       label: l10n.mapStyleDialogAddStyle,
                       onPressed: _add,

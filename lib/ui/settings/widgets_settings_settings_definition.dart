@@ -19,7 +19,7 @@ abstract class SettingsSection {
         final tiles = snapshot.data;
         if (tiles == null) return const SizedBox();
 
-        return AvesExpansionTile(
+        return FmvExpansionTile(
           // key is expected by test driver
           key: Key('section-$key'),
           // use a fixed value instead of the title to identify this expansion tile

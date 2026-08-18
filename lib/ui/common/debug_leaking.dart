@@ -53,7 +53,7 @@ class _DebugLeakingSectionState extends State<DebugLeakingSection> with Automati
   Widget build(BuildContext context) {
     super.build(context);
 
-    return AvesExpansionTile(
+    return FmvExpansionTile(
       title: 'Leaking',
       children: [
         SwitchListTile(
@@ -144,7 +144,7 @@ class _CollectorOverlayState extends State<_CollectorOverlay> {
         deviceService.getHeapSizes(<MemorySizeType>{.used, .total, .max}),
       ]);
       final [ram, heap] = results;
-      final locale = AvesLocale.ascii;
+      final locale = FmvLocale.ascii;
 
       final ramAvailable = formatFileSize(locale, ram[MemorySizeType.available] ?? 0);
       final ramTotal = formatFileSize(locale, ram[MemorySizeType.total] ?? 0);

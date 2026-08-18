@@ -38,7 +38,7 @@ class _SlideshowPageState extends State<SlideshowPage> {
   final ValueNotifier<AppMode> _appModeNotifier = ValueNotifier(.slideshow);
   late ViewerController _viewerController;
   late CollectionLens _slideshowCollection;
-  AvesEntry? _initialEntry;
+  FmvEntry? _initialEntry;
 
   CollectionSource get source => widget.collection.source;
 
@@ -62,7 +62,7 @@ class _SlideshowPageState extends State<SlideshowPage> {
     final initialEntry = _initialEntry;
     return ListenableProvider<ValueNotifier<AppMode>>.value(
       value: _appModeNotifier,
-      child: AvesScaffold(
+      child: FmvScaffold(
         body: initialEntry == null
             ? EmptyContent(
                 icon: AIcons.image,

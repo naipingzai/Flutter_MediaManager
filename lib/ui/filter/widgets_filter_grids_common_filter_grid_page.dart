@@ -118,7 +118,7 @@ class FilterGridPage<T extends CollectionFilter> extends StatelessWidget {
 
     if (useTvLayout) {
       final canNavigate = context.select<ValueNotifier<AppMode>, bool>((v) => v.value.canNavigate);
-      return AvesScaffold(
+      return FmvScaffold(
         body: canNavigate
             ? Row(
                 children: [
@@ -149,7 +149,7 @@ class FilterGridPage<T extends CollectionFilter> extends StatelessWidget {
               _draggableScrollBarEventStreamController.add(notification.event);
               return false;
             },
-            child: AvesScaffold(
+            child: FmvScaffold(
               body: body,
               floatingActionButton: floatingActionButton,
               drawer: canNavigate ? const AppDrawer() : null,
@@ -220,7 +220,7 @@ class _FilterGridState<T extends CollectionFilter> extends State<_FilterGrid<T>>
       spacing: 8,
       horizontalPadding: 2,
     );
-    return AvesPopScope(
+    return FmvPopScope(
       handlers: [
         APopHandler(
           canPop: (context) => context.select<Selection<FilterGridItem<T>>, bool>((v) => !v.isSelecting),
@@ -635,7 +635,7 @@ class _FilterScaler<T extends CollectionFilter> extends StatelessWidget {
           tileSize: tileSize,
           spacing: tileSpacing,
           horizontalPadding: horizontalPadding,
-          borderWidth: AvesFilterChip.outlineWidth,
+          borderWidth: FmvFilterChip.outlineWidth,
           borderRadius: CoveredFilterChip.radius(tileSize.shortestSide),
           color: Colors.grey.shade700,
           textDirection: Directionality.of(context),
@@ -656,8 +656,8 @@ class _FilterScaler<T extends CollectionFilter> extends StatelessWidget {
         decoration: BoxDecoration(
           color: ThumbnailImage.computeLoadingBackgroundColor(index * 10, brightness).withValues(alpha: .9),
           border: Border.all(
-            color: context.read<AvesColorsData>().neutral,
-            width: AvesFilterChip.outlineWidth,
+            color: context.read<FmvColorsData>().neutral,
+            width: FmvFilterChip.outlineWidth,
           ),
           borderRadius: BorderRadius.all(CoveredFilterChip.radius(targetExtent)),
         ),
@@ -706,9 +706,9 @@ class _FilterScrollView<T extends CollectionFilter> extends StatelessWidget {
                 final navBarHeight = showBottomNavigationBar ? AppBottomNavBar.height : 0;
                 return DraggableScrollbar(
                   backgroundColor: Colors.white,
-                  scrollThumbSize: AvesScrollThumb.thumbSize,
-                  scrollThumbBuilder: AvesScrollThumb.builder(
-                    height: AvesScrollThumb.thumbHeight,
+                  scrollThumbSize: FmvScrollThumb.thumbSize,
+                  scrollThumbBuilder: FmvScrollThumb.builder(
+                    height: FmvScrollThumb.thumbHeight,
                     backgroundColor: Colors.white,
                   ),
                   controller: scrollController,

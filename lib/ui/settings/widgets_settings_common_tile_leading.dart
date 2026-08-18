@@ -25,7 +25,7 @@ class SettingsTileLeading extends StatelessWidget {
         border: Border.fromBorderSide(
           BorderSide(
             color: color,
-            width: AvesFilterChip.outlineWidth,
+            width: FmvFilterChip.outlineWidth,
           ),
         ),
         shape: BoxShape.circle,

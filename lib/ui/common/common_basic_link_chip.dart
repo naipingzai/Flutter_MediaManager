@@ -28,7 +28,7 @@ class LinkChip extends StatelessWidget {
       style: (textStyle ?? const TextStyle()).copyWith(color: color),
       child: InkWell(
         borderRadius: borderRadius,
-        onTap: onTap ?? () => AvesApp.launchUrl(urlString),
+        onTap: onTap ?? () => FmvApp.launchUrl(urlString),
         child: Padding(
           padding: const EdgeInsets.all(8),
           child: Row(

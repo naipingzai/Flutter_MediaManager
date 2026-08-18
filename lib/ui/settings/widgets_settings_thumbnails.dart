@@ -20,7 +20,7 @@ class ThumbnailsSection extends SettingsSection {
   @override
   Widget icon(BuildContext context) => SettingsTileLeading(
     icon: AIcons.thumbnails,
-    color: context.select<AvesColorsData, Color>((v) => v.thumbnails),
+    color: context.select<FmvColorsData, Color>((v) => v.thumbnails),
   );
 
   @override

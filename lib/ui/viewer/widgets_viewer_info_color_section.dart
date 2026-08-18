@@ -17,7 +17,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 
 class ColorSectionSliver extends StatefulWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
 
   const ColorSectionSliver({super.key, required this.entry});
 

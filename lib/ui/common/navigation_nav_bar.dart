@@ -18,7 +18,7 @@ class AppBottomNavBar extends StatefulWidget {
   // collection loaded in the `CollectionPage`, if any
   final CollectionLens? currentCollection;
 
-  static double get height => kBottomNavigationBarHeight + AvesFloatingBar.margin.vertical;
+  static double get height => kBottomNavigationBarHeight + FmvFloatingBar.margin.vertical;
 
   const AppBottomNavBar({
     super.key,
@@ -62,7 +62,7 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
-    final items = context.select<Settings, List<AvesNavItem>>((v) => v.bottomNavigationActions);
+    final items = context.select<Settings, List<FmvNavItem>>((v) => v.bottomNavigationActions);
     if (items.length < 2) return const SizedBox();
 
     Widget child = FloatingNavBar(
@@ -70,7 +70,7 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
       events: widget.events,
       childHeight: AppBottomNavBar.height + context.select<MediaQueryData, double>((mq) => mq.effectiveBottomPadding),
       child: SafeArea(
-        child: AvesFloatingBar(
+        child: FmvFloatingBar(
           builder: (context, backgroundColor, child) => BottomNavigationBar(
             items: items.map((item) {
               final label = item.getText(context);
@@ -111,7 +111,7 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
 
   void _onCollectionFilterChanged() => setState(() {});
 
-  int _getCurrentIndex(BuildContext context, List<AvesNavItem> items) {
+  int _getCurrentIndex(BuildContext context, List<FmvNavItem> items) {
     // current route may be null during navigation
     final currentRoute = context.currentRouteName ?? _lastRoute;
     _lastRoute = currentRoute;
@@ -132,7 +132,7 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
     return currentIndex;
   }
 
-  void _goTo(BuildContext context, List<AvesNavItem> items, int index) {
+  void _goTo(BuildContext context, List<FmvNavItem> items, int index) {
     final item = items[index];
     item.goTo(context, topLevel: null);
   }

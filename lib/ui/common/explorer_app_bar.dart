@@ -63,7 +63,7 @@ class _ExplorerAppBarState extends State<ExplorerAppBar> with WidgetsBindingObse
 
   @override
   Widget build(BuildContext context) {
-    return AvesAppBar(
+    return FmvAppBar(
       contentHeight: appBarContentHeight,
       pinned: false,
       leading: const DrawerButton(),
@@ -83,7 +83,7 @@ class _ExplorerAppBarState extends State<ExplorerAppBar> with WidgetsBindingObse
                 if (canNavigate) {
                   final dirPath = _pathOf(contentsDirectory);
                   if (dirPath != null) {
-                    lastCrumbBuilder = (context) => AvesFilterChip(
+                    lastCrumbBuilder = (context) => FmvFilterChip(
                       filter: PathFilter(dirPath),
                       onTap: (filter) => _goToCollectionPage(context, filter),
                       onLongPress: null,

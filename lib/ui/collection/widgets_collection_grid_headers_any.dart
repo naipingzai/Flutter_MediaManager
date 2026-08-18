@@ -45,7 +45,7 @@ class CollectionSectionHeader extends StatelessWidget {
           case .month:
             var k = sectionKey as EntryDateSectionKey;
             final date = collection.calendar.ops.fromYearMonthDay(k.year, k.month, k.day);
-            return MonthSectionHeader<AvesEntry>(
+            return MonthSectionHeader<FmvEntry>(
               key: ValueKey(sectionKey),
               sectionKey: sectionKey,
               date: date,
@@ -54,7 +54,7 @@ class CollectionSectionHeader extends StatelessWidget {
           case .day:
             var k = sectionKey as EntryDateSectionKey;
             final date = collection.calendar.ops.fromYearMonthDay(k.year, k.month, k.day);
-            return DaySectionHeader<AvesEntry>(
+            return DaySectionHeader<FmvEntry>(
               key: ValueKey(sectionKey),
               sectionKey: sectionKey,
               date: date,
@@ -67,7 +67,7 @@ class CollectionSectionHeader extends StatelessWidget {
       case .path:
         return _buildAlbumHeader(context);
       case .rating:
-        return RatingSectionHeader<AvesEntry>(
+        return RatingSectionHeader<FmvEntry>(
           key: ValueKey(sectionKey),
           rating: (sectionKey as EntryRatingSectionKey).rating,
           selectable: selectable,

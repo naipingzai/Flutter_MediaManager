@@ -8,15 +8,15 @@ import 'package:flutter/services.dart';
 import 'package:latlong2/latlong.dart';
 
 abstract class GeocodingService {
-  Future<List<Address>> getAddress(LatLng coordinates, AvesLocale locale);
+  Future<List<Address>> getAddress(LatLng coordinates, FmvLocale locale);
 }
 
 // geocoding requires Google Play Services
 class PlatformGeocodingService implements GeocodingService {
-  static const _channel = AvesMethodChannel(AvesChannels.geocoding);
+  static const _channel = FmvMethodChannel(FmvChannels.geocoding);
 
   @override
-  Future<List<Address>> getAddress(LatLng coordinates, AvesLocale locale) async {
+  Future<List<Address>> getAddress(LatLng coordinates, FmvLocale locale) async {
     try {
       final result = await _channel.invokeMethod('getAddress', <String, Object?>{
         'latitude': coordinates.latitude,

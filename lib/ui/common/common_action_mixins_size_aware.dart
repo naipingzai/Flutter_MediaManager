@@ -17,7 +17,7 @@ import 'package:flutter/material.dart';
 mixin SizeAwareMixin {
   Future<bool> checkFreeSpaceForMove(
     BuildContext context,
-    Set<AvesEntry> selection,
+    Set<FmvEntry> selection,
     String destinationAlbum,
     MoveType moveType,
   ) async {
@@ -31,7 +31,7 @@ mixin SizeAwareMixin {
     if (free == null) return true;
 
     late int needed;
-    int sumSize(int sum, AvesEntry entry) => sum + (entry.sizeBytes ?? 0);
+    int sumSize(int sum, FmvEntry entry) => sum + (entry.sizeBytes ?? 0);
     switch (moveType) {
       case .copy:
       case .export:
@@ -40,7 +40,7 @@ mixin SizeAwareMixin {
       case .toBin:
       case .fromBin:
         // when moving, we only need space for the entries that are not already on the destination volume
-        final byVolume = groupBy<AvesEntry, StorageVolume?>(selection, (entry) => androidFileUtils.getStorageVolume(entry.path)).whereNotNullKey();
+        final byVolume = groupBy<FmvEntry, StorageVolume?>(selection, (entry) => androidFileUtils.getStorageVolume(entry.path)).whereNotNullKey();
         final otherVolumes = byVolume.keys.where((volume) => volume != destinationVolume);
         final fromOtherVolumes = otherVolumes.fold<int>(0, (sum, volume) => sum + byVolume[volume]!.fold(0, sumSize));
         // and we need at least as much space as the largest entry because individual entries are copied then deleted

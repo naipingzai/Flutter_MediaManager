@@ -29,7 +29,7 @@ class _StorageAccessPageState extends State<StorageAccessPage> {
 
   @override
   Widget build(BuildContext context) {
-    return AvesScaffold(
+    return FmvScaffold(
       appBar: AppBar(
         title: Text(context.l10n.settingsStorageAccessPageTitle),
       ),

@@ -202,7 +202,7 @@ class Themes {
         foregroundColor: _lightActionIconColor,
         // `titleTextStyle.color` is used by text
         titleTextStyle: _titleTextStyle.copyWith(color: _lightTitleColor),
-        systemOverlayStyle: deviceInitialized ? AvesApp.systemUIStyleForBrightness(colors.brightness, _schemeFirstLayer(colors)) : null,
+        systemOverlayStyle: deviceInitialized ? FmvApp.systemUIStyleForBrightness(colors.brightness, _schemeFirstLayer(colors)) : null,
       ),
       dialogTheme: DialogThemeData(
         backgroundColor: _schemeSecondLayer(colors),
@@ -255,7 +255,7 @@ class Themes {
         foregroundColor: _darkTitleColor,
         // `titleTextStyle.color` is used by text
         titleTextStyle: _titleTextStyle.copyWith(color: _darkTitleColor),
-        systemOverlayStyle: deviceInitialized ? AvesApp.systemUIStyleForBrightness(colors.brightness, _schemeFirstLayer(colors)) : null,
+        systemOverlayStyle: deviceInitialized ? FmvApp.systemUIStyleForBrightness(colors.brightness, _schemeFirstLayer(colors)) : null,
       ),
       dialogTheme: DialogThemeData(
         backgroundColor: _schemeSecondLayer(colors),

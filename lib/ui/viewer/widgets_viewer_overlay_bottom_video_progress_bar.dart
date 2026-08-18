@@ -15,7 +15,7 @@ import 'package:decorated_icon/decorated_icon.dart';
 import 'package:flutter/material.dart';
 
 class VideoProgressBar extends StatefulWidget {
-  final AvesVideoController? controller;
+  final FmvVideoController? controller;
   final Animation<double> scale;
 
   static const padding = EdgeInsets.symmetric(horizontal: 16);
@@ -37,7 +37,7 @@ class _VideoProgressBarState extends State<VideoProgressBar> {
   static const double _radius = 123;
   static const double _abRepeatMarkWidth = 2;
 
-  AvesVideoController? get controller => widget.controller;
+  FmvVideoController? get controller => widget.controller;
 
   Stream<int> get positionStream => controller?.positionStream ?? Stream.value(0);
 
@@ -78,7 +78,7 @@ class _VideoProgressBarState extends State<VideoProgressBar> {
               padding: VideoProgressBar.padding,
               decoration: BoxDecoration(
                 color: Themes.overlayBackgroundColor(brightness: theme.brightness, blurred: blurred),
-                border: AvesBorder.border(context),
+                border: FmvBorder.border(context),
                 borderRadius: const BorderRadius.all(Radius.circular(_radius)),
               ),
               child: MediaQuery(
@@ -178,7 +178,7 @@ class _VideoProgressBarState extends State<VideoProgressBar> {
       bottom: 0,
       child: Container(
         decoration: BoxDecoration(
-          border: Border(left: AvesBorder.straightSide(context, width: _abRepeatMarkWidth)),
+          border: Border(left: FmvBorder.straightSide(context, width: _abRepeatMarkWidth)),
         ),
       ),
     );

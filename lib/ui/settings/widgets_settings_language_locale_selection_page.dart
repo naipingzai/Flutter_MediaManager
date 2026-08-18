@@ -39,7 +39,7 @@ class _LocaleSelectionPageState extends State<LocaleSelectionPage> {
   @override
   Widget build(BuildContext context) {
     final useTvLayout = settings.useTvLayout;
-    return AvesScaffold(
+    return FmvScaffold(
       appBar: AppBar(
         automaticallyImplyLeading: !useTvLayout,
         title: Text(context.l10n.settingsLanguagePageTitle),
@@ -92,7 +92,7 @@ class _LocaleSelectionPageState extends State<LocaleSelectionPage> {
   }
 
   LinkedHashMap<ui.Locale, String> _getLocaleOptions(BuildContext context) {
-    final displayLocales = AvesApp.supportedLocales.map((locale) => MapEntry(locale, LocaleTile.getLocaleName(locale))).toList()..sort((a, b) => compareAsciiUpperCase(a.value, b.value));
+    final displayLocales = FmvApp.supportedLocales.map((locale) => MapEntry(locale, LocaleTile.getLocaleName(locale))).toList()..sort((a, b) => compareAsciiUpperCase(a.value, b.value));
 
     return LinkedHashMap.of({
       LocaleTile.systemLocaleOption: context.l10n.settingsSystemDefault,

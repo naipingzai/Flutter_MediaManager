@@ -10,8 +10,8 @@ import 'package:flutter/widgets.dart';
 /// A  class to hold internal layout logic to sync both controller states
 ///
 /// It reacts to layout changes (eg: enter landscape or widget resize) and syncs the two controllers.
-mixin AvesMagnifierControllerDelegate on State<AvesMagnifier> {
-  AvesMagnifierController get controller => widget.controller;
+mixin FmvMagnifierControllerDelegate on State<FmvMagnifier> {
+  FmvMagnifierController get controller => widget.controller;
 
   ScaleBoundaries? get scaleBoundaries => controller.scaleBoundaries;
 
@@ -23,13 +23,13 @@ mixin AvesMagnifierControllerDelegate on State<AvesMagnifier> {
 
   final List<StreamSubscription> _subscriptions = [];
 
-  void registerDelegate(AvesMagnifier widget) {
+  void registerDelegate(FmvMagnifier widget) {
     _subscriptions.add(widget.controller.stateStream.listen(_onMagnifierStateChanged));
     _subscriptions.add(widget.controller.scaleStateChangeStream.listen(_onScaleStateChanged));
     // _subscriptions.add(widget.controller.scaleBoundariesStream.listen(_onScaleBoundariesChanged));
   }
 
-  void unregisterDelegate(AvesMagnifier oldWidget) {
+  void unregisterDelegate(FmvMagnifier oldWidget) {
     _animateScale = null;
     _subscriptions
       ..forEach((sub) => sub.cancel())

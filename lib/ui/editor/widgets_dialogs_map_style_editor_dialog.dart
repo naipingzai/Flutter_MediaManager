@@ -51,7 +51,7 @@ class _MapStyleEditorDialogState extends State<MapStyleEditorDialog> {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return AvesDialog(
+    return FmvDialog(
       scrollableContent: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),

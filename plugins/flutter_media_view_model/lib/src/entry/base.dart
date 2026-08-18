@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 
-mixin AvesEntryBase {
+mixin FmvEntryBase {
   int get id;
 
   String get uri;

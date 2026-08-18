@@ -10,7 +10,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class ErrorView extends StatefulWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
   final VoidCallback onTap;
 
   const ErrorView({
@@ -26,7 +26,7 @@ class ErrorView extends StatefulWidget {
 class _ErrorViewState extends State<ErrorView> {
   late Future<bool> _exists;
 
-  AvesEntry get entry => widget.entry;
+  FmvEntry get entry => widget.entry;
 
   @override
   void initState() {

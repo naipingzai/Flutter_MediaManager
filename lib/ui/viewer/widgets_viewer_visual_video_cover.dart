@@ -9,13 +9,13 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 class VideoCover extends StatefulWidget {
-  final AvesEntry mainEntry, pageEntry;
-  final AvesMagnifierController magnifierController;
-  final AvesVideoController videoController;
+  final FmvEntry mainEntry, pageEntry;
+  final FmvMagnifierController magnifierController;
+  final FmvVideoController videoController;
   final Size videoDisplaySize;
   final void Function({Alignment? alignment}) onTap;
   final Widget Function(
-    AvesMagnifierController coverController,
+    FmvMagnifierController coverController,
     Size coverSize,
     ImageProvider videoCoverUriImage,
   )
@@ -41,20 +41,20 @@ class _VideoCoverState extends State<VideoCover> {
   late ImageStreamListener _videoCoverStreamListener;
   final ValueNotifier<ImageInfo?> _videoCoverInfoNotifier = ValueNotifier(null);
 
-  AvesMagnifierController? _dismissedCoverMagnifierController;
+  FmvMagnifierController? _dismissedCoverMagnifierController;
 
-  AvesMagnifierController get dismissedCoverMagnifierController {
-    _dismissedCoverMagnifierController ??= AvesMagnifierController();
+  FmvMagnifierController get dismissedCoverMagnifierController {
+    _dismissedCoverMagnifierController ??= FmvMagnifierController();
     return _dismissedCoverMagnifierController!;
   }
 
-  AvesEntry get mainEntry => widget.mainEntry;
+  FmvEntry get mainEntry => widget.mainEntry;
 
-  AvesEntry get entry => widget.pageEntry;
+  FmvEntry get entry => widget.pageEntry;
 
-  AvesMagnifierController get magnifierController => widget.magnifierController;
+  FmvMagnifierController get magnifierController => widget.magnifierController;
 
-  AvesVideoController get videoController => widget.videoController;
+  FmvVideoController get videoController => widget.videoController;
 
   Size get videoDisplaySize => widget.videoDisplaySize;
 

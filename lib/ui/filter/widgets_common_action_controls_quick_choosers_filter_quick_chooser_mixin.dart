@@ -10,13 +10,13 @@ mixin FilterQuickChooserMixin<T> {
   List<T> get options;
 
   static const int maxTotalOptionCount = HistorySettings.recentFilterHistoryMax;
-  static const double _chipPadding = AvesFilterChip.defaultPadding;
+  static const double _chipPadding = FmvFilterChip.defaultPadding;
   static const bool _chipAllowGenericIcon = false;
 
   CollectionFilter buildFilter(BuildContext context, T option);
 
   Widget itemBuilder(BuildContext context, T option) {
-    return AvesFilterChip(
+    return FmvFilterChip(
       filter: buildFilter(context, option),
       allowGenericIcon: _chipAllowGenericIcon,
       padding: _chipPadding,
@@ -24,17 +24,17 @@ mixin FilterQuickChooserMixin<T> {
     );
   }
 
-  double computeItemHeight(BuildContext context) => AvesFilterChip.minChipHeight;
+  double computeItemHeight(BuildContext context) => FmvFilterChip.minChipHeight;
 
   double? computeLargestItemWidth(BuildContext context) {
     if (options.isEmpty) return null;
 
     final textStyle = DefaultTextStyle.of(context).style.copyWith(
-      fontSize: AvesFilterChip.fontSize,
+      fontSize: FmvFilterChip.fontSize,
     );
     final textDirection = Directionality.of(context);
     final textScaler = MediaQuery.textScalerOf(context);
-    final iconSize = textScaler.scale(AvesFilterChip.iconSize);
+    final iconSize = textScaler.scale(FmvFilterChip.iconSize);
 
     return options
         .map((option) {
@@ -54,7 +54,7 @@ mixin FilterQuickChooserMixin<T> {
           if (icon != null) {
             chipWidth += iconSize + _chipPadding;
           }
-          return max(AvesFilterChip.minChipWidth, chipWidth);
+          return max(FmvFilterChip.minChipWidth, chipWidth);
         })
         .reduce(max);
   }

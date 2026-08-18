@@ -135,7 +135,7 @@ class _CollectionAppBarState extends State<CollectionAppBar> with RouteAware, Si
     super.didChangeDependencies();
     final route = ModalRoute.of(context);
     if (route is PageRoute) {
-      AvesApp.pageRouteObserver.subscribe(this, route);
+      FmvApp.pageRouteObserver.subscribe(this, route);
     }
   }
 
@@ -159,7 +159,7 @@ class _CollectionAppBarState extends State<CollectionAppBar> with RouteAware, Si
       ..forEach((sub) => sub.cancel())
       ..clear();
     WidgetsBinding.instance.removeObserver(this);
-    AvesApp.pageRouteObserver.unsubscribe(this);
+    FmvApp.pageRouteObserver.unsubscribe(this);
     super.dispose();
   }
 
@@ -187,7 +187,7 @@ class _CollectionAppBarState extends State<CollectionAppBar> with RouteAware, Si
   @override
   Widget build(BuildContext context) {
     final appMode = context.watch<ValueNotifier<AppMode>>().value;
-    final selection = context.watch<Selection<AvesEntry>>();
+    final selection = context.watch<Selection<FmvEntry>>();
     final isSelecting = selection.isSelecting;
     _isSelectingNotifier.value = isSelecting;
     return NotificationListener<ScrollNotification>(
@@ -206,9 +206,9 @@ class _CollectionAppBarState extends State<CollectionAppBar> with RouteAware, Si
                 builder: (context, _, child) {
                   final useTvLayout = settings.useTvLayout;
                   final onFilterTap = canRemoveFilters ? collection.removeFilter : null;
-                  return AvesAppBar(
+                  return FmvAppBar(
                     contentHeight: appBarContentHeight,
-                    pinned: context.select<Selection<AvesEntry>, bool>((selection) => selection.isSelecting),
+                    pinned: context.select<Selection<FmvEntry>, bool>((selection) => selection.isSelecting),
                     leading: _buildAppBarLeading(
                       hasDrawer: appMode.canNavigate,
                       isSelecting: isSelecting,
@@ -294,7 +294,7 @@ class _CollectionAppBarState extends State<CollectionAppBar> with RouteAware, Si
     VoidCallback? onPressed;
     String? tooltip;
     if (isSelecting) {
-      onPressed = () => context.read<Selection<AvesEntry>>().browse();
+      onPressed = () => context.read<Selection<FmvEntry>>().browse();
       tooltip = MaterialLocalizations.of(context).backButtonTooltip;
     } else {
       onPressed = Scaffold.of(context).openDrawer;
@@ -318,7 +318,7 @@ class _CollectionAppBarState extends State<CollectionAppBar> with RouteAware, Si
 
     if (isSelecting) {
       // `Selection` may not be available during hero
-      return Selector<Selection<AvesEntry>?, int>(
+      return Selector<Selection<FmvEntry>?, int>(
         selector: (context, selection) => selection?.selectedItemCount ?? 0,
         builder: (context, count, child) {
           Widget title = Text(
@@ -356,7 +356,7 @@ class _CollectionAppBarState extends State<CollectionAppBar> with RouteAware, Si
     }
   }
 
-  List<Widget> _buildActions(BuildContext context, Selection<AvesEntry> selection, double maxWidth) {
+  List<Widget> _buildActions(BuildContext context, Selection<FmvEntry> selection, double maxWidth) {
     final appMode = context.watch<ValueNotifier<AppMode>>().value;
     final isSelecting = selection.isSelecting;
     final selectedItemCount = selection.selectedItemCount;
@@ -397,7 +397,7 @@ class _CollectionAppBarState extends State<CollectionAppBar> with RouteAware, Si
   List<Widget> _buildTelevisionActions({
     required BuildContext context,
     required AppMode appMode,
-    required Selection<AvesEntry> selection,
+    required Selection<FmvEntry> selection,
     required bool Function(EntrySetAction action) isVisible,
     required bool Function(EntrySetAction action) canApply,
   }) {
@@ -452,7 +452,7 @@ class _CollectionAppBarState extends State<CollectionAppBar> with RouteAware, Si
   List<Widget> _buildMobileActions({
     required BuildContext context,
     required AppMode appMode,
-    required Selection<AvesEntry> selection,
+    required Selection<FmvEntry> selection,
     required double maxWidth,
     required bool Function(EntrySetAction action) isVisible,
     required bool Function(EntrySetAction action) canApply,
@@ -550,7 +550,7 @@ class _CollectionAppBarState extends State<CollectionAppBar> with RouteAware, Si
     ];
   }
 
-  Set<AvesEntry> _getExpandedSelectedItems(Selection<AvesEntry> selection) {
+  Set<FmvEntry> _getExpandedSelectedItems(Selection<FmvEntry> selection) {
     return selection.selectedItems.expand((entry) => entry.stackedEntries ?? {entry}).toSet();
   }
 
@@ -562,7 +562,7 @@ class _CollectionAppBarState extends State<CollectionAppBar> with RouteAware, Si
     EntrySetAction action, {
     required bool enabled,
     FocusNode? focusNode,
-    required Selection<AvesEntry> selection,
+    required Selection<FmvEntry> selection,
   }) {
     final blurred = settings.enableBlurEffect;
     final onPressed = enabled ? () => _onActionSelected(action) : null;
@@ -642,7 +642,7 @@ class _CollectionAppBarState extends State<CollectionAppBar> with RouteAware, Si
     }
   }
 
-  PopupMenuItem<EntrySetAction> _toMenuItem(EntrySetAction action, {required bool enabled, required Selection<AvesEntry> selection}) {
+  PopupMenuItem<EntrySetAction> _toMenuItem(EntrySetAction action, {required bool enabled, required Selection<FmvEntry> selection}) {
     final Widget child;
     switch (action) {
       case .toggleTitleSearch:
@@ -712,7 +712,7 @@ class _CollectionAppBarState extends State<CollectionAppBar> with RouteAware, Si
   }
 
   void _onActivityChanged() {
-    if (context.read<Selection<AvesEntry>>().isSelecting) {
+    if (context.read<Selection<FmvEntry>>().isSelecting) {
       _browseToSelectAnimation.forward();
     } else {
       _browseToSelectAnimation.reverse();
@@ -724,7 +724,7 @@ class _CollectionAppBarState extends State<CollectionAppBar> with RouteAware, Si
 
     final filters = collection.filters;
     if (filters.isNotEmpty) {
-      final selection = context.read<Selection<AvesEntry>>();
+      final selection = context.read<Selection<FmvEntry>>();
       if (selection.isSelecting) {
         selection.removeFromSelection(selection.selectedItems.whereNot((entry) => filters.every((f) => f.test(entry))));
       }
@@ -754,7 +754,7 @@ class _CollectionAppBarState extends State<CollectionAppBar> with RouteAware, Si
   }
 
   void _updateAppBarHeight() {
-    widget.appBarHeightNotifier.value = _statusBarHeight + AvesAppBar.appBarHeightForContentHeight(appBarContentHeight);
+    widget.appBarHeightNotifier.value = _statusBarHeight + FmvAppBar.appBarHeightForContentHeight(appBarContentHeight);
   }
 
   Future<void> _onActionSelected(EntrySetAction action) async {
@@ -763,11 +763,11 @@ class _CollectionAppBarState extends State<CollectionAppBar> with RouteAware, Si
       case .configureView:
         await _configureView();
       case .select:
-        context.read<Selection<AvesEntry>>().select();
+        context.read<Selection<FmvEntry>>().select();
       case .selectAll:
-        context.read<Selection<AvesEntry>>().addToSelection(collection.sortedEntries);
+        context.read<Selection<FmvEntry>>().addToSelection(collection.sortedEntries);
       case .selectNone:
-        context.read<Selection<AvesEntry>>().clearSelection();
+        context.read<Selection<FmvEntry>>().clearSelection();
       // browsing
       case .searchCollection:
       case .toggleTitleSearch:

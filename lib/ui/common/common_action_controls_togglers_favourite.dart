@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class FavouriteToggler extends StatefulWidget {
-  final Set<AvesEntry> entries;
+  final Set<FmvEntry> entries;
   final bool isMenuItem;
   final FocusNode? focusNode;
   final VoidCallback? onPressed;
@@ -32,7 +32,7 @@ class FavouriteToggler extends StatefulWidget {
 class _FavouriteTogglerState extends State<FavouriteToggler> {
   final ValueNotifier<bool> _isFavouriteNotifier = ValueNotifier(false);
 
-  Set<AvesEntry> get entries => widget.entries;
+  Set<FmvEntry> get entries => widget.entries;
 
   static const isFavouriteIcon = Icon(AIcons.favourite, fill: 1);
   static const isNotFavouriteIcon = Icon(AIcons.favourite, fill: 0);
@@ -89,7 +89,7 @@ class _FavouriteTogglerState extends State<FavouriteToggler> {
                 builder: (context) => Icon(
                   AIcons.favourite,
                   fill: 0,
-                  color: context.select<AvesColorsData, Color>((v) => v.favourite),
+                  color: context.select<FmvColorsData, Color>((v) => v.favourite),
                 ),
                 toggledNotifier: _isFavouriteNotifier,
               ),
@@ -105,7 +105,7 @@ class _FavouriteTogglerState extends State<FavouriteToggler> {
 }
 
 class FavouriteTogglerCaption extends StatefulWidget {
-  final Set<AvesEntry> entries;
+  final Set<FmvEntry> entries;
   final bool enabled;
 
   const FavouriteTogglerCaption({
@@ -121,7 +121,7 @@ class FavouriteTogglerCaption extends StatefulWidget {
 class _FavouriteTogglerCaptionState extends State<FavouriteTogglerCaption> {
   final ValueNotifier<bool> _isFavouriteNotifier = ValueNotifier(false);
 
-  Set<AvesEntry> get entries => widget.entries;
+  Set<FmvEntry> get entries => widget.entries;
 
   @override
   void initState() {

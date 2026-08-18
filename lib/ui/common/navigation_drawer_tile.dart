@@ -51,7 +51,7 @@ class DrawerPageIcon extends StatelessWidget {
       switch (route) {
         case AppDebugPage.routeName:
           return ShaderMask(
-            shaderCallback: AvesColorsData.debugGradient.createShader,
+            shaderCallback: FmvColorsData.debugGradient.createShader,
             blendMode: BlendMode.srcIn,
             child: Icon(icon),
           );

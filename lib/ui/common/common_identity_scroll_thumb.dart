@@ -2,7 +2,7 @@ import 'package:flutter_media_view/ui/common/common_basic_draggable_scrollbar_ar
 import 'package:flutter_media_view/ui/common/common_basic_draggable_scrollbar_scrollbar.dart';
 import 'package:flutter/material.dart';
 
-class AvesScrollThumb {
+class FmvScrollThumb {
   static const EdgeInsetsGeometry _margin = EdgeInsetsDirectional.only(end: 1);
   static const EdgeInsets _padding = .all(2);
   static const double _width = 20;

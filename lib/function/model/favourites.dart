@@ -24,11 +24,11 @@ class Favourites with ChangeNotifier {
 
   Set<int> get all => Set.unmodifiable(_rows.map((v) => v.entryId));
 
-  bool isFavourite(AvesEntry entry) => _rows.any((row) => row.entryId == entry.id);
+  bool isFavourite(FmvEntry entry) => _rows.any((row) => row.entryId == entry.id);
 
-  FavouriteRow _entryToRow(AvesEntry entry) => FavouriteRow(entryId: entry.id);
+  FavouriteRow _entryToRow(FmvEntry entry) => FavouriteRow(entryId: entry.id);
 
-  Future<void> add(Set<AvesEntry> entries) async {
+  Future<void> add(Set<FmvEntry> entries) async {
     final newRows = entries.map(_entryToRow).toSet();
 
     await localMediaDb.addFavourites(newRows);
@@ -37,7 +37,7 @@ class Favourites with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> removeEntries(Set<AvesEntry> entries) => removeIds(entries.map((entry) => entry.id).toSet());
+  Future<void> removeEntries(Set<FmvEntry> entries) => removeIds(entries.map((entry) => entry.id).toSet());
 
   Future<void> removeIds(Set<int> entryIds) async {
     final removedRows = _rows.where((row) => entryIds.contains(row.entryId)).toSet();
@@ -81,7 +81,7 @@ class Favourites with ChangeNotifier {
     }
 
     final visibleEntries = source.visibleEntries;
-    final foundEntries = <AvesEntry>{};
+    final foundEntries = <FmvEntry>{};
     final missedPaths = <String>{};
     jsonMap.cast<String, List>().forEach((volume, relativePaths) {
       relativePaths.cast<String?>().forEach((relativePath) {

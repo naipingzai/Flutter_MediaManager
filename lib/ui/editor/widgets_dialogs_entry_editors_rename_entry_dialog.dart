@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 class RenameEntryDialog extends StatefulWidget {
   static const routeName = '/dialog/rename_entry';
 
-  final AvesEntry entry;
+  final FmvEntry entry;
 
   const RenameEntryDialog({
     super.key,
@@ -25,7 +25,7 @@ class _RenameEntryDialogState extends State<RenameEntryDialog> {
   final TextEditingController _nameController = TextEditingController();
   final ValueNotifier<bool> _isValidNotifier = ValueNotifier(false);
 
-  AvesEntry get entry => widget.entry;
+  FmvEntry get entry => widget.entry;
 
   @override
   void initState() {
@@ -43,7 +43,7 @@ class _RenameEntryDialogState extends State<RenameEntryDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AvesDialog(
+    return FmvDialog(
       content: Row(
         crossAxisAlignment: .end,
         children: [

@@ -8,7 +8,7 @@ import 'package:flutter_media_view/function/metadata/spherical_video.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group('AvesByteUtils', () {
+  group('FmvByteUtils', () {
     test('toHex 输出小写十六进制', () {
       expect([0xde, 0xad, 0xbe, 0xef].toHex(), 'deadbeef');
       expect([0x00].toHex(), '00');

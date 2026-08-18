@@ -4,7 +4,7 @@ import 'package:flutter_media_view/ui/viewer/widgets_viewer_controls_notificatio
 import 'package:flutter/material.dart';
 
 class ViewerThumbnailPreview extends StatefulWidget {
-  final List<AvesEntry> entries;
+  final List<FmvEntry> entries;
   final int displayedIndex;
   final double availableWidth;
 
@@ -24,7 +24,7 @@ class ViewerThumbnailPreview extends StatefulWidget {
 class _ViewerThumbnailPreviewState extends State<ViewerThumbnailPreview> {
   late final ValueNotifier<int> _entryIndexNotifier;
 
-  List<AvesEntry> get entries => widget.entries;
+  List<FmvEntry> get entries => widget.entries;
 
   int get entryCount => entries.length;
 

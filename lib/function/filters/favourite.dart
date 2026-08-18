@@ -11,7 +11,7 @@ import 'package:provider/provider.dart';
 class FavouriteFilter extends CollectionFilter {
   static const type = 'favourite';
 
-  static bool _test(AvesEntry entry) => entry.isFavourite;
+  static bool _test(FmvEntry entry) => entry.isFavourite;
 
   static const instance = FavouriteFilter._private();
   static const instanceReversed = FavouriteFilter._private(reversed: true);
@@ -49,7 +49,7 @@ class FavouriteFilter extends CollectionFilter {
 
   @override
   Future<Color> color(BuildContext context) {
-    final colors = context.read<AvesColorsData>();
+    final colors = context.read<FmvColorsData>();
     return SynchronousFuture(colors.favourite);
   }
 

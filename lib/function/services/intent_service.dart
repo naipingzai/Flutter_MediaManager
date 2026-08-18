@@ -7,8 +7,8 @@ import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter/services.dart';
 
 class IntentService {
-  static const _platform = AvesMethodChannel('com.naipingzai/flutter_media_view/intent');
-  static final _stream = AvesStreamsChannel('com.naipingzai/flutter_media_view/activity_result_stream');
+  static const _platform = FmvMethodChannel('com.naipingzai/flutter_media_view/intent');
+  static final _stream = FmvStreamsChannel('com.naipingzai/flutter_media_view/activity_result_stream');
 
   static Future<Map<String, Object?>> getIntentData() async {
     try {

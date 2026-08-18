@@ -9,7 +9,7 @@ import 'package:flutter_media_view/function/media/internal_dir_media_fetch_servi
 import 'package:flutter_media_view/function/media/media_store_service.dart';
 import 'package:path_provider/path_provider.dart';
 
-/// 内部目录数据源：替代 Aves 原生 MediaStore 服务。
+/// 内部目录数据源：替代 Fmv 原生 MediaStore 服务。
 ///
 /// 符合「导入模型」：所有媒体都位于 app 内部私有目录 `<docs>/library`，
 /// 不直接访问系统相册 / MediaStore。此实现跨平台（Android/iOS/Linux 通用）。
@@ -47,7 +47,7 @@ class InternalDirMediaStoreService implements MediaStoreService {
   Future<Uri?> scanFile(String path, String mimeType) async => null;
 
   @override
-  Stream<AvesEntry> getEntries(Map<int?, int?> knownEntries, {String? directory}) async* {
+  Stream<FmvEntry> getEntries(Map<int?, int?> knownEntries, {String? directory}) async* {
     final root = await _root();
     await for (final entity in root.list(recursive: true, followLinks: false)) {
       if (entity is! File) continue;
@@ -73,7 +73,7 @@ class InternalDirMediaStoreService implements MediaStoreService {
           // 解码失败保持 0，后续分析流程会填充
         }
       }
-      yield AvesEntry(
+      yield FmvEntry(
         id: null,
         uri: 'file://$absPath',
         path: absPath,

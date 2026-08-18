@@ -7,10 +7,10 @@ import 'package:collection/collection.dart';
 mixin CountryMixin on SourceBase {
   // by country code
   final Map<String, int> _filterEntryCountMap = {}, _filterSizeMap = {};
-  final Map<String, AvesEntry?> _filterRecentEntryMap = {};
+  final Map<String, FmvEntry?> _filterRecentEntryMap = {};
 
   void invalidateCountryFilterSummary({
-    Set<AvesEntry>? entries,
+    Set<FmvEntry>? entries,
     Set<String>? countryCodes,
     bool notify = true,
   }) {
@@ -48,7 +48,7 @@ mixin CountryMixin on SourceBase {
     return _filterSizeMap.putIfAbsent(countryCode, () => visibleEntries.where(filter.test).map((v) => v.sizeBytes).sum);
   }
 
-  AvesEntry? countryRecentEntry(LocationFilter filter) {
+  FmvEntry? countryRecentEntry(LocationFilter filter) {
     final countryCode = filter.code;
     if (countryCode == null) return null;
     return _filterRecentEntryMap.putIfAbsent(countryCode, () => sortedEntriesByDate.firstWhereOrNull(filter.test));

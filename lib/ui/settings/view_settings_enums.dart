@@ -29,7 +29,7 @@ extension ExtraAccessibilityTimeoutView on AccessibilityTimeout {
   }
 }
 
-extension ExtraAvesThemeBrightnessView on AvesThemeBrightness {
+extension ExtraAvesThemeBrightnessView on FmvThemeBrightness {
   String getName(BuildContext context) {
     final l10n = context.l10n;
     return switch (this) {

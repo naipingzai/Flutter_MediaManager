@@ -37,7 +37,7 @@ import 'package:flutter_media_view/ui/viewer/widgets_viewer_controls_notificatio
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CollectionSearchDelegate extends AvesSearchDelegate with FeedbackMixin, VaultAwareMixin {
+class CollectionSearchDelegate extends FmvSearchDelegate with FeedbackMixin, VaultAwareMixin {
   final CollectionSource source;
   final CollectionLens? parentCollection;
   final ValueNotifier<String?> _expandedSectionNotifier = ValueNotifier(null);
@@ -177,7 +177,7 @@ class CollectionSearchDelegate extends AvesSearchDelegate with FeedbackMixin, Va
     HeroType Function(CollectionFilter filter)? heroTypeBuilder,
   }) {
     void onTap(filter) => _select(context, {filter is QueryFilter ? QueryFilter(filter.query) : filter});
-    const onLongPress = AvesFilterChip.showDefaultLongPressMenu;
+    const onLongPress = FmvFilterChip.showDefaultLongPressMenu;
     return title != null
         ? TitledExpandableFilterRow(
             title: title,

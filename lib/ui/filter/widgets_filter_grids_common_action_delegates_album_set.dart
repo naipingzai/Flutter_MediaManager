@@ -370,7 +370,7 @@ class AlbumChipSetActionDelegate extends ChipSetActionDelegate<AlbumBaseFilter> 
     }
   }
 
-  Future<void> _deleteEntriesForever(BuildContext context, Set<AvesEntry> todoEntries) async {
+  Future<void> _deleteEntriesForever(BuildContext context, Set<FmvEntry> todoEntries) async {
     if (todoEntries.isEmpty) return;
 
     final source = context.read<CollectionSource>();

@@ -171,7 +171,7 @@ extension ExtraWidgetShape on WidgetShape {
     return path;
   }
 
-  double extentPx(Size widgetSizePx, AvesEntry entry) {
+  double extentPx(Size widgetSizePx, FmvEntry entry) {
     switch (this) {
       case .bumpyColumns:
       case .bumpyRows:

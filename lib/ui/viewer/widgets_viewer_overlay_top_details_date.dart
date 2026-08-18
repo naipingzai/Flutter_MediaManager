@@ -10,7 +10,7 @@ import 'package:decorated_icon/decorated_icon.dart';
 import 'package:flutter/material.dart';
 
 class OverlayDateRow extends StatelessWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
   final MultiPageController? multiPageController;
 
   const OverlayDateRow({

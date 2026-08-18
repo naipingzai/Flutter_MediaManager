@@ -7,7 +7,7 @@ import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 
 class ShareButton extends ChooserQuickButton<ShareAction> {
-  final Set<AvesEntry> entries;
+  final Set<FmvEntry> entries;
 
   const ShareButton({
     super.key,

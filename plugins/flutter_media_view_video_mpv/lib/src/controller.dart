@@ -13,7 +13,7 @@ import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
 import 'package:path/path.dart' as p;
 
-class MpvVideoController extends AvesVideoController {
+class MpvVideoController extends FmvVideoController {
   late Player _mkPlayer;
   late VideoStatus _status;
   bool _firstFrameRendered = false, _abRepeatSeeking = false;

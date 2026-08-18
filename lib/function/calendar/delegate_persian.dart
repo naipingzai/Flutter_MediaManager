@@ -34,7 +34,7 @@ class PersianDateTime extends DateTime {
   int get day => jDay;
 }
 
-class PersianCalendarDelegate extends AvesCalendarDelegate<PersianDateTime> {
+class PersianCalendarDelegate extends FmvCalendarDelegate<PersianDateTime> {
   static const int daysPerWeek = DateTime.daysPerWeek;
   static const int monthsPerYear = DateTime.monthsPerYear;
 

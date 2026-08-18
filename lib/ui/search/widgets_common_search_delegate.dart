@@ -8,13 +8,13 @@ import 'package:flutter/services.dart';
 import 'package:leak_tracker/leak_tracker.dart';
 import 'package:provider/provider.dart';
 
-abstract class AvesSearchDelegate extends SearchDelegate {
+abstract class FmvSearchDelegate extends SearchDelegate {
   final String routeName;
   final bool canPop;
   final TextEditingController queryTextController = TextEditingController();
   final ValueNotifier<SearchBody?> currentBodyNotifier = ValueNotifier(null);
 
-  AvesSearchDelegate({
+  FmvSearchDelegate({
     required this.routeName,
     this.canPop = true,
     String? initialQuery,
@@ -24,7 +24,7 @@ abstract class AvesSearchDelegate extends SearchDelegate {
     if (kFlutterMemoryAllocationsEnabled) {
       LeakTracking.dispatchObjectCreated(
         library: 'aves',
-        className: '$AvesSearchDelegate',
+        className: '$FmvSearchDelegate',
         object: this,
       );
     }

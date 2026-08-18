@@ -10,7 +10,7 @@ class FilterBar extends StatefulWidget {
   static const EdgeInsets chipPadding = EdgeInsets.symmetric(horizontal: 4);
   static const EdgeInsets rowPadding = EdgeInsets.symmetric(horizontal: 4);
   static const EdgeInsets padding = EdgeInsets.only(top: 4, bottom: 8);
-  static final double preferredHeight = AvesFilterChip.minChipHeight + padding.vertical;
+  static final double preferredHeight = FmvFilterChip.minChipHeight + padding.vertical;
 
   final List<CollectionFilter> filters;
   final bool interactive;
@@ -141,22 +141,22 @@ class _Chip extends StatelessWidget {
     return Padding(
       padding: FilterBar.chipPadding,
       child: Center(
-        child: AvesFilterChip(
+        child: FmvFilterChip(
           key: ValueKey(filter),
           filter: filter,
           maxWidth: single
-              ? AvesFilterChip.computeMaxWidthForRow(
+              ? FmvFilterChip.computeMaxWidthForRow(
                   context,
                   minChipPerRow: 1,
                   chipPadding: FilterBar.chipPadding.horizontal,
-                  rowPadding: FilterBar.rowPadding.horizontal + AvesFloatingBar.margin.horizontal,
+                  rowPadding: FilterBar.rowPadding.horizontal + FmvFloatingBar.margin.horizontal,
                 )
               : null,
           heroType: HeroType.always,
           onTap: onTap,
           onRemove: onRemove,
           onLongPress: (context, filter, tapPosition) {
-            AvesFilterChip.showDefaultLongPressMenu(context, filter, tapPosition, canNavigate: interactive);
+            FmvFilterChip.showDefaultLongPressMenu(context, filter, tapPosition, canNavigate: interactive);
           },
         ),
       ),

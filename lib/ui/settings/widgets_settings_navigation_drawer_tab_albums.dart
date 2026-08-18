@@ -61,7 +61,7 @@ class _DrawerAlbumTabState extends State<DrawerAlbumTab> {
         const Divider(height: 0),
         const SizedBox(height: 8),
         SafeArea(
-          child: AvesOutlinedButton(
+          child: FmvOutlinedButton(
             icon: const Icon(AIcons.add),
             label: context.l10n.settingsNavigationDrawerAddAlbum,
             onPressed: () async {

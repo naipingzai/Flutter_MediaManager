@@ -18,7 +18,7 @@ import 'package:provider/provider.dart';
 class TagEditorPage extends StatefulWidget {
   static const routeName = '/info/tag_editor';
 
-  final Map<AvesEntry, Set<TagFilter>> tagsByEntry;
+  final Map<FmvEntry, Set<TagFilter>> tagsByEntry;
 
   const TagEditorPage({
     super.key,
@@ -33,7 +33,7 @@ class _TagEditorPageState extends State<TagEditorPage> {
   final TextEditingController _newTagTextController = TextEditingController();
   final FocusNode _newTagTextFocusNode = FocusNode();
   final ValueNotifier<String?> _expandedSectionNotifier = ValueNotifier(null);
-  late final Map<AvesEntry, Set<CollectionFilter>> filtersByEntry;
+  late final Map<FmvEntry, Set<CollectionFilter>> filtersByEntry;
   late final List<CollectionFilter> _topTags;
   final List<CollectionFilter> _userAddedFilters = [];
 
@@ -90,7 +90,7 @@ class _TagEditorPageState extends State<TagEditorPage> {
           navigator.pop();
         }
       },
-      child: AvesScaffold(
+      child: FmvScaffold(
         appBar: AppBar(
           title: Text(l10n.tagEditorPageTitle),
           actions: [
@@ -101,7 +101,7 @@ class _TagEditorPageState extends State<TagEditorPage> {
             ),
             IconButton(
               icon: const Icon(AIcons.apply),
-              onPressed: () => Navigator.maybeOf(context)?.pop<Map<AvesEntry, Set<CollectionFilter>>>(filtersByEntry),
+              onPressed: () => Navigator.maybeOf(context)?.pop<Map<FmvEntry, Set<CollectionFilter>>>(filtersByEntry),
               tooltip: l10n.saveTooltip,
             ),
             const SizedBox(width: 16),
@@ -167,7 +167,7 @@ class _TagEditorPageState extends State<TagEditorPage> {
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         child: AnimatedCrossFade(
                           firstChild: ConstrainedBox(
-                            constraints: const BoxConstraints(minHeight: AvesFilterChip.minChipHeight),
+                            constraints: const BoxConstraints(minHeight: FmvFilterChip.minChipHeight),
                             child: Center(
                               child: Row(
                                 mainAxisSize: .min,
@@ -362,7 +362,7 @@ class _TagCount extends StatelessWidget {
       ),
       child: Text(
         '$count',
-        style: const TextStyle(fontSize: AvesFilterChip.fontSize),
+        style: const TextStyle(fontSize: FmvFilterChip.fontSize),
       ),
     );
   }

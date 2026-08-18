@@ -49,7 +49,7 @@ class VideoMetadataFormatter {
   };
 
   // fetch size, rotation and duration
-  static Future<Map<String, int>> getLoadingMetadata(AvesEntry entry) async {
+  static Future<Map<String, int>> getLoadingMetadata(FmvEntry entry) async {
     final mediaInfo = await videoMetadataFetcher.getMetadata(uri: entry.uri, mimeType: entry.mimeType);
     final fields = <String, int>{};
 
@@ -85,7 +85,7 @@ class VideoMetadataFormatter {
   }
 
   // fetch date and animated status
-  static Future<CatalogMetadata?> completeCatalogMetadata(AvesEntry entry) async {
+  static Future<CatalogMetadata?> completeCatalogMetadata(FmvEntry entry) async {
     var catalogMetadata = entry.catalogMetadata ?? CatalogMetadata(id: entry.id);
 
     final mediaInfo = await videoMetadataFetcher.getMetadata(uri: entry.uri, mimeType: entry.mimeType);
@@ -516,7 +516,7 @@ class VideoMetadataFormatter {
     } else if (value is String) {
       size = int.tryParse(value);
     }
-    return size != null ? formatFileSize(AvesLocale.ascii, size) : '$value';
+    return size != null ? formatFileSize(FmvLocale.ascii, size) : '$value';
   }
 
   static String _formatLanguage(String value) {

@@ -25,10 +25,10 @@ import 'package:flutter/widgets.dart';
   - added single & double tap position feedback
   - fixed focus when scaling by double-tap/pinch
  */
-class AvesMagnifier extends StatefulWidget {
+class FmvMagnifier extends StatefulWidget {
   static const double defaultPanInertia = .2;
 
-  final AvesMagnifierController controller;
+  final FmvMagnifierController controller;
   final EdgeInsets viewportPadding;
 
   // The size of the custom [child]. This value is used to compute the relation between the child and the container's size to calculate the scale value.
@@ -59,7 +59,7 @@ class AvesMagnifier extends StatefulWidget {
   final MagnifierDoubleTapCallback? onDoubleTap;
   final Widget child;
 
-  const AvesMagnifier({
+  const FmvMagnifier({
     super.key,
     required this.controller,
     required this.contentSize,
@@ -87,7 +87,7 @@ class AvesMagnifier extends StatefulWidget {
   State<StatefulWidget> createState() => _AvesMagnifierState();
 }
 
-class _AvesMagnifierState extends State<AvesMagnifier> with TickerProviderStateMixin, AvesMagnifierControllerDelegate, EdgeHitDetector {
+class _AvesMagnifierState extends State<FmvMagnifier> with TickerProviderStateMixin, FmvMagnifierControllerDelegate, EdgeHitDetector {
   Offset? _startFocalPoint, _lastViewportFocalPosition;
   double? _startScale, _quickScaleLastY, _quickScaleLastDistance;
   late bool _dropped, _doubleTap, _quickScaleMoved;
@@ -118,7 +118,7 @@ class _AvesMagnifierState extends State<AvesMagnifier> with TickerProviderStateM
   }
 
   @override
-  void didUpdateWidget(covariant AvesMagnifier oldWidget) {
+  void didUpdateWidget(covariant FmvMagnifier oldWidget) {
     super.didUpdateWidget(oldWidget);
 
     if (oldWidget.controller != widget.controller) {
@@ -152,12 +152,12 @@ class _AvesMagnifierState extends State<AvesMagnifier> with TickerProviderStateM
     super.dispose();
   }
 
-  void _registerWidget(AvesMagnifier widget) {
+  void _registerWidget(FmvMagnifier widget) {
     registerDelegate(widget);
     setScaleStateUpdateAnimation(animateOnScaleStateUpdate);
   }
 
-  void _unregisterWidget(AvesMagnifier oldWidget) {
+  void _unregisterWidget(FmvMagnifier oldWidget) {
     unregisterDelegate(oldWidget);
   }
 

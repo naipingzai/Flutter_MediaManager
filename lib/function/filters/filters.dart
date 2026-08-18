@@ -166,7 +166,7 @@ abstract class CollectionFilter extends Equatable implements Comparable<Collecti
   Widget? iconBuilder(BuildContext context, double size, {bool allowGenericIcon = true}) => null;
 
   Future<Color> color(BuildContext context) {
-    final colors = context.read<AvesColorsData>();
+    final colors = context.read<FmvColorsData>();
     return SynchronousFuture(colors.fromString(getLabel(context)));
   }
 
@@ -188,7 +188,7 @@ abstract class CollectionFilter extends Equatable implements Comparable<Collecti
 @immutable
 class FilterGridItem<T extends CollectionFilter> with Equatable {
   final T filter;
-  final AvesEntry? entry;
+  final FmvEntry? entry;
 
   @override
   List<Object?> get props => [filter, entry?.uri];
@@ -196,7 +196,7 @@ class FilterGridItem<T extends CollectionFilter> with Equatable {
   const FilterGridItem(this.filter, this.entry);
 }
 
-typedef EntryPredicate = bool Function(AvesEntry entry);
+typedef EntryPredicate = bool Function(FmvEntry entry);
 typedef CollectionFilterPredicate = bool Function(CollectionFilter filter);
 
 abstract class DummyCollectionFilter extends CollectionFilter {

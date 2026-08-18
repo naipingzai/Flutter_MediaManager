@@ -36,5 +36,5 @@ class SettingSwitchTrailingIcon extends StatelessWidget {
     return textScaler.scale(IconTheme.of(context).size!);
   }
 
-  static Color getIconColor(BuildContext context) => context.select<AvesColorsData, Color>((v) => v.neutral);
+  static Color getIconColor(BuildContext context) => context.select<FmvColorsData, Color>((v) => v.neutral);
 }

@@ -241,7 +241,7 @@ abstract class ChipSetActionDelegate<T extends CollectionFilter> with FeedbackMi
     return selection.isSelecting ? selection.selectedItems.map((v) => v.filter).toSet() : {};
   }
 
-  Iterable<AvesEntry> _selectedEntries(BuildContext context) {
+  Iterable<FmvEntry> _selectedEntries(BuildContext context) {
     final source = context.read<CollectionSource>();
     final visibleEntries = source.visibleEntries;
 
@@ -396,7 +396,7 @@ abstract class ChipSetActionDelegate<T extends CollectionFilter> with FeedbackMi
     final existingCover = covers.of(filter);
     final entryId = existingCover?.entryId;
     final customEntry = entryId != null ? context.read<CollectionSource>().visibleEntries.firstWhereOrNull((entry) => entry.id == entryId) : null;
-    final selectedCover = await showAvesDialog<(AvesEntry?, String?, Color?)>(
+    final selectedCover = await showAvesDialog<(FmvEntry?, String?, Color?)>(
       context: context,
       builder: (context) => CoverSelectionDialog(
         filter: filter,
@@ -409,7 +409,7 @@ abstract class ChipSetActionDelegate<T extends CollectionFilter> with FeedbackMi
     if (selectedCover == null) return;
 
     if (filter is StoredAlbumFilter) {
-      context.read<AvesColorsData>().clearAppColor(filter.album);
+      context.read<FmvColorsData>().clearAppColor(filter.album);
     }
 
     final (selectedEntry, selectedPackage, selectedColor) = selectedCover;

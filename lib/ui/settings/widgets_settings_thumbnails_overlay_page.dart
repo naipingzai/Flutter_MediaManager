@@ -34,7 +34,7 @@ class ThumbnailOverlayPage extends StatelessWidget {
     final iconColor = SettingSwitchTrailingIcon.getIconColor(context);
 
     final l10n = context.l10n;
-    return AvesScaffold(
+    return FmvScaffold(
       appBar: AppBar(
         automaticallyImplyLeading: !settings.useTvLayout,
         title: Text(l10n.settingsThumbnailOverlayPageTitle),

@@ -20,7 +20,7 @@ class AccessibilitySection extends SettingsSection {
   @override
   Widget icon(BuildContext context) => SettingsTileLeading(
     icon: AIcons.accessibility,
-    color: context.select<AvesColorsData, Color>((v) => v.accessibility),
+    color: context.select<FmvColorsData, Color>((v) => v.accessibility),
   );
 
   @override

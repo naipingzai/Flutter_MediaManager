@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 
 typedef _SectionPredicate = List<SettingsTile> Function(BuildContext context, SettingsSection section);
 
-class SettingsSearchDelegate extends AvesSearchDelegate {
+class SettingsSearchDelegate extends FmvSearchDelegate {
   final List<SettingsSection> sections;
 
   static const pageRouteName = '/settings/search';

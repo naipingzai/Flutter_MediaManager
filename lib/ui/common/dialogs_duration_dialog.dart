@@ -47,7 +47,7 @@ class _DurationDialogState extends State<DurationDialog> {
           const textStyle = TextStyle(fontSize: 34);
           const digitsAlign = TextAlign.right;
 
-          return AvesDialog(
+          return FmvDialog(
             scrollableContent: [
               Padding(
                 padding: const EdgeInsets.only(top: 16),

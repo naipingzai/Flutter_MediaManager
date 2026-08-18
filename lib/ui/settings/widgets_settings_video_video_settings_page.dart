@@ -18,7 +18,7 @@ class _VideoSettingsPageState extends State<VideoSettingsPage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return AvesScaffold(
+    return FmvScaffold(
       appBar: AppBar(
         automaticallyImplyLeading: !settings.useTvLayout,
         title: Text(context.l10n.settingsVideoPageTitle),

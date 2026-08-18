@@ -33,7 +33,7 @@ class AlbumSectionHeader extends StatelessWidget {
         );
       }
     }
-    return SectionHeader<AvesEntry>(
+    return SectionHeader<FmvEntry>(
       sectionKey: EntryAlbumSectionKey(_directory),
       leading: albumIcon,
       title: albumName ?? context.l10n.sectionUnknown,

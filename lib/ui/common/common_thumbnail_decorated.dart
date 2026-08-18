@@ -8,7 +8,7 @@ import 'package:flutter_media_view/ui/common/common_thumbnail_overlay.dart';
 import 'package:flutter/material.dart';
 
 class DecoratedThumbnail extends StatelessWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
   final double tileExtent;
   final ValueNotifier<bool>? cancellableNotifier;
   final bool isMosaic, selectable, highlightable;
@@ -18,7 +18,7 @@ class DecoratedThumbnail extends StatelessWidget {
 
   static Color borderColor(BuildContext context) => Theme.of(context).dividerColor;
 
-  static double borderWidth(BuildContext context) => AvesBorder.straightBorderWidth(context);
+  static double borderWidth(BuildContext context) => FmvBorder.straightBorderWidth(context);
 
   const DecoratedThumbnail({
     super.key,
@@ -64,7 +64,7 @@ class DecoratedThumbnail extends StatelessWidget {
         imageDecorator?.call(context, child) ?? child,
         ThumbnailEntryOverlay(entry: entry),
         if (selectable) ...[
-          GridItemSelectionOverlay<AvesEntry>(
+          GridItemSelectionOverlay<FmvEntry>(
             item: entry,
             padding: const EdgeInsets.all(2),
           ),

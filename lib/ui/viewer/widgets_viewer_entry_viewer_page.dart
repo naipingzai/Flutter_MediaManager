@@ -14,7 +14,7 @@ class EntryViewerPage extends StatefulWidget {
   // provided collection should be a new instance specifically created
   // for the `EntryViewerPage` widget, so it can be safely disposed here
   final CollectionLens? collection;
-  final AvesEntry initialEntry;
+  final FmvEntry initialEntry;
 
   const EntryViewerPage({
     super.key,
@@ -43,7 +43,7 @@ class _EntryViewerPageState extends State<EntryViewerPage> {
   @override
   Widget build(BuildContext context) {
     final collection = widget.collection;
-    return AvesScaffold(
+    return FmvScaffold(
       body: MultiProvider(
         providers: [
           ViewStateConductorProvider(),

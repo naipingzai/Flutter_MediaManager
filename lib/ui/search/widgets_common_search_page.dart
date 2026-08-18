@@ -18,7 +18,7 @@ import 'package:provider/provider.dart';
 class SearchPage extends StatefulWidget {
   static const routeName = '/search';
 
-  final AvesSearchDelegate delegate;
+  final FmvSearchDelegate delegate;
   final Animation<double> animation;
 
   const SearchPage({
@@ -147,12 +147,12 @@ class _SearchPageState extends State<SearchPage> {
     final animate = context.select<Settings, bool>((v) => v.animate);
     if (animate) {
       leading = Hero(
-        tag: AvesAppBar.leadingHeroTag,
+        tag: FmvAppBar.leadingHeroTag,
         transitionOnUserGestures: true,
         child: leading,
       );
       title = Hero(
-        tag: AvesAppBar.titleHeroTag,
+        tag: FmvAppBar.titleHeroTag,
         transitionOnUserGestures: true,
         child: title,
       );
@@ -162,13 +162,13 @@ class _SearchPageState extends State<SearchPage> {
       );
     }
 
-    return AvesScaffold(
+    return FmvScaffold(
       appBar: AppBar(
         leading: leading,
         title: title,
         actions: widget.delegate.buildActions(context),
       ),
-      body: AvesPopScope(
+      body: FmvPopScope(
         handlers: [
           tvNavigationPopHandler,
           doubleBackPopHandler,

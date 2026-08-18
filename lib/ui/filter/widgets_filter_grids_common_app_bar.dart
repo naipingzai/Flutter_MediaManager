@@ -121,7 +121,7 @@ class _FilterGridAppBarState<T extends CollectionFilter, CSAD extends ChipSetAct
     super.didChangeDependencies();
     final route = ModalRoute.of(context);
     if (route is PageRoute) {
-      AvesApp.pageRouteObserver.subscribe(this, route);
+      FmvApp.pageRouteObserver.subscribe(this, route);
     }
   }
 
@@ -136,7 +136,7 @@ class _FilterGridAppBarState<T extends CollectionFilter, CSAD extends ChipSetAct
       ..forEach((sub) => sub.cancel())
       ..clear();
     WidgetsBinding.instance.removeObserver(this);
-    AvesApp.pageRouteObserver.unsubscribe(this);
+    FmvApp.pageRouteObserver.unsubscribe(this);
     super.dispose();
   }
 
@@ -169,7 +169,7 @@ class _FilterGridAppBarState<T extends CollectionFilter, CSAD extends ChipSetAct
           final actionDelegate = widget.actionDelegate;
           final ActionsBuilder<T, CSAD> actionsBuilder = widget.actionsBuilder ?? _buildActions;
           final useTvLayout = settings.useTvLayout;
-          return AvesAppBar(
+          return FmvAppBar(
             contentHeight: appBarContentHeight,
             pinned: context.select<Selection<FilterGridItem<T>>, bool>((selection) => selection.isSelecting),
             leading: _buildAppBarLeading(
@@ -205,7 +205,7 @@ class _FilterGridAppBarState<T extends CollectionFilter, CSAD extends ChipSetAct
                               final grouping = groupUri != null ? FilterGrouping.forUri(groupUri) : null;
                               final groupFilter = grouping?.uriToFilter(groupUri);
                               if (groupFilter is T) {
-                                lastCrumbBuilder = (context) => AvesFilterChip(
+                                lastCrumbBuilder = (context) => FmvFilterChip(
                                   filter: groupFilter,
                                   onTap: (_) => onGroupCrumbTap(context, groupFilter),
                                   onLongPress: null,
@@ -515,7 +515,7 @@ class _FilterGridAppBarState<T extends CollectionFilter, CSAD extends ChipSetAct
   void _scrollToTop() => widget.scrollController.jumpTo(0);
 
   void _updateAppBarHeight() {
-    widget.appBarHeightNotifier.value = AvesAppBar.appBarHeightForContentHeight(appBarContentHeight);
+    widget.appBarHeightNotifier.value = FmvAppBar.appBarHeightForContentHeight(appBarContentHeight);
   }
 
   void _onActionSelected(BuildContext context, ChipSetAction action, ChipSetActionDelegate<T> actionDelegate) {

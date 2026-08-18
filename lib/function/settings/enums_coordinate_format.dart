@@ -14,7 +14,7 @@ extension ExtraCoordinateFormat on CoordinateFormat {
     return context.applyDirectionality(text);
   }
 
-  String formatWithoutDirectionality(AvesLocale locale, AppLocalizations l10n, LatLng latLng, {bool minuteSecondPadding = false, int? dmsSecondDecimals}) {
+  String formatWithoutDirectionality(FmvLocale locale, AppLocalizations l10n, LatLng latLng, {bool minuteSecondPadding = false, int? dmsSecondDecimals}) {
     switch (this) {
       case .dms:
         return toDMS(locale, l10n, latLng, minuteSecondPadding: minuteSecondPadding, secondDecimals: dmsSecondDecimals ?? 2).join(_separator);
@@ -26,7 +26,7 @@ extension ExtraCoordinateFormat on CoordinateFormat {
   }
 
   // returns coordinates formatted as DMS, e.g. ['41° 24′ 12.2″ N', '2° 10′ 26.5″ E']
-  static List<String> toDMS(AvesLocale locale, AppLocalizations l10n, LatLng latLng, {bool minuteSecondPadding = false, int secondDecimals = 2}) {
+  static List<String> toDMS(FmvLocale locale, AppLocalizations l10n, LatLng latLng, {bool minuteSecondPadding = false, int secondDecimals = 2}) {
     final lat = latLng.latitude;
     final lng = latLng.longitude;
     final latSexa = _decimal2sexagesimal(lat, minuteSecondPadding, secondDecimals, locale);
@@ -38,7 +38,7 @@ extension ExtraCoordinateFormat on CoordinateFormat {
   }
 
   // returns coordinates formatted as DDM, e.g. ['41° 24.2028′ N', '2° 10.4418′ E']
-  static List<String> toDDM(AvesLocale locale, AppLocalizations l10n, LatLng latLng, {bool minutePadding = false, int minuteDecimals = 4}) {
+  static List<String> toDDM(FmvLocale locale, AppLocalizations l10n, LatLng latLng, {bool minutePadding = false, int minuteDecimals = 4}) {
     final lat = latLng.latitude;
     final lng = latLng.longitude;
     final latSexa = _decimal2ddm(lat, minutePadding, minuteDecimals, locale);
@@ -53,7 +53,7 @@ extension ExtraCoordinateFormat on CoordinateFormat {
     double degDecimal,
     bool minuteSecondPadding,
     int secondDecimals,
-    AvesLocale locale,
+    FmvLocale locale,
   ) {
     final degAbs = degDecimal.abs();
     final deg = degAbs.toInt();
@@ -72,7 +72,7 @@ extension ExtraCoordinateFormat on CoordinateFormat {
     double degDecimal,
     bool minutePadding,
     int minuteDecimals,
-    AvesLocale locale,
+    FmvLocale locale,
   ) {
     final degAbs = degDecimal.abs();
     final deg = degAbs.toInt();
@@ -84,7 +84,7 @@ extension ExtraCoordinateFormat on CoordinateFormat {
     return '$degText° $minText′';
   }
 
-  static List<String> _toDecimal(AvesLocale locale, LatLng latLng) {
+  static List<String> _toDecimal(FmvLocale locale, LatLng latLng) {
     final coordinateFormatter = locale.numberFormat('0.000000°');
     return [
       coordinateFormatter.format(latLng.latitude),

@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class DbTab extends StatefulWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
 
   const DbTab({
     super.key,
@@ -26,13 +26,13 @@ class DbTab extends StatefulWidget {
 
 class _DbTabState extends State<DbTab> {
   late Future<int?> _dbDateLoader;
-  late Future<AvesEntry?> _dbEntryLoader;
+  late Future<FmvEntry?> _dbEntryLoader;
   late Future<CatalogMetadata?> _dbMetadataLoader;
   late Future<AddressDetails?> _dbAddressLoader;
   late Future<TrashDetails?> _dbTrashDetailsLoader;
   late Future<VideoPlaybackRow?> _dbVideoPlaybackLoader;
 
-  AvesEntry get entry => widget.entry;
+  FmvEntry get entry => widget.entry;
 
   @override
   void initState() {
@@ -77,7 +77,7 @@ class _DbTabState extends State<DbTab> {
           },
         ),
         const SizedBox(height: 16),
-        FutureBuilder<AvesEntry?>(
+        FutureBuilder<FmvEntry?>(
           future: _dbEntryLoader,
           builder: (context, snapshot) {
             if (snapshot.hasError) return Text(snapshot.error.toString());

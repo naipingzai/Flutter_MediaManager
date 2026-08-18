@@ -38,7 +38,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class BasicSection extends StatefulWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
   final CollectionLens? collection;
   final EntryInfoActionDelegate actionDelegate;
   final ValueNotifier<bool> isScrollingNotifier;
@@ -155,13 +155,13 @@ class _BasicSectionState extends State<BasicSection> with AutomaticKeepAliveClie
         ]..sort();
 
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AvesFilterChip.outlineWidth / 2) + const EdgeInsets.only(top: 8),
+          padding: const EdgeInsets.symmetric(horizontal: FmvFilterChip.outlineWidth / 2) + const EdgeInsets.only(top: 8),
           child: Wrap(
             spacing: 8,
             runSpacing: 8,
             children: effectiveFilters
                 .map(
-                  (filter) => AvesFilterChip(
+                  (filter) => FmvFilterChip(
                     filter: filter,
                     onTap: widget.onFilterSelection,
                   ),
@@ -199,7 +199,7 @@ class _BasicSectionState extends State<BasicSection> with AutomaticKeepAliveClie
               preferBelow: false,
             ),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AvesFilterChip.outlineWidth / 2) + const EdgeInsets.only(top: 8),
+              padding: const EdgeInsets.symmetric(horizontal: FmvFilterChip.outlineWidth / 2) + const EdgeInsets.only(top: 8),
               child: Wrap(
                 spacing: 8,
                 runSpacing: 8,
@@ -243,11 +243,11 @@ class _BasicSectionState extends State<BasicSection> with AutomaticKeepAliveClie
               decoration: BoxDecoration(
                 border: Border.fromBorderSide(
                   BorderSide(
-                    color: isEditing ? Theme.of(context).disabledColor : context.select<AvesColorsData, Color>((v) => v.neutral),
-                    width: AvesFilterChip.outlineWidth,
+                    color: isEditing ? Theme.of(context).disabledColor : context.select<FmvColorsData, Color>((v) => v.neutral),
+                    width: FmvFilterChip.outlineWidth,
                   ),
                 ),
-                borderRadius: const BorderRadius.all(Radius.circular(AvesFilterChip.defaultRadius)),
+                borderRadius: const BorderRadius.all(Radius.circular(FmvFilterChip.defaultRadius)),
               ),
               child: button,
             ),
@@ -257,7 +257,7 @@ class _BasicSectionState extends State<BasicSection> with AutomaticKeepAliveClie
                 child: const Padding(
                   padding: EdgeInsets.all(1.0),
                   child: CircularProgressIndicator(
-                    strokeWidth: AvesFilterChip.outlineWidth,
+                    strokeWidth: FmvFilterChip.outlineWidth,
                   ),
                 ),
               ),
@@ -283,7 +283,7 @@ class _BasicSectionState extends State<BasicSection> with AutomaticKeepAliveClie
 }
 
 class _BasicInfo extends StatefulWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
 
   const _BasicInfo({
     required this.entry,
@@ -297,7 +297,7 @@ class _BasicInfoState extends State<_BasicInfo> {
   Future<String?> _ownerPackageLoader = SynchronousFuture(null);
   Future<void> _appNameLoader = SynchronousFuture(null);
 
-  AvesEntry get entry => widget.entry;
+  FmvEntry get entry => widget.entry;
 
   static const ownerPackageNamePropKey = 'owner_package_name';
   static const iconSize = 20.0;
@@ -398,7 +398,7 @@ class _BasicInfoState extends State<_BasicInfo> {
     ];
   }
 
-  String getRasterResolutionText(AvesLocale locale) {
+  String getRasterResolutionText(FmvLocale locale) {
     var s = entry.getResolutionText(locale);
 
     // guess whether this is a photo, according to file type

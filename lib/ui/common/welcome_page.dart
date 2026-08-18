@@ -50,7 +50,7 @@ class _WelcomePageState extends State<WelcomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return AvesScaffold(
+    return FmvScaffold(
       body: SafeArea(
         child: Center(
           child: FutureBuilder<String>(
@@ -142,7 +142,7 @@ class _WelcomePageState extends State<WelcomePage> {
       SizedBox(height: padding),
       ...(isPortrait
           ? [
-              const AvesLogo(size: 64),
+              const FmvLogo(size: 64),
               const SizedBox(height: 16),
               message,
             ]
@@ -150,7 +150,7 @@ class _WelcomePageState extends State<WelcomePage> {
               Row(
                 mainAxisSize: .min,
                 children: [
-                  const AvesLogo(size: 48),
+                  const FmvLogo(size: 48),
                   const SizedBox(width: 16),
                   message,
                 ],
@@ -197,7 +197,7 @@ class _WelcomePageState extends State<WelcomePage> {
       ),
     );
 
-    final button = AvesOutlinedButton(
+    final button = FmvOutlinedButton(
       // key is expected by test driver
       key: const Key('continue-button'),
       label: context.l10n.continueButtonLabel,

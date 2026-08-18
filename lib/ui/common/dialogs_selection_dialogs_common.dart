@@ -12,7 +12,7 @@ Future<void> showSelectionDialog<T>({
   final value = await showAvesDialog<T>(
     context: context,
     builder: builder,
-    routeSettings: const RouteSettings(name: AvesSingleSelectionDialog.routeName),
+    routeSettings: const RouteSettings(name: FmvSingleSelectionDialog.routeName),
   );
   // wait for the dialog to hide
   await Future.delayed(ADurations.dialogTransitionLoose * timeDilation);

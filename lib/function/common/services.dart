@@ -40,10 +40,10 @@ final getIt = GetIt.instance;
 final SettingsStore settingsStore = SharedPrefSettingsStore();
 
 final p.Context pContext = getIt<p.Context>();
-final AvesAvailability availability = getIt<AvesAvailability>();
+final FmvAvailability availability = getIt<FmvAvailability>();
 final LocalMediaDb localMediaDb = getIt<LocalMediaDb>();
-final AvesVideoControllerFactory videoControllerFactory = getIt<AvesVideoControllerFactory>();
-final AvesVideoMetadataFetcher videoMetadataFetcher = getIt<AvesVideoMetadataFetcher>();
+final FmvVideoControllerFactory videoControllerFactory = getIt<FmvVideoControllerFactory>();
+final FmvVideoMetadataFetcher videoMetadataFetcher = getIt<FmvVideoMetadataFetcher>();
 
 final AppService appService = getIt<AppService>();
 final AppProfileService appProfileService = getIt<AppProfileService>();
@@ -70,10 +70,10 @@ void initPlatformServices() {
     databaseFactory = databaseFactoryFfi;
   }
   getIt.registerLazySingleton<p.Context>(p.Context.new);
-  getIt.registerLazySingleton<AvesAvailability>(LiveAvesAvailability.new);
+  getIt.registerLazySingleton<FmvAvailability>(LiveAvesAvailability.new);
   getIt.registerLazySingleton<LocalMediaDb>(SqfliteLocalMediaDb.new);
-  getIt.registerLazySingleton<AvesVideoControllerFactory>(MpvVideoControllerFactory.new);
-  getIt.registerLazySingleton<AvesVideoMetadataFetcher>(MpvVideoMetadataFetcher.new);
+  getIt.registerLazySingleton<FmvVideoControllerFactory>(MpvVideoControllerFactory.new);
+  getIt.registerLazySingleton<FmvVideoMetadataFetcher>(MpvVideoMetadataFetcher.new);
 
   getIt.registerLazySingleton<AppService>(PlatformAppService.new);
   getIt.registerLazySingleton<AppProfileService>(PlatformAppProfileService.new);

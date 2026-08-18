@@ -16,7 +16,7 @@ class SvgMetadataService {
   static const _textElements = ['title', 'desc'];
   static const _metadataElement = 'metadata';
 
-  static Future<Size?> getSize(AvesEntry entry) async {
+  static Future<Size?> getSize(FmvEntry entry) async {
     try {
       final data = await mediaFetchService.getOriginalBytes(entry);
       final document = XmlDocument.parse(utf8.decode(data));
@@ -52,7 +52,7 @@ class SvgMetadataService {
     return null;
   }
 
-  static Future<Map<String, Map<String, String>>> getAllMetadata(AvesEntry entry) async {
+  static Future<Map<String, Map<String, String>>> getAllMetadata(FmvEntry entry) async {
     String formatKey(String key) {
       switch (key) {
         case 'desc':

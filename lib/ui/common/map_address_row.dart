@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_media_view/ui/common/map_info_row.dart';
 
 class MapAddressRow extends StatefulWidget {
-  final AvesEntry? entry;
+  final FmvEntry? entry;
 
   const MapAddressRow({
     super.key,
@@ -95,7 +95,7 @@ class _MapAddressRowState extends State<MapAddressRow> {
     }
   }
 
-  Future<String?> _getAddressLine(AvesEntry? entry) async {
+  Future<String?> _getAddressLine(FmvEntry? entry) async {
     if (entry != null && await availability.canLocatePlaces) {
       final addresses = await geocodingService.getAddress(entry.latLng!, settings.avesLocale);
       if (addresses.isNotEmpty) {

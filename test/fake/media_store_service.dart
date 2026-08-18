@@ -7,7 +7,7 @@ import 'package:flutter_media_view/function/media/media_store_service.dart';
 import 'package:test/fake.dart';
 
 class FakeMediaStoreService extends Fake implements MediaStoreService {
-  late Set<AvesEntry> entries;
+  late Set<FmvEntry> entries;
   Duration? latency;
 
   void reset() {
@@ -34,7 +34,7 @@ class FakeMediaStoreService extends Fake implements MediaStoreService {
   }
 
   @override
-  Stream<AvesEntry> getEntries(Map<int?, int?> knownEntries, {String? directory}) => Stream.fromIterable(entries);
+  Stream<FmvEntry> getEntries(Map<int?, int?> knownEntries, {String? directory}) => Stream.fromIterable(entries);
 
   static var _lastId = 1;
 
@@ -42,12 +42,12 @@ class FakeMediaStoreService extends Fake implements MediaStoreService {
 
   static int get dateMillis => DateTime.now().millisecondsSinceEpoch;
 
-  static AvesEntry newImage(String album, String filenameWithoutExtension, {int? id, int? contentId}) {
+  static FmvEntry newImage(String album, String filenameWithoutExtension, {int? id, int? contentId}) {
     id ??= nextId;
     contentId ??= id;
     final _dateMillis = dateMillis;
     final _dateSecs = _dateMillis ~/ 1000;
-    return AvesEntry(
+    return FmvEntry(
       origin: EntryOrigins.mediaStoreContent,
       id: id,
       uri: 'content://media/external/images/media/$contentId',
@@ -68,7 +68,7 @@ class FakeMediaStoreService extends Fake implements MediaStoreService {
     );
   }
 
-  static MoveOpEvent moveOpEventForMove(AvesEntry entry, String sourceAlbum, String destinationAlbum) {
+  static MoveOpEvent moveOpEventForMove(FmvEntry entry, String sourceAlbum, String destinationAlbum) {
     final newContentId = nextId;
     return MoveOpEvent(
       success: true,
@@ -84,7 +84,7 @@ class FakeMediaStoreService extends Fake implements MediaStoreService {
     );
   }
 
-  static MoveOpEvent moveOpEventForRename(AvesEntry entry, String newName) {
+  static MoveOpEvent moveOpEventForRename(FmvEntry entry, String newName) {
     final newContentId = nextId;
     final oldName = entry.filenameWithoutExtension!;
     return MoveOpEvent(

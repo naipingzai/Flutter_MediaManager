@@ -20,7 +20,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
 
 class MapButtonPanel extends StatefulWidget {
-  final AvesMapController controller;
+  final FmvMapController controller;
   final ValueNotifier<ZoomedBounds> boundsNotifier;
   final void Function(BuildContext context)? openMapPage;
 

@@ -25,7 +25,7 @@ class _DebugSettingsSectionState extends State<DebugSettingsSection> with Automa
     return Consumer<Settings>(
       builder: (context, settings, child) {
         String toMultiline(Iterable? l) => l != null && l.isNotEmpty ? '\n${l.join('\n')}' : '$l';
-        return AvesExpansionTile(
+        return FmvExpansionTile(
           title: 'Settings',
           children: [
             Padding(

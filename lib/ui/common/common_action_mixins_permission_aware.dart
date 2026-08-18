@@ -11,12 +11,12 @@ import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 
 mixin PermissionAwareMixin {
-  Future<bool> checkStoragePermission(BuildContext context, Set<AvesEntry> entries) {
+  Future<bool> checkStoragePermission(BuildContext context, Set<FmvEntry> entries) {
     final storageDirs = entries.map((e) => e.storageDirectory).nonNulls.toSet();
     return checkStoragePermissionForAlbums(context, storageDirs, entries: entries);
   }
 
-  Future<bool> checkStoragePermissionForAlbums(BuildContext context, Set<String> storageDirs, {Set<AvesEntry>? entries}) async {
+  Future<bool> checkStoragePermissionForAlbums(BuildContext context, Set<String> storageDirs, {Set<FmvEntry>? entries}) async {
     final restrictedDirsLowerCase = await storageService.getRestrictedDirectoriesLowerCase();
     while (true) {
       final inaccessibleDirs = await storageService.getInaccessibleDirectories(storageDirs);

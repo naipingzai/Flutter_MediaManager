@@ -10,7 +10,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class ErrorThumbnail extends StatefulWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
   final double extent;
 
   const ErrorThumbnail({
@@ -26,7 +26,7 @@ class ErrorThumbnail extends StatefulWidget {
 class _ErrorThumbnailState extends State<ErrorThumbnail> {
   late Future<bool> _exists;
 
-  AvesEntry get entry => widget.entry;
+  FmvEntry get entry => widget.entry;
 
   double get extent => widget.extent;
 

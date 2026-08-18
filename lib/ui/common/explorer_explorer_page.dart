@@ -88,7 +88,7 @@ class _ExplorerPageState extends State<ExplorerPage> {
       builder: (context, directory, child) {
         final atRoot = directory?.relativeDir.isEmpty ?? true;
         final path = directory?.dirPath;
-        final body = AvesPopScope(
+        final body = FmvPopScope(
           handlers: [
             APopHandler(
               canPop: (context) => atRoot,
@@ -134,7 +134,7 @@ class _ExplorerPageState extends State<ExplorerPage> {
                 _draggableScrollBarEventStreamController.add(notification.event);
                 return false;
               },
-              child: AvesScaffold(
+              child: FmvScaffold(
                 body: body,
                 drawer: canNavigate ? AppDrawer(currentExplorerPath: path) : null,
                 bottomNavigationBar: showBottomNavigationBar
@@ -291,7 +291,7 @@ class _ExplorerPageContent extends StatelessWidget {
         if (dirPath != null) {
           final album = getAlbumPath(source, Directory(dirPath));
           if (album != null) {
-            bottom = AvesFilterChip(
+            bottom = FmvFilterChip(
               filter: StoredAlbumFilter(album, source.getStoredAlbumDisplayName(context, album)),
               maxWidth: double.infinity,
               onTap: (filter) => _GoToCollectionPageNotification(filter).dispatch(context),
@@ -323,12 +323,12 @@ class _ExplorerContentLine extends StatelessWidget {
     final album = _ExplorerPageContent.getAlbumPath(source, entity);
     final baseIconTheme = IconTheme.of(context);
 
-    const leadingDim = AvesFilterChip.minChipWidth;
+    const leadingDim = FmvFilterChip.minChipWidth;
     return ListTile(
       leading: album != null
           ? IconTheme.merge(
               data: baseIconTheme,
-              child: AvesFilterChip(
+              child: FmvFilterChip(
                 filter: StoredAlbumFilter(album, source.getStoredAlbumDisplayName(context, album)),
                 showText: false,
                 maxWidth: leadingDim,

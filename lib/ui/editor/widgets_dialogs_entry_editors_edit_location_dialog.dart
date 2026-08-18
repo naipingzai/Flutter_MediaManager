@@ -45,7 +45,7 @@ import 'package:provider/provider.dart';
 class EditEntryLocationDialog extends StatefulWidget {
   static const routeName = '/dialog/edit_entry_location';
 
-  final Set<AvesEntry> entries;
+  final Set<FmvEntry> entries;
   final CollectionLens? collection;
 
   const EditEntryLocationDialog({
@@ -62,11 +62,11 @@ class _EditEntryLocationDialogState extends State<EditEntryLocationDialog> with 
   final Set<StreamSubscription> _subscriptions = {};
   LocationEditAction _action = LocationEditAction.chooseOnMap;
   LatLng? _mapCoordinates;
-  late final AvesEntry mainEntry;
-  late AvesEntry _copyItemSource;
+  late final FmvEntry mainEntry;
+  late FmvEntry _copyItemSource;
   Gpx? _gpx;
   Duration _gpxShift = Duration.zero;
-  final Map<AvesEntry, LatLng> _gpxMap = {};
+  final Map<FmvEntry, LatLng> _gpxMap = {};
   final TextEditingController _latitudeController = TextEditingController(), _longitudeController = TextEditingController();
   final ValueNotifier<bool> _isValidNotifier = ValueNotifier(false);
 
@@ -97,7 +97,7 @@ class _EditEntryLocationDialogState extends State<EditEntryLocationDialog> with 
       _longitudeController.text = '';
     }
     setState(_validate);
-    _subscriptions.add(AvesApp.intentEventBus.on<LocationReceivedEvent>().listen((event) => _setCustomLocation(event.location)));
+    _subscriptions.add(FmvApp.intentEventBus.on<LocationReceivedEvent>().listen((event) => _setCustomLocation(event.location)));
   }
 
   @override
@@ -122,7 +122,7 @@ class _EditEntryLocationDialogState extends State<EditEntryLocationDialog> with 
           builder: (context) {
             final l10n = context.l10n;
 
-            return AvesDialog(
+            return FmvDialog(
               title: l10n.editEntryLocationDialogTitle,
               scrollableContent: [
                 Padding(
@@ -143,7 +143,7 @@ class _EditEntryLocationDialogState extends State<EditEntryLocationDialog> with 
                   duration: context.read<DurationsData>().formTransition,
                   switchInCurve: Curves.easeInOutCubic,
                   switchOutCurve: Curves.easeInOutCubic,
-                  transitionBuilder: AvesTransitions.formTransitionBuilder,
+                  transitionBuilder: FmvTransitions.formTransitionBuilder,
                   child: KeyedSubtree(
                     key: ValueKey(_action),
                     child: _buildContent(),
@@ -264,7 +264,7 @@ class _EditEntryLocationDialogState extends State<EditEntryLocationDialog> with 
     final pickCollection = _createPickCollection();
     if (pickCollection == null) return;
 
-    final entry = await Navigator.maybeOf(context)?.push<AvesEntry>(
+    final entry = await Navigator.maybeOf(context)?.push<FmvEntry>(
       MaterialPageRoute(
         settings: const RouteSettings(name: ItemPickPage.routeName),
         builder: (context) => ItemPickPage(
@@ -344,7 +344,7 @@ class _EditEntryLocationDialogState extends State<EditEntryLocationDialog> with 
                     crossAxisAlignment: .start,
                     children: [
                       Text(l10n.editEntryLocationDialogTimeShift),
-                      AvesCaption(_formatShiftDuration(_gpxShift)),
+                      FmvCaption(_formatShiftDuration(_gpxShift)),
                     ],
                   ),
                 ),
@@ -424,15 +424,15 @@ class _EditEntryLocationDialogState extends State<EditEntryLocationDialog> with 
     if (gpx == null) return;
 
     // dated items and points, oldest first
-    final sortedEntries = widget.entries.where((v) => v.bestDate != null).sorted(AvesEntrySort.compareByDate).reversed.toList();
+    final sortedEntries = widget.entries.where((v) => v.bestDate != null).sorted(FmvEntrySort.compareByDate).reversed.toList();
     final sortedPoints = gpx.trks.expand((trk) => trk.trksegs).expand((trkSeg) => trkSeg.trkpts).where((v) => v.time != null && v.lat != null && v.lon != null).sortedBy((v) => v.time!);
     if (sortedEntries.isNotEmpty && sortedPoints.isNotEmpty) {
       int entryIndex = 0;
       int pointIndex = 0;
 
-      DateTime getEntryDate(AvesEntry entry) => entry.bestDate!;
+      DateTime getEntryDate(FmvEntry entry) => entry.bestDate!;
       DateTime getCorrectedPointDate(Wpt wpt) => wpt.time!.add(_gpxShift);
-      Duration getDurationToPoint(AvesEntry entry, Wpt wpt) => getEntryDate(entry).difference(getCorrectedPointDate(wpt)).abs();
+      Duration getDurationToPoint(FmvEntry entry, Wpt wpt) => getEntryDate(entry).difference(getCorrectedPointDate(wpt)).abs();
 
       while (entryIndex < sortedEntries.length && pointIndex < sortedPoints.length) {
         final entry = sortedEntries[entryIndex];
@@ -636,4 +636,4 @@ class _EditEntryLocationDialogState extends State<EditEntryLocationDialog> with 
   }
 }
 
-typedef LocationEditActionResult = Map<AvesEntry, LatLng?>;
+typedef LocationEditActionResult = Map<FmvEntry, LatLng?>;

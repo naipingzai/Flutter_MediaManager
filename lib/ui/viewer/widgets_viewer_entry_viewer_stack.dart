@@ -47,7 +47,7 @@ import 'package:provider/provider.dart';
 
 class EntryViewerStack extends StatefulWidget {
   final CollectionLens? collection;
-  final AvesEntry initialEntry;
+  final FmvEntry initialEntry;
   final ViewerController viewerController;
 
   const EntryViewerStack({
@@ -80,13 +80,13 @@ class _EntryViewerStackState extends State<EntryViewerStack> with EntryViewContr
   final ValueNotifier<EntryHeroInfo?> _heroInfoNotifier = ValueNotifier(null);
   bool _isEntryTracked = true;
   Timer? _overlayHidingTimer;
-  late ValueNotifier<AvesVideoController?> _playingVideoControllerNotifier;
+  late ValueNotifier<FmvVideoController?> _playingVideoControllerNotifier;
 
   @override
   bool get isViewingImage => _currentVerticalPage.value == imagePage;
 
   @override
-  late final ValueNotifier<AvesEntry?> entryNotifier;
+  late final ValueNotifier<FmvEntry?> entryNotifier;
 
   ViewerController get viewerController => widget.viewerController;
 
@@ -94,7 +94,7 @@ class _EntryViewerStackState extends State<EntryViewerStack> with EntryViewContr
 
   bool get hasCollection => collection != null;
 
-  List<AvesEntry> get entries => hasCollection ? collection!.sortedEntries : [widget.initialEntry];
+  List<FmvEntry> get entries => hasCollection ? collection!.sortedEntries : [widget.initialEntry];
 
   static const int transitionPage = 0;
 
@@ -106,7 +106,7 @@ class _EntryViewerStackState extends State<EntryViewerStack> with EntryViewContr
   void initState() {
     super.initState();
     if (settings.maxBrightness == MaxBrightness.viewerOnly) {
-      AvesApp.screenBrightness?.setApplicationScreenBrightness(1);
+      FmvApp.screenBrightness?.setApplicationScreenBrightness(1);
     }
     if (settings.keepScreenOn == KeepScreenOn.viewerOnly) {
       windowService.keepScreenOn(true);
@@ -174,7 +174,7 @@ class _EntryViewerStackState extends State<EntryViewerStack> with EntryViewContr
     _playingVideoControllerNotifier.addListener(_onPlayingVideoControllerChanged);
     initEntryControllers(entry);
     _registerWidget(widget);
-    AvesApp.lifecycleStateNotifier.addListener(_onAppLifecycleStateChanged);
+    FmvApp.lifecycleStateNotifier.addListener(_onAppLifecycleStateChanged);
     WidgetsBinding.instance.addPostFrameCallback((_) => _initOverlay());
   }
 
@@ -187,7 +187,7 @@ class _EntryViewerStackState extends State<EntryViewerStack> with EntryViewContr
 
   @override
   void dispose() {
-    AvesApp.pageRouteObserver.unsubscribe(this);
+    FmvApp.pageRouteObserver.unsubscribe(this);
     cleanEntryControllers(entryNotifier.value);
     _playingVideoControllerNotifier.removeListener(_onPlayingVideoControllerChanged);
     updatePictureInPicture(context);
@@ -207,7 +207,7 @@ class _EntryViewerStackState extends State<EntryViewerStack> with EntryViewContr
     _verticalScrollNotifier.dispose();
     _heroInfoNotifier.dispose();
     _stopOverlayHidingTimer();
-    AvesApp.lifecycleStateNotifier.removeListener(_onAppLifecycleStateChanged);
+    FmvApp.lifecycleStateNotifier.removeListener(_onAppLifecycleStateChanged);
     _unregisterWidget(widget);
     super.dispose();
   }
@@ -256,7 +256,7 @@ class _EntryViewerStackState extends State<EntryViewerStack> with EntryViewContr
               return ValueListenableBuilder<bool>(
                 // as of floating v6.0.0, `Floating().pipStatusStream` is CPU intensive as it loops to query the platform,
                 // so we monitor the change on the platform and only notify changes
-                valueListenable: AvesApp.isInPictureInPictureMode,
+                valueListenable: FmvApp.isInPictureInPictureMode,
                 builder: (context, pipEnabled, child) {
                   return ValueListenableBuilder<bool>(
                     valueListenable: _viewLocked,
@@ -311,7 +311,7 @@ class _EntryViewerStackState extends State<EntryViewerStack> with EntryViewContr
     super.didChangeDependencies();
     final route = ModalRoute.of(context);
     if (route is PageRoute) {
-      AvesApp.pageRouteObserver.subscribe(this, route);
+      FmvApp.pageRouteObserver.subscribe(this, route);
     }
   }
 
@@ -347,7 +347,7 @@ class _EntryViewerStackState extends State<EntryViewerStack> with EntryViewContr
   // * back from home: paused -> hidden -> inactive -> resumed
   // * app switch / settings / etc: resumed -> inactive
   void _onAppLifecycleStateChanged() {
-    switch (AvesApp.lifecycleStateNotifier.value) {
+    switch (FmvApp.lifecycleStateNotifier.value) {
       case .inactive:
         // inactive: when losing focus
         // also triggered when app is rotated on Android API >=33
@@ -427,7 +427,7 @@ class _EntryViewerStackState extends State<EntryViewerStack> with EntryViewContr
   }
 
   Widget _buildViewerTopOverlay(Size availableSize) {
-    Widget child = ValueListenableBuilder<AvesEntry?>(
+    Widget child = ValueListenableBuilder<FmvEntry?>(
       valueListenable: entryNotifier,
       builder: (context, mainEntry, child) {
         if (mainEntry == null) return const SizedBox();
@@ -464,19 +464,19 @@ class _EntryViewerStackState extends State<EntryViewerStack> with EntryViewContr
   }
 
   Widget _buildViewerBottomOverlay(Size availableSize) {
-    Widget child = ValueListenableBuilder<AvesEntry?>(
+    Widget child = ValueListenableBuilder<FmvEntry?>(
       valueListenable: entryNotifier,
       builder: (context, mainEntry, child) {
         if (mainEntry == null) return const SizedBox();
 
         final multiPageController = mainEntry.isMultiPage ? context.read<MultiPageConductor>().getController(mainEntry) : null;
 
-        Widget? _buildExtraBottomOverlay({AvesEntry? pageEntry}) {
+        Widget? _buildExtraBottomOverlay({FmvEntry? pageEntry}) {
           final targetEntry = pageEntry ?? mainEntry;
           Widget? child;
           // a 360 video is both a video and a panorama but only the video controls are displayed
           if (targetEntry.isPureVideo) {
-            child = Selector<VideoConductor, AvesVideoController?>(
+            child = Selector<VideoConductor, FmvVideoController?>(
               selector: (context, vc) => vc.getController(targetEntry),
               builder: (context, videoController, child) => VideoControlOverlay(
                 entry: targetEntry,
@@ -656,8 +656,8 @@ class _EntryViewerStackState extends State<EntryViewerStack> with EntryViewContr
 
   Future<void> _onVideoAction({
     required BuildContext context,
-    required AvesEntry entry,
-    required AvesVideoController controller,
+    required FmvEntry entry,
+    required FmvVideoController controller,
     required EntryAction action,
   }) async {
     if (action == EntryAction.videoToggleMute) {
@@ -777,7 +777,7 @@ class _EntryViewerStackState extends State<EntryViewerStack> with EntryViewContr
     _updateEntry();
   }
 
-  void _onEntryRestored(Set<AvesEntry> restoredEntries) {
+  void _onEntryRestored(Set<FmvEntry> restoredEntries) {
     if (restoredEntries.isEmpty) return;
 
     final _collection = collection;
@@ -792,7 +792,7 @@ class _EntryViewerStackState extends State<EntryViewerStack> with EntryViewContr
   }
 
   // deleted or moved to another album
-  void _onEntryRemoved(BuildContext context, Set<AvesEntry> removedEntries) {
+  void _onEntryRemoved(BuildContext context, Set<FmvEntry> removedEntries) {
     if (removedEntries.isEmpty) return;
 
     if (hasCollection) {
@@ -913,9 +913,9 @@ class _EntryViewerStackState extends State<EntryViewerStack> with EntryViewContr
         switch (settings.maxBrightness) {
           case .never:
           case .viewerOnly:
-            await AvesApp.screenBrightness?.resetApplicationScreenBrightness().timeout(_pluginOpTimeout, onTimeout: () {});
+            await FmvApp.screenBrightness?.resetApplicationScreenBrightness().timeout(_pluginOpTimeout, onTimeout: () {});
           case .always:
-            await AvesApp.screenBrightness?.setApplicationScreenBrightness(1).timeout(_pluginOpTimeout, onTimeout: () {});
+            await FmvApp.screenBrightness?.setApplicationScreenBrightness(1).timeout(_pluginOpTimeout, onTimeout: () {});
         }
       } on PlatformException catch (e, stack) {
         // `screen_brightness` plugin may fail
@@ -926,7 +926,7 @@ class _EntryViewerStackState extends State<EntryViewerStack> with EntryViewContr
       await windowService.keepScreenOn(false);
     }
     await mediaSessionService.release();
-    await AvesApp.showSystemUI(true);
+    await FmvApp.showSystemUI(true);
     if (!settings.useTvLayout) {
       await windowService.requestOrientation();
     }
@@ -961,7 +961,7 @@ class _EntryViewerStackState extends State<EntryViewerStack> with EntryViewContr
       if (_viewLocked.value) {
         await _startOverlayHidingTimer();
       } else {
-        await AvesApp.showSystemUI(true);
+        await FmvApp.showSystemUI(true);
       }
       if (animate) {
         await _overlayAnimationController.forward();
@@ -975,7 +975,7 @@ class _EntryViewerStackState extends State<EntryViewerStack> with EntryViewContr
         _frozenViewInsets = mediaQuery.viewInsets;
         _frozenViewPadding = mediaQuery.viewPadding;
       });
-      await AvesApp.showSystemUI(false);
+      await FmvApp.showSystemUI(false);
       if (animate) {
         await _overlayAnimationController.reverse();
       } else {
@@ -990,10 +990,10 @@ class _EntryViewerStackState extends State<EntryViewerStack> with EntryViewContr
 
   Future<void> _onViewLockedChanged() async {
     if (_viewLocked.value) {
-      await AvesApp.showSystemUI(false);
+      await FmvApp.showSystemUI(false);
       await _startOverlayHidingTimer();
     } else {
-      await AvesApp.showSystemUI(true);
+      await FmvApp.showSystemUI(true);
       _stopOverlayHidingTimer();
       _overlayVisible.value = true;
     }

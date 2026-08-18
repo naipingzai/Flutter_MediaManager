@@ -8,10 +8,10 @@ import 'package:flutter/foundation.dart';
 import 'package:leak_tracker/leak_tracker.dart';
 
 class MultiPageInfo {
-  final AvesEntry mainEntry;
+  final FmvEntry mainEntry;
   final List<SinglePageInfo> _pages;
-  final Map<SinglePageInfo, AvesEntry> _pageEntries = {};
-  final Set<AvesEntry> _transientEntries = <AvesEntry>{};
+  final Map<SinglePageInfo, FmvEntry> _pageEntries = {};
+  final Set<FmvEntry> _transientEntries = <FmvEntry>{};
 
   int get pageCount => _pages.length;
 
@@ -53,7 +53,7 @@ class MultiPageInfo {
     _transientEntries.forEach((entry) => entry.dispose());
   }
 
-  factory MultiPageInfo.fromPageMaps(AvesEntry mainEntry, List<Map> pageMaps) {
+  factory MultiPageInfo.fromPageMaps(FmvEntry mainEntry, List<Map> pageMaps) {
     return MultiPageInfo(
       mainEntry: mainEntry,
       pages: pageMaps.map(SinglePageInfo.fromMap).toList(),
@@ -66,9 +66,9 @@ class MultiPageInfo {
 
   SinglePageInfo? getByIndex(int? pageIndex) => _pages.firstWhereOrNull((page) => page.index == pageIndex);
 
-  AvesEntry getPageEntryByIndex(int? pageIndex) => _getPageEntry(getByIndex(pageIndex));
+  FmvEntry getPageEntryByIndex(int? pageIndex) => _getPageEntry(getByIndex(pageIndex));
 
-  AvesEntry _getPageEntry(SinglePageInfo? pageInfo) {
+  FmvEntry _getPageEntry(SinglePageInfo? pageInfo) {
     if (pageInfo != null) {
       return _pageEntries.putIfAbsent(pageInfo, () => _createPageEntry(pageInfo));
     } else {
@@ -76,9 +76,9 @@ class MultiPageInfo {
     }
   }
 
-  Set<AvesEntry> get videoPageEntries => _pages.where((page) => page.isVideo).map(_getPageEntry).toSet();
+  Set<FmvEntry> get videoPageEntries => _pages.where((page) => page.isVideo).map(_getPageEntry).toSet();
 
-  List<AvesEntry> get exportEntries => _pages.map((pageInfo) => _createPageEntry(pageInfo, eraseDefaultPageId: false)).toList();
+  List<FmvEntry> get exportEntries => _pages.map((pageInfo) => _createPageEntry(pageInfo, eraseDefaultPageId: false)).toList();
 
   Future<void> extractMotionPhotoVideo() async {
     final videoPage = _pages.firstWhereOrNull((page) => page.isVideo);
@@ -102,7 +102,7 @@ class MultiPageInfo {
     }
   }
 
-  AvesEntry _createPageEntry(SinglePageInfo pageInfo, {bool eraseDefaultPageId = true}) {
+  FmvEntry _createPageEntry(SinglePageInfo pageInfo, {bool eraseDefaultPageId = true}) {
     // do not provide the page ID for the default page,
     // so that we can treat this page like the main entry
     // and retrieve cached images for it
@@ -112,7 +112,7 @@ class MultiPageInfo {
     final trashed = (mainEntry.isMotionPhoto && pageInfo.isVideo) ? false : mainEntry.trashed;
 
     final pageEntry =
-        AvesEntry(
+        FmvEntry(
             id: mainEntry.id,
             uri: pageInfo.uri ?? mainEntry.uri,
             path: mainEntry.path,

@@ -95,7 +95,7 @@ class MediaStoreSource extends CollectionSource {
     final scopeAlbumFilters = _targetScope?.whereType<StoredAlbumFilter>();
     final scopeDirectory = scopeAlbumFilters != null && scopeAlbumFilters.length == 1 ? scopeAlbumFilters.first.album : null;
 
-    final Set<AvesEntry> topEntries = {};
+    final Set<FmvEntry> topEntries = {};
     if (loadTopEntriesFirst) {
       final topIds = settings.topEntryIds?.toSet();
       if (topIds != null) {
@@ -188,14 +188,14 @@ class MediaStoreSource extends CollectionSource {
   Future<void> _loadNewEntries({
     required AnalysisController? analysisController,
     required String? directory,
-    required Set<AvesEntry> knownLiveEntries,
+    required Set<FmvEntry> knownLiveEntries,
     required Map<int?, int?> knownDateByContentId,
   }) async {
     unawaited(reportService.log('$runtimeType load (new) start'));
     final stopwatch = Stopwatch()..start();
 
     // items to add to the collection
-    final newEntries = <AvesEntry>{};
+    final newEntries = <FmvEntry>{};
 
     // recover untracked trash items
     debugPrint('$runtimeType load ${stopwatch.elapsed} recover untracked entries');
@@ -267,7 +267,7 @@ class MediaStoreSource extends CollectionSource {
             }
 
             debugPrint('$runtimeType load ${stopwatch.elapsed} analyze');
-            Set<AvesEntry>? analysisEntries;
+            Set<FmvEntry>? analysisEntries;
             final analysisIds = analysisController?.entryIds;
             if (analysisIds != null) {
               // not only visible entries, as hidden and vault items may be analyzed
@@ -319,7 +319,7 @@ class MediaStoreSource extends CollectionSource {
 
     // fetch new entries
     final tempUris = <String>{};
-    final newEntries = <AvesEntry>{}, entriesToRefresh = <AvesEntry>{};
+    final newEntries = <FmvEntry>{}, entriesToRefresh = <FmvEntry>{};
     final existingDirectories = <String>{};
     for (final kv in changedUriByContentId.entries) {
       final contentId = kv.key;
@@ -437,8 +437,8 @@ class MediaStoreSource extends CollectionSource {
 
   Future<void> _refreshVaultEntries({
     required Set<String> changedUris,
-    required Set<AvesEntry> newEntries,
-    required Set<AvesEntry> entriesToRefresh,
+    required Set<FmvEntry> newEntries,
+    required Set<FmvEntry> entriesToRefresh,
     required Set<String> existingDirectories,
   }) async {
     for (final uri in changedUris) {

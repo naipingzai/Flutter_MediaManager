@@ -16,7 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 
 class RasterImageView extends StatefulWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
   final ValueNotifier<ViewState> viewStateNotifier;
   final ImageErrorWidgetBuilder errorBuilder;
 
@@ -46,7 +46,7 @@ class _RasterImageViewState extends State<RasterImageView> {
   static const int _pixelArtMaxSize = 256; // px
   static const double _tilesByShortestSide = 2;
 
-  AvesEntry get entry => widget.entry;
+  FmvEntry get entry => widget.entry;
 
   ValueNotifier<ViewState> get viewStateNotifier => widget.viewStateNotifier;
 
@@ -381,7 +381,7 @@ class _RasterImageViewState extends State<RasterImageView> {
 }
 
 class _RegionTile extends StatefulWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
 
   // `tileRect` uses Flutter view coordinates
   // `regionRect` uses the raw image pixel coordinates
@@ -415,7 +415,7 @@ class _RegionTile extends StatefulWidget {
 class _RegionTileState extends State<_RegionTile> {
   late RegionProvider _provider;
 
-  AvesEntry get entry => widget.entry;
+  FmvEntry get entry => widget.entry;
 
   @override
   void initState() {

@@ -82,20 +82,20 @@ mixin AppSettings on SettingsAccess {
         // the `window` locales may be empty in a window-less service context
         preferredLocales.addAll(_systemLocalesFallback);
       }
-      _resolvedLocale = basicLocaleListResolution(preferredLocales, AvesApp.supportedLocales);
+      _resolvedLocale = basicLocaleListResolution(preferredLocales, FmvApp.supportedLocales);
     }
     return _resolvedLocale!;
   }
 
-  AvesLocale? _avesLocale;
+  FmvLocale? _avesLocale;
 
   void _resetAvesLocale() {
     _avesLocale = null;
   }
 
   // advanced identifier, resolved to match user settings
-  AvesLocale get avesLocale {
-    _avesLocale ??= AvesLocale(
+  FmvLocale get avesLocale {
+    _avesLocale ??= FmvLocale(
       languageTag: resolvedLocale.toLanguageTag(),
       calendar: calendar,
       forceWesternArabicNumerals: forceWesternArabicNumerals,

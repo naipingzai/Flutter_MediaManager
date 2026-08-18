@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 // do not use as `T` a record containing a collection
 // because radio value comparison will fail without deep equality
-class AvesSingleSelectionDialog<T> extends StatefulWidget {
+class FmvSingleSelectionDialog<T> extends StatefulWidget {
   static const routeName = '/dialog/selection';
 
   final T initialValue;
@@ -14,7 +14,7 @@ class AvesSingleSelectionDialog<T> extends StatefulWidget {
   final String? title, message, confirmationButtonLabel;
   final bool? dense;
 
-  const AvesSingleSelectionDialog({
+  const FmvSingleSelectionDialog({
     super.key,
     required this.initialValue,
     required this.options,
@@ -26,10 +26,10 @@ class AvesSingleSelectionDialog<T> extends StatefulWidget {
   });
 
   @override
-  State<AvesSingleSelectionDialog<T>> createState() => _AvesSingleSelectionDialogState<T>();
+  State<FmvSingleSelectionDialog<T>> createState() => _AvesSingleSelectionDialogState<T>();
 }
 
-class _AvesSingleSelectionDialogState<T> extends State<AvesSingleSelectionDialog<T>> {
+class _AvesSingleSelectionDialogState<T> extends State<FmvSingleSelectionDialog<T>> {
   late T _selectedValue;
 
   @override
@@ -42,10 +42,10 @@ class _AvesSingleSelectionDialogState<T> extends State<AvesSingleSelectionDialog
   Widget build(BuildContext context) {
     final title = widget.title;
     final message = widget.message;
-    final verticalPadding = (title == null && message == null) ? AvesDialog.cornerRadius.y / 2 : .0;
+    final verticalPadding = (title == null && message == null) ? FmvDialog.cornerRadius.y / 2 : .0;
     final confirmationButtonLabel = widget.confirmationButtonLabel;
     final needConfirmation = confirmationButtonLabel != null;
-    return AvesDialog(
+    return FmvDialog(
       title: title,
       scrollableContent: [
         RadioGroup<T>(

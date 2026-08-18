@@ -19,7 +19,7 @@ class MultiEntryScroller extends StatefulWidget {
   final ViewerController viewerController;
   final PageController pageController;
   final ValueChanged<int> onPageChanged;
-  final void Function(AvesEntry mainEntry, AvesEntry? pageEntry) onViewDisposed;
+  final void Function(FmvEntry mainEntry, FmvEntry? pageEntry) onViewDisposed;
 
   const MultiEntryScroller({
     super.key,
@@ -35,7 +35,7 @@ class MultiEntryScroller extends StatefulWidget {
 }
 
 class _MultiEntryScrollerState extends State<MultiEntryScroller> with AutomaticKeepAliveClientMixin {
-  List<AvesEntry> get entries => widget.collection.sortedEntries;
+  List<FmvEntry> get entries => widget.collection.sortedEntries;
 
   ViewerController get viewerController => widget.viewerController;
 
@@ -88,7 +88,7 @@ class _MultiEntryScrollerState extends State<MultiEntryScroller> with AutomaticK
     );
   }
 
-  Widget _buildViewer(AvesEntry mainEntry, {AvesEntry? pageEntry}) {
+  Widget _buildViewer(FmvEntry mainEntry, {FmvEntry? pageEntry}) {
     return EntryPageView(
       // key is expected by test driver
       key: const Key('image_view'),
@@ -141,7 +141,7 @@ class _MultiEntryScrollerState extends State<MultiEntryScroller> with AutomaticK
 }
 
 class SingleEntryScroller extends StatefulWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
   final ViewerController viewerController;
 
   const SingleEntryScroller({
@@ -155,7 +155,7 @@ class SingleEntryScroller extends StatefulWidget {
 }
 
 class _SingleEntryScrollerState extends State<SingleEntryScroller> with AutomaticKeepAliveClientMixin {
-  AvesEntry get mainEntry => widget.entry;
+  FmvEntry get mainEntry => widget.entry;
 
   ViewerController get viewerController => widget.viewerController;
 
@@ -176,7 +176,7 @@ class _SingleEntryScrollerState extends State<SingleEntryScroller> with Automati
     );
   }
 
-  Widget _buildViewer({AvesEntry? pageEntry}) {
+  Widget _buildViewer({FmvEntry? pageEntry}) {
     return EntryPageView(
       mainEntry: mainEntry,
       pageEntry: pageEntry ?? mainEntry,

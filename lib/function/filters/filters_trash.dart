@@ -7,7 +7,7 @@ import 'package:flutter/widgets.dart';
 class TrashFilter extends CollectionFilter {
   static const type = 'trash';
 
-  static bool _test(AvesEntry entry) => entry.trashed;
+  static bool _test(FmvEntry entry) => entry.trashed;
 
   static const instance = TrashFilter._private();
   static const instanceReversed = TrashFilter._private(reversed: true);

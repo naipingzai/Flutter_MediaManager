@@ -45,12 +45,12 @@ class HighlightTitle extends StatelessWidget {
       fontFeatures: const [FontFeature.enable('smcp')],
     );
 
-    final colors = context.watch<AvesColorsData>();
+    final colors = context.watch<FmvColorsData>();
     return Align(
       alignment: AlignmentDirectional.centerStart,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 2),
-        decoration: showHighlight && context.select<Settings, bool>((v) => v.themeColorMode == AvesThemeColorMode.polychrome)
+        decoration: showHighlight && context.select<Settings, bool>((v) => v.themeColorMode == FmvThemeColorMode.polychrome)
             ? HighlightDecoration(
                 color: enabled ? color ?? colors.fromString(title) : disabledColor,
               )

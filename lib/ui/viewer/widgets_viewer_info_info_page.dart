@@ -27,7 +27,7 @@ import 'package:provider/provider.dart';
 
 class InfoPage extends StatefulWidget {
   final CollectionLens? collection;
-  final ValueNotifier<AvesEntry?> entryNotifier;
+  final ValueNotifier<FmvEntry?> entryNotifier;
   final ValueNotifier<bool> isScrollingNotifier;
   final ValueNotifier<double> pageInViewNotifier;
 
@@ -57,19 +57,19 @@ class _InfoPageState extends State<InfoPage> {
 
   @override
   Widget build(BuildContext context) {
-    return AvesScaffold(
+    return FmvScaffold(
       body: GestureAreaProtectorStack(
         child: SafeArea(
           bottom: false,
           child: NotificationListener<ScrollNotification>(
             onNotification: _handleTopScroll,
-            child: ValueListenableBuilder<AvesEntry?>(
+            child: ValueListenableBuilder<FmvEntry?>(
               valueListenable: widget.entryNotifier,
               builder: (context, mainEntry, child) {
                 if (mainEntry == null) return const SizedBox();
 
-                final isSelecting = context.select<Selection<AvesEntry>?, bool>((v) => v?.isSelecting ?? false);
-                Widget _buildContent({AvesEntry? pageEntry}) {
+                final isSelecting = context.select<Selection<FmvEntry>?, bool>((v) => v?.isSelecting ?? false);
+                Widget _buildContent({FmvEntry? pageEntry}) {
                   final targetEntry = pageEntry ?? mainEntry;
                   return EmbeddedDataOpener(
                     enabled: !isSelecting,
@@ -133,7 +133,7 @@ class _InfoPageState extends State<InfoPage> {
 
 class _InfoPageContent extends StatefulWidget {
   final CollectionLens? collection;
-  final AvesEntry entry;
+  final FmvEntry entry;
   final ValueNotifier<bool> isScrollingNotifier;
   final ValueNotifier<double> pageInViewNotifier;
   final ScrollController scrollController;
@@ -170,7 +170,7 @@ class _InfoPageContentState extends State<_InfoPageContent> {
 
   CollectionLens? get collection => widget.collection;
 
-  AvesEntry get entry => widget.entry;
+  FmvEntry get entry => widget.entry;
 
   @override
   void initState() {

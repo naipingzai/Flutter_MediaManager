@@ -22,7 +22,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class AvesNavItem extends Equatable {
+class FmvNavItem extends Equatable {
   final String route;
   final Set<CollectionFilter>? filters;
   final String? path;
@@ -30,7 +30,7 @@ class AvesNavItem extends Equatable {
   @override
   List<Object?> get props => [route, filters, path];
 
-  const AvesNavItem({
+  const FmvNavItem({
     required this.route,
     this.filters,
     this.path,
@@ -126,8 +126,8 @@ class AvesNavItem extends Equatable {
 
   // serialization
 
-  static AvesNavItem _fromMap(Map<String, Object?> json) {
-    return AvesNavItem(
+  static FmvNavItem _fromMap(Map<String, Object?> json) {
+    return FmvNavItem(
       route: json['route'] as String,
       filters: (json['filters'] as List?)?.map(CollectionFilter.fromJson).nonNulls.toSet(),
       path: json['path'] as String?,
@@ -142,7 +142,7 @@ class AvesNavItem extends Equatable {
 
   String toJson() => jsonEncode(_toMap());
 
-  static AvesNavItem? fromJson(String? jsonString) {
+  static FmvNavItem? fromJson(String? jsonString) {
     if (jsonString == null || jsonString.isEmpty) return null;
 
     try {

@@ -46,7 +46,7 @@ class _EditEntryTitleDescriptionDialogState extends State<EditEntryTitleDescript
     return MediaQueryDataProvider(
       child: Builder(
         builder: (context) {
-          return AvesDialog(
+          return FmvDialog(
             scrollableContent: [
               const SizedBox(height: 8),
               ..._buildFieldEditor(DescriptionField.title),

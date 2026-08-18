@@ -4,10 +4,10 @@ import 'package:collection/collection.dart';
 import 'package:test/fake.dart';
 
 class FakeMediaFetchService extends Fake implements MediaFetchService {
-  Set<AvesEntry> entries = {};
+  Set<FmvEntry> entries = {};
 
   @override
-  Future<AvesEntry?> getEntry(String uri, String? mimeType, {bool allowUnsized = false}) async {
+  Future<FmvEntry?> getEntry(String uri, String? mimeType, {bool allowUnsized = false}) async {
     return entries.firstWhereOrNull((v) => v.uri == uri);
   }
 }

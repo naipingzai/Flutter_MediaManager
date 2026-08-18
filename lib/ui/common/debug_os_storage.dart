@@ -30,7 +30,7 @@ class _DebugOSStorageSectionState extends State<DebugOSStorageSection> with Auto
   Widget build(BuildContext context) {
     super.build(context);
 
-    return AvesExpansionTile(
+    return FmvExpansionTile(
       title: 'OS Storage',
       children: [
         ...androidFileUtils.storageVolumes.expand((v) {
@@ -48,7 +48,7 @@ class _DebugOSStorageSectionState extends State<DebugOSStorageSection> with Auto
                   'isPrimary': '${v.isPrimary}',
                   'isRemovable': '${v.isRemovable}',
                   'state': v.state,
-                  if (freeSpace != null) 'freeSpace': formatFileSize(AvesLocale.ascii, freeSpace),
+                  if (freeSpace != null) 'freeSpace': formatFileSize(FmvLocale.ascii, freeSpace),
                 },
               ),
             ),

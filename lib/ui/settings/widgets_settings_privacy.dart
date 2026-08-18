@@ -28,7 +28,7 @@ class PrivacySection extends SettingsSection {
   @override
   Widget icon(BuildContext context) => SettingsTileLeading(
     icon: AIcons.privacy,
-    color: context.select<AvesColorsData, Color>((v) => v.privacy),
+    color: context.select<FmvColorsData, Color>((v) => v.privacy),
   );
 
   @override

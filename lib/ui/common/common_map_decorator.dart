@@ -35,7 +35,7 @@ class MapDecorator extends StatelessWidget {
           child: Container(
             color: mapBackground,
             foregroundDecoration: BoxDecoration(
-              border: AvesBorder.border(context),
+              border: FmvBorder.border(context),
               borderRadius: mapBorderRadius,
             ),
             child: child,

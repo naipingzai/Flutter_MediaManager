@@ -14,7 +14,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class VectorImageView extends StatefulWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
   final ValueNotifier<ViewState> viewStateNotifier;
   final ImageErrorWidgetBuilder errorBuilder;
 
@@ -39,7 +39,7 @@ class _VectorImageViewState extends State<VectorImageView> {
   final ValueNotifier<bool> _fullImageLoaded = ValueNotifier(false);
   ImageInfo? _fullImageInfo;
 
-  AvesEntry get entry => widget.entry;
+  FmvEntry get entry => widget.entry;
 
   ValueNotifier<ViewState> get viewStateNotifier => widget.viewStateNotifier;
 
@@ -295,7 +295,7 @@ class _VectorImageViewState extends State<VectorImageView> {
 typedef _BackgroundFrameBuilder = Widget Function(Widget child, int? frame, Rect tileRect);
 
 class _RegionTile extends StatefulWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
 
   // `tileRect` uses Flutter view coordinates
   // `regionRect` uses the raw image pixel coordinates
@@ -331,7 +331,7 @@ class _RegionTile extends StatefulWidget {
 class _RegionTileState extends State<_RegionTile> {
   late RegionProvider _provider;
 
-  AvesEntry get entry => widget.entry;
+  FmvEntry get entry => widget.entry;
 
   @override
   void initState() {

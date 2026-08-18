@@ -31,7 +31,7 @@ class _SourceViewerPageState extends State<SourceViewerPage> {
 
   @override
   Widget build(BuildContext context) {
-    return AvesScaffold(
+    return FmvScaffold(
       appBar: AppBar(
         title: Text(context.l10n.sourceViewerPageTitle),
       ),
@@ -49,7 +49,7 @@ class _SourceViewerPageState extends State<SourceViewerPage> {
               constraints: const BoxConstraints.expand(),
               child: Scrollbar(
                 child: SingleChildScrollView(
-                  child: AvesHighlightView(
+                  child: FmvHighlightView(
                     input: source,
                     language: 'xml',
                     theme: darculaTheme,

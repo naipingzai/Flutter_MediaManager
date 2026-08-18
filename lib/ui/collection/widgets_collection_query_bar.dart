@@ -56,7 +56,7 @@ class _EntryQueryBarState extends State<EntryQueryBar> {
     return Container(
       height: EntryQueryBar.getPreferredHeight(textScaler),
       alignment: Alignment.topCenter,
-      child: Selector<Selection<AvesEntry>, bool>(
+      child: Selector<Selection<FmvEntry>, bool>(
         selector: (context, selection) => !selection.isSelecting,
         builder: (context, editable, child) => QueryBar(
           queryNotifier: widget.queryNotifier,

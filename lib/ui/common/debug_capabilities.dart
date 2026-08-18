@@ -35,7 +35,7 @@ class _DebugCapabilitiesSectionState extends State<DebugCapabilitiesSection> wit
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return AvesExpansionTile(
+    return FmvExpansionTile(
       title: 'Capabilities',
       children: [
         Padding(

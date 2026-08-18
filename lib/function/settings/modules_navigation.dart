@@ -27,16 +27,16 @@ mixin NavigationSettings on SettingsAccess {
 
   String? get homeCustomExplorerPath => getString(SettingKeys.homeCustomExplorerPathKey);
 
-  AvesNavItem get homeNavItem {
+  FmvNavItem get homeNavItem {
     switch (homePage) {
       case .collection:
-        return AvesNavItem(route: CollectionPage.routeName, filters: homeCustomCollection);
+        return FmvNavItem(route: CollectionPage.routeName, filters: homeCustomCollection);
       case .albums:
-        return const AvesNavItem(route: AlbumListPage.routeName);
+        return const FmvNavItem(route: AlbumListPage.routeName);
       case .tags:
-        return const AvesNavItem(route: TagListPage.routeName);
+        return const FmvNavItem(route: TagListPage.routeName);
       case .explorer:
-        return AvesNavItem(route: ExplorerPage.routeName, path: homeCustomExplorerPath);
+        return FmvNavItem(route: ExplorerPage.routeName, path: homeCustomExplorerPath);
     }
   }
 
@@ -88,9 +88,9 @@ mixin NavigationSettings on SettingsAccess {
 
   set drawerPageBookmarks(List<String> newValue) => set(SettingKeys.drawerPageBookmarksKey, newValue);
 
-  List<AvesNavItem> get bottomNavigationActions => getStringList(SettingKeys.bottomNavigationActionsKey)?.map(AvesNavItem.fromJson).nonNulls.toList() ?? SettingsDefaults.bottomNavigationActions;
+  List<FmvNavItem> get bottomNavigationActions => getStringList(SettingKeys.bottomNavigationActionsKey)?.map(FmvNavItem.fromJson).nonNulls.toList() ?? SettingsDefaults.bottomNavigationActions;
 
-  set bottomNavigationActions(List<AvesNavItem>? newValue) => set(SettingKeys.bottomNavigationActionsKey, newValue?.map((v) => v.toJson()).toList());
+  set bottomNavigationActions(List<FmvNavItem>? newValue) => set(SettingKeys.bottomNavigationActionsKey, newValue?.map((v) => v.toJson()).toList());
 
   bool get enableBottomNavigationBar => bottomNavigationActions.length >= 2;
 

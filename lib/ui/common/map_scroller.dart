@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 
 class MapEntryScroller extends StatefulWidget {
   final ValueNotifier<CollectionLens?> regionCollectionNotifier;
-  final ValueNotifier<AvesEntry?> dotEntryNotifier;
+  final ValueNotifier<FmvEntry?> dotEntryNotifier;
   final ValueNotifier<int?> selectedIndexNotifier;
   final void Function(int index) onTap;
 
@@ -29,7 +29,7 @@ class MapEntryScroller extends StatefulWidget {
 }
 
 class _MapEntryScrollerState extends State<MapEntryScroller> {
-  final ValueNotifier<AvesEntry?> _infoEntryNotifier = ValueNotifier(null);
+  final ValueNotifier<FmvEntry?> _infoEntryNotifier = ValueNotifier(null);
   final Debouncer _infoDebouncer = Debouncer(delay: ADurations.mapInfoDebounceDelay);
 
   @override
@@ -94,7 +94,7 @@ class _MapEntryScrollerState extends State<MapEntryScroller> {
           ],
         ),
         Positioned.fill(
-          child: ValueListenableBuilder<AvesEntry?>(
+          child: ValueListenableBuilder<FmvEntry?>(
             valueListenable: _infoEntryNotifier,
             builder: (context, infoEntry, child) {
               return ValueListenableBuilder<CollectionLens?>(

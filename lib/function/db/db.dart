@@ -26,17 +26,17 @@ abstract class LocalMediaDb {
 
   Future<void> clearEntries();
 
-  Future<Set<AvesEntry>> loadEntries({int? origin, String? directory});
+  Future<Set<FmvEntry>> loadEntries({int? origin, String? directory});
 
-  Future<Set<AvesEntry>> loadEntriesById(Set<int> ids);
+  Future<Set<FmvEntry>> loadEntriesById(Set<int> ids);
 
-  Future<void> insertEntries(Set<AvesEntry> entries);
+  Future<void> insertEntries(Set<FmvEntry> entries);
 
-  Future<void> updateEntry(int id, AvesEntry entry);
+  Future<void> updateEntry(int id, FmvEntry entry);
 
-  Future<Set<AvesEntry>> searchLiveEntries(String query, {int? limit});
+  Future<Set<FmvEntry>> searchLiveEntries(String query, {int? limit});
 
-  Future<Set<AvesEntry>> searchLiveDuplicates(int origin, Set<AvesEntry>? entries);
+  Future<Set<FmvEntry>> searchLiveDuplicates(int origin, Set<FmvEntry>? entries);
 
   // date taken
 

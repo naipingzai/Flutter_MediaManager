@@ -35,7 +35,7 @@ class _CreateDynamicAlbumDialogState extends State<CreateDynamicAlbumDialog> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
 
-    return AvesDialog(
+    return FmvDialog(
       title: l10n.newDynamicAlbumDialogTitle,
       content: ValueListenableBuilder<bool>(
         valueListenable: _existsNotifier,

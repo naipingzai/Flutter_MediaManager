@@ -10,7 +10,7 @@ import 'package:flutter_media_view/ui/viewer/widgets_viewer_panorama_page.dart';
 import 'package:flutter/material.dart';
 
 class PanoramaOverlay extends StatelessWidget with FeedbackMixin {
-  final AvesEntry entry;
+  final FmvEntry entry;
   final Animation<double> scale;
 
   const PanoramaOverlay({

@@ -33,7 +33,7 @@ class ViewStateConductor {
 
   set viewportSize(Size size) => _viewportSize = size;
 
-  ViewStateController getOrCreateController(AvesEntry entry) {
+  ViewStateController getOrCreateController(FmvEntry entry) {
     var controller = getController(entry);
     if (controller != null) {
       _controllers.remove(controller);
@@ -65,12 +65,12 @@ class ViewStateConductor {
     return controller;
   }
 
-  ViewStateController? getController(AvesEntry entry) {
+  ViewStateController? getController(FmvEntry entry) {
     return _controllers.firstWhereOrNull((c) => c.entry.uri == entry.uri && c.entry.pageId == entry.pageId);
   }
 
-  void reset(AvesEntry entry) {
-    final uris = <AvesEntry>{
+  void reset(FmvEntry entry) {
+    final uris = <FmvEntry>{
       entry,
       ...?entry.stackedEntries,
     }.map((v) => v.uri).toSet();

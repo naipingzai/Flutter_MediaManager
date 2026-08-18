@@ -24,7 +24,7 @@ class _MediaStoreScanDirDialogState extends State<MediaStoreScanDirDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AvesDialog(
+    return FmvDialog(
       content: _processing ? const CircularProgressIndicator() : TextField(controller: _pathController),
       actions: [
         TextButton(

@@ -72,7 +72,7 @@ class QueryFilter extends CollectionFilter {
     }
 
     // default to title search
-    bool testTitle(AvesEntry entry) => entry.bestTitle?.toUpperCase().contains(upQuery) == true;
+    bool testTitle(FmvEntry entry) => entry.bestTitle?.toUpperCase().contains(upQuery) == true;
     _test = not ? (entry) => !testTitle(entry) : testTitle;
   }
 
@@ -108,7 +108,7 @@ class QueryFilter extends CollectionFilter {
       return super.color(context);
     }
 
-    final colors = context.read<AvesColorsData>();
+    final colors = context.read<FmvColorsData>();
     return SynchronousFuture(colors.neutral);
   }
 

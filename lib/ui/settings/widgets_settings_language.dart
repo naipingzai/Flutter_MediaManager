@@ -23,7 +23,7 @@ class LanguageSection extends SettingsSection {
   @override
   Widget icon(BuildContext context) => SettingsTileLeading(
     icon: AIcons.language,
-    color: context.select<AvesColorsData, Color>((v) => v.language),
+    color: context.select<FmvColorsData, Color>((v) => v.language),
   );
 
   @override

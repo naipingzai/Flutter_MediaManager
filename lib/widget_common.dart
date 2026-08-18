@@ -16,7 +16,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-const _widgetDrawChannel = AvesMethodChannel('com.naipingzai/flutter_media_view/widget_draw');
+const _widgetDrawChannel = FmvMethodChannel('com.naipingzai/flutter_media_view/widget_draw');
 
 void widgetMainCommon(AppFlavor flavor) async {
   debugPrint('Widget main start');
@@ -83,7 +83,7 @@ Future<Map<String, Object>> _drawWidget(Object? args) async {
   };
 }
 
-Future<AvesEntry?> _getWidgetEntry(int widgetId, bool reuseEntry) async {
+Future<FmvEntry?> _getWidgetEntry(int widgetId, bool reuseEntry) async {
   final uri = reuseEntry ? settings.getWidgetUri(widgetId) : null;
   if (uri != null) {
     final entry = await mediaFetchService.getEntry(uri, null);
@@ -109,7 +109,7 @@ Future<AvesEntry?> _getWidgetEntry(int widgetId, bool reuseEntry) async {
     case .random:
       entries.shuffle();
     case .mostRecent:
-      entries.sort(AvesEntrySort.compareByDate);
+      entries.sort(FmvEntrySort.compareByDate);
   }
   final entry = entries.firstOrNull;
   if (entry != null) {

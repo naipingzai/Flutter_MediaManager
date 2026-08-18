@@ -8,8 +8,8 @@ import 'package:test/test.dart';
 
 void main() {
   test('Decimal degrees to DMS (sexagesimal)', () {
-    final locale = AvesLocale.ascii;
-    final l10n = lookupAppLocalizations(AvesApp.supportedLocales.first);
+    final locale = FmvLocale.ascii;
+    final l10n = lookupAppLocalizations(FmvApp.supportedLocales.first);
     expect(ExtraCoordinateFormat.toDMS(locale, l10n, const LatLng(37.496667, 127.0275)), ['37° 29′ 48.00″ N', '127° 1′ 39.00″ E']); // Gangnam
     expect(ExtraCoordinateFormat.toDMS(locale, l10n, const LatLng(78.9243503, 11.9230465)), ['78° 55′ 27.66″ N', '11° 55′ 22.97″ E']); // Ny-Ålesund
     expect(ExtraCoordinateFormat.toDMS(locale, l10n, const LatLng(-38.6965891, 175.9830047)), ['38° 41′ 47.72″ S', '175° 58′ 58.82″ E']); // Taupo
@@ -21,8 +21,8 @@ void main() {
   });
 
   test('Decimal degrees to DDM', () {
-    final locale = AvesLocale.ascii;
-    final l10n = lookupAppLocalizations(AvesApp.supportedLocales.first);
+    final locale = FmvLocale.ascii;
+    final l10n = lookupAppLocalizations(FmvApp.supportedLocales.first);
     expect(ExtraCoordinateFormat.toDDM(locale, l10n, const LatLng(37.496667, 127.0275)), ['37° 29.8000′ N', '127° 1.6500′ E']); // Gangnam
     expect(ExtraCoordinateFormat.toDDM(locale, l10n, const LatLng(78.9243503, 11.9230465)), ['78° 55.4610′ N', '11° 55.3828′ E']); // Ny-Ålesund
     expect(ExtraCoordinateFormat.toDDM(locale, l10n, const LatLng(-38.6965891, 175.9830047)), ['38° 41.7953′ S', '175° 58.9803′ E']); // Taupo

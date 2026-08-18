@@ -32,11 +32,11 @@ class BottomNavigationActionEditorPage extends StatefulWidget {
 }
 
 class _BottomNavigationActionEditorPageState extends State<BottomNavigationActionEditorPage> {
-  late final QuickActionEditorController<AvesNavItem> _controller;
+  late final QuickActionEditorController<FmvNavItem> _controller;
 
   static final allAvailableActions = [
     NavigationDrawerEditorPage.collectionFilterOptions.map((filter) {
-      return AvesNavItem(
+      return FmvNavItem(
         route: CollectionPage.routeName,
         filters: filter != null ? {filter} : null,
       );
@@ -46,7 +46,7 @@ class _BottomNavigationActionEditorPageState extends State<BottomNavigationActio
       SettingsPage.routeName,
       ...NavigationDrawerEditorPage.pageOptions,
     ].map((v) {
-      return AvesNavItem(
+      return FmvNavItem(
         route: v,
       );
     }).toList(),
@@ -69,7 +69,7 @@ class _BottomNavigationActionEditorPageState extends State<BottomNavigationActio
 
   @override
   Widget build(BuildContext context) {
-    return QuickActionEditorPage<AvesNavItem>(
+    return QuickActionEditorPage<FmvNavItem>(
       title: context.l10n.settingsNavigationBottomActionEditorPageTitle,
       appBarActions: _buildActions(context),
       bannerText: context.l10n.settingsNavigationBottomActionEditorBanner,
@@ -115,7 +115,7 @@ class _BottomNavigationActionEditorPageState extends State<BottomNavigationActio
           initialGroup: null,
         );
         if (albumFilter == null) return;
-        _controller.add(AvesNavItem(route: CollectionPage.routeName, filters: {albumFilter}));
+        _controller.add(FmvNavItem(route: CollectionPage.routeName, filters: {albumFilter}));
       case .addTag:
         final tagFilter = await pickTag(
           context: context,
@@ -123,7 +123,7 @@ class _BottomNavigationActionEditorPageState extends State<BottomNavigationActio
           initialGroup: null,
         );
         if (tagFilter == null) return;
-        _controller.add(AvesNavItem(route: CollectionPage.routeName, filters: {tagFilter}));
+        _controller.add(FmvNavItem(route: CollectionPage.routeName, filters: {tagFilter}));
     }
   }
 }

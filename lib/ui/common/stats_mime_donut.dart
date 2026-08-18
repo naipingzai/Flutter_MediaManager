@@ -26,14 +26,14 @@ class MimeDonut extends StatelessWidget {
     final itemCountFormatter = settings.avesLocale.decimalNumberFormat();
 
     String formatKey(d) => MimeUtils.displayType(d.key);
-    return AvesDonut(
+    return FmvDonut(
       title: Icon(icon),
       byTypes: byMimeTypes,
       animationDuration: animationDuration,
       formatKey: formatKey,
       formatValue: itemCountFormatter.format,
       colorize: (context, d) {
-        final colors = context.read<AvesColorsData>();
+        final colors = context.read<FmvColorsData>();
         return colors.fromString(formatKey(d));
       },
       onTap: (d) => onFilterSelection(MimeFilter(d.key)),

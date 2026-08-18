@@ -24,7 +24,7 @@ import 'package:provider/provider.dart';
 class RenameEntrySetPage extends StatefulWidget {
   static const routeName = '/rename_entry_set';
 
-  final List<AvesEntry> entries;
+  final List<FmvEntry> entries;
 
   const RenameEntrySetPage({
     super.key,
@@ -43,7 +43,7 @@ class _RenameEntrySetPageState extends State<RenameEntrySetPage> {
   static const int previewMax = 10;
   static const double thumbnailExtent = 48;
 
-  List<AvesEntry> get entries => widget.entries;
+  List<FmvEntry> get entries => widget.entries;
 
   int get entryCount => entries.length;
 
@@ -72,7 +72,7 @@ class _RenameEntrySetPageState extends State<RenameEntrySetPage> {
     final textScaler = MediaQuery.textScalerOf(context);
     final effectiveThumbnailExtent = max(thumbnailExtent, textScaler.scale(thumbnailExtent));
     final animations = context.select<Settings, AccessibilityAnimations>((v) => v.accessibilityAnimations);
-    return AvesScaffold(
+    return FmvScaffold(
       appBar: AppBar(
         title: Text(l10n.renameEntrySetPageTitle),
       ),
@@ -229,7 +229,7 @@ class _RenameEntrySetPageState extends State<RenameEntrySetPage> {
             Center(
               child: Padding(
                 padding: const EdgeInsets.all(8),
-                child: AvesOutlinedButton(
+                child: FmvOutlinedButton(
                   label: l10n.entryActionRename,
                   onPressed: () {
                     settings.entryRenamingPattern = _patternTextController.text;

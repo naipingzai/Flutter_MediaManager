@@ -22,7 +22,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class ViewerBottomOverlay extends StatelessWidget {
-  final List<AvesEntry> entries;
+  final List<FmvEntry> entries;
   final int index;
   final CollectionLens? collection;
   final AnimationController animationController;
@@ -33,7 +33,7 @@ class ViewerBottomOverlay extends StatelessWidget {
   // always keep action buttons in the lower right corner, even with RTL locales
   static const actionsDirection = TextDirection.ltr;
 
-  AvesEntry? get entry {
+  FmvEntry? get entry {
     return index < entries.length ? entries[index] : null;
   }
 
@@ -54,7 +54,7 @@ class ViewerBottomOverlay extends StatelessWidget {
     final mainEntry = entry;
     if (mainEntry == null) return const SizedBox();
 
-    Widget _buildContent({AvesEntry? pageEntry}) => _BottomOverlayContent(
+    Widget _buildContent({FmvEntry? pageEntry}) => _BottomOverlayContent(
       entries: entries,
       index: index,
       mainEntry: mainEntry,
@@ -95,9 +95,9 @@ class ViewerBottomOverlay extends StatelessWidget {
 }
 
 class _BottomOverlayContent extends StatefulWidget {
-  final List<AvesEntry> entries;
+  final List<FmvEntry> entries;
   final int index;
-  final AvesEntry mainEntry, pageEntry;
+  final FmvEntry mainEntry, pageEntry;
   final CollectionLens? collection;
   final Size availableSize;
   final EdgeInsets? viewInsets, viewPadding;
@@ -178,7 +178,7 @@ class _BottomOverlayContentState extends State<_BottomOverlayContent> {
       ]),
       builder: (context, child) {
         final viewInsetsPadding = (widget.viewInsets ?? EdgeInsets.zero) + (widget.viewPadding ?? EdgeInsets.zero);
-        final selection = context.read<Selection<AvesEntry>?>();
+        final selection = context.read<Selection<FmvEntry>?>();
         final viewerButtonRow = (selection?.isSelecting ?? false)
             ? SelectionButton(
                 mainEntry: mainEntry,

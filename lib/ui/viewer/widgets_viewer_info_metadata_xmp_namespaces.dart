@@ -131,7 +131,7 @@ class XmpNamespace extends Equatable {
                 padding: const EdgeInsets.only(top: 8, bottom: 4),
                 child: HighlightTitle(
                   title: displayTitle,
-                  color: context.select<AvesColorsData, Color?>((v) => v.fromBrandColor(BrandColors.get(displayTitle))),
+                  color: context.select<FmvColorsData, Color?>((v) => v.fromBrandColor(BrandColors.get(displayTitle))),
                 ),
               ),
             ...content,

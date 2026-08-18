@@ -77,7 +77,7 @@ class _CollectionActionEditorPageState extends State<CollectionActionEditorPage>
 
     return DefaultTabController(
       length: tabs.length,
-      child: AvesScaffold(
+      child: FmvScaffold(
         appBar: AppBar(
           title: Text(context.l10n.settingsCollectionQuickActionEditorPageTitle),
           bottom: TabBar(

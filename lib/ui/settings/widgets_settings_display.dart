@@ -22,7 +22,7 @@ class DisplaySection extends SettingsSection {
   @override
   Widget icon(BuildContext context) => SettingsTileLeading(
     icon: AIcons.display,
-    color: context.select<AvesColorsData, Color>((v) => v.display),
+    color: context.select<FmvColorsData, Color>((v) => v.display),
   );
 
   @override
@@ -48,8 +48,8 @@ class SettingsTileDisplayThemeBrightness extends SettingsTile {
   String title(BuildContext context) => context.l10n.settingsThemeBrightnessTile;
 
   @override
-  Widget build(BuildContext context) => SettingsSelectionListTile<AvesThemeBrightness>(
-    values: AvesThemeBrightness.values,
+  Widget build(BuildContext context) => SettingsSelectionListTile<FmvThemeBrightness>(
+    values: FmvThemeBrightness.values,
     getName: (context, v) => v.getName(context),
     selector: (context, s) => s.themeBrightness,
     onSelection: (v) => settings.themeBrightness = v,
@@ -67,8 +67,8 @@ class SettingsTileDisplayThemeColorMode extends SettingsTile {
 
   @override
   Widget build(BuildContext context) => SettingsSwitchListTile(
-    selector: (context, s) => s.themeColorMode == AvesThemeColorMode.polychrome,
-    onChanged: (v) => settings.themeColorMode = v ? AvesThemeColorMode.polychrome : AvesThemeColorMode.monochrome,
+    selector: (context, s) => s.themeColorMode == FmvThemeColorMode.polychrome,
+    onChanged: (v) => settings.themeColorMode = v ? FmvThemeColorMode.polychrome : FmvThemeColorMode.monochrome,
     title: title,
   );
 }

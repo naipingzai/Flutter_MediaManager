@@ -17,18 +17,18 @@ abstract class MediaEditService {
 
   Stream<ImageOpEvent> delete({
     String? opId,
-    required Iterable<AvesEntry> entries,
+    required Iterable<FmvEntry> entries,
   });
 
   Stream<MoveOpEvent> move({
     String? opId,
-    required Map<String, Iterable<AvesEntry>> entriesByDestination,
+    required Map<String, Iterable<FmvEntry>> entriesByDestination,
     required bool copy,
     required NameConflictStrategy nameConflictStrategy,
   });
 
   Stream<ExportOpEvent> export(
-    Iterable<AvesEntry> entries, {
+    Iterable<FmvEntry> entries, {
     required EntryConvertOptions options,
     required String destinationAlbum,
     required NameConflictStrategy nameConflictStrategy,
@@ -36,11 +36,11 @@ abstract class MediaEditService {
 
   Stream<MoveOpEvent> rename({
     String? opId,
-    required Map<AvesEntry, String> entriesToNewName,
+    required Map<FmvEntry, String> entriesToNewName,
   });
 
   Future<Map<String, Object?>> captureFrame(
-    AvesEntry entry, {
+    FmvEntry entry, {
     required String desiredName,
     required Map<String, Object> exif,
     required Uint8List bytes,
@@ -50,8 +50,8 @@ abstract class MediaEditService {
 }
 
 class PlatformMediaEditService implements MediaEditService {
-  static const _platform = AvesMethodChannel('com.naipingzai/flutter_media_view/media_edit');
-  static final _opStream = AvesStreamsChannel('com.naipingzai/flutter_media_view/media_op_stream');
+  static const _platform = FmvMethodChannel('com.naipingzai/flutter_media_view/media_edit');
+  static final _opStream = FmvStreamsChannel('com.naipingzai/flutter_media_view/media_op_stream');
 
   @override
   String get newOpId => DateTime.now().millisecondsSinceEpoch.toString();
@@ -70,7 +70,7 @@ class PlatformMediaEditService implements MediaEditService {
   @override
   Stream<ImageOpEvent> delete({
     String? opId,
-    required Iterable<AvesEntry> entries,
+    required Iterable<FmvEntry> entries,
   }) {
     try {
       return _opStream
@@ -85,7 +85,7 @@ class PlatformMediaEditService implements MediaEditService {
           .handleError((error) {
             if (error is TimeoutException) {
               debugPrint('Delete operation timed out (platform not implemented)');
-              return ImageOpEvent.success;
+              return const ImageOpEvent(success: true, skipped: false, uri: "");
             }
             throw error;
           });
@@ -98,7 +98,7 @@ class PlatformMediaEditService implements MediaEditService {
   @override
   Stream<MoveOpEvent> move({
     String? opId,
-    required Map<String, Iterable<AvesEntry>> entriesByDestination,
+    required Map<String, Iterable<FmvEntry>> entriesByDestination,
     required bool copy,
     required NameConflictStrategy nameConflictStrategy,
   }) {
@@ -121,7 +121,7 @@ class PlatformMediaEditService implements MediaEditService {
 
   @override
   Stream<ExportOpEvent> export(
-    Iterable<AvesEntry> entries, {
+    Iterable<FmvEntry> entries, {
     required EntryConvertOptions options,
     required String destinationAlbum,
     required NameConflictStrategy nameConflictStrategy,
@@ -151,7 +151,7 @@ class PlatformMediaEditService implements MediaEditService {
   @override
   Stream<MoveOpEvent> rename({
     String? opId,
-    required Map<AvesEntry, String> entriesToNewName,
+    required Map<FmvEntry, String> entriesToNewName,
   }) {
     try {
       return _opStream
@@ -170,7 +170,7 @@ class PlatformMediaEditService implements MediaEditService {
 
   @override
   Future<Map<String, Object?>> captureFrame(
-    AvesEntry entry, {
+    FmvEntry entry, {
     required String desiredName,
     required Map<String, Object?> exif,
     required Uint8List bytes,

@@ -18,36 +18,36 @@ import 'package:flutter/services.dart';
 
 abstract class MetadataFetchService {
   // returns Map<Map<Key, Value>> (map of directories, each directory being a map of metadata label and value description)
-  Future<Map> getAllMetadata(AvesEntry entry);
+  Future<Map> getAllMetadata(FmvEntry entry);
 
-  Future<CatalogMetadata?> getCatalogMetadata(AvesEntry entry, {bool background = false});
+  Future<CatalogMetadata?> getCatalogMetadata(FmvEntry entry, {bool background = false});
 
-  Future<OverlayMetadata> getOverlayMetadata(AvesEntry entry, Set<MetadataSyntheticField> fields);
+  Future<OverlayMetadata> getOverlayMetadata(FmvEntry entry, Set<MetadataSyntheticField> fields);
 
-  Future<GeoTiffInfo?> getGeoTiffInfo(AvesEntry entry);
+  Future<GeoTiffInfo?> getGeoTiffInfo(FmvEntry entry);
 
-  Future<MultiPageInfo?> getMultiPageInfo(AvesEntry entry);
+  Future<MultiPageInfo?> getMultiPageInfo(FmvEntry entry);
 
-  Future<PanoramaInfo?> getPanoramaInfo(AvesEntry entry);
+  Future<PanoramaInfo?> getPanoramaInfo(FmvEntry entry);
 
-  Future<List<Map<String, dynamic>>?> getIptc(AvesEntry entry);
+  Future<List<Map<String, dynamic>>?> getIptc(FmvEntry entry);
 
-  Future<AvesXmp?> getXmp(AvesEntry entry);
+  Future<FmvXmp?> getXmp(FmvEntry entry);
 
   Future<bool> hasContentResolverProp(String prop);
 
-  Future<String?> getContentResolverProp(AvesEntry entry, String prop);
+  Future<String?> getContentResolverProp(FmvEntry entry, String prop);
 
-  Future<DateTime?> getDate(AvesEntry entry, MetadataField field);
+  Future<DateTime?> getDate(FmvEntry entry, MetadataField field);
 
-  Future<Map<String, Object?>> getFields(AvesEntry entry, Set<MetadataField> fields);
+  Future<Map<String, Object?>> getFields(FmvEntry entry, Set<MetadataField> fields);
 }
 
 class PlatformMetadataFetchService implements MetadataFetchService {
-  static const _channel = AvesMethodChannel(AvesChannels.metadataFetch);
+  static const _channel = FmvMethodChannel(FmvChannels.metadataFetch);
 
   @override
-  Future<Map> getAllMetadata(AvesEntry entry) async {
+  Future<Map> getAllMetadata(FmvEntry entry) async {
     if (entry.isSvg) return {};
 
     try {
@@ -64,7 +64,7 @@ class PlatformMetadataFetchService implements MetadataFetchService {
   }
 
   @override
-  Future<CatalogMetadata?> getCatalogMetadata(AvesEntry entry, {bool background = false}) async {
+  Future<CatalogMetadata?> getCatalogMetadata(FmvEntry entry, {bool background = false}) async {
     if (entry.isSvg) return null;
 
     Future<CatalogMetadata?> call() async {
@@ -89,7 +89,7 @@ class PlatformMetadataFetchService implements MetadataFetchService {
                 })
                 as Map;
         result['id'] = entry.id;
-        AvesEntry.normalizeMimeTypeFields(result);
+        FmvEntry.normalizeMimeTypeFields(result);
         return CatalogMetadata.fromMap(result);
       } on PlatformException catch (e, stack) {
         await _processPlatformException(entry, e, stack);
@@ -106,7 +106,7 @@ class PlatformMetadataFetchService implements MetadataFetchService {
   }
 
   @override
-  Future<OverlayMetadata> getOverlayMetadata(AvesEntry entry, Set<MetadataSyntheticField> fields) async {
+  Future<OverlayMetadata> getOverlayMetadata(FmvEntry entry, Set<MetadataSyntheticField> fields) async {
     if (fields.isNotEmpty && !entry.isSvg) {
       try {
         // returns fields on demand, with various value types:
@@ -132,7 +132,7 @@ class PlatformMetadataFetchService implements MetadataFetchService {
   }
 
   @override
-  Future<GeoTiffInfo?> getGeoTiffInfo(AvesEntry entry) async {
+  Future<GeoTiffInfo?> getGeoTiffInfo(FmvEntry entry) async {
     try {
       final result =
           await _channel.invokeMethod('getGeoTiffInfo', <String, Object?>{
@@ -149,7 +149,7 @@ class PlatformMetadataFetchService implements MetadataFetchService {
   }
 
   @override
-  Future<MultiPageInfo?> getMultiPageInfo(AvesEntry entry) async {
+  Future<MultiPageInfo?> getMultiPageInfo(FmvEntry entry) async {
     try {
       final result = await _channel.invokeMethod('getMultiPageInfo', <String, Object?>{
         'mimeType': entry.mimeType,
@@ -164,7 +164,7 @@ class PlatformMetadataFetchService implements MetadataFetchService {
         imagePage['height'] = entry.height;
         imagePage['rotationDegrees'] = entry.rotationDegrees;
       }
-      pageMaps.forEach(AvesEntry.normalizeMimeTypeFields);
+      pageMaps.forEach(FmvEntry.normalizeMimeTypeFields);
       return MultiPageInfo.fromPageMaps(entry, pageMaps);
     } on PlatformException catch (e, stack) {
       if (e.code != 'getMultiPageInfo-empty') {
@@ -175,7 +175,7 @@ class PlatformMetadataFetchService implements MetadataFetchService {
   }
 
   @override
-  Future<PanoramaInfo?> getPanoramaInfo(AvesEntry entry) async {
+  Future<PanoramaInfo?> getPanoramaInfo(FmvEntry entry) async {
     try {
       // returns map with values for:
       // 'croppedAreaLeft' (int), 'croppedAreaTop' (int), 'croppedAreaWidth' (int), 'croppedAreaHeight' (int),
@@ -195,7 +195,7 @@ class PlatformMetadataFetchService implements MetadataFetchService {
   }
 
   @override
-  Future<List<Map<String, dynamic>>?> getIptc(AvesEntry entry) async {
+  Future<List<Map<String, dynamic>>?> getIptc(FmvEntry entry) async {
     try {
       final result = await _channel.invokeMethod('getIptc', <String, Object?>{
         'mimeType': entry.mimeType,
@@ -209,14 +209,14 @@ class PlatformMetadataFetchService implements MetadataFetchService {
   }
 
   @override
-  Future<AvesXmp?> getXmp(AvesEntry entry) async {
+  Future<FmvXmp?> getXmp(FmvEntry entry) async {
     try {
       final result = await _channel.invokeMethod('getXmp', <String, Object?>{
         'mimeType': entry.mimeType,
         'uri': entry.uri,
         'sizeBytes': entry.sizeBytes,
       });
-      if (result != null) return AvesXmp.fromList((result as List).cast<String>());
+      if (result != null) return FmvXmp.fromList((result as List).cast<String>());
     } on PlatformException catch (e, stack) {
       await _processPlatformException(entry, e, stack);
     }
@@ -243,7 +243,7 @@ class PlatformMetadataFetchService implements MetadataFetchService {
   }
 
   @override
-  Future<String?> getContentResolverProp(AvesEntry entry, String prop) async {
+  Future<String?> getContentResolverProp(FmvEntry entry, String prop) async {
     try {
       final result = await _channel.invokeMethod('getContentResolverProp', <String, Object?>{
         'mimeType': entry.mimeType,
@@ -258,7 +258,7 @@ class PlatformMetadataFetchService implements MetadataFetchService {
   }
 
   @override
-  Future<DateTime?> getDate(AvesEntry entry, MetadataField field) async {
+  Future<DateTime?> getDate(FmvEntry entry, MetadataField field) async {
     try {
       final result = await _channel.invokeMethod('getDate', <String, Object?>{
         'mimeType': entry.mimeType,
@@ -276,7 +276,7 @@ class PlatformMetadataFetchService implements MetadataFetchService {
   }
 
   @override
-  Future<Map<String, Object?>> getFields(AvesEntry entry, Set<MetadataField> fields) async {
+  Future<Map<String, Object?>> getFields(FmvEntry entry, Set<MetadataField> fields) async {
     if (fields.isNotEmpty && !entry.isSvg) {
       try {
         final result = await _channel.invokeMethod('getFields', <String, Object?>{
@@ -293,7 +293,7 @@ class PlatformMetadataFetchService implements MetadataFetchService {
     return {};
   }
 
-  Future<void> _processPlatformException(AvesEntry entry, PlatformException e, StackTrace stack) async {
+  Future<void> _processPlatformException(FmvEntry entry, PlatformException e, StackTrace stack) async {
     if (entry.isValid) {
       final code = e.code;
       if (code.endsWith('filenotfound')) {

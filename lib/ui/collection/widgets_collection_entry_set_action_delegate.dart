@@ -288,8 +288,8 @@ class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAware
     }
   }
 
-  Set<AvesEntry> _getTargetItems(BuildContext context) {
-    final selection = context.read<Selection<AvesEntry>>();
+  Set<FmvEntry> _getTargetItems(BuildContext context) {
+    final selection = context.read<Selection<FmvEntry>>();
     final groupedEntries = (selection.isSelecting ? selection.selectedItems : context.read<CollectionLens>().sortedEntries);
     return groupedEntries.expand((entry) => entry.stackedEntries ?? {entry}).toSet();
   }
@@ -356,7 +356,7 @@ class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAware
 
   Future<void> _delete(BuildContext context) async {
     final entries = _getTargetItems(context);
-    final byBinUsage = groupBy<AvesEntry, bool>(entries, (entry) {
+    final byBinUsage = groupBy<FmvEntry, bool>(entries, (entry) {
       final details = vaults.getVault(entry.directory);
       return details?.useBin ?? settings.enableBin;
     });
@@ -372,7 +372,7 @@ class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAware
   // returns whether it completed the action (with or without failures)
   Future<bool> doDelete({
     required BuildContext context,
-    required Set<AvesEntry> entries,
+    required Set<FmvEntry> entries,
     required bool enableBin,
   }) async {
     final pureTrash = entries.every((entry) => entry.trashed);
@@ -492,7 +492,7 @@ class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAware
   }
 
   Future<void> _exportGpx(BuildContext context) async {
-    final entries = _getTargetItems(context).where((entry) => entry.hasGps).sorted(AvesEntrySort.compareByDate).toList();
+    final entries = _getTargetItems(context).where((entry) => entry.hasGps).sorted(FmvEntrySort.compareByDate).toList();
     if (entries.isEmpty) return;
 
     final waypoints = entries
@@ -567,8 +567,8 @@ class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAware
 
   Future<void> _edit(
     BuildContext context,
-    Set<AvesEntry> todoEntries,
-    Future<Set<EntryDataType>> Function(AvesEntry entry) op, {
+    Set<FmvEntry> todoEntries,
+    Future<Set<EntryDataType>> Function(FmvEntry entry) op, {
     bool shouldCheckUndatedItems = true,
     bool showResult = true,
   }) async {
@@ -641,17 +641,17 @@ class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAware
     );
   }
 
-  Future<Set<AvesEntry>?> _getEditableTargetItems(
+  Future<Set<FmvEntry>?> _getEditableTargetItems(
     BuildContext context, {
-    required bool Function(AvesEntry entry) canEdit,
+    required bool Function(FmvEntry entry) canEdit,
   }) => _getEditableItems(context, _getTargetItems(context), canEdit: canEdit);
 
-  Future<Set<AvesEntry>?> _getEditableItems(
+  Future<Set<FmvEntry>?> _getEditableItems(
     BuildContext context,
-    Set<AvesEntry> entries, {
-    required bool Function(AvesEntry entry) canEdit,
+    Set<FmvEntry> entries, {
+    required bool Function(FmvEntry entry) canEdit,
   }) async {
-    final bySupported = groupBy<AvesEntry, bool>(entries, canEdit);
+    final bySupported = groupBy<FmvEntry, bool>(entries, canEdit);
     final supported = (bySupported[true] ?? []).toSet();
     final unsupported = (bySupported[false] ?? []).toSet();
 
@@ -697,7 +697,7 @@ class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAware
 
   Future<void> editDate(
     BuildContext context, {
-    Set<AvesEntry>? entries,
+    Set<FmvEntry>? entries,
     DateModifier? modifier,
     bool showResult = true,
   }) async {
@@ -725,7 +725,7 @@ class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAware
     await _edit(context, todoEntries, (entry) => entry.editLocation(locationByEntry[entry]));
   }
 
-  Future<LatLng?> editLocationByMap(BuildContext context, Set<AvesEntry> entries, LatLng clusterLocation, CollectionLens mapCollection) async {
+  Future<LatLng?> editLocationByMap(BuildContext context, Set<FmvEntry> entries, LatLng clusterLocation, CollectionLens mapCollection) async {
     final todoEntries = await _getEditableItems(context, entries, canEdit: (entry) => entry.canEditLocation);
     if (todoEntries == null || todoEntries.isEmpty) return null;
 
@@ -745,7 +745,7 @@ class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAware
     return location;
   }
 
-  Future<void> removeLocation(BuildContext context, Set<AvesEntry> entries) async {
+  Future<void> removeLocation(BuildContext context, Set<FmvEntry> entries) async {
     final l10n = context.l10n;
     if (!await showConfirmationDialog(
       context: context,
@@ -758,7 +758,7 @@ class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAware
     final todoEntries = await _getEditableItems(context, entries, canEdit: (entry) => entry.canEditLocation);
     if (todoEntries == null || todoEntries.isEmpty) return;
 
-    await _edit(context, todoEntries, (entry) => entry.editLocation(ExtraAvesEntryMetadataEdition.removalLocation));
+    await _edit(context, todoEntries, (entry) => entry.editLocation(ExtraFmvEntryMetadataEdition.removalLocation));
   }
 
   Future<void> _editTitleDescription(BuildContext context) async {
@@ -787,7 +787,7 @@ class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAware
     final entries = await _getEditableTargetItems(context, canEdit: (entry) => entry.canEditTags);
     if (entries == null || entries.isEmpty) return;
 
-    final newTagsByEntry = <AvesEntry, Set<String>>{};
+    final newTagsByEntry = <FmvEntry, Set<String>>{};
     await Future.forEach(entries, (entry) async {
       newTagsByEntry[entry] = {
         ...entry.tags,
@@ -808,7 +808,7 @@ class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAware
     await _doEditTags(context, newTagsByEntry);
   }
 
-  Future<void> _doEditTags(BuildContext context, Map<AvesEntry, Set<String>> newTagsByEntry) async {
+  Future<void> _doEditTags(BuildContext context, Map<FmvEntry, Set<String>> newTagsByEntry) async {
     final entries = newTagsByEntry.keys.toSet();
 
     // only process modified items
@@ -822,7 +822,7 @@ class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAware
     await _edit(context, entries, (entry) => entry.editTags(newTagsByEntry[entry]!));
   }
 
-  Future<void> removeTags(BuildContext context, {required Set<AvesEntry> entries, required Set<String> tags}) async {
+  Future<void> removeTags(BuildContext context, {required Set<FmvEntry> entries, required Set<String> tags}) async {
     final newTagsByEntry = Map.fromEntries(
       entries.map((v) {
         return MapEntry(v, v.tags.whereNot(tags.contains).toSet());
@@ -975,7 +975,7 @@ class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAware
     final filters = collection.filters;
 
     String? defaultName = _getDefaultNameForFilters(context, filters);
-    final result = await showAvesDialog<(AvesEntry?, String)>(
+    final result = await showAvesDialog<(FmvEntry?, String)>(
       context: context,
       builder: (context) => AddShortcutDialog(
         defaultName: defaultName ?? '',
@@ -1005,7 +1005,7 @@ class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAware
   }
 
   Future<void> _pickMultipleMedia(BuildContext context) async {
-    final selection = context.read<Selection<AvesEntry>>();
+    final selection = context.read<Selection<FmvEntry>>();
     final uris = selection.selectedItems.map((entry) => entry.uri).toList();
     try {
       await IntentService.submitPickedItems(uris);

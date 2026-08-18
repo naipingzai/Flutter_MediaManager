@@ -27,7 +27,7 @@ class SubtitleThemePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return AvesScaffold(
+    return FmvScaffold(
       appBar: AppBar(
         automaticallyImplyLeading: !settings.useTvLayout,
         title: Text(l10n.settingsSubtitleThemePageTitle),

@@ -95,7 +95,7 @@ class ScaleBoundaries extends Equatable {
 
   Offset get _contentCenter => contentSize.center(Offset.zero);
 
-  Offset viewportToContentPosition(AvesMagnifierController controller, Offset viewportPosition) {
+  Offset viewportToContentPosition(FmvMagnifierController controller, Offset viewportPosition) {
     return (viewportPosition - viewportCenter - controller.position) / controller.scale! + _contentCenter;
   }
 

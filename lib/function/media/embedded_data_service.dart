@@ -8,26 +8,26 @@ import 'package:flutter_media_view/ui/theme/text.dart';
 import 'package:flutter/services.dart';
 
 abstract class EmbeddedDataService {
-  Future<List<ui.ImageDescriptor?>> getExifThumbnails(AvesEntry entry);
+  Future<List<ui.ImageDescriptor?>> getExifThumbnails(FmvEntry entry);
 
-  Future<Map> extractGoogleDeviceItem(AvesEntry entry, String dataUri);
+  Future<Map> extractGoogleDeviceItem(FmvEntry entry, String dataUri);
 
-  Future<Map> extractMotionPhotoImage(AvesEntry entry);
+  Future<Map> extractMotionPhotoImage(FmvEntry entry);
 
-  Future<Map> extractMotionPhotoVideo(AvesEntry entry);
+  Future<Map> extractMotionPhotoVideo(FmvEntry entry);
 
-  Future<Map> extractJpegMpfItem(AvesEntry entry, int index);
+  Future<Map> extractJpegMpfItem(FmvEntry entry, int index);
 
-  Future<Map> extractVideoEmbeddedPicture(AvesEntry entry);
+  Future<Map> extractVideoEmbeddedPicture(FmvEntry entry);
 
-  Future<Map> extractXmpDataProp(AvesEntry entry, List<Object?>? props, String? propMimeType);
+  Future<Map> extractXmpDataProp(FmvEntry entry, List<Object?>? props, String? propMimeType);
 }
 
 class PlatformEmbeddedDataService implements EmbeddedDataService {
-  static const _platform = AvesMethodChannel('com.naipingzai/flutter_media_view/embedded');
+  static const _platform = FmvMethodChannel('com.naipingzai/flutter_media_view/embedded');
 
   @override
-  Future<List<ui.ImageDescriptor?>> getExifThumbnails(AvesEntry entry) async {
+  Future<List<ui.ImageDescriptor?>> getExifThumbnails(FmvEntry entry) async {
     try {
       final result = await _platform.invokeMethod('getExifThumbnails', <String, Object?>{
         'mimeType': entry.mimeType,
@@ -48,7 +48,7 @@ class PlatformEmbeddedDataService implements EmbeddedDataService {
   }
 
   @override
-  Future<Map> extractGoogleDeviceItem(AvesEntry entry, String dataUri) async {
+  Future<Map> extractGoogleDeviceItem(FmvEntry entry, String dataUri) async {
     try {
       final result = await _platform.invokeMethod('extractGoogleDeviceItem', <String, Object?>{
         'mimeType': entry.mimeType,
@@ -65,7 +65,7 @@ class PlatformEmbeddedDataService implements EmbeddedDataService {
   }
 
   @override
-  Future<Map> extractMotionPhotoImage(AvesEntry entry) async {
+  Future<Map> extractMotionPhotoImage(FmvEntry entry) async {
     try {
       final result = await _platform.invokeMethod('extractMotionPhotoImage', <String, Object?>{
         'mimeType': entry.mimeType,
@@ -81,7 +81,7 @@ class PlatformEmbeddedDataService implements EmbeddedDataService {
   }
 
   @override
-  Future<Map> extractMotionPhotoVideo(AvesEntry entry) async {
+  Future<Map> extractMotionPhotoVideo(FmvEntry entry) async {
     try {
       final result = await _platform.invokeMethod('extractMotionPhotoVideo', <String, Object?>{
         'mimeType': entry.mimeType,
@@ -97,7 +97,7 @@ class PlatformEmbeddedDataService implements EmbeddedDataService {
   }
 
   @override
-  Future<Map> extractJpegMpfItem(AvesEntry entry, int id) async {
+  Future<Map> extractJpegMpfItem(FmvEntry entry, int id) async {
     try {
       final result = await _platform.invokeMethod('extractJpegMpfItem', <String, Object?>{
         'mimeType': entry.mimeType,
@@ -114,7 +114,7 @@ class PlatformEmbeddedDataService implements EmbeddedDataService {
   }
 
   @override
-  Future<Map> extractVideoEmbeddedPicture(AvesEntry entry) async {
+  Future<Map> extractVideoEmbeddedPicture(FmvEntry entry) async {
     try {
       final result = await _platform.invokeMethod('extractVideoEmbeddedPicture', <String, Object?>{
         'uri': entry.uri,
@@ -128,7 +128,7 @@ class PlatformEmbeddedDataService implements EmbeddedDataService {
   }
 
   @override
-  Future<Map> extractXmpDataProp(AvesEntry entry, List<Object?>? props, String? propMimeType) async {
+  Future<Map> extractXmpDataProp(FmvEntry entry, List<Object?>? props, String? propMimeType) async {
     try {
       final result = await _platform.invokeMethod('extractXmpDataProp', <String, Object?>{
         'mimeType': entry.mimeType,

@@ -63,7 +63,7 @@ class _DebugColorSectionState extends State<DebugColorSection> with AutomaticKee
       ('inversePrimary', scheme.inversePrimary),
       ('surfaceTint', scheme.surfaceTint),
     ];
-    return AvesExpansionTile(
+    return FmvExpansionTile(
       title: 'Colors',
       children: [
         Padding(

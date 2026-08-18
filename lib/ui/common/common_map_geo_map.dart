@@ -29,9 +29,9 @@ import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
 
 class GeoMap extends StatefulWidget {
-  final AvesMapController controller;
+  final FmvMapController controller;
   final CollectionLens? collection;
-  final List<AvesEntry>? entries;
+  final List<FmvEntry>? entries;
   final Size availableSize;
   final LatLng? initialCenter;
   final double? initialZoom;
@@ -44,13 +44,13 @@ class GeoMap extends StatefulWidget {
   final MapTapCallback? onMapTap;
   final void Function(
     LatLng markerLocation,
-    AvesEntry markerEntry,
+    FmvEntry markerEntry,
   )?
   onMarkerTap;
   final void Function(
     LatLng markerLocation,
-    AvesEntry markerEntry,
-    Set<AvesEntry> clusterEntries,
+    FmvEntry markerEntry,
+    Set<FmvEntry> clusterEntries,
     Offset tapLocalPosition,
     WidgetBuilder markerBuilder,
   )?
@@ -90,13 +90,13 @@ class _GeoMapState extends State<GeoMap> {
   // so we prevent loading it while scrolling or animating
   bool _heavyMapLoaded = false;
   late final ValueNotifier<ZoomedBounds> _boundsNotifier;
-  Fluster<GeoEntry<AvesEntry>>? _defaultMarkerCluster;
-  Fluster<GeoEntry<AvesEntry>>? _slowMarkerCluster;
+  Fluster<GeoEntry<FmvEntry>>? _defaultMarkerCluster;
+  Fluster<GeoEntry<FmvEntry>>? _slowMarkerCluster;
   final AChangeNotifier _clusterChangeNotifier = .new();
 
   final ValueNotifier<List<GeoTrack>> _tracksNotifier = ValueNotifier([]);
 
-  List<AvesEntry> get entries => widget.collection?.sortedEntries ?? widget.entries ?? [];
+  List<FmvEntry> get entries => widget.collection?.sortedEntries ?? widget.entries ?? [];
 
   // cap initial zoom to avoid a zoom change
   // when toggling overlay on Google map initial state
@@ -145,7 +145,7 @@ class _GeoMapState extends State<GeoMap> {
   @override
   Widget build(BuildContext context) {
     final devicePixelRatio = MediaQuery.devicePixelRatioOf(context);
-    void onMarkerLongPress(GeoEntry<AvesEntry> geoEntry, LatLng tapLocation) => _onMarkerLongPress(
+    void onMarkerLongPress(GeoEntry<FmvEntry> geoEntry, LatLng tapLocation) => _onMarkerLongPress(
       geoEntry: geoEntry,
       tapLocation: tapLocation,
       devicePixelRatio: devicePixelRatio,
@@ -156,7 +156,7 @@ class _GeoMapState extends State<GeoMap> {
       builder: (context, mapStyle, child) {
         final isHeavy = mapStyle?.isHeavy ?? false;
         final countFormatter = settings.avesLocale.decimalNumberFormat().format;
-        Widget _buildMarkerWidget(MarkerKey<AvesEntry> key) => ImageMarker(
+        Widget _buildMarkerWidget(MarkerKey<FmvEntry> key) => ImageMarker(
           key: key,
           count: key.count,
           countFormatter: countFormatter,
@@ -167,12 +167,12 @@ class _GeoMapState extends State<GeoMap> {
             progressive: !isHeavy,
           ),
         );
-        bool _isMarkerImageReady(MarkerKey<AvesEntry> key) => key.entry.isThumbnailReady(extent: MapThemeData.markerImageExtent);
+        bool _isMarkerImageReady(MarkerKey<FmvEntry> key) => key.entry.isThumbnailReady(extent: MapThemeData.markerImageExtent);
 
         Widget child = const SizedBox();
         if (mapStyle != null) {
           if (mapStyle.needMobileService) {
-            child = mobileServices.buildMap<AvesEntry>(
+            child = mobileServices.buildMap<FmvEntry>(
               controller: widget.controller,
               clusterListenable: _clusterChangeNotifier,
               boundsNotifier: _boundsNotifier,
@@ -192,7 +192,7 @@ class _GeoMapState extends State<GeoMap> {
               onMarkerLongPress: onMarkerLongPress,
             );
           } else {
-            child = EntryLeafletMap<AvesEntry>(
+            child = EntryLeafletMap<FmvEntry>(
               controller: widget.controller,
               clusterListenable: _clusterChangeNotifier,
               boundsNotifier: _boundsNotifier,
@@ -353,9 +353,9 @@ class _GeoMapState extends State<GeoMap> {
     );
   }
 
-  ZoomedBounds? _initBoundsForEntries({required List<AvesEntry> entries, int? recentCount}) {
+  ZoomedBounds? _initBoundsForEntries({required List<FmvEntry> entries, int? recentCount}) {
     if (recentCount != null) {
-      entries = List.of(entries)..sort(AvesEntrySort.compareByDate);
+      entries = List.of(entries)..sort(FmvEntrySort.compareByDate);
       entries = entries.take(recentCount).toList();
     }
 
@@ -392,7 +392,7 @@ class _GeoMapState extends State<GeoMap> {
         var prevDate = DateTime.fromMillisecondsSinceEpoch(0);
         var prevLatLng = const LatLng(0, 0);
         final currentTrack = <LatLng>[];
-        for (final entry in entries.sorted(AvesEntrySort.compareByDate).reversed) {
+        for (final entry in entries.sorted(FmvEntrySort.compareByDate).reversed) {
           final thisDate = entry.bestDate;
           if (thisDate != null) {
             if (thisDate.difference(prevDate) > maxTrackPointInterval) {
@@ -418,12 +418,12 @@ class _GeoMapState extends State<GeoMap> {
     _tracksNotifier.value = tracks;
   }
 
-  Fluster<GeoEntry<AvesEntry>> _buildFluster({int nodeSize = 64}) {
+  Fluster<GeoEntry<FmvEntry>> _buildFluster({int nodeSize = 64}) {
     final markers = entries
         .map((entry) {
           final latLng = entry.latLng;
           return latLng != null
-              ? GeoEntry<AvesEntry>(
+              ? GeoEntry<FmvEntry>(
                   entry: entry,
                   latitude: latLng.latitude,
                   longitude: latLng.longitude,
@@ -434,7 +434,7 @@ class _GeoMapState extends State<GeoMap> {
         .nonNulls
         .toList();
 
-    return Fluster<GeoEntry<AvesEntry>>(
+    return Fluster<GeoEntry<FmvEntry>>(
       // we keep clustering on the whole range of zooms (including the maximum)
       // to avoid collocated entries overlapping
       minZoom: 0,
@@ -450,14 +450,14 @@ class _GeoMapState extends State<GeoMap> {
       // `T Function(BaseCluster, double, double)` for `T Function(BaseCluster?, double?, double?)`
       createCluster: (BaseCluster? base, double? lng, double? lat) {
         if (base != null && lng != null && lat != null) {
-          return GeoEntry<AvesEntry>.createCluster(base, lng, lat);
+          return GeoEntry<FmvEntry>.createCluster(base, lng, lat);
         }
         throw Exception('Cluster creation arguments should not be null: base=$base lng=$lng, lat=$lat');
       },
     );
   }
 
-  Map<MarkerKey<AvesEntry>, GeoEntry<AvesEntry>> _buildMarkerClusters() {
+  Map<MarkerKey<FmvEntry>, GeoEntry<FmvEntry>> _buildMarkerClusters() {
     final bounds = _boundsNotifier.value;
     final geoEntries = _defaultMarkerCluster?.clusters(bounds.boundingBox, bounds.zoom.round()) ?? [];
     return Map.fromEntries(
@@ -472,7 +472,7 @@ class _GeoMapState extends State<GeoMap> {
     );
   }
 
-  Set<AvesEntry> _getClusterEntries(GeoEntry<AvesEntry> geoEntry) {
+  Set<FmvEntry> _getClusterEntries(GeoEntry<FmvEntry> geoEntry) {
     final clusterId = geoEntry.clusterId;
     if (clusterId == null) {
       return {geoEntry.entry!};
@@ -489,12 +489,12 @@ class _GeoMapState extends State<GeoMap> {
     return points.map((geoEntry) => geoEntry.entry!).toSet();
   }
 
-  void _onMarkerTap(GeoEntry<AvesEntry> geoEntry) {
+  void _onMarkerTap(GeoEntry<FmvEntry> geoEntry) {
     final onTap = widget.onMarkerTap;
     if (onTap == null) return;
 
     final clusterId = geoEntry.clusterId;
-    AvesEntry? markerEntry;
+    FmvEntry? markerEntry;
     if (clusterId != null) {
       final uri = geoEntry.childMarkerId;
       markerEntry = entries.firstWhereOrNull((v) => v.uri == uri);
@@ -508,7 +508,7 @@ class _GeoMapState extends State<GeoMap> {
   }
 
   Future<void> _onMarkerLongPress({
-    required GeoEntry<AvesEntry> geoEntry,
+    required GeoEntry<FmvEntry> geoEntry,
     required LatLng tapLocation,
     required double devicePixelRatio,
   }) async {
@@ -518,7 +518,7 @@ class _GeoMapState extends State<GeoMap> {
     final clusterEntries = _getClusterEntries(geoEntry);
     final tapLocalPosition = _boundsNotifier.value.offset(tapLocation);
 
-    AvesEntry markerEntry;
+    FmvEntry markerEntry;
     if (geoEntry.isCluster!) {
       final uri = geoEntry.childMarkerId;
       markerEntry = entries.firstWhere((v) => v.uri == uri);

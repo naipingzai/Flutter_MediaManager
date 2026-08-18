@@ -25,7 +25,7 @@ class CoverSelectionDialog extends StatefulWidget {
   static const routeName = '/dialog/select_cover';
 
   final CollectionFilter filter;
-  final AvesEntry? customEntry;
+  final FmvEntry? customEntry;
   final String? customPackage;
   final Color? customColor;
 
@@ -43,7 +43,7 @@ class CoverSelectionDialog extends StatefulWidget {
 
 class _CoverSelectionDialogState extends State<CoverSelectionDialog> {
   late bool _isCustomEntry, _isCustomPackage, _isCustomColor;
-  AvesEntry? _customEntry;
+  FmvEntry? _customEntry;
   String? _customPackage;
   Color? _customColor;
 
@@ -51,7 +51,7 @@ class _CoverSelectionDialogState extends State<CoverSelectionDialog> {
 
   bool get showAppTab => filter is StoredAlbumFilter && settings.isInstalledAppAccessAllowed;
 
-  bool get showColorTab => settings.themeColorMode == AvesThemeColorMode.polychrome;
+  bool get showColorTab => settings.themeColorMode == FmvThemeColorMode.polychrome;
 
   static const double itemPickerExtent = 46;
   static const double appPickerExtent = 32;
@@ -148,7 +148,7 @@ class _CoverSelectionDialogState extends State<CoverSelectionDialog> {
     ];
 
     final contentWidget = DecoratedBox(
-      decoration: AvesDialog.contentDecoration(context),
+      decoration: FmvDialog.contentDecoration(context),
       child: LayoutBuilder(
         builder: (context, constraints) {
           final availableBodyHeight = constraints.maxHeight - tabBarHeight(context) - tabIndicatorWeight;
@@ -160,7 +160,7 @@ class _CoverSelectionDialogState extends State<CoverSelectionDialog> {
               children: [
                 Material(
                   borderRadius: const BorderRadius.vertical(
-                    top: AvesDialog.cornerRadius,
+                    top: FmvDialog.cornerRadius,
                   ),
                   clipBehavior: Clip.antiAlias,
                   child: TabBar(
@@ -189,10 +189,10 @@ class _CoverSelectionDialogState extends State<CoverSelectionDialog> {
     );
 
     final actionsWidget = Padding(
-      padding: AvesDialog.actionsPadding,
+      padding: FmvDialog.actionsPadding,
       child: OverflowBar(
         alignment: .end,
-        spacing: AvesDialog.buttonPadding.horizontal / 2,
+        spacing: FmvDialog.buttonPadding.horizontal / 2,
         overflowAlignment: OverflowBarAlignment.end,
         children: [
           const CancelButton(),
@@ -201,7 +201,7 @@ class _CoverSelectionDialogState extends State<CoverSelectionDialog> {
               final entry = _isCustomEntry ? _customEntry : null;
               final package = _isCustomPackage ? _customPackage : null;
               final color = _isCustomColor ? _customColor : null;
-              return Navigator.maybeOf(context)?.pop<(AvesEntry?, String?, Color?)>((entry, package, color));
+              return Navigator.maybeOf(context)?.pop<(FmvEntry?, String?, Color?)>((entry, package, color));
             },
             child: Text(l10n.applyButtonLabel),
           ),
@@ -228,7 +228,7 @@ class _CoverSelectionDialogState extends State<CoverSelectionDialog> {
     );
 
     return Dialog(
-      shape: AvesDialog.shape(context),
+      shape: FmvDialog.shape(context),
       child: dialogChild,
     );
   }
@@ -300,7 +300,7 @@ class _CoverSelectionDialogState extends State<CoverSelectionDialog> {
                                 height: appPickerExtent,
                                 width: appPickerExtent,
                                 decoration: BoxDecoration(
-                                  border: AvesBorder.border(context),
+                                  border: FmvBorder.border(context),
                                   shape: BoxShape.circle,
                                 ),
                                 child: const Icon(AIcons.clear),
@@ -347,7 +347,7 @@ class _CoverSelectionDialogState extends State<CoverSelectionDialog> {
   }
 
   Future<void> _pickEntry() async {
-    final entry = await Navigator.maybeOf(context)?.push<AvesEntry>(
+    final entry = await Navigator.maybeOf(context)?.push<FmvEntry>(
       MaterialPageRoute(
         settings: const RouteSettings(name: ItemPickPage.routeName),
         builder: (context) => ItemPickPage(

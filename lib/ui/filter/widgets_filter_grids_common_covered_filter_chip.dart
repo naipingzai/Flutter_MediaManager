@@ -56,14 +56,14 @@ class CoveredFilterChip<T extends CollectionFilter> extends StatelessWidget {
 
     // height can actually be a little larger or smaller, when info includes icons or non-latin scripts
     // but it's not worth measuring text metrics, as the widget is flexible enough to absorb the difference
-    return textScaler.scale(AvesFilterChip.fontSize + detailFontSize(extent) + 4) + AvesFilterChip.decoratedContentVerticalPadding * 2;
+    return textScaler.scale(FmvFilterChip.fontSize + detailFontSize(extent) + 4) + FmvFilterChip.decoratedContentVerticalPadding * 2;
   }
 
-  static Radius radius(double extent) => Radius.circular(min<double>(AvesFilterChip.defaultRadius, extent / 4));
+  static Radius radius(double extent) => Radius.circular(min<double>(FmvFilterChip.defaultRadius, extent / 4));
 
-  static double detailIconSize(double extent) => min<double>(AvesFilterChip.fontSize, extent / 7);
+  static double detailIconSize(double extent) => min<double>(FmvFilterChip.fontSize, extent / 7);
 
-  static double detailFontSize(double extent) => min<double>(AvesFilterChip.fontSize, extent / 7);
+  static double detailFontSize(double extent) => min<double>(FmvFilterChip.fontSize, extent / 7);
 
   static double detailIconPadding(double extent) => min<double>(8.0, extent / 16);
 
@@ -140,13 +140,13 @@ class CoveredFilterChip<T extends CollectionFilter> extends StatelessWidget {
       chipKey = ValueKey(appInventory.areAppNamesReadyNotifier.value);
     }
     final textScaler = MediaQuery.textScalerOf(context);
-    return AvesFilterChip(
+    return FmvFilterChip(
       key: chipKey,
       filter: _filter,
       showLeading: showText,
       showText: showText,
       allowGenericIcon: false,
-      decoration: AvesFilterDecoration(
+      decoration: FmvFilterDecoration(
         radius: radius(extent),
         widget: Padding(
           padding: EdgeInsets.only(

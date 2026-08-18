@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class EntryListDetails extends StatelessWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
 
   const EntryListDetails({
     super.key,
@@ -28,7 +28,7 @@ class EntryListDetails extends StatelessWidget {
     return Container(
       padding: EntryListDetailsTheme.contentPadding,
       foregroundDecoration: BoxDecoration(
-        border: Border(top: AvesBorder.straightSide(context)),
+        border: Border(top: FmvBorder.straightSide(context)),
       ),
       margin: EntryListDetailsTheme.contentMargin,
       child: IconTheme.merge(

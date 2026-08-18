@@ -32,7 +32,7 @@ class LocationPickPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AvesScaffold(
+    return FmvScaffold(
       body: SafeArea(
         left: false,
         top: false,
@@ -62,7 +62,7 @@ class _Content extends StatefulWidget {
 
 class _ContentState extends State<_Content> with SingleTickerProviderStateMixin {
   final Set<StreamSubscription> _subscriptions = {};
-  final AvesMapController _mapController = AvesMapController();
+  final FmvMapController _mapController = FmvMapController();
   late final ValueNotifier<bool> _isPageAnimatingNotifier;
   final ValueNotifier<LatLng?> _dotLocationNotifier = ValueNotifier(null), _infoLocationNotifier = ValueNotifier(null);
   final Debouncer _infoDebouncer = Debouncer(delay: ADurations.mapInfoDebounceDelay);
@@ -119,7 +119,7 @@ class _ContentState extends State<_Content> with SingleTickerProviderStateMixin 
               child: _LocationInfo(locationNotifier: _infoLocationNotifier),
             ),
             const SizedBox(height: 8),
-            AvesOutlinedButton(
+            FmvOutlinedButton(
               label: context.l10n.locationPickerUseThisLocationButton,
               onPressed: () => Navigator.maybeOf(context)?.pop<LatLng>(_dotLocationNotifier.value),
             ),

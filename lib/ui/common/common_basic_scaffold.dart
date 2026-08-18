@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AvesScaffold extends StatelessWidget {
+class FmvScaffold extends StatelessWidget {
   final PreferredSizeWidget? appBar;
   final Widget? body;
   final Widget? floatingActionButton;
@@ -10,7 +10,7 @@ class AvesScaffold extends StatelessWidget {
   final bool? resizeToAvoidBottomInset;
   final bool extendBody;
 
-  const AvesScaffold({
+  const FmvScaffold({
     super.key,
     this.appBar,
     this.body,

@@ -1,16 +1,16 @@
 import 'package:flutter_media_view/function/locale/aves_locale.dart';
 import 'package:flutter_media_view/ui/theme/text.dart';
 
-String formatDay(DateTime date, AvesLocale locale) {
+String formatDay(DateTime date, FmvLocale locale) {
   return locale.yMMMd(date);
 }
 
-String formatTime(DateTime date, AvesLocale locale, bool use24hour) {
+String formatTime(DateTime date, FmvLocale locale, bool use24hour) {
   final formatter = use24hour ? locale.Hm : locale.jm;
   return formatter(date);
 }
 
-String formatDateTime(DateTime date, AvesLocale locale, bool use24hour) => [
+String formatDateTime(DateTime date, FmvLocale locale, bool use24hour) => [
   formatDay(date, locale),
   formatTime(date, locale, use24hour),
 ].join(AText.separator);

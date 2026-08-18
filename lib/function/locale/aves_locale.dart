@@ -14,14 +14,14 @@ import 'package:intl4x/number_format.dart' as num4x;
 
 typedef ACalendar = date4x.Calendar;
 
-class AvesLocale {
+class FmvLocale {
   final String languageTag;
   final ACalendar calendar;
   final bool forceWesternArabicNumerals;
   late final DateFormatDelegate _dateFormatDelegate;
   late final num4x.Locale _locale4x;
 
-  AvesLocale({
+  FmvLocale({
     required this.languageTag,
     required this.calendar,
     required this.forceWesternArabicNumerals,
@@ -30,7 +30,7 @@ class AvesLocale {
     _locale4x = Intl4x.toLocale4x(languageTag, calendar, forceWesternArabicNumerals);
   }
 
-  static final AvesLocale ascii = AvesLocale(
+  static final FmvLocale ascii = FmvLocale(
     languageTag: kAsciiLocale,
     calendar: ACalendar.gregorian,
     forceWesternArabicNumerals: false,
@@ -39,10 +39,10 @@ class AvesLocale {
   @override
   String toString() => '$runtimeType#${shortHash(this)}{languageTag=$languageTag, calendar=$calendar, forceWesternArabicNumerals=$forceWesternArabicNumerals}';
 
-  AvesLocale copyWith({
+  FmvLocale copyWith({
     ACalendar? calendar,
   }) {
-    return AvesLocale(
+    return FmvLocale(
       languageTag: languageTag,
       calendar: calendar ?? this.calendar,
       forceWesternArabicNumerals: forceWesternArabicNumerals,

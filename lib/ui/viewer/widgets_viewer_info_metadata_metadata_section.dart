@@ -16,7 +16,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 
 class MetadataSectionSliver extends StatefulWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
   final ValueNotifier<Map<String, MetadataDirectory>> metadataNotifier;
 
   const MetadataSectionSliver({
@@ -32,7 +32,7 @@ class MetadataSectionSliver extends StatefulWidget {
 class _MetadataSectionSliverState extends State<MetadataSectionSliver> {
   final ValueNotifier<String?> _expandedDirectoryNotifier = ValueNotifier(null);
 
-  AvesEntry get entry => widget.entry;
+  FmvEntry get entry => widget.entry;
 
   ValueNotifier<Map<String, MetadataDirectory>> get metadataNotifier => widget.metadataNotifier;
 
@@ -100,7 +100,7 @@ class _MetadataSectionSliverState extends State<MetadataSectionSliver> {
                   children: settings.useTvLayout
                       ? [
                           const SizedBox(height: 16),
-                          AvesOutlinedButton(
+                          FmvOutlinedButton(
                             label: MaterialLocalizations.of(context).moreButtonTooltip,
                             onPressed: () {
                               Navigator.maybeOf(context)?.push(

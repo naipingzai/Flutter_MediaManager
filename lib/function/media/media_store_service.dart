@@ -15,15 +15,15 @@ abstract class MediaStoreService {
   Future<int?> getGeneration();
 
   // knownEntries: map of contentId -> dateModifiedMillis
-  Stream<AvesEntry> getEntries(Map<int?, int?> knownEntries, {String? directory});
+  Stream<FmvEntry> getEntries(Map<int?, int?> knownEntries, {String? directory});
 
   // returns media URI
   Future<Uri?> scanFile(String path, String mimeType);
 }
 
 class PlatformMediaStoreService implements MediaStoreService {
-  static const _platform = AvesMethodChannel('com.naipingzai/flutter_media_view/media_store');
-  static final _stream = AvesStreamsChannel('com.naipingzai/flutter_media_view/media_store_stream');
+  static const _platform = FmvMethodChannel('com.naipingzai/flutter_media_view/media_store');
+  static final _stream = FmvStreamsChannel('com.naipingzai/flutter_media_view/media_store_stream');
 
   @override
   Future<List<int>> checkObsoleteContentIds(List<int?> knownContentIds) async {
@@ -77,7 +77,7 @@ class PlatformMediaStoreService implements MediaStoreService {
   }
 
   @override
-  Stream<AvesEntry> getEntries(Map<int?, int?> knownEntries, {String? directory}) {
+  Stream<FmvEntry> getEntries(Map<int?, int?> knownEntries, {String? directory}) {
     try {
       return _stream
           .receiveBroadcastStream(<String, Object?>{
@@ -87,8 +87,8 @@ class PlatformMediaStoreService implements MediaStoreService {
           .where((event) => event is Map)
           .map((event) {
             final fields = event as Map;
-            AvesEntry.normalizeMimeTypeFields(fields);
-            return AvesEntry.fromMap(fields);
+            FmvEntry.normalizeMimeTypeFields(fields);
+            return FmvEntry.fromMap(fields);
           });
     } on PlatformException catch (e, stack) {
       reportService.recordError(e, stack);

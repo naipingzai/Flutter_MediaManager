@@ -77,7 +77,7 @@ extension ExtraEntryActionView on EntryAction {
     final child = Icon(getIconData());
     return switch (this) {
       .debug => ShaderMask(
-        shaderCallback: AvesColorsData.debugGradient.createShader,
+        shaderCallback: FmvColorsData.debugGradient.createShader,
         blendMode: BlendMode.srcIn,
         child: child,
       ),

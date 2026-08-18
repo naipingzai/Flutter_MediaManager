@@ -4,7 +4,7 @@ import 'package:flutter_media_view_map/flutter_media_view_map.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
 
-abstract class AvesAvailability {
+abstract class FmvAvailability {
   Future<void> onNewIntent();
 
   void onResume();
@@ -18,7 +18,7 @@ abstract class AvesAvailability {
   List<EntryMapStyle> get mapStyles;
 }
 
-class LiveAvesAvailability implements AvesAvailability {
+class LiveAvesAvailability implements FmvAvailability {
   bool? _isConnected, _isLocked;
 
   LiveAvesAvailability() {

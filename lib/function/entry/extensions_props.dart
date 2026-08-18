@@ -13,7 +13,7 @@ import 'package:flutter_media_view/function/utils/android_file_utils.dart';
 import 'package:flutter_media_view/function/locale/aves_locale.dart';
 import 'package:flutter_media_view/function/utils/time_utils.dart';
 
-extension ExtraAvesEntryProps on AvesEntry {
+extension ExtraAvesEntryProps on FmvEntry {
   bool get isValid => !isMissingAtPath && sizeBytes != 0 && width > 0 && height > 0;
 
   // type
@@ -52,7 +52,7 @@ extension ExtraAvesEntryProps on AvesEntry {
 
   // text
 
-  String getResolutionText(AvesLocale locale) {
+  String getResolutionText(FmvLocale locale) {
     final dimensionFormatter = locale.numberFormat('0');
     final ws = dimensionFormatter.format(width);
     final hs = dimensionFormatter.format(height);

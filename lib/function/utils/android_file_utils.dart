@@ -86,7 +86,7 @@ class AndroidFileUtils {
     videoCapturesPaths = {
       // from Samsung
       pContext.join(dcimPath, 'Videocaptures'),
-      // from Aves
+      // from Fmv
       avesVideoCapturesPath,
     };
   }

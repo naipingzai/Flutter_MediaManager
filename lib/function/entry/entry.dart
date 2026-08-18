@@ -18,7 +18,7 @@ import 'package:leak_tracker/leak_tracker.dart';
 
 enum EntryDataType { basic, aspectRatio, catalog, address, references }
 
-class AvesEntry with AvesEntryBase {
+class FmvEntry with FmvEntryBase {
   @override
   int id;
 
@@ -46,16 +46,16 @@ class AvesEntry with AvesEntryBase {
   TrashDetails? trashDetails;
 
   // synthetic stack of related entries, e.g. burst shots or raw/developed pairs
-  List<AvesEntry>? stackedEntries;
+  List<FmvEntry>? stackedEntries;
 
-  Set<AvesEntry> toSelectableItems() => stackedEntries != null ? Set.unmodifiable(stackedEntries!) : {this};
+  Set<FmvEntry> toSelectableItems() => stackedEntries != null ? Set.unmodifiable(stackedEntries!) : {this};
 
   @override
   final AChangeNotifier visualChangeNotifier = .new();
 
   final AChangeNotifier metadataChangeNotifier = .new(), addressChangeNotifier = .new();
 
-  AvesEntry({
+  FmvEntry({
     required int? id,
     required this.uri,
     required String? path,
@@ -78,7 +78,7 @@ class AvesEntry with AvesEntryBase {
     if (kFlutterMemoryAllocationsEnabled) {
       LeakTracking.dispatchObjectCreated(
         library: 'aves',
-        className: '$AvesEntry',
+        className: '$FmvEntry',
         object: this,
       );
     }
@@ -88,7 +88,7 @@ class AvesEntry with AvesEntryBase {
     this.durationMillis = durationMillis;
   }
 
-  AvesEntry copyWith({
+  FmvEntry copyWith({
     int? id,
     String? uri,
     String? path,
@@ -98,11 +98,11 @@ class AvesEntry with AvesEntryBase {
     int? dateAddedSecs,
     int? dateModifiedMillis,
     int? origin,
-    List<AvesEntry>? stackedEntries,
+    List<FmvEntry>? stackedEntries,
   }) {
     final copyEntryId = id ?? this.id;
     final copied =
-        AvesEntry(
+        FmvEntry(
             id: copyEntryId,
             uri: uri ?? this.uri,
             path: path ?? this.path,
@@ -130,8 +130,8 @@ class AvesEntry with AvesEntryBase {
   }
 
   // from DB or platform source entry
-  factory AvesEntry.fromMap(Map map) {
-    return AvesEntry(
+  factory FmvEntry.fromMap(Map map) {
+    return FmvEntry(
       id: map[EntryFields.id] as int?,
       uri: map[EntryFields.uri] as String,
       path: map[EntryFields.path] as String?,

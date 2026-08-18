@@ -28,7 +28,7 @@ class MarkdownContainer extends StatelessWidget {
       child: Markdown(
         data: data,
         selectable: true,
-        onTapLink: (text, href, title) => AvesApp.launchUrl(href),
+        onTapLink: (text, href, title) => FmvApp.launchUrl(href),
         controller: scrollController,
         shrinkWrap: true,
       ),
@@ -57,7 +57,7 @@ class MarkdownContainer extends StatelessWidget {
         color: Themes.secondLayerColor(context),
         border: Border.all(
           color: Theme.of(context).dividerColor,
-          width: AvesBorder.curvedBorderWidth(context),
+          width: FmvBorder.curvedBorderWidth(context),
         ),
         borderRadius: const BorderRadius.all(Radius.circular(16)),
       ),

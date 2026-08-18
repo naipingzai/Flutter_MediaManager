@@ -20,7 +20,7 @@ class _WallpaperSettingsDialogState extends State<WallpaperSettingsDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AvesDialog(
+    return FmvDialog(
       scrollableContent: [
         RadioGroup<WallpaperTarget>(
           groupValue: _selectedTarget,

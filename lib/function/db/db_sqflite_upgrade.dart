@@ -416,7 +416,7 @@ class LocalMediaDbUpgrader {
   static Future<void> _upgradeFrom9(Database db) async {
     debugPrint('upgrading DB from v9');
 
-    // clean duplicates introduced before Aves v1.7.1
+    // clean duplicates introduced before Fmv v1.7.1
     final duplicatedContentIdRows = await db.query(entryTable, columns: ['contentId'], groupBy: 'contentId', having: 'COUNT(id) > 1 AND contentId IS NOT NULL');
     final duplicatedContentIds = duplicatedContentIdRows.map((row) => row['contentId'] as int?).nonNulls.toSet();
     final duplicateIds = <int>{};

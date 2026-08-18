@@ -30,7 +30,7 @@ class SearchPageRoute<T> extends PageRoute<T> {
     super.dispose();
   }
 
-  final AvesSearchDelegate delegate;
+  final FmvSearchDelegate delegate;
 
   // When `PredictiveBackPageTransitionsBuilder` is the transition used for page N-1,
   // N-1 slides away and page N-2 (if any) briefly flashes, while the search page is fading in.

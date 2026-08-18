@@ -8,7 +8,7 @@ import 'package:flutter/foundation.dart';
 import 'package:leak_tracker/leak_tracker.dart';
 
 class MultiPageController {
-  final AvesEntry entry;
+  final FmvEntry entry;
   final ValueNotifier<int?> pageNotifier = ValueNotifier(null);
 
   bool _disposed = false;

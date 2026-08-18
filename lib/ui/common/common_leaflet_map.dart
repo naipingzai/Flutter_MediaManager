@@ -18,7 +18,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
 
 class EntryLeafletMap<T> extends StatefulWidget {
-  final AvesMapController controller;
+  final FmvMapController controller;
   final Listenable clusterListenable;
   final ValueNotifier<ZoomedBounds> boundsNotifier;
   final EntryMapStyle style;

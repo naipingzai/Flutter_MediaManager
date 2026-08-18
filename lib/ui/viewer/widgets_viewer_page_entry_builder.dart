@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 
 class PageEntryBuilder extends StatelessWidget {
   final MultiPageController? multiPageController;
-  final Widget Function(AvesEntry? pageEntry) builder;
+  final Widget Function(FmvEntry? pageEntry) builder;
 
   const PageEntryBuilder({
     super.key,

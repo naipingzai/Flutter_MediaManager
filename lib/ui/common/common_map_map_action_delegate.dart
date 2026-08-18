@@ -16,7 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MapActionDelegate with FeedbackMixin {
-  final AvesMapController controller;
+  final FmvMapController controller;
 
   const MapActionDelegate(this.controller);
 
@@ -71,7 +71,7 @@ class MapActionDelegate with FeedbackMixin {
     }
 
     final collection = context.read<CollectionLens>();
-    final result = await showAvesDialog<(AvesEntry?, String)>(
+    final result = await showAvesDialog<(FmvEntry?, String)>(
       context: context,
       builder: (context) => AddShortcutDialog(
         defaultName: '',

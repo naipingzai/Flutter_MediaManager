@@ -4,7 +4,7 @@ import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/services.dart';
 
 class WallpaperService {
-  static const _platform = AvesMethodChannel('com.naipingzai/flutter_media_view/wallpaper');
+  static const _platform = FmvMethodChannel('com.naipingzai/flutter_media_view/wallpaper');
 
   static Future<bool> set(Uint8List bytes, WallpaperTarget target) async {
     try {

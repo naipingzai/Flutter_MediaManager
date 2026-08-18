@@ -16,7 +16,7 @@ import 'package:provider/provider.dart';
 
 class InteractiveTile extends StatelessWidget {
   final CollectionLens collection;
-  final AvesEntry entry;
+  final FmvEntry entry;
   final double thumbnailExtent;
   final TileLayout tileLayout;
   final ValueNotifier<bool>? isScrollingNotifier;
@@ -37,7 +37,7 @@ class InteractiveTile extends StatelessWidget {
         final appMode = context.read<ValueNotifier<AppMode>>().value;
         switch (appMode) {
           case .main:
-            final selection = context.read<Selection<AvesEntry>>();
+            final selection = context.read<Selection<FmvEntry>>();
             if (selection.isSelecting) {
               selection.toggleSelection(entry);
             } else {
@@ -46,11 +46,11 @@ class InteractiveTile extends StatelessWidget {
           case .pickSingleMediaExternal:
             IntentService.submitPickedItems([entry.uri]);
           case .pickMultipleMediaExternal:
-            final selection = context.read<Selection<AvesEntry>>();
+            final selection = context.read<Selection<FmvEntry>>();
             selection.toggleSelection(entry);
           case .pickFilteredMediaInternal:
           case .pickUnfilteredMediaInternal:
-            Navigator.maybeOf(context)?.pop<AvesEntry>(entry);
+            Navigator.maybeOf(context)?.pop<FmvEntry>(entry);
           default:
             break;
         }
@@ -72,7 +72,7 @@ class InteractiveTile extends StatelessWidget {
 }
 
 class Tile extends StatelessWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
   final double thumbnailExtent;
   final TileLayout tileLayout;
   final bool selectable, highlightable;

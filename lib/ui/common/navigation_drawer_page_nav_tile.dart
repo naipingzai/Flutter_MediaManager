@@ -9,7 +9,7 @@ class PageNavTile extends StatelessWidget {
   final Widget? leading;
   final Widget? title;
   final Widget? trailing;
-  final AvesNavItem navItem;
+  final FmvNavItem navItem;
   final bool Function()? isSelected;
 
   const PageNavTile({

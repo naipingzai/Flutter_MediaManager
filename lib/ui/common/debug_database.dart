@@ -24,7 +24,7 @@ class DebugAppDatabaseSection extends StatefulWidget {
 
 class _DebugAppDatabaseSectionState extends State<DebugAppDatabaseSection> with AutomaticKeepAliveClientMixin {
   late Future<int> _dbFileSizeLoader;
-  late Future<Set<AvesEntry>> _dbEntryLoader;
+  late Future<Set<FmvEntry>> _dbEntryLoader;
   late Future<Map<int?, int?>> _dbDateLoader;
   late Future<Set<CatalogMetadata>> _dbMetadataLoader;
   late Future<Set<AddressDetails>> _dbAddressLoader;
@@ -51,7 +51,7 @@ class _DebugAppDatabaseSectionState extends State<DebugAppDatabaseSection> with 
   Widget build(BuildContext context) {
     super.build(context);
 
-    return AvesExpansionTile(
+    return FmvExpansionTile(
       title: 'Database',
       children: [
         Padding(
@@ -68,7 +68,7 @@ class _DebugAppDatabaseSectionState extends State<DebugAppDatabaseSection> with 
                   return Row(
                     children: [
                       Expanded(
-                        child: Text('DB file size: ${formatFileSize(AvesLocale.ascii, snapshot.data!)}'),
+                        child: Text('DB file size: ${formatFileSize(FmvLocale.ascii, snapshot.data!)}'),
                       ),
                       const SizedBox(width: 8),
                       ElevatedButton(
@@ -79,7 +79,7 @@ class _DebugAppDatabaseSectionState extends State<DebugAppDatabaseSection> with 
                   );
                 },
               ),
-              FutureBuilder<Set<AvesEntry>>(
+              FutureBuilder<Set<FmvEntry>>(
                 future: _dbEntryLoader,
                 builder: (context, snapshot) {
                   if (snapshot.hasError) return Text(snapshot.error.toString());
@@ -87,7 +87,7 @@ class _DebugAppDatabaseSectionState extends State<DebugAppDatabaseSection> with 
                   if (snapshot.connectionState != ConnectionState.done) return const SizedBox();
 
                   final entries = snapshot.data!;
-                  final byOrigin = groupBy<AvesEntry, int>(entries, (entry) => entry.origin);
+                  final byOrigin = groupBy<FmvEntry, int>(entries, (entry) => entry.origin);
                   return Row(
                     children: [
                       Expanded(

@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 
 class ItemPicker extends StatelessWidget {
   final double extent;
-  final AvesEntry entry;
+  final FmvEntry entry;
   final GestureTapCallback? onTap;
 
   const ItemPicker({
@@ -31,7 +31,7 @@ class ItemPicker extends StatelessWidget {
         onTap: onTap,
         child: Container(
           decoration: BoxDecoration(
-            border: AvesBorder.border(context),
+            border: FmvBorder.border(context),
             borderRadius: imageBorderRadius,
           ),
           child: ClipRRect(
@@ -52,7 +52,7 @@ class ItemPicker extends StatelessWidget {
                     child: Container(
                       decoration: BoxDecoration(
                         color: Theme.of(context).isDark ? const Color(0xAA000000) : const Color(0xCCFFFFFF),
-                        border: AvesBorder.border(context),
+                        border: FmvBorder.border(context),
                         borderRadius: actionBoxBorderRadius,
                       ),
                       width: actionBoxDimension,

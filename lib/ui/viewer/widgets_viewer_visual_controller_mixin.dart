@@ -23,16 +23,16 @@ import 'package:provider/provider.dart';
 
 // state controllers/monitors
 mixin EntryViewControllerMixin<T extends StatefulWidget> on State<T> {
-  final Map<AvesEntry, VoidCallback> _metadataChangeListeners = {};
+  final Map<FmvEntry, VoidCallback> _metadataChangeListeners = {};
   final Map<MultiPageController, Future<void> Function()> _multiPageControllerPageListeners = {};
 
   bool? videoMutedOverride;
 
   bool get isViewingImage;
 
-  ValueNotifier<AvesEntry?> get entryNotifier;
+  ValueNotifier<FmvEntry?> get entryNotifier;
 
-  Future<void> initEntryControllers(AvesEntry? entry) async {
+  Future<void> initEntryControllers(FmvEntry? entry) async {
     if (!mounted || entry == null) return;
 
     if (entry.isVideo) {
@@ -46,7 +46,7 @@ mixin EntryViewControllerMixin<T extends StatefulWidget> on State<T> {
     entry.metadataChangeNotifier.addListener(listener);
   }
 
-  void cleanEntryControllers(AvesEntry? entry) {
+  void cleanEntryControllers(FmvEntry? entry) {
     if (entry == null) return;
 
     final listener = _metadataChangeListeners.remove(entry);
@@ -58,7 +58,7 @@ mixin EntryViewControllerMixin<T extends StatefulWidget> on State<T> {
     }
   }
 
-  void _onMetadataChanged(AvesEntry entry) {
+  void _onMetadataChanged(FmvEntry entry) {
     debugPrint('reinitialize controllers for entry=$entry because metadata changed');
     cleanEntryControllers(entry);
     initEntryControllers(entry);
@@ -129,7 +129,7 @@ mixin EntryViewControllerMixin<T extends StatefulWidget> on State<T> {
     return settings.enableMotionPhotoAutoPlay;
   }
 
-  Future<void> _initVideoController(AvesEntry entry) async {
+  Future<void> _initVideoController(FmvEntry entry) async {
     final controller = await context.read<VideoConductor>().getOrCreateController(entry);
     setState(() {});
 
@@ -139,7 +139,7 @@ mixin EntryViewControllerMixin<T extends StatefulWidget> on State<T> {
     }
   }
 
-  Future<void> _initMultiPageController(AvesEntry entry) async {
+  Future<void> _initMultiPageController(FmvEntry entry) async {
     if (!mounted) return;
 
     final multiPageController = context.read<MultiPageConductor>().getOrCreateController(entry);
@@ -191,7 +191,7 @@ mixin EntryViewControllerMixin<T extends StatefulWidget> on State<T> {
     }
   }
 
-  Future<void> _cleanMultiPageController(AvesEntry entry) async {
+  Future<void> _cleanMultiPageController(FmvEntry entry) async {
     final multiPageController = _multiPageControllerPageListeners.keys.firstWhereOrNull((v) => v.entry == entry);
     if (multiPageController != null) {
       final _onPageChange = _multiPageControllerPageListeners.remove(multiPageController);
@@ -201,7 +201,7 @@ mixin EntryViewControllerMixin<T extends StatefulWidget> on State<T> {
     }
   }
 
-  Future<void> _autoPlayVideo(AvesVideoController videoController, bool Function() isCurrent, {int? resumeTimeMillis}) async {
+  Future<void> _autoPlayVideo(FmvVideoController videoController, bool Function() isCurrent, {int? resumeTimeMillis}) async {
     // video decoding may fail or have initial artifacts when the player initializes
     // during this widget initialization (because of the page transition and hero animation?)
     // so we play after a delay for increased stability

@@ -22,7 +22,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ViewerDetailOverlay extends StatefulWidget {
-  final List<AvesEntry> entries;
+  final List<FmvEntry> entries;
   final int index;
   final bool hasCollection;
   final MultiPageController? multiPageController;
@@ -45,7 +45,7 @@ class ViewerDetailOverlay extends StatefulWidget {
 
 class _ViewerDetailOverlayState extends State<ViewerDetailOverlay> {
   late Future<OverlayMetadata> _detailLoader;
-  AvesEntry? _requestEntry;
+  FmvEntry? _requestEntry;
   OverlayMetadata _lastDetails = const OverlayMetadata();
 
   @override
@@ -53,7 +53,7 @@ class _ViewerDetailOverlayState extends State<ViewerDetailOverlay> {
     super.didUpdateWidget(oldWidget);
   }
 
-  void _updateDetailLoader(AvesEntry? entry) {
+  void _updateDetailLoader(FmvEntry? entry) {
     if (entry == null) {
       _detailLoader = SynchronousFuture(const OverlayMetadata());
     } else {
@@ -78,7 +78,7 @@ class _ViewerDetailOverlayState extends State<ViewerDetailOverlay> {
     final mainEntry = mainEntryIndex < collectionSize ? collectionEntries[mainEntryIndex] : null;
     final multiPageController = widget.multiPageController;
 
-    Widget _buildContent({AvesEntry? pageEntry}) {
+    Widget _buildContent({FmvEntry? pageEntry}) {
       final contentEntry = pageEntry ?? mainEntry;
       if (contentEntry != _requestEntry) {
         _updateDetailLoader(contentEntry);
@@ -118,7 +118,7 @@ class _ViewerDetailOverlayState extends State<ViewerDetailOverlay> {
 }
 
 class ViewerDetailOverlayContent extends StatelessWidget {
-  final AvesEntry pageEntry;
+  final FmvEntry pageEntry;
   final OverlayMetadata details;
   final String? position;
   final double availableWidth;

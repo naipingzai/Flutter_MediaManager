@@ -23,7 +23,7 @@ mixin CastMixin {
 
   bool get isCasting => _renderer != null && _mediaServer != null;
 
-  Future<void> initCast(BuildContext context, List<AvesEntry> entries) async {
+  Future<void> initCast(BuildContext context, List<FmvEntry> entries) async {
     await stopCast();
 
     final renderer = await _selectRenderer(context);
@@ -83,7 +83,7 @@ mixin CastMixin {
     );
   }
 
-  Future<void> castEntry(AvesEntry entry) async {
+  Future<void> castEntry(FmvEntry entry) async {
     final server = _mediaServer;
     final renderer = _renderer;
     if (server == null || renderer == null) return;
@@ -107,7 +107,7 @@ mixin CastMixin {
     return server != null ? 'http://${server.address.host}:${server.port}' : null;
   }
 
-  Future<Response> _sendEntry(AvesEntry entry) async {
+  Future<Response> _sendEntry(FmvEntry entry) async {
     // TODO TLAD [cast] providing downscaled versions is suitable when properly serving with `MediaServer`, as the renderer can pick what is best
     final bytes = await mediaFetchService.getOriginalBytes(entry);
 

@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class VideoControlRow extends StatelessWidget {
-  final AvesVideoController? controller;
+  final FmvVideoController? controller;
   final Animation<double> scale;
   final bool canOpenVideoPlayer;
   final Function(EntryAction value) onActionSelected;
@@ -61,7 +61,7 @@ class VideoControlRow extends StatelessWidget {
 }
 
 class _VideoOverlayButton extends StatelessWidget {
-  final AvesVideoController? controller;
+  final FmvVideoController? controller;
   final Animation<double> scale;
   final bool canOpenVideoPlayer;
   final Function(EntryAction value) onActionSelected;

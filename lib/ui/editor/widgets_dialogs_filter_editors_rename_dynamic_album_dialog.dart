@@ -41,7 +41,7 @@ class _RenameDynamicAlbumDialogState extends State<RenameDynamicAlbumDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AvesDialog(
+    return FmvDialog(
       content: ValueListenableBuilder<bool>(
         valueListenable: _existsNotifier,
         builder: (context, exists, child) {

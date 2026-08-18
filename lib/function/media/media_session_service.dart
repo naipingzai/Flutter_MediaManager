@@ -14,8 +14,8 @@ abstract class MediaSessionService {
   Stream<MediaCommandEvent> get mediaCommands;
 
   Future<void> update({
-    required AvesEntry entry,
-    required AvesVideoController controller,
+    required FmvEntry entry,
+    required FmvVideoController controller,
     required bool canSkipToNext,
     required bool canSkipToPrevious,
   });
@@ -24,7 +24,7 @@ abstract class MediaSessionService {
 }
 
 class PlatformMediaSessionService implements MediaSessionService, Disposable {
-  static const _sessionChannel = AvesMethodChannel(AvesChannels.mediaSession);
+  static const _sessionChannel = FmvMethodChannel(FmvChannels.mediaSession);
 
   final Set<StreamSubscription> _subscriptions = {};
   final EventChannel _commandChannel = const OptionalEventChannel('com.naipingzai/flutter_media_view/media_command');
@@ -46,8 +46,8 @@ class PlatformMediaSessionService implements MediaSessionService, Disposable {
 
   @override
   Future<void> update({
-    required AvesEntry entry,
-    required AvesVideoController controller,
+    required FmvEntry entry,
+    required FmvVideoController controller,
     required bool canSkipToNext,
     required bool canSkipToPrevious,
   }) async {

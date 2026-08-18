@@ -20,9 +20,9 @@ import 'package:flutter/foundation.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:xml/xml.dart';
 
-extension ExtraAvesEntryMetadataEdition on AvesEntry {
-  static final _iso6709LatitudeFormatter = AvesLocale.ascii.numberFormat('00.0000');
-  static final _iso6709LongitudeFormatter = AvesLocale.ascii.numberFormat('000.0000');
+extension ExtraAvesEntryMetadataEdition on FmvEntry {
+  static final _iso6709LatitudeFormatter = FmvLocale.ascii.numberFormat('00.0000');
+  static final _iso6709LongitudeFormatter = FmvLocale.ascii.numberFormat('000.0000');
 
   Future<Set<EntryDataType>> editDate(DateModifier userModifier) async {
     final dataTypes = <EntryDataType>{};
@@ -487,11 +487,11 @@ extension ExtraAvesEntryMetadataEdition on AvesEntry {
 
     final editedXmpString = await XMP.edit(
       xmpString,
-      'Aves v${device.packageVersion}',
+      'Fmv v${device.packageVersion}',
       apply,
     );
 
-    final editedXmp = AvesXmp(xmpString: editedXmpString, extendedXmpString: extendedXmpString);
+    final editedXmp = FmvXmp(xmpString: editedXmpString, extendedXmpString: extendedXmpString);
     return {
       xmpCoreKey: editedXmp.xmpString,
       xmpExtendedKey: editedXmp.extendedXmpString,

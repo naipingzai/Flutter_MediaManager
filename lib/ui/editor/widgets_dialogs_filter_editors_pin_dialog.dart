@@ -30,7 +30,7 @@ class _PinDialogState extends State<PinDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AvesDialog(
+    return FmvDialog(
       content: Column(
         mainAxisSize: .min,
         children: [

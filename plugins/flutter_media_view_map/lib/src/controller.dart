@@ -5,13 +5,13 @@ import 'package:flutter/foundation.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:leak_tracker/leak_tracker.dart';
 
-class AvesMapController {
-  final StreamController<AvesMapEvent> _streamController = StreamController.broadcast();
+class FmvMapController {
+  final StreamController<FmvMapEvent> _streamController = StreamController.broadcast();
   ZoomedBounds? _idleBounds;
 
   ZoomedBounds? get idleBounds => _idleBounds;
 
-  Stream<AvesMapEvent> get _events => _streamController.stream;
+  Stream<FmvMapEvent> get _events => _streamController.stream;
 
   Stream<MapControllerMoveEvent> get moveCommands => _events.where((event) => event is MapControllerMoveEvent).cast<MapControllerMoveEvent>();
 
@@ -23,11 +23,11 @@ class AvesMapController {
 
   Stream<MapMarkerLocationChangeEvent> get markerLocationChanges => _events.where((event) => event is MapMarkerLocationChangeEvent).cast<MapMarkerLocationChangeEvent>();
 
-  AvesMapController() {
+  FmvMapController() {
     if (kFlutterMemoryAllocationsEnabled) {
       LeakTracking.dispatchObjectCreated(
         library: 'aves',
-        className: '$AvesMapController',
+        className: '$FmvMapController',
         object: this,
       );
     }
@@ -54,26 +54,26 @@ class AvesMapController {
   void notifyMarkerLocationChange() => _streamController.add(MapMarkerLocationChangeEvent());
 }
 
-abstract class AvesMapEvent {}
+abstract class FmvMapEvent {}
 
-class MapControllerMoveEvent extends AvesMapEvent {
+class MapControllerMoveEvent extends FmvMapEvent {
   final LatLng latLng;
 
   MapControllerMoveEvent(this.latLng);
 }
 
-class MapControllerZoomEvent extends AvesMapEvent {
+class MapControllerZoomEvent extends FmvMapEvent {
   final double delta;
 
   MapControllerZoomEvent(this.delta);
 }
 
-class MapControllerRotationResetEvent extends AvesMapEvent {}
+class MapControllerRotationResetEvent extends FmvMapEvent {}
 
-class MapIdleUpdate extends AvesMapEvent {
+class MapIdleUpdate extends FmvMapEvent {
   final ZoomedBounds bounds;
 
   MapIdleUpdate(this.bounds);
 }
 
-class MapMarkerLocationChangeEvent extends AvesMapEvent {}
+class MapMarkerLocationChangeEvent extends FmvMapEvent {}

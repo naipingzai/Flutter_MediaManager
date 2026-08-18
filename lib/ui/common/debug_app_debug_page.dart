@@ -45,7 +45,7 @@ class AppDebugPage extends StatelessWidget {
     final animations = context.select<Settings, AccessibilityAnimations>((v) => v.accessibilityAnimations);
     return Directionality(
       textDirection: TextDirection.ltr,
-      child: AvesScaffold(
+      child: FmvScaffold(
         appBar: AppBar(
           title: const Text('Debug'),
           actions: [
@@ -73,7 +73,7 @@ class AppDebugPage extends StatelessWidget {
             ),
           ],
         ),
-        body: AvesPopScope(
+        body: FmvPopScope(
           handlers: [tvNavigationPopHandler],
           child: SafeArea(
             bottom: false,

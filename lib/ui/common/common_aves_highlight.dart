@@ -5,7 +5,7 @@ import 'package:highlight/highlight.dart' show highlight, Node;
 // TODO TLAD use the TextSpan getter when this is fixed: https://github.com/pd4d10/highlight/issues/6
 
 /// Highlight Flutter Widget
-class AvesHighlightView extends StatelessWidget {
+class FmvHighlightView extends StatelessWidget {
   /// The original code to be highlighted
   final String source;
 
@@ -29,7 +29,7 @@ class AvesHighlightView extends StatelessWidget {
   /// Specify text styles such as font family and font size
   final TextStyle? textStyle;
 
-  AvesHighlightView({
+  FmvHighlightView({
     super.key,
     required String input,
     this.language,

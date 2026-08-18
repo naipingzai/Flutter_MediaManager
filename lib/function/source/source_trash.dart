@@ -40,8 +40,8 @@ mixin TrashMixin on SourceBase {
     return await opCompleter.future;
   }
 
-  Future<Set<AvesEntry>> recoverUntrackedTrashItems() async {
-    final newEntries = <AvesEntry>{};
+  Future<Set<FmvEntry>> recoverUntrackedTrashItems() async {
+    final newEntries = <FmvEntry>{};
 
     final knownPaths = allEntries.map((v) => v.trashDetails?.path).nonNulls.toSet();
     final untrackedPaths = await storageService.getUntrackedTrashPaths(knownPaths);

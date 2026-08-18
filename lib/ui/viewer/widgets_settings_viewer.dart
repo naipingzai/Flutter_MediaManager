@@ -23,7 +23,7 @@ class ViewerSection extends SettingsSection {
   @override
   Widget icon(BuildContext context) => SettingsTileLeading(
     icon: AIcons.image,
-    color: context.select<AvesColorsData, Color>((v) => v.image),
+    color: context.select<FmvColorsData, Color>((v) => v.image),
   );
 
   @override

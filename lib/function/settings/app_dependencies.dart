@@ -12,7 +12,7 @@ class Dependencies {
 
   static const List<Dependency> androidDependencies = [
     Dependency(
-      name: 'AndroidSVG (Aves fork)',
+      name: 'AndroidSVG (Fmv fork)',
       license: apache2,
       sourceUrl: 'https://github.com/deckerst/androidsvg',
     ),
@@ -37,17 +37,17 @@ class Dependencies {
       sourceUrl: 'https://github.com/drewnoakes/metadata-extractor',
     ),
     Dependency(
-      name: 'MP4 Parser (Aves fork)',
+      name: 'MP4 Parser (Fmv fork)',
       license: apache2,
       sourceUrl: 'https://github.com/deckerst/mp4parser',
     ),
     Dependency(
-      name: 'PixyMeta Android (Aves fork)',
+      name: 'PixyMeta Android (Fmv fork)',
       license: eclipse1,
       sourceUrl: 'https://github.com/deckerst/pixymeta-android',
     ),
     Dependency(
-      name: 'Tiff Bitmap Factory (Aves fork)',
+      name: 'Tiff Bitmap Factory (Fmv fork)',
       license: mit,
       sourceUrl: 'https://github.com/deckerst/Android-TiffBitmapFactory',
     ),
@@ -125,7 +125,7 @@ class Dependencies {
       sourceUrl: 'https://github.com/tekartik/sqflite',
     ),
     Dependency(
-      name: 'Streams Channel (Aves fork)',
+      name: 'Streams Channel (Fmv fork)',
       license: apache2,
       sourceUrl: 'https://github.com/naipingzai/Flutter_MediaManager',
     ),
@@ -178,7 +178,7 @@ class Dependencies {
 
   static const List<Dependency> flutterPackages = [
     Dependency(
-      name: 'Community Charts (Aves fork)',
+      name: 'Community Charts (Fmv fork)',
       license: apache2,
       sourceUrl: 'https://github.com/deckerst/flutter_community_charts',
     ),
@@ -193,7 +193,7 @@ class Dependencies {
       sourceUrl: 'https://github.com/benPesso/flutter_decorated_icon',
     ),
     Dependency(
-      name: 'Expansion Tile Card (Aves fork)',
+      name: 'Expansion Tile Card (Fmv fork)',
       license: bsd3,
       sourceUrl: 'https://github.com/deckerst/expansion_tile_card',
     ),
@@ -218,7 +218,7 @@ class Dependencies {
       sourceUrl: 'https://github.com/foresightmobile/flutter_markdown_plus',
     ),
     Dependency(
-      name: 'Flutter Staggered Animations (Aves fork)',
+      name: 'Flutter Staggered Animations (Fmv fork)',
       license: mit,
       sourceUrl: 'https://github.com/deckerst/flutter_staggered_animations',
     ),
@@ -243,12 +243,12 @@ class Dependencies {
       sourceUrl: 'https://github.com/timmaffett/material_symbols_icons',
     ),
     Dependency(
-      name: 'Overlay Support (Aves fork)',
+      name: 'Overlay Support (Fmv fork)',
       license: apache2,
       sourceUrl: 'https://github.com/deckerst/overlay_support',
     ),
     Dependency(
-      name: 'Panorama (Aves fork)',
+      name: 'Panorama (Fmv fork)',
       license: apache2,
       sourceUrl: 'https://github.com/naipingzai/Flutter_MediaManager',
     ),
@@ -258,7 +258,7 @@ class Dependencies {
       sourceUrl: 'https://github.com/qwert2603/pattern_lock',
     ),
     Dependency(
-      name: 'Percent Indicator (Aves fork)',
+      name: 'Percent Indicator (Fmv fork)',
       license: bsd2,
       sourceUrl: 'https://github.com/deckerst/flutter_percent_indicator',
     ),

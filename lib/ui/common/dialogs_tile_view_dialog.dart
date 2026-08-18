@@ -83,7 +83,7 @@ class _TileViewDialogState<S, G, L> extends State<TileViewDialog<S, G, L>> with 
   Widget build(BuildContext context) {
     final l10n = context.l10n;
 
-    return AvesDialog(
+    return FmvDialog(
       scrollableContent: [
         _buildSection(
           icon: AIcons.sort,
@@ -99,13 +99,13 @@ class _TileViewDialogState<S, G, L> extends State<TileViewDialog<S, G, L>> with 
             _selectedSort = v;
             _reverseSort = false;
           },
-          bottom: _selectedSort != null ? AvesCaption(widget.sortOrder(_selectedSort as S, _reverseSort)) : null,
+          bottom: _selectedSort != null ? FmvCaption(widget.sortOrder(_selectedSort as S, _reverseSort)) : null,
         ),
         AnimatedSwitcher(
           duration: context.read<DurationsData>().formTransition,
           switchInCurve: Curves.easeInOutCubic,
           switchOutCurve: Curves.easeInOutCubic,
-          transitionBuilder: AvesTransitions.formTransitionBuilder,
+          transitionBuilder: FmvTransitions.formTransitionBuilder,
           child: _buildSection(
             show: canSection,
             icon: AIcons.section,

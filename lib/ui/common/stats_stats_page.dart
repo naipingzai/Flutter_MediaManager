@@ -40,7 +40,7 @@ import 'package:provider/provider.dart';
 class StatsPage extends StatefulWidget {
   static const routeName = '/collection/stats';
 
-  final Set<AvesEntry> entries;
+  final Set<FmvEntry> entries;
   final CollectionSource source;
   final CollectionLens? parentCollection;
 
@@ -63,7 +63,7 @@ class _StatsPageState extends State<StatsPage> with FeedbackMixin, VaultAwareMix
   int _totalSizeBytes = 0;
   int _totalDurationMillis = 0;
 
-  Set<AvesEntry> get entries => widget.entries;
+  Set<FmvEntry> get entries => widget.entries;
 
   @override
   void initState() {
@@ -138,7 +138,7 @@ class _StatsPageState extends State<StatsPage> with FeedbackMixin, VaultAwareMix
           } else {
             final chartAnimationDuration = context.read<DurationsData>().chartTransition;
 
-            final byMimeTypes = groupBy<AvesEntry, String>(entries, (entry) => entry.mimeType).map<String, int>((k, v) => MapEntry(k, v.length));
+            final byMimeTypes = groupBy<FmvEntry, String>(entries, (entry) => entry.mimeType).map<String, int>((k, v) => MapEntry(k, v.length));
             final imagesByMimeTypes = Map.fromEntries(byMimeTypes.entries.where((kv) => kv.key.startsWith('image')));
             final videoByMimeTypes = Map.fromEntries(byMimeTypes.entries.where((kv) => kv.key.startsWith('video')));
             final mimeDonuts = Wrap(
@@ -208,7 +208,7 @@ class _StatsPageState extends State<StatsPage> with FeedbackMixin, VaultAwareMix
           }
         }
 
-        return AvesScaffold(
+        return FmvScaffold(
           appBar: AppBar(
             automaticallyImplyLeading: !useTvLayout,
             title: Text(l10n.statsPageTitle),
@@ -399,7 +399,7 @@ class _StatsPageState extends State<StatsPage> with FeedbackMixin, VaultAwareMix
 }
 
 class _LocationIndicator extends StatelessWidget {
-  final Set<AvesEntry> entries;
+  final Set<FmvEntry> entries;
 
   const _LocationIndicator({required this.entries});
 

@@ -38,7 +38,7 @@ class _DebugOSAppSectionState extends State<DebugOSAppSection> with AutomaticKee
   Widget build(BuildContext context) {
     super.build(context);
 
-    return AvesExpansionTile(
+    return FmvExpansionTile(
       title: 'OS Apps',
       children: [
         Padding(
@@ -64,7 +64,7 @@ class _DebugOSAppSectionState extends State<DebugOSAppSection> with AutomaticKee
                         }
                         final colorLoader = _colorLoaders.putIfAbsent(
                           package.packageName,
-                          () async => await AvesColorsData.appColorFromPackageName(package.packageName),
+                          () async => await FmvColorsData.appColorFromPackageName(package.packageName),
                         );
                         return Text.rich(
                           TextSpan(

@@ -11,7 +11,7 @@ import 'package:country_code/country_code.dart';
 import 'package:flutter/foundation.dart';
 import 'package:latlong2/latlong.dart';
 
-extension ExtraAvesEntryLocation on AvesEntry {
+extension ExtraAvesEntryLocation on FmvEntry {
   static final _invalidLocalityPattern = RegExp(r'^[-+\dA-Z]+$');
 
   LatLng? get latLng => hasGps ? LatLng(catalogMetadata!.latitude!, catalogMetadata!.longitude!) : null;
@@ -19,7 +19,7 @@ extension ExtraAvesEntryLocation on AvesEntry {
   Future<void> locate({
     required bool background,
     required bool force,
-    required AvesLocale geocoderLocale,
+    required FmvLocale geocoderLocale,
   }) async {
     if (hasGps) {
       await _locateCountry(force: force);
@@ -48,7 +48,7 @@ extension ExtraAvesEntryLocation on AvesEntry {
   }
 
   // full reverse geocoding, requiring Play Services and some connectivity
-  Future<void> locatePlace({required bool background, required bool force, required AvesLocale geocoderLocale}) async {
+  Future<void> locatePlace({required bool background, required bool force, required FmvLocale geocoderLocale}) async {
     if (!hasGps || (hasFineAddress && !force)) return;
     try {
       Future<List<Address>> call() => geocodingService.getAddress(latLng!, geocoderLocale);
@@ -83,7 +83,7 @@ extension ExtraAvesEntryLocation on AvesEntry {
     }
   }
 
-  Future<String?> findAddressLine({required AvesLocale geocoderLocale}) async {
+  Future<String?> findAddressLine({required FmvLocale geocoderLocale}) async {
     if (!hasGps) return null;
 
     try {

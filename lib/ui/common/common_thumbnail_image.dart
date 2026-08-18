@@ -18,7 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ThumbnailImage extends StatefulWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
   final double extent, devicePixelRatio;
   final bool isMosaic, progressive;
   final BoxFit? fit;
@@ -60,7 +60,7 @@ class _ThumbnailImageState extends State<ThumbnailImage> {
   Object? _lastException;
   late final ImageStreamListener _streamListener;
 
-  AvesEntry get entry => widget.entry;
+  FmvEntry get entry => widget.entry;
 
   double get extent => widget.extent;
 

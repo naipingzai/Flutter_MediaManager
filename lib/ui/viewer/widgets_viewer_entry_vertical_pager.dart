@@ -31,13 +31,13 @@ import 'package:provider/provider.dart';
 
 class ViewerVerticalPageView extends StatefulWidget {
   final CollectionLens? collection;
-  final ValueNotifier<AvesEntry?> entryNotifier;
+  final ValueNotifier<FmvEntry?> entryNotifier;
   final ViewerController viewerController;
   final Animation<double> overlayOpacity;
   final PageController verticalPager, horizontalPager;
   final void Function(int page) onVerticalPageChanged, onHorizontalPageChanged;
   final VoidCallback onImagePageRequested;
-  final void Function(AvesEntry mainEntry, AvesEntry? pageEntry) onViewDisposed;
+  final void Function(FmvEntry mainEntry, FmvEntry? pageEntry) onViewDisposed;
 
   // critically damped spring (ratio = 1) a bit stiffer than `ScrollPhysics._kDefaultSpring`
   static final spring = SpringDescription.withDampingRatio(
@@ -71,14 +71,14 @@ class _ViewerVerticalPageViewState extends State<ViewerVerticalPageView> {
   final ValueNotifier<double> _infoPageInViewNotifier = ValueNotifier(0);
   final ValueNotifier<bool> _isImageFocusedNotifier = ValueNotifier(true);
   Timer? _verticalScrollMonitoringTimer;
-  AvesEntry? _oldEntry;
+  FmvEntry? _oldEntry;
   Future<double>? _systemBrightness;
 
   CollectionLens? get collection => widget.collection;
 
   bool get hasCollection => collection != null;
 
-  AvesEntry? get entry => widget.entryNotifier.value;
+  FmvEntry? get entry => widget.entryNotifier.value;
 
   PageController get verticalPager => widget.verticalPager;
 
@@ -92,7 +92,7 @@ class _ViewerVerticalPageViewState extends State<ViewerVerticalPageView> {
     _registerWidget(widget);
 
     if (settings.maxBrightness == MaxBrightness.viewerOnly) {
-      _systemBrightness = AvesApp.screenBrightness?.system;
+      _systemBrightness = FmvApp.screenBrightness?.system;
     }
   }
 
@@ -315,7 +315,7 @@ class _ViewerVerticalPageViewState extends State<ViewerVerticalPageView> {
   void _onEntryActionIntent(EntryAction action) {
     final mainEntry = entry;
     if (mainEntry != null) {
-      AvesEntry? pageEntry;
+      FmvEntry? pageEntry;
       final multiPageController = context.read<MultiPageConductor>().getController(mainEntry);
       if (multiPageController != null) {
         pageEntry = multiPageController.info?.getPageEntryByIndex(multiPageController.page);
@@ -358,7 +358,7 @@ class _ViewerVerticalPageViewState extends State<ViewerVerticalPageView> {
     if (settings.maxBrightness == MaxBrightness.viewerOnly) {
       _systemBrightness?.then((system) {
         final value = lerpDouble(maximumBrightness, system, ((1 - page).abs() * 2).clamp(0, 1))!;
-        AvesApp.screenBrightness?.setApplicationScreenBrightness(value);
+        FmvApp.screenBrightness?.setApplicationScreenBrightness(value);
       });
     }
 

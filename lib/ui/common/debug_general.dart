@@ -31,7 +31,7 @@ class _DebugGeneralSectionState extends State<DebugGeneralSection> with Automati
     final withAddress = withGps.where((entry) => entry.hasAddress);
     final withFineAddress = withGps.where((entry) => entry.hasFineAddress);
 
-    return AvesExpansionTile(
+    return FmvExpansionTile(
       title: 'General',
       children: [
         const Padding(
@@ -47,9 +47,9 @@ class _DebugGeneralSectionState extends State<DebugGeneralSection> with Automati
           label: '$timeDilation',
         ),
         SwitchListTile(
-          value: AvesMethodChannel.kDebug,
-          onChanged: (v) => setState(() => AvesMethodChannel.kDebug = v),
-          title: const Text('Trace Aves platform channels'),
+          value: FmvMethodChannel.kDebug,
+          onChanged: (v) => setState(() => FmvMethodChannel.kDebug = v),
+          title: const Text('Trace Fmv platform channels'),
         ),
         SwitchListTile(
           value: _taskQueueOverlayEntry != null,

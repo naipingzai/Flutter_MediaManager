@@ -87,8 +87,8 @@ class _OverlayCoordinateFilterChipState extends State<OverlayCoordinateFilterChi
               padding: EdgeInsets.all(widget.padding),
               child: BlurredRRect.all(
                 enabled: blurred,
-                borderRadius: AvesFilterChip.defaultRadius,
-                child: AvesFilterChip(
+                borderRadius: FmvFilterChip.defaultRadius,
+                child: FmvFilterChip(
                   filter: filter,
                   useFilterColor: false,
                   background: Themes.overlayBackgroundColor(brightness: theme.brightness, blurred: blurred),

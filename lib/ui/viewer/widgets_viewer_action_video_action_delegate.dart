@@ -48,7 +48,7 @@ class VideoActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAwareMix
     }
   }
 
-  Future<void> onActionSelected(BuildContext context, AvesEntry entry, AvesVideoController controller, EntryAction action) async {
+  Future<void> onActionSelected(BuildContext context, FmvEntry entry, FmvVideoController controller, EntryAction action) async {
     // make sure overlay is not disappearing when selecting an action
     const ToggleOverlayNotification(visible: true).dispatch(context);
 
@@ -84,7 +84,7 @@ class VideoActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAwareMix
     }
   }
 
-  Future<void> _captureFrame(BuildContext context, AvesEntry entry, AvesVideoController controller) async {
+  Future<void> _captureFrame(BuildContext context, FmvEntry entry, FmvVideoController controller) async {
     final destinationAlbum = androidFileUtils.avesVideoCapturesPath;
     final positionMillis = controller.currentPosition;
     final Map<String, dynamic> newFields = {};
@@ -154,7 +154,7 @@ class VideoActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAwareMix
     }
   }
 
-  Future<void> _showTrackSelectionDialog(BuildContext context, AvesVideoController controller) async {
+  Future<void> _showTrackSelectionDialog(BuildContext context, FmvVideoController controller) async {
     final tracks = controller.tracks;
     final currentSelectedTracks = await Future.wait(MediaTrackType.values.map(controller.getSelectedTrack));
 
@@ -179,7 +179,7 @@ class VideoActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAwareMix
     );
   }
 
-  Future<void> _showSpeedDialog(BuildContext context, AvesVideoController controller) async {
+  Future<void> _showSpeedDialog(BuildContext context, FmvVideoController controller) async {
     final newSpeed = await showAvesDialog<double>(
       context: context,
       builder: (context) => VideoSpeedDialog(
@@ -194,7 +194,7 @@ class VideoActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAwareMix
     await controller.setSpeed(newSpeed);
   }
 
-  Future<void> _showSettings(BuildContext context, AvesVideoController controller) async {
+  Future<void> _showSettings(BuildContext context, FmvVideoController controller) async {
     int? resumePosition;
     if (controller.isPlaying) {
       resumePosition = controller.currentPosition;
@@ -214,7 +214,7 @@ class VideoActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAwareMix
     }
   }
 
-  Future<void> _togglePlayPause(BuildContext context, AvesVideoController controller) async {
+  Future<void> _togglePlayPause(BuildContext context, FmvVideoController controller) async {
     if (!context.mounted) return;
 
     if (controller.isPlaying) {

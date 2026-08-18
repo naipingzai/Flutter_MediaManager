@@ -24,8 +24,8 @@ class SettingsDefaults {
 
   // display
   static const displayRefreshRateMode = DisplayRefreshRateMode.auto;
-  static const themeBrightness = AvesThemeBrightness.system;
-  static const themeColorMode = AvesThemeColorMode.polychrome;
+  static const themeBrightness = FmvThemeBrightness.system;
+  static const themeColorMode = FmvThemeColorMode.polychrome;
   static const enableDynamicColor = false;
   static const enableBlurEffect = true; // `enableBlurEffect` has a contextual default value
   static const maxBrightness = MaxBrightness.never;
@@ -48,10 +48,10 @@ class SettingsDefaults {
     ExplorerPage.routeName,
   ];
   static final bottomNavigationActions = [
-    const AvesNavItem(route: CollectionPage.routeName),
-    AvesNavItem(route: CollectionPage.routeName, filters: {MimeFilter.video}),
-    AvesNavItem(route: CollectionPage.routeName, filters: {FavouriteFilter.instance}),
-    const AvesNavItem(route: AlbumListPage.routeName),
+    const FmvNavItem(route: CollectionPage.routeName),
+    FmvNavItem(route: CollectionPage.routeName, filters: {MimeFilter.video}),
+    FmvNavItem(route: CollectionPage.routeName, filters: {FavouriteFilter.instance}),
+    const FmvNavItem(route: AlbumListPage.routeName),
   ];
 
   // collection

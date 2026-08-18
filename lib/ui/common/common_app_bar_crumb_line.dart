@@ -25,7 +25,7 @@ class CrumbLine<T> extends StatefulWidget {
   @override
   State<CrumbLine<T>> createState() => _CrumbLineState<T>();
 
-  static double getPreferredHeight(TextScaler textScaler) => max(AvesFilterChip.minChipHeight, textScaler.scale(22)) + padding.vertical;
+  static double getPreferredHeight(TextScaler textScaler) => max(FmvFilterChip.minChipHeight, textScaler.scale(22)) + padding.vertical;
 }
 
 class _CrumbLineState<T> extends State<CrumbLine<T>> {

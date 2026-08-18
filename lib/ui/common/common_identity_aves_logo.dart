@@ -5,10 +5,10 @@ import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class AvesLogo extends StatelessWidget {
+class FmvLogo extends StatelessWidget {
   final double size;
 
-  const AvesLogo({
+  const FmvLogo({
     super.key,
     required this.size,
   });
@@ -19,9 +19,9 @@ class AvesLogo extends StatelessWidget {
 
     Widget child = CustomPaint(
       size: Size(size / 1.4, size / 1.4),
-      painter: AvesLogoPainter(),
+      painter: FmvLogoPainter(),
     );
-    if (context.select<Settings, bool>((v) => v.themeColorMode == AvesThemeColorMode.monochrome)) {
+    if (context.select<Settings, bool>((v) => v.themeColorMode == FmvThemeColorMode.monochrome)) {
       final tint = Color.lerp(theme.colorScheme.primary, Colors.white, .5)!;
       child = ColorFiltered(
         colorFilter: ColorFilter.mode(tint, BlendMode.modulate),
@@ -37,14 +37,14 @@ class AvesLogo extends StatelessWidget {
       radius: size / 2,
       child: CircleAvatar(
         backgroundColor: Colors.white,
-        radius: size / 2 - AvesBorder.curvedBorderWidth(context),
+        radius: size / 2 - FmvBorder.curvedBorderWidth(context),
         child: child,
       ),
     );
   }
 }
 
-class AvesLogoPainter extends CustomPainter {
+class FmvLogoPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final dim = size.width / 100;

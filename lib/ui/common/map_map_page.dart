@@ -47,7 +47,7 @@ class MapPage extends StatelessWidget {
   final CollectionLens collection;
   final LatLng? initialLocation;
   final double? initialZoom;
-  final AvesEntry? initialEntry;
+  final FmvEntry? initialEntry;
   final MappedGeoTiff? overlayEntry;
   final List<GeoTrack>? tracks;
 
@@ -72,7 +72,7 @@ class MapPage extends StatelessWidget {
         // opening collection can be used by map actions
         ChangeNotifierProvider<CollectionLens>.value(value: collection),
       ],
-      child: AvesScaffold(
+      child: FmvScaffold(
         body: SafeArea(
           left: false,
           top: false,
@@ -96,7 +96,7 @@ class _Content extends StatefulWidget {
   final CollectionLens collection;
   final LatLng? initialLocation;
   final double? initialZoom;
-  final AvesEntry? initialEntry;
+  final FmvEntry? initialEntry;
   final MappedGeoTiff? overlayEntry;
   final List<GeoTrack>? tracks;
 
@@ -115,12 +115,12 @@ class _Content extends StatefulWidget {
 
 class _ContentState extends State<_Content> with SingleTickerProviderStateMixin {
   final Set<StreamSubscription> _subscriptions = {};
-  final AvesMapController _mapController = AvesMapController();
+  final FmvMapController _mapController = FmvMapController();
   final ValueNotifier<bool> _isPageAnimatingNotifier = ValueNotifier(false);
   final ValueNotifier<int?> _selectedIndexNotifier = ValueNotifier(0);
   final ValueNotifier<CollectionLens?> _regionCollectionNotifier = ValueNotifier(null);
   final ValueNotifier<LatLng?> _dotLocationNotifier = ValueNotifier(null);
-  final ValueNotifier<AvesEntry?> _dotEntryNotifier = ValueNotifier(null);
+  final ValueNotifier<FmvEntry?> _dotEntryNotifier = ValueNotifier(null);
   final ValueNotifier<double> _overlayOpacityNotifier = ValueNotifier(1);
   final ValueNotifier<bool> _overlayVisible = ValueNotifier(true);
   late AnimationController _overlayAnimationController;
@@ -376,7 +376,7 @@ class _ContentState extends State<_Content> with SingleTickerProviderStateMixin 
     final regionFilter = _regionFilter;
     if (regionFilter == null) return;
 
-    AvesEntry? selectedEntry;
+    FmvEntry? selectedEntry;
     if (regionCollection != null) {
       final regionEntries = regionCollection!.sortedEntries;
       final selectedIndex = _selectedIndexNotifier.value;
@@ -406,7 +406,7 @@ class _ContentState extends State<_Content> with SingleTickerProviderStateMixin 
     _onThumbnailIndexChanged();
   }
 
-  AvesEntry? _getRegionEntry(int? index) {
+  FmvEntry? _getRegionEntry(int? index) {
     if (index != null && index >= 0 && regionCollection != null) {
       final regionEntries = regionCollection!.sortedEntries;
       if (index < regionEntries.length) {
@@ -418,7 +418,7 @@ class _ContentState extends State<_Content> with SingleTickerProviderStateMixin 
 
   void _onThumbnailIndexChanged() => _onEntrySelected(_getRegionEntry(_selectedIndexNotifier.value));
 
-  void _onEntrySelected(AvesEntry? selectedEntry) {
+  void _onEntrySelected(FmvEntry? selectedEntry) {
     _dotEntryNotifier.value?.metadataChangeNotifier.removeListener(_onMarkerEntryMetadataChanged);
     _dotEntryNotifier.value = selectedEntry;
     selectedEntry?.metadataChangeNotifier.addListener(_onMarkerEntryMetadataChanged);
@@ -429,7 +429,7 @@ class _ContentState extends State<_Content> with SingleTickerProviderStateMixin 
     _dotLocationNotifier.value = _dotEntryNotifier.value?.latLng;
   }
 
-  void _goToViewer(AvesEntry? initialEntry) {
+  void _goToViewer(FmvEntry? initialEntry) {
     if (initialEntry == null) return;
 
     // derive a stable collection out of the route builder,
@@ -512,8 +512,8 @@ class _ContentState extends State<_Content> with SingleTickerProviderStateMixin 
 
   Future<void> _onMarkerLongPress(
     LatLng markerLocation,
-    AvesEntry markerEntry,
-    Set<AvesEntry> clusterEntries,
+    FmvEntry markerEntry,
+    Set<FmvEntry> clusterEntries,
     Offset tapLocalPosition,
     WidgetBuilder markerBuilder,
   ) async {

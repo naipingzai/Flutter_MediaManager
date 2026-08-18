@@ -22,7 +22,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
 
 class WallpaperButtons extends StatelessWidget with FeedbackMixin {
-  final AvesEntry entry;
+  final FmvEntry entry;
   final Animation<double> scale;
 
   const WallpaperButtons({

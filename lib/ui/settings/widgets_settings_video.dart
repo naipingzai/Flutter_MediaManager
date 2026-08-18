@@ -27,7 +27,7 @@ class VideoSection extends SettingsSection {
   @override
   Widget icon(BuildContext context) => SettingsTileLeading(
     icon: AIcons.video,
-    color: context.select<AvesColorsData, Color>((v) => v.video),
+    color: context.select<FmvColorsData, Color>((v) => v.video),
   );
 
   @override

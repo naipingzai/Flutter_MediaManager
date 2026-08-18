@@ -11,7 +11,7 @@ import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/function/metadata/svg_metadata_service.dart';
 import 'package:flutter/foundation.dart';
 
-extension ExtraAvesEntryCatalog on AvesEntry {
+extension ExtraAvesEntryCatalog on FmvEntry {
   Future<void> catalog({required bool background, required bool force, required bool persist}) async {
     if (isCatalogued && !force) return;
 

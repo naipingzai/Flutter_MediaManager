@@ -7,7 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:video_player/video_player.dart';
 
-class ExoVideoController extends AvesVideoController {
+class ExoVideoController extends FmvVideoController {
   late VideoPlayerController _controller;
   late VideoStatus _status;
   final List<StreamSubscription> _subscriptions = [];

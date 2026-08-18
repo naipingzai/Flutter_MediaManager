@@ -11,7 +11,7 @@ import 'package:flutter_media_view_video/flutter_media_view_video.dart';
 import 'package:flutter/material.dart';
 
 class SlowMotionBar extends StatefulWidget {
-  final AvesVideoController? controller;
+  final FmvVideoController? controller;
   final Animation<double> scale;
 
   const SlowMotionBar({
@@ -29,7 +29,7 @@ class _SlowMotionBarState extends State<SlowMotionBar> {
 
   static const double _radius = 123;
 
-  AvesVideoController? get controller => widget.controller;
+  FmvVideoController? get controller => widget.controller;
 
   bool get isSlowMotion => controller?.isSlowMotion ?? false;
 
@@ -58,7 +58,7 @@ class _SlowMotionBarState extends State<SlowMotionBar> {
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     color: Themes.overlayBackgroundColor(brightness: theme.brightness, blurred: blurred),
-                    border: AvesBorder.border(context),
+                    border: FmvBorder.border(context),
                     borderRadius: const BorderRadius.all(Radius.circular(_radius)),
                   ),
                   child: MediaQuery(

@@ -47,7 +47,7 @@ class PlaceholderFilter extends CollectionFilter {
     'placeholder': placeholder,
   };
 
-  Future<String?> toTag(AvesEntry entry) async {
+  Future<String?> toTag(FmvEntry entry) async {
     switch (placeholder) {
       case _country:
       case _state:

@@ -32,7 +32,7 @@ class _DebugHdrSectionState extends State<DebugHdrSection> with AutomaticKeepAli
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return AvesExpansionTile(
+    return FmvExpansionTile(
       title: 'HDR',
       children: [
         FutureBuilder<bool>(

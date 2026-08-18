@@ -44,7 +44,7 @@ class _CastDialogState extends State<CastDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AvesDialog(
+    return FmvDialog(
       title: context.l10n.castDialogTitle,
       scrollableContent: [
         if (_seenRenderers.isEmpty)

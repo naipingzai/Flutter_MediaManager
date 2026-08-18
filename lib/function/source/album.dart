@@ -46,7 +46,7 @@ mixin AlbumMixin on SourceBase {
     }
   }
 
-  Map<String, AvesEntry?> getAlbumEntries() {
+  Map<String, FmvEntry?> getAlbumEntries() {
     final entries = sortedEntriesByDate;
     final regularAlbums = <String>[], appAlbums = <String>[], specialAlbums = <String>[];
     for (final album in rawAlbums) {
@@ -107,10 +107,10 @@ mixin AlbumMixin on SourceBase {
 
   // by filter key
   final Map<String, int> _filterEntryCountMap = {}, _filterSizeMap = {};
-  final Map<String, AvesEntry?> _filterRecentEntryMap = {};
+  final Map<String, FmvEntry?> _filterRecentEntryMap = {};
 
   void invalidateAlbumFilterSummary({
-    Set<AvesEntry>? entries,
+    Set<FmvEntry>? entries,
     Set<String?>? directories,
     bool notify = true,
   }) {
@@ -175,7 +175,7 @@ mixin AlbumMixin on SourceBase {
     return _filterSizeMap.putIfAbsent(filter.key, () => visibleEntries.where(filter.test).map((v) => v.sizeBytes).sum);
   }
 
-  AvesEntry? albumRecentEntry(AlbumBaseFilter filter) {
+  FmvEntry? albumRecentEntry(AlbumBaseFilter filter) {
     return _filterRecentEntryMap.putIfAbsent(filter.key, () => sortedEntriesByDate.firstWhereOrNull(filter.test));
   }
 

@@ -8,7 +8,7 @@ import 'package:decorated_icon/decorated_icon.dart';
 import 'package:flutter/material.dart';
 
 class OverlayRatingTagsRow extends AnimatedWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
 
   OverlayRatingTagsRow({
     super.key,

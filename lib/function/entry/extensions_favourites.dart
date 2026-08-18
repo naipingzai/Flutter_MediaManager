@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/function/model/favourites.dart';
 
-extension ExtraAvesEntryFav on AvesEntry {
+extension ExtraAvesEntryFav on FmvEntry {
   bool get isFavourite => favourites.isFavourite(this);
 
   Future<void> toggleFavourite() async {

@@ -12,24 +12,24 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 abstract class MetadataEditService {
-  Future<Map<String, Object?>> rotate(AvesEntry entry, {required bool clockwise});
+  Future<Map<String, Object?>> rotate(FmvEntry entry, {required bool clockwise});
 
-  Future<Map<String, Object?>> flip(AvesEntry entry);
+  Future<Map<String, Object?>> flip(FmvEntry entry);
 
-  Future<Map<String, Object?>> editExifDate(AvesEntry entry, DateModifier modifier);
+  Future<Map<String, Object?>> editExifDate(FmvEntry entry, DateModifier modifier);
 
-  Future<Map<String, Object?>> editMetadata(AvesEntry entry, Map<MetadataType, dynamic> modifier, {bool autoCorrectTrailerOffset = true});
+  Future<Map<String, Object?>> editMetadata(FmvEntry entry, Map<MetadataType, dynamic> modifier, {bool autoCorrectTrailerOffset = true});
 
-  Future<Map<String, Object?>> removeTrailerVideo(AvesEntry entry);
+  Future<Map<String, Object?>> removeTrailerVideo(FmvEntry entry);
 
-  Future<Map<String, Object?>> removeTypes(AvesEntry entry, Set<MetadataType> types);
+  Future<Map<String, Object?>> removeTypes(FmvEntry entry, Set<MetadataType> types);
 }
 
 class PlatformMetadataEditService implements MetadataEditService {
-  static const _platform = AvesMethodChannel('com.naipingzai/flutter_media_view/metadata_edit');
+  static const _platform = FmvMethodChannel('com.naipingzai/flutter_media_view/metadata_edit');
 
   @override
-  Future<Map<String, Object?>> rotate(AvesEntry entry, {required bool clockwise}) async {
+  Future<Map<String, Object?>> rotate(FmvEntry entry, {required bool clockwise}) async {
     try {
       // returns map with: 'rotationDegrees' 'isFlipped'
       final result = await _platform.invokeMethod('rotate', <String, Object?>{
@@ -44,7 +44,7 @@ class PlatformMetadataEditService implements MetadataEditService {
   }
 
   @override
-  Future<Map<String, Object?>> flip(AvesEntry entry) async {
+  Future<Map<String, Object?>> flip(FmvEntry entry) async {
     try {
       // returns map with: 'rotationDegrees' 'isFlipped'
       final result = await _platform.invokeMethod('flip', <String, Object?>{
@@ -58,7 +58,7 @@ class PlatformMetadataEditService implements MetadataEditService {
   }
 
   @override
-  Future<Map<String, Object?>> editExifDate(AvesEntry entry, DateModifier modifier) async {
+  Future<Map<String, Object?>> editExifDate(FmvEntry entry, DateModifier modifier) async {
     try {
       final result = await _platform.invokeMethod('editDate', <String, Object?>{
         'entry': entry.toPlatformEntryMap(),
@@ -75,7 +75,7 @@ class PlatformMetadataEditService implements MetadataEditService {
 
   @override
   Future<Map<String, Object?>> editMetadata(
-    AvesEntry entry,
+    FmvEntry entry,
     Map<MetadataType, dynamic> metadata, {
     bool autoCorrectTrailerOffset = true,
   }) async {
@@ -93,7 +93,7 @@ class PlatformMetadataEditService implements MetadataEditService {
   }
 
   @override
-  Future<Map<String, Object?>> removeTrailerVideo(AvesEntry entry) async {
+  Future<Map<String, Object?>> removeTrailerVideo(FmvEntry entry) async {
     try {
       final result = await _platform.invokeMethod('removeTrailerVideo', <String, Object?>{
         'entry': entry.toPlatformEntryMap(),
@@ -106,7 +106,7 @@ class PlatformMetadataEditService implements MetadataEditService {
   }
 
   @override
-  Future<Map<String, Object?>> removeTypes(AvesEntry entry, Set<MetadataType> types) async {
+  Future<Map<String, Object?>> removeTypes(FmvEntry entry, Set<MetadataType> types) async {
     try {
       final result = await _platform.invokeMethod('removeTypes', <String, Object?>{
         'entry': entry.toPlatformEntryMap(),
@@ -119,7 +119,7 @@ class PlatformMetadataEditService implements MetadataEditService {
     return {};
   }
 
-  Future<void> _processPlatformException(AvesEntry entry, PlatformException e, StackTrace stack) async {
+  Future<void> _processPlatformException(FmvEntry entry, PlatformException e, StackTrace stack) async {
     if (entry.isValid) {
       final code = e.code;
       final customException = CustomPlatformException.fromStandard(e);

@@ -30,7 +30,7 @@ import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 
 mixin EntryEditorMixin {
-  Future<DateModifier?> selectDateModifier(BuildContext context, Set<AvesEntry> entries, CollectionLens? collection) async {
+  Future<DateModifier?> selectDateModifier(BuildContext context, Set<FmvEntry> entries, CollectionLens? collection) async {
     if (entries.isEmpty) return null;
 
     return showAvesDialog<DateModifier>(
@@ -43,7 +43,7 @@ mixin EntryEditorMixin {
     );
   }
 
-  Future<LocationEditActionResult?> selectLocation(BuildContext context, Set<AvesEntry> entries, CollectionLens? collection) async {
+  Future<LocationEditActionResult?> selectLocation(BuildContext context, Set<FmvEntry> entries, CollectionLens? collection) async {
     if (entries.isEmpty) return null;
 
     return showAvesDialog<LocationEditActionResult>(
@@ -56,7 +56,7 @@ mixin EntryEditorMixin {
     );
   }
 
-  Future<Map<DescriptionField, String?>?> selectTitleDescriptionModifier(BuildContext context, Set<AvesEntry> entries) async {
+  Future<Map<DescriptionField, String?>?> selectTitleDescriptionModifier(BuildContext context, Set<FmvEntry> entries) async {
     if (entries.isEmpty) return null;
 
     final entry = entries.first;
@@ -74,7 +74,7 @@ mixin EntryEditorMixin {
     );
   }
 
-  Future<int?> selectRating(BuildContext context, Set<AvesEntry> entries) async {
+  Future<int?> selectRating(BuildContext context, Set<FmvEntry> entries) async {
     if (entries.isEmpty) return null;
 
     return showAvesDialog<int>(
@@ -86,7 +86,7 @@ mixin EntryEditorMixin {
     );
   }
 
-  Future<Map<AvesEntry, Set<String>>?> selectTags(BuildContext context, Set<AvesEntry> entries) async {
+  Future<Map<FmvEntry, Set<String>>?> selectTags(BuildContext context, Set<FmvEntry> entries) async {
     if (entries.isEmpty) return null;
 
     final oldTagsByEntry = Map.fromEntries(
@@ -95,7 +95,7 @@ mixin EntryEditorMixin {
       }),
     );
     final filtersByEntry =
-        await Navigator.maybeOf(context)?.push<Map<AvesEntry, Set<CollectionFilter>>>(
+        await Navigator.maybeOf(context)?.push<Map<FmvEntry, Set<CollectionFilter>>>(
           MaterialPageRoute(
             settings: const RouteSettings(name: TagEditorPage.routeName),
             builder: (context) => TagEditorPage(
@@ -105,7 +105,7 @@ mixin EntryEditorMixin {
         ) ??
         oldTagsByEntry;
 
-    final newTagsByEntry = <AvesEntry, Set<String>>{};
+    final newTagsByEntry = <FmvEntry, Set<String>>{};
     await Future.forEach(filtersByEntry.entries, (kv) async {
       final entry = kv.key;
       final filters = kv.value;
@@ -115,14 +115,14 @@ mixin EntryEditorMixin {
     return newTagsByEntry;
   }
 
-  Future<Set<String>> getTagsFromFilters(Set<CollectionFilter> filters, AvesEntry entry) async {
+  Future<Set<String>> getTagsFromFilters(Set<CollectionFilter> filters, FmvEntry entry) async {
     final tags = filters.whereType<TagFilter>().map((v) => v.tag).toSet();
     final placeholderTags = await Future.wait(filters.whereType<PlaceholderFilter>().map((v) => v.toTag(entry)));
     tags.addAll(placeholderTags.nonNulls.where((v) => v.isNotEmpty));
     return tags;
   }
 
-  Future<Set<MetadataType>?> selectMetadataToRemove(BuildContext context, Set<AvesEntry> entries) async {
+  Future<Set<MetadataType>?> selectMetadataToRemove(BuildContext context, Set<FmvEntry> entries) async {
     if (entries.isEmpty) return null;
 
     final types = await showAvesDialog<Set<MetadataType>>(
@@ -148,7 +148,7 @@ mixin EntryEditorMixin {
     return types;
   }
 
-  Future<bool> checkUndatedItems(BuildContext context, Set<AvesEntry> entries) async {
+  Future<bool> checkUndatedItems(BuildContext context, Set<FmvEntry> entries) async {
     // make sure entries are catalogued before we check whether they have a metadata date
     await Future.forEach(entries.where((entry) => !entry.isCatalogued), (entry) async {
       await entry.catalog(background: false, force: false, persist: true);
@@ -211,7 +211,7 @@ class MoveUndatedConfirmationDialogDelegate extends ConfirmationDialogDelegate {
           Expanded(child: Text(context.l10n.moveUndatedConfirmationDialogMessage)),
           IconButton(
             icon: const Icon(AIcons.help),
-            onPressed: () => AvesApp.launchUrl('${AppReference.avesFaq}#whats-in-a-date'),
+            onPressed: () => FmvApp.launchUrl('${AppReference.avesFaq}#whats-in-a-date'),
             tooltip: 'FAQ',
           ),
         ],

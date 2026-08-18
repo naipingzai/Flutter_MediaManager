@@ -34,7 +34,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class EntryPageView extends StatefulWidget {
-  final AvesEntry mainEntry, pageEntry;
+  final FmvEntry mainEntry, pageEntry;
   final ViewerController viewerController;
   final VoidCallback? onDisposed;
 
@@ -56,14 +56,14 @@ class EntryPageView extends StatefulWidget {
 
 class _EntryPageViewState extends State<EntryPageView> with TickerProviderStateMixin {
   late ValueNotifier<ViewState> _viewStateNotifier;
-  late AvesMagnifierController _magnifierController;
+  late FmvMagnifierController _magnifierController;
   final Set<StreamSubscription> _subscriptions = {};
   final ValueNotifier<Widget?> _actionFeedbackChildNotifier = ValueNotifier(null);
   OverlayEntry? _actionFeedbackOverlayEntry;
 
-  AvesEntry get mainEntry => widget.mainEntry;
+  FmvEntry get mainEntry => widget.mainEntry;
 
-  AvesEntry get entry => widget.pageEntry;
+  FmvEntry get entry => widget.pageEntry;
 
   ViewerController get viewerController => widget.viewerController;
 
@@ -94,7 +94,7 @@ class _EntryPageViewState extends State<EntryPageView> with TickerProviderStateM
   void _registerWidget(EntryPageView widget) {
     final entry = widget.pageEntry;
     _viewStateNotifier = context.read<ViewStateConductor>().getOrCreateController(entry).viewStateNotifier;
-    _magnifierController = AvesMagnifierController();
+    _magnifierController = FmvMagnifierController();
     _subscriptions.add(_magnifierController.stateStream.listen(_onViewStateChanged));
     _subscriptions.add(_magnifierController.scaleBoundariesStream.listen(_onViewScaleBoundariesChanged));
     if (entry.isVideo) {
@@ -386,7 +386,7 @@ class _EntryPageViewState extends State<EntryPageView> with TickerProviderStateM
   }
 
   Widget _buildMagnifier({
-    AvesMagnifierController? controller,
+    FmvMagnifierController? controller,
     Size? displaySize,
     ScaleLevel maxScale = EntryPageView.rasterMaxScale,
     ScaleStateCycle scaleStateCycle = defaultScaleStateCycle,
@@ -401,9 +401,9 @@ class _EntryPageViewState extends State<EntryPageView> with TickerProviderStateM
     final minScale = isWallpaperMode ? const ScaleLevel(ref: ScaleReference.covered) : const ScaleLevel(ref: ScaleReference.contained);
 
     return ValueListenableBuilder<bool>(
-      valueListenable: AvesApp.canGestureToOtherApps,
+      valueListenable: FmvApp.canGestureToOtherApps,
       builder: (context, canGestureToOtherApps, child) {
-        return AvesMagnifier(
+        return FmvMagnifier(
           // key includes modified date to refresh when the image is modified by metadata (e.g. rotated)
           key: Key('${entry.uri}_${entry.pageId}_${entry.dateModifiedMillis}'),
           controller: controller ?? _magnifierController,

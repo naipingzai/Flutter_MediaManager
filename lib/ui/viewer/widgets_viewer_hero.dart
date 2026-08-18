@@ -9,7 +9,7 @@ class EntryHeroInfo extends Equatable {
   // between different views of the entry in the same collection (e.g. thumbnails <-> viewer)
   // but not between different collection instances, even with the same attributes (e.g. reloading collection page via drawer)
   final CollectionLens? collection;
-  final AvesEntry? entry;
+  final FmvEntry? entry;
 
   @override
   List<Object?> get props => [collection?.id, entry?.uri];

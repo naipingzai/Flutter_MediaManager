@@ -10,8 +10,8 @@ import 'package:flutter_media_view/ui/viewer/widgets_viewer_info_metadata_metada
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
-class InfoSearchDelegate extends AvesSearchDelegate {
-  final AvesEntry entry;
+class InfoSearchDelegate extends FmvSearchDelegate {
+  final FmvEntry entry;
   final ValueNotifier<Map<String, MetadataDirectory>> metadataNotifier;
   final bool isSelecting;
 

@@ -49,8 +49,8 @@ class _ItemPickPageState extends State<ItemPickPage> {
     _appModeNotifier.value = widget.canRemoveFilters ? .pickUnfilteredMediaInternal : .pickFilteredMediaInternal;
     return ListenableProvider<ValueNotifier<AppMode>>.value(
       value: _appModeNotifier,
-      child: AvesScaffold(
-        body: SelectionProvider<AvesEntry>(
+      child: FmvScaffold(
+        body: SelectionProvider<FmvEntry>(
           toSelectableItems: (entry) => entry.toSelectableItems(),
           child: QueryProvider(
             startEnabled: settings.getShowTitleQuery(context.currentRouteName!),

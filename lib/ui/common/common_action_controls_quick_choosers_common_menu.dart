@@ -133,7 +133,7 @@ class _MenuQuickChooserState<T> extends State<MenuQuickChooser<T>> {
               ValueListenableBuilder<Rect>(
                 valueListenable: _selectedRowRect,
                 builder: (context, selectedRowRect, child) {
-                  Widget child = const Center(child: AvesDot());
+                  Widget child = const Center(child: FmvDot());
                   child = AnimatedOpacity(
                     opacity: selectedValue != null ? 1 : 0,
                     curve: Curves.easeInOutCubic,

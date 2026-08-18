@@ -29,11 +29,11 @@ typedef OffsetFilterCallback<T extends CollectionFilter> = void Function(BuildCo
 enum HeroType { always, onTap, never }
 
 @immutable
-class AvesFilterDecoration {
+class FmvFilterDecoration {
   final Radius radius;
   final Widget widget;
 
-  const AvesFilterDecoration({
+  const FmvFilterDecoration({
     required this.radius,
     required this.widget,
   });
@@ -43,10 +43,10 @@ class AvesFilterDecoration {
   BorderRadius get chipBorderRadius => BorderRadius.all(radius);
 }
 
-class AvesFilterChip extends StatefulWidget {
+class FmvFilterChip extends StatefulWidget {
   final CollectionFilter filter;
   final bool showLeading, showText, allowGenericIcon, useFilterColor;
-  final AvesFilterDecoration? decoration;
+  final FmvFilterDecoration? decoration;
   final Color? background;
   final String? banner;
   final Widget? leadingOverride, details;
@@ -65,7 +65,7 @@ class AvesFilterChip extends StatefulWidget {
   static const double fontSize = 14;
   static const double decoratedContentVerticalPadding = 5;
 
-  const AvesFilterChip({
+  const FmvFilterChip({
     super.key,
     required this.filter,
     this.showLeading = true,
@@ -157,10 +157,10 @@ class AvesFilterChip extends StatefulWidget {
   }
 
   @override
-  State<AvesFilterChip> createState() => _AvesFilterChipState();
+  State<FmvFilterChip> createState() => _AvesFilterChipState();
 }
 
-class _AvesFilterChipState extends State<AvesFilterChip> {
+class _AvesFilterChipState extends State<FmvFilterChip> {
   final Set<StreamSubscription> _subscriptions = {};
   late Color _outlineColor;
   late bool _tapped;
@@ -194,7 +194,7 @@ class _AvesFilterChipState extends State<AvesFilterChip> {
   }
 
   @override
-  void didUpdateWidget(covariant AvesFilterChip oldWidget) {
+  void didUpdateWidget(covariant FmvFilterChip oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.filter != filter) {
       _initColorLoader();
@@ -211,7 +211,7 @@ class _AvesFilterChipState extends State<AvesFilterChip> {
   }
 
   void _initColorLoader() {
-    _outlineColor = context.read<AvesColorsData>().neutral;
+    _outlineColor = context.read<FmvColorsData>().neutral;
   }
 
   void _onCoverColorChanged(Set<CollectionFilter>? event) {
@@ -251,7 +251,7 @@ class _AvesFilterChipState extends State<AvesFilterChip> {
     final showText = widget.showText;
     if (showLeading || showText) {
       final textScaler = MediaQuery.textScalerOf(context);
-      final iconSize = textScaler.scale(AvesFilterChip.iconSize);
+      final iconSize = textScaler.scale(FmvFilterChip.iconSize);
       final leading = showLeading ? widget.leadingOverride ?? filter.iconBuilder(context, iconSize, allowGenericIcon: widget.allowGenericIcon) : null;
       final trailing = onRemove != null
           ? Theme(
@@ -279,7 +279,7 @@ class _AvesFilterChipState extends State<AvesFilterChip> {
               child: Text(
                 filter.getLabel(context),
                 style: TextStyle(
-                  fontSize: AvesFilterChip.fontSize,
+                  fontSize: FmvFilterChip.fontSize,
                   decoration: filter.reversed ? TextDecoration.lineThrough : null,
                   decorationThickness: 2,
                 ),
@@ -311,7 +311,7 @@ class _AvesFilterChipState extends State<AvesFilterChip> {
           child: ClipRRect(
             borderRadius: decoration.textBorderRadius,
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: padding * 2, vertical: AvesFilterChip.decoratedContentVerticalPadding),
+              padding: EdgeInsets.symmetric(horizontal: padding * 2, vertical: FmvFilterChip.decoratedContentVerticalPadding),
               color: chipBackground,
               child: content,
             ),
@@ -325,22 +325,22 @@ class _AvesFilterChipState extends State<AvesFilterChip> {
       }
     }
 
-    final borderRadius = decoration?.chipBorderRadius ?? const BorderRadius.all(Radius.circular(AvesFilterChip.defaultRadius));
+    final borderRadius = decoration?.chipBorderRadius ?? const BorderRadius.all(Radius.circular(FmvFilterChip.defaultRadius));
     final banner = widget.banner;
     Widget chip = Container(
       constraints: BoxConstraints(
-        minWidth: AvesFilterChip.minChipWidth,
+        minWidth: FmvFilterChip.minChipWidth,
         maxWidth: max(
-          AvesFilterChip.minChipWidth,
+          FmvFilterChip.minChipWidth,
           widget.maxWidth ??
-              AvesFilterChip.computeMaxWidthForRow(
+              FmvFilterChip.computeMaxWidthForRow(
                 context,
                 minChipPerRow: 2,
                 chipPadding: FilterBar.chipPadding.horizontal,
                 rowPadding: FilterBar.rowPadding.horizontal,
               ),
         ),
-        minHeight: AvesFilterChip.minChipHeight,
+        minHeight: FmvFilterChip.minChipHeight,
       ),
       child: Stack(
         fit: StackFit.passthrough,
@@ -375,8 +375,8 @@ class _AvesFilterChipState extends State<AvesFilterChip> {
                     decoration: BoxDecoration(
                       border: Border.fromBorderSide(
                         BorderSide(
-                          color: widget.useFilterColor ? _outlineColor : context.select<AvesColorsData, Color>((v) => v.neutral),
-                          width: AvesFilterChip.outlineWidth,
+                          color: widget.useFilterColor ? _outlineColor : context.select<FmvColorsData, Color>((v) => v.neutral),
+                          width: FmvFilterChip.outlineWidth,
                         ),
                       ),
                       borderRadius: borderRadius,

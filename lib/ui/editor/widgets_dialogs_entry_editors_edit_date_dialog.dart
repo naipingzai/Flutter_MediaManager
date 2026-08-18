@@ -23,7 +23,7 @@ import 'package:provider/provider.dart';
 class EditEntryDateDialog extends StatefulWidget {
   static const routeName = '/dialog/edit_entry_date';
 
-  final AvesEntry entry;
+  final FmvEntry entry;
   final CollectionLens? collection;
 
   const EditEntryDateDialog({
@@ -39,7 +39,7 @@ class EditEntryDateDialog extends StatefulWidget {
 class _EditEntryDateDialogState extends State<EditEntryDateDialog> {
   DateEditAction _action = DateEditAction.setCustom;
   DateFieldSource _copyFieldSource = DateFieldSource.fileModifiedDate;
-  late AvesEntry _copyItemSource;
+  late FmvEntry _copyItemSource;
   late DateTime _customDateTime;
   late TimeShiftController _timeShiftController;
   bool _showOptions = false;
@@ -88,7 +88,7 @@ class _EditEntryDateDialogState extends State<EditEntryDateDialog> {
           builder: (context) {
             final l10n = context.l10n;
 
-            return AvesDialog(
+            return FmvDialog(
               title: l10n.editEntryDateDialogTitle,
               scrollableContent: [
                 Padding(
@@ -110,7 +110,7 @@ class _EditEntryDateDialogState extends State<EditEntryDateDialog> {
                   duration: context.read<DurationsData>().formTransition,
                   switchInCurve: Curves.easeInOutCubic,
                   switchOutCurve: Curves.easeInOutCubic,
-                  transitionBuilder: AvesTransitions.formTransitionBuilder,
+                  transitionBuilder: FmvTransitions.formTransitionBuilder,
                   child: Column(
                     key: ValueKey(_action),
                     mainAxisSize: .min,
@@ -298,7 +298,7 @@ class _EditEntryDateDialogState extends State<EditEntryDateDialog> {
     final pickCollection = _createPickCollection();
     if (pickCollection == null) return;
 
-    final entry = await Navigator.maybeOf(context)?.push<AvesEntry>(
+    final entry = await Navigator.maybeOf(context)?.push<FmvEntry>(
       MaterialPageRoute(
         settings: const RouteSettings(name: ItemPickPage.routeName),
         builder: (context) => ItemPickPage(

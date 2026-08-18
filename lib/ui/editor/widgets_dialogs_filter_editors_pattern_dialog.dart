@@ -24,7 +24,7 @@ class _PatternDialogState extends State<PatternDialog> {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    return AvesDialog(
+    return FmvDialog(
       content: Column(
         mainAxisSize: .min,
         children: [

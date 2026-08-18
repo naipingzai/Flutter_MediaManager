@@ -110,7 +110,7 @@ class _NavigationDrawerEditorPageState extends State<NavigationDrawerEditorPage>
 
     return DefaultTabController(
       length: tabs.length,
-      child: AvesScaffold(
+      child: FmvScaffold(
         appBar: AppBar(
           automaticallyImplyLeading: !settings.useTvLayout,
           title: Text(l10n.settingsNavigationDrawerEditorPageTitle),

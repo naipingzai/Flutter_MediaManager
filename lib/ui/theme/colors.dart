@@ -20,13 +20,13 @@ class AColors {
   ];
 }
 
-class AvesColorsProvider extends StatelessWidget {
+class FmvColorsProvider extends StatelessWidget {
   final bool allowMonochrome;
   final Widget child;
 
-  static final Map<(AvesThemeColorMode, bool), AvesColorsData> _schemeCache = {};
+  static final Map<(FmvThemeColorMode, bool), FmvColorsData> _schemeCache = {};
 
-  const AvesColorsProvider({
+  const FmvColorsProvider({
     super.key,
     this.allowMonochrome = true,
     required this.child,
@@ -34,12 +34,12 @@ class AvesColorsProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProxyProvider<Settings, AvesColorsData>(
+    return ProxyProvider<Settings, FmvColorsData>(
       update: (context, settings, _) {
         final isDark = Theme.of(context).isDark;
         var mode = settings.themeColorMode;
-        if (!allowMonochrome && mode == AvesThemeColorMode.monochrome) {
-          mode = AvesThemeColorMode.polychrome;
+        if (!allowMonochrome && mode == FmvThemeColorMode.monochrome) {
+          mode = FmvThemeColorMode.polychrome;
         }
         return _schemeCache.putIfAbsent((mode, isDark), () {
           return switch (mode) {
@@ -53,7 +53,7 @@ class AvesColorsProvider extends StatelessWidget {
   }
 }
 
-abstract class AvesColorsData {
+abstract class FmvColorsData {
   static const defaultAccent = Colors.indigoAccent;
   static const _neutralOnDark = Colors.white;
   static const _neutralOnLight = Color(0xAA000000);
@@ -155,7 +155,7 @@ abstract class AvesColorsData {
   );
 }
 
-abstract class _Monochrome extends AvesColorsData {
+abstract class _Monochrome extends FmvColorsData {
   @override
   Color fromHue(double hue) => neutral;
 
@@ -171,17 +171,17 @@ abstract class _Monochrome extends AvesColorsData {
 
 class _MonochromeOnDark extends _Monochrome {
   @override
-  Color get neutral => AvesColorsData._neutralOnDark;
+  Color get neutral => FmvColorsData._neutralOnDark;
 }
 
 class _MonochromeOnLight extends _Monochrome {
   @override
-  Color get neutral => AvesColorsData._neutralOnLight;
+  Color get neutral => FmvColorsData._neutralOnLight;
 }
 
-class _NeonOnDark extends AvesColorsData {
+class _NeonOnDark extends FmvColorsData {
   @override
-  Color get neutral => AvesColorsData._neutralOnDark;
+  Color get neutral => FmvColorsData._neutralOnDark;
 
   @override
   Color fromHue(double hue) => HSLColor.fromAHSL(1.0, hue, .8, .6).toColor();
@@ -190,9 +190,9 @@ class _NeonOnDark extends AvesColorsData {
   Color? fromBrandColor(Color? color) => color;
 }
 
-class _PastelOnLight extends AvesColorsData {
+class _PastelOnLight extends FmvColorsData {
   @override
-  Color get neutral => AvesColorsData._neutralOnLight;
+  Color get neutral => FmvColorsData._neutralOnLight;
 
   @override
   Color fromHue(double hue) => _pastellize(HSLColor.fromAHSL(1.0, hue, .8, .6).toColor());

@@ -14,12 +14,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class EditorImage extends StatefulWidget {
-  final AvesMagnifierController magnifierController;
+  final FmvMagnifierController magnifierController;
   final TransformController transformController;
   final ValueNotifier<EditorAction?> actionNotifier;
   final ValueNotifier<EdgeInsets> marginNotifier;
   final ValueNotifier<ViewState> viewStateNotifier;
-  final AvesEntry entry;
+  final FmvEntry entry;
 
   const EditorImage({
     super.key,
@@ -39,7 +39,7 @@ class _EditorImageState extends State<EditorImage> {
   final Set<StreamSubscription> _subscriptions = {};
   final ValueNotifier<double> _scrimOpacityNotifier = ValueNotifier(0);
 
-  AvesEntry get entry => widget.entry;
+  FmvEntry get entry => widget.entry;
 
   TransformController get transformController => widget.transformController;
 
@@ -108,7 +108,7 @@ class _EditorImageState extends State<EditorImage> {
                       builder: (context, constraints) {
                         final viewportSize = margin.deflateSize(constraints.biggest);
                         final minScale = ScaleLevel(factor: ScaleLevel.scaleForContained(viewportSize, canvasSize));
-                        return AvesMagnifier(
+                        return FmvMagnifier(
                           key: Key('${entry.uri}_${entry.pageId}_${entry.dateModifiedMillis}'),
                           controller: widget.magnifierController,
                           viewportPadding: margin,
@@ -202,7 +202,7 @@ class _EditorImageState extends State<EditorImage> {
       case .transform:
         return 0;
       case null:
-        return AvesMagnifier.defaultPanInertia;
+        return FmvMagnifier.defaultPanInertia;
     }
   }
 

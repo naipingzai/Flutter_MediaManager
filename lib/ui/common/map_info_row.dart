@@ -5,7 +5,7 @@ import 'package:flutter_media_view_map/flutter_media_view_map.dart';
 import 'package:flutter/material.dart';
 
 class MapInfoRow extends StatelessWidget {
-  final ValueNotifier<AvesEntry?> entryNotifier;
+  final ValueNotifier<FmvEntry?> entryNotifier;
 
   static const double iconPadding = 8.0;
   static const double _interRowPadding = 2.0;
@@ -17,7 +17,7 @@ class MapInfoRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<AvesEntry?>(
+    return ValueListenableBuilder<FmvEntry?>(
       valueListenable: entryNotifier,
       builder: (context, entry, child) {
         final isPortrait = MediaQuery.orientationOf(context) == Orientation.portrait;

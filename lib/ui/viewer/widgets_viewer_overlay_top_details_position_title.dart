@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class OverlayPositionTitleRow extends StatelessWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
   final String? collectionPosition;
   final MultiPageController? multiPageController;
 

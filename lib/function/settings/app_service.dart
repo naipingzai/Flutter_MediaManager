@@ -32,13 +32,13 @@ abstract class AppService {
 
   Future<bool> setAs(String uri, String mimeType);
 
-  Future<bool> shareEntries(Iterable<AvesEntry> entries);
+  Future<bool> shareEntries(Iterable<FmvEntry> entries);
 
   Future<bool> shareSingle(String uri, String mimeType);
 
   Future<void> pinToHomeScreen(
     String label,
-    AvesEntry? coverEntry, {
+    FmvEntry? coverEntry, {
     required String route,
     Set<CollectionFilter>? filters,
     String? path,
@@ -48,8 +48,8 @@ abstract class AppService {
 }
 
 class PlatformAppService implements AppService {
-  static const _platform = AvesMethodChannel('com.naipingzai/flutter_media_view/app');
-  static final _stream = AvesStreamsChannel('com.naipingzai/flutter_media_view/activity_result_stream');
+  static const _platform = FmvMethodChannel('com.naipingzai/flutter_media_view/app');
+  static final _stream = FmvStreamsChannel('com.naipingzai/flutter_media_view/activity_result_stream');
 
   static final _knownAppDirs = {
     'com.google.android.apps.photos': {'Google Photos'},
@@ -189,9 +189,9 @@ class PlatformAppService implements AppService {
   }
 
   @override
-  Future<bool> shareEntries(Iterable<AvesEntry> entries) {
+  Future<bool> shareEntries(Iterable<FmvEntry> entries) {
     return _share(
-      groupBy<AvesEntry, String>(
+      groupBy<FmvEntry, String>(
         entries,
         // loosen MIME type to a generic one, so we can share with badly defined apps
         // e.g. Google Lens declares receiving "image/jpeg" only, but it can actually handle more formats
@@ -228,7 +228,7 @@ class PlatformAppService implements AppService {
   @override
   Future<void> pinToHomeScreen(
     String label,
-    AvesEntry? coverEntry, {
+    FmvEntry? coverEntry, {
     required String route,
     Set<CollectionFilter>? filters,
     String? path,

@@ -1,6 +1,6 @@
 /// 字节工具，移植自 Android `utils/ByteUtils.kt` 与 `utils/CollectionUtils.kt`，
 /// 无平台依赖，可复用于任何目标。
-extension AvesByteUtils on List<int> {
+extension FmvByteUtils on List<int> {
   /// 字节数组转小写十六进制字符串，如 `[0xde, 0xad]` -> `'dead'`
   String toHex() => map((b) => b.toRadixString(16).padLeft(2, '0')).join();
 

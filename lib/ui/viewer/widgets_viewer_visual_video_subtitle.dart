@@ -16,8 +16,8 @@ import 'package:latlong2/latlong.dart' as angles;
 import 'package:provider/provider.dart';
 
 class VideoSubtitles extends StatelessWidget {
-  final AvesEntry entry;
-  final AvesVideoController controller;
+  final FmvEntry entry;
+  final FmvVideoController controller;
   final ValueNotifier<ViewState> viewStateNotifier;
   final bool debugMode;
 

@@ -37,5 +37,5 @@ void mainCommon(AppFlavor flavor, {Map<String, Object?>? debugIntentData}) {
   FlutterMemoryAllocations.instance.addListener(
     (event) => LeakTracking.dispatchObjectEvent(event.toMap()),
   );
-  runApp(AvesApp(flavor: flavor, debugIntentData: debugIntentData));
+  runApp(FmvApp(flavor: flavor, debugIntentData: debugIntentData));
 }

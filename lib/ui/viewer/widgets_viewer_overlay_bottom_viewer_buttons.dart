@@ -38,7 +38,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 class ViewerButtons extends StatelessWidget {
-  final AvesEntry mainEntry, pageEntry;
+  final FmvEntry mainEntry, pageEntry;
   final CollectionLens? collection;
   final Animation<double> scale;
 
@@ -113,7 +113,7 @@ class ViewerButtons extends StatelessWidget {
 class _TvButtonRowContent extends StatelessWidget {
   final EntryActionDelegate actionDelegate;
   final Animation<double> scale;
-  final AvesEntry mainEntry, pageEntry;
+  final FmvEntry mainEntry, pageEntry;
 
   const _TvButtonRowContent({
     required this.actionDelegate,
@@ -125,7 +125,7 @@ class _TvButtonRowContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appMode = context.watch<ValueNotifier<AppMode>>().value;
-    return Selector<VideoConductor, AvesVideoController?>(
+    return Selector<VideoConductor, FmvVideoController?>(
       selector: (context, vc) => vc.getController(pageEntry),
       builder: (context, videoController, child) {
         return Row(
@@ -178,9 +178,9 @@ class _TvButtonRowContent extends StatelessWidget {
   static Widget _buildButtonCaption({
     required BuildContext context,
     required EntryAction action,
-    required AvesEntry mainEntry,
-    required AvesEntry pageEntry,
-    required AvesVideoController? videoController,
+    required FmvEntry mainEntry,
+    required FmvEntry pageEntry,
+    required FmvVideoController? videoController,
     required bool enabled,
   }) {
     switch (action) {
@@ -213,7 +213,7 @@ class ViewerButtonRowContent extends StatefulWidget {
   final EntryActionDelegate actionDelegate;
   final List<EntryAction> quickActions, topLevelActions, exportActions, videoActions;
   final Animation<double> scale;
-  final AvesEntry mainEntry, pageEntry;
+  final FmvEntry mainEntry, pageEntry;
 
   static const double padding = 8;
 
@@ -238,11 +238,11 @@ class _ViewerButtonRowContentState extends State<ViewerButtonRowContent> {
 
   EntryActionDelegate get actionDelegate => widget.actionDelegate;
 
-  AvesEntry get mainEntry => widget.mainEntry;
+  FmvEntry get mainEntry => widget.mainEntry;
 
-  AvesEntry get pageEntry => widget.pageEntry;
+  FmvEntry get pageEntry => widget.pageEntry;
 
-  AvesEntry get favouriteTargetEntry => mainEntry.isStack ? pageEntry : mainEntry;
+  FmvEntry get favouriteTargetEntry => mainEntry.isStack ? pageEntry : mainEntry;
 
   static const double padding = ViewerButtonRowContent.padding;
 
@@ -266,7 +266,7 @@ class _ViewerButtonRowContentState extends State<ViewerButtonRowContent> {
 
     final hasOverflowMenu = showOrientationActions || topLevelActions.isNotEmpty || exportActions.isNotEmpty || videoActions.isNotEmpty;
     final animations = context.select<Settings, AccessibilityAnimations>((v) => v.accessibilityAnimations);
-    return Selector<VideoConductor, AvesVideoController?>(
+    return Selector<VideoConductor, FmvVideoController?>(
       selector: (context, vc) => vc.getController(pageEntry),
       builder: (context, videoController, child) {
         return Padding(
@@ -342,7 +342,7 @@ class _ViewerButtonRowContentState extends State<ViewerButtonRowContent> {
     );
   }
 
-  Widget _buildOverlayButton(BuildContext context, EntryAction action, AvesVideoController? videoController) {
+  Widget _buildOverlayButton(BuildContext context, EntryAction action, FmvVideoController? videoController) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: padding / 2),
       child: OverlayButton(
@@ -359,7 +359,7 @@ class _ViewerButtonRowContentState extends State<ViewerButtonRowContent> {
     );
   }
 
-  PopupMenuItem<EntryAction> _buildPopupMenuItem(BuildContext context, EntryAction action, AvesVideoController? videoController) {
+  PopupMenuItem<EntryAction> _buildPopupMenuItem(BuildContext context, EntryAction action, FmvVideoController? videoController) {
     var enabled = actionDelegate.canApply(action);
     switch (action) {
       case .videoCaptureFrame:
@@ -446,9 +446,9 @@ class _ViewerButtonRowContentState extends State<ViewerButtonRowContent> {
   static Widget _buildButtonIcon({
     required BuildContext context,
     required EntryAction action,
-    required AvesEntry mainEntry,
-    required AvesEntry pageEntry,
-    required AvesVideoController? videoController,
+    required FmvEntry mainEntry,
+    required FmvEntry pageEntry,
+    required FmvVideoController? videoController,
     required EntryActionDelegate actionDelegate,
     FocusNode? focusNode,
   }) {

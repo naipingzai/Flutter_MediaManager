@@ -6,7 +6,7 @@ import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter/services.dart';
 
 class AndroidDebugService {
-  static const _platform = AvesMethodChannel('com.naipingzai/flutter_media_view/debug');
+  static const _platform = FmvMethodChannel('com.naipingzai/flutter_media_view/debug');
 
   static Future<Map> getContextDirs() async {
     try {
@@ -38,7 +38,7 @@ class AndroidDebugService {
     return {};
   }
 
-  static Future<Map> getBitmapFactoryInfo(AvesEntry entry) async {
+  static Future<Map> getBitmapFactoryInfo(FmvEntry entry) async {
     try {
       // returns map with all data available when decoding image bounds with `BitmapFactory`
       final result = await _platform.invokeMethod('getBitmapFactoryInfo', <String, Object?>{
@@ -51,7 +51,7 @@ class AndroidDebugService {
     return {};
   }
 
-  static Future<Map> getContentResolverMetadata(AvesEntry entry) async {
+  static Future<Map> getContentResolverMetadata(FmvEntry entry) async {
     try {
       // returns map with all data available from the content resolver
       final result = await _platform.invokeMethod('getContentResolverMetadata', <String, Object?>{
@@ -65,7 +65,7 @@ class AndroidDebugService {
     return {};
   }
 
-  static Future<Map> getExifInterfaceMetadata(AvesEntry entry) async {
+  static Future<Map> getExifInterfaceMetadata(FmvEntry entry) async {
     try {
       // returns map with all data available from the `ExifInterface` library
       final result = await _platform.invokeMethod('getExifInterfaceMetadata', <String, Object?>{
@@ -80,7 +80,7 @@ class AndroidDebugService {
     return {};
   }
 
-  static Future<Map> getMediaMetadataRetrieverMetadata(AvesEntry entry) async {
+  static Future<Map> getMediaMetadataRetrieverMetadata(FmvEntry entry) async {
     try {
       // returns map with all data available from `MediaMetadataRetriever`
       final result = await _platform.invokeMethod('getMediaMetadataRetrieverMetadata', <String, Object?>{
@@ -93,7 +93,7 @@ class AndroidDebugService {
     return {};
   }
 
-  static Future<Map> getMetadataExtractorSummary(AvesEntry entry) async {
+  static Future<Map> getMetadataExtractorSummary(FmvEntry entry) async {
     try {
       // returns map with the MIME type and tag count for each directory found by `metadata-extractor`
       final result = await _platform.invokeMethod('getMetadataExtractorSummary', <String, Object?>{
@@ -108,7 +108,7 @@ class AndroidDebugService {
     return {};
   }
 
-  static Future<String?> getMp4ParserDump(AvesEntry entry) async {
+  static Future<String?> getMp4ParserDump(FmvEntry entry) async {
     try {
       return await _platform.invokeMethod('getMp4ParserDump', <String, Object?>{
         'mimeType': entry.mimeType,
@@ -120,7 +120,7 @@ class AndroidDebugService {
     return null;
   }
 
-  static Future<Map> getPixyMetadata(AvesEntry entry) async {
+  static Future<Map> getPixyMetadata(FmvEntry entry) async {
     try {
       // returns map with all data available from the `PixyMeta` library
       final result = await _platform.invokeMethod('getPixyMetadata', <String, Object?>{
@@ -134,7 +134,7 @@ class AndroidDebugService {
     return {};
   }
 
-  static Future<Map> getTiffStructure(AvesEntry entry) async {
+  static Future<Map> getTiffStructure(FmvEntry entry) async {
     if (entry.mimeType != MimeTypes.tiff) return {};
 
     try {

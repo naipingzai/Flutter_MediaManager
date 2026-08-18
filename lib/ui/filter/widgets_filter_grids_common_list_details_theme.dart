@@ -42,7 +42,7 @@ class FilterListDetailsTheme extends StatelessWidget {
         );
         captionStyle = captionStyle.copyWith(height: captionStyle.height ?? defaultTextHeight);
 
-        final titleIconSize = textScaler.scale(AvesFilterChip.iconSize);
+        final titleIconSize = textScaler.scale(FmvFilterChip.iconSize);
         final titleLineHeightParagraph = RenderParagraph(
           TextSpan(text: 'Fake Title', style: titleStyle),
           textDirection: TextDirection.ltr,

@@ -21,7 +21,7 @@ import 'package:provider/provider.dart';
 
 class LocationSection extends StatefulWidget {
   final CollectionLens? collection;
-  final AvesEntry entry;
+  final FmvEntry entry;
   final bool showTitle;
   final ValueNotifier<bool> isScrollingNotifier;
   final AFilterCallback onFilterSelection;
@@ -40,11 +40,11 @@ class LocationSection extends StatefulWidget {
 }
 
 class _LocationSectionState extends State<LocationSection> {
-  final AvesMapController _mapController = AvesMapController();
+  final FmvMapController _mapController = FmvMapController();
 
   CollectionLens? get collection => widget.collection;
 
-  AvesEntry get entry => widget.entry;
+  FmvEntry get entry => widget.entry;
 
   @override
   void initState() {
@@ -127,13 +127,13 @@ class _LocationSectionState extends State<LocationSection> {
                   _AddressInfoGroup(entry: entry),
                   if (filters.isNotEmpty)
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: AvesFilterChip.outlineWidth / 2) + const EdgeInsets.only(top: 8),
+                      padding: const EdgeInsets.symmetric(horizontal: FmvFilterChip.outlineWidth / 2) + const EdgeInsets.only(top: 8),
                       child: Wrap(
                         spacing: 8,
                         runSpacing: 8,
                         children: filters
                             .map(
-                              (filter) => AvesFilterChip(
+                              (filter) => FmvFilterChip(
                                 filter: filter,
                                 onTap: widget.onFilterSelection,
                               ),
@@ -190,7 +190,7 @@ class _LocationSectionState extends State<LocationSection> {
 }
 
 class _AddressInfoGroup extends StatefulWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
 
   const _AddressInfoGroup({required this.entry});
 
@@ -201,7 +201,7 @@ class _AddressInfoGroup extends StatefulWidget {
 class _AddressInfoGroupState extends State<_AddressInfoGroup> {
   late Future<String?> _addressLineLoader;
 
-  AvesEntry get entry => widget.entry;
+  FmvEntry get entry => widget.entry;
 
   @override
   void initState() {

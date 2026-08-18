@@ -26,16 +26,16 @@ class FakeAvesDb extends Fake implements LocalMediaDb {
   // entries
 
   @override
-  Future<Set<AvesEntry>> loadEntries({int? origin, String? directory}) => SynchronousFuture({});
+  Future<Set<FmvEntry>> loadEntries({int? origin, String? directory}) => SynchronousFuture({});
 
   @override
-  Future<void> insertEntries(Set<AvesEntry> entries) => SynchronousFuture(null);
+  Future<void> insertEntries(Set<FmvEntry> entries) => SynchronousFuture(null);
 
   @override
-  Future<void> updateEntry(int id, AvesEntry entry) => SynchronousFuture(null);
+  Future<void> updateEntry(int id, FmvEntry entry) => SynchronousFuture(null);
 
   @override
-  Future<Set<AvesEntry>> searchLiveDuplicates(int origin, Set<AvesEntry>? entries) => SynchronousFuture({});
+  Future<Set<FmvEntry>> searchLiveDuplicates(int origin, Set<FmvEntry>? entries) => SynchronousFuture({});
 
   // date taken
 

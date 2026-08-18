@@ -7,7 +7,7 @@ import 'package:flutter_media_view/ui/common/map_info_row.dart';
 import 'package:flutter/material.dart';
 
 class MapDateRow extends StatelessWidget {
-  final AvesEntry? entry;
+  final FmvEntry? entry;
 
   const MapDateRow({
     super.key,

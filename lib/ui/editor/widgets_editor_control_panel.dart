@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class EditorControlPanel extends StatelessWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
   final ValueNotifier<EditorAction?> actionNotifier;
 
   static const padding = ViewerButtonRowContent.padding;
@@ -91,7 +91,7 @@ class EditorControlPanel extends StatelessWidget {
 
   void _cancelAction(BuildContext context) {
     actionNotifier.value = null;
-    context.read<AvesMagnifierController>().reset();
+    context.read<FmvMagnifierController>().reset();
     context.read<TransformController>().reset();
   }
 

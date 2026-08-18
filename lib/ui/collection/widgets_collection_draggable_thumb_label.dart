@@ -21,7 +21,7 @@ class CollectionDraggableThumbLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DraggableThumbLabel<AvesEntry>(
+    return DraggableThumbLabel<FmvEntry>(
       offsetY: offsetY,
       lineBuilder: (context, entry) {
         switch (collection.sortFactor) {
@@ -77,9 +77,9 @@ class CollectionDraggableThumbLabel extends StatelessWidget {
     );
   }
 
-  bool _hasMultipleSections(BuildContext context) => context.read<SectionedListLayout<AvesEntry>>().sections.length > 1;
+  bool _hasMultipleSections(BuildContext context) => context.read<SectionedListLayout<FmvEntry>>().sections.length > 1;
 
-  bool _showAlbumName(BuildContext context, AvesEntry entry) => _hasMultipleSections(context) && entry.directory != null;
+  bool _showAlbumName(BuildContext context, FmvEntry entry) => _hasMultipleSections(context) && entry.directory != null;
 
-  String _getAlbumName(BuildContext context, AvesEntry entry) => context.read<CollectionSource>().getStoredAlbumDisplayName(context, entry.directory!);
+  String _getAlbumName(BuildContext context, FmvEntry entry) => context.read<CollectionSource>().getStoredAlbumDisplayName(context, entry.directory!);
 }

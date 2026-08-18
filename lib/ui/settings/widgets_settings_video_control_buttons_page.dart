@@ -20,7 +20,7 @@ class VideoControlButtonsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AvesScaffold(
+    return FmvScaffold(
       appBar: AppBar(
         automaticallyImplyLeading: !settings.useTvLayout,
         title: Text(context.l10n.settingsVideoButtonsTile),

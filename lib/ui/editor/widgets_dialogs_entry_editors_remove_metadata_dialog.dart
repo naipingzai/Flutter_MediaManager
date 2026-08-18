@@ -57,7 +57,7 @@ class _RemoveEntryMetadataDialogState extends State<RemoveEntryMetadataDialog> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final animationDuration = context.select<DurationsData, Duration>((v) => v.expansionTileAnimation);
-    return AvesDialog(
+    return FmvDialog(
       title: l10n.removeEntryMetadataDialogTitle,
       scrollableContent: [
         SwitchListTile(
@@ -128,8 +128,8 @@ class _RemoveEntryMetadataDialogState extends State<RemoveEntryMetadataDialog> {
       ],
       outlineColor: Themes.firstLayerColor(context),
     );
-    if (context.select<Settings, bool>((v) => v.themeColorMode == AvesThemeColorMode.polychrome)) {
-      final colors = context.watch<AvesColorsData>();
+    if (context.select<Settings, bool>((v) => v.themeColorMode == FmvThemeColorMode.polychrome)) {
+      final colors = context.watch<FmvColorsData>();
       child = Container(
         padding: const EdgeInsets.symmetric(horizontal: 2),
         decoration: HighlightDecoration(

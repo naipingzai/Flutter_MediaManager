@@ -21,9 +21,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ViewerTopOverlay extends StatelessWidget {
-  final List<AvesEntry> entries;
+  final List<FmvEntry> entries;
   final int index;
-  final AvesEntry mainEntry;
+  final FmvEntry mainEntry;
   final Animation<double> scale;
   final bool hasCollection;
   final ValueNotifier<bool> expandedNotifier;
@@ -185,9 +185,9 @@ class ZoomLevelIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final blurred = settings.enableBlurEffect;
-    final border = AvesBorder.border(
+    final border = FmvBorder.border(
       context,
-      width: AvesBorder.curvedBorderWidth(context),
+      width: FmvBorder.curvedBorderWidth(context),
     );
     final borderRadius = BorderRadius.circular(4);
     final zoomScaleFactor = MediaQuery.devicePixelRatioOf(context) * 100;

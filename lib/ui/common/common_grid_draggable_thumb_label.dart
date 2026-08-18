@@ -60,12 +60,12 @@ class DraggableThumbLabel<T> extends StatelessWidget {
     );
   }
 
-  static String formatMonthThumbLabel(BuildContext context, AvesLocale locale, DateTime? date) {
+  static String formatMonthThumbLabel(BuildContext context, FmvLocale locale, DateTime? date) {
     if (date == null) return context.l10n.sectionUnknown;
     return locale.yMMM(date);
   }
 
-  static String formatDayThumbLabel(BuildContext context, AvesLocale locale, DateTime? date) {
+  static String formatDayThumbLabel(BuildContext context, FmvLocale locale, DateTime? date) {
     if (date == null) return context.l10n.sectionUnknown;
     return locale.yMMMd(date);
   }

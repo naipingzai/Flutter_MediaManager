@@ -21,7 +21,7 @@ class QuickChooser extends StatelessWidget {
   Widget build(BuildContext context) {
     final brightness = Theme.of(context).brightness;
     final backgroundColor = blurred ? Themes.overlayBackgroundColor(brightness: brightness, blurred: blurred) : null;
-    const borderRadius = BorderRadius.all(AvesDialog.cornerRadius);
+    const borderRadius = BorderRadius.all(FmvDialog.cornerRadius);
     return Padding(
       padding: margin,
       child: BlurredRRect(
@@ -32,7 +32,7 @@ class QuickChooser extends StatelessWidget {
           color: backgroundColor,
           child: Ink(
             decoration: BoxDecoration(
-              border: AvesBorder.border(context),
+              border: FmvBorder.border(context),
               borderRadius: borderRadius,
             ),
             child: Padding(

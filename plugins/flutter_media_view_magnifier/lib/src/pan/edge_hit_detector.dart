@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-mixin EdgeHitDetector on AvesMagnifierControllerDelegate {
+mixin EdgeHitDetector on FmvMagnifierControllerDelegate {
   // the content width/height is not accurate for some image size & scale combos
   // e.g. 3580.0 * 0.1005586592178771 yields 360.0
   // but 4764.0 * 0.07556675062972293 yields 360.00000000000006

@@ -11,7 +11,7 @@ import 'package:flutter_media_view_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 
 class HomeWidgetPainter {
-  final AvesEntry? entry;
+  final FmvEntry? entry;
   final double devicePixelRatio;
 
   // do not use `AlignmentDirectional` as there is no `TextDirection` in context
@@ -75,12 +75,12 @@ class HomeWidgetPainter {
       Paint()
         ..style = PaintingStyle.stroke
         ..color = color
-        ..strokeWidth = AvesFilterChip.outlineWidth * devicePixelRatio * 2
+        ..strokeWidth = FmvFilterChip.outlineWidth * devicePixelRatio * 2
         ..strokeCap = StrokeCap.round,
     );
   }
 
-  Future<ui.Image?> _getEntryImage(AvesEntry? entry, double extent) async {
+  Future<ui.Image?> _getEntryImage(FmvEntry? entry, double extent) async {
     if (entry == null) return null;
 
     final provider = entry.getThumbnail(extent: extent);

@@ -81,7 +81,7 @@ class _EditVaultDialogState extends State<EditVaultDialog> with FeedbackMixin, V
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final isNew = initialDetails == null;
-    return AvesDialog(
+    return FmvDialog(
       title: isNew ? l10n.newVaultDialogTitle : l10n.configureVaultDialogTitle,
       scrollableContent: [
         Padding(
@@ -104,12 +104,12 @@ class _EditVaultDialogState extends State<EditVaultDialog> with FeedbackMixin, V
         if (_lockTypeOptions.length > 1)
           ListTile(
             title: Text(l10n.vaultDialogLockTypeLabel),
-            subtitle: AvesCaption(_lockType.getText(context)),
+            subtitle: FmvCaption(_lockType.getText(context)),
             onTap: () {
               _unfocus();
               showSelectionDialog<VaultLockType>(
                 context: context,
-                builder: (context) => AvesSingleSelectionDialog<VaultLockType>(
+                builder: (context) => FmvSingleSelectionDialog<VaultLockType>(
                   initialValue: _lockType,
                   options: Map.fromEntries(_lockTypeOptions.map((v) => MapEntry(v, v.getText(context)))),
                 ),

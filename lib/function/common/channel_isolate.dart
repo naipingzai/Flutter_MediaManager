@@ -54,7 +54,7 @@ class ChannelIsolate {
         ..listen((message) async {
           if (message is IsolateChannelRequest) {
             // do not use outer instance member `channelName`, only message members
-            final channel = AvesChannels.byName(message.channelName);
+            final channel = FmvChannels.byName(message.channelName);
 
             final id = message.id;
             IsolateChannelResponse response;

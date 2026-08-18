@@ -46,7 +46,7 @@ class _AppPickPageState extends State<AppPickPage> {
   @override
   Widget build(BuildContext context) {
     final useTvLayout = settings.useTvLayout;
-    return AvesScaffold(
+    return FmvScaffold(
       appBar: AppBar(
         automaticallyImplyLeading: !useTvLayout,
         title: Text(context.l10n.appPickDialogTitle),

@@ -19,7 +19,7 @@ abstract class AppProfileService {
 }
 
 class PlatformAppProfileService implements AppProfileService {
-  static const _platform = AvesMethodChannel('com.naipingzai/flutter_media_view/app_profile');
+  static const _platform = FmvMethodChannel('com.naipingzai/flutter_media_view/app_profile');
 
   @override
   Future<bool> canInteractAcrossProfiles() async {

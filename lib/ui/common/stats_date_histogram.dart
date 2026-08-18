@@ -22,7 +22,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 class Histogram extends StatefulWidget {
-  final Set<AvesEntry> entries;
+  final Set<FmvEntry> entries;
   final Duration animationDuration;
   final AFilterCallback onFilterSelection;
 
@@ -54,7 +54,7 @@ class _HistogramState extends State<Histogram> with AutomaticKeepAliveClientMixi
   void initState() {
     super.initState();
 
-    final entriesByDateDescending = List.of(widget.entries)..sort(AvesEntrySort.compareByDate);
+    final entriesByDateDescending = List.of(widget.entries)..sort(FmvEntrySort.compareByDate);
     var lastDate = entriesByDateDescending.firstWhereOrNull((entry) => entry.bestDate != null)?.bestDate;
     var firstDate = entriesByDateDescending.lastWhereOrNull((entry) => entry.bestDate != null)?.bestDate;
 
@@ -334,7 +334,7 @@ class _HistogramState extends State<Histogram> with AutomaticKeepAliveClientMixi
             padding: const EdgeInsets.all(8),
             child: Row(
               children: [
-                AvesFilterChip(
+                FmvFilterChip(
                   filter: filter,
                   onTap: widget.onFilterSelection,
                 ),
@@ -355,7 +355,7 @@ class _HistogramState extends State<Histogram> with AutomaticKeepAliveClientMixi
           duration: context.read<DurationsData>().formTransition,
           switchInCurve: Curves.easeInOutCubic,
           switchOutCurve: Curves.easeInOutCubic,
-          transitionBuilder: AvesTransitions.formTransitionBuilder,
+          transitionBuilder: FmvTransitions.formTransitionBuilder,
           child: child,
         );
       },

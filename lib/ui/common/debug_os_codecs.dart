@@ -33,7 +33,7 @@ class _DebugOSCodecSectionState extends State<DebugOSCodecSection> with Automati
   Widget build(BuildContext context) {
     super.build(context);
 
-    return AvesExpansionTile(
+    return FmvExpansionTile(
       title: 'OS Codecs',
       children: [
         Padding(

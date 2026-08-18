@@ -19,7 +19,7 @@ import 'package:provider/provider.dart';
 class PanoramaPage extends StatefulWidget {
   static const routeName = '/viewer/panorama';
 
-  final AvesEntry entry;
+  final FmvEntry entry;
   final PanoramaInfo info;
 
   const PanoramaPage({
@@ -36,7 +36,7 @@ class _PanoramaPageState extends State<PanoramaPage> {
   final ValueNotifier<bool> _overlayVisible = ValueNotifier(true);
   final ValueNotifier<SensorControl> _sensorControl = ValueNotifier(.none);
 
-  AvesEntry get entry => widget.entry;
+  FmvEntry get entry => widget.entry;
 
   PanoramaInfo get info => widget.info;
 
@@ -61,7 +61,7 @@ class _PanoramaPageState extends State<PanoramaPage> {
   Widget build(BuildContext context) {
     return PopScope(
       onPopInvokedWithResult: (didPop, result) => _onLeave(),
-      child: AvesScaffold(
+      child: FmvScaffold(
         body: Stack(
           children: [
             ValueListenableBuilder<SensorControl>(
@@ -167,7 +167,7 @@ class _PanoramaPageState extends State<PanoramaPage> {
   }
 
   Future<void> _onLeave() async {
-    await AvesApp.showSystemUI(true);
+    await FmvApp.showSystemUI(true);
   }
 
   // system UI
@@ -183,9 +183,9 @@ class _PanoramaPageState extends State<PanoramaPage> {
 
   Future<void> _onOverlayVisibleChanged() async {
     if (_overlayVisible.value) {
-      await AvesApp.showSystemUI(true);
+      await FmvApp.showSystemUI(true);
     } else {
-      await AvesApp.showSystemUI(false);
+      await FmvApp.showSystemUI(false);
     }
   }
 }

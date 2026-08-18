@@ -10,10 +10,10 @@ import 'package:flutter/material.dart';
 class ThumbnailScroller extends StatefulWidget {
   final double availableWidth;
   final int entryCount;
-  final AvesEntry? Function(int index) entryBuilder;
+  final FmvEntry? Function(int index) entryBuilder;
   final ValueNotifier<int?> indexNotifier;
   final void Function(int index)? onTap;
-  final Object? Function(AvesEntry entry)? heroTagger;
+  final Object? Function(FmvEntry entry)? heroTagger;
   final bool scrollable, highlightable, showLocation;
 
   const ThumbnailScroller({

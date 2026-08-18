@@ -49,7 +49,7 @@ class _RenameGroupDialogState extends State<RenameGroupDialog> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
 
-    return AvesDialog(
+    return FmvDialog(
       content: ValueListenableBuilder<bool>(
         valueListenable: _existsNotifier,
         builder: (context, exists, child) {

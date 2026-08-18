@@ -96,7 +96,7 @@ class _TvRailState extends State<TvRail> {
       child: ValueListenableBuilder<bool>(
         valueListenable: _extendedNotifier,
         builder: (context, extended, child) {
-          const logo = AvesLogo(size: 48);
+          const logo = FmvLogo(size: 48);
           final header = extended
               ? Row(
                   children: [
@@ -261,7 +261,7 @@ class _TvRailState extends State<TvRail> {
   }
 
   void _goTo(String routeName) {
-    final navItem = AvesNavItem(route: routeName);
+    final navItem = FmvNavItem(route: routeName);
     Navigator.maybeOf(context)?.pushAndRemoveUntil(
       navItem.routeBuilder(context, topLevel: true),
       (route) => false,

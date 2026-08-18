@@ -163,7 +163,7 @@ class Covers {
     );
   }
 
-  Future<void> moveEntry(AvesEntry entry) async {
+  Future<void> moveEntry(FmvEntry entry) async {
     final entryId = entry.id;
     await _removeEntryFromRows(_rows.where((row) => row.coverProps.entryId == entryId && !row.filter.test(entry)).toSet());
   }
@@ -297,7 +297,7 @@ class Covers {
         // for backward compatibility, color used to be an `int`, now a `string`
         final colorJson = color is String ? color : null;
 
-        AvesEntry? entry;
+        FmvEntry? entry;
         if (volume != null && relativePath != null) {
           final path = pContext.join(volume, relativePath);
           entry = visibleEntries.firstWhereOrNull((entry) => entry.path == path && filter.test(entry));

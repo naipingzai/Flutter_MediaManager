@@ -16,7 +16,7 @@ import 'package:provider/provider.dart';
 class ImageEditorPage extends StatefulWidget {
   static const routeName = '/image_editor';
 
-  final AvesEntry entry;
+  final FmvEntry entry;
 
   const ImageEditorPage({
     super.key,
@@ -32,7 +32,7 @@ class _ImageEditorPageState extends State<ImageEditorPage> {
   final ValueNotifier<EditorAction?> _actionNotifier = ValueNotifier(null);
   final ValueNotifier<EdgeInsets> _marginNotifier = ValueNotifier(EdgeInsets.zero);
   final ValueNotifier<ViewState> _viewStateNotifier = ValueNotifier<ViewState>(ViewState.zero);
-  final AvesMagnifierController _magnifierController = AvesMagnifierController();
+  final FmvMagnifierController _magnifierController = FmvMagnifierController();
   late final TransformController _transformController;
 
   @override
@@ -61,7 +61,7 @@ class _ImageEditorPageState extends State<ImageEditorPage> {
     return Scaffold(
       body: MultiProvider(
         providers: [
-          Provider<AvesMagnifierController>.value(value: _magnifierController),
+          Provider<FmvMagnifierController>.value(value: _magnifierController),
           Provider<TransformController>.value(value: _transformController),
         ],
         child: SafeArea(

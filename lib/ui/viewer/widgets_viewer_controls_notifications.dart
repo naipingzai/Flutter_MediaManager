@@ -67,8 +67,8 @@ class TvShowMoreInfoNotification extends Notification {}
 
 @immutable
 class VideoActionNotification extends Notification {
-  final AvesVideoController controller;
-  final AvesEntry entry;
+  final FmvVideoController controller;
+  final FmvEntry entry;
   final EntryAction action;
 
   const VideoActionNotification({
@@ -110,7 +110,7 @@ class DecomposeFilterNotification extends Notification with Equatable {
 
 @immutable
 class EntryDeletedNotification extends Notification with Equatable {
-  final Set<AvesEntry> entries;
+  final Set<FmvEntry> entries;
 
   @override
   List<Object?> get props => [entries];
@@ -121,7 +121,7 @@ class EntryDeletedNotification extends Notification with Equatable {
 @immutable
 class EntryMovedNotification extends Notification with Equatable {
   final MoveType moveType;
-  final Set<AvesEntry> entries;
+  final Set<FmvEntry> entries;
 
   @override
   List<Object?> get props => [moveType, entries];
@@ -131,7 +131,7 @@ class EntryMovedNotification extends Notification with Equatable {
 
 @immutable
 class FullImageLoadedNotification extends Notification {
-  final AvesEntry entry;
+  final FmvEntry entry;
   final ImageProvider image;
 
   const FullImageLoadedNotification(this.entry, this.image);

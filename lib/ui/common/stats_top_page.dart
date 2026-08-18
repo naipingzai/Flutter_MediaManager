@@ -42,7 +42,7 @@ class StatsTopPage<T extends Comparable> extends StatelessWidget with FeedbackMi
 
   @override
   Widget build(BuildContext context) {
-    return AvesScaffold(
+    return FmvScaffold(
       appBar: AppBar(
         automaticallyImplyLeading: !settings.useTvLayout,
         title: Text(title),

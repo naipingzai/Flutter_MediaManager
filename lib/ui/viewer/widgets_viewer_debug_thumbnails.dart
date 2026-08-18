@@ -8,7 +8,7 @@ import 'package:flutter_media_view/ui/common/common_identity_aves_expansion_tile
 import 'package:flutter/material.dart';
 
 class ThumbnailsTab extends StatefulWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
 
   const ThumbnailsTab({
     super.key,
@@ -22,7 +22,7 @@ class ThumbnailsTab extends StatefulWidget {
 class _ThumbnailsTabState extends State<ThumbnailsTab> {
   late final Future<List<MapEntry<ThumbnailMethod, Uint8List?>>> _byMethodLoader;
 
-  AvesEntry get entry => widget.entry;
+  FmvEntry get entry => widget.entry;
 
   @override
   void initState() {
@@ -48,7 +48,7 @@ class _ThumbnailsTabState extends State<ThumbnailsTab> {
     return ListView(
       padding: const EdgeInsets.all(8),
       children: [
-        AvesExpansionTile(
+        FmvExpansionTile(
           title: 'Cached',
           children: entry.cachedThumbnails
               .expand(
@@ -85,7 +85,7 @@ class _ThumbnailsTabState extends State<ThumbnailsTab> {
 
             final result = snapshot.data!;
 
-            return AvesExpansionTile(
+            return FmvExpansionTile(
               title: 'By method',
               children: result.expand((kv) {
                 final method = kv.key;

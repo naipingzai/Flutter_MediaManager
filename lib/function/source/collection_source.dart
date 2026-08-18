@@ -43,15 +43,15 @@ typedef SourceScope = Set<CollectionFilter>?;
 mixin SourceBase {
   EventBus get eventBus;
 
-  AvesEntry? getEntryById(int id);
+  FmvEntry? getEntryById(int id);
 
-  Set<AvesEntry> get allEntries;
+  Set<FmvEntry> get allEntries;
 
-  Set<AvesEntry> get visibleEntries;
+  Set<FmvEntry> get visibleEntries;
 
-  Set<AvesEntry> get trashedEntries;
+  Set<FmvEntry> get trashedEntries;
 
-  List<AvesEntry> get sortedEntriesByDate;
+  List<FmvEntry> get sortedEntriesByDate;
 
   ValueNotifier<SourceState> stateNotifier = ValueNotifier(SourceState.ready);
 
@@ -110,32 +110,32 @@ abstract class CollectionSource with SourceBase, AlbumMixin, CountryMixin, Place
   EventBus get eventBus => _eventBus;
 
   @override
-  AvesEntry? getEntryById(int id) => _entriesById[id];
+  FmvEntry? getEntryById(int id) => _entriesById[id];
 
-  final Map<int, AvesEntry> _entriesById = {};
-
-  @override
-  Set<AvesEntry> get allEntries => Set.unmodifiable(_entriesById.values);
-
-  Set<AvesEntry>? _visibleEntries, _trashedEntries;
+  final Map<int, FmvEntry> _entriesById = {};
 
   @override
-  Set<AvesEntry> get visibleEntries {
+  Set<FmvEntry> get allEntries => Set.unmodifiable(_entriesById.values);
+
+  Set<FmvEntry>? _visibleEntries, _trashedEntries;
+
+  @override
+  Set<FmvEntry> get visibleEntries {
     _visibleEntries ??= Set.unmodifiable(_applyHiddenFilters(_entriesById.values));
     return _visibleEntries!;
   }
 
   @override
-  Set<AvesEntry> get trashedEntries {
+  Set<FmvEntry> get trashedEntries {
     _trashedEntries ??= Set.unmodifiable(_applyTrashFilter(_entriesById.values));
     return _trashedEntries!;
   }
 
-  List<AvesEntry>? _sortedEntriesByDate;
+  List<FmvEntry>? _sortedEntriesByDate;
 
   @override
-  List<AvesEntry> get sortedEntriesByDate {
-    _sortedEntriesByDate ??= List.unmodifiable(visibleEntries.toList()..sort(AvesEntrySort.compareByDate));
+  List<FmvEntry> get sortedEntriesByDate {
+    _sortedEntriesByDate ??= List.unmodifiable(visibleEntries.toList()..sort(FmvEntrySort.compareByDate));
     return _sortedEntriesByDate!;
   }
 
@@ -151,7 +151,7 @@ abstract class CollectionSource with SourceBase, AlbumMixin, CountryMixin, Place
     ...vaults.vaultDirectories.where(vaults.isLocked).map((v) => StoredAlbumFilter(v, null)),
   };
 
-  Iterable<AvesEntry> _applyHiddenFilters(Iterable<AvesEntry> entries) {
+  Iterable<FmvEntry> _applyHiddenFilters(Iterable<FmvEntry> entries) {
     final hiddenFilters = {
       TrashFilter.instance,
       ..._getAppHiddenFilters(),
@@ -159,12 +159,12 @@ abstract class CollectionSource with SourceBase, AlbumMixin, CountryMixin, Place
     return entries.where((entry) => !hiddenFilters.any((filter) => filter.test(entry)));
   }
 
-  Iterable<AvesEntry> _applyTrashFilter(Iterable<AvesEntry> entries) {
+  Iterable<FmvEntry> _applyTrashFilter(Iterable<FmvEntry> entries) {
     final hiddenFilters = _getAppHiddenFilters();
     return entries.where(TrashFilter.instance.test).where((entry) => !hiddenFilters.any((filter) => filter.test(entry)));
   }
 
-  void _invalidate({Set<AvesEntry>? entries, bool notify = true}) {
+  void _invalidate({Set<FmvEntry>? entries, bool notify = true}) {
     invalidateEntries();
     invalidateAlbumFilterSummary(entries: entries, notify: notify);
     invalidateCountryFilterSummary(entries: entries, notify: notify);
@@ -180,7 +180,7 @@ abstract class CollectionSource with SourceBase, AlbumMixin, CountryMixin, Place
     _sortedEntriesByDate = null;
   }
 
-  void updateDerivedFilters([Set<AvesEntry>? entries]) {
+  void updateDerivedFilters([Set<FmvEntry>? entries]) {
     _invalidate(entries: entries);
     // it is possible for entries hidden by a filter type, to have an impact on other types
     // e.g. given a sole entry for country C and tag T, hiding T should make C disappear too
@@ -189,14 +189,14 @@ abstract class CollectionSource with SourceBase, AlbumMixin, CountryMixin, Place
     updateTags();
   }
 
-  void _disposeEntries(bool Function(int id, AvesEntry entry) test) {
+  void _disposeEntries(bool Function(int id, FmvEntry entry) test) {
     final todoEntries = _entriesById.entries.where((kv) => test(kv.key, kv.value)).toSet();
     todoEntries.forEach((kv) => _entriesById.remove(kv.key)?.dispose());
   }
 
   void _disposeAllEntries() => _disposeEntries((_, _) => true);
 
-  void addEntries(Set<AvesEntry> entries, {bool notify = true}) {
+  void addEntries(Set<FmvEntry> entries, {bool notify = true}) {
     if (entries.isEmpty) return;
 
     entries.where((entry) => entry.catalogDateMillis == null).forEach((entry) {
@@ -244,7 +244,7 @@ abstract class CollectionSource with SourceBase, AlbumMixin, CountryMixin, Place
     // caller should take care of updating these at the right time
   }
 
-  Future<void> _moveEntry(AvesEntry entry, Map newFields, {required bool persist}) async {
+  Future<void> _moveEntry(FmvEntry entry, Map newFields, {required bool persist}) async {
     newFields.keys.forEach((key) {
       final newValue = newFields[key];
       switch (key) {
@@ -294,7 +294,7 @@ abstract class CollectionSource with SourceBase, AlbumMixin, CountryMixin, Place
     }
   }
 
-  Future<void> renameStoredAlbum(String sourceAlbum, String destinationAlbum, Set<AvesEntry> entries, Set<MoveOpEvent> movedOps) async {
+  Future<void> renameStoredAlbum(String sourceAlbum, String destinationAlbum, Set<FmvEntry> entries, Set<MoveOpEvent> movedOps) async {
     final oldFilter = StoredAlbumFilter(sourceAlbum, null);
     final newFilter = StoredAlbumFilter(destinationAlbum, null);
 
@@ -351,7 +351,7 @@ abstract class CollectionSource with SourceBase, AlbumMixin, CountryMixin, Place
   }
 
   Future<void> updateAfterMove({
-    required Set<AvesEntry> todoEntries,
+    required Set<FmvEntry> todoEntries,
     required MoveType moveType,
     required Set<String> destinationAlbums,
     required Set<MoveOpEvent> movedOps,
@@ -369,7 +369,7 @@ abstract class CollectionSource with SourceBase, AlbumMixin, CountryMixin, Place
     await removeEntries(replacedUris, includeTrash: false);
 
     final fromAlbums = <String?>{};
-    final movedEntries = <AvesEntry>{};
+    final movedEntries = <FmvEntry>{};
     final copy = moveType == MoveType.copy;
     if (copy) {
       movedOps.forEach((movedOp) {
@@ -434,13 +434,13 @@ abstract class CollectionSource with SourceBase, AlbumMixin, CountryMixin, Place
   }
 
   Future<void> updateAfterRename({
-    required Set<AvesEntry> todoEntries,
+    required Set<FmvEntry> todoEntries,
     required Set<MoveOpEvent> movedOps,
     required bool persist,
   }) async {
     if (movedOps.isEmpty) return;
 
-    final movedEntries = <AvesEntry>{};
+    final movedEntries = <FmvEntry>{};
     await Future.forEach<MoveOpEvent>(movedOps, (movedOp) async {
       final newFields = movedOp.newFields;
       if (newFields.isNotEmpty) {
@@ -468,7 +468,7 @@ abstract class CollectionSource with SourceBase, AlbumMixin, CountryMixin, Place
 
   Future<Set<String>> refreshUris(Set<String> changedUris, {AnalysisController? analysisController});
 
-  Future<void> refreshEntries(Set<AvesEntry> entries, Set<EntryDataType> dataTypes) async {
+  Future<void> refreshEntries(Set<FmvEntry> entries, Set<EntryDataType> dataTypes) async {
     const background = false;
     const persist = true;
 
@@ -502,7 +502,7 @@ abstract class CollectionSource with SourceBase, AlbumMixin, CountryMixin, Place
     eventBus.fire(EntryRefreshedEvent(entries));
   }
 
-  Future<void> analyze(AnalysisController? analysisController, {Set<AvesEntry>? entries}) async {
+  Future<void> analyze(AnalysisController? analysisController, {Set<FmvEntry>? entries}) async {
     // not only visible entries, as hidden and vault items may be analyzed
     final todoEntries = entries ?? allEntries;
     final defaultAnalysisController = AnalysisController();
@@ -526,7 +526,7 @@ abstract class CollectionSource with SourceBase, AlbumMixin, CountryMixin, Place
 
       debugPrint('analyze ${todoEntries.length} entries, force=$force, starting service=$startAnalysisService');
       if (startAnalysisService) {
-        final lifecycleState = AvesApp.lifecycleStateNotifier.value;
+        final lifecycleState = FmvApp.lifecycleStateNotifier.value;
         switch (lifecycleState) {
           case .resumed:
           case .inactive:
@@ -596,7 +596,7 @@ abstract class CollectionSource with SourceBase, AlbumMixin, CountryMixin, Place
     return 0;
   }
 
-  AvesEntry? recentEntry(CollectionFilter filter) {
+  FmvEntry? recentEntry(CollectionFilter filter) {
     switch (filter) {
       case AlbumBaseFilter _:
         return albumRecentEntry(filter);
@@ -612,7 +612,7 @@ abstract class CollectionSource with SourceBase, AlbumMixin, CountryMixin, Place
     return null;
   }
 
-  AvesEntry? coverEntry(CollectionFilter filter) {
+  FmvEntry? coverEntry(CollectionFilter filter) {
     final id = covers.of(filter)?.entryId;
     if (id != null) {
       final entry = visibleEntries.firstWhereOrNull((entry) => entry.id == id);

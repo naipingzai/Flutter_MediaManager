@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SelectionButton extends StatelessWidget {
-  final AvesEntry mainEntry;
+  final FmvEntry mainEntry;
   final Animation<double> scale;
 
   static const double padding = 8;
@@ -25,7 +25,7 @@ class SelectionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final selection = context.read<Selection<AvesEntry>>();
+    final selection = context.read<Selection<FmvEntry>>();
     final duration = context.select<DurationsData, Duration>((v) => v.formTransition);
     return SafeArea(
       top: false,
@@ -40,7 +40,7 @@ class SelectionButton extends StatelessWidget {
             ScalingOverlayTextButton(
               scale: scale,
               onPressed: () => selection.toggleSelection(mainEntry),
-              child: Selector<Selection<AvesEntry>?, int>(
+              child: Selector<Selection<FmvEntry>?, int>(
                 selector: (context, selection) => selection?.selectedItemCount ?? 0,
                 builder: (context, count, child) {
                   return Row(
@@ -55,7 +55,7 @@ class SelectionButton extends StatelessWidget {
                         padding: EdgeInsets.symmetric(horizontal: 8),
                         child: Text(AText.separator),
                       ),
-                      Selector<Selection<AvesEntry>, bool>(
+                      Selector<Selection<FmvEntry>, bool>(
                         selector: (context, selection) => selection.isSelected({mainEntry}),
                         builder: (context, isSelected, child) {
                           return AnimatedSwitcher(

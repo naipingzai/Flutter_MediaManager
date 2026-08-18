@@ -15,12 +15,12 @@ import 'package:leak_tracker/leak_tracker.dart';
 
 class VideoConductor {
   final CollectionLens? _collection;
-  final List<AvesVideoController> _controllers = [];
-  final Map<AvesVideoController, StreamSubscription> _statusSubscriptions = {};
-  final Map<AvesVideoController, StreamSubscription> _eventSubscriptions = {};
+  final List<FmvVideoController> _controllers = [];
+  final Map<FmvVideoController, StreamSubscription> _statusSubscriptions = {};
+  final Map<FmvVideoController, StreamSubscription> _eventSubscriptions = {};
   final PlaybackStateHandler _playbackStateHandler = DatabasePlaybackStateHandler();
 
-  final ValueNotifier<AvesVideoController?> playingVideoControllerNotifier = ValueNotifier(null);
+  final ValueNotifier<FmvVideoController?> playingVideoControllerNotifier = ValueNotifier(null);
 
   static const _defaultMaxControllerCount = 3;
 
@@ -46,7 +46,7 @@ class VideoConductor {
     }
   }
 
-  Future<AvesVideoController> getOrCreateController(AvesEntry entry, {int? maxControllerCount}) async {
+  Future<FmvVideoController> getOrCreateController(FmvEntry entry, {int? maxControllerCount}) async {
     var controller = getController(entry);
     if (controller != null) {
       _controllers.remove(controller);
@@ -68,19 +68,19 @@ class VideoConductor {
     return controller;
   }
 
-  AvesVideoController? getPlayingController() => _controllers.firstWhereOrNull((c) => c.isPlaying);
+  FmvVideoController? getPlayingController() => _controllers.firstWhereOrNull((c) => c.isPlaying);
 
-  AvesVideoController? getController(AvesEntry entry) {
+  FmvVideoController? getController(FmvEntry entry) {
     return _controllers.firstWhereOrNull((c) => c.entry.uri == entry.uri && c.entry.pageId == entry.pageId);
   }
 
-  Future<void> _onControllerStatusChanged(AvesEntry entry, AvesVideoController controller, VideoStatus status) async {
+  Future<void> _onControllerStatusChanged(FmvEntry entry, FmvVideoController controller, VideoStatus status) async {
     bool canSkipToNext = false, canSkipToPrevious = false;
     final entries = _collection?.sortedEntries;
     if (entries != null) {
       final currentIndex = entries.indexOf(entry);
       if (currentIndex != -1) {
-        bool isVideo(AvesEntry entry) => entry.isVideo;
+        bool isVideo(FmvEntry entry) => entry.isVideo;
         canSkipToPrevious = entries.take(currentIndex).lastWhereOrNull(isVideo) != null;
         canSkipToNext = entries.skip(currentIndex + 1).firstWhereOrNull(isVideo) != null;
       }
@@ -99,18 +99,18 @@ class VideoConductor {
     playingVideoControllerNotifier.value = getPlayingController();
   }
 
-  Future<void> _onControllerEvent(AvesEntry entry, AvesVideoController controller, VideoEvent event) async {
+  Future<void> _onControllerEvent(FmvEntry entry, FmvVideoController controller, VideoEvent event) async {
     if (event is LagEvent) {
       debugPrint('Video lag detected: disposing video controllers, keeping only the one for entry=$entry');
       final otherControllers = List.of(_controllers)..remove(controller);
       _controllers.removeWhere(otherControllers.contains);
-      await Future.forEach<AvesVideoController>(otherControllers, _disposeController);
+      await Future.forEach<FmvVideoController>(otherControllers, _disposeController);
     }
   }
 
-  Future<void> _applyToAll(Future Function(AvesVideoController controller) action) {
+  Future<void> _applyToAll(Future Function(FmvVideoController controller) action) {
     // local copy to prevent concurrent modification
-    return Future.forEach<AvesVideoController>(List.of(_controllers), action);
+    return Future.forEach<FmvVideoController>(List.of(_controllers), action);
   }
 
   Future<void> _disposeAll() => _applyToAll(_disposeController);
@@ -119,7 +119,7 @@ class VideoConductor {
 
   Future<void> muteAll(bool muted) => _applyToAll((controller) => controller.mute(muted));
 
-  Future<void> _disposeController(AvesVideoController controller) async {
+  Future<void> _disposeController(FmvVideoController controller) async {
     await _statusSubscriptions.remove(controller)?.cancel();
     await _eventSubscriptions.remove(controller)?.cancel();
     await controller.dispose();

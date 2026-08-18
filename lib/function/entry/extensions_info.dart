@@ -17,7 +17,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
-extension ExtraAvesEntryInfo on AvesEntry {
+extension ExtraAvesEntryInfo on FmvEntry {
   // directory names may contain the name of their parent directory (as prefix + '/')
   // directory names may contain an index (as suffix in '[]')
   static final directoryNamePattern = RegExp(r'^((?<parent>.*?)/)?(?<name>.*?)(\[(?<index>\d+)\])?$');
@@ -131,7 +131,7 @@ extension ExtraAvesEntryInfo on AvesEntry {
       if (knownStreams.isNotEmpty) {
         final indexDigits = knownStreams.length.toString().length;
 
-        final colors = context.read<AvesColorsData>();
+        final colors = context.read<FmvColorsData>();
         for (final stream in knownStreams) {
           final index = ((stream[Keys.index] as int?) ?? 0) + 1;
           final typeText = getTypeText(stream);

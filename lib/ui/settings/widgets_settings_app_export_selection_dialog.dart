@@ -30,7 +30,7 @@ class _AppExportItemSelectionDialogState extends State<AppExportItemSelectionDia
 
   @override
   Widget build(BuildContext context) {
-    return AvesDialog(
+    return FmvDialog(
       title: widget.title,
       scrollableContent: AppExportItem.values.map((v) {
         return SwitchListTile(

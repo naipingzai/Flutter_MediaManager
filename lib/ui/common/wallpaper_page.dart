@@ -28,7 +28,7 @@ import 'package:provider/provider.dart';
 class WallpaperPage extends StatelessWidget {
   static const routeName = '/set_wallpaper';
 
-  final AvesEntry? entry;
+  final FmvEntry? entry;
 
   const WallpaperPage({
     super.key,
@@ -37,7 +37,7 @@ class WallpaperPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AvesScaffold(
+    return FmvScaffold(
       body: entry != null
           ? MultiProvider(
               providers: [
@@ -57,7 +57,7 @@ class WallpaperPage extends StatelessWidget {
 }
 
 class EntryEditor extends StatefulWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
 
   const EntryEditor({
     super.key,
@@ -80,15 +80,15 @@ class _EntryEditorState extends State<EntryEditor> with EntryViewControllerMixin
   bool get isViewingImage => true;
 
   @override
-  final ValueNotifier<AvesEntry?> entryNotifier = ValueNotifier(null);
+  final ValueNotifier<FmvEntry?> entryNotifier = ValueNotifier(null);
 
-  AvesEntry get entry => widget.entry;
+  FmvEntry get entry => widget.entry;
 
   @override
   void initState() {
     super.initState();
     if (settings.maxBrightness == MaxBrightness.viewerOnly) {
-      AvesApp.screenBrightness?.setApplicationScreenBrightness(1);
+      FmvApp.screenBrightness?.setApplicationScreenBrightness(1);
     }
     if (settings.keepScreenOn == KeepScreenOn.viewerOnly) {
       windowService.keepScreenOn(true);
@@ -172,12 +172,12 @@ class _EntryEditorState extends State<EntryEditor> with EntryViewControllerMixin
     final mainEntry = entry;
     final multiPageController = mainEntry.isMultiPage ? context.read<MultiPageConductor>().getController(mainEntry) : null;
 
-    Widget? _buildExtraBottomOverlay({AvesEntry? pageEntry}) {
+    Widget? _buildExtraBottomOverlay({FmvEntry? pageEntry}) {
       final targetEntry = pageEntry ?? mainEntry;
       Widget? child;
       // a 360 video is both a video and a panorama but only the video controls are displayed
       if (targetEntry.isPureVideo) {
-        child = Selector<VideoConductor, AvesVideoController?>(
+        child = Selector<VideoConductor, FmvVideoController?>(
           selector: (context, vc) => vc.getController(targetEntry),
           builder: (context, videoController, child) => VideoControlOverlay(
             entry: targetEntry,
@@ -243,8 +243,8 @@ class _EntryEditorState extends State<EntryEditor> with EntryViewControllerMixin
 
   void _onVideoAction({
     required BuildContext context,
-    required AvesEntry entry,
-    required AvesVideoController? controller,
+    required FmvEntry entry,
+    required FmvVideoController? controller,
     required EntryAction action,
   }) {
     if (controller != null) {
@@ -256,7 +256,7 @@ class _EntryEditorState extends State<EntryEditor> with EntryViewControllerMixin
 
   Future<void> _onOverlayVisibleChanged({bool animate = true}) async {
     if (_overlayVisible.value) {
-      await AvesApp.showSystemUI(true);
+      await FmvApp.showSystemUI(true);
       if (animate) {
         await _overlayAnimationController.forward();
       } else {
@@ -268,7 +268,7 @@ class _EntryEditorState extends State<EntryEditor> with EntryViewControllerMixin
         _frozenViewInsets = mediaQuery.viewInsets;
         _frozenViewPadding = mediaQuery.viewPadding;
       });
-      await AvesApp.showSystemUI(false);
+      await FmvApp.showSystemUI(false);
       if (animate) {
         await _overlayAnimationController.reverse();
       } else {

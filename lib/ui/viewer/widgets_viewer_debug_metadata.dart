@@ -13,7 +13,7 @@ import 'package:flutter_media_view/ui/viewer/widgets_viewer_info_common.dart';
 import 'package:flutter/material.dart';
 
 class MetadataTab extends StatefulWidget {
-  final AvesEntry entry;
+  final FmvEntry entry;
 
   const MetadataTab({
     super.key,
@@ -33,7 +33,7 @@ class _MetadataTabState extends State<MetadataTab> {
   static const secondTimestampKeys = ['date_added', 'date_modified', 'date_expires', 'isPlayed'];
   static const millisecondTimestampKeys = ['datetaken', 'datetime', 'inferred_date'];
 
-  AvesEntry get entry => widget.entry;
+  FmvEntry get entry => widget.entry;
 
   @override
   void initState() {
@@ -91,7 +91,7 @@ class _MetadataTabState extends State<MetadataTab> {
           return MapEntry(key, value);
         }),
       );
-      return AvesExpansionTile(
+      return FmvExpansionTile(
         title: title,
         children: [
           if (data.isNotEmpty)
@@ -142,7 +142,7 @@ class _MetadataTabState extends State<MetadataTab> {
             if (snapshot.hasError) return Text(snapshot.error.toString());
             if (snapshot.connectionState != ConnectionState.done) return const SizedBox();
             final data = snapshot.data?.trim();
-            return AvesExpansionTile(
+            return FmvExpansionTile(
               title: 'MP4 Parser',
               children: [
                 if (data != null && data.isNotEmpty)

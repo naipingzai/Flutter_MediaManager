@@ -3,7 +3,7 @@ import 'package:flutter_media_view/ui/common/dialogs_aves_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_selection_dialogs_common.dart';
 import 'package:flutter/material.dart';
 
-class AvesMultiSelectionDialog<T> extends StatefulWidget {
+class FmvMultiSelectionDialog<T> extends StatefulWidget {
   static const routeName = '/dialog/multi_selection';
 
   final Set<T> initialValue;
@@ -12,7 +12,7 @@ class AvesMultiSelectionDialog<T> extends StatefulWidget {
   final String? title, message;
   final bool? dense;
 
-  const AvesMultiSelectionDialog({
+  const FmvMultiSelectionDialog({
     super.key,
     required this.initialValue,
     required this.options,
@@ -23,10 +23,10 @@ class AvesMultiSelectionDialog<T> extends StatefulWidget {
   });
 
   @override
-  State<AvesMultiSelectionDialog<T>> createState() => _AvesMultiSelectionDialogState<T>();
+  State<FmvMultiSelectionDialog<T>> createState() => _AvesMultiSelectionDialogState<T>();
 }
 
-class _AvesMultiSelectionDialogState<T> extends State<AvesMultiSelectionDialog<T>> {
+class _AvesMultiSelectionDialogState<T> extends State<FmvMultiSelectionDialog<T>> {
   late Set<T> _selectedValues;
 
   @override
@@ -39,8 +39,8 @@ class _AvesMultiSelectionDialogState<T> extends State<AvesMultiSelectionDialog<T
   Widget build(BuildContext context) {
     final title = widget.title;
     final message = widget.message;
-    final verticalPadding = (title == null && message == null) ? AvesDialog.cornerRadius.y / 2 : .0;
-    return AvesDialog(
+    final verticalPadding = (title == null && message == null) ? FmvDialog.cornerRadius.y / 2 : .0;
+    return FmvDialog(
       title: title,
       scrollableContent: [
         if (verticalPadding != 0) SizedBox(height: verticalPadding),

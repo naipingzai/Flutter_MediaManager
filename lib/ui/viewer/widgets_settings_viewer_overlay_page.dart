@@ -37,7 +37,7 @@ class ViewerOverlayPage extends StatelessWidget {
       color: SettingSwitchTrailingIcon.getIconColor(context),
     );
 
-    return AvesScaffold(
+    return FmvScaffold(
       appBar: AppBar(
         automaticallyImplyLeading: !useTvLayout,
         title: Text(l10n.settingsViewerOverlayPageTitle),

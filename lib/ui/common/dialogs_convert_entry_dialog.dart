@@ -23,7 +23,7 @@ import 'package:flutter_media_view/ui/common/dialogs_aves_dialog.dart';
 class ConvertEntryDialog extends StatefulWidget {
   static const routeName = '/dialog/convert_entry';
 
-  final Set<AvesEntry> entries;
+  final Set<FmvEntry> entries;
 
   const ConvertEntryDialog({
     super.key,
@@ -45,9 +45,9 @@ class _ConvertEntryDialogState extends State<ConvertEntryDialog> {
   late List<LengthUnit> _lengthUnitOptions;
   late LengthUnit _lengthUnit;
 
-  Set<AvesEntry> get entries => widget.entries;
+  Set<FmvEntry> get entries => widget.entries;
 
-  EdgeInsets get contentHorizontalPadding => const EdgeInsets.symmetric(horizontal: AvesDialog.defaultHorizontalContentPadding);
+  EdgeInsets get contentHorizontalPadding => const EdgeInsets.symmetric(horizontal: FmvDialog.defaultHorizontalContentPadding);
 
   static const _imageExportFormats = [
     MimeTypes.bmp,
@@ -104,7 +104,7 @@ class _ConvertEntryDialogState extends State<ConvertEntryDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AvesDialog(
+    return FmvDialog(
       scrollableContent: [
         const SizedBox(height: 16),
         if (_actionOptions.length > 1)
@@ -128,7 +128,7 @@ class _ConvertEntryDialogState extends State<ConvertEntryDialog> {
           duration: context.read<DurationsData>().formTransition,
           switchInCurve: Curves.easeInOutCubic,
           switchOutCurve: Curves.easeInOutCubic,
-          transitionBuilder: AvesTransitions.formTransitionBuilder,
+          transitionBuilder: FmvTransitions.formTransitionBuilder,
           child: Column(
             key: ValueKey(_action),
             mainAxisSize: .min,
@@ -200,7 +200,7 @@ class _ConvertEntryDialogState extends State<ConvertEntryDialog> {
           mainAxisSize: .min,
           children: [
             Text(l10n.exportEntryDialogFormat),
-            const SizedBox(width: AvesDialog.controlCaptionPadding),
+            const SizedBox(width: FmvDialog.controlCaptionPadding),
             TextDropdownButton<String>(
               values: _imageExportFormats,
               valueText: MimeUtils.displayType,
@@ -332,7 +332,7 @@ class _ConvertEntryDialogState extends State<ConvertEntryDialog> {
             duration: context.read<DurationsData>().formTransition,
             switchInCurve: Curves.easeInOutCubic,
             switchOutCurve: Curves.easeInOutCubic,
-            transitionBuilder: AvesTransitions.formTransitionBuilder,
+            transitionBuilder: FmvTransitions.formTransitionBuilder,
             child: child,
           );
         },
@@ -347,8 +347,8 @@ class _ConvertEntryDialogState extends State<ConvertEntryDialog> {
               onChanged: (v) => setState(() => _writeMetadata = v),
               title: Text(l10n.exportEntryDialogWriteMetadata),
               contentPadding: const EdgeInsetsDirectional.only(
-                start: AvesDialog.defaultHorizontalContentPadding,
-                end: AvesDialog.defaultHorizontalContentPadding - 8,
+                start: FmvDialog.defaultHorizontalContentPadding,
+                end: FmvDialog.defaultHorizontalContentPadding - 8,
               ),
             );
           } else {
@@ -358,7 +358,7 @@ class _ConvertEntryDialogState extends State<ConvertEntryDialog> {
             duration: context.read<DurationsData>().formTransition,
             switchInCurve: Curves.easeInOutCubic,
             switchOutCurve: Curves.easeInOutCubic,
-            transitionBuilder: AvesTransitions.formTransitionBuilder,
+            transitionBuilder: FmvTransitions.formTransitionBuilder,
             child: child,
           );
         },

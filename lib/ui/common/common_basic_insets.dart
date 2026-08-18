@@ -150,7 +150,7 @@ class SafeCutoutArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<EdgeInsets>(
-      valueListenable: AvesApp.cutoutInsetsNotifier,
+      valueListenable: FmvApp.cutoutInsetsNotifier,
       builder: (context, cutoutInsets, child) {
         return NullableValueListenableBuilder<double>(
           valueListenable: animation,

@@ -85,7 +85,7 @@ class _AboutDataUsageState extends State<AboutDataUsage> with FeedbackMixin {
                     animationDuration: animationDuration,
                   ),
                   Center(
-                    child: AvesOutlinedButton(
+                    child: FmvOutlinedButton(
                       label: context.l10n.aboutDataUsageClearCache,
                       onPressed: () async {
                         await storageService.deleteTempDirectory();
@@ -144,7 +144,7 @@ class DataUsageDonut extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
 
-    return AvesDonut(
+    return FmvDonut(
       title: Text(title),
       byTypes: byTypes,
       animationDuration: animationDuration,
@@ -170,7 +170,7 @@ class DataUsageDonut extends StatelessWidget {
       },
       formatValue: (v) => formatFileSize(settings.avesLocale, v, round: 0),
       colorize: (context, d) {
-        final colors = context.read<AvesColorsData>();
+        final colors = context.read<FmvColorsData>();
         Color? color;
         switch (d.key) {
           case flutter:

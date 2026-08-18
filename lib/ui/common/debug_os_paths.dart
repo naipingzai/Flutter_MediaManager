@@ -25,7 +25,7 @@ class _DebugOSPathSectionState extends State<DebugOSPathSection> with AutomaticK
   Widget build(BuildContext context) {
     super.build(context);
 
-    return AvesExpansionTile(
+    return FmvExpansionTile(
       title: 'OS Paths',
       children: [
         Padding(

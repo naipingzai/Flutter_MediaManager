@@ -33,7 +33,7 @@ class EntryInfoActionDelegate with FeedbackMixin, PermissionAwareMixin, EntryEdi
 
   bool isVisible({
     required AppMode appMode,
-    required AvesEntry targetEntry,
+    required FmvEntry targetEntry,
     required EntryAction action,
   }) {
     final canWrite = appMode.canEditEntry && !settings.isReadOnly;
@@ -64,7 +64,7 @@ class EntryInfoActionDelegate with FeedbackMixin, PermissionAwareMixin, EntryEdi
     }
   }
 
-  bool canApply(AvesEntry targetEntry, EntryAction action) {
+  bool canApply(FmvEntry targetEntry, EntryAction action) {
     switch (action) {
       // general
       case .rotateCCW:
@@ -99,7 +99,7 @@ class EntryInfoActionDelegate with FeedbackMixin, PermissionAwareMixin, EntryEdi
     }
   }
 
-  Future<void> onActionSelected(BuildContext context, AvesEntry targetEntry, CollectionLens? collection, EntryAction action) async {
+  Future<void> onActionSelected(BuildContext context, FmvEntry targetEntry, CollectionLens? collection, EntryAction action) async {
     await reportService.log('$runtimeType handles $action');
     _eventStreamController.add(ActionStartedEvent(action));
     switch (action) {
@@ -135,14 +135,14 @@ class EntryInfoActionDelegate with FeedbackMixin, PermissionAwareMixin, EntryEdi
     _eventStreamController.add(ActionEndedEvent(action));
   }
 
-  Future<void> _editDate(BuildContext context, AvesEntry targetEntry, CollectionLens? collection) async {
+  Future<void> _editDate(BuildContext context, FmvEntry targetEntry, CollectionLens? collection) async {
     final modifier = await selectDateModifier(context, {targetEntry}, collection);
     if (modifier == null) return;
 
     await edit(context, targetEntry, () => targetEntry.editDate(modifier), shouldCheckUndatedItems: false);
   }
 
-  Future<void> _editLocation(BuildContext context, AvesEntry targetEntry, CollectionLens? collection) async {
+  Future<void> _editLocation(BuildContext context, FmvEntry targetEntry, CollectionLens? collection) async {
     final locationByEntry = await selectLocation(context, {targetEntry}, collection);
     if (locationByEntry == null) return;
 
@@ -151,27 +151,27 @@ class EntryInfoActionDelegate with FeedbackMixin, PermissionAwareMixin, EntryEdi
     }
   }
 
-  Future<void> _editTitleDescription(BuildContext context, AvesEntry targetEntry) async {
+  Future<void> _editTitleDescription(BuildContext context, FmvEntry targetEntry) async {
     final modifier = await selectTitleDescriptionModifier(context, {targetEntry});
     if (modifier == null) return;
 
     await edit(context, targetEntry, () => targetEntry.editTitleDescription(modifier));
   }
 
-  Future<void> _editRating(BuildContext context, AvesEntry targetEntry) async {
+  Future<void> _editRating(BuildContext context, FmvEntry targetEntry) async {
     final rating = await selectRating(context, {targetEntry});
     if (rating == null) return;
 
     await quickRate(context, targetEntry, rating);
   }
 
-  Future<void> quickRate(BuildContext context, AvesEntry targetEntry, int rating) async {
+  Future<void> quickRate(BuildContext context, FmvEntry targetEntry, int rating) async {
     if (targetEntry.rating == rating) return;
 
     await edit(context, targetEntry, () => targetEntry.editRating(rating));
   }
 
-  Future<void> _editTags(BuildContext context, AvesEntry targetEntry) async {
+  Future<void> _editTags(BuildContext context, FmvEntry targetEntry) async {
     final tagsByEntry = await selectTags(context, {targetEntry});
     if (tagsByEntry == null) return;
 
@@ -179,7 +179,7 @@ class EntryInfoActionDelegate with FeedbackMixin, PermissionAwareMixin, EntryEdi
     await _applyTags(context, targetEntry, newTags);
   }
 
-  Future<void> quickTag(BuildContext context, AvesEntry targetEntry, CollectionFilter filter) async {
+  Future<void> quickTag(BuildContext context, FmvEntry targetEntry, CollectionFilter filter) async {
     final newTags = {
       ...targetEntry.tags,
       ...await getTagsFromFilters({filter}, targetEntry),
@@ -187,21 +187,21 @@ class EntryInfoActionDelegate with FeedbackMixin, PermissionAwareMixin, EntryEdi
     await _applyTags(context, targetEntry, newTags);
   }
 
-  Future<void> _applyTags(BuildContext context, AvesEntry targetEntry, Set<String> newTags) async {
+  Future<void> _applyTags(BuildContext context, FmvEntry targetEntry, Set<String> newTags) async {
     final currentTags = targetEntry.tags;
     if (newTags.length == currentTags.length && newTags.every(currentTags.contains)) return;
 
     await edit(context, targetEntry, () => targetEntry.editTags(newTags));
   }
 
-  Future<void> _removeMetadata(BuildContext context, AvesEntry targetEntry) async {
+  Future<void> _removeMetadata(BuildContext context, FmvEntry targetEntry) async {
     final types = await selectMetadataToRemove(context, {targetEntry});
     if (types == null) return;
 
     await edit(context, targetEntry, () => targetEntry.removeMetadata(types));
   }
 
-  Future<void> _exportMetadata(BuildContext context, AvesEntry targetEntry) async {
+  Future<void> _exportMetadata(BuildContext context, FmvEntry targetEntry) async {
     final lines = <String>[];
     final padding = ' ' * 2;
     final titledDirectories = await targetEntry.getMetadataDirectories(context);
@@ -233,7 +233,7 @@ class EntryInfoActionDelegate with FeedbackMixin, PermissionAwareMixin, EntryEdi
     }
   }
 
-  Future<void> _convertMotionPhotoToStillImage(BuildContext context, AvesEntry targetEntry) async {
+  Future<void> _convertMotionPhotoToStillImage(BuildContext context, FmvEntry targetEntry) async {
     final l10n = context.l10n;
 
     if (!await showConfirmationDialog(
@@ -247,7 +247,7 @@ class EntryInfoActionDelegate with FeedbackMixin, PermissionAwareMixin, EntryEdi
     await edit(context, targetEntry, targetEntry.removeTrailerVideo);
   }
 
-  Future<void> _showGeoTiffOnMap(BuildContext context, AvesEntry targetEntry, CollectionLens? collection) async {
+  Future<void> _showGeoTiffOnMap(BuildContext context, FmvEntry targetEntry, CollectionLens? collection) async {
     final info = await metadataFetchService.getGeoTiffInfo(targetEntry);
     if (info == null) return;
 
@@ -276,7 +276,7 @@ class EntryInfoActionDelegate with FeedbackMixin, PermissionAwareMixin, EntryEdi
     );
   }
 
-  void _goToDebug(BuildContext context, AvesEntry targetEntry) {
+  void _goToDebug(BuildContext context, FmvEntry targetEntry) {
     Navigator.maybeOf(context)?.push(
       MaterialPageRoute(
         settings: const RouteSettings(name: ViewerDebugPage.routeName),

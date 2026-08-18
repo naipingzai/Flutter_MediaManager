@@ -2,11 +2,11 @@ import 'package:collection/collection.dart';
 import 'package:flutter/widgets.dart';
 
 // this widget combines multiple pop handlers with a guaranteed order
-class AvesPopScope extends StatelessWidget {
+class FmvPopScope extends StatelessWidget {
   final List<PopHandler> handlers;
   final Widget child;
 
-  const AvesPopScope({
+  const FmvPopScope({
     super.key,
     required this.handlers,
     required this.child,

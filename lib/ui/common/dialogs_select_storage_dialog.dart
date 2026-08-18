@@ -36,7 +36,7 @@ class _SelectStorageDialogState extends State<SelectStorageDialog> {
     final primaryVolumes = (byPrimary[true] ?? [])..sort(compare);
     final otherVolumes = (byPrimary[false] ?? [])..sort(compare);
 
-    return AvesDialog(
+    return FmvDialog(
       title: context.l10n.selectStorageVolumeDialogTitle,
       scrollableContent: [
         RadioGroup(

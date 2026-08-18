@@ -17,7 +17,7 @@ int applyFileSizeSuffix(String? suffix, int bytes) {
   return bytes;
 }
 
-String formatFileSize(AvesLocale locale, int size, {int round = 2}) {
+String formatFileSize(FmvLocale locale, int size, {int round = 2}) {
   if (size < _kilo) return '$size B';
 
   final compactFormatter = locale.numberFormat('0${round > 0 ? '.${'0' * round}' : ''}');

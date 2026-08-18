@@ -41,7 +41,7 @@ import 'package:provider/provider.dart';
 
 mixin EntryStorageMixin on FeedbackMixin, PermissionAwareMixin, SizeAwareMixin, EntryEditorMixin {
   // returns whether it completed the action (with or without failures)
-  Future<bool> doExport(BuildContext context, Set<AvesEntry> targetEntries, EntryConvertOptions options) async {
+  Future<bool> doExport(BuildContext context, Set<FmvEntry> targetEntries, EntryConvertOptions options) async {
     final destinationAlbumFilter = await pickAlbum(
       context: context,
       moveType: MoveType.export,
@@ -56,7 +56,7 @@ mixin EntryStorageMixin on FeedbackMixin, PermissionAwareMixin, SizeAwareMixin, 
     if (!await checkFreeSpaceForMove(context, targetEntries, destinationAlbum, MoveType.export)) return false;
 
     final transientMultiPageInfo = <MultiPageInfo>{};
-    final selection = <AvesEntry>{};
+    final selection = <FmvEntry>{};
     await Future.forEach(targetEntries, (targetEntry) async {
       if (targetEntry.isMultiPage) {
         final multiPageInfo = await targetEntry.getMultiPageInfo();
@@ -90,13 +90,13 @@ mixin EntryStorageMixin on FeedbackMixin, PermissionAwareMixin, SizeAwareMixin, 
     if (uniqueNames.length < names.length) {
       final value = await showAvesDialog<NameConflictStrategy>(
         context: context,
-        builder: (context) => AvesSingleSelectionDialog<NameConflictStrategy>(
+        builder: (context) => FmvSingleSelectionDialog<NameConflictStrategy>(
           initialValue: nameConflictStrategy,
           options: Map.fromEntries(NameConflictStrategy.values.map((v) => MapEntry(v, v.getName(context)))),
           message: l10n.nameConflictDialogSingleSourceMessage,
           confirmationButtonLabel: l10n.continueButtonLabel,
         ),
-        routeSettings: const RouteSettings(name: AvesSingleSelectionDialog.routeName),
+        routeSettings: const RouteSettings(name: FmvSingleSelectionDialog.routeName),
       );
       if (value == null) return false;
       nameConflictStrategy = value;
@@ -190,7 +190,7 @@ mixin EntryStorageMixin on FeedbackMixin, PermissionAwareMixin, SizeAwareMixin, 
   Future<bool> doQuickMove(
     BuildContext context, {
     required MoveType moveType,
-    required Map<String, Set<AvesEntry>> entriesByDestination,
+    required Map<String, Set<FmvEntry>> entriesByDestination,
     bool hideShowAction = false,
     VoidCallback? onSuccess,
   }) async {
@@ -239,13 +239,13 @@ mixin EntryStorageMixin on FeedbackMixin, PermissionAwareMixin, SizeAwareMixin, 
       if (uniqueNames.length < names.length) {
         final value = await showAvesDialog<NameConflictStrategy>(
           context: context,
-          builder: (context) => AvesSingleSelectionDialog<NameConflictStrategy>(
+          builder: (context) => FmvSingleSelectionDialog<NameConflictStrategy>(
             initialValue: nameConflictStrategy,
             options: Map.fromEntries(NameConflictStrategy.values.map((v) => MapEntry(v, v.getName(context)))),
             message: originAlbums.length == 1 ? l10n.nameConflictDialogSingleSourceMessage : l10n.nameConflictDialogMultipleSourceMessage,
             confirmationButtonLabel: l10n.continueButtonLabel,
           ),
-          routeSettings: const RouteSettings(name: AvesSingleSelectionDialog.routeName),
+          routeSettings: const RouteSettings(name: FmvSingleSelectionDialog.routeName),
         );
         if (value == null) return false;
         nameConflictStrategy = value;
@@ -359,7 +359,7 @@ mixin EntryStorageMixin on FeedbackMixin, PermissionAwareMixin, SizeAwareMixin, 
   Future<bool> doMove(
     BuildContext context, {
     required MoveType moveType,
-    required Set<AvesEntry> entries,
+    required Set<FmvEntry> entries,
     bool hideShowAction = false,
     VoidCallback? onSuccess,
   }) async {
@@ -375,7 +375,7 @@ mixin EntryStorageMixin on FeedbackMixin, PermissionAwareMixin, SizeAwareMixin, 
       }
     }
 
-    final entriesByDestination = <String, Set<AvesEntry>>{};
+    final entriesByDestination = <String, Set<FmvEntry>>{};
     switch (moveType) {
       case .copy:
       case .move:
@@ -396,7 +396,7 @@ mixin EntryStorageMixin on FeedbackMixin, PermissionAwareMixin, SizeAwareMixin, 
       case .toBin:
         entriesByDestination[AndroidFileUtils.trashDirPath] = entries;
       case .fromBin:
-        groupBy<AvesEntry, String?>(entries, (e) => e.directory).forEach((originAlbum, dirEntries) {
+        groupBy<FmvEntry, String?>(entries, (e) => e.directory).forEach((originAlbum, dirEntries) {
           if (originAlbum != null) {
             entriesByDestination[originAlbum] = dirEntries.toSet();
           }
@@ -414,7 +414,7 @@ mixin EntryStorageMixin on FeedbackMixin, PermissionAwareMixin, SizeAwareMixin, 
   // returns whether it completed the action (with or without failures)
   Future<bool> rename(
     BuildContext context, {
-    required Map<AvesEntry, String> entriesToNewName,
+    required Map<FmvEntry, String> entriesToNewName,
     required bool persist,
     VoidCallback? onSuccess,
   }) async {
@@ -468,7 +468,7 @@ mixin EntryStorageMixin on FeedbackMixin, PermissionAwareMixin, SizeAwareMixin, 
     Set<MoveOpEvent> movedOps,
   ) async {
     final newUris = movedOps.map((op) => op.newFields[EntryFields.uri] as String?).toSet();
-    bool highlightTest(AvesEntry entry) => newUris.contains(entry.uri);
+    bool highlightTest(FmvEntry entry) => newUris.contains(entry.uri);
 
     final collection = context.read<CollectionLens?>();
     if (collection == null || collection.filters.any((f) => f is StoredAlbumFilter || f is TrashFilter)) {

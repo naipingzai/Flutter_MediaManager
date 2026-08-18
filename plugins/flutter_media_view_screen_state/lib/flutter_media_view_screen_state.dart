@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/services.dart';
 
-class AvesScreenState {
+class FmvScreenState {
   final EventChannel _eventChannel = const EventChannel('deckers.thibault/aves_screen_state/events');
   Stream<ScreenStateEvent>? _screenStateStream;
 

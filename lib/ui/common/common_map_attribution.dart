@@ -35,7 +35,7 @@ class Attribution extends StatelessWidget {
         a: TextStyle(color: theme.colorScheme.primary),
         p: theme.textTheme.bodySmall!.merge(const TextStyle(fontSize: InfoRowGroup.fontSize)),
       ),
-      onTapLink: (text, href, title) => AvesApp.launchUrl(href),
+      onTapLink: (text, href, title) => FmvApp.launchUrl(href),
     );
 
     final animate = context.select<Settings, bool>((v) => v.animate);

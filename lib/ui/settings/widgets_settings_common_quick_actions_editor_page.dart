@@ -94,7 +94,7 @@ class QuickActionEditorPage<T extends Object> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AvesScaffold(
+    return FmvScaffold(
       appBar: AppBar(
         title: Text(title),
         actions: appBarActions,

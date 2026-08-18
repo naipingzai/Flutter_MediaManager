@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'dart:ui' as ui;
 
-abstract class AvesVideoMetadataFetcher {
+abstract class FmvVideoMetadataFetcher {
   void init();
 
   Future<Map<String, Object?>> getMetadata({required String uri, required String mimeType});

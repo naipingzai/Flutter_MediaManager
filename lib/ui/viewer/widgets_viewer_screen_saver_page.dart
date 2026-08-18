@@ -96,7 +96,7 @@ class _ScreenSaverPageState extends State<ScreenSaverPage> with WidgetsBindingOb
       }
     }
 
-    return AvesScaffold(
+    return FmvScaffold(
       body: child,
     );
   }

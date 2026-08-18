@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 
 class EmbeddedDataOpener extends StatelessWidget with FeedbackMixin {
   final bool enabled;
-  final AvesEntry entry;
+  final FmvEntry entry;
   final Widget child;
 
   const EmbeddedDataOpener({
@@ -52,7 +52,7 @@ class EmbeddedDataOpener extends StatelessWidget with FeedbackMixin {
       case .xmp:
         fields = await embeddedDataService.extractXmpDataProp(entry, notification.props, notification.mimeType);
     }
-    AvesEntry.normalizeMimeTypeFields(fields);
+    FmvEntry.normalizeMimeTypeFields(fields);
     final mimeType = fields[EntryFields.mimeType] as String?;
     final uri = fields[EntryFields.uri] as String?;
     if (mimeType == null || uri == null) {
@@ -75,10 +75,10 @@ class EmbeddedDataOpener extends StatelessWidget with FeedbackMixin {
       return;
     }
 
-    _openTempEntry(context, AvesEntry.fromMap(fields));
+    _openTempEntry(context, FmvEntry.fromMap(fields));
   }
 
-  void _openTempEntry(BuildContext context, AvesEntry tempEntry) {
+  void _openTempEntry(BuildContext context, FmvEntry tempEntry) {
     Navigator.maybeOf(context)?.push(
       TransparentMaterialPageRoute(
         settings: const RouteSettings(name: EntryViewerPage.routeName),

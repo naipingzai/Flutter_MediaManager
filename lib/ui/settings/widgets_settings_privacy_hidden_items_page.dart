@@ -23,7 +23,7 @@ class HiddenItemsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    return AvesScaffold(
+    return FmvScaffold(
       appBar: AppBar(
         automaticallyImplyLeading: !settings.useTvLayout,
         title: Text(l10n.settingsHiddenItemsPageTitle),
@@ -75,13 +75,13 @@ class HiddenItemsPage extends StatelessWidget {
                                 builder: (context, constraints) {
                                   return Row(
                                     children: [
-                                      AvesFilterChip(
+                                      FmvFilterChip(
                                         filter: filter,
                                         maxWidth: constraints.maxWidth,
                                         onTap: onRemove,
                                         onRemove: onRemove,
                                         onLongPress: (context, filter, tapPosition) {
-                                          AvesFilterChip.showDefaultLongPressMenu(context, filter, tapPosition, canNavigate: false);
+                                          FmvFilterChip.showDefaultLongPressMenu(context, filter, tapPosition, canNavigate: false);
                                         },
                                       ),
                                       const Spacer(),

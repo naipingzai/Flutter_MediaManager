@@ -19,7 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Cropper extends StatefulWidget {
-  final AvesMagnifierController magnifierController;
+  final FmvMagnifierController magnifierController;
   final TransformController transformController;
   final ValueNotifier<EdgeInsets> marginNotifier;
 
@@ -49,7 +49,7 @@ class _CropperState extends State<Cropper> with SingleTickerProviderStateMixin {
   static const int straightenGridDivision = 9;
   static const double overOutlineFactor = .25;
 
-  AvesMagnifierController get magnifierController => widget.magnifierController;
+  FmvMagnifierController get magnifierController => widget.magnifierController;
 
   TransformController get transformController => widget.transformController;
 
