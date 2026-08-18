@@ -56,7 +56,7 @@ class _WelcomePageState extends State<WelcomePage> {
           child: FutureBuilder<String>(
             future: _termsLoader,
             builder: (context, snapshot) {
-              if (snapshot.hasError || snapshot.connectionState != ConnectionState.done) return const SizedBox();
+              if (snapshot.hasError || snapshot.connectionState != ConnectionState.done) return const Center(child: CircularProgressIndicator());
               final terms = snapshot.data!;
               final durations = context.watch<DurationsData>();
               final isPortrait = MediaQuery.orientationOf(context) == Orientation.portrait;
@@ -64,7 +64,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 mainAxisSize: .min,
                 children: _toStaggeredList(
                   duration: durations.staggeredAnimation,
-                  delay: durations.staggeredAnimationDelay * timeDilation,
+                  delay: const Duration(milliseconds: 50),
                   childAnimationBuilder: (child) => SlideAnimation(
                     verticalOffset: 50.0,
                     child: FadeInAnimation(
