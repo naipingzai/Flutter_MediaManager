@@ -28,7 +28,8 @@ class ImportService {
   ///
   /// 选择逻辑与复制分离，便于上层在拿到文件列表后展示复制进度。
   Future<List<PlatformFile>> pickFiles() async {
-    return FilePicker.pickFiles(
+    final result = await FilePicker.platform.pickFiles(
+      allowMultiple: true,
       type: FileType.custom,
       allowedExtensions: const [
         // images
@@ -37,6 +38,7 @@ class ImportService {
         'mp4', 'mkv', 'webm', 'mov', 'avi', 'm4v', '3gp', 'ts', 'mts', 'mpg', 'mpeg',
       ],
     );
+    return result?.files ?? const <PlatformFile>[];
   }
 
   /// 通过系统文件选择器选取文件，并复制到私有库目录。
@@ -113,7 +115,9 @@ class ImportService {
       // 分块流式复制，避免大文件一次性读入内存
       await File(sourcePath).openRead().pipe(target.openWrite());
     } else {
-      await target.writeAsBytes(await file.readAsBytes(), flush: true);
+      final bytes = file.bytes ?? (file.path != null ? await File(file.path!).readAsBytes() : null);
+      if (bytes == null) throw StateError('no data for picked file \${file.name}');
+      await target.writeAsBytes(bytes, flush: true);
     }
   }
 

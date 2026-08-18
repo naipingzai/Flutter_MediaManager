@@ -72,12 +72,12 @@ dependencies:
   crypto:
   csv:
   decorated_icon:
-  device_info_plus:
+  device_info_plus: ^11.3.0
   dlna_dart:
   dynamic_color:
   equatable:
   event_bus:
-  file_picker:
+  file_picker: ^11.0.0
   expansion_tile_card:
     git:
       url: https://github.com/deckerst/expansion_tile_card.git

@@ -18,10 +18,10 @@
 @import device_info_plus;
 #endif
 
-#if __has_include(<file_picker_darwin/FilePickerPlugin.h>)
-#import <file_picker_darwin/FilePickerPlugin.h>
+#if __has_include(<file_picker/FilePickerPlugin.h>)
+#import <file_picker/FilePickerPlugin.h>
 #else
-@import file_picker_darwin;
+@import file_picker;
 #endif
 
 #if __has_include(<local_auth_darwin/LocalAuthPlugin.h>)

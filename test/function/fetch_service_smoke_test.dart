@@ -27,7 +27,8 @@ void main() {
       request: key,
     );
     final frame = await codec.getNextFrame();
-    print('FETCH_OK ${frame.image.width}x${frame.image.height}');
+    // ignore: avoid_print
+    // ignore: avoid_print
     expect(frame.image.width, greaterThan(0));
   });
 }
