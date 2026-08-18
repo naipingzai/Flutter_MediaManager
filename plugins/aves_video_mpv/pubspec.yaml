@@ -19,6 +19,7 @@ dependencies:
   image:
   media_kit:
   media_kit_libs_android_video:
+  media_kit_libs_ios_video:
   media_kit_libs_linux:
   media_kit_video:
   path:
