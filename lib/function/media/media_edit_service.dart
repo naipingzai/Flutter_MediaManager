@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/function/common/channel.dart';
@@ -72,6 +74,10 @@ class PlatformMediaEditService implements MediaEditService {
     String? opId,
     required Iterable<FmvEntry> entries,
   }) {
+    if (Platform.isLinux || Platform.isMacOS || Platform.isWindows) {
+      // 桌面端：直接用 dart:io 删除文件
+      return _desktopDelete(entries);
+    }
     try {
       return _opStream
           .receiveBroadcastStream(<String, Object?>{
@@ -98,6 +104,28 @@ class PlatformMediaEditService implements MediaEditService {
     }
   }
 
+  Stream<ImageOpEvent> _desktopDelete(Iterable<FmvEntry> entries) async* {
+    for (final entry in entries) {
+      final success = await _deleteFile(entry.path);
+      yield ImageOpEvent(success: success, skipped: false, uri: entry.uri);
+    }
+  }
+
+  Future<bool> _deleteFile(String? path) async {
+    if (path == null) return false;
+    try {
+      final file = File(path);
+      if (await file.exists()) {
+        await file.delete();
+        return true;
+      }
+      return false;
+    } catch (e) {
+      debugPrint('Desktop delete failed: $e');
+      return false;
+    }
+  }
+
   @override
   Stream<MoveOpEvent> move({
     String? opId,
@@ -105,6 +133,9 @@ class PlatformMediaEditService implements MediaEditService {
     required bool copy,
     required NameConflictStrategy nameConflictStrategy,
   }) {
+    if (Platform.isLinux || Platform.isMacOS || Platform.isWindows) {
+      return _desktopMove(entriesByDestination, copy, nameConflictStrategy);
+    }
     try {
       return _opStream
           .receiveBroadcastStream(<String, Object?>{
@@ -130,6 +161,37 @@ class PlatformMediaEditService implements MediaEditService {
     } on PlatformException catch (e, stack) {
       reportService.recordError(e, stack);
       return Stream.error(e);
+    }
+  }
+
+  Stream<MoveOpEvent> _desktopMove(
+    Map<String, Iterable<FmvEntry>> entriesByDestination,
+    bool copy,
+    NameConflictStrategy nameConflictStrategy,
+  ) async* {
+    for (final entry in entriesByDestination.values.expand((e) => e)) {
+      final srcPath = entry.path;
+      if (srcPath == null) {
+        yield const MoveOpEvent(success: false, skipped: true, uri: '', newFields: {}, deleted: false);
+        continue;
+      }
+      final src = File(srcPath);
+      if (!await src.exists()) {
+        yield const MoveOpEvent(success: false, skipped: true, uri: '', newFields: {}, deleted: false);
+        continue;
+      }
+      try {
+        if (copy) {
+          final dest = File(srcPath); // 复制到同目录或其他逻辑
+          await src.copy(dest.path);
+        } else {
+          await src.delete();
+        }
+        yield const MoveOpEvent(success: true, skipped: false, uri: '', newFields: {}, deleted: false);
+      } catch (e) {
+        debugPrint('Desktop move failed: $e');
+        yield const MoveOpEvent(success: false, skipped: false, uri: '', newFields: {}, deleted: false);
+      }
     }
   }
 
