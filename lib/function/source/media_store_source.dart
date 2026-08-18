@@ -301,7 +301,12 @@ class MediaStoreSource extends CollectionSource {
     unawaited(reportService.log('$runtimeType refresh start for ${changedUris.length} uris$changedUriDetails'));
     final changedUriByContentId = Map.fromEntries(
       changedUris.map((uri) {
-        final pathSegments = Uri.parse(uri).pathSegments;
+        final parsed = Uri.parse(uri);
+        // 对于 file:// URI，用路径哈希作为 contentId
+        if (parsed.scheme == 'file') {
+          return MapEntry(parsed.path.hashCode, uri);
+        }
+        final pathSegments = parsed.pathSegments;
         // e.g. URI `content://media/` has no path segment
         if (pathSegments.isEmpty) return null;
         final idString = pathSegments.last;
