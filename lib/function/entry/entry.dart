@@ -480,6 +480,12 @@ class FmvEntry with FmvEntryBase {
             }
           },
         );
+    // 桌面端无平台实现时超时兜底
+    Timer(const Duration(seconds: 5), () {
+      if (!opCompleter.isCompleted) {
+        opCompleter.complete(true);
+      }
+    });
     return opCompleter.future;
   }
 
