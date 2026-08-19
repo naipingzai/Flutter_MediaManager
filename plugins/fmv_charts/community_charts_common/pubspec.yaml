@@ -1,0 +1,21 @@
+name: fmv_charts_common
+version: 1.0.4
+description: A common library for charting packages. Forked from google/charts.
+repository: https://github.com/juliansteenbakker/community_charts
+publish_to: none
+
+resolution: workspace
+
+environment:
+  sdk: ">=3.12.0 <4.0.0"
+
+dependencies:
+  intl:
+  collection:
+  leak_tracker:
+  meta:
+  vector_math:
+
+dev_dependencies:
+  mockito:
+  test:
