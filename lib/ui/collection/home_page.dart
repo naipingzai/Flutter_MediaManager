@@ -25,8 +25,8 @@ import 'package:flutter_media_view/ui/common/behaviour/common_behaviour_routes.d
 import 'package:flutter_media_view/ui/search/common_search_page.dart';
 import 'package:flutter_media_view/ui/editor/entry_editor_page.dart';
 import 'package:flutter_media_view/ui/common/explorer_page.dart';
-import 'package:flutter_media_view/ui/filter/grids_albums_page.dart';
-import 'package:flutter_media_view/ui/filter/grids_tags_page.dart';
+import 'package:flutter_media_view/ui/filter/grids/grids_albums_page.dart';
+import 'package:flutter_media_view/ui/filter/grids/grids_tags_page.dart';
 import 'package:flutter_media_view/ui/collection/home_error.dart';
 import 'package:flutter_media_view/ui/common/map_page.dart';
 import 'package:flutter_media_view/ui/collection/search_page_route.dart';

@@ -32,7 +32,7 @@ import 'package:flutter_media_view/ui/common/dialogs_fmv_confirmation_dialog.dar
 import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_pick_dialogs_album_pick_page.dart';
 import 'package:flutter_media_view/ui/common/dialogs_selection_dialogs_single_selection.dart';
-import 'package:flutter_media_view/ui/filter/grids_common_enums.dart';
+import 'package:flutter_media_view/ui/filter/grids/grids_common_enums.dart';
 import 'package:flutter_media_view/ui/viewer/controls/controls_notifications.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';

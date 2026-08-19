@@ -17,7 +17,7 @@ import 'package:flutter_media_view/ui/common/basic/common_basic_gestures_ink_wel
 import 'package:flutter_media_view/ui/common/basic/common_basic_popup_menu_row.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/common_providers_media_query_data_provider.dart';
-import 'package:flutter_media_view/ui/filter/grids_common_action_delegates_chip.dart';
+import 'package:flutter_media_view/ui/filter/grids/grids_common_action_delegates_chip.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';

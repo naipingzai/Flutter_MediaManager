@@ -18,7 +18,7 @@ import 'package:flutter_media_view/ui/common/common_extensions_build_context.dar
 import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_video_speed_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_video_track_selection_dialog.dart';
-import 'package:flutter_media_view/ui/settings/video_settings_page.dart';
+import 'package:flutter_media_view/ui/settings/video/video_settings_page.dart';
 import 'package:flutter_media_view/ui/viewer/controls/controls_notifications.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:fmv_video/flutter_media_view_video.dart';

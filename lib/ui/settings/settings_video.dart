@@ -5,12 +5,12 @@ import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/ui/theme/colors.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/settings/common_tile_leading.dart';
-import 'package:flutter_media_view/ui/settings/common_tiles.dart';
+import 'package:flutter_media_view/ui/settings/common/common_tile_leading.dart';
+import 'package:flutter_media_view/ui/settings/common/common_tiles.dart';
 import 'package:flutter_media_view/ui/settings/settings_definition.dart';
-import 'package:flutter_media_view/ui/settings/video_controls_page.dart';
-import 'package:flutter_media_view/ui/settings/video_playback_page.dart';
-import 'package:flutter_media_view/ui/settings/video_subtitle_theme_page.dart';
+import 'package:flutter_media_view/ui/settings/video/video_controls_page.dart';
+import 'package:flutter_media_view/ui/settings/video/video_playback_page.dart';
+import 'package:flutter_media_view/ui/settings/video/video_subtitle_theme_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

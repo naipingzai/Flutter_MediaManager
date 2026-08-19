@@ -51,7 +51,7 @@ import 'package:flutter_media_view/ui/common/dialogs_convert_entry_dialog.dart';
 import 'package:flutter_media_view/ui/editor/dialogs_entry_editors_rename_entry_set_page.dart';
 import 'package:flutter_media_view/ui/editor/dialogs_filter_editors_create_dynamic_album_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_pick_dialogs_location_pick_page.dart';
-import 'package:flutter_media_view/ui/filter/grids_albums_page.dart';
+import 'package:flutter_media_view/ui/filter/grids/grids_albums_page.dart';
 import 'package:flutter_media_view/ui/common/map_page.dart';
 import 'package:flutter_media_view/ui/collection/search_page_route.dart';
 import 'package:flutter_media_view/ui/common/stats_page.dart';

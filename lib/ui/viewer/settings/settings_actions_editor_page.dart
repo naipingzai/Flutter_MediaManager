@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/ui/common/view.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/settings/common_quick_actions_editor_page.dart';
+import 'package:flutter_media_view/ui/settings/common/common_quick_actions_editor_page.dart';
 import 'package:flutter_media_view/ui/viewer/overlay/overlay_bottom.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';

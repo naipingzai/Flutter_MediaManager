@@ -22,11 +22,11 @@ import 'package:flutter_media_view/ui/common/common_providers_query_provider.dar
 import 'package:flutter_media_view/ui/common/common_providers_selection_provider.dart';
 import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view/ui/editor/dialogs_filter_editors_create_group_dialog.dart';
-import 'package:flutter_media_view/ui/filter/grids_common_action_delegates_tag_set.dart';
-import 'package:flutter_media_view/ui/filter/grids_common_app_bar.dart';
-import 'package:flutter_media_view/ui/filter/grids_common_enums.dart';
-import 'package:flutter_media_view/ui/filter/grids_common_grid_page.dart';
-import 'package:flutter_media_view/ui/filter/grids_tags_page.dart';
+import 'package:flutter_media_view/ui/filter/grids/grids_common_action_delegates_tag_set.dart';
+import 'package:flutter_media_view/ui/filter/grids/grids_common_app_bar.dart';
+import 'package:flutter_media_view/ui/filter/grids/grids_common_enums.dart';
+import 'package:flutter_media_view/ui/filter/grids/grids_common_grid_page.dart';
+import 'package:flutter_media_view/ui/filter/grids/grids_tags_page.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';

@@ -22,10 +22,10 @@ import 'package:flutter_media_view/ui/common/common_extensions_media_query.dart'
 import 'package:flutter_media_view/ui/common/identity/common_identity_fmv_logo.dart';
 import 'package:flutter_media_view/ui/common/debug_app_debug_page.dart';
 import 'package:flutter_media_view/ui/common/explorer_page.dart';
-import 'package:flutter_media_view/ui/filter/grids_albums_page.dart';
-import 'package:flutter_media_view/ui/filter/grids_countries_page.dart';
-import 'package:flutter_media_view/ui/filter/grids_places_page.dart';
-import 'package:flutter_media_view/ui/filter/grids_tags_page.dart';
+import 'package:flutter_media_view/ui/filter/grids/grids_albums_page.dart';
+import 'package:flutter_media_view/ui/filter/grids/grids_countries_page.dart';
+import 'package:flutter_media_view/ui/filter/grids/grids_places_page.dart';
+import 'package:flutter_media_view/ui/filter/grids/grids_tags_page.dart';
 import 'package:flutter_media_view/ui/collection/home_page.dart';
 import 'package:flutter_media_view/ui/collection/navigation_drawer_nav_tile.dart';
 import 'package:flutter_media_view/ui/common/navigation_drawer_page_nav_tile.dart';

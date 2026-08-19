@@ -11,11 +11,11 @@ import 'package:flutter_media_view/ui/common/actions/common_action_mixins_permis
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/dialogs_fmv_confirmation_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
-import 'package:flutter_media_view/ui/settings/common_tile_leading.dart';
-import 'package:flutter_media_view/ui/settings/common_tiles.dart';
-import 'package:flutter_media_view/ui/settings/privacy_access_grants_page.dart';
-import 'package:flutter_media_view/ui/settings/privacy_hidden_items_page.dart';
-import 'package:flutter_media_view/ui/settings/privacy_permissions_tile.dart';
+import 'package:flutter_media_view/ui/settings/common/common_tile_leading.dart';
+import 'package:flutter_media_view/ui/settings/common/common_tiles.dart';
+import 'package:flutter_media_view/ui/settings/privacy/privacy_access_grants_page.dart';
+import 'package:flutter_media_view/ui/settings/privacy/privacy_hidden_items_page.dart';
+import 'package:flutter_media_view/ui/settings/privacy/privacy_permissions_tile.dart';
 import 'package:flutter_media_view/ui/settings/settings_definition.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
