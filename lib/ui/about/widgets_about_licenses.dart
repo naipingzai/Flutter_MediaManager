@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/app_flavor.dart';
+import 'package:flutter_media_view/core/app_flavor.dart';
 import 'package:flutter_media_view/function/settings/app_dependencies.dart';
 import 'package:flutter_media_view/function/model/brand_colors.dart';
 import 'package:flutter_media_view/ui/theme/colors.dart';

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter_media_view/app_mode.dart';
+import 'package:flutter_media_view/core/app_mode.dart';
 import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/function/filters/container_dynamic_album.dart';
 import 'package:flutter_media_view/function/filters/container_set_and.dart';

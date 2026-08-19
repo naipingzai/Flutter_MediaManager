@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter_media_view/app_flavor.dart';
+import 'package:flutter_media_view/core/app_flavor.dart';
 import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/function/entry/sort.dart';
 import 'package:flutter_media_view/function/settings/enums_widget_outline.dart';

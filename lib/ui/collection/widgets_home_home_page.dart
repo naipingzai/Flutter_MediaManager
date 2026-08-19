@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter_media_view/app_mode.dart';
+import 'package:flutter_media_view/core/app_mode.dart';
 import 'package:flutter_media_view/function/utils/function_uri.dart';
 import 'package:flutter_media_view/function/settings/app_intent.dart';
 import 'package:flutter_media_view/function/settings/app_permissions.dart';

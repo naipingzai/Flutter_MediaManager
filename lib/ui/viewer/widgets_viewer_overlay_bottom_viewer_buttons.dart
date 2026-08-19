@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter_media_view/app_mode.dart';
+import 'package:flutter_media_view/core/app_mode.dart';
 import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/function/entry/extensions_multipage.dart';
 import 'package:flutter_media_view/function/settings/enums_accessibility_animations.dart';

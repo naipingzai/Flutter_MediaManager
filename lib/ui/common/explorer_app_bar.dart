@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter_media_view/app_mode.dart';
+import 'package:flutter_media_view/core/app_mode.dart';
 import 'package:flutter_media_view/function/filters/filters.dart';
 import 'package:flutter_media_view/function/filters/path.dart';
 import 'package:flutter_media_view/function/settings/enums_accessibility_animations.dart';

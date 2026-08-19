@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/app_mode.dart';
+import 'package:flutter_media_view/core/app_mode.dart';
 import 'package:flutter_media_view/ui/image_providers/app_icon_image_provider.dart';
 import 'package:flutter_media_view/function/locale/fmv_locale.dart';
 import 'package:flutter_media_view/function/calendar/calendar_utils.dart';

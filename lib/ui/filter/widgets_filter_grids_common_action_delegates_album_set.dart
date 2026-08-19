@@ -1,7 +1,7 @@
 import 'dart:collection';
 import 'dart:io';
 
-import 'package:flutter_media_view/app_mode.dart';
+import 'package:flutter_media_view/core/app_mode.dart';
 import 'package:flutter_media_view/function/model/covers.dart';
 import 'package:flutter_media_view/function/model/dynamic_albums.dart';
 import 'package:flutter_media_view/function/entry/entry.dart';

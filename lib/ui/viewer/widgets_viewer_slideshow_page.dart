@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/app_mode.dart';
+import 'package:flutter_media_view/core/app_mode.dart';
 import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/function/filters/covered_stored_album.dart';
 import 'package:flutter_media_view/function/filters/mime.dart';

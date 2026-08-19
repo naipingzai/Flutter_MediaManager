@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/app_mode.dart';
+import 'package:flutter_media_view/core/app_mode.dart';
 import 'package:flutter_media_view/function/filters/container_tag_group.dart';
 import 'package:flutter_media_view/function/filters/covered_tag.dart';
 import 'package:flutter_media_view/function/filters/filters.dart';

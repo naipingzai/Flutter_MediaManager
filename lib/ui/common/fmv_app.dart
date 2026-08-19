@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter_media_view/app_flavor.dart';
-import 'package:flutter_media_view/app_mode.dart';
+import 'package:flutter_media_view/core/app_flavor.dart';
+import 'package:flutter_media_view/core/app_mode.dart';
 import 'package:flutter_media_view/function/utils/function_uri.dart';
 import 'package:flutter_media_view/l10n/l10n.dart';
 import 'package:flutter_media_view/function/settings/app_intent.dart';
