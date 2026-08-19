@@ -43,7 +43,7 @@ subprojects {
         if (project.plugins.hasPlugin("com.android.library") || project.plugins.hasPlugin("com.android.application")) {
             project.extensions.findByType(com.android.build.gradle.BaseExtension::class.java)?.let { ext ->
                 if (ext.namespace == null) {
-                    ext.setNamespace(project.group.toString())
+                    ext.namespace = project.group.toString()
                 }
             }
         }
