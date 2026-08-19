@@ -243,7 +243,7 @@ dependencies {
 
     ksp(libs.glideKsp)
 
-    compileOnly(rootProject.findProject(":streams_channel")!!)
+    compileOnly(rootProject.findProject(":fmv_streams_channel")!!)
 }
 
 if (rootProject.extra["fmv_useCrashlytics"] as Boolean) {
