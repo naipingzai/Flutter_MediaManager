@@ -84,6 +84,6 @@ abstract class WindowHandler(private val contextWrapper: ContextWrapper) : Metho
 
     companion object {
         private val LOG_TAG = LogUtils.createTag<WindowHandler>()
-        const val CHANNEL = "deckers.thibault/aves/window"
+        const val CHANNEL = "com.naipingzai.fmv/window"
     }
 }

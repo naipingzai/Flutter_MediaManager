@@ -70,6 +70,6 @@ class MediaFetchObjectHandler(private val context: Context) : MethodCallHandler 
     }
 
     companion object {
-        const val CHANNEL = "deckers.thibault/aves/media_fetch_object"
+        const val CHANNEL = "com.naipingzai.fmv/media_fetch_object"
     }
 }

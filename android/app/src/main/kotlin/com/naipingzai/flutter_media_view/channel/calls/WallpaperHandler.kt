@@ -46,6 +46,6 @@ class WallpaperHandler(private val contextWrapper: ContextWrapper) : MethodCallH
     }
 
     companion object {
-        const val CHANNEL = "deckers.thibault/aves/wallpaper"
+        const val CHANNEL = "com.naipingzai.fmv/wallpaper"
     }
 }

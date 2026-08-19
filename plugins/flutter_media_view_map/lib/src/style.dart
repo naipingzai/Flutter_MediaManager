@@ -7,7 +7,7 @@ import 'package:flutter/foundation.dart';
 // OSM vector tile providers: https://wiki.openstreetmap.org/wiki/Vector_tiles#Providers
 // Leaflet providers preview: https://leaflet-extras.github.io/leaflet-providers/preview/
 // OpenMapTiles styles: https://openmaptiles.org/styles/
-// Examples: https://github.com/deckerst/aves/wiki/Custom-maps
+// Examples: https://github.com/naipingzai/Flutter_MediaManager
 class EntryMapStyle extends Equatable {
   final String key;
   final String? name;

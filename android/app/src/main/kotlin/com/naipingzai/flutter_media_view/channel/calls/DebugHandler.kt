@@ -533,6 +533,6 @@ class DebugHandler(private val context: Context) : MethodCallHandler {
 
     companion object {
         private val LOG_TAG = LogUtils.createTag<DebugHandler>()
-        const val CHANNEL = "deckers.thibault/aves/debug"
+        const val CHANNEL = "com.naipingzai.fmv/debug"
     }
 }

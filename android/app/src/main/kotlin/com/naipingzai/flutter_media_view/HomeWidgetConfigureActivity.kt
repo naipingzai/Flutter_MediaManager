@@ -61,7 +61,7 @@ class HomeWidgetSettingsActivity : MainActivity() {
     }
 
     companion object {
-        private const val CHANNEL = "deckers.thibault/aves/widget_configure"
+        private const val CHANNEL = "com.naipingzai.fmv/widget_configure"
     }
 }
 

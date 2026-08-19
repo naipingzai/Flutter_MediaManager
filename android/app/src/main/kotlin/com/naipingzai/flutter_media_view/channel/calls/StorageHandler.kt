@@ -239,6 +239,6 @@ class StorageHandler(private val context: Context) : MethodCallHandler {
     }
 
     companion object {
-        const val CHANNEL = "deckers.thibault/aves/storage"
+        const val CHANNEL = "com.naipingzai.fmv/storage"
     }
 }

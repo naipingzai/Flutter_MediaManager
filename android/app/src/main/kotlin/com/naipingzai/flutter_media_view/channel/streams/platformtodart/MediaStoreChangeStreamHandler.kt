@@ -44,6 +44,6 @@ class MediaStoreChangeStreamHandler(private val context: Context) : BaseStreamHa
 
     companion object {
         private val LOG_TAG = LogUtils.createTag<MediaStoreChangeStreamHandler>()
-        const val CHANNEL = "deckers.thibault/aves/media_store_change"
+        const val CHANNEL = "com.naipingzai.fmv/media_store_change"
     }
 }

@@ -74,7 +74,7 @@ class SecurityHandler(private val context: Context) : MethodCallHandler {
     }
 
     companion object {
-        const val CHANNEL = "deckers.thibault/aves/security"
+        const val CHANNEL = "com.naipingzai.fmv/security"
         const val FILENAME = "secret_shared_prefs"
     }
 }

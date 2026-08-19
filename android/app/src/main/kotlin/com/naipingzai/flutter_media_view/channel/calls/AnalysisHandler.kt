@@ -112,7 +112,7 @@ class AnalysisHandler<T>(private val activity: T, private val onAnalysisComplete
 
     companion object {
         private val LOG_TAG = LogUtils.createTag<AnalysisHandler<ComponentActivity>>()
-        const val CHANNEL = "deckers.thibault/aves/analysis"
+        const val CHANNEL = "com.naipingzai.fmv/analysis"
         private const val ANALYSIS_WORK_NAME = "analysis_work"
     }
 }

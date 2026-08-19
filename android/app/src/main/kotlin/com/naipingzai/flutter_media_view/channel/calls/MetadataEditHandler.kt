@@ -182,7 +182,7 @@ class MetadataEditHandler(private val contextWrapper: ContextWrapper) : MethodCa
     }
 
     companion object {
-        const val CHANNEL = "deckers.thibault/aves/metadata_edit"
+        const val CHANNEL = "com.naipingzai.fmv/metadata_edit"
     }
 }
 

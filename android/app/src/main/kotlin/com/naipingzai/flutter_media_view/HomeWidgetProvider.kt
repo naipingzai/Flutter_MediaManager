@@ -278,7 +278,7 @@ class HomeWidgetProvider : AppWidgetProvider() {
     companion object {
         private val LOG_TAG = LogUtils.createTag<HomeWidgetProvider>()
         private const val WIDGET_DART_ENTRYPOINT = "widgetMain"
-        private const val WIDGET_DRAW_CHANNEL = "deckers.thibault/aves/widget_draw"
+        private const val WIDGET_DRAW_CHANNEL = "com.naipingzai.fmv/widget_draw"
         private const val DRAW_RETRY_MAX = 5
 
         private var flutterEngine: FlutterEngine? = null

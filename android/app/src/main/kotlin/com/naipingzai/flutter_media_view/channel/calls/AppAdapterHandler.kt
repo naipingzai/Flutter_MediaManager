@@ -499,7 +499,7 @@ class AppAdapterHandler(private val context: Context) : MethodCallHandler {
 
     companion object {
         private val LOG_TAG = LogUtils.createTag<AppAdapterHandler>()
-        const val CHANNEL = "deckers.thibault/aves/app"
+        const val CHANNEL = "com.naipingzai.fmv/app"
 
         fun getShareableUri(context: Context, uri: Uri): Uri? {
             return when (uri.scheme?.lowercase(Locale.ROOT)) {

@@ -1478,7 +1478,7 @@ class MetadataFetchHandler(private val context: Context) : MethodCallHandler {
 
     companion object {
         private val LOG_TAG = LogUtils.createTag<MetadataFetchHandler>()
-        const val CHANNEL = "deckers.thibault/aves/metadata_fetch"
+        const val CHANNEL = "com.naipingzai.fmv/metadata_fetch"
 
         private val doubleFormat = DecimalFormat("0.###")
         private const val SLOW_MOTION_MIN_CAPTURE_FRAME_RATE = 120

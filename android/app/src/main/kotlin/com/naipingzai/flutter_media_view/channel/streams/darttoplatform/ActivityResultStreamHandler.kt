@@ -310,6 +310,6 @@ class ActivityResultStreamHandler(private val activity: Activity, arguments: Any
 
     companion object {
         private val LOG_TAG = LogUtils.createTag<ActivityResultStreamHandler>()
-        const val CHANNEL = "deckers.thibault/aves/activity_result_stream"
+        const val CHANNEL = "com.naipingzai.fmv/activity_result_stream"
     }
 }

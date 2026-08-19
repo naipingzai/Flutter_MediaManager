@@ -10,6 +10,6 @@ class AnalysisStreamHandler : BaseStreamHandler() {
 
     companion object {
         private val LOG_TAG = LogUtils.createTag<AnalysisStreamHandler>()
-        const val CHANNEL = "deckers.thibault/aves/analysis_events"
+        const val CHANNEL = "com.naipingzai.fmv/analysis_events"
     }
 }

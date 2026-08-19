@@ -179,6 +179,6 @@ class DeviceHandler(private val context: Context) : MethodCallHandler {
     }
 
     companion object {
-        const val CHANNEL = "deckers.thibault/aves/device"
+        const val CHANNEL = "com.naipingzai.fmv/device"
     }
 }

@@ -74,7 +74,7 @@ class SettingsChangeStreamHandler(private val context: Context) : BaseStreamHand
 
     companion object {
         private val LOG_TAG = LogUtils.createTag<SettingsChangeStreamHandler>()
-        const val CHANNEL = "deckers.thibault/aves/settings_change"
+        const val CHANNEL = "com.naipingzai.fmv/settings_change"
 
         // cf `Settings.Secure.LONG_PRESS_TIMEOUT`
         const val KEY_LONG_PRESS_TIMEOUT_MILLIS = "long_press_timeout"

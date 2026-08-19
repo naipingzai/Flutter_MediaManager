@@ -70,7 +70,7 @@ class MediaEditHandler(private val contextWrapper: ContextWrapper) : MethodCallH
 
     companion object {
         private val LOG_TAG = LogUtils.createTag<MediaEditHandler>()
-        const val CHANNEL = "deckers.thibault/aves/media_edit"
+        const val CHANNEL = "com.naipingzai.fmv/media_edit"
 
         val cancelledOps = HashSet<String>()
     }

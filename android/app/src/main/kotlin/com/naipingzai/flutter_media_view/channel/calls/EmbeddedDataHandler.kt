@@ -356,6 +356,6 @@ class EmbeddedDataHandler(private val context: Context) : MethodCallHandler {
 
     companion object {
         private val LOG_TAG = LogUtils.createTag<EmbeddedDataHandler>()
-        const val CHANNEL = "deckers.thibault/aves/embedded"
+        const val CHANNEL = "com.naipingzai.fmv/embedded"
     }
 }

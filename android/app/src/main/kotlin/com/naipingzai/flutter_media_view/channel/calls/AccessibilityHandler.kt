@@ -99,7 +99,7 @@ class AccessibilityHandler(private val contextWrapper: ContextWrapper) : MethodC
 
     companion object {
         private val LOG_TAG = LogUtils.createTag<AccessibilityHandler>()
-        const val CHANNEL = "deckers.thibault/aves/accessibility"
+        const val CHANNEL = "com.naipingzai.fmv/accessibility"
 
         // match Flutter way: https://github.com/flutter/engine/blob/main/shell/platform/android/io/flutter/view/AccessibilityBridge.java#L125
         const val BOLD_TEXT_WEIGHT_ADJUSTMENT = 300

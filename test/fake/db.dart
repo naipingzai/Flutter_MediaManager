@@ -11,7 +11,7 @@ import 'package:flutter_media_view/function/function_vaults_details.dart';
 import 'package:flutter/foundation.dart';
 import 'package:test/fake.dart';
 
-class FakeAvesDb extends Fake implements LocalMediaDb {
+class FakeFmvDb extends Fake implements LocalMediaDb {
   static int _lastId = 0;
 
   @override

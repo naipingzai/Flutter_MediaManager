@@ -265,7 +265,7 @@ class ImageByteStreamHandler(private val context: Context, private val arguments
 
     companion object {
         private val LOG_TAG = LogUtils.createTag<ImageByteStreamHandler>()
-        const val CHANNEL = "deckers.thibault/aves/media_byte_stream"
+        const val CHANNEL = "com.naipingzai.fmv/media_byte_stream"
     }
 }
 

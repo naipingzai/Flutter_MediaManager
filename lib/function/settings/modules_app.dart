@@ -66,7 +66,7 @@ mixin AppSettings on SettingsAccess {
 
   void resetResolvedLocale() {
     _resolvedLocale = null;
-    _resetAvesLocale();
+    _resetFmvLocale();
   }
 
   // basic identifier, without extensions, resolved to match user settings
@@ -89,7 +89,7 @@ mixin AppSettings on SettingsAccess {
 
   FmvLocale? _fmvLocale;
 
-  void _resetAvesLocale() {
+  void _resetFmvLocale() {
     _fmvLocale = null;
   }
 
@@ -106,14 +106,14 @@ mixin AppSettings on SettingsAccess {
   ACalendar get calendar => getEnumOrDefault(SettingKeys.calendarKey, SettingsDefaults.calendar, ACalendar.values);
 
   set calendar(ACalendar newValue) {
-    _resetAvesLocale();
+    _resetFmvLocale();
     set(SettingKeys.calendarKey, newValue.name);
   }
 
   bool get forceWesternArabicNumerals => getBool(SettingKeys.forceWesternArabicNumeralsKey) ?? false;
 
   set forceWesternArabicNumerals(bool newValue) {
-    _resetAvesLocale();
+    _resetFmvLocale();
     set(SettingKeys.forceWesternArabicNumeralsKey, newValue);
   }
 

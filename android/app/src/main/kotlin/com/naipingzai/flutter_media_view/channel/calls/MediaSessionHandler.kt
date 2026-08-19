@@ -160,7 +160,7 @@ class MediaSessionHandler(private val context: Context, private val mediaCommand
     }
 
     companion object {
-        const val CHANNEL = "deckers.thibault/aves/media_session"
+        const val CHANNEL = "com.naipingzai.fmv/media_session"
 
         const val STATE_STOPPED = "stopped"
         const val STATE_PAUSED = "paused"

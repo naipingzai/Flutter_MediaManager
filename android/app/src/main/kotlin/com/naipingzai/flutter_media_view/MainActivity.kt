@@ -629,7 +629,7 @@ open class MainActivity : FlutterFragmentActivity() {
 
     companion object {
         private val LOG_TAG = LogUtils.createTag<MainActivity>()
-        const val INTENT_CHANNEL = "deckers.thibault/aves/intent"
+        const val INTENT_CHANNEL = "com.naipingzai.fmv/intent"
         const val EXTRA_STRING_ARRAY_SEPARATOR = "###"
         const val DOCUMENT_TREE_ACCESS_REQUEST = 1
         const val OPEN_FROM_ANALYSIS_SERVICE = 2

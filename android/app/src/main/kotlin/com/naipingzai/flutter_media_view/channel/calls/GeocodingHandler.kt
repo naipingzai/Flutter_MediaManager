@@ -78,6 +78,6 @@ class GeocodingHandler(private val context: Context) : MethodCallHandler {
     }
 
     companion object {
-        const val CHANNEL = "deckers.thibault/aves/geocoding"
+        const val CHANNEL = "com.naipingzai.fmv/geocoding"
     }
 }

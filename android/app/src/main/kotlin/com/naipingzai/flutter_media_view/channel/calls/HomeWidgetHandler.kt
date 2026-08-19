@@ -27,6 +27,6 @@ class HomeWidgetHandler(private val context: Context) : MethodChannel.MethodCall
     }
 
     companion object {
-        const val CHANNEL = "deckers.thibault/aves/widget_update"
+        const val CHANNEL = "com.naipingzai.fmv/widget_update"
     }
 }

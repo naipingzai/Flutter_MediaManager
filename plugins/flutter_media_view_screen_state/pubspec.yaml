@@ -18,5 +18,5 @@ flutter:
   plugin:
     platforms:
       android:
-        package: deckers.thibault.aves.aves_screen_state
-        pluginClass: AvesScreenStatePlugin
+        package: com.naipingzai.fmv.screen_state
+        pluginClass: FmvScreenStatePlugin

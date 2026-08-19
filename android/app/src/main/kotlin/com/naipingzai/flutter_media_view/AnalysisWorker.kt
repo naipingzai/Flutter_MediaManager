@@ -217,7 +217,7 @@ class AnalysisWorker(context: Context, parameters: WorkerParameters) : Coroutine
 
     companion object {
         private val LOG_TAG = LogUtils.createTag<AnalysisWorker>()
-        private const val BACKGROUND_CHANNEL = "deckers.thibault/aves/analysis_service_background"
+        private const val BACKGROUND_CHANNEL = "com.naipingzai.fmv/analysis_service_background"
         const val SHARED_PREFERENCES_KEY = "analysis_service"
         const val PREF_CALLBACK_HANDLE_KEY = "callback_handle"
         const val PREF_ENTRY_IDS_KEY = "entry_ids"

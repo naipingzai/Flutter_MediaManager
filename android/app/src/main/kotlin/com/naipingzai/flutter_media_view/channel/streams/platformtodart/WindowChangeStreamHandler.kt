@@ -18,7 +18,7 @@ class WindowChangeStreamHandler : BaseStreamHandler() {
 
     companion object {
         private val LOG_TAG = LogUtils.createTag<WindowChangeStreamHandler>()
-        const val CHANNEL = "deckers.thibault/aves/window_change"
+        const val CHANNEL = "com.naipingzai.fmv/window_change"
 
         private const val KEY_CODE = "code"
 

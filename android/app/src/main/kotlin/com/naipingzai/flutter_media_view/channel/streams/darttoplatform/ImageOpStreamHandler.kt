@@ -214,6 +214,6 @@ class ImageOpStreamHandler(private val activity: Activity, private val arguments
 
     companion object {
         private val LOG_TAG = LogUtils.createTag<ImageOpStreamHandler>()
-        const val CHANNEL = "deckers.thibault/aves/media_op_stream"
+        const val CHANNEL = "com.naipingzai.fmv/media_op_stream"
     }
 }

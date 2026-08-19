@@ -140,7 +140,7 @@ class SearchSuggestionsProvider : ContentProvider() {
 
     companion object {
         private val LOG_TAG = LogUtils.createTag<SearchSuggestionsProvider>()
-        private const val BACKGROUND_CHANNEL = "deckers.thibault/aves/global_search_background"
+        private const val BACKGROUND_CHANNEL = "com.naipingzai.fmv/global_search_background"
         const val SHARED_PREFERENCES_KEY = "platform_search"
         const val CALLBACK_HANDLE_KEY = "callback_handle"
 

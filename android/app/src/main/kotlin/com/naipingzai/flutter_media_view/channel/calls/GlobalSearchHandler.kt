@@ -37,6 +37,6 @@ class GlobalSearchHandler(private val context: Context) : MethodCallHandler {
     }
 
     companion object {
-        const val CHANNEL = "deckers.thibault/aves/global_search"
+        const val CHANNEL = "com.naipingzai.fmv/global_search"
     }
 }

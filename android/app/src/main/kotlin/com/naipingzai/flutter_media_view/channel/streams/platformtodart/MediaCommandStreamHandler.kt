@@ -46,7 +46,7 @@ class MediaCommandStreamHandler : BaseStreamHandler() {
 
     companion object {
         private val LOG_TAG = LogUtils.createTag<MediaCommandStreamHandler>()
-        const val CHANNEL = "deckers.thibault/aves/media_command"
+        const val CHANNEL = "com.naipingzai.fmv/media_command"
 
         const val KEY_COMMAND = "command"
         const val KEY_POSITION = "position"

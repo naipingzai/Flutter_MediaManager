@@ -92,6 +92,6 @@ class AppProfileHandler(private val activity: Activity) : MethodCallHandler {
     }
 
     companion object {
-        const val CHANNEL = "deckers.thibault/aves/app_profile"
+        const val CHANNEL = "com.naipingzai.fmv/app_profile"
     }
 }

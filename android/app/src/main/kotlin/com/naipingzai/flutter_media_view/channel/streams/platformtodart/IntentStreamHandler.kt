@@ -10,6 +10,6 @@ class IntentStreamHandler : BaseStreamHandler() {
 
     companion object {
         private val LOG_TAG = LogUtils.createTag<IntentStreamHandler>()
-        const val CHANNEL = "deckers.thibault/aves/new_intent_stream"
+        const val CHANNEL = "com.naipingzai.fmv/new_intent_stream"
     }
 }

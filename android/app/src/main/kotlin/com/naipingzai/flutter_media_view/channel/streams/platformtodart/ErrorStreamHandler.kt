@@ -10,6 +10,6 @@ class ErrorStreamHandler : BaseStreamHandler() {
 
     companion object {
         private val LOG_TAG = LogUtils.createTag<ErrorStreamHandler>()
-        const val CHANNEL = "deckers.thibault/aves/error"
+        const val CHANNEL = "com.naipingzai.fmv/error"
     }
 }

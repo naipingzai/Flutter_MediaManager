@@ -1,4 +1,4 @@
-package deckers.thibault.aves.aves_screen_state
+package com.naipingzai.fmv.screen_state
 
 import android.content.Context
 import android.content.Intent
@@ -13,7 +13,7 @@ class FmvScreenStatePlugin : FlutterPlugin, EventChannel.StreamHandler {
     private var screenReceiver: ScreenReceiver? = null
 
     override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-        eventChannel = EventChannel(flutterPluginBinding.binaryMessenger, "deckers.thibault/aves_screen_state/events")
+        eventChannel = EventChannel(flutterPluginBinding.binaryMessenger, "com.naipingzai.fmv.screen_state/events")
         context = flutterPluginBinding.applicationContext
         eventChannel.setStreamHandler(this)
     }
