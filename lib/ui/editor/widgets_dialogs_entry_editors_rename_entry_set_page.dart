@@ -7,7 +7,7 @@ import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/theme/styles.dart';
 import 'package:flutter_media_view/ui/common/view.dart';
-import 'package:flutter_media_view/ui/collection/widgets_collection_collection_grid.dart';
+import 'package:flutter_media_view/ui/collection/widgets_collection_grid.dart';
 import 'package:flutter_media_view/ui/common/common_basic_font_size_icon_theme.dart';
 import 'package:flutter_media_view/ui/common/common_basic_popup_expansion_panel.dart';
 import 'package:flutter_media_view/ui/common/common_basic_popup_menu_row.dart';

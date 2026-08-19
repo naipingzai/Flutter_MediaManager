@@ -5,12 +5,12 @@ import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/ui/theme/colors.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/settings/widgets_settings_common_tile_leading.dart';
-import 'package:flutter_media_view/ui/settings/widgets_settings_common_tiles.dart';
-import 'package:flutter_media_view/ui/settings/widgets_settings_settings_definition.dart';
-import 'package:flutter_media_view/ui/settings/widgets_settings_video_controls_page.dart';
-import 'package:flutter_media_view/ui/settings/widgets_settings_video_playback_page.dart';
-import 'package:flutter_media_view/ui/settings/widgets_settings_video_subtitle_theme_page.dart';
+import 'package:flutter_media_view/ui/settings/widgets_common_tile_leading.dart';
+import 'package:flutter_media_view/ui/settings/widgets_common_tiles.dart';
+import 'package:flutter_media_view/ui/settings/widgets_settings_definition.dart';
+import 'package:flutter_media_view/ui/settings/widgets_video_controls_page.dart';
+import 'package:flutter_media_view/ui/settings/widgets_video_playback_page.dart';
+import 'package:flutter_media_view/ui/settings/widgets_video_subtitle_theme_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

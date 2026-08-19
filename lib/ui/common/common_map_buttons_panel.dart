@@ -9,7 +9,7 @@ import 'package:flutter_media_view/ui/common/common_map_buttons_button.dart';
 import 'package:flutter_media_view/ui/filter/widgets_common_map_buttons_coordinate_filter.dart';
 import 'package:flutter_media_view/ui/common/common_map_buttons_item_track_toggler.dart';
 import 'package:flutter_media_view/ui/common/common_map_compass.dart';
-import 'package:flutter_media_view/ui/common/common_map_map_action_delegate.dart';
+import 'package:flutter_media_view/ui/common/common_map_action_delegate.dart';
 import 'package:flutter_media_view/ui/common/common_providers_map_theme_provider.dart';
 import 'package:fmv_map/flutter_media_view_map.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';

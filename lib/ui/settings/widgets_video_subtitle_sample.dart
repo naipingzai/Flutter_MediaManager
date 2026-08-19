@@ -1,0 +1,104 @@
+import 'package:flutter_media_view/function/settings/settings.dart';
+import 'package:flutter_media_view/ui/theme/colors.dart';
+import 'package:flutter_media_view/ui/common/common_basic_text_background_painter.dart';
+import 'package:flutter_media_view/ui/common/common_basic_text_outlined.dart';
+import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
+import 'package:flutter_media_view/ui/common/common_fx_borders.dart';
+import 'package:flutter_media_view/ui/viewer/widgets_visual_video_subtitle.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+class SubtitleSample extends StatelessWidget {
+  const SubtitleSample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final textSpans = [
+      TextSpan(text: context.l10n.settingsSubtitleThemeSample),
+    ];
+
+    return Consumer<Settings>(
+      builder: (context, settings, child) {
+        final textAlign = settings.subtitleTextAlignment;
+        final textPosition = settings.subtitleTextPosition;
+        final outlineColor = Colors.black.withValues(alpha: settings.subtitleTextColor.a);
+        final shadows = [
+          Shadow(
+            color: outlineColor,
+            offset: VideoSubtitles.baseShadowOffset,
+          ),
+        ];
+
+        return Container(
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              begin: AlignmentDirectional.bottomStart,
+              end: AlignmentDirectional.topEnd,
+              colors: AColors.boraBoraGradient,
+            ),
+            border: FmvBorder.border(context),
+            borderRadius: const BorderRadius.all(Radius.circular(24)),
+          ),
+          height: 128,
+          child: AnimatedAlign(
+            alignment: _getAlignment(textAlign, textPosition),
+            curve: Curves.easeInOutCubic,
+            duration: const Duration(milliseconds: 400),
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: AnimatedDefaultTextStyle(
+                style: TextStyle(
+                  color: settings.subtitleTextColor,
+                  fontSize: settings.subtitleFontSize,
+                  shadows: settings.subtitleShowOutline ? shadows : null,
+                ),
+                textAlign: textAlign,
+                duration: const Duration(milliseconds: 200),
+                child: Builder(
+                  builder: (context) => TextBackgroundPainter(
+                    spans: textSpans,
+                    style: DefaultTextStyle.of(context).style.copyWith(
+                      backgroundColor: settings.subtitleBackgroundColor,
+                    ),
+                    textAlign: textAlign,
+                    child: OutlinedText(
+                      textSpans: textSpans,
+                      outlineWidth: settings.subtitleShowOutline ? 1 : 0,
+                      outlineColor: outlineColor,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Alignment _getAlignment(TextAlign textAlign, SubtitlePosition textPosition) {
+    switch (textPosition) {
+      case .top:
+        switch (textAlign) {
+          case .left:
+            return Alignment.topLeft;
+          case .right:
+            return Alignment.topRight;
+          case .center:
+          default:
+            return Alignment.topCenter;
+        }
+      case .bottom:
+        switch (textAlign) {
+          case .left:
+            return Alignment.bottomLeft;
+          case .right:
+            return Alignment.bottomRight;
+          case .center:
+          default:
+            return Alignment.bottomCenter;
+        }
+    }
+  }
+}

@@ -17,7 +17,7 @@ import 'package:flutter_media_view/ui/common/common_map_attribution.dart';
 import 'package:flutter_media_view/ui/common/common_map_buttons_panel.dart';
 import 'package:flutter_media_view/ui/common/common_map_decorator.dart';
 import 'package:flutter_media_view/ui/common/common_leaflet_map.dart';
-import 'package:flutter_media_view/ui/common/common_map_map_action_delegate.dart';
+import 'package:flutter_media_view/ui/common/common_map_action_delegate.dart';
 import 'package:flutter_media_view/ui/common/common_thumbnail_image.dart';
 import 'package:fmv_map/flutter_media_view_map.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';

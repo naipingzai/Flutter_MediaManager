@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:flutter_media_view/function/media/internal_dir_media_fetch_service.dart';
+import 'package:flutter_media_view/function/media/internal_dir_fetch_service.dart';
 import 'package:flutter_media_view/ui/image_providers/thumbnail_provider.dart';
 import 'package:flutter_test/flutter_test.dart';
 

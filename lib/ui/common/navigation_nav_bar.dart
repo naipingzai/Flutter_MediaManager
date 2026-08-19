@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/core/app_mode.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/function/source/collection_lens.dart';
-import 'package:flutter_media_view/ui/collection/widgets_collection_collection_page.dart';
+import 'package:flutter_media_view/ui/collection/widgets_collection_page.dart';
 import 'package:flutter_media_view/ui/common/common_basic_draggable_scrollbar_notifications.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_media_query.dart';
