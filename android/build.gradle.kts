@@ -39,6 +39,14 @@ subprojects {
 }
 subprojects {
     project.evaluationDependsOn(":app")
+    // 修复老旧插件缺失 namespace 导致的 AGP 8+ 构建失败
+    afterEvaluate {
+        if (project.plugins.hasPlugin("com.android.library") || project.plugins.hasPlugin("com.android.application")) {
+            android {
+                namespace ?= project.group.toString()
+            }
+        }
+    }
 }
 
 tasks.register<Delete>("clean") {
