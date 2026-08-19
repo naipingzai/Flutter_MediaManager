@@ -27,7 +27,7 @@ import 'package:flutter_media_view/function/source/location_place.dart';
 import 'package:flutter_media_view/function/source/location_state.dart';
 import 'package:flutter_media_view/function/source/tag.dart';
 import 'package:flutter_media_view/function/source/source_trash.dart';
-import 'package:flutter_media_view/function/function_vaults.dart';
+import 'package:flutter_media_view/function/model/function_vaults.dart';
 import 'package:flutter_media_view/function/services/analysis_service.dart';
 import 'package:flutter_media_view/function/common/image_op_events.dart';
 import 'package:flutter_media_view/function/common/services.dart';

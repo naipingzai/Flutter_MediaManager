@@ -1,7 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 import 'package:flutter_media_view/function/locale/fmv_locale.dart';
 import 'package:flutter_media_view/function/calendar/dateformat_base.dart';
-import 'package:flutter_media_view/function/function_intl4x.dart';
+import 'package:flutter_media_view/function/locale/function_intl4x.dart';
 import 'package:intl4x/datetime_format.dart';
 
 class Intl4xDateFormatDelegate extends DateFormatDelegate {

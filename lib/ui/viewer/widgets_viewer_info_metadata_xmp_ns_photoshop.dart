@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/function_ref_metadata_xmp.dart';
+import 'package:flutter_media_view/function/metadata/function_ref_metadata_xmp.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_info_metadata_xmp_namespaces.dart';
 
 // cf https://github.com/adobe/xmp-docs/blob/master/XMPNamespaces/photoshop.md

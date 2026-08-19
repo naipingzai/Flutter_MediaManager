@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/function_highlight.dart';
-import 'package:flutter_media_view/function/function_selection.dart';
+import 'package:flutter_media_view/function/utils/function_highlight.dart';
+import 'package:flutter_media_view/function/model/function_selection.dart';
 import 'package:flutter_media_view/ui/theme/durations.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/common/common_fx_sweeper.dart';

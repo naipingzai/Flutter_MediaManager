@@ -11,7 +11,7 @@ import 'package:flutter_media_view/function/filters/filters.dart';
 import 'package:flutter_media_view/function/metadata/address.dart';
 import 'package:flutter_media_view/function/metadata/catalog.dart';
 import 'package:flutter_media_view/function/metadata/metadata_trash.dart';
-import 'package:flutter_media_view/function/function_vaults_details.dart';
+import 'package:flutter_media_view/function/model/function_vaults_details.dart';
 import 'package:flutter_media_view/function/viewer/video_playback.dart';
 import 'package:flutter_media_view/function/common/services.dart';
 import 'package:collection/collection.dart';

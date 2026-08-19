@@ -9,7 +9,7 @@ import 'package:flutter_media_view/function/media/video_profiles_h264.dart';
 import 'package:flutter_media_view/function/media/video_profiles_hevc.dart';
 import 'package:flutter_media_view/function/media/video_stereo_3d_modes.dart';
 import 'package:flutter_media_view/function/metadata/catalog.dart';
-import 'package:flutter_media_view/function/function_languages.dart';
+import 'package:flutter_media_view/function/locale/function_languages.dart';
 import 'package:flutter_media_view/function/model/mime_types.dart';
 import 'package:flutter_media_view/function/media/mp4.dart';
 import 'package:flutter_media_view/function/common/services.dart';

@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/function_device.dart';
+import 'package:flutter_media_view/function/device/function_device.dart';
 import 'package:flutter_media_view/function/locale/locales.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/about/widgets_about_policy_page.dart';

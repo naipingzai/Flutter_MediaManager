@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/function_languages.dart';
+import 'package:flutter_media_view/function/locale/function_languages.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/theme/text.dart';
 import 'package:flutter_media_view/ui/theme/themes.dart';

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter_media_view/app_mode.dart';
-import 'package:flutter_media_view/function/function_number.dart';
+import 'package:flutter_media_view/function/utils/function_number.dart';
 import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/function/entry/extensions_location.dart';
 import 'package:flutter_media_view/function/entry/extensions_metadata_edition.dart';
@@ -13,7 +13,7 @@ import 'package:flutter_media_view/function/metadata/catalog.dart';
 import 'package:flutter_media_view/function/settings/enums_coordinate_format.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/function/source/collection_lens.dart';
-import 'package:flutter_media_view/function/function_poi.dart';
+import 'package:flutter_media_view/function/geo/function_poi.dart';
 import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/ui/theme/durations.dart';
 import 'package:flutter_media_view/ui/theme/format.dart';

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter_media_view/function/function_highlight.dart';
+import 'package:flutter_media_view/function/utils/function_highlight.dart';
 import 'package:flutter_media_view/ui/theme/durations.dart';
 import 'package:flutter_media_view/ui/common/common_grid_sections_list_layout.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';

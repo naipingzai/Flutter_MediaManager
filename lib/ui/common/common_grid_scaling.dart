@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/function_highlight.dart';
+import 'package:flutter_media_view/function/utils/function_highlight.dart';
 import 'package:flutter_media_view/ui/common/common_behaviour_eager_scale_gesture_recognizer.dart';
 import 'package:flutter_media_view/ui/common/common_grid_sections_fixed_scale_overlay.dart';
 import 'package:flutter_media_view/ui/common/common_grid_sections_mosaic_scale_overlay.dart';

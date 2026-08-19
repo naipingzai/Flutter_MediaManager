@@ -9,7 +9,7 @@ import 'package:flutter_media_view/function/entry/extensions_multipage.dart';
 import 'package:flutter_media_view/function/model/favourites.dart';
 import 'package:flutter_media_view/function/filters/covered_stored_album.dart';
 import 'package:flutter_media_view/function/filters/filters_trash.dart';
-import 'package:flutter_media_view/function/function_highlight.dart';
+import 'package:flutter_media_view/function/utils/function_highlight.dart';
 import 'package:flutter_media_view/function/media/multipage.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/function/source/collection_lens.dart';

@@ -6,7 +6,7 @@ import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/function/model/favourites.dart';
 import 'package:flutter_media_view/function/filters/favourite.dart';
 import 'package:flutter_media_view/function/filters/mime.dart';
-import 'package:flutter_media_view/function/function_selection.dart';
+import 'package:flutter_media_view/function/model/function_selection.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/function/source/collection_lens.dart';
 import 'package:flutter_media_view/function/source/collection_source.dart';

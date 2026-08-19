@@ -2,7 +2,7 @@ import 'package:flutter_media_view/function/model/covers.dart';
 import 'package:flutter_media_view/function/filters/container_album_group.dart';
 import 'package:flutter_media_view/function/filters/covered.dart';
 import 'package:flutter_media_view/function/filters/filters.dart';
-import 'package:flutter_media_view/function/function_vaults.dart';
+import 'package:flutter_media_view/function/model/function_vaults.dart';
 import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/ui/theme/colors.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';

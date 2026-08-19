@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter_media_view/function/function_selection.dart';
+import 'package:flutter_media_view/function/model/function_selection.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/ui/common/common_basic_gestures_gesture_detector.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';

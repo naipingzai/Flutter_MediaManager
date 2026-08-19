@@ -3,7 +3,7 @@ import 'dart:io' show Platform;
 import 'dart:math';
 
 import 'package:flutter_media_view/app_flavor.dart';
-import 'package:flutter_media_view/function/function_device.dart';
+import 'package:flutter_media_view/function/device/function_device.dart';
 import 'package:flutter_media_view/function/model/dynamic_albums.dart';
 import 'package:flutter_media_view/function/filters/favourite.dart';
 import 'package:flutter_media_view/function/filters/mime.dart';

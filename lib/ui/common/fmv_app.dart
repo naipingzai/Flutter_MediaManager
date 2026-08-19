@@ -3,11 +3,11 @@ import 'dart:math';
 
 import 'package:flutter_media_view/app_flavor.dart';
 import 'package:flutter_media_view/app_mode.dart';
-import 'package:flutter_media_view/function/function_uri.dart';
+import 'package:flutter_media_view/function/utils/function_uri.dart';
 import 'package:flutter_media_view/l10n/l10n.dart';
 import 'package:flutter_media_view/function/settings/app_intent.dart';
 import 'package:flutter_media_view/function/settings/app_inventory.dart';
-import 'package:flutter_media_view/function/function_device.dart';
+import 'package:flutter_media_view/function/device/function_device.dart';
 import 'package:flutter_media_view/function/filters/recent.dart';
 import 'package:flutter_media_view/function/settings/defaults.dart';
 import 'package:flutter_media_view/function/settings/enums_display_refresh_rate_mode.dart';

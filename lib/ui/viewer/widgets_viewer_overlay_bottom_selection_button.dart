@@ -1,5 +1,5 @@
 import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/function_selection.dart';
+import 'package:flutter_media_view/function/model/function_selection.dart';
 import 'package:flutter_media_view/ui/theme/durations.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/theme/text.dart';

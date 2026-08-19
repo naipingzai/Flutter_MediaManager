@@ -1,5 +1,5 @@
 import 'package:flutter_media_view/function/locale/locales.dart';
-import 'package:flutter_media_view/function/function_ref_metadata_xmp.dart';
+import 'package:flutter_media_view/function/metadata/function_ref_metadata_xmp.dart';
 import 'package:intl/intl.dart';
 import 'package:xml/xml.dart';
 

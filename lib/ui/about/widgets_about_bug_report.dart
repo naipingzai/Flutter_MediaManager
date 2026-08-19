@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_media_view/app_flavor.dart';
-import 'package:flutter_media_view/function/function_device.dart';
+import 'package:flutter_media_view/function/device/function_device.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/function/source/collection_source.dart';
 import 'package:flutter_media_view/function/locale/locales.dart';

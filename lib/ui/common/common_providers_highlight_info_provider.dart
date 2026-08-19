@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/function_highlight.dart';
+import 'package:flutter_media_view/function/utils/function_highlight.dart';
 import 'package:provider/provider.dart';
 
 class HighlightInfoProvider extends ChangeNotifierProvider<HighlightInfo> {

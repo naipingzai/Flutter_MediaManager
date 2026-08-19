@@ -3,7 +3,7 @@ import 'package:flutter_media_view/function/model/covers.dart';
 import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/function/entry/extensions_multipage.dart';
 import 'package:flutter_media_view/function/entry/extensions_props.dart';
-import 'package:flutter_media_view/function/function_vaults.dart';
+import 'package:flutter_media_view/function/model/function_vaults.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_theme.dart';

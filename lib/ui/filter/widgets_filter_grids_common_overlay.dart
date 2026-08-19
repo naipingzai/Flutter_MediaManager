@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter_media_view/function/filters/filters.dart';
-import 'package:flutter_media_view/function/function_highlight.dart';
+import 'package:flutter_media_view/function/utils/function_highlight.dart';
 import 'package:flutter_media_view/ui/common/common_fx_sweeper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/function_ref_metadata_xmp.dart';
+import 'package:flutter_media_view/function/metadata/function_ref_metadata_xmp.dart';
 
 class XmpNamespaceView {
   // cf https://exiftool.org/TagNames/XMP.html

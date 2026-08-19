@@ -10,7 +10,7 @@ import 'package:flutter_media_view/function/grouping/common.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/function/source/analysis_controller.dart';
 import 'package:flutter_media_view/function/source/collection_source.dart';
-import 'package:flutter_media_view/function/function_vaults.dart';
+import 'package:flutter_media_view/function/model/function_vaults.dart';
 import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/ui/theme/durations.dart';
 import 'package:flutter_media_view/function/utils/android_file_utils.dart';

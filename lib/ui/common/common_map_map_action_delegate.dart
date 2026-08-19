@@ -1,5 +1,5 @@
-import 'package:flutter_media_view/function/function_uri.dart';
-import 'package:flutter_media_view/function/function_device.dart';
+import 'package:flutter_media_view/function/utils/function_uri.dart';
+import 'package:flutter_media_view/function/device/function_device.dart';
 import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/function/source/collection_lens.dart';

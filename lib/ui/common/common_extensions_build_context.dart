@@ -1,5 +1,5 @@
 import 'package:flutter_media_view/l10n/l10n.dart';
-import 'package:flutter_media_view/function/function_languages.dart';
+import 'package:flutter_media_view/function/locale/function_languages.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 

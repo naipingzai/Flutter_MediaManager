@@ -7,7 +7,7 @@ import 'package:flutter_media_view/function/entry/extensions_location.dart';
 import 'package:flutter_media_view/function/entry/sort.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/function/source/collection_lens.dart';
-import 'package:flutter_media_view/function/function_poi.dart';
+import 'package:flutter_media_view/function/geo/function_poi.dart';
 import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/ui/theme/durations.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';

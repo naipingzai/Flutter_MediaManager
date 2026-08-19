@@ -1,9 +1,9 @@
-import 'package:flutter_media_view/function/function_device.dart';
+import 'package:flutter_media_view/function/device/function_device.dart';
 import 'package:flutter_media_view/function/filters/covered_stored_album.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/function/source/collection_source.dart';
-import 'package:flutter_media_view/function/function_vaults_details.dart';
-import 'package:flutter_media_view/function/function_vaults.dart';
+import 'package:flutter_media_view/function/model/function_vaults_details.dart';
+import 'package:flutter_media_view/function/model/function_vaults.dart';
 import 'package:flutter_media_view/ui/common/view.dart';
 import 'package:flutter_media_view/ui/common/common_action_mixins_feedback.dart';
 import 'package:flutter_media_view/ui/common/common_action_mixins_vault_aware.dart';

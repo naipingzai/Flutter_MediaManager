@@ -6,7 +6,7 @@ import 'package:flutter_media_view/function/entry/extensions_location.dart';
 import 'package:flutter_media_view/function/filters/coordinate.dart';
 import 'package:flutter_media_view/function/filters/covered_location.dart';
 import 'package:flutter_media_view/function/filters/filters.dart';
-import 'package:flutter_media_view/function/function_highlight.dart';
+import 'package:flutter_media_view/function/utils/function_highlight.dart';
 import 'package:flutter_media_view/function/media/media_geotiff.dart';
 import 'package:flutter_media_view/function/settings/enums_accessibility_animations.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';

@@ -2,7 +2,7 @@ import 'package:flutter_media_view/function/filters/covered_tag.dart';
 import 'package:flutter_media_view/function/filters/filters.dart';
 import 'package:flutter_media_view/function/settings/defaults.dart';
 import 'package:flutter_media_view/function/source/collection_source.dart';
-import 'package:flutter_media_view/function/function_vaults.dart';
+import 'package:flutter_media_view/function/model/function_vaults.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 
 mixin HistorySettings on SettingsAccess {

@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:ui' as ui;
 import 'dart:ui';
 
-import 'package:flutter_media_view/function/function_uri.dart';
+import 'package:flutter_media_view/function/utils/function_uri.dart';
 import 'package:flutter_media_view/ui/image_providers/thumbnail_provider.dart';
 import 'package:flutter_media_view/function/settings/app_inventory.dart';
 import 'package:flutter_media_view/function/entry/entry.dart';

@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/function_query.dart';
+import 'package:flutter_media_view/function/filters/function_query.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/common/common_basic_popup_menu_row.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';

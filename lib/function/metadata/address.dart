@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/function_states.dart';
+import 'package:flutter_media_view/function/geo/function_states.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 

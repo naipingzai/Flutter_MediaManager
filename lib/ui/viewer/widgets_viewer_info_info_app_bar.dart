@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/app_mode.dart';
 import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/function/entry/extensions_props.dart';
-import 'package:flutter_media_view/function/function_selection.dart';
+import 'package:flutter_media_view/function/model/function_selection.dart';
 import 'package:flutter_media_view/function/settings/enums_accessibility_animations.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/function/source/collection_lens.dart';

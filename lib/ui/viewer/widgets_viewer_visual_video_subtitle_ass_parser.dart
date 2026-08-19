@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/function_unicode.dart';
+import 'package:flutter_media_view/function/utils/function_unicode.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_visual_video_subtitle_line.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_visual_video_subtitle_span.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_visual_video_subtitle_style.dart';

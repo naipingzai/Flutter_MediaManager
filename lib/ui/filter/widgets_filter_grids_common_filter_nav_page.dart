@@ -2,7 +2,7 @@ import 'package:flutter_media_view/function/filters/container_album_group.dart';
 import 'package:flutter_media_view/function/filters/container_group_base.dart';
 import 'package:flutter_media_view/function/filters/covered_stored_album.dart';
 import 'package:flutter_media_view/function/filters/filters.dart';
-import 'package:flutter_media_view/function/function_selection.dart';
+import 'package:flutter_media_view/function/model/function_selection.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/function/source/collection_source.dart';
 import 'package:flutter_media_view/function/utils/time_utils.dart';

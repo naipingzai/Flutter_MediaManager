@@ -10,7 +10,7 @@ import 'package:flutter_media_view/function/media/multipage.dart';
 import 'package:flutter_media_view/function/common/channel.dart';
 import 'package:flutter_media_view/function/common/service_policy.dart';
 import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/function/function_services_metadata_xmp.dart';
+import 'package:flutter_media_view/function/services/function_services_metadata_xmp.dart';
 import 'package:flutter_media_view/function/utils/time_utils.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/foundation.dart';

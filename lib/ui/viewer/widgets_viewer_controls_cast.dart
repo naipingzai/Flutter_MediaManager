@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/function/entry/extensions_props.dart';
-import 'package:flutter_media_view/function/function_upnp.dart';
+import 'package:flutter_media_view/function/services/function_upnp.dart';
 import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_cast_dialog.dart';

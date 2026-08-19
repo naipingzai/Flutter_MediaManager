@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/function_device.dart';
+import 'package:flutter_media_view/function/device/function_device.dart';
 import 'package:flutter_media_view/function/filters/filters.dart';
 import 'package:flutter_media_view/function/settings/enums_widget_outline.dart';
 import 'package:flutter_media_view/function/settings/enums_widget_shape.dart';

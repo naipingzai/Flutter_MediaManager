@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/function_unicode.dart';
+import 'package:flutter_media_view/function/utils/function_unicode.dart';
 
 class AText {
   static const separator = ' ${UniChars.bullet} ';

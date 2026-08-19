@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_media_view/function/settings/enums_coordinate_format.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/function/function_poi.dart';
+import 'package:flutter_media_view/function/geo/function_poi.dart';
 import 'package:flutter_media_view/ui/theme/colors.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/function/locale/fmv_locale.dart';

@@ -1,6 +1,6 @@
 import 'dart:ui' as ui;
 
-import 'package:flutter_media_view/function/function_languages.dart';
+import 'package:flutter_media_view/function/locale/function_languages.dart';
 
 const kAsciiLocale = 'en-US'; // should conform to BCP47
 

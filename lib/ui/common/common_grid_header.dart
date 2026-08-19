@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/function_selection.dart';
+import 'package:flutter_media_view/function/model/function_selection.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/function/source/section_keys.dart';
 import 'package:flutter_media_view/ui/theme/durations.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter_media_view/app_mode.dart';
-import 'package:flutter_media_view/function/function_states.dart';
+import 'package:flutter_media_view/function/geo/function_states.dart';
 import 'package:flutter_media_view/function/filters/covered_location.dart';
 import 'package:flutter_media_view/function/filters/filters.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_media_view/app_mode.dart';
-import 'package:flutter_media_view/function/function_uri.dart';
+import 'package:flutter_media_view/function/utils/function_uri.dart';
 import 'package:flutter_media_view/function/settings/app_intent.dart';
 import 'package:flutter_media_view/function/settings/app_permissions.dart';
 import 'package:flutter_media_view/function/settings/app_inventory.dart';

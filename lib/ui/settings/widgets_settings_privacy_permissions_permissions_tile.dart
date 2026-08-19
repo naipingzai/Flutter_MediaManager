@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_media_view/app_flavor.dart';
-import 'package:flutter_media_view/function/function_device.dart';
+import 'package:flutter_media_view/function/device/function_device.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';

@@ -3,7 +3,7 @@ import 'package:flutter_media_view/function/filters/container_tag_group.dart';
 import 'package:flutter_media_view/function/filters/covered_tag.dart';
 import 'package:flutter_media_view/function/filters/filters.dart';
 import 'package:flutter_media_view/function/grouping/common.dart';
-import 'package:flutter_media_view/function/function_selection.dart';
+import 'package:flutter_media_view/function/model/function_selection.dart';
 import 'package:flutter_media_view/function/settings/enums_accessibility_animations.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/function/source/collection_source.dart';

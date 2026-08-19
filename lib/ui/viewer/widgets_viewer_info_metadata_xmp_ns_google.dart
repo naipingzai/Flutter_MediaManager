@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/function_ref_metadata_xmp.dart';
+import 'package:flutter_media_view/function/metadata/function_ref_metadata_xmp.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_info_common.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_info_embedded_notifications.dart';
