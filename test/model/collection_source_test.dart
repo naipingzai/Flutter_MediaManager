@@ -20,9 +20,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../common.dart';
-import '../fake/fetch_service.dart';
-import '../fake/store_service.dart';
-import '../fake/fetch_service.dart';
+import '../fake/media_fetch_service.dart';
+import '../fake/media_store_service.dart';
+import '../fake/media_fetch_service.dart';
 import '../fake/storage_service.dart';
 
 void main() {

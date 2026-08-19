@@ -25,7 +25,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:test/test.dart';
 
 import '../common.dart';
-import '../fake/store_service.dart';
+import '../fake/media_store_service.dart';
 import '../fake/storage_service.dart';
 
 void main() {
