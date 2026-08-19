@@ -1,6 +1,6 @@
 import 'package:fmv_map/flutter_media_view_map.dart';
 import 'package:fmv_services/flutter_media_view_services.dart';
-import 'package:flutter_media_view_services_platform/src/map.dart';
+import 'package:fmv_services_platform/src/map.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_api_availability/google_api_availability.dart';
