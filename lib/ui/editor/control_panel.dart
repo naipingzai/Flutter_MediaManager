@@ -6,7 +6,7 @@ import 'package:flutter_media_view/ui/common/common_extensions_build_context.dar
 import 'package:flutter_media_view/ui/common/identity/common_identity_buttons_overlay_button.dart';
 import 'package:flutter_media_view/ui/editor/transform_control_panel.dart';
 import 'package:flutter_media_view/ui/editor/transform_controller.dart';
-import 'package:flutter_media_view/ui/viewer/overlay_bottom_viewer_buttons.dart';
+import 'package:flutter_media_view/ui/viewer/overlay/overlay_bottom_viewer_buttons.dart';
 import 'package:fmv_magnifier/flutter_media_view_magnifier.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';

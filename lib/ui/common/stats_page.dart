@@ -29,7 +29,7 @@ import 'package:flutter_media_view/ui/filter/stats_filter_table.dart';
 import 'package:flutter_media_view/ui/common/stats_mime_donut.dart';
 import 'package:flutter_media_view/ui/common/stats_percent_text.dart';
 import 'package:flutter_media_view/ui/common/stats_top_page.dart';
-import 'package:flutter_media_view/ui/viewer/controls_notifications.dart';
+import 'package:flutter_media_view/ui/viewer/controls/controls_notifications.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';

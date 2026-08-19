@@ -5,7 +5,7 @@ import 'package:flutter_media_view/function/common/channel.dart';
 import 'package:flutter_media_view/function/common/service_policy.dart';
 import 'package:flutter_media_view/ui/common/identity/common_identity_fmv_expansion_tile.dart';
 import 'package:flutter_media_view/ui/settings/common_tiles.dart';
-import 'package:flutter_media_view/ui/viewer/info_common.dart';
+import 'package:flutter_media_view/ui/viewer/info/info_common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';

@@ -39,7 +39,7 @@ import 'package:flutter_media_view/ui/common/tiles/common_tile_extent_controller
 import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_tile_view_dialog.dart';
 import 'package:flutter_media_view/ui/collection/search_page_route.dart';
-import 'package:flutter_media_view/ui/viewer/controls_notifications.dart';
+import 'package:flutter_media_view/ui/viewer/controls/controls_notifications.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';

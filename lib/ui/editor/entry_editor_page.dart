@@ -7,7 +7,7 @@ import 'package:flutter_media_view/ui/editor/control_panel.dart';
 import 'package:flutter_media_view/ui/editor/editor_image.dart';
 import 'package:flutter_media_view/ui/editor/transform_controller.dart';
 import 'package:flutter_media_view/ui/editor/transform_cropper.dart';
-import 'package:flutter_media_view/ui/viewer/overlay_top_minimap.dart';
+import 'package:flutter_media_view/ui/viewer/overlay/overlay_top_minimap.dart';
 import 'package:fmv_magnifier/flutter_media_view_magnifier.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';

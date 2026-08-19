@@ -13,7 +13,7 @@ import 'package:flutter_media_view/ui/settings/mobile_page.dart';
 import 'package:flutter_media_view/ui/settings/tv_page.dart';
 import 'package:flutter_media_view/ui/settings/settings_thumbnails.dart';
 import 'package:flutter_media_view/ui/settings/settings_video.dart';
-import 'package:flutter_media_view/ui/viewer/settings_viewer.dart';
+import 'package:flutter_media_view/ui/viewer/settings/settings_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:fmv_staggered_animations/flutter_staggered_animations.dart';

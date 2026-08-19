@@ -31,7 +31,7 @@ import 'package:flutter_media_view/ui/common/common_providers_highlight_info_pro
 import 'package:flutter_media_view/ui/common/common_providers_map_theme_provider.dart';
 import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view/ui/common/map_scroller.dart';
-import 'package:flutter_media_view/ui/viewer/controls_notifications.dart';
+import 'package:flutter_media_view/ui/viewer/controls/controls_notifications.dart';
 import 'package:flutter_media_view/ui/viewer/entry_viewer_page.dart';
 import 'package:fmv_map/flutter_media_view_map.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';

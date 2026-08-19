@@ -14,7 +14,7 @@ import 'package:flutter_media_view/ui/common/common_extensions_build_context.dar
 import 'package:flutter_media_view/ui/common/common_extensions_media_query.dart';
 import 'package:flutter_media_view/ui/filter/common_identity_fmv_filter_chip.dart';
 import 'package:flutter_media_view/ui/filter/stats_filter_table.dart';
-import 'package:flutter_media_view/ui/viewer/controls_notifications.dart';
+import 'package:flutter_media_view/ui/viewer/controls/controls_notifications.dart';
 import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

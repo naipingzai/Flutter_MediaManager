@@ -6,7 +6,7 @@ import 'package:flutter_media_view/ui/filter/grids_albums_page.dart';
 import 'package:flutter_media_view/ui/filter/grids_countries_page.dart';
 import 'package:flutter_media_view/ui/filter/grids_places_page.dart';
 import 'package:flutter_media_view/ui/filter/grids_tags_page.dart';
-import 'package:flutter_media_view/ui/viewer/info_common.dart';
+import 'package:flutter_media_view/ui/viewer/info/info_common.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
