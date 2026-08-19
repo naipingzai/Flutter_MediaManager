@@ -31,7 +31,7 @@ workspace:
   - plugins/flutter_media_view_video_mpv
   - plugins/flutter_media_view_panorama
   - plugins/flutter_media_view_streams_channel
-  - plugins/flutter_media_view_charts/community_charts_flutter
+  - plugins/fmv_charts/community_charts_flutter
 
 dependencies:
   flutter:
@@ -65,8 +65,8 @@ dependencies:
   flutter_media_view_utils:
     path: plugins/flutter_media_view_utils
   collection:
-  flutter_media_view_charts:
-    path: plugins/flutter_media_view_charts/community_charts_flutter
+  fmv_charts:
+    path: plugins/fmv_charts/community_charts_flutter
   connectivity_plus: ^6.1.0
   country_code:
   crypto:

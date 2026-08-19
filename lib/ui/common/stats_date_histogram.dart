@@ -14,7 +14,7 @@ import 'package:flutter_media_view/ui/common/common_fx_transitions.dart';
 import 'package:flutter_media_view/ui/filter/widgets_common_identity_fmv_filter_chip.dart';
 import 'package:flutter_media_view/ui/common/stats_date_axis.dart';
 import 'package:collection/collection.dart';
-import 'package:flutter_media_view_charts/community_charts_flutter.dart' as charts;
+import 'package:fmv_charts/community_charts_flutter.dart' as charts;
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
