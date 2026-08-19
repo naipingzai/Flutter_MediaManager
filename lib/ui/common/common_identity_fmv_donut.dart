@@ -5,7 +5,7 @@ import 'package:flutter_media_view/ui/theme/colors.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/theme/themes.dart';
 import 'package:collection/collection.dart';
-import 'package:community_charts_flutter/community_charts_flutter.dart' as charts;
+import 'package:flutter_media_view_charts/community_charts_flutter.dart' as charts;
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

@@ -5,7 +5,7 @@ import 'package:flutter_media_view/function/calendar/calendar_utils.dart';
 import 'package:flutter_media_view/function/calendar/dateformat_base.dart';
 import 'package:flutter_media_view/function/filters/date.dart';
 import 'package:flutter_media_view/function/utils/time_utils.dart';
-import 'package:community_charts_flutter/community_charts_flutter.dart' as charts;
+import 'package:flutter_media_view_charts/community_charts_flutter.dart' as charts;
 
 // cf charts.DateTimeTickFormatter factory internals for default formats
 class TimeAxisSpec {
