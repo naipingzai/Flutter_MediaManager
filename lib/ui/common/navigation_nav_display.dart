@@ -3,17 +3,17 @@ import 'package:flutter_media_view/function/filters/filters.dart';
 import 'package:flutter_media_view/function/filters/mime.dart';
 import 'package:flutter_media_view/function/filters/type.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/about/widgets_about_page.dart';
+import 'package:flutter_media_view/ui/about/about_page.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/search/widgets_common_search_page.dart';
+import 'package:flutter_media_view/ui/search/common_search_page.dart';
 import 'package:flutter_media_view/ui/common/debug_app_debug_page.dart';
 import 'package:flutter_media_view/ui/common/explorer_page.dart';
-import 'package:flutter_media_view/ui/filter/widgets_grids_albums_page.dart';
-import 'package:flutter_media_view/ui/filter/widgets_grids_countries_page.dart';
-import 'package:flutter_media_view/ui/filter/widgets_grids_places_page.dart';
-import 'package:flutter_media_view/ui/filter/widgets_grids_tags_page.dart';
-import 'package:flutter_media_view/ui/collection/widgets_home_page.dart';
-import 'package:flutter_media_view/ui/settings/widgets_settings_page.dart';
+import 'package:flutter_media_view/ui/filter/grids_albums_page.dart';
+import 'package:flutter_media_view/ui/filter/grids_countries_page.dart';
+import 'package:flutter_media_view/ui/filter/grids_places_page.dart';
+import 'package:flutter_media_view/ui/filter/grids_tags_page.dart';
+import 'package:flutter_media_view/ui/collection/home_page.dart';
+import 'package:flutter_media_view/ui/settings/settings_page.dart';
 import 'package:flutter/material.dart';
 
 class NavigationDisplay {

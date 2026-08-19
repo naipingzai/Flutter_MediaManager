@@ -7,7 +7,7 @@ import 'package:flutter_media_view/ui/common/common_extensions_build_context.dar
 import 'package:flutter_media_view/ui/common/identity/common_identity_buttons_outlined_button.dart';
 import 'package:flutter_media_view/ui/common/dialogs_fmv_confirmation_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
-import 'package:flutter_media_view/ui/editor/widgets_dialogs_map_style_editor_dialog.dart';
+import 'package:flutter_media_view/ui/editor/dialogs_map_style_editor_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_selection_dialogs_radio_list_tile.dart';
 import 'package:fmv_map/flutter_media_view_map.dart';
 import 'package:fmv_utils/flutter_media_view_utils.dart';

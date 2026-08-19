@@ -3,10 +3,10 @@ import 'package:flutter_media_view/function/filters/container_dynamic_album.dart
 import 'package:flutter_media_view/function/filters/filters.dart';
 import 'package:flutter_media_view/function/grouping/common.dart';
 import 'package:flutter_media_view/function/settings/defaults.dart';
-import 'package:flutter_media_view/ui/collection/widgets_collection_page.dart';
+import 'package:flutter_media_view/ui/collection/collection_page.dart';
 import 'package:flutter_media_view/ui/common/explorer_page.dart';
-import 'package:flutter_media_view/ui/filter/widgets_grids_albums_page.dart';
-import 'package:flutter_media_view/ui/filter/widgets_grids_tags_page.dart';
+import 'package:flutter_media_view/ui/filter/grids_albums_page.dart';
+import 'package:flutter_media_view/ui/filter/grids_tags_page.dart';
 import 'package:flutter_media_view/ui/common/navigation_nav_item.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:fmv_utils/flutter_media_view_utils.dart';

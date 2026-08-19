@@ -10,7 +10,7 @@ import 'package:flutter_media_view/function/source/media_store_source.dart';
 import 'package:flutter_media_view/function/common/channel.dart';
 import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/function/utils/android_file_utils.dart';
-import 'package:flutter_media_view/ui/collection/widgets_home_widget.dart';
+import 'package:flutter_media_view/ui/collection/home_widget.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';

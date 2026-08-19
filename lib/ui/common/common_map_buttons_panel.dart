@@ -6,7 +6,7 @@ import 'package:flutter_media_view/ui/common/view.dart';
 import 'package:flutter_media_view/ui/common/basic/common_basic_popup_menu_row.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/common_map_buttons_button.dart';
-import 'package:flutter_media_view/ui/filter/widgets_common_map_buttons_coordinate_filter.dart';
+import 'package:flutter_media_view/ui/filter/common_map_buttons_coordinate_filter.dart';
 import 'package:flutter_media_view/ui/common/common_map_buttons_item_track_toggler.dart';
 import 'package:flutter_media_view/ui/common/common_map_compass.dart';
 import 'package:flutter_media_view/ui/common/common_map_action_delegate.dart';

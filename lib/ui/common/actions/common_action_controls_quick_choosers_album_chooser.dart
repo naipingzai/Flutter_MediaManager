@@ -4,7 +4,7 @@ import 'package:flutter_media_view/function/filters/covered_stored_album.dart';
 import 'package:flutter_media_view/function/filters/filters.dart';
 import 'package:flutter_media_view/function/source/collection_source.dart';
 import 'package:flutter_media_view/ui/common/actions/common_action_controls_quick_choosers_common_menu.dart';
-import 'package:flutter_media_view/ui/filter/widgets_common_action_controls_quick_choosers_quick_chooser_mixin.dart';
+import 'package:flutter_media_view/ui/filter/common_action_controls_quick_choosers_quick_chooser_mixin.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
