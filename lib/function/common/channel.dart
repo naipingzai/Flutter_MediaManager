@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:streams_channel/streams_channel.dart';
+import 'package:flutter_media_view_streams_channel/streams_channel.dart';
 
 class FmvMethodChannel extends MethodChannel {
   static bool kDebug = false;

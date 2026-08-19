@@ -917,15 +917,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.1"
-  panorama:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: master
-      resolved-ref: "538fd948892357088afeeb4d90de04b3ccb91668"
-      url: "https://github.com/deckerst/aves_panorama.git"
-    source: git
-    version: "0.4.1"
   path:
     dependency: "direct main"
     description:
@@ -1484,15 +1475,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
-  streams_channel:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: master
-      resolved-ref: "35a9b0fcc0e97f756756c0010fb223129c2d832c"
-      url: "https://github.com/deckerst/aves_streams_channel.git"
-    source: git
-    version: "0.3.0"
   string_scanner:
     dependency: transitive
     description:

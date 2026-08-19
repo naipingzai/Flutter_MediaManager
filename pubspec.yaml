@@ -29,6 +29,8 @@ workspace:
   - plugins/flutter_media_view_video
   - plugins/flutter_media_view_video_exo
   - plugins/flutter_media_view_video_mpv
+  - plugins/flutter_media_view_panorama
+  - plugins/flutter_media_view_streams_channel
 
 dependencies:
   flutter:
@@ -117,10 +119,8 @@ dependencies:
       url: https://github.com/deckerst/overlay_support.git
       ref: main
   package_info_plus:
-  panorama:
-    git:
-      url: https://github.com/deckerst/aves_panorama.git
-      ref: master
+  flutter_media_view_panorama:
+    path: plugins/flutter_media_view_panorama
   path:
   path_provider:
   pattern_lock:
@@ -143,10 +143,8 @@ dependencies:
   sqflite:
   sqflite_common_ffi:
   stack_trace:
-  streams_channel:
-    git:
-      url: https://github.com/deckerst/aves_streams_channel.git
-      ref: master
+  flutter_media_view_streams_channel:
+    path: plugins/flutter_media_view_streams_channel
   synchronized:
   url_launcher:
   # `vector_map_tiles` v10.0.0-beta API is unclear to provide sprites
