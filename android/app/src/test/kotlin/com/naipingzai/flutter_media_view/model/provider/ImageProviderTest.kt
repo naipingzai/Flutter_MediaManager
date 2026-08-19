@@ -1,4 +1,4 @@
-package com.naipingzai.flutter_media_view.model.provider
+package com.naipingzai.fmv.model.provider
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test

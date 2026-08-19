@@ -1,6 +1,6 @@
-package com.naipingzai.flutter_media_view.utils
+package com.naipingzai.fmv.utils
 
-import com.naipingzai.flutter_media_view.utils.MathUtils.highestPowerOf2
+import com.naipingzai.fmv.utils.MathUtils.highestPowerOf2
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

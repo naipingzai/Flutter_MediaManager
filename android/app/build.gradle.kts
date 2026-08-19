@@ -8,7 +8,7 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
-val packageName = "com.naipingzai.flutter_media_view"
+val packageName = "com.naipingzai.fmv"
 
 // Keys
 
@@ -37,7 +37,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace = "com.naipingzai.flutter_media_view"
+    namespace = "com.naipingzai.fmv"
     compileSdk = 37
     ndkVersion = flutter.ndkVersion
 
