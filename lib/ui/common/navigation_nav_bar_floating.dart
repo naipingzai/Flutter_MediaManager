@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter_media_view/ui/common/basic/basic_draggable_scrollbar_notifications.dart';
+import 'package:fmv/ui/common/basic/basic_draggable_scrollbar_notifications.dart';
 import 'package:flutter/material.dart';
 
 class FloatingNavBar extends StatefulWidget {

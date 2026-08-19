@@ -1,12 +1,12 @@
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/collection/page.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_fmv_expansion_tile.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_highlight_title.dart';
-import 'package:flutter_media_view/ui/filter/grids/albums_page.dart';
-import 'package:flutter_media_view/ui/filter/grids/countries_page.dart';
-import 'package:flutter_media_view/ui/filter/grids/places_page.dart';
-import 'package:flutter_media_view/ui/filter/grids/tags_page.dart';
-import 'package:flutter_media_view/ui/viewer/info/common.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/ui/collection/page.dart';
+import 'package:fmv/ui/common/identity/identity_fmv_expansion_tile.dart';
+import 'package:fmv/ui/common/identity/identity_highlight_title.dart';
+import 'package:fmv/ui/filter/grids/albums_page.dart';
+import 'package:fmv/ui/filter/grids/countries_page.dart';
+import 'package:fmv/ui/filter/grids/places_page.dart';
+import 'package:fmv/ui/filter/grids/tags_page.dart';
+import 'package:fmv/ui/viewer/info/common.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

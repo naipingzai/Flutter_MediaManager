@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/filters/filters.dart';
+import 'package:fmv/function/filters/filters.dart';
 
 mixin ContainerFilter<T extends CollectionFilter> on CollectionFilter {
   Set<CollectionFilter> get innerFilters;

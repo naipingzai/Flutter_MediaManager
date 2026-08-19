@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/entry/extensions_multipage.dart';
-import 'package:flutter_media_view/function/media/multipage.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/entry/extensions_multipage.dart';
+import 'package:fmv/function/media/multipage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:leak_tracker/leak_tracker.dart';
 

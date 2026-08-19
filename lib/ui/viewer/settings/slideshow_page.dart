@@ -1,8 +1,8 @@
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/common/view.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_scaffold.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/settings/common/tiles.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/ui/common/view.dart';
+import 'package:fmv/ui/common/basic/basic_scaffold.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/settings/common/tiles.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 

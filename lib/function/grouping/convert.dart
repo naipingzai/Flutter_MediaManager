@@ -1,10 +1,10 @@
-import 'package:flutter_media_view/function/model/dynamic_albums.dart';
-import 'package:flutter_media_view/function/filters/container_dynamic_album.dart';
-import 'package:flutter_media_view/function/filters/container_group_base.dart';
-import 'package:flutter_media_view/function/filters/covered_stored_album.dart';
-import 'package:flutter_media_view/function/filters/covered_tag.dart';
-import 'package:flutter_media_view/function/filters/filters.dart';
-import 'package:flutter_media_view/function/grouping/common.dart';
+import 'package:fmv/function/model/dynamic_albums.dart';
+import 'package:fmv/function/filters/container_dynamic_album.dart';
+import 'package:fmv/function/filters/container_group_base.dart';
+import 'package:fmv/function/filters/covered_stored_album.dart';
+import 'package:fmv/function/filters/covered_tag.dart';
+import 'package:fmv/function/filters/filters.dart';
+import 'package:fmv/function/grouping/common.dart';
 
 mixin GroupingConversion {
   static const _storedAlbumPath = '/stored';

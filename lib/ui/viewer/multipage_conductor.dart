@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/ui/viewer/multipage_controller.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/ui/viewer/multipage_controller.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:leak_tracker/leak_tracker.dart';

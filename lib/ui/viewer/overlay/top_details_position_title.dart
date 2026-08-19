@@ -1,7 +1,7 @@
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/media/multipage.dart';
-import 'package:flutter_media_view/ui/theme/text.dart';
-import 'package:flutter_media_view/ui/viewer/multipage_controller.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/media/multipage.dart';
+import 'package:fmv/ui/theme/text.dart';
+import 'package:fmv/ui/viewer/multipage_controller.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

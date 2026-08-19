@@ -1,12 +1,12 @@
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_empty.dart';
-import 'package:flutter_media_view/ui/common/providers_media_query_data_provider.dart';
-import 'package:flutter_media_view/ui/search/common_search_delegate.dart';
-import 'package:flutter_media_view/ui/viewer/info/embedded_data_opener.dart';
-import 'package:flutter_media_view/ui/viewer/info/metadata_dir.dart';
-import 'package:flutter_media_view/ui/viewer/info/metadata_dir_tile.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/identity/identity_empty.dart';
+import 'package:fmv/ui/common/providers_media_query_data_provider.dart';
+import 'package:fmv/ui/search/common_search_delegate.dart';
+import 'package:fmv/ui/viewer/info/embedded_data_opener.dart';
+import 'package:fmv/ui/viewer/info/metadata_dir.dart';
+import 'package:fmv/ui/viewer/info/metadata_dir_tile.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 

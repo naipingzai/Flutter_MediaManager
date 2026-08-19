@@ -1,10 +1,10 @@
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/theme/colors.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_text_background_painter.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_text_outlined.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/fx_borders.dart';
-import 'package:flutter_media_view/ui/viewer/visual/video_subtitle.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/ui/theme/colors.dart';
+import 'package:fmv/ui/common/basic/basic_text_background_painter.dart';
+import 'package:fmv/ui/common/basic/basic_text_outlined.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/fx_borders.dart';
+import 'package:fmv/ui/viewer/visual/video_subtitle.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

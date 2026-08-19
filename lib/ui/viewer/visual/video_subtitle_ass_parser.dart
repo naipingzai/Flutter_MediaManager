@@ -1,7 +1,7 @@
-import 'package:flutter_media_view/function/utils/function_unicode.dart';
-import 'package:flutter_media_view/ui/viewer/visual/video_subtitle_line.dart';
-import 'package:flutter_media_view/ui/viewer/visual/video_subtitle_span.dart';
-import 'package:flutter_media_view/ui/viewer/visual/video_subtitle_style.dart';
+import 'package:fmv/function/utils/function_unicode.dart';
+import 'package:fmv/ui/viewer/visual/video_subtitle_line.dart';
+import 'package:fmv/ui/viewer/visual/video_subtitle_span.dart';
+import 'package:fmv/ui/viewer/visual/video_subtitle_style.dart';
 import 'package:flutter/material.dart';
 
 class AssParser {

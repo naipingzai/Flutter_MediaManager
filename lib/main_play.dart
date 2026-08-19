@@ -1,6 +1,6 @@
-import 'package:flutter_media_view/core/app_flavor.dart';
-import 'package:flutter_media_view/main_common.dart';
-import 'package:flutter_media_view/core/widget_common.dart';
+import 'package:fmv/core/app_flavor.dart';
+import 'package:fmv/main_common.dart';
+import 'package:fmv/core/widget_common.dart';
 
 const AppFlavor _flavor = .play;
 

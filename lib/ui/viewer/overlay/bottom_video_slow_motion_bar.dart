@@ -1,11 +1,11 @@
 import 'dart:math';
 
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/function/locale/locales.dart';
-import 'package:flutter_media_view/ui/theme/themes.dart';
-import 'package:flutter_media_view/ui/common/fx_blurred.dart';
-import 'package:flutter_media_view/ui/common/fx_borders.dart';
-import 'package:flutter_media_view/ui/viewer/overlay/bottom_video_progress_bar.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/function/locale/locales.dart';
+import 'package:fmv/ui/theme/themes.dart';
+import 'package:fmv/ui/common/fx_blurred.dart';
+import 'package:fmv/ui/common/fx_borders.dart';
+import 'package:fmv/ui/viewer/overlay/bottom_video_progress_bar.dart';
 import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:fmv_video/flutter_media_view_video.dart';
 import 'package:flutter/material.dart';

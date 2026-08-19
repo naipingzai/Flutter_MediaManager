@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter_media_view/function/utils/function_highlight.dart';
-import 'package:flutter_media_view/ui/theme/durations.dart';
-import 'package:flutter_media_view/ui/common/grid_sections_list_layout.dart';
+import 'package:fmv/function/utils/function_highlight.dart';
+import 'package:fmv/ui/theme/durations.dart';
+import 'package:fmv/ui/common/grid_sections_list_layout.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';

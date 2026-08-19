@@ -1,5 +1,5 @@
-import 'package:flutter_media_view/function/model/covers.dart';
-import 'package:flutter_media_view/function/filters/filters.dart';
+import 'package:fmv/function/model/covers.dart';
+import 'package:fmv/function/filters/filters.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 

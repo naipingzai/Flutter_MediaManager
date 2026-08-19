@@ -1,5 +1,5 @@
-import 'package:flutter_media_view/function/locale/fmv_locale.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
+import 'package:fmv/function/locale/fmv_locale.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
 import 'package:fmv_map/flutter_media_view_map.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/widgets.dart';

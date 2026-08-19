@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/ui/theme/durations.dart';
-import 'package:flutter_media_view/ui/viewer/controls/cast.dart';
-import 'package:flutter_media_view/ui/viewer/controls/events.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/ui/theme/durations.dart';
+import 'package:fmv/ui/viewer/controls/cast.dart';
+import 'package:fmv/ui/viewer/controls/events.dart';
 import 'package:fmv_magnifier/flutter_media_view_magnifier.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/foundation.dart';

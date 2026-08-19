@@ -1,7 +1,7 @@
-import 'package:flutter_media_view/l10n/l10n.dart';
-import 'package:flutter_media_view/function/locale/fmv_locale.dart';
-import 'package:flutter_media_view/function/settings/enums_coordinate_format.dart';
-import 'package:flutter_media_view/ui/common/fmv_app.dart';
+import 'package:fmv/l10n/l10n.dart';
+import 'package:fmv/function/locale/fmv_locale.dart';
+import 'package:fmv/function/settings/enums_coordinate_format.dart';
+import 'package:fmv/ui/common/fmv_app.dart';
 import 'package:fmv_map/flutter_media_view_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:test/test.dart';

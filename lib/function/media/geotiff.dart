@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:math';
 import 'dart:ui' as ui;
 
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/entry/extensions_images.dart';
-import 'package:flutter_media_view/function/metadata/geotiff.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/entry/extensions_images.dart';
+import 'package:fmv/function/metadata/geotiff.dart';
 import 'package:fmv_map/flutter_media_view_map.dart';
 import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:equatable/equatable.dart';

@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/function/services/device_service.dart';
-import 'package:flutter_media_view/function/locale/fmv_locale.dart';
-import 'package:flutter_media_view/function/utils/file_utils.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_fmv_expansion_tile.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/function/services/device_service.dart';
+import 'package:fmv/function/locale/fmv_locale.dart';
+import 'package:fmv/function/utils/file_utils.dart';
+import 'package:fmv/ui/common/identity/identity_fmv_expansion_tile.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:leak_tracker/leak_tracker.dart';

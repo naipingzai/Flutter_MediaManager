@@ -1,10 +1,10 @@
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/source/collection_lens.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_scaffold.dart';
-import 'package:flutter_media_view/ui/common/extensions_theme.dart';
-import 'package:flutter_media_view/ui/viewer/controls/controller.dart';
-import 'package:flutter_media_view/ui/viewer/entry_viewer_stack.dart';
-import 'package:flutter_media_view/ui/viewer/providers.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/source/collection_lens.dart';
+import 'package:fmv/ui/common/basic/basic_scaffold.dart';
+import 'package:fmv/ui/common/extensions_theme.dart';
+import 'package:fmv/ui/viewer/controls/controller.dart';
+import 'package:fmv/ui/viewer/entry_viewer_stack.dart';
+import 'package:fmv/ui/viewer/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

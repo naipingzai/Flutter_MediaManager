@@ -1,11 +1,11 @@
 import 'dart:math';
 import 'dart:ui';
 
-import 'package:flutter_media_view/function/viewer/view_state.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/editor/transform_controller.dart';
-import 'package:flutter_media_view/ui/editor/transform_transformation.dart';
-import 'package:flutter_media_view/ui/viewer/overlay/overlay_top.dart';
+import 'package:fmv/function/viewer/view_state.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/editor/transform_controller.dart';
+import 'package:fmv/ui/editor/transform_transformation.dart';
+import 'package:fmv/ui/viewer/overlay/overlay_top.dart';
 import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

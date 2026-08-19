@@ -1,9 +1,9 @@
 import 'dart:math';
 
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/theme/colors.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/theme/themes.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/ui/theme/colors.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/theme/themes.dart';
 import 'package:collection/collection.dart';
 import 'package:fmv_charts/community_charts_flutter.dart' as charts;
 import 'package:equatable/equatable.dart';

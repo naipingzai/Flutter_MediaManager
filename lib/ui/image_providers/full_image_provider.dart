@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:ui' as ui;
 
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/function/media/fetch_service.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/function/media/fetch_service.dart';
 import 'package:fmv_report/flutter_media_view_report.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';

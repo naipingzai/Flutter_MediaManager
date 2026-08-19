@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/ui/common/map_leaflet_latlng_utils.dart';
+import 'package:fmv/ui/common/map_leaflet_latlng_utils.dart';
 import 'package:flutter/widgets.dart';
 import 'package:latlong2/latlong.dart';
 

@@ -1,10 +1,10 @@
 import 'dart:ui';
 
-import 'package:flutter_media_view/function/entry/sort.dart';
-import 'package:flutter_media_view/function/common/channel.dart';
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/ui/theme/format.dart';
-import 'package:flutter_media_view/function/locale/fmv_locale.dart';
+import 'package:fmv/function/entry/sort.dart';
+import 'package:fmv/function/common/channel.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/ui/theme/format.dart';
+import 'package:fmv/function/locale/fmv_locale.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';

@@ -1,7 +1,7 @@
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/theme/themes.dart';
-import 'package:flutter_media_view/ui/common/fmv_app.dart';
-import 'package:flutter_media_view/ui/common/fx_borders.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/ui/theme/themes.dart';
+import 'package:fmv/ui/common/fmv_app.dart';
+import 'package:fmv/ui/common/fx_borders.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 

@@ -1,6 +1,6 @@
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/drawer_tile.dart';
-import 'package:flutter_media_view/ui/common/navigation_nav_item.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/drawer_tile.dart';
+import 'package:fmv/ui/common/navigation_nav_item.dart';
 import 'package:flutter/material.dart';
 
 typedef TileRouteBuilder = Route Function(BuildContext context, String routeName, bool topLevel);

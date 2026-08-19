@@ -1,15 +1,15 @@
 import 'dart:async';
 
-import 'package:flutter_media_view/function/filters/container_album_group.dart';
-import 'package:flutter_media_view/function/filters/covered_stored_album.dart';
-import 'package:flutter_media_view/function/filters/filters.dart';
-import 'package:flutter_media_view/function/source/collection_source.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/collection/page.dart';
-import 'package:flutter_media_view/ui/common/actions/mixins_feedback.dart';
-import 'package:flutter_media_view/ui/common/actions/mixins_vault_aware.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/drawer_tile.dart';
+import 'package:fmv/function/filters/container_album_group.dart';
+import 'package:fmv/function/filters/covered_stored_album.dart';
+import 'package:fmv/function/filters/filters.dart';
+import 'package:fmv/function/source/collection_source.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/collection/page.dart';
+import 'package:fmv/ui/common/actions/mixins_feedback.dart';
+import 'package:fmv/ui/common/actions/mixins_vault_aware.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/drawer_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

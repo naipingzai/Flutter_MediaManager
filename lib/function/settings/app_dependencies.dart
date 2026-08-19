@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/core/app_flavor.dart';
+import 'package:fmv/core/app_flavor.dart';
 
 class Dependencies {
   static const String apache2 = 'Apache License 2.0';

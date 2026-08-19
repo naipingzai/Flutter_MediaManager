@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter_media_view/ui/image_providers/full_image_provider.dart';
-import 'package:flutter_media_view/ui/image_providers/thumbnail_provider.dart';
+import 'package:fmv/ui/image_providers/full_image_provider.dart';
+import 'package:fmv/ui/image_providers/thumbnail_provider.dart';
 import 'package:flutter/foundation.dart';
 
 class EntryCache {

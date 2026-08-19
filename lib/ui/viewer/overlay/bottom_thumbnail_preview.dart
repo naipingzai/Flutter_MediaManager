@@ -1,6 +1,6 @@
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/ui/common/thumbnails/thumbnails_scroller.dart';
-import 'package:flutter_media_view/ui/viewer/controls/notifications.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/ui/common/thumbnails/thumbnails_scroller.dart';
+import 'package:fmv/ui/viewer/controls/notifications.dart';
 import 'package:flutter/material.dart';
 
 class ViewerThumbnailPreview extends StatefulWidget {

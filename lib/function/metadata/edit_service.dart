@@ -1,12 +1,12 @@
 import 'dart:async';
 
-import 'package:flutter_media_view/function/convert/convert.dart';
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/entry/extensions_props.dart';
-import 'package:flutter_media_view/function/metadata/date_modifier.dart';
-import 'package:flutter_media_view/function/common/channel.dart';
-import 'package:flutter_media_view/function/common/custom_exception.dart';
-import 'package:flutter_media_view/function/common/services.dart';
+import 'package:fmv/function/convert/convert.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/entry/extensions_props.dart';
+import 'package:fmv/function/metadata/date_modifier.dart';
+import 'package:fmv/function/common/channel.dart';
+import 'package:fmv/function/common/custom_exception.dart';
+import 'package:fmv/function/common/services.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';

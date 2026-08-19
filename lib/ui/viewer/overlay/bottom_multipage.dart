@@ -1,7 +1,7 @@
-import 'package:flutter_media_view/function/media/multipage.dart';
-import 'package:flutter_media_view/ui/common/thumbnails/thumbnails_scroller.dart';
-import 'package:flutter_media_view/ui/viewer/multipage_controller.dart';
-import 'package:flutter_media_view/ui/viewer/view_conductor.dart';
+import 'package:fmv/function/media/multipage.dart';
+import 'package:fmv/ui/common/thumbnails/thumbnails_scroller.dart';
+import 'package:fmv/ui/viewer/multipage_controller.dart';
+import 'package:fmv/ui/viewer/view_conductor.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

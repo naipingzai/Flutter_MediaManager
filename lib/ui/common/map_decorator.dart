@@ -1,6 +1,6 @@
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/common/fx_borders.dart';
-import 'package:flutter_media_view/ui/common/providers_map_theme_provider.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/ui/common/fx_borders.dart';
+import 'package:fmv/ui/common/providers_map_theme_provider.dart';
 import 'package:fmv_map/flutter_media_view_map.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

@@ -1,6 +1,6 @@
-import 'package:flutter_media_view/ui/theme/colors.dart';
-import 'package:flutter_media_view/ui/theme/durations.dart';
-import 'package:flutter_media_view/ui/settings/common/tiles.dart';
+import 'package:fmv/ui/theme/colors.dart';
+import 'package:fmv/ui/theme/durations.dart';
+import 'package:fmv/ui/settings/common/tiles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

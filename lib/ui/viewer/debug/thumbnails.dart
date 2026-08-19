@@ -1,10 +1,10 @@
 import 'dart:typed_data';
 
-import 'package:flutter_media_view/ui/image_providers/thumbnail_provider.dart';
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/entry/extensions_images.dart';
-import 'package:flutter_media_view/function/device/android_debug_service.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_fmv_expansion_tile.dart';
+import 'package:fmv/ui/image_providers/thumbnail_provider.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/entry/extensions_images.dart';
+import 'package:fmv/function/device/android_debug_service.dart';
+import 'package:fmv/ui/common/identity/identity_fmv_expansion_tile.dart';
 import 'package:flutter/material.dart';
 
 class ThumbnailsTab extends StatefulWidget {

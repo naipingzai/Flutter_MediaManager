@@ -1,6 +1,6 @@
 import 'dart:ui' as ui;
 
-import 'package:flutter_media_view/function/common/services.dart';
+import 'package:fmv/function/common/services.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

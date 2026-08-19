@@ -1,5 +1,5 @@
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/media/fetch_service.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/media/fetch_service.dart';
 import 'package:collection/collection.dart';
 import 'package:test/fake.dart';
 

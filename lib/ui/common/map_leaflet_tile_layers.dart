@@ -1,7 +1,7 @@
 import 'dart:io' as io;
 
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/ui/common/map_leaflet_vector_style_reader_extra.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/ui/common/map_leaflet_vector_style_reader_extra.dart';
 import 'package:flutter/material.dart';
 import 'package:vector_map_tiles/src/io/io.dart' as vmtio show Directory; // ignore: implementation_imports
 import 'package:vector_map_tiles/vector_map_tiles.dart';

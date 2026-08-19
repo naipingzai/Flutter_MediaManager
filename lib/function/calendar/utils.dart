@@ -1,7 +1,7 @@
-import 'package:flutter_media_view/function/locale/fmv_locale.dart';
-import 'package:flutter_media_view/function/calendar/ops_base.dart';
-import 'package:flutter_media_view/function/calendar/ops_gregorian.dart';
-import 'package:flutter_media_view/function/calendar/ops_persian.dart';
+import 'package:fmv/function/locale/fmv_locale.dart';
+import 'package:fmv/function/calendar/ops_base.dart';
+import 'package:fmv/function/calendar/ops_gregorian.dart';
+import 'package:fmv/function/calendar/ops_persian.dart';
 
 extension ExtraIntl4xCalendar on ACalendar {
   int get maxDaysInYear => 366;

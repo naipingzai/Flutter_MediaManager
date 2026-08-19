@@ -1,13 +1,13 @@
 import 'dart:math';
 
-import 'package:flutter_media_view/ui/image_providers/region_provider.dart';
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/entry/extensions_images.dart';
-import 'package:flutter_media_view/function/settings/enums_entry_background.dart';
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/function/viewer/view_state.dart';
-import 'package:flutter_media_view/ui/common/fx_checkered_decoration.dart';
-import 'package:flutter_media_view/ui/viewer/visual/entry_page_view.dart';
+import 'package:fmv/ui/image_providers/region_provider.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/entry/extensions_images.dart';
+import 'package:fmv/function/settings/enums_entry_background.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/function/viewer/view_state.dart';
+import 'package:fmv/ui/common/fx_checkered_decoration.dart';
+import 'package:fmv/ui/viewer/visual/entry_page_view.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:flutter/foundation.dart';

@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/ui/common/identity/identity_buttons_overlay_button.dart';
+import 'package:fmv/ui/common/identity/identity_buttons_overlay_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 

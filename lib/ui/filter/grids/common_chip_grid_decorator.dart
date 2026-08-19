@@ -1,7 +1,7 @@
-import 'package:flutter_media_view/function/filters/filters.dart';
-import 'package:flutter_media_view/ui/common/grid_overlay.dart';
-import 'package:flutter_media_view/ui/filter/grids/common_covered_filter_chip.dart';
-import 'package:flutter_media_view/ui/filter/grids/common_overlay.dart';
+import 'package:fmv/function/filters/filters.dart';
+import 'package:fmv/ui/common/grid_overlay.dart';
+import 'package:fmv/ui/filter/grids/common_covered_filter_chip.dart';
+import 'package:fmv/ui/filter/grids/common_overlay.dart';
 import 'package:flutter/widgets.dart';
 
 class FilterChipGridDecorator<T extends CollectionFilter, U extends FilterGridItem<T>> extends StatelessWidget {

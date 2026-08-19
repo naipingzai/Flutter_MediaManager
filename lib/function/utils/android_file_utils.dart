@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:flutter_media_view/function/settings/app_inventory.dart';
-import 'package:flutter_media_view/function/model/function_vaults.dart';
-import 'package:flutter_media_view/function/common/services.dart';
+import 'package:fmv/function/settings/app_inventory.dart';
+import 'package:fmv/function/model/function_vaults.dart';
+import 'package:fmv/function/common/services.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:collection/collection.dart';

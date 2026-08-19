@@ -1,7 +1,7 @@
-import 'package:flutter_media_view/function/filters/container_dynamic_album.dart';
-import 'package:flutter_media_view/function/filters/filters.dart';
-import 'package:flutter_media_view/function/grouping/common.dart';
-import 'package:flutter_media_view/function/settings/defaults.dart';
+import 'package:fmv/function/filters/container_dynamic_album.dart';
+import 'package:fmv/function/filters/filters.dart';
+import 'package:fmv/function/grouping/common.dart';
+import 'package:fmv/function/settings/defaults.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:synchronized/synchronized.dart';

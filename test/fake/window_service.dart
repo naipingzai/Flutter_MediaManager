@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/services/window_service.dart';
+import 'package:fmv/function/services/window_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:test/fake.dart';

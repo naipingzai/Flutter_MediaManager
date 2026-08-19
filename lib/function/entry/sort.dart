@@ -1,5 +1,5 @@
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/utils/time_utils.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/utils/time_utils.dart';
 import 'package:collection/collection.dart';
 
 class FmvEntrySort {

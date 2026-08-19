@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:isolate';
 
-import 'package:flutter_media_view/function/geo/topojson.dart';
+import 'package:fmv/function/geo/topojson.dart';
 import 'package:collection/collection.dart';
 import 'package:country_code/country_code.dart';
 import 'package:flutter/foundation.dart';

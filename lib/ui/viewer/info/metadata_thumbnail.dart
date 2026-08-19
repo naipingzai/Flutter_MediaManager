@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:ui' as ui;
 
-import 'package:flutter_media_view/ui/image_providers/descriptor_provider.dart';
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/common/services.dart';
+import 'package:fmv/ui/image_providers/descriptor_provider.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/common/services.dart';
 import 'package:flutter/material.dart';
 
 class MetadataThumbnails extends StatefulWidget {

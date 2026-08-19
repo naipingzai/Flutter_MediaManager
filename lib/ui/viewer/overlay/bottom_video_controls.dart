@@ -1,8 +1,8 @@
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/common/view.dart';
-import 'package:flutter_media_view/ui/common/actions/common_controls_togglers_play.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_buttons_overlay_button.dart';
-import 'package:flutter_media_view/ui/viewer/overlay/bottom.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/ui/common/view.dart';
+import 'package:fmv/ui/common/actions/common_controls_togglers_play.dart';
+import 'package:fmv/ui/common/identity/identity_buttons_overlay_button.dart';
+import 'package:fmv/ui/viewer/overlay/bottom.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:fmv_video/flutter_media_view_video.dart';
 import 'package:flutter/material.dart';

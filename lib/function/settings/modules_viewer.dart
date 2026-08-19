@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/settings/defaults.dart';
+import 'package:fmv/function/settings/defaults.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 
 mixin ViewerSettings on SettingsAccess {

@@ -1,16 +1,16 @@
 import 'dart:ui';
 
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/theme/durations.dart';
-import 'package:flutter_media_view/ui/theme/themes.dart';
-import 'package:flutter_media_view/function/utils/debouncer.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_scaffold.dart';
-import 'package:flutter_media_view/ui/common/behaviour/behaviour_pop_double_back.dart';
-import 'package:flutter_media_view/ui/common/behaviour/behaviour_pop_scope.dart';
-import 'package:flutter_media_view/ui/common/behaviour/behaviour_pop_tv_navigation.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_fmv_app_bar.dart';
-import 'package:flutter_media_view/ui/search/common_search_delegate.dart';
-import 'package:flutter_media_view/ui/search/common_search_route.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/ui/theme/durations.dart';
+import 'package:fmv/ui/theme/themes.dart';
+import 'package:fmv/function/utils/debouncer.dart';
+import 'package:fmv/ui/common/basic/basic_scaffold.dart';
+import 'package:fmv/ui/common/behaviour/behaviour_pop_double_back.dart';
+import 'package:fmv/ui/common/behaviour/behaviour_pop_scope.dart';
+import 'package:fmv/ui/common/behaviour/behaviour_pop_tv_navigation.dart';
+import 'package:fmv/ui/common/identity/identity_fmv_app_bar.dart';
+import 'package:fmv/ui/search/common_search_delegate.dart';
+import 'package:fmv/ui/search/common_search_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';

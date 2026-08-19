@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:flutter_media_view/ui/theme/durations.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_popup_menu_row.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_buttons_captioned_button.dart';
+import 'package:fmv/ui/theme/durations.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/common/basic/basic_popup_menu_row.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/identity/identity_buttons_captioned_button.dart';
 import 'package:fmv_video/flutter_media_view_video.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

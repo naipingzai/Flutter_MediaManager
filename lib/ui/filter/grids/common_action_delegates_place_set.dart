@@ -1,8 +1,8 @@
-import 'package:flutter_media_view/function/filters/covered_location.dart';
-import 'package:flutter_media_view/function/filters/filters.dart';
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/filter/grids/common_action_delegates_chip_set.dart';
-import 'package:flutter_media_view/ui/filter/grids/places_page.dart';
+import 'package:fmv/function/filters/covered_location.dart';
+import 'package:fmv/function/filters/filters.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/ui/filter/grids/common_action_delegates_chip_set.dart';
+import 'package:fmv/ui/filter/grids/places_page.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 
 class PlaceChipSetActionDelegate extends ChipSetActionDelegate<LocationFilter> {

@@ -1,10 +1,10 @@
 import 'dart:math';
 
-import 'package:flutter_media_view/function/locale/fmv_locale.dart';
-import 'package:flutter_media_view/function/calendar/utils.dart';
-import 'package:flutter_media_view/function/calendar/dateformat_base.dart';
-import 'package:flutter_media_view/function/filters/date.dart';
-import 'package:flutter_media_view/function/utils/time_utils.dart';
+import 'package:fmv/function/locale/fmv_locale.dart';
+import 'package:fmv/function/calendar/utils.dart';
+import 'package:fmv/function/calendar/dateformat_base.dart';
+import 'package:fmv/function/filters/date.dart';
+import 'package:fmv/function/utils/time_utils.dart';
 import 'package:fmv_charts/community_charts_flutter.dart' as charts;
 
 // cf charts.DateTimeTickFormatter factory internals for default formats

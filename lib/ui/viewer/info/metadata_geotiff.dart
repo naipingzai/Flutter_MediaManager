@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/metadata/geotiff.dart';
+import 'package:fmv/function/metadata/geotiff.dart';
 
 class GeoTiffDirectory {
   static int? tagForName(String name) {

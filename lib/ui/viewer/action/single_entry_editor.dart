@@ -1,16 +1,16 @@
 import 'dart:async';
 
-import 'package:flutter_media_view/core/app_mode.dart';
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/entry/extensions_catalog.dart';
-import 'package:flutter_media_view/function/entry/extensions_location.dart';
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/function/source/collection_source.dart';
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/ui/editor/mixins_entry_editor.dart';
-import 'package:flutter_media_view/ui/common/actions/mixins_feedback.dart';
-import 'package:flutter_media_view/ui/common/actions/mixins_permission_aware.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
+import 'package:fmv/core/app_mode.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/entry/extensions_catalog.dart';
+import 'package:fmv/function/entry/extensions_location.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/function/source/collection_source.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/ui/editor/mixins_entry_editor.dart';
+import 'package:fmv/ui/common/actions/mixins_feedback.dart';
+import 'package:fmv/ui/common/actions/mixins_permission_aware.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

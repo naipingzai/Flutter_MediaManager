@@ -1,12 +1,12 @@
-import 'package:flutter_media_view/function/filters/container_album_group.dart';
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_buttons_outlined_button.dart';
-import 'package:flutter_media_view/ui/common/pick_album_pick_page.dart';
-import 'package:flutter_media_view/ui/filter/grids/common_enums.dart';
-import 'package:flutter_media_view/ui/common/drawer_tile.dart';
-import 'package:flutter_media_view/ui/settings/navigation/drawer_editor_banner.dart';
+import 'package:fmv/function/filters/container_album_group.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/identity/identity_buttons_outlined_button.dart';
+import 'package:fmv/ui/common/pick_album_pick_page.dart';
+import 'package:fmv/ui/filter/grids/common_enums.dart';
+import 'package:fmv/ui/common/drawer_tile.dart';
+import 'package:fmv/ui/settings/navigation/drawer_editor_banner.dart';
 import 'package:flutter/material.dart';
 
 class DrawerAlbumTab extends StatefulWidget {

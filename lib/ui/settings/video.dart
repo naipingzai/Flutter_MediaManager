@@ -1,16 +1,16 @@
 import 'dart:async';
 
-import 'package:flutter_media_view/function/filters/mime.dart';
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/theme/colors.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/settings/common/tile_leading.dart';
-import 'package:flutter_media_view/ui/settings/common/tiles.dart';
-import 'package:flutter_media_view/ui/settings/definition.dart';
-import 'package:flutter_media_view/ui/settings/video/controls_page.dart';
-import 'package:flutter_media_view/ui/settings/video/playback_page.dart';
-import 'package:flutter_media_view/ui/settings/video/subtitle_theme_page.dart';
+import 'package:fmv/function/filters/mime.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/ui/theme/colors.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/settings/common/tile_leading.dart';
+import 'package:fmv/ui/settings/common/tiles.dart';
+import 'package:fmv/ui/settings/definition.dart';
+import 'package:fmv/ui/settings/video/controls_page.dart';
+import 'package:fmv/ui/settings/video/playback_page.dart';
+import 'package:fmv/ui/settings/video/subtitle_theme_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

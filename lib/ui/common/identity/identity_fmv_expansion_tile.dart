@@ -1,6 +1,6 @@
-import 'package:flutter_media_view/ui/theme/durations.dart';
-import 'package:flutter_media_view/ui/theme/themes.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_highlight_title.dart';
+import 'package:fmv/ui/theme/durations.dart';
+import 'package:fmv/ui/theme/themes.dart';
+import 'package:fmv/ui/common/identity/identity_highlight_title.dart';
 import 'package:fmv_expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

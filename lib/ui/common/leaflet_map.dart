@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter_media_view/function/device/function_device.dart';
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/theme/durations.dart';
-import 'package:flutter_media_view/function/utils/debouncer.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_gestures_gesture_detector.dart';
-import 'package:flutter_media_view/ui/common/map_leaflet_latlng_tween.dart' as llt;
-import 'package:flutter_media_view/ui/common/map_leaflet_scale_layer.dart';
-import 'package:flutter_media_view/ui/common/map_leaflet_tile_layers.dart';
+import 'package:fmv/function/device/function_device.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/ui/theme/durations.dart';
+import 'package:fmv/function/utils/debouncer.dart';
+import 'package:fmv/ui/common/basic/basic_gestures_gesture_detector.dart';
+import 'package:fmv/ui/common/map_leaflet_latlng_tween.dart' as llt;
+import 'package:fmv/ui/common/map_leaflet_scale_layer.dart';
+import 'package:fmv/ui/common/map_leaflet_tile_layers.dart';
 import 'package:fmv_map/flutter_media_view_map.dart';
 import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:flutter/gestures.dart';

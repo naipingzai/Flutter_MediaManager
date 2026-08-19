@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter_media_view/ui/theme/durations.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/common/actions/common_controls_quick_quick_chooser.dart';
+import 'package:fmv/ui/theme/durations.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/common/actions/common_controls_quick_quick_chooser.dart';
 import 'package:fmv_ui/flutter_media_view_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';

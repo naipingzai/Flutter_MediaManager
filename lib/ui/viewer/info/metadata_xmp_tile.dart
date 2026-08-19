@@ -1,8 +1,8 @@
 import 'dart:collection';
 import 'dart:convert';
 
-import 'package:flutter_media_view/function/utils/xmp_utils.dart';
-import 'package:flutter_media_view/ui/viewer/info/metadata_xmp_namespaces.dart';
+import 'package:fmv/function/utils/xmp_utils.dart';
+import 'package:fmv/ui/viewer/info/metadata_xmp_namespaces.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 

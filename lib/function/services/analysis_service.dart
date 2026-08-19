@@ -1,16 +1,16 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:flutter_media_view/l10n/l10n.dart';
-import 'package:flutter_media_view/function/device/function_device.dart';
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/function/source/analysis_controller.dart';
-import 'package:flutter_media_view/function/source/collection_source.dart';
-import 'package:flutter_media_view/function/source/media_store_source.dart';
-import 'package:flutter_media_view/function/common/channel.dart';
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/function/utils/android_file_utils.dart';
-import 'package:flutter_media_view/ui/common/view.dart';
+import 'package:fmv/l10n/l10n.dart';
+import 'package:fmv/function/device/function_device.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/function/source/analysis_controller.dart';
+import 'package:fmv/function/source/collection_source.dart';
+import 'package:fmv/function/source/media_store_source.dart';
+import 'package:fmv/function/common/channel.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/function/utils/android_file_utils.dart';
+import 'package:fmv/ui/common/view.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';

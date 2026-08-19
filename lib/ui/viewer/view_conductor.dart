@@ -1,6 +1,6 @@
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/viewer/view_state.dart';
-import 'package:flutter_media_view/ui/viewer/view_controller.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/viewer/view_state.dart';
+import 'package:fmv/ui/viewer/view_controller.dart';
 import 'package:fmv_magnifier/flutter_media_view_magnifier.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';

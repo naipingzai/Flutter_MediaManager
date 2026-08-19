@@ -1,15 +1,15 @@
 import 'dart:async';
 
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/entry/extensions_info.dart';
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/theme/durations.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_buttons_outlined_button.dart';
-import 'package:flutter_media_view/ui/viewer/info/common.dart';
-import 'package:flutter_media_view/ui/viewer/info/metadata_dir.dart';
-import 'package:flutter_media_view/ui/viewer/info/metadata_dir_tile.dart';
-import 'package:flutter_media_view/ui/viewer/info/metadata_tv_page.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/entry/extensions_info.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/ui/theme/durations.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/common/identity/identity_buttons_outlined_button.dart';
+import 'package:fmv/ui/viewer/info/common.dart';
+import 'package:fmv/ui/viewer/info/metadata_dir.dart';
+import 'package:fmv/ui/viewer/info/metadata_dir_tile.dart';
+import 'package:fmv/ui/viewer/info/metadata_tv_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:fmv_staggered_animations/flutter_staggered_animations.dart';

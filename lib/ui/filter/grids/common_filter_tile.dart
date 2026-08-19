@@ -1,13 +1,13 @@
-import 'package:flutter_media_view/function/filters/covered_stored_album.dart';
-import 'package:flutter_media_view/function/filters/filters.dart';
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/function/model/function_vaults.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/grid_scaling.dart';
-import 'package:flutter_media_view/ui/filter/identity_fmv_filter_chip.dart';
-import 'package:flutter_media_view/ui/filter/grids/common_covered_filter_chip.dart';
-import 'package:flutter_media_view/ui/filter/grids/common_chip_grid_decorator.dart';
-import 'package:flutter_media_view/ui/filter/grids/common_list_details.dart';
+import 'package:fmv/function/filters/covered_stored_album.dart';
+import 'package:fmv/function/filters/filters.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/function/model/function_vaults.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/grid_scaling.dart';
+import 'package:fmv/ui/filter/identity_fmv_filter_chip.dart';
+import 'package:fmv/ui/filter/grids/common_covered_filter_chip.dart';
+import 'package:fmv/ui/filter/grids/common_chip_grid_decorator.dart';
+import 'package:fmv/ui/filter/grids/common_list_details.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 

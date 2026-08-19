@@ -1,7 +1,7 @@
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/function/locale/locales.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_wheel.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/function/locale/locales.dart';
+import 'package:fmv/ui/common/basic/basic_wheel.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
 import 'package:flutter/material.dart';
 
 class TimeShiftSelector extends StatefulWidget {

@@ -1,12 +1,12 @@
 import 'dart:async';
 
-import 'package:flutter_media_view/function/geo/countries.dart';
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/metadata/address.dart';
-import 'package:flutter_media_view/function/common/service_policy.dart';
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/function/services/geocoding_service.dart';
-import 'package:flutter_media_view/function/locale/fmv_locale.dart';
+import 'package:fmv/function/geo/countries.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/metadata/address.dart';
+import 'package:fmv/function/common/service_policy.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/function/services/geocoding_service.dart';
+import 'package:fmv/function/locale/fmv_locale.dart';
 import 'package:country_code/country_code.dart';
 import 'package:flutter/foundation.dart';
 import 'package:latlong2/latlong.dart';

@@ -1,13 +1,13 @@
 import 'dart:collection';
 import 'dart:ui' as ui;
 
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/common/fmv_app.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_list_tiles_reselectable_radio.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_query_bar.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_scaffold.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/settings/language/locale_tile.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/ui/common/fmv_app.dart';
+import 'package:fmv/ui/common/basic/basic_list_tiles_reselectable_radio.dart';
+import 'package:fmv/ui/common/basic/basic_query_bar.dart';
+import 'package:fmv/ui/common/basic/basic_scaffold.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/settings/language/locale_tile.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 

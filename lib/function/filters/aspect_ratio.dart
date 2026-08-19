@@ -1,7 +1,7 @@
-import 'package:flutter_media_view/function/filters/filters.dart';
-import 'package:flutter_media_view/function/filters/query.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
+import 'package:fmv/function/filters/filters.dart';
+import 'package:fmv/function/filters/query.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
 import 'package:flutter/widgets.dart';
 
 class AspectRatioFilter extends CollectionFilter {

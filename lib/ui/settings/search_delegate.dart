@@ -1,11 +1,11 @@
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_empty.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_highlight_title.dart';
-import 'package:flutter_media_view/ui/common/providers_media_query_data_provider.dart';
-import 'package:flutter_media_view/ui/search/common_search_delegate.dart';
-import 'package:flutter_media_view/ui/settings/definition.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/identity/identity_empty.dart';
+import 'package:fmv/ui/common/identity/identity_highlight_title.dart';
+import 'package:fmv/ui/common/providers_media_query_data_provider.dart';
+import 'package:fmv/ui/search/common_search_delegate.dart';
+import 'package:fmv/ui/settings/definition.dart';
 import 'package:flutter/material.dart';
 
 typedef _SectionPredicate = List<SettingsTile> Function(BuildContext context, SettingsSection section);

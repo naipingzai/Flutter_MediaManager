@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/utils/byte_utils.dart';
+import 'package:fmv/function/utils/byte_utils.dart';
 
 /// QuickTime `USMT`/`MTDT` 盒解析器，
 /// 移植自 Android `metadata/QuickTimeMetadata.kt`，无平台依赖，可复用于任何目标。

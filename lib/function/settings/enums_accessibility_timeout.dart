@@ -1,5 +1,5 @@
-import 'package:flutter_media_view/function/services/accessibility_service.dart';
-import 'package:flutter_media_view/ui/theme/durations.dart';
+import 'package:fmv/function/services/accessibility_service.dart';
+import 'package:fmv/ui/theme/durations.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 
 extension ExtraAccessibilityTimeout on AccessibilityTimeout {

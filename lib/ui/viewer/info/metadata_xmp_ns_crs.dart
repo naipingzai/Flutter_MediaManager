@@ -1,5 +1,5 @@
-import 'package:flutter_media_view/function/metadata/function_ref_metadata_xmp.dart';
-import 'package:flutter_media_view/ui/viewer/info/metadata_xmp_namespaces.dart';
+import 'package:fmv/function/metadata/function_ref_metadata_xmp.dart';
+import 'package:fmv/ui/viewer/info/metadata_xmp_namespaces.dart';
 
 class XmpCrsNamespace extends XmpNamespace {
   XmpCrsNamespace({required super.schemaRegistryPrefixes, required super.rawProps}) : super(nsUri: XmpNamespaces.crs);

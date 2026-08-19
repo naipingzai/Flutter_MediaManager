@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/model/mime_types.dart';
+import 'package:fmv/function/model/mime_types.dart';
 
 class MimeUtils {
   static String displayType(String mime) {

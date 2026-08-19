@@ -1,16 +1,16 @@
 import 'dart:async';
 import 'dart:ui' as ui;
 
-import 'package:flutter_media_view/ui/image_providers/region_provider.dart';
-import 'package:flutter_media_view/ui/image_providers/thumbnail_provider.dart';
-import 'package:flutter_media_view/function/settings/app_support.dart';
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/model/mime_types.dart';
-import 'package:flutter_media_view/function/common/channel.dart';
-import 'package:flutter_media_view/function/common/decoding.dart';
-import 'package:flutter_media_view/function/common/output_buffer.dart';
-import 'package:flutter_media_view/function/common/service_policy.dart';
-import 'package:flutter_media_view/function/common/services.dart';
+import 'package:fmv/ui/image_providers/region_provider.dart';
+import 'package:fmv/ui/image_providers/thumbnail_provider.dart';
+import 'package:fmv/function/settings/app_support.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/model/mime_types.dart';
+import 'package:fmv/function/common/channel.dart';
+import 'package:fmv/function/common/decoding.dart';
+import 'package:fmv/function/common/output_buffer.dart';
+import 'package:fmv/function/common/service_policy.dart';
+import 'package:fmv/function/common/services.dart';
 import 'package:fmv_report/flutter_media_view_report.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';

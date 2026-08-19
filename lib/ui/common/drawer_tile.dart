@@ -1,8 +1,8 @@
-import 'package:flutter_media_view/function/filters/filters.dart';
-import 'package:flutter_media_view/ui/theme/colors.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/common/debug_app_debug_page.dart';
-import 'package:flutter_media_view/ui/common/navigation_nav_display.dart';
+import 'package:fmv/function/filters/filters.dart';
+import 'package:fmv/ui/theme/colors.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/common/debug_app_debug_page.dart';
+import 'package:fmv/ui/common/navigation_nav_display.dart';
 import 'package:flutter/material.dart';
 
 class DrawerFilterIcon extends StatelessWidget {

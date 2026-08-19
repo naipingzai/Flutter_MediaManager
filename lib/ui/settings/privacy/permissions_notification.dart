@@ -1,8 +1,8 @@
-import 'package:flutter_media_view/function/device/function_device.dart';
-import 'package:flutter_media_view/ui/theme/durations.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/settings/common/tiles.dart';
+import 'package:fmv/function/device/function_device.dart';
+import 'package:fmv/ui/theme/durations.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/settings/common/tiles.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 

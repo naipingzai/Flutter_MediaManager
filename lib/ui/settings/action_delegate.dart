@@ -1,14 +1,14 @@
 import 'dart:convert';
 
-import 'package:flutter_media_view/function/source/collection_source.dart';
-import 'package:flutter_media_view/function/locale/locales.dart';
-import 'package:flutter_media_view/function/model/mime_types.dart';
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/ui/common/actions/mixins_feedback.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
-import 'package:flutter_media_view/ui/settings/app_export_items.dart';
-import 'package:flutter_media_view/ui/settings/app_export_selection_dialog.dart';
+import 'package:fmv/function/source/collection_source.dart';
+import 'package:fmv/function/locale/locales.dart';
+import 'package:fmv/function/model/mime_types.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/ui/common/actions/mixins_feedback.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/dialogs_fmv_dialog.dart';
+import 'package:fmv/ui/settings/app_export_items.dart';
+import 'package:fmv/ui/settings/app_export_selection_dialog.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

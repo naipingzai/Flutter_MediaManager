@@ -1,12 +1,12 @@
-import 'package:flutter_media_view/core/app_mode.dart';
-import 'package:flutter_media_view/function/geo/function_states.dart';
-import 'package:flutter_media_view/function/filters/covered_location.dart';
-import 'package:flutter_media_view/function/filters/filters.dart';
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/ui/filter/grids/common_action_delegates_chip_set.dart';
-import 'package:flutter_media_view/ui/filter/grids/countries_page.dart';
-import 'package:flutter_media_view/ui/filter/grids/states_page.dart';
+import 'package:fmv/core/app_mode.dart';
+import 'package:fmv/function/geo/function_states.dart';
+import 'package:fmv/function/filters/covered_location.dart';
+import 'package:fmv/function/filters/filters.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/ui/filter/grids/common_action_delegates_chip_set.dart';
+import 'package:fmv/ui/filter/grids/countries_page.dart';
+import 'package:fmv/ui/filter/grids/states_page.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 

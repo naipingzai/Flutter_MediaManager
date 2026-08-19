@@ -1,6 +1,6 @@
-import 'package:flutter_media_view/function/filters/container_group_base.dart';
-import 'package:flutter_media_view/function/filters/container_set_or.dart';
-import 'package:flutter_media_view/function/filters/filters.dart';
+import 'package:fmv/function/filters/container_group_base.dart';
+import 'package:fmv/function/filters/container_set_or.dart';
+import 'package:fmv/function/filters/filters.dart';
 
 mixin TagBaseFilter on CollectionFilter {}
 

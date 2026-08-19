@@ -1,6 +1,6 @@
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/function/media/fetch_service.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_fmv_expansion_tile.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/function/media/fetch_service.dart';
+import 'package:fmv/ui/common/identity/identity_fmv_expansion_tile.dart';
 import 'package:flutter/material.dart';
 
 class DebugHdrSection extends StatefulWidget {

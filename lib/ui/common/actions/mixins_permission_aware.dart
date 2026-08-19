@@ -1,12 +1,12 @@
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/entry/extensions_props.dart';
-import 'package:flutter_media_view/function/settings/app_service.dart';
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/function/utils/android_file_utils.dart';
-import 'package:flutter_media_view/ui/common/view.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/dialogs_fmv_confirmation_dialog.dart';
-import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/entry/extensions_props.dart';
+import 'package:fmv/function/settings/app_service.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/function/utils/android_file_utils.dart';
+import 'package:fmv/ui/common/view.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/dialogs_fmv_confirmation_dialog.dart';
+import 'package:fmv/ui/common/dialogs_fmv_dialog.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 

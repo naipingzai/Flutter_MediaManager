@@ -1,6 +1,6 @@
-import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
-import 'package:flutter_media_view/ui/common/dialogs_selection_dialogs_common.dart';
-import 'package:flutter_media_view/ui/common/dialogs_selection_dialogs_radio_list_tile.dart';
+import 'package:fmv/ui/common/dialogs_fmv_dialog.dart';
+import 'package:fmv/ui/common/dialogs_selection_dialogs_common.dart';
+import 'package:fmv/ui/common/dialogs_selection_dialogs_radio_list_tile.dart';
 import 'package:flutter/material.dart';
 
 // do not use as `T` a record containing a collection

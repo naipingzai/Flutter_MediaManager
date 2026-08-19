@@ -1,9 +1,9 @@
-import 'package:flutter_media_view/function/metadata/overlay.dart';
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/theme/text.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/viewer/overlay/top_details.dart';
+import 'package:fmv/function/metadata/overlay.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/theme/text.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/viewer/overlay/top_details.dart';
 import 'package:decorated_icon/decorated_icon.dart';
 import 'package:flutter/material.dart';
 

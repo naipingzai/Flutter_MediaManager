@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/model/bursts.dart';
+import 'package:fmv/function/model/bursts.dart';
 import 'package:test/test.dart';
 
 void main() {

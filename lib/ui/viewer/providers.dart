@@ -1,7 +1,7 @@
-import 'package:flutter_media_view/function/source/collection_lens.dart';
-import 'package:flutter_media_view/ui/viewer/multipage_conductor.dart';
-import 'package:flutter_media_view/ui/viewer/video_conductor.dart';
-import 'package:flutter_media_view/ui/viewer/view_conductor.dart';
+import 'package:fmv/function/source/collection_lens.dart';
+import 'package:fmv/ui/viewer/multipage_conductor.dart';
+import 'package:fmv/ui/viewer/video_conductor.dart';
+import 'package:fmv/ui/viewer/view_conductor.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 

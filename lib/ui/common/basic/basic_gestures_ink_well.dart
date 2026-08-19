@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:collection';
 
-import 'package:flutter_media_view/ui/common/basic/basic_gestures_gesture_detector.dart';
+import 'package:fmv/ui/common/basic/basic_gestures_gesture_detector.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

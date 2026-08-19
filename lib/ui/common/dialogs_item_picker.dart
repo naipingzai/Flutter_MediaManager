@@ -1,11 +1,11 @@
 import 'dart:math';
 
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/extensions_theme.dart';
-import 'package:flutter_media_view/ui/common/fx_borders.dart';
-import 'package:flutter_media_view/ui/common/thumbnails/thumbnails_image.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/extensions_theme.dart';
+import 'package:fmv/ui/common/fx_borders.dart';
+import 'package:fmv/ui/common/thumbnails/thumbnails_image.dart';
 import 'package:flutter/material.dart';
 
 class ItemPicker extends StatelessWidget {

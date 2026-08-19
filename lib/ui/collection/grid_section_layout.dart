@@ -1,8 +1,8 @@
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/source/collection_lens.dart';
-import 'package:flutter_media_view/function/source/section_keys.dart';
-import 'package:flutter_media_view/ui/collection/grid_headers_any.dart';
-import 'package:flutter_media_view/ui/common/grid_sections_provider.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/source/collection_lens.dart';
+import 'package:fmv/function/source/section_keys.dart';
+import 'package:fmv/ui/collection/grid_headers_any.dart';
+import 'package:fmv/ui/common/grid_sections_provider.dart';
 import 'package:flutter/material.dart';
 
 class SectionedEntryListLayoutProvider extends SectionedListLayoutProvider<FmvEntry> {

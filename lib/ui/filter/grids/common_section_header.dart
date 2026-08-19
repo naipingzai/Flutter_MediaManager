@@ -1,5 +1,5 @@
-import 'package:flutter_media_view/ui/common/grid_header.dart';
-import 'package:flutter_media_view/ui/filter/grids/common_section_keys.dart';
+import 'package:fmv/ui/common/grid_header.dart';
+import 'package:fmv/ui/filter/grids/common_section_keys.dart';
 import 'package:flutter/material.dart';
 
 class FilterChipSectionHeader<T> extends StatelessWidget {

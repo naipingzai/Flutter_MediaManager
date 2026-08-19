@@ -1,9 +1,9 @@
 import 'dart:math';
 
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/theme/format.dart';
-import 'package:flutter_media_view/ui/filter/identity_fmv_filter_chip.dart';
-import 'package:flutter_media_view/ui/common/tiles/tiles_extent_controller.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/ui/theme/format.dart';
+import 'package:fmv/ui/filter/identity_fmv_filter_chip.dart';
+import 'package:fmv/ui/common/tiles/tiles_extent_controller.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';

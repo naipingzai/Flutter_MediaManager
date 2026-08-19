@@ -1,5 +1,5 @@
-import 'package:flutter_media_view/function/device/function_device.dart';
-import 'package:flutter_media_view/function/common/services.dart';
+import 'package:fmv/function/device/function_device.dart';
+import 'package:fmv/function/common/services.dart';
 import 'package:fmv_map/flutter_media_view_map.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';

@@ -1,15 +1,15 @@
 import 'dart:async';
 
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/entry/extensions_keys.dart';
-import 'package:flutter_media_view/function/model/mime_types.dart';
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/ui/common/actions/mixins_feedback.dart';
-import 'package:flutter_media_view/ui/common/behaviour/behaviour_routes.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
-import 'package:flutter_media_view/ui/viewer/entry_viewer_page.dart';
-import 'package:flutter_media_view/ui/viewer/info/embedded_notifications.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/entry/extensions_keys.dart';
+import 'package:fmv/function/model/mime_types.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/ui/common/actions/mixins_feedback.dart';
+import 'package:fmv/ui/common/behaviour/behaviour_routes.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/dialogs_fmv_dialog.dart';
+import 'package:fmv/ui/viewer/entry_viewer_page.dart';
+import 'package:fmv/ui/viewer/info/embedded_notifications.dart';
 import 'package:flutter/material.dart';
 
 class EmbeddedDataOpener extends StatelessWidget with FeedbackMixin {

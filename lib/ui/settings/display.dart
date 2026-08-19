@@ -1,16 +1,16 @@
 import 'dart:async';
 
-import 'package:flutter_media_view/function/device/function_device.dart';
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/theme/colors.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/common/view.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/dialogs_fmv_confirmation_dialog.dart';
-import 'package:flutter_media_view/ui/settings/common/tile_leading.dart';
-import 'package:flutter_media_view/ui/settings/common/tiles.dart';
-import 'package:flutter_media_view/ui/settings/privacy.dart';
-import 'package:flutter_media_view/ui/settings/definition.dart';
+import 'package:fmv/function/device/function_device.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/ui/theme/colors.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/common/view.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/dialogs_fmv_confirmation_dialog.dart';
+import 'package:fmv/ui/settings/common/tile_leading.dart';
+import 'package:fmv/ui/settings/common/tiles.dart';
+import 'package:fmv/ui/settings/privacy.dart';
+import 'package:fmv/ui/settings/definition.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

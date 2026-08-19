@@ -1,10 +1,10 @@
 import 'dart:ui' as ui;
 
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/common/channel.dart';
-import 'package:flutter_media_view/function/common/decoding.dart';
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/ui/theme/text.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/common/channel.dart';
+import 'package:fmv/function/common/decoding.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/ui/theme/text.dart';
 import 'package:flutter/services.dart';
 
 abstract class EmbeddedDataService {

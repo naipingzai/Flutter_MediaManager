@@ -1,5 +1,5 @@
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/source/collection_lens.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/source/collection_lens.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 

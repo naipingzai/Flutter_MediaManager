@@ -1,9 +1,9 @@
-import 'package:flutter_media_view/function/filters/filters.dart';
-import 'package:flutter_media_view/function/services/intent_service.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/collection/filter_bar.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_fmv_caption.dart';
+import 'package:fmv/function/filters/filters.dart';
+import 'package:fmv/function/services/intent_service.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/collection/filter_bar.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/identity/identity_fmv_caption.dart';
 import 'package:flutter/material.dart';
 
 class SettingsCollectionTile extends StatelessWidget {

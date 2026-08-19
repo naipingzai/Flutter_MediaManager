@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/ui/theme/durations.dart';
-import 'package:flutter_media_view/ui/common/behaviour/behaviour_pop_scope.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/ui/theme/durations.dart';
+import 'package:fmv/ui/common/behaviour/behaviour_pop_scope.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:overlay_support/overlay_support.dart';

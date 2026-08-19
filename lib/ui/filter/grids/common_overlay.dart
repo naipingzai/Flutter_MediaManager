@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:flutter_media_view/function/filters/filters.dart';
-import 'package:flutter_media_view/function/utils/function_highlight.dart';
-import 'package:flutter_media_view/ui/common/fx_sweeper.dart';
+import 'package:fmv/function/filters/filters.dart';
+import 'package:fmv/function/utils/function_highlight.dart';
+import 'package:fmv/ui/common/fx_sweeper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

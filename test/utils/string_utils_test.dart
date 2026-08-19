@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/utils/string_utils.dart';
+import 'package:fmv/function/utils/string_utils.dart';
 import 'package:test/test.dart';
 
 void main() {

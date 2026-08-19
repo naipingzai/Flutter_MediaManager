@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:flutter_media_view/ui/common/basic/basic_link_chip.dart';
-import 'package:flutter_media_view/ui/filter/identity_fmv_filter_chip.dart';
+import 'package:fmv/ui/common/basic/basic_link_chip.dart';
+import 'package:fmv/ui/filter/identity_fmv_filter_chip.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

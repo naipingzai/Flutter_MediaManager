@@ -1,11 +1,11 @@
-import 'package:flutter_media_view/ui/common/basic/basic_insets.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_scaffold.dart';
-import 'package:flutter_media_view/ui/common/behaviour/behaviour_pop_scope.dart';
-import 'package:flutter_media_view/ui/common/behaviour/behaviour_pop_tv_navigation.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/navigation_tv_rail.dart';
-import 'package:flutter_media_view/ui/settings/definition.dart';
-import 'package:flutter_media_view/ui/settings/page.dart';
+import 'package:fmv/ui/common/basic/basic_insets.dart';
+import 'package:fmv/ui/common/basic/basic_scaffold.dart';
+import 'package:fmv/ui/common/behaviour/behaviour_pop_scope.dart';
+import 'package:fmv/ui/common/behaviour/behaviour_pop_tv_navigation.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/navigation_tv_rail.dart';
+import 'package:fmv/ui/settings/definition.dart';
+import 'package:fmv/ui/settings/page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

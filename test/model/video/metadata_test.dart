@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/media/video_metadata.dart';
+import 'package:fmv/function/media/video_metadata.dart';
 import 'package:test/test.dart';
 
 void main() {

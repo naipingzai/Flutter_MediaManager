@@ -1,11 +1,11 @@
-import 'package:flutter_media_view/function/filters/filters.dart';
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/theme/durations.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/theme/styles.dart';
-import 'package:flutter_media_view/ui/theme/themes.dart';
-import 'package:flutter_media_view/ui/filter/identity_fmv_filter_chip.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_buttons_outlined_button.dart';
+import 'package:fmv/function/filters/filters.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/ui/theme/durations.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/theme/styles.dart';
+import 'package:fmv/ui/theme/themes.dart';
+import 'package:fmv/ui/filter/identity_fmv_filter_chip.dart';
+import 'package:fmv/ui/common/identity/identity_buttons_outlined_button.dart';
 import 'package:flutter/material.dart';
 
 class TitledExpandableFilterRow extends StatelessWidget {

@@ -1,5 +1,5 @@
-import 'package:flutter_media_view/ui/theme/durations.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_popup_menu_row.dart';
+import 'package:fmv/ui/theme/durations.dart';
+import 'package:fmv/ui/common/basic/basic_popup_menu_row.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

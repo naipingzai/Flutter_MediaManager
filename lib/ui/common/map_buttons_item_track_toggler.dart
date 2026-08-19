@@ -1,7 +1,7 @@
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_popup_menu_row.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/common/basic/basic_popup_menu_row.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

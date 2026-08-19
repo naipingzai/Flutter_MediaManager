@@ -1,6 +1,6 @@
-import 'package:flutter_media_view/function/locale/fmv_locale.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/grid_sections_list_layout.dart';
+import 'package:fmv/function/locale/fmv_locale.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/grid_sections_list_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

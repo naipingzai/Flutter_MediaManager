@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter_media_view/ui/theme/durations.dart';
+import 'package:fmv/ui/theme/durations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 

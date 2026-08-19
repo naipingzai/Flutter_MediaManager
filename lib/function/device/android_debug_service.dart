@@ -1,8 +1,8 @@
-import 'package:flutter_media_view/ui/image_providers/thumbnail_provider.dart';
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/model/mime_types.dart';
-import 'package:flutter_media_view/function/common/channel.dart';
-import 'package:flutter_media_view/function/common/services.dart';
+import 'package:fmv/ui/image_providers/thumbnail_provider.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/model/mime_types.dart';
+import 'package:fmv/function/common/channel.dart';
+import 'package:fmv/function/common/services.dart';
 import 'package:flutter/services.dart';
 
 class AndroidDebugService {

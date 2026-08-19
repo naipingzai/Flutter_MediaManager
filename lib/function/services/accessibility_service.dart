@@ -1,5 +1,5 @@
-import 'package:flutter_media_view/function/common/channel.dart';
-import 'package:flutter_media_view/function/common/services.dart';
+import 'package:fmv/function/common/channel.dart';
+import 'package:fmv/function/common/services.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';

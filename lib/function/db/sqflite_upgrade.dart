@@ -1,9 +1,9 @@
 import 'dart:ui';
 
-import 'package:flutter_media_view/function/model/covers.dart';
-import 'package:flutter_media_view/function/db/extension.dart';
-import 'package:flutter_media_view/function/db/sqflite_schema.dart';
-import 'package:flutter_media_view/function/filters/filters.dart';
+import 'package:fmv/function/model/covers.dart';
+import 'package:fmv/function/db/extension.dart';
+import 'package:fmv/function/db/sqflite_schema.dart';
+import 'package:fmv/function/filters/filters.dart';
 import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqflite.dart';
 

@@ -1,6 +1,6 @@
-import 'package:flutter_media_view/function/entry/extensions_metadata_edition.dart';
-import 'package:flutter_media_view/function/metadata/function_ref_metadata_xmp.dart';
-import 'package:flutter_media_view/function/utils/xmp_utils.dart';
+import 'package:fmv/function/entry/extensions_metadata_edition.dart';
+import 'package:fmv/function/metadata/function_ref_metadata_xmp.dart';
+import 'package:fmv/function/utils/xmp_utils.dart';
 import 'package:test/test.dart';
 import 'package:xml/xml.dart';
 

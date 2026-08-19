@@ -1,5 +1,5 @@
 // ignore_for_file: non_constant_identifier_names
-import 'package:flutter_media_view/function/calendar/dateformat_base.dart';
+import 'package:fmv/function/calendar/dateformat_base.dart';
 import 'package:intl/intl.dart';
 
 class IntlDateFormatDelegate extends DateFormatDelegate {

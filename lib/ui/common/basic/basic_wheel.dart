@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/ui/theme/durations.dart';
+import 'package:fmv/ui/theme/durations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';

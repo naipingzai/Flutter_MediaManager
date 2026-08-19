@@ -1,12 +1,12 @@
 import 'dart:math';
 
-import 'package:flutter_media_view/ui/theme/durations.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_multi_cross_fader.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_highlight_title.dart';
-import 'package:flutter_media_view/ui/viewer/info/common.dart';
-import 'package:flutter_media_view/ui/viewer/info/metadata_xmp_namespaces.dart';
+import 'package:fmv/ui/theme/durations.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/common/basic/basic_multi_cross_fader.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/identity/identity_highlight_title.dart';
+import 'package:fmv/ui/viewer/info/common.dart';
+import 'package:fmv/ui/viewer/info/metadata_xmp_namespaces.dart';
 import 'package:flutter/material.dart';
 
 typedef XmpExtractedCard = (Map<String, XmpProp>, List<XmpCardData>?);

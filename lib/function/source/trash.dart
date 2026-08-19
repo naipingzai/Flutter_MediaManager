@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/entry/extensions_props.dart';
-import 'package:flutter_media_view/function/metadata/trash.dart';
-import 'package:flutter_media_view/function/source/collection_source.dart';
-import 'package:flutter_media_view/function/common/image_op_events.dart';
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/function/utils/android_file_utils.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/entry/extensions_props.dart';
+import 'package:fmv/function/metadata/trash.dart';
+import 'package:fmv/function/source/collection_source.dart';
+import 'package:fmv/function/common/image_op_events.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/function/utils/android_file_utils.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 

@@ -1,6 +1,6 @@
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/ui/common/map_address_row.dart';
-import 'package:flutter_media_view/ui/common/map_date_row.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/ui/common/map_address_row.dart';
+import 'package:fmv/ui/common/map_date_row.dart';
 import 'package:fmv_map/flutter_media_view_map.dart';
 import 'package:flutter/material.dart';
 

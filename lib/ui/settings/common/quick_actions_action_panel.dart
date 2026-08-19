@@ -1,5 +1,5 @@
-import 'package:flutter_media_view/ui/theme/durations.dart';
-import 'package:flutter_media_view/ui/theme/themes.dart';
+import 'package:fmv/ui/theme/durations.dart';
+import 'package:fmv/ui/theme/themes.dart';
 import 'package:flutter/material.dart';
 
 class ActionPanel extends StatelessWidget {

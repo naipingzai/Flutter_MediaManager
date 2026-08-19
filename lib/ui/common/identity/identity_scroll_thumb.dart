@@ -1,5 +1,5 @@
-import 'package:flutter_media_view/ui/common/basic/basic_draggable_scrollbar_arrow_clipper.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_draggable_scrollbar.dart';
+import 'package:fmv/ui/common/basic/basic_draggable_scrollbar_arrow_clipper.dart';
+import 'package:fmv/ui/common/basic/basic_draggable_scrollbar.dart';
 import 'package:flutter/material.dart';
 
 class FmvScrollThumb {

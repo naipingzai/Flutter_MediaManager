@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/ui/common/extensions_theme.dart';
+import 'package:fmv/ui/common/extensions_theme.dart';
 import 'package:flutter/material.dart';
 
 class FmvBorder {

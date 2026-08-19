@@ -1,16 +1,16 @@
 import 'dart:math';
 
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/entry/extensions_images.dart';
-import 'package:flutter_media_view/function/media/panorama.dart';
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/common/fmv_app.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_insets.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_scaffold.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/extensions_media_query.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_buttons_overlay_button.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/entry/extensions_images.dart';
+import 'package:fmv/function/media/panorama.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/common/fmv_app.dart';
+import 'package:fmv/ui/common/basic/basic_insets.dart';
+import 'package:fmv/ui/common/basic/basic_scaffold.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/extensions_media_query.dart';
+import 'package:fmv/ui/common/identity/identity_buttons_overlay_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:fmv_panorama/panorama.dart';

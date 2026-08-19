@@ -1,9 +1,9 @@
-import 'package:flutter_media_view/function/filters/filters.dart';
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/function/source/collection_source.dart';
-import 'package:flutter_media_view/function/utils/file_utils.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/grid_draggable_thumb_label.dart';
+import 'package:fmv/function/filters/filters.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/function/source/collection_source.dart';
+import 'package:fmv/function/utils/file_utils.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/grid_draggable_thumb_label.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

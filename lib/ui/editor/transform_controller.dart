@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:flutter_media_view/ui/editor/transform_crop_region.dart';
-import 'package:flutter_media_view/ui/editor/transform_transformation.dart';
+import 'package:fmv/ui/editor/transform_crop_region.dart';
+import 'package:fmv/ui/editor/transform_transformation.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:leak_tracker/leak_tracker.dart';

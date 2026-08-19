@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/entry/extensions_images.dart';
-import 'package:flutter_media_view/function/settings/enums_widget_shape.dart';
-import 'package:flutter_media_view/ui/theme/colors.dart';
-import 'package:flutter_media_view/ui/filter/identity_fmv_filter_chip.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/entry/extensions_images.dart';
+import 'package:fmv/function/settings/enums_widget_shape.dart';
+import 'package:fmv/ui/theme/colors.dart';
+import 'package:fmv/ui/filter/identity_fmv_filter_chip.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 

@@ -1,15 +1,15 @@
 import 'dart:async';
 
-import 'package:flutter_media_view/core/app_flavor.dart';
-import 'package:flutter_media_view/function/device/function_device.dart';
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/theme/text.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/settings/common/tiles.dart';
-import 'package:flutter_media_view/ui/settings/privacy/permissions_page.dart';
-import 'package:flutter_media_view/ui/settings/definition.dart';
+import 'package:fmv/core/app_flavor.dart';
+import 'package:fmv/function/device/function_device.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/theme/text.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/settings/common/tiles.dart';
+import 'package:fmv/ui/settings/privacy/permissions_page.dart';
+import 'package:fmv/ui/settings/definition.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';

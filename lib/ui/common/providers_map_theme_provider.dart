@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/settings/settings.dart';
+import 'package:fmv/function/settings/settings.dart';
 import 'package:fmv_map/flutter_media_view_map.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

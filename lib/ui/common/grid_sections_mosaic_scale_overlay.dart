@@ -1,7 +1,7 @@
-import 'package:flutter_media_view/ui/theme/durations.dart';
-import 'package:flutter_media_view/ui/common/extensions_theme.dart';
-import 'package:flutter_media_view/ui/common/grid_sections_mosaic_scale_grid.dart';
-import 'package:flutter_media_view/ui/common/providers_media_query_data_provider.dart';
+import 'package:fmv/ui/theme/durations.dart';
+import 'package:fmv/ui/common/extensions_theme.dart';
+import 'package:fmv/ui/common/grid_sections_mosaic_scale_grid.dart';
+import 'package:fmv/ui/common/providers_media_query_data_provider.dart';
 import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:flutter/material.dart';
 

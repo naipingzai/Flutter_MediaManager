@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter_media_view/function/media/internal_dir_store_service.dart';
-import 'package:flutter_media_view/function/model/mime_types.dart';
+import 'package:fmv/function/media/internal_dir_store_service.dart';
+import 'package:fmv/function/model/mime_types.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';

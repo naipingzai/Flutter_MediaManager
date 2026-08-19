@@ -1,9 +1,9 @@
 import 'dart:developer' show Flow, Timeline;
 import 'dart:ui' as ui;
 
-import 'package:flutter_media_view/ui/theme/themes.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_scaffold.dart';
-import 'package:flutter_media_view/ui/common/behaviour/behaviour_intents.dart';
+import 'package:fmv/ui/theme/themes.dart';
+import 'package:fmv/ui/common/basic/basic_scaffold.dart';
+import 'package:fmv/ui/common/behaviour/behaviour_intents.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Flow;
 import 'package:flutter/scheduler.dart';

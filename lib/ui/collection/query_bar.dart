@@ -1,8 +1,8 @@
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/model/function_selection.dart';
-import 'package:flutter_media_view/function/source/collection_lens.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_query_bar.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/model/function_selection.dart';
+import 'package:fmv/function/source/collection_lens.dart';
+import 'package:fmv/ui/common/basic/basic_query_bar.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

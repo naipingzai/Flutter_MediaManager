@@ -1,11 +1,11 @@
 import 'dart:io';
 import 'dart:ui' as ui;
 
-import 'package:flutter_media_view/ui/image_providers/region_provider.dart';
-import 'package:flutter_media_view/ui/image_providers/thumbnail_provider.dart';
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/model/mime_types.dart';
-import 'package:flutter_media_view/function/media/fetch_service.dart';
+import 'package:fmv/ui/image_providers/region_provider.dart';
+import 'package:fmv/ui/image_providers/thumbnail_provider.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/model/mime_types.dart';
+import 'package:fmv/function/media/fetch_service.dart';
 import 'package:fmv_report/flutter_media_view_report.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';

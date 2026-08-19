@@ -1,16 +1,16 @@
 import 'dart:convert';
 
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/entry/extensions_props.dart';
-import 'package:flutter_media_view/function/media/geotiff.dart';
-import 'package:flutter_media_view/function/media/panorama.dart';
-import 'package:flutter_media_view/function/metadata/catalog.dart';
-import 'package:flutter_media_view/function/metadata/overlay.dart';
-import 'package:flutter_media_view/function/media/multipage.dart';
-import 'package:flutter_media_view/function/model/mime_types.dart';
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/function/metadata/fetch_service.dart';
-import 'package:flutter_media_view/function/services/function_metadata_xmp.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/entry/extensions_props.dart';
+import 'package:fmv/function/media/geotiff.dart';
+import 'package:fmv/function/media/panorama.dart';
+import 'package:fmv/function/metadata/catalog.dart';
+import 'package:fmv/function/metadata/overlay.dart';
+import 'package:fmv/function/media/multipage.dart';
+import 'package:fmv/function/model/mime_types.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/function/metadata/fetch_service.dart';
+import 'package:fmv/function/services/function_metadata_xmp.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image/image.dart' as img;

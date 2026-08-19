@@ -1,10 +1,10 @@
 import 'dart:math';
 
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/ui/theme/durations.dart';
-import 'package:flutter_media_view/ui/common/behaviour/behaviour_known_extent_scroll_physics.dart';
-import 'package:flutter_media_view/ui/common/grid_theme.dart';
-import 'package:flutter_media_view/ui/common/thumbnails/thumbnails_decorated.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/ui/theme/durations.dart';
+import 'package:fmv/ui/common/behaviour/behaviour_known_extent_scroll_physics.dart';
+import 'package:fmv/ui/common/grid_theme.dart';
+import 'package:fmv/ui/common/thumbnails/thumbnails_decorated.dart';
 import 'package:flutter/material.dart';
 
 class ThumbnailScroller extends StatefulWidget {

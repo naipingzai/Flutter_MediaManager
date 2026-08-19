@@ -1,16 +1,16 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:flutter_media_view/function/entry/cache.dart';
-import 'package:flutter_media_view/function/entry/dirs.dart';
-import 'package:flutter_media_view/function/entry/extensions_keys.dart';
-import 'package:flutter_media_view/function/metadata/address.dart';
-import 'package:flutter_media_view/function/metadata/catalog.dart';
-import 'package:flutter_media_view/function/metadata/trash.dart';
-import 'package:flutter_media_view/function/model/mime_types.dart';
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/ui/theme/format.dart';
-import 'package:flutter_media_view/function/utils/time_utils.dart';
+import 'package:fmv/function/entry/cache.dart';
+import 'package:fmv/function/entry/dirs.dart';
+import 'package:fmv/function/entry/extensions_keys.dart';
+import 'package:fmv/function/metadata/address.dart';
+import 'package:fmv/function/metadata/catalog.dart';
+import 'package:fmv/function/metadata/trash.dart';
+import 'package:fmv/function/model/mime_types.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/ui/theme/format.dart';
+import 'package:fmv/function/utils/time_utils.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:flutter/foundation.dart';

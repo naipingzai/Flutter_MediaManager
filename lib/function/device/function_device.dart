@@ -1,6 +1,6 @@
 import 'dart:io' show Platform;
 
-import 'package:flutter_media_view/function/common/services.dart';
+import 'package:fmv/function/common/services.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:package_info_plus/package_info_plus.dart';

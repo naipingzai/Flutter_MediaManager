@@ -1,16 +1,16 @@
 import 'dart:math';
 
-import 'package:flutter_media_view/function/geo/countries.dart';
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/entry/extensions_location.dart';
-import 'package:flutter_media_view/function/filters/covered_location.dart';
-import 'package:flutter_media_view/function/metadata/address.dart';
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/function/source/analysis_controller.dart';
-import 'package:flutter_media_view/function/source/location_country.dart';
-import 'package:flutter_media_view/function/source/location_place.dart';
-import 'package:flutter_media_view/function/source/location_state.dart';
-import 'package:flutter_media_view/function/common/services.dart';
+import 'package:fmv/function/geo/countries.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/entry/extensions_location.dart';
+import 'package:fmv/function/filters/covered_location.dart';
+import 'package:fmv/function/metadata/address.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/function/source/analysis_controller.dart';
+import 'package:fmv/function/source/location_country.dart';
+import 'package:fmv/function/source/location_place.dart';
+import 'package:fmv/function/source/location_state.dart';
+import 'package:fmv/function/common/services.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';

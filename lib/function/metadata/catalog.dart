@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/services/geocoding_service.dart';
+import 'package:fmv/function/services/geocoding_service.dart';
 import 'package:flutter/foundation.dart';
 
 class CatalogMetadata {

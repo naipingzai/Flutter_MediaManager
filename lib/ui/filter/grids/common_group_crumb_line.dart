@@ -1,7 +1,7 @@
-import 'package:flutter_media_view/function/grouping/common.dart';
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/ui/common/app_bar_crumb_line.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
+import 'package:fmv/function/grouping/common.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/ui/common/app_bar_crumb_line.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
 import 'package:flutter/material.dart';
 
 class FilterGroupCrumbLine extends StatelessWidget {

@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/calendar/ops_base.dart';
+import 'package:fmv/function/calendar/ops_base.dart';
 
 class GregorianCalendarOps extends CalendarOps {
   @override

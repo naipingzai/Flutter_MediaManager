@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/media/multipage.dart';
-import 'package:flutter_media_view/function/model/bursts.dart';
-import 'package:flutter_media_view/function/common/services.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/media/multipage.dart';
+import 'package:fmv/function/model/bursts.dart';
+import 'package:fmv/function/common/services.dart';
 import 'package:collection/collection.dart';
 
 extension ExtraFmvEntryMultipage on FmvEntry {

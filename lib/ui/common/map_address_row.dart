@@ -1,13 +1,13 @@
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/entry/extensions_location.dart';
-import 'package:flutter_media_view/function/settings/enums_coordinate_format.dart';
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/theme/text.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/entry/extensions_location.dart';
+import 'package:fmv/function/settings/enums_coordinate_format.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/theme/text.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_media_view/ui/common/map_info_row.dart';
+import 'package:fmv/ui/common/map_info_row.dart';
 
 class MapAddressRow extends StatefulWidget {
   final FmvEntry? entry;

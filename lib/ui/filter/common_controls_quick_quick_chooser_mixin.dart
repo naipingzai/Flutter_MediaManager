@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:flutter_media_view/function/filters/filters.dart';
-import 'package:flutter_media_view/function/settings/modules_history.dart';
-import 'package:flutter_media_view/ui/filter/identity_fmv_filter_chip.dart';
+import 'package:fmv/function/filters/filters.dart';
+import 'package:fmv/function/settings/modules_history.dart';
+import 'package:fmv/ui/filter/identity_fmv_filter_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 

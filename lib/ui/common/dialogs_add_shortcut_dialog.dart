@@ -1,15 +1,15 @@
-import 'package:flutter_media_view/function/model/covers.dart';
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/filters/query.dart';
-import 'package:flutter_media_view/function/source/collection_lens.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/providers_media_query_data_provider.dart';
-import 'package:flutter_media_view/ui/common/dialogs_item_picker.dart';
-import 'package:flutter_media_view/ui/common/pick_item_pick_page.dart';
+import 'package:fmv/function/model/covers.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/filters/query.dart';
+import 'package:fmv/function/source/collection_lens.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/providers_media_query_data_provider.dart';
+import 'package:fmv/ui/common/dialogs_item_picker.dart';
+import 'package:fmv/ui/common/pick_item_pick_page.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
+import 'package:fmv/ui/common/dialogs_fmv_dialog.dart';
 
 class AddShortcutDialog extends StatefulWidget {
   static const routeName = '/dialog/add_shortcut';

@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:flutter_media_view/function/filters/covered_stored_album.dart';
-import 'package:flutter_media_view/function/filters/filters.dart';
-import 'package:flutter_media_view/function/source/collection_source.dart';
-import 'package:flutter_media_view/ui/common/actions/common_controls_quick_common_menu.dart';
-import 'package:flutter_media_view/ui/filter/common_controls_quick_quick_chooser_mixin.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
+import 'package:fmv/function/filters/covered_stored_album.dart';
+import 'package:fmv/function/filters/filters.dart';
+import 'package:fmv/function/source/collection_source.dart';
+import 'package:fmv/ui/common/actions/common_controls_quick_common_menu.dart';
+import 'package:fmv/ui/filter/common_controls_quick_quick_chooser_mixin.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

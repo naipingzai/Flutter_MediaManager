@@ -1,11 +1,11 @@
-import 'package:flutter_media_view/ui/image_providers/app_icon_image_provider.dart';
-import 'package:flutter_media_view/function/settings/app_inventory.dart';
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_list_tiles_reselectable_radio.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_query_bar.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_scaffold.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/image_providers/app_icon_image_provider.dart';
+import 'package:fmv/function/settings/app_inventory.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/ui/common/basic/basic_list_tiles_reselectable_radio.dart';
+import 'package:fmv/ui/common/basic/basic_query_bar.dart';
+import 'package:fmv/ui/common/basic/basic_scaffold.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 

@@ -1,11 +1,11 @@
 // ignore_for_file: non_constant_identifier_names
-import 'package:flutter_media_view/function/calendar/dateformat_base.dart';
-import 'package:flutter_media_view/function/calendar/dateformat_intl.dart';
-import 'package:flutter_media_view/function/calendar/dateformat_intl4x.dart';
-import 'package:flutter_media_view/function/calendar/delegate_persian.dart';
-import 'package:flutter_media_view/function/locale/function_intl4x.dart';
-import 'package:flutter_media_view/function/utils/function_number.dart';
-import 'package:flutter_media_view/function/locale/locales.dart';
+import 'package:fmv/function/calendar/dateformat_base.dart';
+import 'package:fmv/function/calendar/dateformat_intl.dart';
+import 'package:fmv/function/calendar/dateformat_intl4x.dart';
+import 'package:fmv/function/calendar/delegate_persian.dart';
+import 'package:fmv/function/locale/function_intl4x.dart';
+import 'package:fmv/function/utils/function_number.dart';
+import 'package:fmv/function/locale/locales.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;

@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter_media_view/function/utils/diff_match.dart';
+import 'package:fmv/function/utils/diff_match.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 

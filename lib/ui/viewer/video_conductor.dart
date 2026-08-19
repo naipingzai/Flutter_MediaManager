@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/entry/extensions_props.dart';
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/function/source/collection_lens.dart';
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/ui/viewer/video_db_playback_state_handler.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/entry/extensions_props.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/function/source/collection_lens.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/ui/viewer/video_db_playback_state_handler.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:fmv_video/flutter_media_view_video.dart';
 import 'package:collection/collection.dart';

@@ -1,5 +1,5 @@
-import 'package:flutter_media_view/function/source/section_keys.dart';
-import 'package:flutter_media_view/ui/common/grid_sections_section_layout.dart';
+import 'package:fmv/function/source/section_keys.dart';
+import 'package:fmv/ui/common/grid_sections_section_layout.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';

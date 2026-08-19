@@ -1,9 +1,9 @@
 import 'dart:ui';
 
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/ui/viewer/overlay/overlay_top.dart';
-import 'package:flutter_media_view/ui/viewer/view_controller.dart';
-import 'package:flutter_media_view/ui/viewer/view_histogram.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/ui/viewer/overlay/overlay_top.dart';
+import 'package:fmv/ui/viewer/view_controller.dart';
+import 'package:fmv/ui/viewer/view_histogram.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 

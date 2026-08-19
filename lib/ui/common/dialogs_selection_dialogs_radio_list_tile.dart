@@ -1,5 +1,5 @@
-import 'package:flutter_media_view/ui/common/basic/basic_list_tiles_reselectable_radio.dart';
-import 'package:flutter_media_view/ui/common/dialogs_selection_dialogs_common.dart';
+import 'package:fmv/ui/common/basic/basic_list_tiles_reselectable_radio.dart';
+import 'package:fmv/ui/common/dialogs_selection_dialogs_common.dart';
 import 'package:flutter/material.dart';
 
 class SelectionRadioListTile<T> extends StatelessWidget {

@@ -1,5 +1,5 @@
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/common/fmv_app.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/common/fmv_app.dart';
 import 'package:flutter/material.dart';
 
 class LinkChip extends StatelessWidget {

@@ -1,14 +1,14 @@
 import 'dart:async';
 
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/entry/extensions_keys.dart';
-import 'package:flutter_media_view/function/entry/extensions_props.dart';
-import 'package:flutter_media_view/function/media/geotiff.dart';
-import 'package:flutter_media_view/function/media/video_metadata.dart';
-import 'package:flutter_media_view/function/metadata/catalog.dart';
-import 'package:flutter_media_view/function/model/mime_types.dart';
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/function/metadata/svg_metadata_service.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/entry/extensions_keys.dart';
+import 'package:fmv/function/entry/extensions_props.dart';
+import 'package:fmv/function/media/geotiff.dart';
+import 'package:fmv/function/media/video_metadata.dart';
+import 'package:fmv/function/metadata/catalog.dart';
+import 'package:fmv/function/model/mime_types.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/function/metadata/svg_metadata_service.dart';
 import 'package:flutter/foundation.dart';
 
 extension ExtraFmvEntryCatalog on FmvEntry {

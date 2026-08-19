@@ -1,11 +1,11 @@
 import 'dart:math';
 
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/common/fmv_app.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/extensions_media_query.dart';
-import 'package:flutter_media_view/ui/common/providers_media_query_data_provider.dart';
-import 'package:flutter_media_view/ui/common/tiles/tiles_extent_controller.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/ui/common/fmv_app.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/extensions_media_query.dart';
+import 'package:fmv/ui/common/providers_media_query_data_provider.dart';
+import 'package:fmv/ui/common/tiles/tiles_extent_controller.dart';
 import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

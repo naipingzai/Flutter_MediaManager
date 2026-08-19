@@ -1,9 +1,9 @@
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
+import 'package:fmv/ui/common/dialogs_fmv_dialog.dart';
 
 Future<bool> showConfirmationDialog({
   required BuildContext context,

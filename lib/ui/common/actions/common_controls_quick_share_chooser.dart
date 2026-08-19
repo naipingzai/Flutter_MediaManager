@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter_media_view/ui/common/view.dart';
-import 'package:flutter_media_view/ui/common/actions/common_controls_quick_common_menu.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_popup_menu_row.dart';
+import 'package:fmv/ui/common/view.dart';
+import 'package:fmv/ui/common/actions/common_controls_quick_common_menu.dart';
+import 'package:fmv/ui/common/basic/basic_popup_menu_row.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';

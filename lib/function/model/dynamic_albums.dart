@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:flutter_media_view/function/filters/container.dart';
-import 'package:flutter_media_view/function/filters/container_dynamic_album.dart';
-import 'package:flutter_media_view/function/filters/container_group_base.dart';
-import 'package:flutter_media_view/function/filters/filters.dart';
-import 'package:flutter_media_view/function/grouping/common.dart';
-import 'package:flutter_media_view/function/common/services.dart';
+import 'package:fmv/function/filters/container.dart';
+import 'package:fmv/function/filters/container_dynamic_album.dart';
+import 'package:fmv/function/filters/container_group_base.dart';
+import 'package:fmv/function/filters/filters.dart';
+import 'package:fmv/function/grouping/common.dart';
+import 'package:fmv/function/common/services.dart';
 import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 import 'package:event_bus/event_bus.dart';

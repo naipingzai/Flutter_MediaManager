@@ -1,14 +1,14 @@
-import 'package:flutter_media_view/function/locale/function_languages.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/theme/text.dart';
-import 'package:flutter_media_view/ui/theme/themes.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_text_dropdown_button.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
+import 'package:fmv/function/locale/function_languages.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/theme/text.dart';
+import 'package:fmv/ui/theme/themes.dart';
+import 'package:fmv/ui/common/basic/basic_text_dropdown_button.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
 import 'package:fmv_video/flutter_media_view_video.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
+import 'package:fmv/ui/common/dialogs_fmv_dialog.dart';
 
 class VideoTrackSelectionDialog extends StatefulWidget {
   static const routeName = '/dialog/select_video_track';

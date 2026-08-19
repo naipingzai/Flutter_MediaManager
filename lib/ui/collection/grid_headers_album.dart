@@ -1,12 +1,12 @@
-import 'package:flutter_media_view/function/model/covers.dart';
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/source/collection_source.dart';
-import 'package:flutter_media_view/function/source/section_keys.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/function/utils/android_file_utils.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/grid_header.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_fmv_icons.dart';
+import 'package:fmv/function/model/covers.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/source/collection_source.dart';
+import 'package:fmv/function/source/section_keys.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/function/utils/android_file_utils.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/grid_header.dart';
+import 'package:fmv/ui/common/identity/identity_fmv_icons.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 

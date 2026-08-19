@@ -1,5 +1,5 @@
-import 'package:flutter_media_view/function/locale/fmv_locale.dart';
-import 'package:flutter_media_view/ui/theme/text.dart';
+import 'package:fmv/function/locale/fmv_locale.dart';
+import 'package:fmv/ui/theme/text.dart';
 
 String formatDay(DateTime date, FmvLocale locale) {
   return locale.yMMMd(date);

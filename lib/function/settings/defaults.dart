@@ -1,15 +1,15 @@
-import 'package:flutter_media_view/function/locale/fmv_locale.dart';
-import 'package:flutter_media_view/function/filters/favourite.dart';
-import 'package:flutter_media_view/function/filters/mime.dart';
-import 'package:flutter_media_view/function/filters/recent.dart';
-import 'package:flutter_media_view/function/metadata/naming_pattern.dart';
-import 'package:flutter_media_view/function/model/mime_types.dart';
-import 'package:flutter_media_view/ui/collection/page.dart';
-import 'package:flutter_media_view/ui/common/explorer_page.dart';
-import 'package:flutter_media_view/ui/filter/grids/albums_page.dart';
-import 'package:flutter_media_view/ui/filter/grids/countries_page.dart';
-import 'package:flutter_media_view/ui/filter/grids/tags_page.dart';
-import 'package:flutter_media_view/ui/common/navigation_nav_item.dart';
+import 'package:fmv/function/locale/fmv_locale.dart';
+import 'package:fmv/function/filters/favourite.dart';
+import 'package:fmv/function/filters/mime.dart';
+import 'package:fmv/function/filters/recent.dart';
+import 'package:fmv/function/metadata/naming_pattern.dart';
+import 'package:fmv/function/model/mime_types.dart';
+import 'package:fmv/ui/collection/page.dart';
+import 'package:fmv/ui/common/explorer_page.dart';
+import 'package:fmv/ui/filter/grids/albums_page.dart';
+import 'package:fmv/ui/filter/grids/countries_page.dart';
+import 'package:fmv/ui/filter/grids/tags_page.dart';
+import 'package:fmv/ui/common/navigation_nav_item.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 
 class SettingsDefaults {

@@ -2,11 +2,11 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/common/channel.dart';
-import 'package:flutter_media_view/function/common/image_op_events.dart';
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/function/media/enums.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/common/channel.dart';
+import 'package:fmv/function/common/image_op_events.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/function/media/enums.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';

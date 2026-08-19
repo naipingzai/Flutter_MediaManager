@@ -1,8 +1,8 @@
 import 'dart:isolate';
 
-import 'package:flutter_media_view/core/app_flavor.dart';
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/ui/common/fmv_app.dart';
+import 'package:fmv/core/app_flavor.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/ui/common/fmv_app.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

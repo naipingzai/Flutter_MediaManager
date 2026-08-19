@@ -1,16 +1,16 @@
 import 'dart:async';
 
-import 'package:flutter_media_view/core/app_flavor.dart';
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/entry/sort.dart';
-import 'package:flutter_media_view/function/settings/enums_widget_outline.dart';
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/function/source/collection_lens.dart';
-import 'package:flutter_media_view/function/source/media_store_source.dart';
-import 'package:flutter_media_view/function/common/channel.dart';
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/function/utils/android_file_utils.dart';
-import 'package:flutter_media_view/ui/collection/home_widget.dart';
+import 'package:fmv/core/app_flavor.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/entry/sort.dart';
+import 'package:fmv/function/settings/enums_widget_outline.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/function/source/collection_lens.dart';
+import 'package:fmv/function/source/media_store_source.dart';
+import 'package:fmv/function/common/channel.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/function/utils/android_file_utils.dart';
+import 'package:fmv/ui/collection/home_widget.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';

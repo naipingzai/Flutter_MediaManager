@@ -2,11 +2,11 @@ import 'dart:ui' as ui;
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/entry/origins.dart';
-import 'package:flutter_media_view/function/model/mime_types.dart';
-import 'package:flutter_media_view/function/media/internal_dir_fetch_service.dart';
-import 'package:flutter_media_view/function/media/store_service.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/entry/origins.dart';
+import 'package:fmv/function/model/mime_types.dart';
+import 'package:fmv/function/media/internal_dir_fetch_service.dart';
+import 'package:fmv/function/media/store_service.dart';
 import 'package:path_provider/path_provider.dart';
 
 /// 内部目录数据源：替代 Fmv 原生 MediaStore 服务。

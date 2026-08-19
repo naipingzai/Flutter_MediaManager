@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/entry/entry.dart';
+import 'package:fmv/function/entry/entry.dart';
 import 'package:fmv_video/flutter_media_view_video.dart';
 import 'package:flutter/material.dart';
 

@@ -1,15 +1,15 @@
 import 'dart:async';
 
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/theme/durations.dart';
-import 'package:flutter_media_view/ui/theme/text.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_fmv_caption.dart';
-import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
-import 'package:flutter_media_view/ui/common/dialogs_duration_dialog.dart';
-import 'package:flutter_media_view/ui/common/dialogs_selection_dialogs_common.dart';
-import 'package:flutter_media_view/ui/common/dialogs_selection_dialogs_multi_selection.dart';
-import 'package:flutter_media_view/ui/common/dialogs_selection_dialogs_single_selection.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/ui/theme/durations.dart';
+import 'package:fmv/ui/theme/text.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/identity/identity_fmv_caption.dart';
+import 'package:fmv/ui/common/dialogs_fmv_dialog.dart';
+import 'package:fmv/ui/common/dialogs_duration_dialog.dart';
+import 'package:fmv/ui/common/dialogs_selection_dialogs_common.dart';
+import 'package:fmv/ui/common/dialogs_selection_dialogs_multi_selection.dart';
+import 'package:fmv/ui/common/dialogs_selection_dialogs_single_selection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

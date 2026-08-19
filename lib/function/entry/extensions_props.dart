@@ -1,17 +1,17 @@
 import 'dart:io';
 import 'dart:ui';
 
-import 'package:flutter_media_view/function/settings/app_support.dart';
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/function/source/trash.dart';
-import 'package:flutter_media_view/function/model/mime_types.dart';
-import 'package:flutter_media_view/function/utils/function_unicode.dart';
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/ui/theme/text.dart';
-import 'package:flutter_media_view/function/utils/android_file_utils.dart';
-import 'package:flutter_media_view/function/locale/fmv_locale.dart';
-import 'package:flutter_media_view/function/utils/time_utils.dart';
+import 'package:fmv/function/settings/app_support.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/function/source/trash.dart';
+import 'package:fmv/function/model/mime_types.dart';
+import 'package:fmv/function/utils/function_unicode.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/ui/theme/text.dart';
+import 'package:fmv/function/utils/android_file_utils.dart';
+import 'package:fmv/function/locale/fmv_locale.dart';
+import 'package:fmv/function/utils/time_utils.dart';
 
 extension ExtraFmvEntryProps on FmvEntry {
   bool get isValid => !isMissingAtPath && sizeBytes != 0 && width > 0 && height > 0;

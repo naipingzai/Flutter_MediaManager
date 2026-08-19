@@ -1,8 +1,8 @@
-import 'package:flutter_media_view/function/filters/container.dart';
-import 'package:flutter_media_view/function/filters/covered_location.dart';
-import 'package:flutter_media_view/function/filters/covered_stored_album.dart';
-import 'package:flutter_media_view/function/filters/filters.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
+import 'package:fmv/function/filters/container.dart';
+import 'package:fmv/function/filters/covered_location.dart';
+import 'package:fmv/function/filters/covered_stored_album.dart';
+import 'package:fmv/function/filters/filters.dart';
+import 'package:fmv/ui/theme/icons.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/widgets.dart';
 

@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/filters/function_query.dart';
+import 'package:fmv/function/filters/function_query.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 

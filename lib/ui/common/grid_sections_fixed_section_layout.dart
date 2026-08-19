@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/ui/common/grid_sections_section_layout.dart';
+import 'package:fmv/ui/common/grid_sections_section_layout.dart';
 
 class FixedExtentSectionLayout extends SectionLayout {
   final double tileHeight, mainAxisStride;

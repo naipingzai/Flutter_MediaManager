@@ -1,5 +1,5 @@
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/model/favourites.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/model/favourites.dart';
 
 extension ExtraFmvEntryFav on FmvEntry {
   bool get isFavourite => favourites.isFavourite(this);

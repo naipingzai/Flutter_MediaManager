@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/calendar/delegate_base.dart';
+import 'package:fmv/function/calendar/delegate_base.dart';
 import 'package:flutter/material.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 

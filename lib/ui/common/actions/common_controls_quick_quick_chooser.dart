@@ -1,7 +1,7 @@
-import 'package:flutter_media_view/ui/theme/themes.dart';
-import 'package:flutter_media_view/ui/common/fx_blurred.dart';
-import 'package:flutter_media_view/ui/common/fx_borders.dart';
-import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
+import 'package:fmv/ui/theme/themes.dart';
+import 'package:fmv/ui/common/fx_blurred.dart';
+import 'package:fmv/ui/common/fx_borders.dart';
+import 'package:fmv/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter/material.dart';
 
 class QuickChooser extends StatelessWidget {

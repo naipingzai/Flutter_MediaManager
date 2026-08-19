@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/utils/function_unicode.dart';
+import 'package:fmv/function/utils/function_unicode.dart';
 
 class EmojiUtils {
   static const _countryCodeToFlagDiff = UniCodes.regionalIndicatorSymbolLetterA - UniCodes.latinCapitalLetterA;

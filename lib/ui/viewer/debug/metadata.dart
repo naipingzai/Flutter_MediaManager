@@ -1,15 +1,15 @@
 import 'dart:collection';
 import 'dart:typed_data';
 
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/entry/extensions_location.dart';
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/function/model/mime_types.dart';
-import 'package:flutter_media_view/function/device/android_debug_service.dart';
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_fmv_expansion_tile.dart';
-import 'package:flutter_media_view/ui/viewer/debug/utils.dart';
-import 'package:flutter_media_view/ui/viewer/info/common.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/entry/extensions_location.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/function/model/mime_types.dart';
+import 'package:fmv/function/device/android_debug_service.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/ui/common/identity/identity_fmv_expansion_tile.dart';
+import 'package:fmv/ui/viewer/debug/utils.dart';
+import 'package:fmv/ui/viewer/info/common.dart';
 import 'package:flutter/material.dart';
 
 class MetadataTab extends StatefulWidget {

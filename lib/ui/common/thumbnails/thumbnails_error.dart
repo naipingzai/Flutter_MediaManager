@@ -1,11 +1,11 @@
 import 'dart:io';
 import 'dart:math';
 
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/entry/extensions_props.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/theme/themes.dart';
-import 'package:flutter_media_view/function/utils/mime_utils.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/entry/extensions_props.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/theme/themes.dart';
+import 'package:fmv/function/utils/mime_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

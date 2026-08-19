@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/geo/topojson.dart';
+import 'package:fmv/function/geo/topojson.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

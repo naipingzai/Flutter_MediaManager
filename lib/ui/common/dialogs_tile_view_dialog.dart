@@ -1,18 +1,18 @@
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/theme/durations.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/theme/themes.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_font_size_icon_theme.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_text_dropdown_button.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/fx_transitions.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_fmv_caption.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_highlight_title.dart';
-import 'package:flutter_media_view/ui/common/tiles/tiles_extent_controller.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/ui/theme/durations.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/theme/themes.dart';
+import 'package:fmv/ui/common/basic/basic_font_size_icon_theme.dart';
+import 'package:fmv/ui/common/basic/basic_text_dropdown_button.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/fx_transitions.dart';
+import 'package:fmv/ui/common/identity/identity_fmv_caption.dart';
+import 'package:fmv/ui/common/identity/identity_highlight_title.dart';
+import 'package:fmv/ui/common/tiles/tiles_extent_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
+import 'package:fmv/ui/common/dialogs_fmv_dialog.dart';
 
 class TileViewDialog<S, G, L> extends StatefulWidget {
   static const routeName = '/dialog/tile_view';

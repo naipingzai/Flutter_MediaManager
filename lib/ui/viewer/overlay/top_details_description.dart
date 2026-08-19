@@ -1,5 +1,5 @@
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/viewer/overlay/top_details.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/viewer/overlay/top_details.dart';
 import 'package:decorated_icon/decorated_icon.dart';
 import 'package:flutter/material.dart';
 

@@ -1,15 +1,15 @@
 import 'dart:math';
 
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/common/view.dart';
-import 'package:flutter_media_view/ui/common/extensions_media_query.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_buttons_captioned_button.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_buttons_overlay_button.dart';
-import 'package:flutter_media_view/ui/viewer/controls/intents.dart';
-import 'package:flutter_media_view/ui/viewer/controls/notifications.dart';
-import 'package:flutter_media_view/ui/viewer/overlay/bottom.dart';
-import 'package:flutter_media_view/ui/viewer/overlay/bottom_viewer_buttons.dart';
-import 'package:flutter_media_view/ui/viewer/slideshow_page.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/ui/common/view.dart';
+import 'package:fmv/ui/common/extensions_media_query.dart';
+import 'package:fmv/ui/common/identity/identity_buttons_captioned_button.dart';
+import 'package:fmv/ui/common/identity/identity_buttons_overlay_button.dart';
+import 'package:fmv/ui/viewer/controls/intents.dart';
+import 'package:fmv/ui/viewer/controls/notifications.dart';
+import 'package:fmv/ui/viewer/overlay/bottom.dart';
+import 'package:fmv/ui/viewer/overlay/bottom_viewer_buttons.dart';
+import 'package:fmv/ui/viewer/slideshow_page.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';

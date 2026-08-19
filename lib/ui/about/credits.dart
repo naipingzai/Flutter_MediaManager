@@ -1,6 +1,6 @@
-import 'package:flutter_media_view/ui/about/title.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_link_chip.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/about/title.dart';
+import 'package:fmv/ui/common/basic/basic_link_chip.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
 import 'package:flutter/material.dart';
 
 class AboutCredits extends StatelessWidget {

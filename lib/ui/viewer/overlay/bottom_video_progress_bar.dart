@@ -1,14 +1,14 @@
 import 'dart:async';
 
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/function/locale/locales.dart';
-import 'package:flutter_media_view/ui/theme/format.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/theme/styles.dart';
-import 'package:flutter_media_view/ui/theme/themes.dart';
-import 'package:flutter_media_view/ui/common/extensions_theme.dart';
-import 'package:flutter_media_view/ui/common/fx_blurred.dart';
-import 'package:flutter_media_view/ui/common/fx_borders.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/function/locale/locales.dart';
+import 'package:fmv/ui/theme/format.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/theme/styles.dart';
+import 'package:fmv/ui/theme/themes.dart';
+import 'package:fmv/ui/common/extensions_theme.dart';
+import 'package:fmv/ui/common/fx_blurred.dart';
+import 'package:fmv/ui/common/fx_borders.dart';
 import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:fmv_video/flutter_media_view_video.dart';
 import 'package:decorated_icon/decorated_icon.dart';

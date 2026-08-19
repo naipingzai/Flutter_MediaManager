@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter_media_view/ui/common/identity/identity_fmv_expansion_tile.dart';
+import 'package:fmv/ui/common/identity/identity_fmv_expansion_tile.dart';
 import 'package:flutter/widgets.dart';
 
 abstract class SettingsSection {

@@ -1,8 +1,8 @@
-import 'package:flutter_media_view/function/device/android_debug_service.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_query_bar.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_fmv_expansion_tile.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_highlight_title.dart';
-import 'package:flutter_media_view/ui/viewer/info/common.dart';
+import 'package:fmv/function/device/android_debug_service.dart';
+import 'package:fmv/ui/common/basic/basic_query_bar.dart';
+import 'package:fmv/ui/common/identity/identity_fmv_expansion_tile.dart';
+import 'package:fmv/ui/common/identity/identity_highlight_title.dart';
+import 'package:fmv/ui/viewer/info/common.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 

@@ -1,13 +1,13 @@
-import 'package:flutter_media_view/ui/image_providers/app_icon_image_provider.dart';
-import 'package:flutter_media_view/function/model/covers.dart';
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/entry/extensions_multipage.dart';
-import 'package:flutter_media_view/function/entry/extensions_props.dart';
-import 'package:flutter_media_view/function/model/function_vaults.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/extensions_theme.dart';
-import 'package:flutter_media_view/ui/common/grid_theme.dart';
+import 'package:fmv/ui/image_providers/app_icon_image_provider.dart';
+import 'package:fmv/function/model/covers.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/entry/extensions_multipage.dart';
+import 'package:fmv/function/entry/extensions_props.dart';
+import 'package:fmv/function/model/function_vaults.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/extensions_theme.dart';
+import 'package:fmv/ui/common/grid_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

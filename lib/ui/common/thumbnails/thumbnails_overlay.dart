@@ -1,12 +1,12 @@
 import 'dart:math';
 
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/utils/function_highlight.dart';
-import 'package:flutter_media_view/function/model/function_selection.dart';
-import 'package:flutter_media_view/ui/theme/durations.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/common/fx_sweeper.dart';
-import 'package:flutter_media_view/ui/common/grid_theme.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/utils/function_highlight.dart';
+import 'package:fmv/function/model/function_selection.dart';
+import 'package:fmv/ui/theme/durations.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/common/fx_sweeper.dart';
+import 'package:fmv/ui/common/grid_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

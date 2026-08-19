@@ -1,8 +1,8 @@
-import 'package:flutter_media_view/function/entry/extensions_metadata_edition.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_labeled_checkbox.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/providers_media_query_data_provider.dart';
-import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
+import 'package:fmv/function/entry/extensions_metadata_edition.dart';
+import 'package:fmv/ui/common/basic/basic_labeled_checkbox.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/providers_media_query_data_provider.dart';
+import 'package:fmv/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter/material.dart';
 
 class EditEntryTitleDescriptionDialog extends StatefulWidget {

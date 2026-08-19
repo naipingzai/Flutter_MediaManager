@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/function/calendar/ops_base.dart';
+import 'package:fmv/function/calendar/ops_base.dart';
 import 'package:shamsi_date/shamsi_date.dart';
 
 class PersianCalendarOps extends CalendarOps {

@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/common/channel.dart';
-import 'package:flutter_media_view/function/common/services.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/common/channel.dart';
+import 'package:fmv/function/common/services.dart';
 import 'package:flutter/services.dart';
 
 abstract class MediaStoreService {

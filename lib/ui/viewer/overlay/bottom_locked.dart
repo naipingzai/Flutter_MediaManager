@@ -1,11 +1,11 @@
 import 'dart:math';
 
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/extensions_media_query.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_buttons_overlay_button.dart';
-import 'package:flutter_media_view/ui/viewer/controls/notifications.dart';
-import 'package:flutter_media_view/ui/viewer/overlay/bottom_viewer_buttons.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/extensions_media_query.dart';
+import 'package:fmv/ui/common/identity/identity_buttons_overlay_button.dart';
+import 'package:fmv/ui/viewer/controls/notifications.dart';
+import 'package:fmv/ui/viewer/overlay/bottom_viewer_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

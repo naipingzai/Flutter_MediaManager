@@ -1,6 +1,6 @@
-import 'package:flutter_media_view/function/model/dynamic_albums.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
+import 'package:fmv/function/model/dynamic_albums.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter/material.dart';
 
 class RenameDynamicAlbumDialog extends StatefulWidget {

@@ -1,7 +1,7 @@
-import 'package:flutter_media_view/function/source/section_keys.dart';
-import 'package:flutter_media_view/ui/theme/durations.dart';
-import 'package:flutter_media_view/ui/common/grid_sections_list_layout.dart';
-import 'package:flutter_media_view/ui/common/grid_sections_section_layout.dart';
+import 'package:fmv/function/source/section_keys.dart';
+import 'package:fmv/ui/theme/durations.dart';
+import 'package:fmv/ui/common/grid_sections_list_layout.dart';
+import 'package:fmv/ui/common/grid_sections_section_layout.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:fmv_staggered_animations/flutter_staggered_animations.dart';

@@ -1,8 +1,8 @@
-import 'package:flutter_media_view/function/device/function_device.dart';
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_fmv_expansion_tile.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_highlight_title.dart';
-import 'package:flutter_media_view/ui/viewer/info/common.dart';
+import 'package:fmv/function/device/function_device.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/ui/common/identity/identity_fmv_expansion_tile.dart';
+import 'package:fmv/ui/common/identity/identity_highlight_title.dart';
+import 'package:fmv/ui/viewer/info/common.dart';
 import 'package:flutter/material.dart';
 
 class DebugCapabilitiesSection extends StatefulWidget {

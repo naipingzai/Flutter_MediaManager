@@ -1,9 +1,9 @@
-import 'package:flutter_media_view/function/filters/filters.dart';
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/function/locale/fmv_locale.dart';
-import 'package:flutter_media_view/function/calendar/utils.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
+import 'package:fmv/function/filters/filters.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/function/locale/fmv_locale.dart';
+import 'package:fmv/function/calendar/utils.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
 import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:flutter/widgets.dart';
 

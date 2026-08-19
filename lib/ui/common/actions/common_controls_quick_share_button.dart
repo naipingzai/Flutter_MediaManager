@@ -1,8 +1,8 @@
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/entry/extensions_multipage.dart';
-import 'package:flutter_media_view/ui/common/view.dart';
-import 'package:flutter_media_view/ui/common/actions/common_controls_quick_common_button.dart';
-import 'package:flutter_media_view/ui/common/actions/common_controls_quick_share_chooser.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/entry/extensions_multipage.dart';
+import 'package:fmv/ui/common/view.dart';
+import 'package:fmv/ui/common/actions/common_controls_quick_common_button.dart';
+import 'package:fmv/ui/common/actions/common_controls_quick_share_chooser.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 

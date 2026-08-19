@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/ui/viewer/controls/intents.dart';
+import 'package:fmv/ui/viewer/controls/intents.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';

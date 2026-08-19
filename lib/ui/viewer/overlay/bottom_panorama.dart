@@ -1,12 +1,12 @@
 import 'dart:async';
 
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/ui/common/actions/mixins_feedback.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_buttons_overlay_button.dart';
-import 'package:flutter_media_view/ui/viewer/overlay/bottom.dart';
-import 'package:flutter_media_view/ui/viewer/panorama_page.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/ui/common/actions/mixins_feedback.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/identity/identity_buttons_overlay_button.dart';
+import 'package:fmv/ui/viewer/overlay/bottom.dart';
+import 'package:fmv/ui/viewer/panorama_page.dart';
 import 'package:flutter/material.dart';
 
 class PanoramaOverlay extends StatelessWidget with FeedbackMixin {

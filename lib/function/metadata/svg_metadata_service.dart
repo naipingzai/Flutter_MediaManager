@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:ui';
 
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/function/utils/string_utils.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/common/services.dart';
+import 'package:fmv/function/utils/string_utils.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:xml/xml.dart';

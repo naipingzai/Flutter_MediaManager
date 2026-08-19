@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/ui/viewer/visual/video_subtitle_span.dart';
+import 'package:fmv/ui/viewer/visual/video_subtitle_span.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';

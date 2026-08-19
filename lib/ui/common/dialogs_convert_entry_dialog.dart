@@ -1,24 +1,24 @@
-import 'package:flutter_media_view/function/settings/app_support.dart';
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/entry/extensions_multipage.dart';
-import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/function/model/mime_types.dart';
-import 'package:flutter_media_view/function/media/edit_service.dart';
-import 'package:flutter_media_view/ui/theme/durations.dart';
-import 'package:flutter_media_view/ui/theme/text.dart';
-import 'package:flutter_media_view/ui/theme/themes.dart';
-import 'package:flutter_media_view/function/utils/mime_utils.dart';
-import 'package:flutter_media_view/ui/common/view.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_list_tiles_slider.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_text_change_highlight.dart';
-import 'package:flutter_media_view/ui/common/basic/basic_text_dropdown_button.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/fx_transitions.dart';
+import 'package:fmv/function/settings/app_support.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/entry/extensions_multipage.dart';
+import 'package:fmv/function/settings/settings.dart';
+import 'package:fmv/function/model/mime_types.dart';
+import 'package:fmv/function/media/edit_service.dart';
+import 'package:fmv/ui/theme/durations.dart';
+import 'package:fmv/ui/theme/text.dart';
+import 'package:fmv/ui/theme/themes.dart';
+import 'package:fmv/function/utils/mime_utils.dart';
+import 'package:fmv/ui/common/view.dart';
+import 'package:fmv/ui/common/basic/basic_list_tiles_slider.dart';
+import 'package:fmv/ui/common/basic/basic_text_change_highlight.dart';
+import 'package:fmv/ui/common/basic/basic_text_dropdown_button.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/fx_transitions.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
+import 'package:fmv/ui/common/dialogs_fmv_dialog.dart';
 
 class ConvertEntryDialog extends StatefulWidget {
   static const routeName = '/dialog/convert_entry';

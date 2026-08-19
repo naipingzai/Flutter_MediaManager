@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/function/entry/extensions_props.dart';
-import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/identity/identity_empty.dart';
-import 'package:flutter_media_view/ui/viewer/entry_viewer_page.dart';
+import 'package:fmv/function/entry/entry.dart';
+import 'package:fmv/function/entry/extensions_props.dart';
+import 'package:fmv/ui/theme/icons.dart';
+import 'package:fmv/ui/common/extensions_build_context.dart';
+import 'package:fmv/ui/common/identity/identity_empty.dart';
+import 'package:fmv/ui/viewer/entry_viewer_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

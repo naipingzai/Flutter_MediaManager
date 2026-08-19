@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:flutter_media_view/function/settings/settings.dart';
+import 'package:fmv/function/settings/settings.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:collection/collection.dart';
