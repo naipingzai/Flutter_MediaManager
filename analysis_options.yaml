@@ -11,8 +11,8 @@ analyzer:
     - macos/**
     - linux/**
     # 未使用的 flavor 插件（play/google/crashlytics），其依赖未解析，排除以避免误报
-    - plugins/flutter_media_view_services_google/**
-    - plugins/flutter_media_view_report_crashlytics/**
+    - plugins/fmv_services_google/**
+    - plugins/fmv_report_crashlytics/**
 
 #  strong-mode:
 #    implicit-casts: false
