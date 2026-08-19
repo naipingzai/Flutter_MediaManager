@@ -7,7 +7,7 @@ import 'package:flutter_media_view/function/source/collection_source.dart';
 import 'package:flutter_media_view/function/source/tag.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/identity/common_identity_empty.dart';
+import 'package:flutter_media_view/ui/common/identity/identity_empty.dart';
 import 'package:flutter_media_view/ui/filter/common_providers_group_provider.dart';
 import 'package:flutter_media_view/ui/filter/grids/common_action_delegates_tag_set.dart';
 import 'package:flutter_media_view/ui/filter/grids/common_enums.dart';

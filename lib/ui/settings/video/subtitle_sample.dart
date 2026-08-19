@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/ui/theme/colors.dart';
-import 'package:flutter_media_view/ui/common/basic/common_basic_text_background_painter.dart';
-import 'package:flutter_media_view/ui/common/basic/common_basic_text_outlined.dart';
+import 'package:flutter_media_view/ui/common/basic/basic_text_background_painter.dart';
+import 'package:flutter_media_view/ui/common/basic/basic_text_outlined.dart';
 import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/fx_borders.dart';
 import 'package:flutter_media_view/ui/viewer/visual/video_subtitle.dart';

@@ -7,7 +7,7 @@ import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/ui/theme/colors.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/collection/entry_set_action_delegate.dart';
-import 'package:flutter_media_view/ui/common/actions/common_action_mixins_permission_aware.dart';
+import 'package:flutter_media_view/ui/common/actions/mixins_permission_aware.dart';
 import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/dialogs_fmv_confirmation_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';

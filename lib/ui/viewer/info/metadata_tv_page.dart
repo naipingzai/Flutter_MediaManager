@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/common/basic/common_basic_scaffold.dart';
-import 'package:flutter_media_view/ui/common/behaviour/common_behaviour_intents.dart';
+import 'package:flutter_media_view/ui/common/basic/basic_scaffold.dart';
+import 'package:flutter_media_view/ui/common/behaviour/behaviour_intents.dart';
 import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/navigation_tv_rail.dart';
 import 'package:flutter_media_view/ui/viewer/info/metadata_dir.dart';

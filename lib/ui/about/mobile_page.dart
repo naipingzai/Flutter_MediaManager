@@ -4,8 +4,8 @@ import 'package:flutter_media_view/ui/about/credits.dart';
 import 'package:flutter_media_view/ui/about/data_usage.dart';
 import 'package:flutter_media_view/ui/about/licenses.dart';
 import 'package:flutter_media_view/ui/about/translators.dart';
-import 'package:flutter_media_view/ui/common/basic/common_basic_insets.dart';
-import 'package:flutter_media_view/ui/common/basic/common_basic_scaffold.dart';
+import 'package:flutter_media_view/ui/common/basic/basic_insets.dart';
+import 'package:flutter_media_view/ui/common/basic/basic_scaffold.dart';
 import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter/material.dart';
 

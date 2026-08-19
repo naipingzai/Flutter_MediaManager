@@ -1,5 +1,5 @@
 import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/common/identity/common_identity_buttons_overlay_button.dart';
+import 'package:flutter_media_view/ui/common/identity/identity_buttons_overlay_button.dart';
 import 'package:flutter_media_view/ui/common/providers_media_query_data_provider.dart';
 import 'package:flutter/widgets.dart';
 

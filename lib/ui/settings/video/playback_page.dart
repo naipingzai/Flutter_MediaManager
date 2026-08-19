@@ -4,7 +4,7 @@ import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/common/view.dart';
 import 'package:flutter_media_view/ui/about/app_ref.dart';
 import 'package:flutter_media_view/ui/common/fmv_app.dart';
-import 'package:flutter_media_view/ui/common/basic/common_basic_scaffold.dart';
+import 'package:flutter_media_view/ui/common/basic/basic_scaffold.dart';
 import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter_media_view/ui/settings/common/tiles.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';

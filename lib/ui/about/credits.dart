@@ -1,5 +1,5 @@
 import 'package:flutter_media_view/ui/about/title.dart';
-import 'package:flutter_media_view/ui/common/basic/common_basic_link_chip.dart';
+import 'package:flutter_media_view/ui/common/basic/basic_link_chip.dart';
 import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter/material.dart';
 

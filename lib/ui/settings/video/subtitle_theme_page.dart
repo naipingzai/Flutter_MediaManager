@@ -1,8 +1,8 @@
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/ui/common/view.dart';
-import 'package:flutter_media_view/ui/common/basic/common_basic_list_tiles_color.dart';
-import 'package:flutter_media_view/ui/common/basic/common_basic_list_tiles_slider.dart';
-import 'package:flutter_media_view/ui/common/basic/common_basic_scaffold.dart';
+import 'package:flutter_media_view/ui/common/basic/basic_list_tiles_color.dart';
+import 'package:flutter_media_view/ui/common/basic/basic_list_tiles_slider.dart';
+import 'package:flutter_media_view/ui/common/basic/basic_scaffold.dart';
 import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter_media_view/ui/settings/common/tiles.dart';
 import 'package:flutter_media_view/ui/settings/video/subtitle_sample.dart';

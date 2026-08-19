@@ -14,7 +14,7 @@ import 'package:flutter_media_view/ui/filter/grids/countries_page.dart';
 import 'package:flutter_media_view/ui/filter/grids/places_page.dart';
 import 'package:flutter_media_view/ui/filter/grids/tags_page.dart';
 import 'package:flutter_media_view/ui/collection/home_page.dart';
-import 'package:flutter_media_view/ui/common/navigation_drawer_tile.dart';
+import 'package:flutter_media_view/ui/common/drawer_tile.dart';
 import 'package:flutter_media_view/ui/common/navigation_nav_display.dart';
 import 'package:flutter_media_view/ui/collection/search_page_route.dart';
 import 'package:flutter_media_view/ui/settings/page.dart';

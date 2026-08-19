@@ -7,7 +7,7 @@ import 'package:flutter_media_view/function/entry/extensions_images.dart';
 import 'package:flutter_media_view/function/entry/extensions_multipage.dart';
 import 'package:flutter_media_view/function/entry/extensions_props.dart';
 import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/ui/common/actions/common_action_mixins_feedback.dart';
+import 'package:flutter_media_view/ui/common/actions/mixins_feedback.dart';
 import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter/widgets.dart';
 import 'package:pdf/pdf.dart';

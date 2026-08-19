@@ -5,7 +5,7 @@ import 'package:flutter_media_view/function/source/collection_lens.dart';
 import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/providers_media_query_data_provider.dart';
 import 'package:flutter_media_view/ui/common/dialogs_item_picker.dart';
-import 'package:flutter_media_view/ui/common/dialogs_pick_dialogs_item_pick_page.dart';
+import 'package:flutter_media_view/ui/common/pick_item_pick_page.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 

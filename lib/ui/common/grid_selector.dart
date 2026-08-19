@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:flutter_media_view/function/model/function_selection.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/common/basic/common_basic_gestures_gesture_detector.dart';
+import 'package:flutter_media_view/ui/common/basic/basic_gestures_gesture_detector.dart';
 import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/extensions_media_query.dart';
 import 'package:flutter_media_view/ui/common/grid_sections_list_layout.dart';

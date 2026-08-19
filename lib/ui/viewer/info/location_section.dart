@@ -8,7 +8,7 @@ import 'package:flutter_media_view/function/source/collection_lens.dart';
 import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/filter/common_identity_fmv_filter_chip.dart';
+import 'package:flutter_media_view/ui/filter/identity_fmv_filter_chip.dart';
 import 'package:flutter_media_view/ui/common/map_geo_map.dart';
 import 'package:flutter_media_view/ui/common/map_action_delegate.dart';
 import 'package:flutter_media_view/ui/common/providers_map_theme_provider.dart';

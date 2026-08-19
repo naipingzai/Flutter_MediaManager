@@ -4,7 +4,7 @@ import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/function/model/function_vaults.dart';
 import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/grid_scaling.dart';
-import 'package:flutter_media_view/ui/filter/common_identity_fmv_filter_chip.dart';
+import 'package:flutter_media_view/ui/filter/identity_fmv_filter_chip.dart';
 import 'package:flutter_media_view/ui/filter/grids/common_covered_filter_chip.dart';
 import 'package:flutter_media_view/ui/filter/grids/common_chip_grid_decorator.dart';
 import 'package:flutter_media_view/ui/filter/grids/common_list_details.dart';

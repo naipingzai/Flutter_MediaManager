@@ -4,11 +4,11 @@ import 'package:flutter_media_view/function/settings/enums_accessibility_animati
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/collection/page.dart';
-import 'package:flutter_media_view/ui/common/basic/common_basic_font_size_icon_theme.dart';
-import 'package:flutter_media_view/ui/common/basic/common_basic_popup_menu_row.dart';
+import 'package:flutter_media_view/ui/common/basic/basic_font_size_icon_theme.dart';
+import 'package:flutter_media_view/ui/common/basic/basic_popup_menu_row.dart';
 import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/dialogs_pick_dialogs_album_pick_page.dart';
-import 'package:flutter_media_view/ui/common/dialogs_pick_dialogs_tag_pick_page.dart';
+import 'package:flutter_media_view/ui/common/pick_album_pick_page.dart';
+import 'package:flutter_media_view/ui/common/pick_tag_pick_page.dart';
 import 'package:flutter_media_view/ui/filter/grids/common_enums.dart';
 import 'package:flutter_media_view/ui/collection/home_page.dart';
 import 'package:flutter_media_view/ui/common/navigation_nav_item.dart';

@@ -4,7 +4,7 @@ import 'package:flutter_media_view/function/source/collection_source.dart';
 import 'package:flutter_media_view/function/locale/locales.dart';
 import 'package:flutter_media_view/function/model/mime_types.dart';
 import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/ui/common/actions/common_action_mixins_feedback.dart';
+import 'package:flutter_media_view/ui/common/actions/mixins_feedback.dart';
 import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view/ui/settings/app_export_items.dart';

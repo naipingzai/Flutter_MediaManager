@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter_media_view/function/settings/app_contributors.dart';
 import 'package:flutter_media_view/ui/theme/text.dart';
 import 'package:flutter_media_view/ui/about/title.dart';
-import 'package:flutter_media_view/ui/common/basic/common_basic_text_change_highlight.dart';
+import 'package:flutter_media_view/ui/common/basic/basic_text_change_highlight.dart';
 import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';

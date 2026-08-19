@@ -4,7 +4,7 @@ import 'package:flutter_media_view/ui/theme/colors.dart';
 import 'package:flutter_media_view/function/utils/string_utils.dart';
 import 'package:flutter_media_view/function/utils/xmp_utils.dart';
 import 'package:flutter_media_view/ui/common/view.dart';
-import 'package:flutter_media_view/ui/common/identity/common_identity_highlight_title.dart';
+import 'package:flutter_media_view/ui/common/identity/identity_highlight_title.dart';
 import 'package:flutter_media_view/ui/viewer/info/common.dart';
 import 'package:flutter_media_view/ui/viewer/info/metadata_xmp_card.dart';
 import 'package:flutter_media_view/ui/viewer/info/metadata_xmp_ns_crs.dart';

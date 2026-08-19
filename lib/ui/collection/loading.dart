@@ -1,9 +1,9 @@
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/function/source/collection_source.dart';
 import 'package:flutter_media_view/function/source/events.dart';
-import 'package:flutter_media_view/ui/common/actions/common_action_mixins_feedback.dart';
+import 'package:flutter_media_view/ui/common/actions/mixins_feedback.dart';
 import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/identity/common_identity_empty.dart';
+import 'package:flutter_media_view/ui/common/identity/identity_empty.dart';
 import 'package:flutter/material.dart';
 
 class LoadingEmptyContent extends StatelessWidget {

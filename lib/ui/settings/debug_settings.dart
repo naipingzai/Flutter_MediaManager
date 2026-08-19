@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/ui/collection/page.dart';
-import 'package:flutter_media_view/ui/common/identity/common_identity_fmv_expansion_tile.dart';
-import 'package:flutter_media_view/ui/common/identity/common_identity_highlight_title.dart';
+import 'package:flutter_media_view/ui/common/identity/identity_fmv_expansion_tile.dart';
+import 'package:flutter_media_view/ui/common/identity/identity_highlight_title.dart';
 import 'package:flutter_media_view/ui/filter/grids/albums_page.dart';
 import 'package:flutter_media_view/ui/filter/grids/countries_page.dart';
 import 'package:flutter_media_view/ui/filter/grids/places_page.dart';

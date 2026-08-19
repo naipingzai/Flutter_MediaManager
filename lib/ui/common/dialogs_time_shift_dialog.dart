@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/ui/common/basic/common_basic_time_shift_selector.dart';
+import 'package:flutter_media_view/ui/common/basic/basic_time_shift_selector.dart';
 import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter/material.dart';
 

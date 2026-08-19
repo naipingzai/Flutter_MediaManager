@@ -2,8 +2,8 @@ import 'package:flutter_media_view/function/filters/mime.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/ui/theme/colors.dart';
 import 'package:flutter_media_view/function/utils/mime_utils.dart';
-import 'package:flutter_media_view/ui/common/identity/common_identity_fmv_donut.dart';
-import 'package:flutter_media_view/ui/filter/common_identity_fmv_filter_chip.dart';
+import 'package:flutter_media_view/ui/common/identity/identity_fmv_donut.dart';
+import 'package:flutter_media_view/ui/filter/identity_fmv_filter_chip.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,9 +1,9 @@
 import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/ui/theme/durations.dart';
 import 'package:flutter_media_view/ui/common/view.dart';
-import 'package:flutter_media_view/ui/common/basic/common_basic_multi_cross_fader.dart';
+import 'package:flutter_media_view/ui/common/basic/basic_multi_cross_fader.dart';
 import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/identity/common_identity_buttons_overlay_button.dart';
+import 'package:flutter_media_view/ui/common/identity/identity_buttons_overlay_button.dart';
 import 'package:flutter_media_view/ui/editor/transform_control_panel.dart';
 import 'package:flutter_media_view/ui/editor/transform_controller.dart';
 import 'package:flutter_media_view/ui/viewer/overlay/bottom_viewer_buttons.dart';

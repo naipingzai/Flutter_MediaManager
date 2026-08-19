@@ -1,9 +1,9 @@
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/common/view.dart';
-import 'package:flutter_media_view/ui/common/basic/common_basic_scaffold.dart';
+import 'package:flutter_media_view/ui/common/basic/basic_scaffold.dart';
 import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/identity/common_identity_fmv_icons.dart';
+import 'package:flutter_media_view/ui/common/identity/identity_fmv_icons.dart';
 import 'package:flutter_media_view/ui/settings/common/switch_icon.dart';
 import 'package:flutter_media_view/ui/settings/common/tiles.dart';
 import 'package:flutter_media_view/ui/settings/definition.dart';

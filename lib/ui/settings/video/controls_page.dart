@@ -1,5 +1,5 @@
 import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/common/basic/common_basic_scaffold.dart';
+import 'package:flutter_media_view/ui/common/basic/basic_scaffold.dart';
 import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter_media_view/ui/settings/common/tiles.dart';
 import 'package:flutter_media_view/ui/settings/video/control_buttons_page.dart';

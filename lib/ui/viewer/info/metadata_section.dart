@@ -5,7 +5,7 @@ import 'package:flutter_media_view/function/entry/extensions_info.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/ui/theme/durations.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/common/identity/common_identity_buttons_outlined_button.dart';
+import 'package:flutter_media_view/ui/common/identity/identity_buttons_outlined_button.dart';
 import 'package:flutter_media_view/ui/viewer/info/common.dart';
 import 'package:flutter_media_view/ui/viewer/info/metadata_dir.dart';
 import 'package:flutter_media_view/ui/viewer/info/metadata_dir_tile.dart';

@@ -11,7 +11,7 @@ import 'package:flutter_media_view/ui/theme/durations.dart';
 import 'package:flutter_media_view/ui/theme/themes.dart';
 import 'package:flutter_media_view/function/utils/time_utils.dart';
 import 'package:flutter_media_view/ui/common/fx_transitions.dart';
-import 'package:flutter_media_view/ui/filter/common_identity_fmv_filter_chip.dart';
+import 'package:flutter_media_view/ui/filter/identity_fmv_filter_chip.dart';
 import 'package:flutter_media_view/ui/common/stats_date_axis.dart';
 import 'package:collection/collection.dart';
 import 'package:fmv_charts/community_charts_flutter.dart' as charts;

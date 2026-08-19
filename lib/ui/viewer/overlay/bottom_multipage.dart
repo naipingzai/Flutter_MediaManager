@@ -1,5 +1,5 @@
 import 'package:flutter_media_view/function/media/multipage.dart';
-import 'package:flutter_media_view/ui/common/thumbnails/common_thumbnail_scroller.dart';
+import 'package:flutter_media_view/ui/common/thumbnails/thumbnails_scroller.dart';
 import 'package:flutter_media_view/ui/viewer/multipage_controller.dart';
 import 'package:flutter_media_view/ui/viewer/view_conductor.dart';
 import 'package:flutter/material.dart';

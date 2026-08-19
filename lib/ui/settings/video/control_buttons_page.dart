@@ -1,8 +1,8 @@
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/ui/common/view.dart';
-import 'package:flutter_media_view/ui/common/basic/common_basic_scaffold.dart';
+import 'package:flutter_media_view/ui/common/basic/basic_scaffold.dart';
 import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/identity/common_identity_buttons_overlay_button.dart';
+import 'package:flutter_media_view/ui/common/identity/identity_buttons_overlay_button.dart';
 import 'package:flutter_media_view/ui/settings/common/quick_actions_action_panel.dart';
 import 'package:flutter_media_view/ui/viewer/overlay/bottom_video_controls.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';

@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/ui/common/actions/common_action_mixins_feedback.dart';
+import 'package:flutter_media_view/ui/common/actions/mixins_feedback.dart';
 import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/identity/common_identity_buttons_overlay_button.dart';
+import 'package:flutter_media_view/ui/common/identity/identity_buttons_overlay_button.dart';
 import 'package:flutter_media_view/ui/viewer/overlay/bottom.dart';
 import 'package:flutter_media_view/ui/viewer/panorama_page.dart';
 import 'package:flutter/material.dart';

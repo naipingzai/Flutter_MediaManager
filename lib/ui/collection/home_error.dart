@@ -2,10 +2,10 @@ import 'package:flutter_media_view/function/locale/locales.dart';
 import 'package:flutter_media_view/function/model/mime_types.dart';
 import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/ui/about/bug_report.dart';
-import 'package:flutter_media_view/ui/common/actions/common_action_mixins_feedback.dart';
+import 'package:flutter_media_view/ui/common/actions/mixins_feedback.dart';
 import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/identity/common_identity_fmv_expansion_tile.dart';
-import 'package:flutter_media_view/ui/common/identity/common_identity_buttons_outlined_button.dart';
+import 'package:flutter_media_view/ui/common/identity/identity_fmv_expansion_tile.dart';
+import 'package:flutter_media_view/ui/common/identity/identity_buttons_outlined_button.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

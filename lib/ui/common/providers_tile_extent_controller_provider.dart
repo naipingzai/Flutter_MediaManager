@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/ui/common/tiles/common_tile_extent_controller.dart';
+import 'package:flutter_media_view/ui/common/tiles/tiles_extent_controller.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 

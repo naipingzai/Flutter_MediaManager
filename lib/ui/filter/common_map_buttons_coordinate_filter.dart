@@ -4,7 +4,7 @@ import 'package:flutter_media_view/ui/theme/durations.dart';
 import 'package:flutter_media_view/ui/theme/themes.dart';
 import 'package:flutter_media_view/function/utils/debouncer.dart';
 import 'package:flutter_media_view/ui/common/fx_blurred.dart';
-import 'package:flutter_media_view/ui/filter/common_identity_fmv_filter_chip.dart';
+import 'package:flutter_media_view/ui/filter/identity_fmv_filter_chip.dart';
 import 'package:flutter_media_view/ui/viewer/controls/notifications.dart';
 import 'package:fmv_map/flutter_media_view_map.dart';
 import 'package:flutter/material.dart';

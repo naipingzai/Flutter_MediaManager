@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter_media_view/ui/common/basic/common_basic_text_outlined.dart';
+import 'package:flutter_media_view/ui/common/basic/basic_text_outlined.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';

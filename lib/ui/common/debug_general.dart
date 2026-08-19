@@ -3,7 +3,7 @@ import 'package:flutter_media_view/function/source/collection_source.dart';
 import 'package:flutter_media_view/function/services/analysis_service.dart';
 import 'package:flutter_media_view/function/common/channel.dart';
 import 'package:flutter_media_view/function/common/service_policy.dart';
-import 'package:flutter_media_view/ui/common/identity/common_identity_fmv_expansion_tile.dart';
+import 'package:flutter_media_view/ui/common/identity/identity_fmv_expansion_tile.dart';
 import 'package:flutter_media_view/ui/settings/common/tiles.dart';
 import 'package:flutter_media_view/ui/viewer/info/common.dart';
 import 'package:flutter/material.dart';

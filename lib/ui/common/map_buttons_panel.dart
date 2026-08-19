@@ -3,7 +3,7 @@ import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/ui/theme/durations.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/common/view.dart';
-import 'package:flutter_media_view/ui/common/basic/common_basic_popup_menu_row.dart';
+import 'package:flutter_media_view/ui/common/basic/basic_popup_menu_row.dart';
 import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/map_buttons_button.dart';
 import 'package:flutter_media_view/ui/filter/common_map_buttons_coordinate_filter.dart';
