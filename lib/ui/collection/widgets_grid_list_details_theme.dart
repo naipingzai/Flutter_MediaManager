@@ -1,6 +1,6 @@
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/ui/theme/format.dart';
-import 'package:flutter_media_view/ui/common/common_tile_extent_controller.dart';
+import 'package:flutter_media_view/ui/common/tiles/common_tile_extent_controller.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';

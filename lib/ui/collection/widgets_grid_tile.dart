@@ -7,8 +7,8 @@ import 'package:flutter_media_view/ui/collection/widgets_grid_list_details.dart'
 import 'package:flutter_media_view/ui/collection/widgets_grid_list_details_theme.dart';
 import 'package:flutter_media_view/ui/common/common_grid_scaling.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_common_providers_entry_provider.dart';
-import 'package:flutter_media_view/ui/common/common_thumbnail_decorated.dart';
-import 'package:flutter_media_view/ui/common/common_thumbnail_notifications.dart';
+import 'package:flutter_media_view/ui/common/thumbnails/common_thumbnail_decorated.dart';
+import 'package:flutter_media_view/ui/common/thumbnails/common_thumbnail_notifications.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_hero.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';

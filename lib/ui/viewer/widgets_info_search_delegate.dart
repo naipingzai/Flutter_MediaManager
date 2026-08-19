@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/common_identity_empty.dart';
+import 'package:flutter_media_view/ui/common/identity/common_identity_empty.dart';
 import 'package:flutter_media_view/ui/common/common_providers_media_query_data_provider.dart';
 import 'package:flutter_media_view/ui/search/widgets_common_search_delegate.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_info_embedded_data_opener.dart';

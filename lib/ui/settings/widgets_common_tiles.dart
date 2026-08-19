@@ -4,7 +4,7 @@ import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/ui/theme/durations.dart';
 import 'package:flutter_media_view/ui/theme/text.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/common_identity_fmv_caption.dart';
+import 'package:flutter_media_view/ui/common/identity/common_identity_fmv_caption.dart';
 import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_duration_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_selection_dialogs_common.dart';

@@ -3,9 +3,9 @@ import 'dart:ui' as ui;
 
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/ui/common/fmv_app.dart';
-import 'package:flutter_media_view/ui/common/common_basic_list_tiles_reselectable_radio.dart';
-import 'package:flutter_media_view/ui/common/common_basic_query_bar.dart';
-import 'package:flutter_media_view/ui/common/common_basic_scaffold.dart';
+import 'package:flutter_media_view/ui/common/basic/common_basic_list_tiles_reselectable_radio.dart';
+import 'package:flutter_media_view/ui/common/basic/common_basic_query_bar.dart';
+import 'package:flutter_media_view/ui/common/basic/common_basic_scaffold.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/settings/widgets_language_locale_tile.dart';
 import 'package:collection/collection.dart';

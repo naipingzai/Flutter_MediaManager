@@ -11,7 +11,7 @@ import 'package:flutter_media_view/function/viewer/video_playback.dart';
 import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/function/locale/fmv_locale.dart';
 import 'package:flutter_media_view/function/utils/file_utils.dart';
-import 'package:flutter_media_view/ui/common/common_identity_fmv_expansion_tile.dart';
+import 'package:flutter_media_view/ui/common/identity/common_identity_fmv_expansion_tile.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 

@@ -1,7 +1,7 @@
-import 'package:flutter_media_view/ui/common/common_basic_insets.dart';
-import 'package:flutter_media_view/ui/common/common_basic_scaffold.dart';
-import 'package:flutter_media_view/ui/common/common_behaviour_pop_scope.dart';
-import 'package:flutter_media_view/ui/common/common_behaviour_pop_tv_navigation.dart';
+import 'package:flutter_media_view/ui/common/basic/common_basic_insets.dart';
+import 'package:flutter_media_view/ui/common/basic/common_basic_scaffold.dart';
+import 'package:flutter_media_view/ui/common/behaviour/common_behaviour_pop_scope.dart';
+import 'package:flutter_media_view/ui/common/behaviour/common_behaviour_pop_tv_navigation.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/navigation_tv_rail.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_definition.dart';

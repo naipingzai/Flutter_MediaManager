@@ -4,7 +4,7 @@ import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/function/source/collection_lens.dart';
 import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/ui/common/common_action_mixins_feedback.dart';
+import 'package:flutter_media_view/ui/common/actions/common_action_mixins_feedback.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/dialogs_add_shortcut_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';

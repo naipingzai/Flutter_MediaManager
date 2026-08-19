@@ -2,7 +2,7 @@ import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/function/entry/extensions_images.dart';
 import 'package:flutter_media_view/function/entry/extensions_multipage.dart';
 import 'package:flutter_media_view/ui/theme/durations.dart';
-import 'package:flutter_media_view/ui/common/common_thumbnail_image.dart';
+import 'package:flutter_media_view/ui/common/thumbnails/common_thumbnail_image.dart';
 import 'package:fmv_magnifier/flutter_media_view_magnifier.dart';
 import 'package:fmv_video/flutter_media_view_video.dart';
 import 'package:collection/collection.dart';

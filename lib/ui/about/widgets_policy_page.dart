@@ -1,6 +1,6 @@
 import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/common/common_basic_markdown_container.dart';
-import 'package:flutter_media_view/ui/common/common_basic_scaffold.dart';
+import 'package:flutter_media_view/ui/common/basic/common_basic_markdown_container.dart';
+import 'package:flutter_media_view/ui/common/basic/common_basic_scaffold.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

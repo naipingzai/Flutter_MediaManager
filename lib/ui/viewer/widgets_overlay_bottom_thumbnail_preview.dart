@@ -1,5 +1,5 @@
 import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/ui/common/common_thumbnail_scroller.dart';
+import 'package:flutter_media_view/ui/common/thumbnails/common_thumbnail_scroller.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_controls_notifications.dart';
 import 'package:flutter/material.dart';
 

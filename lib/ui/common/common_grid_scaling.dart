@@ -1,11 +1,11 @@
 import 'package:flutter_media_view/function/utils/function_highlight.dart';
-import 'package:flutter_media_view/ui/common/common_behaviour_eager_scale_gesture_recognizer.dart';
+import 'package:flutter_media_view/ui/common/behaviour/common_behaviour_eager_scale_gesture_recognizer.dart';
 import 'package:flutter_media_view/ui/common/common_grid_sections_fixed_scale_overlay.dart';
 import 'package:flutter_media_view/ui/common/common_grid_sections_mosaic_scale_overlay.dart';
 import 'package:flutter_media_view/ui/common/common_grid_sections_section_layout_builder.dart';
 import 'package:flutter_media_view/ui/common/common_grid_theme.dart';
 import 'package:flutter_media_view/ui/common/common_providers_tile_extent_controller_provider.dart';
-import 'package:flutter_media_view/ui/common/common_tile_extent_controller.dart';
+import 'package:flutter_media_view/ui/common/tiles/common_tile_extent_controller.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/gestures.dart';

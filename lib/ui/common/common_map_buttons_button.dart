@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/ui/common/common_identity_buttons_overlay_button.dart';
+import 'package:flutter_media_view/ui/common/identity/common_identity_buttons_overlay_button.dart';
 import 'package:fmv_map/flutter_media_view_map.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

@@ -4,7 +4,7 @@ import 'package:flutter_media_view/function/source/section_keys.dart';
 import 'package:flutter_media_view/ui/theme/durations.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/theme/styles.dart';
-import 'package:flutter_media_view/ui/common/common_basic_gestures_gesture_detector.dart';
+import 'package:flutter_media_view/ui/common/basic/common_basic_gestures_gesture_detector.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/common_grid_sections_list_layout.dart';
 import 'package:flutter/material.dart';

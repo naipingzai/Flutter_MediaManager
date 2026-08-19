@@ -2,13 +2,13 @@ import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/ui/theme/durations.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/theme/themes.dart';
-import 'package:flutter_media_view/ui/common/common_basic_font_size_icon_theme.dart';
-import 'package:flutter_media_view/ui/common/common_basic_text_dropdown_button.dart';
+import 'package:flutter_media_view/ui/common/basic/common_basic_font_size_icon_theme.dart';
+import 'package:flutter_media_view/ui/common/basic/common_basic_text_dropdown_button.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/common_fx_transitions.dart';
-import 'package:flutter_media_view/ui/common/common_identity_fmv_caption.dart';
-import 'package:flutter_media_view/ui/common/common_identity_highlight_title.dart';
-import 'package:flutter_media_view/ui/common/common_tile_extent_controller.dart';
+import 'package:flutter_media_view/ui/common/identity/common_identity_fmv_caption.dart';
+import 'package:flutter_media_view/ui/common/identity/common_identity_highlight_title.dart';
+import 'package:flutter_media_view/ui/common/tiles/common_tile_extent_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

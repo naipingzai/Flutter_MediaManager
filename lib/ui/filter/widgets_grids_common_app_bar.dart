@@ -15,11 +15,11 @@ import 'package:flutter_media_view/ui/search/widgets_common_action_controls_togg
 import 'package:flutter_media_view/ui/common/common_app_bar_app_bar_subtitle.dart';
 import 'package:flutter_media_view/ui/common/common_app_bar_app_bar_title.dart';
 import 'package:flutter_media_view/ui/common/common_app_bar_crumb_line.dart';
-import 'package:flutter_media_view/ui/common/common_basic_popup_menu_row.dart';
+import 'package:flutter_media_view/ui/common/basic/common_basic_popup_menu_row.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/common_identity_fmv_app_bar.dart';
+import 'package:flutter_media_view/ui/common/identity/common_identity_fmv_app_bar.dart';
 import 'package:flutter_media_view/ui/filter/widgets_common_identity_fmv_filter_chip.dart';
-import 'package:flutter_media_view/ui/common/common_identity_buttons_captioned_button.dart';
+import 'package:flutter_media_view/ui/common/identity/common_identity_buttons_captioned_button.dart';
 import 'package:flutter_media_view/ui/filter/widgets_common_providers_group_provider.dart';
 import 'package:flutter_media_view/ui/filter/widgets_grids_common_action_delegates_chip_set.dart';
 import 'package:flutter_media_view/ui/filter/widgets_grids_common_group_crumb_line.dart';

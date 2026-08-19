@@ -6,7 +6,7 @@ import 'package:flutter_media_view/function/source/collection_source.dart';
 import 'package:flutter_media_view/function/source/location_place.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/common_identity_empty.dart';
+import 'package:flutter_media_view/ui/common/identity/common_identity_empty.dart';
 import 'package:flutter_media_view/ui/filter/widgets_grids_common_action_delegates_state_set.dart';
 import 'package:flutter_media_view/ui/filter/widgets_grids_common_nav_page.dart';
 import 'package:flutter_media_view/ui/filter/widgets_grids_common_section_keys.dart';

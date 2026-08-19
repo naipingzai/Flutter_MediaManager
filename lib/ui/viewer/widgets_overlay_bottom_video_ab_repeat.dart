@@ -1,6 +1,6 @@
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/common_identity_buttons_overlay_button.dart';
+import 'package:flutter_media_view/ui/common/identity/common_identity_buttons_overlay_button.dart';
 import 'package:fmv_video/flutter_media_view_video.dart';
 import 'package:flutter/material.dart';
 

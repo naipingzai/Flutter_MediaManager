@@ -2,9 +2,9 @@ import 'dart:math';
 
 import 'package:flutter_media_view/ui/theme/durations.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/common/common_basic_multi_cross_fader.dart';
+import 'package:flutter_media_view/ui/common/basic/common_basic_multi_cross_fader.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/common_identity_highlight_title.dart';
+import 'package:flutter_media_view/ui/common/identity/common_identity_highlight_title.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_info_common.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_info_metadata_xmp_namespaces.dart';
 import 'package:flutter/material.dart';

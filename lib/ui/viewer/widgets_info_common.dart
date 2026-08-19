@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:flutter_media_view/ui/common/common_basic_link_chip.dart';
+import 'package:flutter_media_view/ui/common/basic/common_basic_link_chip.dart';
 import 'package:flutter_media_view/ui/filter/widgets_common_identity_fmv_filter_chip.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';

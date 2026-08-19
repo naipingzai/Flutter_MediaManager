@@ -3,7 +3,7 @@ import 'package:flutter_media_view/function/services/intent_service.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/collection/widgets_filter_bar.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/common_identity_fmv_caption.dart';
+import 'package:flutter_media_view/ui/common/identity/common_identity_fmv_caption.dart';
 import 'package:flutter/material.dart';
 
 class SettingsCollectionTile extends StatelessWidget {

@@ -2,8 +2,8 @@ import 'package:flutter_media_view/ui/image_providers/app_icon_image_provider.da
 import 'package:flutter_media_view/function/settings/app_inventory.dart';
 import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/ui/theme/colors.dart';
-import 'package:flutter_media_view/ui/common/common_basic_query_bar.dart';
-import 'package:flutter_media_view/ui/common/common_identity_fmv_expansion_tile.dart';
+import 'package:flutter_media_view/ui/common/basic/common_basic_query_bar.dart';
+import 'package:flutter_media_view/ui/common/identity/common_identity_fmv_expansion_tile.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_info_common.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
