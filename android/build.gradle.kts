@@ -39,6 +39,15 @@ subprojects {
 }
 subprojects {
     project.evaluationDependsOn(":app")
+    afterEvaluate {
+        if (project.plugins.hasPlugin("com.android.library") || project.plugins.hasPlugin("com.android.application")) {
+            project.extensions.findByType(com.android.build.gradle.BaseExtension::class.java)?.let { ext ->
+                if (ext.namespace == null) {
+                    ext.setNamespace(project.group.toString())
+                }
+            }
+        }
+    }
 }
 
 tasks.register<Delete>("clean") {
