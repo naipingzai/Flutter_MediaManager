@@ -16,7 +16,7 @@ import 'package:flutter_media_view/ui/common/actions/common_action_mixins_feedba
 import 'package:flutter_media_view/ui/common/basic/common_basic_scaffold.dart';
 import 'package:flutter_media_view/ui/common/basic/common_basic_text_outlined.dart';
 import 'package:flutter_media_view/ui/common/basic/common_basic_text_dropdown_button.dart';
-import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
+import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/identity/common_identity_buttons_outlined_button.dart';
 import 'package:flutter_media_view/ui/common/identity/common_identity_highlight_title.dart';
 import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';

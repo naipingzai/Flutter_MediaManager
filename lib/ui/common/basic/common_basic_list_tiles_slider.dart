@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/ui/settings/common/common_tiles.dart';
+import 'package:flutter_media_view/ui/settings/common/tiles.dart';
 import 'package:flutter/material.dart';
 
 class SliderListTile extends StatelessWidget {

@@ -20,7 +20,7 @@ import 'package:flutter_media_view/function/filters/placeholder.dart';
 import 'package:flutter_media_view/function/filters/query.dart';
 import 'package:flutter_media_view/function/filters/rating.dart';
 import 'package:flutter_media_view/function/filters/recent.dart';
-import 'package:flutter_media_view/function/filters/filters_trash.dart';
+import 'package:flutter_media_view/function/filters/trash.dart';
 import 'package:flutter_media_view/function/filters/type.dart';
 import 'package:flutter_media_view/function/filters/weekday.dart';
 import 'package:flutter_media_view/ui/theme/colors.dart';

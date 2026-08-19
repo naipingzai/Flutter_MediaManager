@@ -2,7 +2,7 @@ import 'package:flutter_media_view/ui/theme/durations.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/function/utils/debouncer.dart';
 import 'package:flutter_media_view/ui/common/basic/common_basic_font_size_icon_theme.dart';
-import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
+import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter/material.dart';
 
 class QueryBar extends StatefulWidget {

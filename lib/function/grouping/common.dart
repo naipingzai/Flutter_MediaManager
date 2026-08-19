@@ -10,7 +10,7 @@ import 'package:flutter_media_view/function/filters/container_tag_group.dart';
 import 'package:flutter_media_view/function/filters/covered_stored_album.dart';
 import 'package:flutter_media_view/function/filters/covered_tag.dart';
 import 'package:flutter_media_view/function/filters/filters.dart';
-import 'package:flutter_media_view/function/grouping/grouping_convert.dart';
+import 'package:flutter_media_view/function/grouping/convert.dart';
 import 'package:flutter_media_view/function/source/album.dart';
 import 'package:flutter_media_view/function/source/collection_source.dart';
 import 'package:flutter_media_view/function/source/events.dart';

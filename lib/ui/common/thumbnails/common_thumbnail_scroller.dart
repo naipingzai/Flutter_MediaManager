@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/ui/theme/durations.dart';
 import 'package:flutter_media_view/ui/common/behaviour/common_behaviour_known_extent_scroll_physics.dart';
-import 'package:flutter_media_view/ui/common/common_grid_theme.dart';
+import 'package:flutter_media_view/ui/common/grid_theme.dart';
 import 'package:flutter_media_view/ui/common/thumbnails/common_thumbnail_decorated.dart';
 import 'package:flutter/material.dart';
 

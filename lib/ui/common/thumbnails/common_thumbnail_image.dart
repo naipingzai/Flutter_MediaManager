@@ -8,10 +8,10 @@ import 'package:flutter_media_view/function/settings/enums_entry_background.dart
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/ui/common/basic/common_basic_insets.dart';
-import 'package:flutter_media_view/ui/common/common_fx_checkered_decoration.dart';
-import 'package:flutter_media_view/ui/common/common_fx_transition_image.dart';
-import 'package:flutter_media_view/ui/common/common_grid_sections_mosaic_section_layout_builder.dart';
-import 'package:flutter_media_view/ui/common/common_providers_media_query_data_provider.dart';
+import 'package:flutter_media_view/ui/common/fx_checkered_decoration.dart';
+import 'package:flutter_media_view/ui/common/fx_transition_image.dart';
+import 'package:flutter_media_view/ui/common/grid_sections_mosaic_section_layout_builder.dart';
+import 'package:flutter_media_view/ui/common/providers_media_query_data_provider.dart';
 import 'package:flutter_media_view/ui/common/thumbnails/common_thumbnail_error.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';

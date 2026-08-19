@@ -1,8 +1,8 @@
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/ui/theme/themes.dart';
-import 'package:flutter_media_view/ui/common/common_extensions_theme.dart';
-import 'package:flutter_media_view/ui/common/common_fx_blurred.dart';
-import 'package:flutter_media_view/ui/common/common_fx_borders.dart';
+import 'package:flutter_media_view/ui/common/extensions_theme.dart';
+import 'package:flutter_media_view/ui/common/fx_blurred.dart';
+import 'package:flutter_media_view/ui/common/fx_borders.dart';
 import 'package:flutter/material.dart';
 
 class OverlayButton extends StatefulWidget {

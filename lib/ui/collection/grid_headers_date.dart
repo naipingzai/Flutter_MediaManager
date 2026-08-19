@@ -1,8 +1,8 @@
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/function/source/section_keys.dart';
-import 'package:flutter_media_view/function/calendar/calendar_utils.dart';
-import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/common_grid_header.dart';
+import 'package:flutter_media_view/function/calendar/utils.dart';
+import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
+import 'package:flutter_media_view/ui/common/grid_header.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

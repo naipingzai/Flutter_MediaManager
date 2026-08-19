@@ -1,14 +1,14 @@
 import 'package:flutter_media_view/function/device/function_device.dart';
 import 'package:flutter_media_view/ui/theme/themes.dart';
 import 'package:flutter_media_view/ui/about/app_ref.dart';
-import 'package:flutter_media_view/ui/about/about_credits.dart';
-import 'package:flutter_media_view/ui/about/about_translators.dart';
+import 'package:flutter_media_view/ui/about/credits.dart';
+import 'package:flutter_media_view/ui/about/translators.dart';
 import 'package:flutter_media_view/ui/about/tv_license_page.dart';
 import 'package:flutter_media_view/ui/common/basic/common_basic_insets.dart';
 import 'package:flutter_media_view/ui/common/basic/common_basic_scaffold.dart';
 import 'package:flutter_media_view/ui/common/behaviour/common_behaviour_pop_scope.dart';
 import 'package:flutter_media_view/ui/common/behaviour/common_behaviour_pop_tv_navigation.dart';
-import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
+import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/identity/common_identity_buttons_outlined_button.dart';
 import 'package:flutter_media_view/ui/common/navigation_tv_rail.dart';
 import 'package:flutter/material.dart';

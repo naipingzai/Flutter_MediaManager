@@ -1,8 +1,8 @@
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/function/source/collection_lens.dart';
-import 'package:flutter_media_view/ui/collection/collection_page.dart';
+import 'package:flutter_media_view/ui/collection/page.dart';
 import 'package:flutter_media_view/ui/common/behaviour/common_behaviour_pop_scope.dart';
-import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
+import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

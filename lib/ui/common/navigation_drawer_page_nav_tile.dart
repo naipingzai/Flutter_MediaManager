@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
+import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/navigation_drawer_tile.dart';
 import 'package:flutter_media_view/ui/common/navigation_nav_item.dart';
 import 'package:flutter/material.dart';

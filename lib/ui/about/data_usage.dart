@@ -6,7 +6,7 @@ import 'package:flutter_media_view/ui/theme/durations.dart';
 import 'package:flutter_media_view/ui/theme/styles.dart';
 import 'package:flutter_media_view/function/utils/file_utils.dart';
 import 'package:flutter_media_view/ui/common/actions/common_action_mixins_feedback.dart';
-import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
+import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/identity/common_identity_fmv_donut.dart';
 import 'package:flutter_media_view/ui/common/identity/common_identity_buttons_outlined_button.dart';
 import 'package:flutter/material.dart';

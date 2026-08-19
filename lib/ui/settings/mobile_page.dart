@@ -2,14 +2,14 @@ import 'package:flutter_media_view/function/settings/enums_accessibility_animati
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/common/actions/common_action_mixins_feedback.dart';
-import 'package:flutter_media_view/ui/common/common_app_bar_app_bar_title.dart';
+import 'package:flutter_media_view/ui/common/app_bar_app_bar_title.dart';
 import 'package:flutter_media_view/ui/common/basic/common_basic_font_size_icon_theme.dart';
 import 'package:flutter_media_view/ui/common/basic/common_basic_insets.dart';
 import 'package:flutter_media_view/ui/common/basic/common_basic_popup_menu_row.dart';
 import 'package:flutter_media_view/ui/common/basic/common_basic_scaffold.dart';
-import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
+import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter_media_view/ui/settings/action_delegate.dart';
-import 'package:flutter_media_view/ui/settings/settings_page.dart';
+import 'package:flutter_media_view/ui/settings/page.dart';
 import 'package:flutter_media_view/ui/settings/search_page_route.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';

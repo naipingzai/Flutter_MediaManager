@@ -4,7 +4,7 @@ import 'package:flutter_media_view/function/model/favourites.dart';
 import 'package:flutter_media_view/function/grouping/common.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/function/source/collection_source.dart';
-import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
+import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter/widgets.dart';
 
 enum AppExportItem { covers, dynamicAlbums, favourites, settings }

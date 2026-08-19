@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view/ui/common/common_fx_borders.dart';
-import 'package:flutter_media_view/ui/common/common_grid_overlay.dart';
-import 'package:flutter_media_view/ui/common/common_grid_sections_mosaic_section_layout_builder.dart';
+import 'package:flutter_media_view/ui/common/fx_borders.dart';
+import 'package:flutter_media_view/ui/common/grid_overlay.dart';
+import 'package:flutter_media_view/ui/common/grid_sections_mosaic_section_layout_builder.dart';
 import 'package:flutter_media_view/ui/common/thumbnails/common_thumbnail_image.dart';
 import 'package:flutter_media_view/ui/common/thumbnails/common_thumbnail_notifications.dart';
 import 'package:flutter_media_view/ui/common/thumbnails/common_thumbnail_overlay.dart';

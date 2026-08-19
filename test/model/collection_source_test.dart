@@ -7,7 +7,7 @@ import 'package:flutter_media_view/function/model/favourites.dart';
 import 'package:flutter_media_view/function/filters/covered_stored_album.dart';
 import 'package:flutter_media_view/function/filters/covered_tag.dart';
 import 'package:flutter_media_view/function/grouping/common.dart';
-import 'package:flutter_media_view/function/grouping/grouping_convert.dart';
+import 'package:flutter_media_view/function/grouping/convert.dart';
 import 'package:flutter_media_view/function/metadata/address.dart';
 import 'package:flutter_media_view/function/metadata/catalog.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';
@@ -20,9 +20,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../common.dart';
-import '../fake/media_fetch_service.dart';
-import '../fake/media_store_service.dart';
-import '../fake/metadata_fetch_service.dart';
+import '../fake/fetch_service.dart';
+import '../fake/store_service.dart';
+import '../fake/fetch_service.dart';
 import '../fake/storage_service.dart';
 
 void main() {

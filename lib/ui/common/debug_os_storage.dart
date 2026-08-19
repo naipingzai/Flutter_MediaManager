@@ -4,7 +4,7 @@ import 'package:flutter_media_view/function/utils/android_file_utils.dart';
 import 'package:flutter_media_view/function/utils/file_utils.dart';
 import 'package:flutter_media_view/ui/common/view.dart';
 import 'package:flutter_media_view/ui/common/identity/common_identity_fmv_expansion_tile.dart';
-import 'package:flutter_media_view/ui/viewer/info/info_common.dart';
+import 'package:flutter_media_view/ui/viewer/info/common.dart';
 import 'package:flutter/material.dart';
 
 class DebugOSStorageSection extends StatefulWidget {

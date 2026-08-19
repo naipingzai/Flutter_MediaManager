@@ -6,7 +6,7 @@ import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/function/entry/origins.dart';
 import 'package:flutter_media_view/function/model/mime_types.dart';
 import 'package:flutter_media_view/function/media/internal_dir_fetch_service.dart';
-import 'package:flutter_media_view/function/media/media_store_service.dart';
+import 'package:flutter_media_view/function/media/store_service.dart';
 import 'package:path_provider/path_provider.dart';
 
 /// 内部目录数据源：替代 Fmv 原生 MediaStore 服务。

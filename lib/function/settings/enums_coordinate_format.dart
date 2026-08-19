@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/l10n/l10n.dart';
 import 'package:flutter_media_view/function/locale/fmv_locale.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
+import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/widgets.dart';
 import 'package:latlong2/latlong.dart';

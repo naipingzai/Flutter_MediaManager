@@ -17,7 +17,7 @@ import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/about/app_ref.dart';
 import 'package:flutter_media_view/ui/common/fmv_app.dart';
 import 'package:flutter_media_view/ui/collection/entry_set_action_delegate.dart';
-import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
+import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/dialogs_fmv_confirmation_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view/ui/editor/dialogs_entry_editors_edit_date_dialog.dart';

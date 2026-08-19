@@ -6,7 +6,7 @@ import 'package:flutter_media_view/function/entry/dirs.dart';
 import 'package:flutter_media_view/function/entry/extensions_keys.dart';
 import 'package:flutter_media_view/function/metadata/address.dart';
 import 'package:flutter_media_view/function/metadata/catalog.dart';
-import 'package:flutter_media_view/function/metadata/metadata_trash.dart';
+import 'package:flutter_media_view/function/metadata/trash.dart';
 import 'package:flutter_media_view/function/model/mime_types.dart';
 import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/ui/theme/format.dart';

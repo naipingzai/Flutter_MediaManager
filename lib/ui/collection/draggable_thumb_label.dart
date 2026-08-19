@@ -4,8 +4,8 @@ import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/function/source/collection_lens.dart';
 import 'package:flutter_media_view/function/source/collection_source.dart';
 import 'package:flutter_media_view/function/utils/file_utils.dart';
-import 'package:flutter_media_view/ui/common/common_grid_draggable_thumb_label.dart';
-import 'package:flutter_media_view/ui/common/common_grid_sections_list_layout.dart';
+import 'package:flutter_media_view/ui/common/grid_draggable_thumb_label.dart';
+import 'package:flutter_media_view/ui/common/grid_sections_list_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

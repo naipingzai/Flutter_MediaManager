@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/function/entry/extensions_metadata_edition.dart';
 import 'package:flutter_media_view/ui/common/basic/common_basic_labeled_checkbox.dart';
-import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/common_providers_media_query_data_provider.dart';
+import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
+import 'package:flutter_media_view/ui/common/providers_media_query_data_provider.dart';
 import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter/material.dart';
 

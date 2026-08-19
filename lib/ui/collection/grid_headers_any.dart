@@ -4,11 +4,11 @@ import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/function/source/collection_lens.dart';
 import 'package:flutter_media_view/function/source/collection_source.dart';
 import 'package:flutter_media_view/function/source/section_keys.dart';
-import 'package:flutter_media_view/function/calendar/calendar_utils.dart';
+import 'package:flutter_media_view/function/calendar/utils.dart';
 import 'package:flutter_media_view/ui/collection/grid_headers_album.dart';
 import 'package:flutter_media_view/ui/collection/grid_headers_date.dart';
 import 'package:flutter_media_view/ui/collection/grid_headers_rating.dart';
-import 'package:flutter_media_view/ui/common/common_grid_header.dart';
+import 'package:flutter_media_view/ui/common/grid_header.dart';
 import 'package:flutter/material.dart';
 
 class CollectionSectionHeader extends StatelessWidget {

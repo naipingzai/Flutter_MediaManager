@@ -1,12 +1,12 @@
 import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/ui/collection/collection_page.dart';
+import 'package:flutter_media_view/ui/collection/page.dart';
 import 'package:flutter_media_view/ui/common/identity/common_identity_fmv_expansion_tile.dart';
 import 'package:flutter_media_view/ui/common/identity/common_identity_highlight_title.dart';
-import 'package:flutter_media_view/ui/filter/grids/grids_albums_page.dart';
-import 'package:flutter_media_view/ui/filter/grids/grids_countries_page.dart';
-import 'package:flutter_media_view/ui/filter/grids/grids_places_page.dart';
-import 'package:flutter_media_view/ui/filter/grids/grids_tags_page.dart';
-import 'package:flutter_media_view/ui/viewer/info/info_common.dart';
+import 'package:flutter_media_view/ui/filter/grids/albums_page.dart';
+import 'package:flutter_media_view/ui/filter/grids/countries_page.dart';
+import 'package:flutter_media_view/ui/filter/grids/places_page.dart';
+import 'package:flutter_media_view/ui/filter/grids/tags_page.dart';
+import 'package:flutter_media_view/ui/viewer/info/common.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

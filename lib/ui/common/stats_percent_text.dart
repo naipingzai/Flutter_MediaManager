@@ -2,7 +2,7 @@ import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/ui/theme/styles.dart';
 import 'package:flutter_media_view/ui/theme/themes.dart';
 import 'package:flutter_media_view/ui/common/basic/common_basic_text_outlined.dart';
-import 'package:flutter_media_view/ui/common/common_extensions_theme.dart';
+import 'package:flutter_media_view/ui/common/extensions_theme.dart';
 import 'package:flutter/material.dart';
 
 class LinearPercentIndicatorText extends StatelessWidget {

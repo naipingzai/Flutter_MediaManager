@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter_media_view/function/locale/fmv_locale.dart';
-import 'package:flutter_media_view/function/calendar/calendar_utils.dart';
+import 'package:flutter_media_view/function/calendar/utils.dart';
 import 'package:flutter_media_view/function/calendar/dateformat_base.dart';
 import 'package:flutter_media_view/function/filters/date.dart';
 import 'package:flutter_media_view/function/utils/time_utils.dart';

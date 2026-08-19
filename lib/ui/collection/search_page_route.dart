@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/function/source/collection_lens.dart';
 import 'package:flutter_media_view/function/source/collection_source.dart';
 import 'package:flutter_media_view/ui/theme/themes.dart';
-import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
+import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter_media_view/ui/search/common_search_route.dart';
 import 'package:flutter_media_view/ui/collection/search_delegate.dart';
 import 'package:flutter/material.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/ui/theme/themes.dart';
-import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
+import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter_media_view/ui/search/common_search_route.dart';
-import 'package:flutter_media_view/ui/settings/settings_page.dart';
+import 'package:flutter_media_view/ui/settings/page.dart';
 import 'package:flutter_media_view/ui/settings/search_delegate.dart';
 import 'package:flutter/material.dart';
 

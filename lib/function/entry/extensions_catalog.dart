@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/function/entry/extensions_keys.dart';
 import 'package:flutter_media_view/function/entry/extensions_props.dart';
-import 'package:flutter_media_view/function/media/media_geotiff.dart';
+import 'package:flutter_media_view/function/media/geotiff.dart';
 import 'package:flutter_media_view/function/media/video_metadata.dart';
 import 'package:flutter_media_view/function/metadata/catalog.dart';
 import 'package:flutter_media_view/function/model/mime_types.dart';

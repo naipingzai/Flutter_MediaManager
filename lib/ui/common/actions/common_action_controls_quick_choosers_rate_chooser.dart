@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter_media_view/ui/theme/colors.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/common/actions/common_action_controls_quick_choosers_quick_chooser.dart';
-import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
+import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter/material.dart';
 
 class RateQuickChooser extends StatefulWidget {

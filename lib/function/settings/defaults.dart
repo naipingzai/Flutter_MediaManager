@@ -4,11 +4,11 @@ import 'package:flutter_media_view/function/filters/mime.dart';
 import 'package:flutter_media_view/function/filters/recent.dart';
 import 'package:flutter_media_view/function/metadata/naming_pattern.dart';
 import 'package:flutter_media_view/function/model/mime_types.dart';
-import 'package:flutter_media_view/ui/collection/collection_page.dart';
+import 'package:flutter_media_view/ui/collection/page.dart';
 import 'package:flutter_media_view/ui/common/explorer_page.dart';
-import 'package:flutter_media_view/ui/filter/grids/grids_albums_page.dart';
-import 'package:flutter_media_view/ui/filter/grids/grids_countries_page.dart';
-import 'package:flutter_media_view/ui/filter/grids/grids_tags_page.dart';
+import 'package:flutter_media_view/ui/filter/grids/albums_page.dart';
+import 'package:flutter_media_view/ui/filter/grids/countries_page.dart';
+import 'package:flutter_media_view/ui/filter/grids/tags_page.dart';
 import 'package:flutter_media_view/ui/common/navigation_nav_item.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 

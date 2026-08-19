@@ -3,7 +3,7 @@ import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/ui/theme/durations.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/common/view.dart';
-import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
+import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/identity/common_identity_buttons_captioned_button.dart';
 import 'package:flutter_media_view/ui/common/identity/common_identity_buttons_overlay_button.dart';
 import 'package:flutter_media_view/ui/editor/control_panel.dart';

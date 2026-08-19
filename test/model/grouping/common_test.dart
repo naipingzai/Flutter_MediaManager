@@ -8,14 +8,14 @@ import 'package:flutter_media_view/function/filters/container_tag_group.dart';
 import 'package:flutter_media_view/function/filters/covered_stored_album.dart';
 import 'package:flutter_media_view/function/filters/covered_tag.dart';
 import 'package:flutter_media_view/function/grouping/common.dart';
-import 'package:flutter_media_view/function/grouping/grouping_convert.dart';
+import 'package:flutter_media_view/function/grouping/convert.dart';
 import 'package:flutter_media_view/function/source/collection_source.dart';
 import 'package:flutter_media_view/function/source/media_store_source.dart';
 import 'package:flutter_media_view/function/common/services.dart';
 import 'package:test/test.dart';
 
 import '../../common.dart';
-import '../../fake/media_store_service.dart';
+import '../../fake/store_service.dart';
 import '../../fake/storage_service.dart';
 
 void main() {

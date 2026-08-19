@@ -1,5 +1,5 @@
 import 'package:flutter_media_view/ui/theme/durations.dart';
-import 'package:flutter_media_view/ui/common/common_extensions_media_query.dart';
+import 'package:flutter_media_view/ui/common/extensions_media_query.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:fmv_staggered_animations/flutter_staggered_animations.dart';

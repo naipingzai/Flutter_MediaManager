@@ -1,5 +1,5 @@
 import 'package:flutter_media_view/ui/common/basic/common_basic_time_shift_selector.dart';
-import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
+import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';

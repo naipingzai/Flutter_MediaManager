@@ -4,7 +4,7 @@ import 'dart:ui';
 import 'package:flutter_media_view/function/settings/app_support.dart';
 import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';
-import 'package:flutter_media_view/function/source/source_trash.dart';
+import 'package:flutter_media_view/function/source/trash.dart';
 import 'package:flutter_media_view/function/model/mime_types.dart';
 import 'package:flutter_media_view/function/utils/function_unicode.dart';
 import 'package:flutter_media_view/function/common/services.dart';

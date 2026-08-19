@@ -13,7 +13,7 @@ import 'package:flutter_media_view/ui/common/basic/common_basic_popup_menu_row.d
 import 'package:flutter_media_view/ui/common/basic/common_basic_scaffold.dart';
 import 'package:flutter_media_view/ui/common/behaviour/common_behaviour_pop_scope.dart';
 import 'package:flutter_media_view/ui/common/behaviour/common_behaviour_pop_tv_navigation.dart';
-import 'package:flutter_media_view/ui/common/common_extensions_media_query.dart';
+import 'package:flutter_media_view/ui/common/extensions_media_query.dart';
 import 'package:flutter_media_view/ui/common/debug_app_debug_action.dart';
 import 'package:flutter_media_view/ui/common/debug_cache.dart';
 import 'package:flutter_media_view/ui/common/debug_capabilities.dart';

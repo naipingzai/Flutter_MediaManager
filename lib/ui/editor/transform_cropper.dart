@@ -3,8 +3,8 @@ import 'dart:math';
 
 import 'package:flutter_media_view/function/viewer/view_state.dart';
 import 'package:flutter_media_view/ui/theme/durations.dart';
-import 'package:flutter_media_view/ui/common/common_extensions_geometry.dart';
-import 'package:flutter_media_view/ui/common/common_fx_dashed_path_painter.dart';
+import 'package:flutter_media_view/ui/common/extensions_geometry.dart';
+import 'package:flutter_media_view/ui/common/fx_dashed_path_painter.dart';
 import 'package:flutter_media_view/ui/editor/transform_controller.dart';
 import 'package:flutter_media_view/ui/editor/transform_crop_region.dart';
 import 'package:flutter_media_view/ui/editor/transform_handles.dart';

@@ -3,7 +3,7 @@ import 'package:flutter_media_view/function/entry/extensions_keys.dart';
 import 'package:flutter_media_view/function/entry/origins.dart';
 import 'package:flutter_media_view/function/model/mime_types.dart';
 import 'package:flutter_media_view/function/common/image_op_events.dart';
-import 'package:flutter_media_view/function/media/media_store_service.dart';
+import 'package:flutter_media_view/function/media/store_service.dart';
 import 'package:test/fake.dart';
 
 class FakeMediaStoreService extends Fake implements MediaStoreService {

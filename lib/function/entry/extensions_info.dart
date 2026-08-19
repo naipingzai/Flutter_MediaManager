@@ -11,7 +11,7 @@ import 'package:flutter_media_view/function/metadata/svg_metadata_service.dart';
 import 'package:flutter_media_view/ui/theme/colors.dart';
 import 'package:flutter_media_view/ui/theme/format.dart';
 import 'package:flutter_media_view/ui/theme/text.dart';
-import 'package:flutter_media_view/ui/viewer/info/info_metadata_dir.dart';
+import 'package:flutter_media_view/ui/viewer/info/metadata_dir.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/widgets.dart';

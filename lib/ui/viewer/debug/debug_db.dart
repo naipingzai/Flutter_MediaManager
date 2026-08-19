@@ -1,13 +1,13 @@
 import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/function/metadata/address.dart';
 import 'package:flutter_media_view/function/metadata/catalog.dart';
-import 'package:flutter_media_view/function/metadata/metadata_trash.dart';
+import 'package:flutter_media_view/function/metadata/trash.dart';
 import 'package:flutter_media_view/function/source/collection_source.dart';
 import 'package:flutter_media_view/function/viewer/video_playback.dart';
 import 'package:flutter_media_view/function/model/mime_types.dart';
 import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view/ui/viewer/debug/debug_utils.dart';
-import 'package:flutter_media_view/ui/viewer/info/info_common.dart';
+import 'package:flutter_media_view/ui/viewer/debug/utils.dart';
+import 'package:flutter_media_view/ui/viewer/info/common.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

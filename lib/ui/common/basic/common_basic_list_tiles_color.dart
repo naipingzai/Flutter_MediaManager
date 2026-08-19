@@ -1,8 +1,8 @@
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/ui/common/basic/common_basic_color_indicator.dart';
-import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
+import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
-import 'package:flutter_media_view/ui/settings/common/common_tiles.dart';
+import 'package:flutter_media_view/ui/settings/common/tiles.dart';
 import 'package:flex_color_picker/flex_color_picker.dart' show ColorPicker, ColorPickerType;
 import 'package:flutter/material.dart';
 

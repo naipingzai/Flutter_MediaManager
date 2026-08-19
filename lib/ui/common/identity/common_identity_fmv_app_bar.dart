@@ -8,7 +8,7 @@ import 'package:flutter_media_view/ui/common/fmv_app.dart';
 import 'package:flutter_media_view/ui/common/basic/common_basic_font_size_icon_theme.dart';
 import 'package:flutter_media_view/ui/common/basic/common_basic_gestures_ink_well.dart';
 import 'package:flutter_media_view/ui/common/basic/common_basic_insets.dart';
-import 'package:flutter_media_view/ui/common/common_fx_blurred.dart';
+import 'package:flutter_media_view/ui/common/fx_blurred.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';

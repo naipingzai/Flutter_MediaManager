@@ -3,7 +3,7 @@ import 'package:flutter_media_view/function/entry/extensions_favourites.dart';
 import 'package:flutter_media_view/function/filters/filters.dart';
 import 'package:flutter_media_view/ui/theme/colors.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
+import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';

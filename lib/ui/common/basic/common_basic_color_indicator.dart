@@ -1,4 +1,4 @@
-import 'package:flutter_media_view/ui/common/common_fx_borders.dart';
+import 'package:flutter_media_view/ui/common/fx_borders.dart';
 import 'package:flutter/widgets.dart';
 
 class ColorIndicator extends StatelessWidget {

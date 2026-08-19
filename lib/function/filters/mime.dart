@@ -5,7 +5,7 @@ import 'package:flutter_media_view/function/model/mime_types.dart';
 import 'package:flutter_media_view/ui/theme/colors.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/function/utils/mime_utils.dart';
-import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
+import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';

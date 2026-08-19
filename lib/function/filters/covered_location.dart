@@ -3,7 +3,7 @@ import 'package:flutter_media_view/function/filters/covered.dart';
 import 'package:flutter_media_view/function/filters/filters.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/function/utils/emoji_utils.dart';
-import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
+import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
 import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:flutter/widgets.dart';
 

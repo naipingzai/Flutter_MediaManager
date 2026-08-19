@@ -2,9 +2,9 @@ import 'dart:math';
 
 import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
-import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/common_extensions_theme.dart';
-import 'package:flutter_media_view/ui/common/common_fx_borders.dart';
+import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
+import 'package:flutter_media_view/ui/common/extensions_theme.dart';
+import 'package:flutter_media_view/ui/common/fx_borders.dart';
 import 'package:flutter_media_view/ui/common/thumbnails/common_thumbnail_image.dart';
 import 'package:flutter/material.dart';
 

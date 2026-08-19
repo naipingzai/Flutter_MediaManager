@@ -5,8 +5,8 @@ import 'package:flutter_media_view/ui/theme/durations.dart';
 import 'package:flutter_media_view/ui/theme/themes.dart';
 import 'package:flutter_media_view/ui/common/view.dart';
 import 'package:flutter_media_view/ui/common/basic/common_basic_text_outlined.dart';
-import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view/ui/common/common_fx_highlight_decoration.dart';
+import 'package:flutter_media_view/ui/common/extensions_build_context.dart';
+import 'package:flutter_media_view/ui/common/fx_highlight_decoration.dart';
 import 'package:flutter_media_view/ui/common/identity/common_identity_highlight_title.dart';
 import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
@@ -113,10 +113,10 @@ class _RemoveEntryMetadataDialogState extends State<RemoveEntryMetadataDialog> {
     );
   }
 
-  int _compareTypeText(MetadataType a, MetadataType b) => a.getText().compareTo(b.getText());
+  int _compareTypeText(MetadataType a, MetadataType b) => a.name.compareTo(b.name);
 
   Widget _toTile(MetadataType type) {
-    final text = type.getText();
+    final text = type.name;
     Widget child = OutlinedText(
       textSpans: [
         TextSpan(
