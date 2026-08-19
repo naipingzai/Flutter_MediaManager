@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/ui/common/view.dart';
 import 'package:flutter_media_view/ui/common/common_action_controls_quick_choosers_common_button.dart';
 import 'package:flutter_media_view/ui/common/common_action_controls_quick_choosers_rate_chooser.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 
 class RateButton extends ChooserQuickButton<int> {

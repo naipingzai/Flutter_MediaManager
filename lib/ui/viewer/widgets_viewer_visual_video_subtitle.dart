@@ -8,7 +8,7 @@ import 'package:flutter_media_view/ui/common/common_basic_text_outlined.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_visual_video_subtitle_ass_parser.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_visual_video_subtitle_span.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_visual_video_subtitle_style.dart';
-import 'package:flutter_media_view_video/flutter_media_view_video.dart';
+import 'package:fmv_video/flutter_media_view_video.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';

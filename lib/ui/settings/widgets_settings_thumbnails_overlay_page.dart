@@ -7,7 +7,7 @@ import 'package:flutter_media_view/ui/common/common_identity_fmv_icons.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_common_switch_icon.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_common_tiles.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_settings_definition.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

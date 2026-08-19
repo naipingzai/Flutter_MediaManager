@@ -5,7 +5,7 @@ import 'package:flutter_media_view/ui/common/common_extensions_build_context.dar
 import 'package:flutter_media_view/ui/common/common_identity_buttons_overlay_button.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_common_quick_actions_action_panel.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_overlay_bottom_video_controls.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

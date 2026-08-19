@@ -5,7 +5,7 @@ import 'package:flutter_media_view/ui/image_providers/region_provider.dart';
 import 'package:flutter_media_view/ui/image_providers/thumbnail_provider.dart';
 import 'package:flutter_media_view/function/entry/cache.dart';
 import 'package:flutter_media_view/function/entry/entry.dart';
-import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
+import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/painting.dart';
 

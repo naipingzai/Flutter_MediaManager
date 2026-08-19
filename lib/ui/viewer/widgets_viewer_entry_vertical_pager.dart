@@ -22,8 +22,8 @@ import 'package:flutter_media_view/ui/viewer/widgets_viewer_entry_horizontal_pag
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_info_info_page.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_multipage_conductor.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_video_conductor.dart';
-import 'package:flutter_media_view_magnifier/flutter_media_view_magnifier.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_magnifier/flutter_media_view_magnifier.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

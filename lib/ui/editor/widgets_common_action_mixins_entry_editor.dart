@@ -26,7 +26,7 @@ import 'package:flutter_media_view/ui/editor/widgets_dialogs_entry_editors_edit_
 import 'package:flutter_media_view/ui/editor/widgets_dialogs_entry_editors_edit_rating_dialog.dart';
 import 'package:flutter_media_view/ui/editor/widgets_dialogs_entry_editors_remove_metadata_dialog.dart';
 import 'package:flutter_media_view/ui/editor/widgets_dialogs_entry_editors_tag_editor_page.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 
 mixin EntryEditorMixin {

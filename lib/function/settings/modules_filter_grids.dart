@@ -2,8 +2,8 @@ import 'package:flutter_media_view/function/filters/container_dynamic_album.dart
 import 'package:flutter_media_view/function/filters/filters.dart';
 import 'package:flutter_media_view/function/grouping/common.dart';
 import 'package:flutter_media_view/function/settings/defaults.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
-import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
+import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:synchronized/synchronized.dart';
 
 mixin FilterGridsSettings on SettingsAccess {

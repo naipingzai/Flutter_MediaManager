@@ -13,7 +13,7 @@ import 'package:flutter_media_view/ui/common/common_extensions_media_query.dart'
 import 'package:flutter_media_view/ui/common/common_identity_buttons_overlay_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_media_view_panorama/panorama.dart';
+import 'package:fmv_panorama/panorama.dart';
 import 'package:provider/provider.dart';
 
 class PanoramaPage extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
+import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:flutter/foundation.dart';
 
 class Query extends ChangeNotifier {

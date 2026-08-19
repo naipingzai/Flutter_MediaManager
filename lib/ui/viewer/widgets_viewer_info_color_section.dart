@@ -9,7 +9,7 @@ import 'package:flutter_media_view/ui/theme/durations.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/common/common_basic_color_indicator.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_info_common.dart';
-import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
+import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:flex_color_picker/flex_color_picker.dart' as flex;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';

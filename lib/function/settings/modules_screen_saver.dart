@@ -1,6 +1,6 @@
 import 'package:flutter_media_view/function/filters/filters.dart';
 import 'package:flutter_media_view/function/settings/defaults.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 
 mixin ScreenSaverSettings on SettingsAccess {
   bool get screenSaverFillScreen => getBool(SettingKeys.screenSaverFillScreenKey) ?? SettingsDefaults.slideshowFillScreen;

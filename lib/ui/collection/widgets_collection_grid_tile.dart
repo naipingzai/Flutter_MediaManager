@@ -10,7 +10,7 @@ import 'package:flutter_media_view/ui/viewer/widgets_common_providers_viewer_ent
 import 'package:flutter_media_view/ui/common/common_thumbnail_decorated.dart';
 import 'package:flutter_media_view/ui/common/common_thumbnail_notifications.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_hero.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

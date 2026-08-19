@@ -24,13 +24,13 @@ import 'package:flutter_media_view/function/metadata/metadata_fetch_service.dart
 import 'package:flutter_media_view/function/services/security_service.dart';
 import 'package:flutter_media_view/function/services/storage_service.dart';
 import 'package:flutter_media_view/function/services/window_service.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
-import 'package:flutter_media_view_report/flutter_media_view_report.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
+import 'package:fmv_report/flutter_media_view_report.dart';
 import 'package:flutter_media_view_report_platform/flutter_media_view_report_platform.dart';
-import 'package:flutter_media_view_services/flutter_media_view_services.dart';
+import 'package:fmv_services/flutter_media_view_services.dart';
 import 'package:flutter_media_view_services_platform/flutter_media_view_services_platform.dart';
-import 'package:flutter_media_view_video/flutter_media_view_video.dart';
-import 'package:flutter_media_view_video_mpv/flutter_media_view_video_mpv.dart';
+import 'package:fmv_video/flutter_media_view_video.dart';
+import 'package:fmv_video_mpv/flutter_media_view_video_mpv.dart';
 import 'package:get_it/get_it.dart';
 import 'package:path/path.dart' as p;
 

@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/function/settings/enums_entry_background.dart';
 import 'package:flutter_media_view/ui/common/common_basic_color_indicator.dart';
 import 'package:flutter_media_view/ui/common/common_fx_checkered_decoration.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 
 class EntryBackgroundSelector extends StatefulWidget {

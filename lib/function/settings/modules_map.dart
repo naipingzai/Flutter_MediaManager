@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter_media_view/function/settings/defaults.dart';
 import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view_map/flutter_media_view_map.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_map/flutter_media_view_map.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:latlong2/latlong.dart';
 

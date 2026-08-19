@@ -16,21 +16,21 @@ platforms:
   linux:
 
 workspace:
-  - plugins/flutter_media_view_magnifier
-  - plugins/flutter_media_view_map
-  - plugins/flutter_media_view_model
-  - plugins/flutter_media_view_report
-  - plugins/flutter_media_view_report_console
-  - plugins/flutter_media_view_screen_state
-  - plugins/flutter_media_view_services
-  - plugins/flutter_media_view_services_none
-  - plugins/flutter_media_view_ui
-  - plugins/flutter_media_view_utils
-  - plugins/flutter_media_view_video
-  - plugins/flutter_media_view_video_exo
-  - plugins/flutter_media_view_video_mpv
-  - plugins/flutter_media_view_panorama
-  - plugins/flutter_media_view_streams_channel
+  - plugins/fmv_magnifier
+  - plugins/fmv_map
+  - plugins/fmv_model
+  - plugins/fmv_report
+  - plugins/fmv_report_console
+  - plugins/fmv_screen_state
+  - plugins/fmv_services
+  - plugins/fmv_services_none
+  - plugins/fmv_ui
+  - plugins/fmv_utils
+  - plugins/fmv_video
+  - plugins/fmv_video_exo
+  - plugins/fmv_video_mpv
+  - plugins/fmv_panorama
+  - plugins/fmv_streams_channel
   - plugins/fmv_charts/community_charts_flutter
 
 dependencies:
@@ -38,32 +38,32 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  flutter_media_view_magnifier:
-    path: plugins/flutter_media_view_magnifier
-  flutter_media_view_map:
-    path: plugins/flutter_media_view_map
-  flutter_media_view_model:
-    path: plugins/flutter_media_view_model
-  flutter_media_view_report:
-    path: plugins/flutter_media_view_report
+  fmv_magnifier:
+    path: plugins/fmv_magnifier
+  fmv_map:
+    path: plugins/fmv_map
+  fmv_model:
+    path: plugins/fmv_model
+  fmv_report:
+    path: plugins/fmv_report
   flutter_media_view_report_platform:
-    path: plugins/flutter_media_view_report_console
-  flutter_media_view_screen_state:
-    path: plugins/flutter_media_view_screen_state
-  flutter_media_view_services:
-    path: plugins/flutter_media_view_services
+    path: plugins/fmv_report_console
+  fmv_screen_state:
+    path: plugins/fmv_screen_state
+  fmv_services:
+    path: plugins/fmv_services
   flutter_media_view_services_platform:
-    path: plugins/flutter_media_view_services_none
-  flutter_media_view_video:
-    path: plugins/flutter_media_view_video
-  #  flutter_media_view_video_exo:
-  #    path: plugins/flutter_media_view_video_exo
-  flutter_media_view_video_mpv:
-    path: plugins/flutter_media_view_video_mpv
-  flutter_media_view_ui:
-    path: plugins/flutter_media_view_ui
-  flutter_media_view_utils:
-    path: plugins/flutter_media_view_utils
+    path: plugins/fmv_services_none
+  fmv_video:
+    path: plugins/fmv_video
+  #  fmv_video_exo:
+  #    path: plugins/fmv_video_exo
+  fmv_video_mpv:
+    path: plugins/fmv_video_mpv
+  fmv_ui:
+    path: plugins/fmv_ui
+  fmv_utils:
+    path: plugins/fmv_utils
   collection:
   fmv_charts:
     path: plugins/fmv_charts/community_charts_flutter
@@ -117,8 +117,8 @@ dependencies:
       url: https://github.com/deckerst/overlay_support.git
       ref: main
   package_info_plus:
-  flutter_media_view_panorama:
-    path: plugins/flutter_media_view_panorama
+  fmv_panorama:
+    path: plugins/fmv_panorama
   path:
   path_provider:
   pattern_lock:
@@ -141,8 +141,8 @@ dependencies:
   sqflite:
   sqflite_common_ffi:
   stack_trace:
-  flutter_media_view_streams_channel:
-    path: plugins/flutter_media_view_streams_channel
+  fmv_streams_channel:
+    path: plugins/fmv_streams_channel
   synchronized:
   url_launcher:
   # `vector_map_tiles` v10.0.0-beta API is unclear to provide sprites

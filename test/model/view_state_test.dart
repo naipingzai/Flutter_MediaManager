@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter_media_view/function/viewer/view_state.dart';
-import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
+import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:test/test.dart';
 import 'package:vector_math/vector_math_64.dart';
 

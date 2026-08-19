@@ -1,5 +1,5 @@
 import 'package:flutter_media_view/function/settings/defaults.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 
 mixin InfoSettings on SettingsAccess {
   double get infoMapZoom => getDouble(SettingKeys.infoMapZoomKey) ?? SettingsDefaults.infoMapZoom;

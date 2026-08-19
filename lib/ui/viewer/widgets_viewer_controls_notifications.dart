@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/function/filters/filters.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
-import 'package:flutter_media_view_video/flutter_media_view_video.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
+import 'package:fmv_video/flutter_media_view_video.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 

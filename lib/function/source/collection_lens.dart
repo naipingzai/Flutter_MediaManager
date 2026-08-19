@@ -22,8 +22,8 @@ import 'package:flutter_media_view/function/source/tag.dart';
 import 'package:flutter_media_view/function/model/mime_types.dart';
 import 'package:flutter_media_view/function/locale/fmv_locale.dart';
 import 'package:flutter_media_view/function/calendar/calendar_utils.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
-import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
+import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 

@@ -1,6 +1,6 @@
 import 'dart:ui' as ui;
 
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 
 class FixedExtentGridPainter extends CustomPainter {

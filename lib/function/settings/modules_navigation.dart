@@ -8,8 +8,8 @@ import 'package:flutter_media_view/ui/common/explorer_explorer_page.dart';
 import 'package:flutter_media_view/ui/filter/widgets_filter_grids_albums_page.dart';
 import 'package:flutter_media_view/ui/filter/widgets_filter_grids_tags_page.dart';
 import 'package:flutter_media_view/ui/common/navigation_nav_item.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
-import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
+import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:synchronized/synchronized.dart';
 
 mixin NavigationSettings on SettingsAccess {

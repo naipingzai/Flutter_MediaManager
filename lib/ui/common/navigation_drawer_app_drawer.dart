@@ -32,7 +32,7 @@ import 'package:flutter_media_view/ui/common/navigation_drawer_page_nav_tile.dar
 import 'package:flutter_media_view/ui/common/navigation_drawer_tile.dart';
 import 'package:flutter_media_view/ui/common/navigation_nav_item.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_settings_page.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

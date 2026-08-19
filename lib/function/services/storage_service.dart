@@ -6,7 +6,7 @@ import 'package:flutter_media_view/function/settings/app_service.dart';
 import 'package:flutter_media_view/function/common/channel.dart';
 import 'package:flutter_media_view/function/common/output_buffer.dart';
 import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/services.dart';
 
 abstract class StorageService {

@@ -10,8 +10,8 @@ import 'package:flutter_media_view/ui/common/dialogs_add_shortcut_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_map_style_selection_dialog.dart';
 import 'package:flutter_media_view/ui/common/map_map_page.dart';
-import 'package:flutter_media_view_map/flutter_media_view_map.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_map/flutter_media_view_map.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

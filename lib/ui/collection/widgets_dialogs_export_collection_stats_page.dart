@@ -20,7 +20,7 @@ import 'package:flutter_media_view/ui/common/common_extensions_build_context.dar
 import 'package:flutter_media_view/ui/common/common_identity_buttons_outlined_button.dart';
 import 'package:flutter_media_view/ui/common/common_identity_highlight_title.dart';
 import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';

@@ -10,7 +10,7 @@ import 'package:flutter_media_view/ui/filter/widgets_filter_grids_albums_page.da
 import 'package:flutter_media_view/ui/filter/widgets_filter_grids_countries_page.dart';
 import 'package:flutter_media_view/ui/filter/widgets_filter_grids_tags_page.dart';
 import 'package:flutter_media_view/ui/common/navigation_nav_item.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 
 class SettingsDefaults {
   // app

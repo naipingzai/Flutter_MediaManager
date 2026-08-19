@@ -14,7 +14,7 @@ import 'package:flutter_media_view/ui/settings/widgets_settings_navigation_botto
 import 'package:flutter_media_view/ui/settings/widgets_settings_navigation_confirmation_dialog_page.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_navigation_drawer_editor_page.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_settings_definition.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

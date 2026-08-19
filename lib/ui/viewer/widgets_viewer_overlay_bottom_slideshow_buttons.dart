@@ -10,7 +10,7 @@ import 'package:flutter_media_view/ui/viewer/widgets_viewer_controls_notificatio
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_overlay_bottom.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_overlay_bottom_viewer_buttons.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_slideshow_page.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

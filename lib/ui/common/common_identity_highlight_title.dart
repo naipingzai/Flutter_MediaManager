@@ -6,7 +6,7 @@ import 'package:flutter_media_view/ui/common/common_basic_text_outlined.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_theme.dart';
 import 'package:flutter_media_view/ui/common/common_fx_highlight_decoration.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

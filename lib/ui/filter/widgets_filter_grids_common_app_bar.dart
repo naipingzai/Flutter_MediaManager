@@ -25,7 +25,7 @@ import 'package:flutter_media_view/ui/filter/widgets_filter_grids_common_action_
 import 'package:flutter_media_view/ui/filter/widgets_filter_grids_common_group_crumb_line.dart';
 import 'package:flutter_media_view/ui/filter/widgets_filter_grids_common_query_bar.dart';
 import 'package:flutter_media_view/ui/collection/widgets_search_collection_search_page_route.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';

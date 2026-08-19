@@ -7,7 +7,7 @@ import 'package:flutter_media_view/ui/common/common_identity_empty.dart';
 import 'package:flutter_media_view/ui/common/common_thumbnail_scroller.dart';
 import 'package:flutter_media_view/ui/common/map_info_row.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_hero.dart';
-import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
+import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:flutter/material.dart';
 
 class MapEntryScroller extends StatefulWidget {

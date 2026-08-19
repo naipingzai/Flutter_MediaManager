@@ -12,7 +12,7 @@ import 'package:flutter_media_view/function/metadata/metadata_fetch_service.dart
 import 'package:flutter_media_view/function/services/storage_service.dart';
 import 'package:flutter_media_view/function/services/window_service.dart';
 import 'package:flutter_media_view/function/utils/android_file_utils.dart';
-import 'package:flutter_media_view_report/flutter_media_view_report.dart';
+import 'package:fmv_report/flutter_media_view_report.dart';
 import 'package:path/path.dart' as p;
 import 'package:shared_preferences_platform_interface/shared_preferences_platform_interface.dart';
 

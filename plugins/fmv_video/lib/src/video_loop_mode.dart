@@ -1,0 +1,19 @@
+import 'package:fmv_model/flutter_media_view_model.dart';
+
+extension ExtraVideoLoopMode on VideoLoopMode {
+  static const shortVideoThreshold = Duration(seconds: 30);
+
+  bool shouldLoop(FmvEntryBase entry) {
+    if (entry.isAnimated) return true;
+
+    switch (this) {
+      case .never:
+        return false;
+      case .shortOnly:
+        final durationMillis = entry.durationMillis;
+        return durationMillis != null ? durationMillis < shortVideoThreshold.inMilliseconds : false;
+      case .always:
+        return true;
+    }
+  }
+}

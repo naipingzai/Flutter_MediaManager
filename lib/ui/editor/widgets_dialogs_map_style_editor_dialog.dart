@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
-import 'package:flutter_media_view_map/flutter_media_view_map.dart';
+import 'package:fmv_map/flutter_media_view_map.dart';
 import 'package:flutter/material.dart';
 
 class MapStyleEditorDialog extends StatefulWidget {

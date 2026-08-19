@@ -2,7 +2,7 @@ import 'package:flutter_media_view/ui/theme/durations.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_theme.dart';
 import 'package:flutter_media_view/ui/common/common_grid_sections_mosaic_scale_grid.dart';
 import 'package:flutter_media_view/ui/common/common_providers_media_query_data_provider.dart';
-import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
+import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:flutter/material.dart';
 
 typedef MosaicItemBuilder = Widget Function(int index, double targetExtent);

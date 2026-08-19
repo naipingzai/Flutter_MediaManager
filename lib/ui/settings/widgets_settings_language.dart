@@ -12,7 +12,7 @@ import 'package:flutter_media_view/ui/settings/widgets_settings_common_tile_lead
 import 'package:flutter_media_view/ui/settings/widgets_settings_common_tiles.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_language_locale_tile.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_settings_definition.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

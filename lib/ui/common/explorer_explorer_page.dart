@@ -24,7 +24,7 @@ import 'package:flutter_media_view/ui/common/common_identity_empty.dart';
 import 'package:flutter_media_view/ui/common/explorer_app_bar.dart';
 import 'package:flutter_media_view/ui/common/navigation_drawer_app_drawer.dart';
 import 'package:flutter_media_view/ui/common/navigation_nav_bar.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

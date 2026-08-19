@@ -28,9 +28,9 @@ import 'package:flutter_media_view/ui/viewer/widgets_viewer_action_entry_action_
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_controls_notifications.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_overlay_bottom.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_video_conductor.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
-import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
-import 'package:flutter_media_view_video/flutter_media_view_video.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
+import 'package:fmv_utils/flutter_media_view_utils.dart';
+import 'package:fmv_video/flutter_media_view_video.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

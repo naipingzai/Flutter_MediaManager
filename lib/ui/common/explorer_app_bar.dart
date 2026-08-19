@@ -24,7 +24,7 @@ import 'package:flutter_media_view/ui/common/dialogs_select_storage_dialog.dart'
 import 'package:flutter_media_view/ui/common/explorer_crumb_line.dart';
 import 'package:flutter_media_view/ui/common/explorer_explorer_action_delegate.dart';
 import 'package:flutter_media_view/ui/collection/widgets_search_collection_search_page_route.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';

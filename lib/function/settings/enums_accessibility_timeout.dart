@@ -1,6 +1,6 @@
 import 'package:flutter_media_view/function/services/accessibility_service.dart';
 import 'package:flutter_media_view/ui/theme/durations.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 
 extension ExtraAccessibilityTimeout on AccessibilityTimeout {
   Future<Duration> getSnackBarDuration(bool hasAction) async {

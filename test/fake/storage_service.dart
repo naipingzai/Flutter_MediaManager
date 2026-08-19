@@ -1,5 +1,5 @@
 import 'package:flutter_media_view/function/services/storage_service.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:test/fake.dart';
 

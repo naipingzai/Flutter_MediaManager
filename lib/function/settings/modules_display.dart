@@ -1,6 +1,6 @@
 import 'package:flutter_media_view/function/function_device.dart';
 import 'package:flutter_media_view/function/settings/defaults.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 
 mixin DisplaySettings on SettingsAccess {
   DisplayRefreshRateMode get displayRefreshRateMode => getEnumOrDefault(SettingKeys.displayRefreshRateModeKey, SettingsDefaults.displayRefreshRateMode, DisplayRefreshRateMode.values);

@@ -11,7 +11,7 @@ import 'package:flutter_media_view/ui/common/common_extensions_build_context.dar
 import 'package:flutter_media_view/ui/settings/widgets_settings_settings_action_delegate.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_settings_page.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_settings_search_page_route.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';

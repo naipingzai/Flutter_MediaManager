@@ -9,8 +9,8 @@ import 'package:flutter_media_view/ui/common/dialogs_fmv_confirmation_dialog.dar
 import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view/ui/editor/widgets_dialogs_map_style_editor_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_selection_dialogs_radio_list_tile.dart';
-import 'package:flutter_media_view_map/flutter_media_view_map.dart';
-import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
+import 'package:fmv_map/flutter_media_view_map.dart';
+import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

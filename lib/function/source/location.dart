@@ -11,7 +11,7 @@ import 'package:flutter_media_view/function/source/location_country.dart';
 import 'package:flutter_media_view/function/source/location_place.dart';
 import 'package:flutter_media_view/function/source/location_state.dart';
 import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 

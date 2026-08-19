@@ -18,7 +18,7 @@ import 'package:flutter_media_view/ui/common/navigation_drawer_tile.dart';
 import 'package:flutter_media_view/ui/collection/widgets_search_collection_search_delegate.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_navigation_drawer_tab_albums.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_navigation_drawer_tab_fixed.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 
 class NavigationDrawerEditorPage extends StatefulWidget {

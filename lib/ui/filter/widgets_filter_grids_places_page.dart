@@ -9,7 +9,7 @@ import 'package:flutter_media_view/ui/common/common_identity_empty.dart';
 import 'package:flutter_media_view/ui/filter/widgets_filter_grids_common_action_delegates_place_set.dart';
 import 'package:flutter_media_view/ui/filter/widgets_filter_grids_common_filter_nav_page.dart';
 import 'package:flutter_media_view/ui/filter/widgets_filter_grids_common_section_keys.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

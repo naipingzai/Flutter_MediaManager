@@ -15,7 +15,7 @@ import 'package:flutter_media_view/ui/common/navigation_nav_item.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_common_quick_actions_editor_page.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_navigation_drawer_editor_page.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_settings_page.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';

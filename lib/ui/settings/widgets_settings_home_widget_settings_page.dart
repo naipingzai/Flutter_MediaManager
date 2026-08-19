@@ -15,7 +15,7 @@ import 'package:flutter_media_view/ui/common/common_identity_buttons_outlined_bu
 import 'package:flutter_media_view/ui/collection/widgets_home_widget.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_common_collection_tile.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_common_tiles.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

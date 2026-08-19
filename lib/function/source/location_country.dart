@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/function/entry/entry.dart';
 import 'package:flutter_media_view/function/filters/covered_location.dart';
 import 'package:flutter_media_view/function/source/collection_source.dart';
-import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
+import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:collection/collection.dart';
 
 mixin CountryMixin on SourceBase {

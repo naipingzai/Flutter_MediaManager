@@ -1,0 +1,21 @@
+name: fmv_magnifier
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ">=3.12.0 <4.0.0"
+resolution: workspace
+
+dependencies:
+  flutter:
+    sdk: flutter
+  fmv_utils:
+    path: ../fmv_utils
+  equatable:
+  leak_tracker:
+  provider:
+
+dev_dependencies:
+  flutter_lints:
+
+flutter:

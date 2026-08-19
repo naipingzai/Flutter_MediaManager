@@ -22,7 +22,7 @@ import 'package:flutter_media_view/ui/common/map_map_page.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_action_single_entry_editor.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_debug_debug_page.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_info_embedded_notifications.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

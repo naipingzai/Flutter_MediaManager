@@ -8,8 +8,8 @@ import 'package:flutter_media_view/ui/editor/widgets_editor_transform_painter.da
 import 'package:flutter_media_view/ui/editor/widgets_editor_transform_transformation.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_visual_error.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_visual_raster.dart';
-import 'package:flutter_media_view_magnifier/flutter_media_view_magnifier.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_magnifier/flutter_media_view_magnifier.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

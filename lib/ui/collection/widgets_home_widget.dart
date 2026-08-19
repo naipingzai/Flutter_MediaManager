@@ -7,7 +7,7 @@ import 'package:flutter_media_view/function/entry/extensions_images.dart';
 import 'package:flutter_media_view/function/settings/enums_widget_shape.dart';
 import 'package:flutter_media_view/ui/theme/colors.dart';
 import 'package:flutter_media_view/ui/filter/widgets_common_identity_fmv_filter_chip.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 
 class HomeWidgetPainter {

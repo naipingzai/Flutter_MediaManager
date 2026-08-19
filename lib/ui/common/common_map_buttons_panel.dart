@@ -11,8 +11,8 @@ import 'package:flutter_media_view/ui/common/common_map_buttons_item_track_toggl
 import 'package:flutter_media_view/ui/common/common_map_compass.dart';
 import 'package:flutter_media_view/ui/common/common_map_map_action_delegate.dart';
 import 'package:flutter_media_view/ui/common/common_providers_map_theme_provider.dart';
-import 'package:flutter_media_view_map/flutter_media_view_map.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_map/flutter_media_view_map.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';

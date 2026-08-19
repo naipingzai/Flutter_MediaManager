@@ -8,7 +8,7 @@ import 'package:flutter_media_view/ui/filter/widgets_common_action_controls_quic
 import 'package:flutter_media_view/ui/common/common_action_controls_quick_choosers_tag_chooser.dart';
 import 'package:flutter_media_view/ui/common/common_providers_media_query_data_provider.dart';
 import 'package:flutter_media_view/ui/filter/widgets_filter_grids_common_filter_nav_page.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

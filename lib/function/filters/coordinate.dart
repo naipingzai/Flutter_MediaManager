@@ -5,8 +5,8 @@ import 'package:flutter_media_view/function/settings/enums_coordinate_format.dar
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/function/locale/fmv_locale.dart';
-import 'package:flutter_media_view_map/flutter_media_view_map.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_map/flutter_media_view_map.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/widgets.dart';
 import 'package:latlong2/latlong.dart';
 

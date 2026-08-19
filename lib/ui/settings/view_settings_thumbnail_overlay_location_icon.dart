@@ -1,6 +1,6 @@
 import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/widgets.dart';
 
 extension ExtraThumbnailOverlayLocationIconView on ThumbnailOverlayLocationIcon {

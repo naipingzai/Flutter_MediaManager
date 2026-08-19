@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter_media_view/function/settings/app_inventory.dart';
 import 'package:flutter_media_view/function/function_vaults.dart';
 import 'package:flutter_media_view/function/common/services.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
-import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
+import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 

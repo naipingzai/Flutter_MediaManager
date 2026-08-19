@@ -1,0 +1,21 @@
+name: fmv_report_platform
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ">=3.12.0 <4.0.0"
+resolution: workspace
+
+dependencies:
+  flutter:
+    sdk: flutter
+  fmv_report:
+    path: ../fmv_report
+  firebase_core:
+  firebase_crashlytics:
+  stack_trace:
+
+dev_dependencies:
+  flutter_lints:
+
+flutter:

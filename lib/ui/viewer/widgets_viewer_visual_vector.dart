@@ -8,8 +8,8 @@ import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/function/viewer/view_state.dart';
 import 'package:flutter_media_view/ui/common/common_fx_checkered_decoration.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_visual_entry_page_view.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
-import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
+import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

@@ -21,7 +21,7 @@ import 'package:flutter_media_view/ui/filter/widgets_filter_grids_countries_page
 import 'package:flutter_media_view/ui/filter/widgets_filter_grids_places_page.dart';
 import 'package:flutter_media_view/ui/filter/widgets_filter_grids_tags_page.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_controls_notifications.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

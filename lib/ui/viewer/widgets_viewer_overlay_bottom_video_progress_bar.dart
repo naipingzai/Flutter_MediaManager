@@ -9,8 +9,8 @@ import 'package:flutter_media_view/ui/theme/themes.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_theme.dart';
 import 'package:flutter_media_view/ui/common/common_fx_blurred.dart';
 import 'package:flutter_media_view/ui/common/common_fx_borders.dart';
-import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
-import 'package:flutter_media_view_video/flutter_media_view_video.dart';
+import 'package:fmv_utils/flutter_media_view_utils.dart';
+import 'package:fmv_video/flutter_media_view_video.dart';
 import 'package:decorated_icon/decorated_icon.dart';
 import 'package:flutter/material.dart';
 

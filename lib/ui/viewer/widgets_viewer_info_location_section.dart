@@ -15,7 +15,7 @@ import 'package:flutter_media_view/ui/common/common_providers_map_theme_provider
 import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view/ui/common/map_map_page.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_info_common.dart';
-import 'package:flutter_media_view_map/flutter_media_view_map.dart';
+import 'package:fmv_map/flutter_media_view_map.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,0 +1,30 @@
+name: fmv_video_mpv
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ">=3.12.0 <4.0.0"
+resolution: workspace
+
+dependencies:
+  flutter:
+    sdk: flutter
+  fmv_model:
+    path: ../fmv_model
+  fmv_video:
+    path: ../fmv_video
+  fmv_utils:
+    path: ../fmv_utils
+  collection:
+  image:
+  media_kit:
+  media_kit_libs_android_video:
+  media_kit_libs_ios_video:
+  media_kit_libs_linux:
+  media_kit_video:
+  path:
+
+dev_dependencies:
+  flutter_lints:
+
+flutter:

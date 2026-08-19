@@ -13,7 +13,7 @@ import 'package:flutter_media_view/ui/common/common_extensions_build_context.dar
 import 'package:flutter_media_view/ui/common/common_identity_buttons_outlined_button.dart';
 import 'package:flutter_media_view/ui/common/common_map_geo_map.dart';
 import 'package:flutter_media_view/ui/common/common_providers_map_theme_provider.dart';
-import 'package:flutter_media_view_map/flutter_media_view_map.dart';
+import 'package:fmv_map/flutter_media_view_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:latlong2/latlong.dart';

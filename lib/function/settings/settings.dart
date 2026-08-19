@@ -32,10 +32,10 @@ import 'package:flutter_media_view/ui/filter/widgets_filter_grids_albums_page.da
 import 'package:flutter_media_view/ui/filter/widgets_filter_grids_countries_page.dart';
 import 'package:flutter_media_view/ui/filter/widgets_filter_grids_places_page.dart';
 import 'package:flutter_media_view/ui/filter/widgets_filter_grids_tags_page.dart';
-import 'package:flutter_media_view_map/flutter_media_view_map.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
-import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
-import 'package:flutter_media_view_video/flutter_media_view_video.dart';
+import 'package:fmv_map/flutter_media_view_map.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
+import 'package:fmv_utils/flutter_media_view_utils.dart';
+import 'package:fmv_video/flutter_media_view_video.dart';
 import 'package:collection/collection.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';

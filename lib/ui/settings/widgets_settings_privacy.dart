@@ -17,7 +17,7 @@ import 'package:flutter_media_view/ui/settings/widgets_settings_privacy_access_g
 import 'package:flutter_media_view/ui/settings/widgets_settings_privacy_hidden_items_page.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_privacy_permissions_permissions_tile.dart';
 import 'package:flutter_media_view/ui/settings/widgets_settings_settings_definition.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

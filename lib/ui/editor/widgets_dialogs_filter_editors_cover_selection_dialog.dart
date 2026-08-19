@@ -16,7 +16,7 @@ import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_item_picker.dart';
 import 'package:flutter_media_view/ui/common/dialogs_pick_dialogs_app_pick_page.dart';
 import 'package:flutter_media_view/ui/common/dialogs_pick_dialogs_item_pick_page.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';

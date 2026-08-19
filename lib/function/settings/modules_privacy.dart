@@ -1,6 +1,6 @@
 import 'package:flutter_media_view/function/filters/filters.dart';
 import 'package:flutter_media_view/function/settings/modules_history.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 
 mixin PrivacySettings on SettingsAccess, HistorySettings {
   Set<CollectionFilter> get hiddenFilters => (getStringList(SettingKeys.hiddenFiltersKey) ?? []).map(CollectionFilter.fromJson).nonNulls.toSet();

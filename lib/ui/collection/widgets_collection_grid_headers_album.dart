@@ -7,7 +7,7 @@ import 'package:flutter_media_view/function/utils/android_file_utils.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/common_grid_header.dart';
 import 'package:flutter_media_view/ui/common/common_identity_fmv_icons.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 
 class AlbumSectionHeader extends StatelessWidget {

@@ -1,4 +1,4 @@
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 
 extension ExtraMetadataFieldView on MetadataField {
   String get title {

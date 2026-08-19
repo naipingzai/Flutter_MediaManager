@@ -11,8 +11,8 @@ import 'package:flutter_media_view/function/model/mime_types.dart';
 import 'package:flutter_media_view/function/common/services.dart';
 import 'package:flutter_media_view/ui/theme/format.dart';
 import 'package:flutter_media_view/function/utils/time_utils.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
-import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
+import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:leak_tracker/leak_tracker.dart';
 

@@ -13,7 +13,7 @@ import 'package:flutter_media_view/ui/common/dialogs_fmv_confirmation_dialog.dar
 import 'package:flutter_media_view/ui/common/dialogs_fmv_dialog.dart';
 import 'package:flutter_media_view/ui/common/dialogs_selection_dialogs_common.dart';
 import 'package:flutter_media_view/ui/common/dialogs_selection_dialogs_single_selection.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

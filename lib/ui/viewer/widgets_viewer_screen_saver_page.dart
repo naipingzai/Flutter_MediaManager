@@ -9,8 +9,8 @@ import 'package:flutter_media_view/ui/common/common_identity_empty.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_controls_controller.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_entry_viewer_stack.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_providers.dart';
-import 'package:flutter_media_view_magnifier/flutter_media_view_magnifier.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_magnifier/flutter_media_view_magnifier.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

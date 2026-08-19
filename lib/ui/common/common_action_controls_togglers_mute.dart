@@ -4,8 +4,8 @@ import 'package:flutter_media_view/ui/theme/icons.dart';
 import 'package:flutter_media_view/ui/common/common_basic_popup_menu_row.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/common_identity_buttons_captioned_button.dart';
-import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
-import 'package:flutter_media_view_video/flutter_media_view_video.dart';
+import 'package:fmv_utils/flutter_media_view_utils.dart';
+import 'package:fmv_video/flutter_media_view_video.dart';
 import 'package:flutter/material.dart';
 
 class MuteToggler extends StatelessWidget {

@@ -9,8 +9,8 @@ import 'package:flutter_media_view/ui/viewer/widgets_viewer_overlay_bottom_video
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_overlay_bottom_video_controls.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_overlay_bottom_video_progress_bar.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_overlay_bottom_video_slow_motion_bar.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
-import 'package:flutter_media_view_video/flutter_media_view_video.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
+import 'package:fmv_video/flutter_media_view_video.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

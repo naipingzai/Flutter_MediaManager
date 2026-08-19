@@ -3,7 +3,7 @@ import 'package:flutter_media_view/function/filters/filters.dart';
 import 'package:flutter_media_view/function/settings/settings.dart';
 import 'package:flutter_media_view/ui/filter/widgets_filter_grids_common_action_delegates_chip_set.dart';
 import 'package:flutter_media_view/ui/filter/widgets_filter_grids_states_page.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 
 class StateChipSetActionDelegate extends ChipSetActionDelegate<LocationFilter> {
   final Iterable<FilterGridItem<LocationFilter>> _items;

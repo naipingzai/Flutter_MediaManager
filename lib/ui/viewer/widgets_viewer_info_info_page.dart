@@ -21,7 +21,7 @@ import 'package:flutter_media_view/ui/viewer/widgets_viewer_info_metadata_metada
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_info_metadata_metadata_section.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_multipage_conductor.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_page_entry_builder.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

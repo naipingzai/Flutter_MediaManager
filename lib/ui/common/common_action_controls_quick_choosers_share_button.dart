@@ -3,7 +3,7 @@ import 'package:flutter_media_view/function/entry/extensions_multipage.dart';
 import 'package:flutter_media_view/ui/common/view.dart';
 import 'package:flutter_media_view/ui/common/common_action_controls_quick_choosers_common_button.dart';
 import 'package:flutter_media_view/ui/common/common_action_controls_quick_choosers_share_chooser.dart';
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
 
 class ShareButton extends ChooserQuickButton<ShareAction> {

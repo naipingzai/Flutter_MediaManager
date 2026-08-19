@@ -1,0 +1,21 @@
+name: fmv_services_platform
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ">=3.12.0 <4.0.0"
+resolution: workspace
+
+dependencies:
+  flutter:
+    sdk: flutter
+  fmv_map:
+    path: ../fmv_map
+  fmv_services:
+    path: ../fmv_services
+  latlong2:
+
+dev_dependencies:
+  flutter_lints:
+
+flutter:

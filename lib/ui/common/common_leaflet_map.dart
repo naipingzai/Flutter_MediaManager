@@ -9,8 +9,8 @@ import 'package:flutter_media_view/ui/common/common_basic_gestures_gesture_detec
 import 'package:flutter_media_view/ui/common/common_map_leaflet_latlng_tween.dart' as llt;
 import 'package:flutter_media_view/ui/common/common_map_leaflet_scale_layer.dart';
 import 'package:flutter_media_view/ui/common/common_map_leaflet_tile_layers.dart';
-import 'package:flutter_media_view_map/flutter_media_view_map.dart';
-import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
+import 'package:fmv_map/flutter_media_view_map.dart';
+import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';

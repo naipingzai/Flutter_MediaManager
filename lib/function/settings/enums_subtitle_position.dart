@@ -1,4 +1,4 @@
-import 'package:flutter_media_view_model/flutter_media_view_model.dart';
+import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/painting.dart';
 
 extension ExtraSubtitlePosition on SubtitlePosition {

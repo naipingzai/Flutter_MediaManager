@@ -6,7 +6,7 @@ import 'package:flutter_media_view/ui/common/common_extensions_build_context.dar
 import 'package:flutter_media_view/ui/editor/widgets_editor_transform_controller.dart';
 import 'package:flutter_media_view/ui/editor/widgets_editor_transform_transformation.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_overlay_top.dart';
-import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
+import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

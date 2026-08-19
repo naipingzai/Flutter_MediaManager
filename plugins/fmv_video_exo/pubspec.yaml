@@ -1,0 +1,23 @@
+name: fmv_video_exo
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ">=3.12.0 <4.0.0"
+resolution: workspace
+
+dependencies:
+  flutter:
+    sdk: flutter
+  fmv_model:
+    path: ../fmv_model
+  fmv_video:
+    path: ../fmv_video
+  fmv_utils:
+    path: ../fmv_utils
+  video_player:
+
+dev_dependencies:
+  flutter_lints:
+
+flutter:

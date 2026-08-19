@@ -7,7 +7,7 @@ import 'package:flutter_media_view/ui/common/common_basic_gestures_gesture_detec
 import 'package:flutter_media_view/ui/common/common_extensions_build_context.dart';
 import 'package:flutter_media_view/ui/common/common_extensions_media_query.dart';
 import 'package:flutter_media_view/ui/common/common_grid_sections_list_layout.dart';
-import 'package:flutter_media_view_utils/flutter_media_view_utils.dart';
+import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
