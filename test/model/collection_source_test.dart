@@ -22,9 +22,9 @@ import 'package:latlong2/latlong.dart';
 import '../common.dart';
 import '../fake/media_fetch_service.dart';
 import '../fake/media_store_service.dart';
-import '../fake/media_fetch_service.dart';
 import '../fake/storage_service.dart';
 
+import '../fake/metadata_fetch_service.dart';
 void main() {
   const testAlbum = '${FakeStorageService.primaryPath}Pictures/test';
   const sourceAlbum = '${FakeStorageService.primaryPath}Pictures/source';

@@ -3,7 +3,7 @@ import 'package:fmv/function/entry/extensions_keys.dart';
 import 'package:fmv/function/entry/origins.dart';
 import 'package:fmv/function/model/mime_types.dart';
 import 'package:fmv/function/common/image_op_events.dart';
-import 'package:fmv/function/media/media_store_service.dart';
+import 'package:fmv/function/media/store_service.dart';
 import 'package:test/fake.dart';
 
 class FakeMediaStoreService extends Fake implements MediaStoreService {
