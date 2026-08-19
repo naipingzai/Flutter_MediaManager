@@ -1,0 +1,22 @@
+name: fmv_localizations_plus
+description: Localization package for Flutter to support locales not already supported by `flutter_localizations`.
+version: 0.0.1
+publish_to: none
+
+resolution: workspace
+
+environment:
+  sdk: ">=3.8.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl:
+  kurd_localization:
+
+dev_dependencies:
+  flutter_lints:
+
+flutter:

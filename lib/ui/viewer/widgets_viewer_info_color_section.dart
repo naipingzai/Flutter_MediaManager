@@ -13,7 +13,7 @@ import 'package:fmv_utils/flutter_media_view_utils.dart';
 import 'package:flex_color_picker/flex_color_picker.dart' as flex;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:fmv_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 
 class ColorSectionSliver extends StatefulWidget {

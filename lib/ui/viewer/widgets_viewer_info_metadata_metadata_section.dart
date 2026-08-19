@@ -12,7 +12,7 @@ import 'package:flutter_media_view/ui/viewer/widgets_viewer_info_metadata_metada
 import 'package:flutter_media_view/ui/viewer/widgets_viewer_info_metadata_tv_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:fmv_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 
 class MetadataSectionSliver extends StatefulWidget {

@@ -33,7 +33,7 @@ import 'package:flutter_media_view/ui/viewer/widgets_viewer_controls_notificatio
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:fmv_staggered_animations/flutter_staggered_animations.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 

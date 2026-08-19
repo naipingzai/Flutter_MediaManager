@@ -47,7 +47,7 @@ import 'package:flutter_media_view/ui/common/navigation_tv_rail.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:fmv_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 
 typedef QueryTest<T extends CollectionFilter> = List<FilterGridItem<T>> Function(BuildContext context, List<FilterGridItem<T>> filters, String query);

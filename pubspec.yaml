@@ -29,6 +29,9 @@ workspace:
   - plugins/fmv_video
   - plugins/fmv_video_exo
   - plugins/fmv_video_mpv
+  - plugins/fmv_staggered_animations
+  - plugins/fmv_localizations_plus
+  - plugins/fmv_expansion_tile_card
   - plugins/fmv_panorama
   - plugins/fmv_streams_channel
   - plugins/fmv_charts/community_charts_flutter
@@ -46,13 +49,13 @@ dependencies:
     path: plugins/fmv_model
   fmv_report:
     path: plugins/fmv_report
-  flutter_media_view_report_platform:
+  fmv_report_platform:
     path: plugins/fmv_report_console
   fmv_screen_state:
     path: plugins/fmv_screen_state
   fmv_services:
     path: plugins/fmv_services
-  flutter_media_view_services_platform:
+  fmv_services_platform:
     path: plugins/fmv_services_none
   fmv_video:
     path: plugins/fmv_video
@@ -78,9 +81,8 @@ dependencies:
   equatable:
   event_bus:
   file_picker: ^11.0.0
-  expansion_tile_card:
-    git:
-      url: https://github.com/deckerst/expansion_tile_card.git
+  fmv_expansion_tile_card:
+    path: plugins/fmv_expansion_tile_card
   flex_color_picker:
   floating:
     git:
@@ -89,15 +91,12 @@ dependencies:
   fluster:
   flutter_displaymode:
   flutter_highlight:
-  flutter_localizations_plus:
-    git:
-      url: https://github.com/deckerst/flutter_localizations_plus.git
+  fmv_localizations_plus:
+    path: plugins/fmv_localizations_plus
   flutter_map:
   flutter_markdown_plus:
-  flutter_staggered_animations:
-    git:
-      url: https://github.com/deckerst/flutter_staggered_animations
-      ref: main
+  fmv_staggered_animations:
+    path: plugins/fmv_staggered_animations
   get_it:
   gpx:
   highlight:
@@ -112,10 +111,7 @@ dependencies:
   flutter_material_design_icons:
   material_symbols_icons:
   network_info_plus:
-  overlay_support:
-    git:
-      url: https://github.com/deckerst/overlay_support.git
-      ref: main
+  overlay_support: ^2.1.0
   package_info_plus:
   fmv_panorama:
     path: plugins/fmv_panorama
@@ -123,10 +119,7 @@ dependencies:
   path_provider:
   pattern_lock:
   pdf:
-  percent_indicator:
-    git:
-      url: https://github.com/deckerst/flutter_percent_indicator.git
-      ref: main
+  percent_indicator: ^4.2.3
   permission_handler:
   pin_code_fields:
   printing:

@@ -1,7 +1,7 @@
 import 'package:flutter_media_view/ui/theme/durations.dart';
 import 'package:flutter_media_view/ui/theme/themes.dart';
 import 'package:flutter_media_view/ui/common/common_identity_highlight_title.dart';
-import 'package:expansion_tile_card/expansion_tile_card.dart';
+import 'package:fmv_expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

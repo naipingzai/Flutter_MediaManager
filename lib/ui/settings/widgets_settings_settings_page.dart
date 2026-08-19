@@ -16,7 +16,7 @@ import 'package:flutter_media_view/ui/settings/widgets_settings_video.dart';
 import 'package:flutter_media_view/ui/viewer/widgets_settings_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:fmv_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 
 class SettingsPage extends StatelessWidget {

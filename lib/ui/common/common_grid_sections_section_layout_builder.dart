@@ -4,7 +4,7 @@ import 'package:flutter_media_view/ui/common/common_grid_sections_list_layout.da
 import 'package:flutter_media_view/ui/common/common_grid_sections_section_layout.dart';
 import 'package:fmv_model/flutter_media_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:fmv_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 
 typedef TileBuilder<T> = Widget Function(T item, Size tileSize);

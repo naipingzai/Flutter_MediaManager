@@ -7,7 +7,7 @@ import 'package:flutter_media_view/ui/common/common_action_controls_quick_choose
 import 'package:fmv_ui/flutter_media_view_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:fmv_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 
 class MenuQuickChooser<T> extends StatefulWidget {
